@@ -654,7 +654,18 @@ const NETWORKS = {
       { key:'cw_return_header', name:'CW Return Header', icon:'&#128260;', group:'cw',
         attrs:[{name:'Return Pressure',uom:'bar'},{name:'Return Temperature',uom:'degC'},{name:'Return Flow',uom:'m3/h'}] },
       { key:'cw_pump', name:'CW Pump', icon:'&#128167;', group:'cw', electricDriver:true,
-        attrs:[{name:'Driver Power',uom:'kW'},{name:'Flow',uom:'m3/h'},{name:'Differential Head',uom:'m'},{name:'Efficiency',uom:'percent'}] },
+        attrs:[
+          {name:'Driver Power',uom:'kW'},
+          {name:'Flow',uom:'m3/h'},
+          {name:'Differential Head',uom:'m'},
+          {name:'Efficiency',uom:'percent'},
+          {name:'Current',uom:'Amps'},
+          {name:'Suction Flow',uom:'m3/h'},
+          {name:'Suction Pressure',uom:'bar'},
+          {name:'Discharge Pressure',uom:'bar'},
+          {name:'Design Power',uom:'kW'}
+        ]
+      },
       { key:'cooling_tower', name:'Cooling Tower', icon:'&#127981;', group:'cw',
         attrs:[{name:'Range',uom:'degC'},{name:'Approach',uom:'degC'},{name:'Wet Bulb Temperature',uom:'degC'},{name:'Evaporation Loss',uom:'m3/h'},{name:'Drift Loss',uom:'m3/h'},{name:'Blowdown',uom:'m3/h'}] },
       { key:'ct_fan', name:'Cooling Tower Fan', icon:'&#127788;️', group:'cw', electricDriver:true,
@@ -667,7 +678,18 @@ const NETWORKS = {
       { key:'sw_return_header', name:'SW Return Header', icon:'&#128260;', group:'sw',
         attrs:[{name:'Return Pressure',uom:'bar'},{name:'Return Temperature',uom:'degC'},{name:'Return Flow',uom:'m3/h'}] },
       { key:'sw_pump', name:'SW Pump', icon:'&#128167;', group:'sw', electricDriver:true,
-        attrs:[{name:'Driver Power',uom:'kW'},{name:'Flow',uom:'m3/h'},{name:'Differential Head',uom:'m'},{name:'Efficiency',uom:'percent'}] },
+        attrs:[
+          {name:'Driver Power',uom:'kW'},
+          {name:'Flow',uom:'m3/h'},
+          {name:'Differential Head',uom:'m'},
+          {name:'Efficiency',uom:'percent'},
+          {name:'Current',uom:'Amps'},
+          {name:'Suction Flow',uom:'m3/h'},
+          {name:'Suction Pressure',uom:'bar'},
+          {name:'Discharge Pressure',uom:'bar'},
+          {name:'Design Power',uom:'kW'}
+        ]
+      },
       { key:'sw_user', name:'SW User / Exchanger', icon:'&#128260;', group:'sw',
         attrs:[{name:'SW Flow',uom:'m3/h'},{name:'Inlet Temperature',uom:'degC'},{name:'Outlet Temperature',uom:'degC'},{name:'Duty',uom:'MMkcal/h'}] },
       /* Service water */
@@ -783,12 +805,35 @@ const NETWORKS = {
     elementTree:[
       /* ELECTRIC ENERGY */
       { key:'electric_drivers', name:'Electric Drivers', icon:'⚡', group:'electric',
-        attrs:[{name:'Driver Power',uom:'kW'},{name:'Efficiency',uom:'percent'}] },
+        attrs:[
+          {name:'Driver Power',uom:'kW'},
+          {name:'Efficiency',uom:'percent'},
+          {name:'Current',uom:'Amps'},
+          {name:'Suction Flow',uom:'m3/h'},
+          {name:'Suction Pressure',uom:'bar'},
+          {name:'Discharge Pressure',uom:'bar'}
+        ]
+      },
       /* FUEL ENERGY (fired heater family) */
       { key:'fh_boiler', name:'Fuel Fired Boiler', icon:'♨️', group:'fuel', role:'Consumer', subcomponents:'BOILER',
         attrs:[{name:'Steam Output',uom:'metric_ton/h'},{name:'Steam Pressure',uom:'bar'},{name:'Steam Temperature',uom:'degC'},{name:'Fuel Flow',uom:'Nm3/h'},{name:'Boiler Efficiency',uom:'percent'},{name:'Excess O2',uom:'percent'}] },
       { key:'fh_feed_preheater', name:'Feed Preheater', icon:'&#128260;', group:'fuel', role:'Consumer', subcomponents:'FIRED_HEATER',
-        attrs:[{name:'Fuel Flow',uom:'Nm3/h'},{name:'Duty',uom:'MMkcal/h'},{name:'Outlet Temperature',uom:'degC'},{name:'Efficiency',uom:'percent'}] },
+        attrs:[
+          {name:'Fuel Flow',uom:'Nm3/h'},
+          {name:'Fuel Gas C1',uom:'mol%'},
+          {name:'Fuel Gas C2',uom:'mol%'},
+          {name:'Fuel Gas C3',uom:'mol%'},
+          {name:'Fuel Gas CO2',uom:'mol%'},
+          {name:'O2 in Flue Gas',uom:'percent'},
+          {name:'Fuel Gas iC4',uom:'mol%'},
+          {name:'Fuel Gas iC5',uom:'mol%'},
+          {name:'Fuel Gas N2',uom:'mol%'},
+          {name:'Fuel Gas nC4',uom:'mol%'},
+          {name:'Fuel Gas nC5',uom:'mol%'},
+          {name:'Duty',uom:'GJ/h'},
+          {name:'Outlet Temperature',uom:'degC'}
+        ]
+      },
       { key:'fh_furnace', name:'Furnace', icon:'&#127915;️', group:'fuel', role:'Consumer', subcomponents:'FIRED_HEATER',
         attrs:[{name:'Fuel Flow',uom:'Nm3/h'},{name:'Duty',uom:'MMkcal/h'},{name:'Stack Temperature',uom:'degC'},{name:'Efficiency',uom:'percent'}] },
       { key:'fh_reformer', name:'Reformer', icon:'&#129514;', group:'fuel', role:'Consumer', subcomponents:'REFORMER',
@@ -1813,6 +1858,23 @@ function buildEquipmentInventory(){
         }
       }
     });
+  });
+
+  if (STATE._customNonSecItems && Array.isArray(STATE._customNonSecItems)) {
+    rows.push(...STATE._customNonSecItems);
+  }
+
+  // Override pump networks to Power Distribution Network!
+  rows.forEach(it => {
+    const isPump = (it.elemKey && (it.elemKey.includes('pump') || it.elemKey.includes('CWP') || it.elemKey.includes('SWP'))) || 
+                   (it.instLabel && it.instLabel.toLowerCase().includes('pump')) ||
+                   (it.elemName && it.elemName.toLowerCase().includes('pump'));
+    if (isPump && it.netKey !== 'sec') {
+      it.netKey = 'power';
+      it.netName = 'Power Distribution Network';
+      it.netColor = '#F0C040';
+      it.netIcon = '⚡';
+    }
   });
 
   return rows;
@@ -6570,7 +6632,7 @@ function drawFuelDiagram(box, net, def, plantSummary) {
 function paneNonSec() {
   const allItems = buildEquipmentInventory();
   const items = allItems.filter(it => {
-    if (it.netKey !== 'steam') return false;
+    if (it.netKey !== 'steam' && it.netKey !== 'power') return false;
     if ((it.plantName || '').trim().toLowerCase() !== 'utility unit') return false;
     return true;
   });
@@ -6612,6 +6674,15 @@ function paneNonSec() {
   srch.onblur =()=>srch.style.borderColor='var(--border)';
   srch.oninput=()=>{ STATE._nonSecFilter.search = srch.value; saveState(); applyAndRender(); };
   fbar.appendChild(srch);
+
+  const addBtn = el('button');
+  addBtn.textContent = '+ Add Custom Equipment';
+  addBtn.style.cssText = 'background:#F0C040;color:#1E1E2E;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-weight:700;font-size:13px;font-family:var(--font);transition:all 0.15s;outline:none';
+  addBtn.onmouseover = () => { addBtn.style.background = '#f2cb65'; };
+  addBtn.onmouseout = () => { addBtn.style.background = '#F0C040'; };
+  addBtn.onclick = () => { openAddCustomNonSecModal(); };
+  fbar.appendChild(addBtn);
+
   w.appendChild(fbar);
 
   if ((STATE.plants||[]).length > 1){
@@ -6721,6 +6792,7 @@ function paneNonSec() {
           <div style="font-weight:600;color:var(--text);display:flex;align-items:center;gap:6px">
             <span>${it.elemIcon}</span>
             <span>${esc(it.instLabel)}</span>
+            ${it.custom ? `<button class="custom-del-btn" style="background:none;border:none;color:#ff5555;cursor:pointer;font-size:12px;padding:2px 4px;margin-left:8px;" title="Delete custom equipment">🗑️</button>` : ''}
           </div>
         </td>
         <td style="${tdStyle}">
@@ -6730,6 +6802,38 @@ function paneNonSec() {
         </td>
       `;
       tr.insertBefore(chkCell, tr.firstChild);
+
+      if (it.custom) {
+        const delBtn = tr.querySelector('.custom-del-btn');
+        if (delBtn) {
+          delBtn.onclick = (e) => {
+            e.stopPropagation();
+            if (confirm(`Are you sure you want to delete custom item "${it.instLabel}"?`)) {
+              STATE._customNonSecItems = (STATE._customNonSecItems || []).filter(x => x.instanceId !== it.instanceId);
+              if (STATE._nonSeuConfig) {
+                delete STATE._nonSeuConfig[it.instanceId];
+              }
+              if (STATE._nonSecExcluded) {
+                delete STATE._nonSecExcluded[it.instanceId];
+              }
+              saveState();
+
+              // Refresh items array
+              items.length = 0;
+              const freshAll = buildEquipmentInventory();
+              const freshFiltered = freshAll.filter(x => {
+                if (x.netKey !== 'steam') return false;
+                if ((x.plantName || '').trim().toLowerCase() !== 'utility unit') return false;
+                return true;
+              });
+              freshFiltered.forEach(x => items.push(x));
+
+              applyAndRender();
+            }
+          };
+        }
+      }
+
       tbody.appendChild(tr);
     });
     tableContainer.appendChild(table);
@@ -6737,6 +6841,171 @@ function paneNonSec() {
 
   applyAndRender();
   return w;
+}
+
+function openAddCustomNonSecModal() {
+  const mask = el('div');
+  mask.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;z-index:9999;backdrop-filter:blur(3px)';
+
+  const modal = el('div');
+  modal.style.cssText = 'background:var(--bg2);border:1.5px solid #F0C04055;border-radius:12px;width:100%;max-width:440px;padding:20px;box-shadow:0 16px 48px rgba(0,0,0,0.5);display:flex;flex-direction:column;font-family:var(--font);box-sizing:border-box';
+
+  const title = el('div');
+  title.style.cssText = 'font-size:16px;font-weight:700;color:var(--text);margin-bottom:18px;display:flex;align-items:center;gap:8px';
+  title.innerHTML = '<span>➕</span> Add Custom Equipment';
+  modal.appendChild(title);
+
+  const form = el('div');
+  form.style.cssText = 'display:flex;flex-direction:column;gap:12px';
+
+  // Name Input
+  const nameGroup = el('div');
+  const nameLabel = el('label');
+  nameLabel.style.cssText = 'font-size:11px;color:var(--text3);font-weight:600;margin-bottom:4px;display:block;text-transform:uppercase;letter-spacing:0.5px';
+  nameLabel.textContent = 'Equipment Name / Label';
+  const nameInput = el('input');
+  nameInput.type = 'text';
+  nameInput.placeholder = 'e.g. Custom Booster Pump';
+  nameInput.style.cssText = 'width:100%;padding:9px 12px;border-radius:6px;border:1px solid var(--border);background:var(--bg3);color:var(--text);font-size:13px;outline:none;box-sizing:border-box';
+  nameInput.onfocus = () => { nameInput.style.borderColor = '#F0C040'; };
+  nameInput.onblur = () => { nameInput.style.borderColor = 'var(--border)'; };
+  nameGroup.appendChild(nameLabel);
+  nameGroup.appendChild(nameInput);
+  form.appendChild(nameGroup);
+
+  // Plant Select
+  const plantGroup = el('div');
+  const plantLabel = el('label');
+  plantLabel.style.cssText = 'font-size:11px;color:var(--text3);font-weight:600;margin-bottom:4px;display:block;text-transform:uppercase;letter-spacing:0.5px';
+  plantLabel.textContent = 'Plant';
+  const plantSelect = el('select');
+  plantSelect.style.cssText = 'width:100%;padding:9px 12px;border-radius:6px;border:1px solid var(--border);background:var(--bg3);color:var(--text);font-size:13px;outline:none;box-sizing:border-box';
+  (STATE.plants || []).forEach(p => {
+    const opt = el('option');
+    opt.value = p.id;
+    opt.textContent = p.name;
+    if ((p.name || '').trim().toLowerCase() === 'utility unit') {
+      opt.selected = true;
+    }
+    plantSelect.appendChild(opt);
+  });
+  plantGroup.appendChild(plantLabel);
+  plantGroup.appendChild(plantSelect);
+  form.appendChild(plantGroup);
+
+  // Area Input
+  const areaGroup = el('div');
+  const areaLabel = el('label');
+  areaLabel.style.cssText = 'font-size:11px;color:var(--text3);font-weight:600;margin-bottom:4px;display:block;text-transform:uppercase;letter-spacing:0.5px';
+  areaLabel.textContent = 'Area Tag';
+  const areaInput = el('input');
+  areaInput.type = 'text';
+  areaInput.value = 'UTI';
+  areaInput.style.cssText = 'width:100%;padding:9px 12px;border-radius:6px;border:1px solid var(--border);background:var(--bg3);color:var(--text);font-size:13px;outline:none;box-sizing:border-box';
+  areaInput.onfocus = () => { areaInput.style.borderColor = '#F0C040'; };
+  areaInput.onblur = () => { areaInput.style.borderColor = 'var(--border)'; };
+  areaGroup.appendChild(areaLabel);
+  areaGroup.appendChild(areaInput);
+  form.appendChild(areaGroup);
+
+  // Group Select
+  const groupGroup = el('div');
+  const groupLabelEl = el('label');
+  groupLabelEl.style.cssText = 'font-size:11px;color:var(--text3);font-weight:600;margin-bottom:4px;display:block;text-transform:uppercase;letter-spacing:0.5px';
+  groupLabelEl.textContent = 'Group / Role';
+  const groupSelect = el('select');
+  groupSelect.style.cssText = 'width:100%;padding:9px 12px;border-radius:6px;border:1px solid var(--border);background:var(--bg3);color:var(--text);font-size:13px;outline:none;box-sizing:border-box';
+  
+  const optGen = el('option'); optGen.value = 'gen'; optGen.textContent = 'Steam Generators & Turbines (Generator)';
+  const optCon = el('option'); optCon.value = 'con'; optCon.textContent = 'Steam Consumers (Consumer)';
+  const optDist = el('option'); optDist.value = 'dist'; optDist.textContent = 'Distribution (Distribution)';
+  
+  groupSelect.appendChild(optCon);
+  groupSelect.appendChild(optGen);
+  groupSelect.appendChild(optDist);
+  
+  groupGroup.appendChild(groupLabelEl);
+  groupGroup.appendChild(groupSelect);
+  form.appendChild(groupGroup);
+
+  modal.appendChild(form);
+
+  // Buttons
+  const btnBar = el('div');
+  btnBar.style.cssText = 'display:flex;justify-content:flex-end;gap:10px;margin-top:20px';
+
+  const cancelBtn = el('button');
+  cancelBtn.textContent = 'Cancel';
+  cancelBtn.style.cssText = 'background:none;border:1px solid var(--border);color:var(--text2);padding:9px 16px;border-radius:6px;cursor:pointer;font-weight:600;font-size:13px;transition:all 0.15s;outline:none';
+  cancelBtn.onmouseover = () => { cancelBtn.style.borderColor = 'var(--text3)'; };
+  cancelBtn.onmouseout = () => { cancelBtn.style.borderColor = 'var(--border)'; };
+  cancelBtn.onclick = () => { document.body.removeChild(mask); };
+  btnBar.appendChild(cancelBtn);
+
+  const submitBtn = el('button');
+  submitBtn.textContent = 'Add Equipment';
+  submitBtn.style.cssText = 'background:#F0C040;color:#1E1E2E;border:none;padding:9px 16px;border-radius:6px;cursor:pointer;font-weight:700;font-size:13px;transition:all 0.15s;outline:none';
+  submitBtn.onmouseover = () => { submitBtn.style.background = '#f2cb65'; };
+  submitBtn.onmouseout = () => { submitBtn.style.background = '#F0C040'; };
+  submitBtn.onclick = () => {
+    const nameVal = nameInput.value.trim();
+    if (!nameVal) {
+      alert('Please enter an equipment name.');
+      return;
+    }
+    const plantIdVal = plantSelect.value;
+    const plantObj = (STATE.plants || []).find(p => p.id === plantIdVal) || { id: plantIdVal, name: 'Utility Unit' };
+    const areaVal = areaInput.value.trim().toUpperCase() || 'UTI';
+    const groupRoleVal = groupSelect.value;
+
+    let gLabel = 'Steam Consumers';
+    let rRole = 'Consumer';
+    let eIcon = '⚙️';
+    if (groupRoleVal === 'gen') {
+      gLabel = 'Steam Generators & Turbines';
+      rRole = 'Generator';
+      eIcon = '♨️';
+    } else if (groupRoleVal === 'dist') {
+      gLabel = 'Distribution';
+      rRole = 'Distribution';
+      eIcon = '⏬';
+    }
+
+    const customItem = {
+      instanceId: `steam::custom::${Date.now()}::${Math.floor(Math.random()*1000)}`,
+      netKey: 'steam',
+      netName: 'Steam Network',
+      netColor: '#f0883e',
+      netIcon: '♨️',
+      plantId: plantObj.id,
+      plantName: plantObj.name,
+      areaTag: areaVal,
+      elemKey: 'custom_equipment',
+      elemName: nameVal,
+      groupKey: groupRoleVal,
+      groupLabel: gLabel,
+      role: rRole,
+      index: (STATE._customNonSecItems || []).length,
+      instLabel: nameVal,
+      elemIcon: eIcon,
+      attrs: [],
+      piTagBase: '',
+      electricDriver: false,
+      custom: true
+    };
+
+    if (!STATE._customNonSecItems) STATE._customNonSecItems = [];
+    STATE._customNonSecItems.push(customItem);
+    saveState();
+
+    document.body.removeChild(mask);
+    render();
+  };
+  btnBar.appendChild(submitBtn);
+
+  modal.appendChild(btnBar);
+  mask.appendChild(modal);
+  document.body.appendChild(mask);
 }
 
 /* ============================================================================
@@ -10031,6 +10300,7 @@ const KPI_OUTPUT_INPUT_MAP = {
     'Driver Energy (GJ/h)': ['Flow (m³/h)','Suction Pressure (bar)','Discharge Pressure (bar)','Fluid Density (kg/m³)','Motor Current (A)','Motor Voltage (V)'],
     'Specific Energy (kWh/m³)': ['Flow (m³/h)','Suction Pressure (bar)','Discharge Pressure (bar)','Motor Current (A)','Motor Voltage (V)'],
     'Bypass Loss (kW)': ['Min Flow Bypass (m³/h)','Fluid Density (kg/m³)','Discharge Pressure (bar)','Suction Pressure (bar)'],
+    'Power Consumption': ['Current (A)','Suction Flow (m³/h)','Suction Pressure (bar)','Discharge Pressure (bar)','Design Power (kW)'],
   },
   /* ── Backpressure Turbine ── */
   'backpressure_turbine': {
@@ -10107,7 +10377,7 @@ const KPI_OUTPUT_INPUT_MAP = {
   },
   /* ── Feed Preheater (feed_preheater.py → OUTPUT_INPUT_MAP) ── */
   'feed_preheater': {
-    'Duty Recovered (GJ/h)': ['Cold Flow (t/h)','Cold Inlet T (°C)','Cold Outlet T (°C)','Cold Cp (kJ/kg·K)'],
+    'Duty Recovered (GJ/h)': ['Fuel Flow (Nm³/h)','Fuel Gas C1 (mol%)','Fuel Gas C2 (mol%)','Fuel Gas C3 (mol%)','Fuel Gas CO2 (mol%)','O2 in Flue Gas (%)','Fuel Gas iC4 (mol%)','Fuel Gas iC5 (mol%)','Fuel Gas N2 (mol%)','Fuel Gas nC4 (mol%)','Fuel Gas nC5 (mol%)','Duty (GJ/h)','Outlet Temperature (°C)'],
     'Cold ΔT (°C)': ['Cold Inlet T (°C)','Cold Outlet T (°C)'],
     'Hot ΔT (°C)': ['Hot Inlet T (°C)','Hot Outlet T (°C)'],
     'Approach ΔT (°C)': ['Hot Outlet T (°C)','Cold Inlet T (°C)'],
@@ -10185,15 +10455,31 @@ KPI_OUTPUT_INPUT_MAP['sec_extraction_turbine']      = KPI_OUTPUT_INPUT_MAP['extr
 KPI_OUTPUT_INPUT_MAP['sec_extraction_cond_turbine'] = KPI_OUTPUT_INPUT_MAP['extraction_cond_turbine'];
 KPI_OUTPUT_INPUT_MAP['sec_condensing_turbine']      = KPI_OUTPUT_INPUT_MAP['condensing_turbine'];
 
+KPI_OUTPUT_INPUT_MAP['electric_drivers'] = {
+  'Power Consumption': ['Driver Power (kW)','Efficiency (%)','Current (A)','Suction Flow (m³/h)','Suction Pressure (bar)','Discharge Pressure (bar)']
+};
+
+KPI_OUTPUT_INPUT_MAP['custom_equipment'] = {
+  'Power Consumption': ['Current (A)','Suction Flow (m³/h)','Suction Pressure (bar)','Discharge Pressure (bar)','Design Power (kW)']
+};
+
 /** Look up required input attributes for a specific KPI of an equipment type.
  *  Returns array of {name, selected, piTag, ...} with only the inputs needed for that KPI. */
 function getEquipRequiredAttrs(elemKey, kpiName){
-  const equipMap = KPI_OUTPUT_INPUT_MAP[elemKey];
+  let key = elemKey;
+  if(key && key.startsWith('electric_drivers')) {
+    key = 'electric_drivers';
+  }
+  const equipMap = KPI_OUTPUT_INPUT_MAP[key];
   if(!equipMap) return [];
   /* Extract the KPI display name from "Instance Label - KPI Name" format */
   const dashIdx = (kpiName||'').lastIndexOf(' - ');
   const kpi = dashIdx > -1 ? kpiName.substring(dashIdx + 3) : (kpiName||'');
-  const attrs = equipMap[kpi];
+  let attrs = equipMap[kpi];
+  if(!attrs || !attrs.length) {
+    const vals = Object.values(equipMap);
+    if(vals.length > 0) attrs = vals[0];
+  }
   if(!attrs || !attrs.length) return [];
   return attrs.map(a => ({
     name: a, selected: true, piTag: '', uom: '',
@@ -10247,6 +10533,9 @@ function paneSeu() {
           existingKpi.dataSource = srcKpi.dataSource || 'calculate';
           existingKpi.formula = srcKpi.formula || '';
           
+          if (!existingKpi.customAttrs || existingKpi.customAttrs.length === 0) {
+            existingKpi.customAttrs = getEquipRequiredAttrs(otherElemKey, targetName);
+          }
           if (srcKpi.customAttrs && existingKpi.customAttrs) {
             srcKpi.customAttrs.forEach(srcAttr => {
               const dstAttr = existingKpi.customAttrs.find(a => a.name === srcAttr.name);
@@ -10660,7 +10949,11 @@ function paneSeu() {
                 nameInp.style.cssText = 'flex:1;max-width:300px;padding:5px 8px;border-radius:5px;border:1.5px solid '+(kpi.name?'rgba(240,192,64,.3)':'var(--border)')+';background:var(--bg4);color:var(--text);font-size:12.5px;font-weight:600;outline:none;transition:border-color .12s';
                 nameInp.onfocus = () => nameInp.style.borderColor = '#F0C040';
                 nameInp.onblur = () => {
-                   kpi.name = nameInp.value.trim();
+                   const trimmedVal = nameInp.value.trim();
+                   if (trimmedVal && (!kpi.customAttrs || kpi.customAttrs.length === 0)) {
+                      kpi.customAttrs = getEquipRequiredAttrs(item.elemKey, trimmedVal);
+                   }
+                   kpi.name = trimmedVal;
                    syncKpisAcrossEquipType(item.elemKey, seu, item.instanceId);
                    saveState();
                    applyAndRender();
@@ -10899,7 +11192,7 @@ function paneSeu() {
                             fnRow.innerHTML = '<span style="font-size:10px;color:var(--text3);font-weight:700;text-transform:uppercase;letter-spacing:.5px;flex-shrink:0">Combine using:</span>';
                             const fnSel = el('select');
                             fnSel.style.cssText = 'padding:4px 8px;border-radius:5px;border:1px solid var(--border);background:var(--bg);color:var(--text);font-size:11px;font-family:var(--mono);outline:none;cursor:pointer';
-                            ['SUM','AVG','MAX','MIN','MULTIPLY','CUSTOM'].forEach(fn=>{
+                            ['SUM','ADD','SUBTRACT','MULTIPLY','DIVIDE','AVG','AVERAGE','MAX','MIN','CUSTOM'].forEach(fn=>{
                               const opt = el('option'); opt.value=fn; opt.textContent=fn;
                               if(ca.tagFunction===fn) opt.selected=true;
                               fnSel.appendChild(opt);
@@ -10970,11 +11263,13 @@ function paneSeu() {
                           else {
                             const fn = ca.tagFunction || 'SUM';
                             const refs = tags.map((t,i)=>'['+t+']');
-                            if(fn==='SUM') ca.piTag = refs.join(' + ');
-                            else if(fn==='AVG') ca.piTag = '(' + refs.join(' + ') + ') / ' + tags.length;
+                            if(fn==='SUM' || fn==='ADD') ca.piTag = refs.join(' + ');
+                            else if(fn==='SUBTRACT') ca.piTag = refs.join(' - ');
+                            else if(fn==='MULTIPLY') ca.piTag = refs.join(' * ');
+                            else if(fn==='DIVIDE') ca.piTag = refs.join(' / ');
+                            else if(fn==='AVG' || fn==='AVERAGE') ca.piTag = '(' + refs.join(' + ') + ') / ' + tags.length;
                             else if(fn==='MAX') ca.piTag = 'MAX(' + refs.join(', ') + ')';
                             else if(fn==='MIN') ca.piTag = 'MIN(' + refs.join(', ') + ')';
-                            else if(fn==='MULTIPLY') ca.piTag = refs.join(' * ');
                             else if(fn==='CUSTOM') ca.piTag = ca.customFormula || refs.join(' + ');
                           }
                           /* Update preview in parent */
@@ -11267,7 +11562,7 @@ function paneNonSeu() {
   const allItems = buildEquipmentInventory();
 
   const items = allItems.filter(it => {
-    if (it.netKey !== 'steam') return false;
+    if (it.netKey !== 'steam' && it.netKey !== 'power') return false;
     if ((it.plantName || '').trim().toLowerCase() !== 'utility unit') return false;
     if (STATE._nonSecExcluded && STATE._nonSecExcluded[it.instanceId]) return false;
     return true;
@@ -11310,6 +11605,9 @@ function paneNonSeu() {
           existingKpi.dataSource = srcKpi.dataSource || 'calculate';
           existingKpi.formula = srcKpi.formula || '';
           
+          if (!existingKpi.customAttrs || existingKpi.customAttrs.length === 0) {
+            existingKpi.customAttrs = getEquipRequiredAttrs(otherElemKey, targetName);
+          }
           if (srcKpi.customAttrs && existingKpi.customAttrs) {
             srcKpi.customAttrs.forEach(srcAttr => {
               const dstAttr = existingKpi.customAttrs.find(a => a.name === srcAttr.name);
@@ -11728,7 +12026,11 @@ function paneNonSeu() {
                 nameInp.style.cssText = 'flex:1;max-width:300px;padding:5px 8px;border-radius:5px;border:1.5px solid '+(kpi.name?'rgba(240,192,64,.3)':'var(--border)')+';background:var(--bg4);color:var(--text);font-size:12.5px;font-weight:600;outline:none;transition:border-color .12s';
                 nameInp.onfocus = () => nameInp.style.borderColor = '#F0C040';
                 nameInp.onblur = () => {
-                   kpi.name = nameInp.value.trim();
+                   const trimmedVal = nameInp.value.trim();
+                   if (trimmedVal && (!kpi.customAttrs || kpi.customAttrs.length === 0)) {
+                      kpi.customAttrs = getEquipRequiredAttrs(item.elemKey, trimmedVal);
+                   }
+                   kpi.name = trimmedVal;
                    syncKpisAcrossEquipType(item.elemKey, seu, item.instanceId);
                    saveState();
                    applyAndRender();
@@ -11967,7 +12269,7 @@ function paneNonSeu() {
                             fnRow.innerHTML = '<span style="font-size:10px;color:var(--text3);font-weight:700;text-transform:uppercase;letter-spacing:.5px;flex-shrink:0">Combine using:</span>';
                             const fnSel = el('select');
                             fnSel.style.cssText = 'padding:4px 8px;border-radius:5px;border:1px solid var(--border);background:var(--bg);color:var(--text);font-size:11px;font-family:var(--mono);outline:none;cursor:pointer';
-                            ['SUM','AVG','MAX','MIN','MULTIPLY','CUSTOM'].forEach(fn=>{
+                            ['SUM','ADD','SUBTRACT','MULTIPLY','DIVIDE','AVG','AVERAGE','MAX','MIN','CUSTOM'].forEach(fn=>{
                               const opt = el('option'); opt.value=fn; opt.textContent=fn;
                               if(ca.tagFunction===fn) opt.selected=true;
                               fnSel.appendChild(opt);
@@ -12038,11 +12340,13 @@ function paneNonSeu() {
                           else {
                             const fn = ca.tagFunction || 'SUM';
                             const refs = tags.map((t,i)=>'['+t+']');
-                            if(fn==='SUM') ca.piTag = refs.join(' + ');
-                            else if(fn==='AVG') ca.piTag = '(' + refs.join(' + ') + ') / ' + tags.length;
+                            if(fn==='SUM' || fn==='ADD') ca.piTag = refs.join(' + ');
+                            else if(fn==='SUBTRACT') ca.piTag = refs.join(' - ');
+                            else if(fn==='MULTIPLY') ca.piTag = refs.join(' * ');
+                            else if(fn==='DIVIDE') ca.piTag = refs.join(' / ');
+                            else if(fn==='AVG' || fn==='AVERAGE') ca.piTag = '(' + refs.join(' + ') + ') / ' + tags.length;
                             else if(fn==='MAX') ca.piTag = 'MAX(' + refs.join(', ') + ')';
                             else if(fn==='MIN') ca.piTag = 'MIN(' + refs.join(', ') + ')';
-                            else if(fn==='MULTIPLY') ca.piTag = refs.join(' * ');
                             else if(fn==='CUSTOM') ca.piTag = ca.customFormula || refs.join(' + ');
                           }
                           /* Update preview in parent */
@@ -13162,7 +13466,7 @@ function exportTabXlsx(tabId){
     {
       rows = hdr().concat([['Plant','Network','Element','Instance','KPI Name','Data Source','PI Tag','Formula','UOM','Design','Min','Max','Default','Attribute Name']]);
       buildEquipmentInventory().forEach(function(it){
-        if (it.netKey !== 'steam') return;
+        if (it.netKey !== 'steam' && it.netKey !== 'power') return;
         if ((it.plantName || '').trim().toLowerCase() !== 'utility unit') return;
         if (STATE._nonSecExcluded && STATE._nonSecExcluded[it.instanceId]) return;
 
