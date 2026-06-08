@@ -1,0 +1,79 @@
+@use 'config/scss/variables' as *;
+
+.worlflowConfigurationContainer {
+  padding: 1vmin 1vmin 0 1vmin;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  .topContainer {
+    .checkboxContainer {
+      .checkboxWrapper {
+        .headerContainer {
+          margin-bottom: 0.5vmin;
+        }
+
+        .rowContainer {
+          margin-bottom: 2vmin;
+
+          :global(.form-check.form-check-reverse) {
+            width: 100%;
+            display: flex;
+            padding-right: 0;
+            align-items: center;
+          }
+
+          :global(.form-check-label) {
+            margin-left: 3vmin;
+            text-align: left;
+          }
+
+          :global(.form-check-input) {
+            margin-bottom: 0.4vmin;
+          }
+        }
+      }
+    }
+
+    .numberContainer {
+      display: flex;
+      align-items: center;
+      gap: 1vmin;
+
+      .numberInput {
+        width: 7vmin;
+        border-radius: 0.3vmin;
+        border: 1px solid $primary_gray_3;
+        padding: 0.2vmin 1vmin;
+        height: 3.5vmin;
+        font-weight: 600;
+
+        &:focus {
+          outline: none;
+          box-shadow: none;
+          border: 1px solid $primary_gray_3;
+        }
+      }
+    }
+  }
+
+  .bottonContainer {
+    margin-top: 2vmin;
+    height: 3.5vmin;
+
+    .submitBtn {
+      background-color: $primary_blue;
+      height: 100%;
+      border-radius: 0.3vmin;
+      width: 14vmin;
+      color: $primary_white;
+      border: 1px solid $primary_blue;
+
+      &:disabled {
+        opacity: 1;
+        background-color: $primary_gray_2;
+        border: 1px solid $primary_gray_2;
+        cursor: not-allowed;
+      }
+    }
+  }
+}

@@ -1,0 +1,200 @@
+@use 'config/scss/variables' as *;
+
+.container {
+  height: 100%;
+
+  .datePickerContainer {
+    height: 3.5vmin;
+    padding: 0 1.5vmin;
+    margin-bottom: 1.5vmin;
+
+    :global(
+      .react-datepicker-wrapper .react-datepicker__input-container input
+    ) {
+      width: 18vmin;
+      background-image: url('../../../assets/sabic_new_icons/calendar_icon.svg');
+      background-repeat: no-repeat;
+      background-position: calc(100% - 1vmin) center;
+      background-size: 2vmin;
+    }
+
+    .btnContainer {
+      button {
+        width: 14vmin;
+        text-transform: uppercase;
+      }
+
+      .enableBtn {
+        display: inline-block;
+        border: 1px solid $primary_blue;
+        background-color: $primary_blue_bg;
+        border-radius: 0.3vmin;
+      }
+
+      .disableBtn {
+        display: inline-block;
+        border: 1px solid $primary_gray_2;
+        background-color: $primary_gray_4;
+        border-radius: 0.3vmin;
+      }
+    }
+  }
+
+  .tableParentContainer {
+    position: relative;
+    width: 100%;
+    height: calc(100% - 5vmin - 2vmin);
+
+    &::after {
+      content: '';
+      position: absolute;
+      width: 1.5vmin;
+      height: 10vmin;
+      background-color: #eaf9ff;
+      top: 0;
+      right: 0;
+      z-index: 88;
+    }
+
+    .tableContainer {
+      height: 100%;
+      position: relative;
+      border-collapse: collapse;
+      overflow-y: auto;
+
+      &::-webkit-scrollbar-track {
+        background: transparent;
+      }
+
+      &::-webkit-scrollbar-track-piece:start {
+        background: transparent !important;
+        margin-top: 10vmin !important;
+      }
+
+      table {
+        thead {
+          position: sticky;
+          top: 0px;
+          height: 10vmin;
+          background-color: $primary_blue_bg;
+
+          tr {
+            th {
+              text-transform: uppercase;
+              height: 5vmin;
+
+              &.headerSeparater {
+                position: relative;
+
+                &::before {
+                  content: '';
+                  position: absolute;
+                  width: 1px;
+                  height: 40%;
+                  background-color: $primary_gray_3;
+                  left: 0;
+                  top: 50%;
+                  transform: translateY(-50%);
+                }
+              }
+
+              .borderBottom {
+                position: relative;
+
+                &::before {
+                  content: '';
+                  position: absolute;
+                  width: 98%;
+                  height: 1px;
+                  background-color: $primary_gray_3;
+                  bottom: 0;
+                  left: 50%;
+                  transform: translateX(-50%);
+                }
+              }
+
+              .rowSpanImg {
+                width: 3.5vmin;
+                height: 3.5vmin;
+                filter: none;
+              }
+
+              .marginTop {
+                margin-top: 1vmin;
+              }
+
+              .colSpanImg {
+                width: 2.8vmin;
+                height: 2.8vmin;
+                margin-right: 1vmin;
+              }
+            }
+          }
+        }
+
+        tbody {
+          tr {
+            td {
+              padding: 1vmin 0.5vmin;
+              height: 6vmin;
+              border-bottom: 1px solid $primary_gray_4;
+
+              &.IconTrend {
+                img {
+                  width: 2.2vmin;
+                  height: 2.2vmin;
+                  filter: none;
+                }
+              }
+
+              &.editLink {
+                a {
+                  right: 0.4vmin;
+                  display: flex;
+                  width: 2.2vmin;
+                  height: 2.2vmin;
+                  justify-content: center;
+                  align-items: center;
+                  cursor: pointer;
+                  filter: unset;
+
+                  img {
+                    width: 100%;
+                    height: 100%;
+                    cursor: pointer;
+                    filter: none;
+                  }
+                }
+              }
+            }
+
+            &.lastRow {
+              td {
+                background-color: $primary_blue_bg;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.modalBox {
+  h1 {
+    height: 2vmin;
+  }
+
+  .chartContainer {
+    height: calc(100% - 2vmin);
+  }
+}
+
+.disabledLink {
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
+.notAllowed {
+  cursor: not-allowed;
+}

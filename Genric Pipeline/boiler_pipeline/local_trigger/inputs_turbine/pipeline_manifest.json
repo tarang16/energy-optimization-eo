@@ -1,0 +1,200 @@
+{
+  "model_id": "turbine_calc_v1",
+  "version": "v1",
+  "system_id": "turbine_plant",
+  "feature_flag": "turbine_calc",
+  "input_config_sheets": {
+    "instantiated_attrs": "intantiated_attributes",
+    "sensors_mapping": "Sensors_Mapping"
+  },
+  "output_schemas": {
+    "output_attribute_values": {
+      "mandatory": true,
+      "db_table": "output_attribute_values_table",
+      "natural_key": [
+        "run_id",
+        "timestamp",
+        "element_code",
+        "attribute"
+      ],
+      "partition_interval": "month",
+      "fields": [
+        {
+          "name": "model_id",
+          "type": "string",
+          "nullable": false
+        },
+        {
+          "name": "run_id",
+          "type": "string",
+          "nullable": false
+        },
+        {
+          "name": "timestamp",
+          "type": "datetime",
+          "nullable": false
+        },
+        {
+          "name": "element_code",
+          "type": "string",
+          "nullable": false
+        },
+        {
+          "name": "attribute",
+          "type": "string",
+          "nullable": false
+        },
+        {
+          "name": "value",
+          "type": "float",
+          "nullable": true
+        }
+      ],
+      "allowed_combinations": [
+        {
+          "attribute": "INLET_FLOW_T_H",
+          "element_code": "ebdbf979-edfa-5383-b891-5f305f6ab4c5"
+        },
+        {
+          "attribute": "STATUS",
+          "element_code": "ebdbf979-edfa-5383-b891-5f305f6ab4c5"
+        },
+        {
+          "attribute": "INLET_ENTHALPY_KJKG",
+          "element_code": "ebdbf979-edfa-5383-b891-5f305f6ab4c5"
+        },
+        {
+          "attribute": "EXHAUST_ENTHALPY_KJKG",
+          "element_code": "ebdbf979-edfa-5383-b891-5f305f6ab4c5"
+        },
+        {
+          "attribute": "ENTHALPY_DROP_KJKG",
+          "element_code": "ebdbf979-edfa-5383-b891-5f305f6ab4c5"
+        },
+        {
+          "attribute": "DELIVERED_POWER_KW",
+          "element_code": "ebdbf979-edfa-5383-b891-5f305f6ab4c5"
+        },
+        {
+          "attribute": "STEAM_RATE_KG_PER_KWH",
+          "element_code": "ebdbf979-edfa-5383-b891-5f305f6ab4c5"
+        },
+        {
+          "attribute": "POWER_LOAD_PCT",
+          "element_code": "ebdbf979-edfa-5383-b891-5f305f6ab4c5"
+        },
+        {
+          "attribute": "INLET_FLOW_T_H",
+          "element_code": "6ec63780-83d1-53ba-b436-1226e203aa57"
+        },
+        {
+          "attribute": "STATUS",
+          "element_code": "6ec63780-83d1-53ba-b436-1226e203aa57"
+        },
+        {
+          "attribute": "INLET_ENTHALPY_KJKG",
+          "element_code": "6ec63780-83d1-53ba-b436-1226e203aa57"
+        },
+        {
+          "attribute": "EXHAUST_ENTHALPY_KJKG",
+          "element_code": "6ec63780-83d1-53ba-b436-1226e203aa57"
+        },
+        {
+          "attribute": "ENTHALPY_DROP_KJKG",
+          "element_code": "6ec63780-83d1-53ba-b436-1226e203aa57"
+        },
+        {
+          "attribute": "DELIVERED_POWER_KW",
+          "element_code": "6ec63780-83d1-53ba-b436-1226e203aa57"
+        },
+        {
+          "attribute": "STEAM_RATE_KG_PER_KWH",
+          "element_code": "6ec63780-83d1-53ba-b436-1226e203aa57"
+        },
+        {
+          "attribute": "POWER_LOAD_PCT",
+          "element_code": "6ec63780-83d1-53ba-b436-1226e203aa57"
+        },
+        {
+          "attribute": "INLET_FLOW_T_H",
+          "element_code": "3414cbfa-c8ff-51eb-b702-b53f845f5c5b"
+        },
+        {
+          "attribute": "STATUS",
+          "element_code": "3414cbfa-c8ff-51eb-b702-b53f845f5c5b"
+        },
+        {
+          "attribute": "INLET_ENTHALPY_KJKG",
+          "element_code": "3414cbfa-c8ff-51eb-b702-b53f845f5c5b"
+        },
+        {
+          "attribute": "EXHAUST_ENTHALPY_KJKG",
+          "element_code": "3414cbfa-c8ff-51eb-b702-b53f845f5c5b"
+        },
+        {
+          "attribute": "ENTHALPY_DROP_KJKG",
+          "element_code": "3414cbfa-c8ff-51eb-b702-b53f845f5c5b"
+        },
+        {
+          "attribute": "DELIVERED_POWER_KW",
+          "element_code": "3414cbfa-c8ff-51eb-b702-b53f845f5c5b"
+        },
+        {
+          "attribute": "STEAM_RATE_KG_PER_KWH",
+          "element_code": "3414cbfa-c8ff-51eb-b702-b53f845f5c5b"
+        },
+        {
+          "attribute": "POWER_LOAD_PCT",
+          "element_code": "3414cbfa-c8ff-51eb-b702-b53f845f5c5b"
+        }
+      ]
+    },
+    "imputation_history": {
+      "mandatory": false,
+      "db_table": "imputation_history_table",
+      "natural_key": [
+        "run_id",
+        "timestamp",
+        "sensor"
+      ],
+      "partition_interval": "none",
+      "fields": [
+        {
+          "name": "model_id",
+          "type": "string",
+          "nullable": false
+        },
+        {
+          "name": "run_id",
+          "type": "string",
+          "nullable": false
+        },
+        {
+          "name": "timestamp",
+          "type": "datetime",
+          "nullable": false
+        },
+        {
+          "name": "sensor",
+          "type": "string",
+          "nullable": false
+        },
+        {
+          "name": "raw_value",
+          "type": "float",
+          "nullable": true
+        },
+        {
+          "name": "modified_value",
+          "type": "float",
+          "nullable": false
+        },
+        {
+          "name": "sip_policy",
+          "type": "string",
+          "nullable": false
+        }
+      ]
+    }
+  }
+}

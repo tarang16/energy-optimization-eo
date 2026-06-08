@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?><process version="10.4.003">
+  <context>
+    <input/>
+    <output/>
+    <macros/>
+  </context>
+  <operator activated="true" class="process" compatibility="10.4.003" expanded="true" name="Process">
+    <parameter key="logverbosity" value="init"/>
+    <parameter key="random_seed" value="2001"/>
+    <parameter key="send_mail" value="never"/>
+    <parameter key="notification_email" value=""/>
+    <parameter key="process_duration_for_mail" value="30"/>
+    <parameter key="encoding" value="SYSTEM"/>
+    <process expanded="true">
+      <operator activated="true" class="productivity:execute_process" compatibility="10.4.003" expanded="true" height="68" name="Execute 03_Model_Validation" width="90" x="380" y="85">
+        <parameter key="process_location" value="05_Model_Validation"/>
+        <parameter key="use_input" value="true"/>
+        <parameter key="store_output" value="false"/>
+        <parameter key="propagate_metadata_recursively" value="false"/>
+        <parameter key="cache_process" value="false"/>
+        <list key="macros">
+          <parameter key="sub_model_id" value="%{sub_model_id}"/>
+          <parameter key="pullpi_window_hour" value="%{pullpi_window_hour}"/>
+          <parameter key="start_time" value="%{start_time}"/>
+          <parameter key="end_time" value="%{end_time}"/>
+          <parameter key="sub_model_retraining_history_id" value="%{sub_model_retraining_history_id}"/>
+          <parameter key="block" value="%{block}"/>
+        </list>
+        <parameter key="fail_for_unknown_macros" value="false"/>
+      </operator>
+      <portSpacing port="source_input 1" spacing="0"/>
+      <portSpacing port="sink_result 1" spacing="0"/>
+    </process>
+  </operator>
+</process>

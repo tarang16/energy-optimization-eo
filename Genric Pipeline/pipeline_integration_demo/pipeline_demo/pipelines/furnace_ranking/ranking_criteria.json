@@ -1,0 +1,42 @@
+[
+  {
+    "attribute_name": "specific_energy_consumption",
+    "attribute_weightage": 10,
+    "sort_type": "asc"
+  },
+  {
+    "attribute_name": "ethylene_yield",
+    "attribute_weightage": 20,
+    "sort_type": "desc"
+  },
+  {
+    "attribute_name": "percent_above_threshold",
+    "attribute_weightage": 30,
+    "sort_type": "desc"
+  },
+  {
+    "attribute_name": "fuel_gas_pressure",
+    "attribute_weightage": 10,
+    "sort_type": "desc"
+  },
+  {
+    "attribute_name": "draft_pressure",
+    "attribute_weightage": 0,
+    "sort_type": "asc"
+  },
+  {
+    "attribute_name": "Flow_Control_Valve_OP",
+    "attribute_weightage": 10,
+    "sort_type": "desc"
+  },
+  {
+    "attribute_name": "max_cpr",
+    "attribute_weightage": 15,
+    "sort_type": "desc"
+  },
+  {
+    "attribute_name": "Damper_Opening",
+    "attribute_weightage": 5,
+    "sort_type": "desc"
+  }
+]

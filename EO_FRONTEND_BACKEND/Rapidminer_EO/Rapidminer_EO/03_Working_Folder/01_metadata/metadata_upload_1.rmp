@@ -1,0 +1,396 @@
+<?xml version="1.0" encoding="UTF-8"?><process version="10.4.003">
+  <context>
+    <input/>
+    <output/>
+    <macros/>
+  </context>
+  <operator activated="true" class="process" compatibility="10.4.003" expanded="true" name="Process">
+    <parameter key="logverbosity" value="init"/>
+    <parameter key="random_seed" value="2001"/>
+    <parameter key="send_mail" value="never"/>
+    <parameter key="notification_email" value=""/>
+    <parameter key="process_duration_for_mail" value="30"/>
+    <parameter key="encoding" value="SYSTEM"/>
+    <process expanded="true">
+      <operator activated="true" class="subprocess" compatibility="10.4.003" expanded="true" height="68" name="File Input" width="90" x="45" y="34">
+        <process expanded="true">
+          <operator activated="true" class="open_file" compatibility="10.4.003" expanded="true" height="68" name="Open File" width="90" x="45" y="34">
+            <parameter key="resource_type" value="repository blob entry"/>
+            <parameter key="repository_entry" value="//ing_manufacturing_eo_2024_dev/03_Pipeline/working_folder/01_metadata/01_metadata.xlsx"/>
+          </operator>
+          <operator activated="true" class="multiply" compatibility="10.4.003" expanded="true" height="166" name="Multiply" width="90" x="179" y="34"/>
+          <operator activated="true" class="read_excel" compatibility="10.3.001" expanded="true" height="68" name="mst_output_mapping" width="90" x="313" y="442">
+            <parameter key="sheet_selection" value="sheet name"/>
+            <parameter key="sheet_name" value="mst_output_mapping"/>
+            <parameter key="sheet_number" value="1"/>
+            <parameter key="imported_cell_range" value="A1"/>
+            <parameter key="encoding" value="SYSTEM"/>
+            <parameter key="use_header_row" value="true"/>
+            <parameter key="header_row" value="1"/>
+            <parameter key="first_row_as_names" value="true"/>
+            <list key="annotations"/>
+            <parameter key="date_format" value=""/>
+            <parameter key="time_zone" value="SYSTEM"/>
+            <parameter key="locale" value="English (United States)"/>
+            <parameter key="read_all_values_as_polynominal" value="false"/>
+            <list key="data_set_meta_data_information"/>
+            <parameter key="read_not_matching_values_as_missings" value="true"/>
+          </operator>
+          <operator activated="true" class="remember" compatibility="10.4.003" expanded="true" height="68" name="Remember (6)" width="90" x="447" y="442">
+            <parameter key="name" value="mst_output_mapping"/>
+            <parameter key="io_object" value="ExampleSet"/>
+            <parameter key="store_which" value="1"/>
+            <parameter key="remove_from_process" value="true"/>
+          </operator>
+          <operator activated="true" class="read_excel" compatibility="10.3.001" expanded="true" height="68" name="MST_Overview_Trend" width="90" x="313" y="340">
+            <parameter key="sheet_selection" value="sheet name"/>
+            <parameter key="sheet_name" value="MST_Overview_Trend"/>
+            <parameter key="sheet_number" value="1"/>
+            <parameter key="imported_cell_range" value="A1"/>
+            <parameter key="encoding" value="SYSTEM"/>
+            <parameter key="use_header_row" value="true"/>
+            <parameter key="header_row" value="1"/>
+            <parameter key="first_row_as_names" value="true"/>
+            <list key="annotations"/>
+            <parameter key="date_format" value=""/>
+            <parameter key="time_zone" value="SYSTEM"/>
+            <parameter key="locale" value="English (United States)"/>
+            <parameter key="read_all_values_as_polynominal" value="false"/>
+            <list key="data_set_meta_data_information"/>
+            <parameter key="read_not_matching_values_as_missings" value="true"/>
+          </operator>
+          <operator activated="true" class="remember" compatibility="10.4.003" expanded="true" height="68" name="Remember (5)" width="90" x="447" y="340">
+            <parameter key="name" value="MST_Overview_Trend"/>
+            <parameter key="io_object" value="ExampleSet"/>
+            <parameter key="store_which" value="1"/>
+            <parameter key="remove_from_process" value="true"/>
+          </operator>
+          <operator activated="true" class="read_excel" compatibility="10.3.001" expanded="true" height="68" name="MST_Tree_Diagram" width="90" x="313" y="238">
+            <parameter key="sheet_selection" value="sheet name"/>
+            <parameter key="sheet_name" value="MST_Tree_Diagram"/>
+            <parameter key="sheet_number" value="1"/>
+            <parameter key="imported_cell_range" value="A1"/>
+            <parameter key="encoding" value="SYSTEM"/>
+            <parameter key="use_header_row" value="true"/>
+            <parameter key="header_row" value="1"/>
+            <parameter key="first_row_as_names" value="true"/>
+            <list key="annotations"/>
+            <parameter key="date_format" value=""/>
+            <parameter key="time_zone" value="SYSTEM"/>
+            <parameter key="locale" value="English (United States)"/>
+            <parameter key="read_all_values_as_polynominal" value="false"/>
+            <list key="data_set_meta_data_information"/>
+            <parameter key="read_not_matching_values_as_missings" value="true"/>
+          </operator>
+          <operator activated="true" class="remember" compatibility="10.4.003" expanded="true" height="68" name="Remember (4)" width="90" x="447" y="238">
+            <parameter key="name" value="MST_Tree_Diagram"/>
+            <parameter key="io_object" value="ExampleSet"/>
+            <parameter key="store_which" value="1"/>
+            <parameter key="remove_from_process" value="true"/>
+          </operator>
+          <operator activated="true" class="read_excel" compatibility="10.3.001" expanded="true" height="68" name="MST_Kpi_Overview" width="90" x="313" y="34">
+            <parameter key="excel_file" value="C:/Users/30757749/Documents/RapidMiner/Projects/ing_manufacturing_eo_2024_dev/03_Pipeline/working_folder/01_metadata/01_metadata.xlsx"/>
+            <parameter key="sheet_selection" value="sheet name"/>
+            <parameter key="sheet_name" value="MST_Kpi_Overview"/>
+            <parameter key="sheet_number" value="1"/>
+            <parameter key="imported_cell_range" value="A1"/>
+            <parameter key="encoding" value="SYSTEM"/>
+            <parameter key="use_header_row" value="true"/>
+            <parameter key="header_row" value="1"/>
+            <parameter key="first_row_as_names" value="true"/>
+            <list key="annotations"/>
+            <parameter key="date_format" value=""/>
+            <parameter key="time_zone" value="SYSTEM"/>
+            <parameter key="locale" value="English (United States)"/>
+            <parameter key="read_all_values_as_polynominal" value="false"/>
+            <list key="data_set_meta_data_information"/>
+            <parameter key="read_not_matching_values_as_missings" value="true"/>
+          </operator>
+          <operator activated="true" class="remember" compatibility="10.4.003" expanded="true" height="68" name="Remember (3)" width="90" x="447" y="34">
+            <parameter key="name" value="MST_Kpi_Overview"/>
+            <parameter key="io_object" value="ExampleSet"/>
+            <parameter key="store_which" value="1"/>
+            <parameter key="remove_from_process" value="true"/>
+          </operator>
+          <operator activated="true" class="read_excel" compatibility="10.3.001" expanded="true" height="68" name="MST_Monitoring" width="90" x="313" y="136">
+            <parameter key="sheet_selection" value="sheet name"/>
+            <parameter key="sheet_name" value="MST_Monitoring"/>
+            <parameter key="sheet_number" value="1"/>
+            <parameter key="imported_cell_range" value="A1"/>
+            <parameter key="encoding" value="SYSTEM"/>
+            <parameter key="use_header_row" value="true"/>
+            <parameter key="header_row" value="1"/>
+            <parameter key="first_row_as_names" value="true"/>
+            <list key="annotations"/>
+            <parameter key="date_format" value=""/>
+            <parameter key="time_zone" value="SYSTEM"/>
+            <parameter key="locale" value="English (United States)"/>
+            <parameter key="read_all_values_as_polynominal" value="false"/>
+            <list key="data_set_meta_data_information"/>
+            <parameter key="read_not_matching_values_as_missings" value="true"/>
+          </operator>
+          <operator activated="true" class="remember" compatibility="10.4.003" expanded="true" height="68" name="Remember (2)" width="90" x="447" y="136">
+            <parameter key="name" value="MST_Monitoring"/>
+            <parameter key="io_object" value="ExampleSet"/>
+            <parameter key="store_which" value="1"/>
+            <parameter key="remove_from_process" value="true"/>
+          </operator>
+          <operator activated="true" class="retrieve" compatibility="10.4.003" expanded="true" height="68" name="Retrieve MSSQL_EO_2024 (2)" width="90" x="648" y="136">
+            <parameter key="repository_entry" value="//ing_manufacturing_eo_2024_dev/Connections/EO_WEB_DASHBOARD"/>
+          </operator>
+          <operator activated="true" class="remember" compatibility="10.4.003" expanded="true" height="68" name="Remember (7)" width="90" x="782" y="136">
+            <parameter key="name" value="connection_sql_pe"/>
+            <parameter key="io_object" value="ConnectionInformationContainerIOObject"/>
+            <parameter key="store_which" value="1"/>
+            <parameter key="remove_from_process" value="true"/>
+          </operator>
+          <connect from_op="Open File" from_port="file" to_op="Multiply" to_port="input"/>
+          <connect from_op="Multiply" from_port="output 1" to_op="MST_Kpi_Overview" to_port="file"/>
+          <connect from_op="Multiply" from_port="output 2" to_op="MST_Monitoring" to_port="file"/>
+          <connect from_op="Multiply" from_port="output 3" to_op="MST_Tree_Diagram" to_port="file"/>
+          <connect from_op="Multiply" from_port="output 4" to_op="MST_Overview_Trend" to_port="file"/>
+          <connect from_op="Multiply" from_port="output 5" to_op="mst_output_mapping" to_port="file"/>
+          <connect from_op="mst_output_mapping" from_port="output" to_op="Remember (6)" to_port="store"/>
+          <connect from_op="MST_Overview_Trend" from_port="output" to_op="Remember (5)" to_port="store"/>
+          <connect from_op="MST_Tree_Diagram" from_port="output" to_op="Remember (4)" to_port="store"/>
+          <connect from_op="MST_Kpi_Overview" from_port="output" to_op="Remember (3)" to_port="store"/>
+          <connect from_op="MST_Monitoring" from_port="output" to_op="Remember (2)" to_port="store"/>
+          <connect from_op="Retrieve MSSQL_EO_2024 (2)" from_port="output" to_op="Remember (7)" to_port="store"/>
+          <portSpacing port="source_in 1" spacing="0"/>
+          <portSpacing port="sink_out 1" spacing="0"/>
+        </process>
+      </operator>
+      <operator activated="true" class="subprocess" compatibility="10.4.003" expanded="true" height="82" name="Upload" width="90" x="246" y="34">
+        <process expanded="true">
+          <operator activated="true" class="subprocess" compatibility="10.4.003" expanded="true" height="68" name="MST_Tree_Diagram (2)" width="90" x="246" y="34">
+            <process expanded="true">
+              <operator activated="true" class="recall" compatibility="10.4.003" expanded="true" height="68" name="connection_sql_pe (9)" width="90" x="45" y="34">
+                <parameter key="name" value="connection_sql_pe"/>
+                <parameter key="io_object" value="ConnectionInformationContainerIOObject"/>
+                <parameter key="remove_from_store" value="false"/>
+              </operator>
+              <operator activated="true" class="jdbc_connectors:execute_sql" compatibility="10.4.003" expanded="true" height="82" name="Execute SQL (2)" width="90" x="179" y="34">
+                <parameter key="define_connection" value="repository"/>
+                <parameter key="database_system" value="MySQL"/>
+                <parameter key="query" value="DELETE FROM dbo.mst_tree_diagram&#10;WHERE [case_id] = 1"/>
+                <parameter key="prepare_statement" value="false"/>
+                <enumeration key="parameters"/>
+              </operator>
+              <operator activated="true" class="recall" compatibility="10.4.003" expanded="true" height="68" name="connection_sql_pe" width="90" x="380" y="136">
+                <parameter key="name" value="connection_sql_pe"/>
+                <parameter key="io_object" value="ConnectionInformationContainerIOObject"/>
+                <parameter key="remove_from_store" value="false"/>
+              </operator>
+              <operator activated="true" class="recall" compatibility="10.4.003" expanded="true" height="68" name="Recall" width="90" x="380" y="34">
+                <parameter key="name" value="MST_Tree_Diagram"/>
+                <parameter key="io_object" value="ExampleSet"/>
+                <parameter key="remove_from_store" value="false"/>
+              </operator>
+              <operator activated="true" class="jdbc_connectors:write_database" compatibility="10.4.003" expanded="true" height="82" name="Write Database" width="90" x="514" y="85">
+                <parameter key="define_connection" value="repository"/>
+                <parameter key="database_system" value="MySQL"/>
+                <parameter key="use_default_schema" value="true"/>
+                <parameter key="schema_name" value="web"/>
+                <parameter key="table_name" value="mst_tree_diagram"/>
+                <parameter key="overwrite_mode" value="append"/>
+                <parameter key="set_default_varchar_length" value="false"/>
+                <parameter key="default_varchar_length" value="128"/>
+                <parameter key="add_generated_primary_keys" value="false"/>
+                <parameter key="db_key_attribute_name" value="generated_primary_key"/>
+                <parameter key="batch_size" value="10000"/>
+              </operator>
+              <connect from_op="connection_sql_pe (9)" from_port="result" to_op="Execute SQL (2)" to_port="connection"/>
+              <connect from_op="connection_sql_pe" from_port="result" to_op="Write Database" to_port="connection"/>
+              <connect from_op="Recall" from_port="result" to_op="Write Database" to_port="input"/>
+              <portSpacing port="source_in 1" spacing="0"/>
+              <portSpacing port="sink_out 1" spacing="0"/>
+            </process>
+          </operator>
+          <operator activated="true" class="subprocess" compatibility="10.4.003" expanded="true" height="68" name="MST_Kpi_Overview (2)" width="90" x="45" y="34">
+            <process expanded="true">
+              <operator activated="true" class="recall" compatibility="10.4.003" expanded="true" height="68" name="connection_sql_pe (10)" width="90" x="45" y="34">
+                <parameter key="name" value="connection_sql_pe"/>
+                <parameter key="io_object" value="ConnectionInformationContainerIOObject"/>
+                <parameter key="remove_from_store" value="false"/>
+              </operator>
+              <operator activated="true" class="jdbc_connectors:execute_sql" compatibility="10.4.003" expanded="true" height="82" name="Execute SQL" width="90" x="179" y="34">
+                <parameter key="define_connection" value="repository"/>
+                <parameter key="database_system" value="MySQL"/>
+                <parameter key="query" value="DELETE FROM dbo.mst_kpi_overview&#10;WHERE [case_id] = 1"/>
+                <parameter key="prepare_statement" value="false"/>
+                <enumeration key="parameters"/>
+              </operator>
+              <operator activated="true" class="recall" compatibility="10.4.003" expanded="true" height="68" name="connection_sql_pe (2)" width="90" x="380" y="136">
+                <parameter key="name" value="connection_sql_pe"/>
+                <parameter key="io_object" value="ConnectionInformationContainerIOObject"/>
+                <parameter key="remove_from_store" value="false"/>
+              </operator>
+              <operator activated="true" class="recall" compatibility="10.4.003" expanded="true" height="68" name="Recall (2)" width="90" x="380" y="34">
+                <parameter key="name" value="MST_Kpi_Overview"/>
+                <parameter key="io_object" value="ExampleSet"/>
+                <parameter key="remove_from_store" value="false"/>
+              </operator>
+              <operator activated="true" class="jdbc_connectors:write_database" compatibility="10.4.003" expanded="true" height="82" name="Write Database (2)" width="90" x="514" y="85">
+                <parameter key="define_connection" value="repository"/>
+                <parameter key="database_system" value="MySQL"/>
+                <parameter key="use_default_schema" value="true"/>
+                <parameter key="schema_name" value="dbo"/>
+                <parameter key="table_name" value="mst_kpi_overview"/>
+                <parameter key="overwrite_mode" value="append"/>
+                <parameter key="set_default_varchar_length" value="false"/>
+                <parameter key="default_varchar_length" value="128"/>
+                <parameter key="add_generated_primary_keys" value="false"/>
+                <parameter key="db_key_attribute_name" value="generated_primary_key"/>
+                <parameter key="batch_size" value="10000"/>
+              </operator>
+              <connect from_op="connection_sql_pe (10)" from_port="result" to_op="Execute SQL" to_port="connection"/>
+              <connect from_op="connection_sql_pe (2)" from_port="result" to_op="Write Database (2)" to_port="connection"/>
+              <connect from_op="Recall (2)" from_port="result" to_op="Write Database (2)" to_port="input"/>
+              <portSpacing port="source_in 1" spacing="0"/>
+              <portSpacing port="sink_out 1" spacing="0"/>
+            </process>
+          </operator>
+          <operator activated="true" class="subprocess" compatibility="10.4.003" expanded="true" height="68" name="MST_Monitoring (2)" width="90" x="45" y="136">
+            <process expanded="true">
+              <operator activated="true" class="recall" compatibility="10.4.003" expanded="true" height="68" name="connection_sql_pe (11)" width="90" x="45" y="34">
+                <parameter key="name" value="connection_sql_pe"/>
+                <parameter key="io_object" value="ConnectionInformationContainerIOObject"/>
+                <parameter key="remove_from_store" value="false"/>
+              </operator>
+              <operator activated="true" class="jdbc_connectors:execute_sql" compatibility="10.4.003" expanded="true" height="82" name="Execute SQL (3)" width="90" x="179" y="34">
+                <parameter key="define_connection" value="repository"/>
+                <parameter key="database_system" value="MySQL"/>
+                <parameter key="query" value="DELETE FROM dbo.mst_monitoring&#10;WHERE [case_id] = 1"/>
+                <parameter key="prepare_statement" value="false"/>
+                <enumeration key="parameters"/>
+              </operator>
+              <operator activated="true" class="recall" compatibility="10.4.003" expanded="true" height="68" name="connection_sql_pe (3)" width="90" x="380" y="136">
+                <parameter key="name" value="connection_sql_pe"/>
+                <parameter key="io_object" value="ConnectionInformationContainerIOObject"/>
+                <parameter key="remove_from_store" value="false"/>
+              </operator>
+              <operator activated="true" class="recall" compatibility="10.4.003" expanded="true" height="68" name="Recall (3)" width="90" x="380" y="34">
+                <parameter key="name" value="MST_Monitoring"/>
+                <parameter key="io_object" value="ExampleSet"/>
+                <parameter key="remove_from_store" value="false"/>
+              </operator>
+              <operator activated="true" class="jdbc_connectors:write_database" compatibility="10.4.003" expanded="true" height="82" name="Write Database (3)" width="90" x="514" y="85">
+                <parameter key="define_connection" value="repository"/>
+                <parameter key="database_system" value="MySQL"/>
+                <parameter key="use_default_schema" value="true"/>
+                <parameter key="schema_name" value="web"/>
+                <parameter key="table_name" value="mst_monitoring"/>
+                <parameter key="overwrite_mode" value="append"/>
+                <parameter key="set_default_varchar_length" value="false"/>
+                <parameter key="default_varchar_length" value="128"/>
+                <parameter key="add_generated_primary_keys" value="false"/>
+                <parameter key="db_key_attribute_name" value="generated_primary_key"/>
+                <parameter key="batch_size" value="10000"/>
+              </operator>
+              <connect from_op="connection_sql_pe (11)" from_port="result" to_op="Execute SQL (3)" to_port="connection"/>
+              <connect from_op="connection_sql_pe (3)" from_port="result" to_op="Write Database (3)" to_port="connection"/>
+              <connect from_op="Recall (3)" from_port="result" to_op="Write Database (3)" to_port="input"/>
+              <portSpacing port="source_in 1" spacing="0"/>
+              <portSpacing port="sink_out 1" spacing="0"/>
+            </process>
+          </operator>
+          <operator activated="true" class="subprocess" compatibility="10.4.003" expanded="true" height="68" name="mst_output_mapping (2)" width="90" x="246" y="136">
+            <process expanded="true">
+              <operator activated="true" class="recall" compatibility="10.4.003" expanded="true" height="68" name="connection_sql_pe (12)" width="90" x="45" y="34">
+                <parameter key="name" value="connection_sql_pe"/>
+                <parameter key="io_object" value="ConnectionInformationContainerIOObject"/>
+                <parameter key="remove_from_store" value="false"/>
+              </operator>
+              <operator activated="true" class="jdbc_connectors:execute_sql" compatibility="10.4.003" expanded="true" height="82" name="Execute SQL (4)" width="90" x="179" y="34">
+                <parameter key="define_connection" value="repository"/>
+                <parameter key="database_system" value="MySQL"/>
+                <parameter key="query" value="DELETE FROM dbo.mst_output_mapping&#10;WHERE [case_id] = 1"/>
+                <parameter key="prepare_statement" value="false"/>
+                <enumeration key="parameters"/>
+              </operator>
+              <operator activated="true" class="recall" compatibility="10.4.003" expanded="true" height="68" name="connection_sql_pe (4)" width="90" x="380" y="136">
+                <parameter key="name" value="connection_sql_pe"/>
+                <parameter key="io_object" value="ConnectionInformationContainerIOObject"/>
+                <parameter key="remove_from_store" value="false"/>
+              </operator>
+              <operator activated="true" class="recall" compatibility="10.4.003" expanded="true" height="68" name="Recall (4)" width="90" x="380" y="34">
+                <parameter key="name" value="mst_output_mapping"/>
+                <parameter key="io_object" value="ExampleSet"/>
+                <parameter key="remove_from_store" value="false"/>
+              </operator>
+              <operator activated="true" class="jdbc_connectors:write_database" compatibility="10.4.003" expanded="true" height="82" name="Write Database (4)" width="90" x="514" y="85">
+                <parameter key="define_connection" value="repository"/>
+                <parameter key="database_system" value="MySQL"/>
+                <parameter key="use_default_schema" value="true"/>
+                <parameter key="schema_name" value="web"/>
+                <parameter key="table_name" value="mst_output_mapping"/>
+                <parameter key="overwrite_mode" value="append"/>
+                <parameter key="set_default_varchar_length" value="false"/>
+                <parameter key="default_varchar_length" value="128"/>
+                <parameter key="add_generated_primary_keys" value="false"/>
+                <parameter key="db_key_attribute_name" value="generated_primary_key"/>
+                <parameter key="batch_size" value="10000"/>
+              </operator>
+              <connect from_op="connection_sql_pe (12)" from_port="result" to_op="Execute SQL (4)" to_port="connection"/>
+              <connect from_op="connection_sql_pe (4)" from_port="result" to_op="Write Database (4)" to_port="connection"/>
+              <connect from_op="Recall (4)" from_port="result" to_op="Write Database (4)" to_port="input"/>
+              <portSpacing port="source_in 1" spacing="0"/>
+              <portSpacing port="sink_out 1" spacing="0"/>
+            </process>
+          </operator>
+          <operator activated="true" class="subprocess" compatibility="10.4.003" expanded="true" height="68" name="MST_Overview_Trend (2)" width="90" x="447" y="34">
+            <process expanded="true">
+              <operator activated="true" class="recall" compatibility="10.4.003" expanded="true" height="68" name="connection_sql_pe (13)" width="90" x="45" y="34">
+                <parameter key="name" value="connection_sql_pe"/>
+                <parameter key="io_object" value="ConnectionInformationContainerIOObject"/>
+                <parameter key="remove_from_store" value="false"/>
+              </operator>
+              <operator activated="true" class="jdbc_connectors:execute_sql" compatibility="10.4.003" expanded="true" height="82" name="Execute SQL (5)" width="90" x="179" y="34">
+                <parameter key="define_connection" value="repository"/>
+                <parameter key="database_system" value="MySQL"/>
+                <parameter key="query" value="DELETE FROM dbo.mst_overview_trend&#10;WHERE [case_id] = 1"/>
+                <parameter key="prepare_statement" value="false"/>
+                <enumeration key="parameters"/>
+              </operator>
+              <operator activated="true" class="recall" compatibility="10.4.003" expanded="true" height="68" name="connection_sql_pe (5)" width="90" x="380" y="136">
+                <parameter key="name" value="connection_sql_pe"/>
+                <parameter key="io_object" value="ConnectionInformationContainerIOObject"/>
+                <parameter key="remove_from_store" value="false"/>
+              </operator>
+              <operator activated="true" class="recall" compatibility="10.4.003" expanded="true" height="68" name="Recall (5)" width="90" x="380" y="34">
+                <parameter key="name" value="MST_Overview_Trend"/>
+                <parameter key="io_object" value="ExampleSet"/>
+                <parameter key="remove_from_store" value="false"/>
+              </operator>
+              <operator activated="true" class="jdbc_connectors:write_database" compatibility="10.4.003" expanded="true" height="82" name="Write Database (5)" width="90" x="514" y="85">
+                <parameter key="define_connection" value="repository"/>
+                <parameter key="database_system" value="MySQL"/>
+                <parameter key="use_default_schema" value="true"/>
+                <parameter key="schema_name" value="web"/>
+                <parameter key="table_name" value="mst_overview_trend"/>
+                <parameter key="overwrite_mode" value="append"/>
+                <parameter key="set_default_varchar_length" value="false"/>
+                <parameter key="default_varchar_length" value="128"/>
+                <parameter key="add_generated_primary_keys" value="false"/>
+                <parameter key="db_key_attribute_name" value="generated_primary_key"/>
+                <parameter key="batch_size" value="10000"/>
+              </operator>
+              <connect from_op="connection_sql_pe (13)" from_port="result" to_op="Execute SQL (5)" to_port="connection"/>
+              <connect from_op="connection_sql_pe (5)" from_port="result" to_op="Write Database (5)" to_port="connection"/>
+              <connect from_op="Recall (5)" from_port="result" to_op="Write Database (5)" to_port="input"/>
+              <portSpacing port="source_in 1" spacing="0"/>
+              <portSpacing port="sink_out 1" spacing="0"/>
+            </process>
+          </operator>
+          <portSpacing port="source_in 1" spacing="0"/>
+          <portSpacing port="sink_out 1" spacing="0"/>
+          <portSpacing port="sink_out 2" spacing="0"/>
+        </process>
+      </operator>
+      <connect from_op="Upload" from_port="out 1" to_port="result 1"/>
+      <portSpacing port="source_input 1" spacing="0"/>
+      <portSpacing port="sink_result 1" spacing="0"/>
+      <portSpacing port="sink_result 2" spacing="0"/>
+    </process>
+  </operator>
+</process>

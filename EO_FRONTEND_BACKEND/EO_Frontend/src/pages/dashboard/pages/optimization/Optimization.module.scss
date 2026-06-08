@@ -1,0 +1,1081 @@
+@use '../../../../../src/config/scss/variables.scss' as *;
+
+.optimizationMainContainer {
+  padding: 1vmin 2vmin;
+  position: relative;
+
+  .optimizationToggleContainer {
+    position: absolute;
+    right: calc(40% + 2vmin);
+    top: -5vmin;
+    height: 6vmin;
+    padding: 0.9vmin 0 0.9vmin 0;
+  }
+
+  .optimizationContainer {
+    display: flex;
+    // gap: 2vmin;
+    flex-wrap: nowrap;
+
+    .leftContainer {
+      width: 65%;
+      padding-right: 2vmin;
+
+      &.whatIfLeftContainer {
+        table {
+          thead {
+            height: 4.5vmin;
+
+            th {
+              &:not(:first-child) {
+                text-align: center;
+              }
+            }
+          }
+
+          tbody {
+            tr {
+              td {
+                &:not(:first-child) {
+                  text-align: center;
+
+                  :global(.whatIfTextCenter) {
+                    justify-content: center;
+                  }
+
+                  :global(.accordion-body) {
+                    justify-content: center !important;
+                  }
+                }
+
+                :global(.accordion-body) {
+                  justify-content: flex-start !important;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      .leftContainer__Top {
+        height: calc(100% - 5vmin);
+        display: flex;
+        gap: 2vmin;
+
+        &.whatIfLeftContainer_top {
+          height: calc(100% - 0.5vmin);
+        }
+
+        .cardWrapper {
+          height: 100%;
+
+          &.topCardWrapper {
+            // padding-bottom: 1vmin;
+          }
+
+          &.bottomCardWrapper {
+            // padding-top: 1vmin;
+
+            table {
+              tbody {
+                tr {
+                  td {
+                    height: 4.5vmin;
+                  }
+                }
+              }
+            }
+          }
+
+          .cardContainer {
+            width: 100%;
+            height: 100%;
+            background-color: $primary_white;
+            border-radius: 1vmin;
+            @include boxShadow_kpi;
+            display: flex;
+            flex-direction: column;
+            padding: 0 1.5vmin;
+            position: relative;
+
+            .whatgIfExpandTableContainer {
+              height: calc(100% - 11.5vmin);
+            }
+
+            .whatIfbottonConContainer {
+              height: 11.5vmin;
+
+              .whatIfBtnGroupContainer {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 2vmin;
+                height: 3.5vmin;
+                margin: 1.5vmin 0;
+
+                button {
+                  height: 100%;
+                  padding: 0.25vmin 2vmin 0 2vmin;
+                  border: none;
+                  border-radius: 0.3vmin;
+                  color: $primary_white;
+                  letter-spacing: 0.09vmin;
+
+                  &.grayBtn {
+                    background-color: $primary_gray_2;
+                    cursor: not-allowed;
+                  }
+
+                  &.blueBtn {
+                    background-color: $primary_blue;
+                  }
+                }
+              }
+            }
+
+            .cardItem {
+              padding-bottom: 1.5vmin;
+              height: 50%;
+
+              &.cardItem__whatIf {
+                height: calc(100% - 6.5vmin);
+                padding-bottom: none;
+              }
+
+              &.borderBottom {
+                border-bottom: 1px solid $primary_gray_4;
+
+                table {
+                  tbody {
+                    tr {
+                      &:last-child {
+                        td {
+                          border-bottom: none;
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+
+              .CardHeader {
+                height: 5vmin;
+
+                &.expandedCardHeader {
+                  background-color: $primary_blue_bg;
+                  justify-content: center;
+                  align-items: center;
+                  height: 4.5vmin;
+                  padding: 0 2vmin;
+                  position: relative;
+
+                  .assetIcon {
+                    width: 2.5vmin;
+                    height: 2.5vmin;
+                  }
+
+                  &.borderBottom {
+                    border-bottom: 1px solid $primary_gray_4;
+                    justify-content: flex-start;
+                  }
+
+                  .expandIcon {
+                    position: absolute;
+                    top: 50%;
+                    right: 2vmin;
+                    transform: translateY(-50%);
+                    width: 2.5vmin;
+                    height: 2.5vmin;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+
+                    .arrowDown {
+                      cursor: pointer;
+                      width: 100%;
+                      height: 100%;
+                      transform: rotate(90deg);
+                      filter: brightness(0) saturate(100%) invert(38%)
+                        sepia(99%) saturate(2102%) hue-rotate(171deg)
+                        brightness(101%) contrast(103%);
+                    }
+
+                    .arrowUp {
+                      cursor: pointer;
+                      width: 100%;
+                      height: 100%;
+                      transform: rotate(-90deg);
+                      filter: brightness(0) saturate(100%) invert(38%)
+                        sepia(99%) saturate(2102%) hue-rotate(171deg)
+                        brightness(101%) contrast(103%);
+                    }
+                  }
+                }
+
+                &__BottomContainer {
+                  height: 100%;
+                  padding: 1vmin 0;
+
+                  .esitimateBtn {
+                    width: 18vmin;
+                    background-color: $primary_blue;
+                    color: $primary_white;
+                    border-radius: 0.3vmin;
+                    padding-top: 0.3vmin;
+                    border: none;
+                  }
+                }
+              }
+
+              .CardBody {
+                height: calc(100% - 5vmin);
+                // @include boxShadow_kpi;
+                border-radius: 1vmin;
+
+                &.equipmentAvaibilityTableContainer {
+                  position: relative;
+
+                  &::before {
+                    content: '';
+                    position: absolute;
+                    width: 0.7vmin;
+                    height: 4.5vmin;
+                    background-color: $primary_blue_bg;
+                    border-bottom: 1px solid $primary_gray_4;
+                    top: 0;
+                    right: 0;
+                    z-index: 9;
+                  }
+
+                  .optimizationWidth {
+                    gap: 2vmin;
+
+                    p {
+                      width: unset !important;
+                    }
+
+                    .img {
+                      width: 2vmin;
+                    }
+
+                    .displayNameBreak {
+                      word-break: break-word;
+                    }
+                  }
+
+                  :global(.customScrollBarMargin) {
+                    &::-webkit-scrollbar-track {
+                      background: #f1f1f1 !important;
+                    }
+
+                    &::-webkit-scrollbar-track-piece:start {
+                      background: transparent !important;
+                      margin-top: 4.5vmin !important;
+                    }
+                  }
+
+                  table {
+                    thead {
+                      height: 4.5vmin;
+                    }
+                  }
+                }
+
+                .optimizationTableContainer {
+                  height: 100%;
+                  position: relative;
+
+                  &::after {
+                    content: '';
+                    position: absolute;
+                    width: 0.7vmin;
+                    height: 4.5vmin;
+                    border-bottom: 1px solid $primary_gray_4;
+                    background-color: $primary_blue_bg;
+                    top: 0;
+                    right: 0;
+                  }
+
+                  table {
+                    tbody {
+                      tr {
+                        td {
+                          height: 4.1vmin;
+                          font-size: 1.2vmin;
+                        }
+
+                        td:first-child {
+                          text-align: left !important;
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+
+              &.removeBlueBorder {
+                .CardBody {
+                  &.equipmentAvaibilityTableContainer {
+                    &::before {
+                      display: none;
+                    }
+                  }
+                }
+              }
+            }
+
+            .esitimateBtnWrapper {
+              height: 3.5vmin;
+              margin: 1.5vmin;
+
+              .esitimateBtn {
+                width: 18vmin;
+                background-color: $primary_blue;
+                color: $primary_white;
+                border-radius: 0.3vmin;
+                padding-top: 0.3vmin;
+                border: none;
+              }
+
+              .esitimateBtnGray {
+                width: 18vmin;
+                background-color: $primary_gray_2;
+                color: $primary_white;
+                border-radius: 0.3vmin;
+                padding-top: 0.3vmin;
+                border: none;
+                cursor: not-allowed;
+              }
+            }
+          }
+        }
+      }
+
+      .leftContainer__Bottom {
+        margin-top: 1.5vmin;
+        height: 3.5vmin;
+
+        .leftButtomContainerBotton {
+          button {
+            height: 100%;
+            background-color: $primary_white;
+            color: $primary_blue;
+            border: 1px solid $primary_blue;
+            border-radius: 0.5vmin;
+            cursor: pointer;
+            // width: 22vmin;
+            padding: 0 3vmin;
+
+            .priceInputIcon {
+              width: 2vmin;
+              height: 2vmin;
+              margin-right: 0.5vmin;
+            }
+          }
+        }
+
+        .rightButtomContainerBotton {
+          button {
+            height: 100%;
+            background-color: $primary_blue;
+            color: $primary_white;
+            padding-top: 0.25vmin;
+            border-radius: 0.3vmin;
+            border: none;
+            cursor: pointer;
+            width: 18vmin;
+
+            &.disabled {
+              background-color: $primary_gray_2;
+              cursor: not-allowed;
+            }
+
+            &.resetBtn {
+              background-color: $primary_gray_2;
+              width: 15vmin;
+            }
+          }
+        }
+
+        // .buttomContainerBotton .button:hover {
+        //   background-color: $primary_blue;
+        //   color: $primary_white;
+        // }
+      }
+    }
+
+    .rightContainer {
+      width: 35%;
+      background-color: $primary_white;
+    }
+  }
+
+  .leftTop {
+    display: flex;
+    flex: 1;
+    gap: 10px;
+    height: 100%;
+
+    .leftContainerButton {
+      background-color: $primary_blue;
+      border: none;
+      border-radius: 0.3vmin;
+      color: $primary_white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.8vmin;
+      height: 3vmin;
+      min-width: 12vmin;
+      width: 15vmin;
+    }
+  }
+}
+
+.Optimization_Output.normalMode {
+  height: 100%;
+  // margin-bottom: 1vmin;
+}
+
+.optimizationEneryBillContainer {
+  border-radius: 1vmin;
+  background-color: $primary_gray_8;
+  padding: 0.1vmin;
+  height: 12vmin;
+
+  .energyBillIconContainer {
+    height: 4vmin;
+
+    h1 {
+      padding-left: 1vmin;
+    }
+
+    .energyBillIcon_img {
+      width: 2.5vmin;
+      height: 2.5vmin;
+
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+
+  .optimizationEneryBillCardContainer {
+    height: calc(100% - 4vmin);
+    display: flex;
+    gap: 1vmin;
+    padding: 0 1vmin 1vmin 1vmin;
+
+    .energyBill {
+      background-color: $primary_white;
+      border-radius: 1vmin;
+      flex: 1;
+      /* Ensures equal width */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1vmin;
+      height: 100%;
+      /* Set a minimum height for better responsiveness */
+    }
+  }
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.sectionItem {
+  flex: 1;
+  margin: 5px;
+  border: 1px solid $primary_gray_2;
+  padding: 10px;
+  background-color: $primary_white;
+}
+
+.img {
+  display: inline-block;
+  width: 1.5vmin;
+  height: 1.5vmin;
+  object-fit: contain;
+}
+
+.EditIconImg {
+  display: inline-block;
+  width: 1.5vmin;
+  height: 1.5vmin;
+  object-fit: contain;
+  color: $primary_blue;
+  @include blue_filter_icon_important;
+}
+
+.ToolTipIconImg {
+  display: inline-block;
+  width: 1.5vmin;
+  height: 1.5vmin;
+  object-fit: contain;
+}
+
+.h_24 {
+  height: 24vmin;
+}
+
+.h_30 {
+  height: 30vmin;
+}
+
+.RightBorder {
+  border-right: 1px solid $primary_gray_3;
+}
+
+.optimizationButttonContainer {
+  width: 15vmin;
+  max-width: 15vmin;
+  background-color: $primary_blue;
+  color: $primary_white;
+  padding: 1vmin;
+  border-radius: 0.4vmin;
+  border: none;
+  text-wrap: nowrap;
+}
+
+.optimizationWidth {
+  width: 100%;
+
+  p {
+    width: 70%;
+  }
+
+  span {
+    width: 30%;
+  }
+
+  .img {
+    width: 4vmin;
+    text-align: center;
+  }
+
+  .displayNameBreak {
+    word-break: break-word;
+  }
+}
+
+.inputStyle {
+  width: 7vmin;
+  max-width: 7vmin;
+  height: 2.5vmin;
+  text-align: center;
+  border-radius: 0.3vmin;
+  border: 1px solid $primary_gray_4;
+  padding-top: 0.3vmin;
+  outline: none;
+}
+
+// Removing number up and down arrow in type number
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+.h_25 {
+  height: calc(100% - 4vmin - 1vmin);
+}
+
+.optimizationButttonContainer_p {
+  width: 20vmin;
+  max-width: 20vmin;
+  background-color: $primary_blue;
+  color: $primary_white;
+  padding-top: 0.25vmin;
+  border-radius: 0.3vmin;
+  border: none;
+  text-wrap: nowrap;
+}
+
+.equipementModalContainer {
+  height: 100%;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    width: 5px;
+    height: 4.5vmin;
+    background-color: $primary_blue_bg;
+    right: 0;
+    top: 0;
+    z-index: 9;
+  }
+
+  &.whatIFModelHelp {
+    &::before {
+      display: none;
+    }
+
+    display: flex;
+    align-items: end;
+    justify-content: end;
+  }
+
+  .equipementTableContainer {
+    height: calc(100% - 5vmin);
+    overflow-y: auto;
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-track-piece:start {
+      background: transparent !important;
+      margin-top: 4.5vmin !important;
+    }
+
+    .table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0px;
+
+      thead {
+        height: 4.5vmin;
+        width: 100%;
+        position: sticky;
+        top: 0;
+        z-index: 10;
+
+        tr {
+          th {
+            position: relative;
+            padding: 0.5vmin;
+            background-color: $primary_blue_bg;
+            color: $primary_gray;
+            font-size: 1.2vmin;
+            font-family: 'sabic_text_bold', serif;
+            text-align: left;
+            text-transform: uppercase;
+
+            &:first-child {
+              width: 30%;
+            }
+
+            &:nth-child(2) {
+              width: 30%;
+            }
+
+            &:nth-child(3),
+            &:nth-child(4) {
+              text-align: center;
+            }
+          }
+        }
+      }
+
+      tbody {
+        /* subtract the height of the fixed header */
+        overflow-y: auto;
+        height: calc(100% - 5.5vmin);
+
+        tr {
+          td {
+            text-align: left;
+            padding: 0.5vmin 0.5vmin;
+            color: $primary_gray;
+            position: relative;
+            vertical-align: middle;
+            border-bottom: 1px solid $primary_gray_4;
+            height: 4.5vmin;
+            text-transform: uppercase;
+          }
+        }
+      }
+    }
+  }
+
+  .btnContainer {
+    height: 3.5vmin;
+    margin-top: 1.5vmin;
+    display: flex;
+    justify-content: center;
+
+    button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: $primary_blue;
+      border: none;
+      height: 100%;
+      width: 14vmin;
+      padding-top: 0.2vmin;
+      border-radius: 0.3vmin;
+
+      &.cancelBtn {
+        background-color: $primary_gray_2;
+      }
+
+      &.disableBtn {
+        background-color: $primary_gray_2;
+      }
+    }
+  }
+}
+
+.optimizationOutputOverlayContainer {
+  :global(.centerPositionLoader) {
+    // @include boxShadow_kpi;
+    border-radius: 1vmin;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 50;
+    background-color: #ffffff67;
+  }
+}
+
+.optimizationOutputContainer {
+  border-radius: 1vmin;
+  height: 100%;
+
+  h1 {
+    margin-top: 0.3vmin;
+  }
+
+  .optimizationOutputExpandableContainer {
+    table {
+      tbody {
+        tr {
+          height: 0.5vmin !important;
+        }
+      }
+    }
+  }
+}
+
+.ModelErrorContainer {
+  border: 0.3vmin $primary_gray_3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1vmin;
+  text-align: center;
+  height: 4vmin;
+
+  &__content {
+    .infoIcon {
+      cursor: pointer;
+      width: 1.8vmin;
+      height: 1.8vmin;
+    }
+
+    .failedText {
+      color: $primary_orange;
+    }
+  }
+}
+
+.tableContainer {
+  height: 35vmin;
+}
+
+.enabled {
+  background-color: $primary_blue;
+  cursor: pointer;
+}
+
+.disabled {
+  background-color: $primary_gray_2;
+  cursor: not-allowed;
+}
+
+.ModelErrorContainer_border {
+  height: 4vmin;
+  border-radius: 1vmin;
+  border: 1px solid $primary_gray_4;
+  padding: 0.1vmin 1.5vmin;
+  box-shadow: 0px 0px 5px 1px $primary_gray_4;
+}
+
+.optimizationOutputButtonContainers button {
+  width: 12vmin;
+  max-width: 15vmin;
+  background-color: $primary_white;
+  color: $primary_blue;
+  border: 1px solid $primary_blue;
+  border-radius: 0.3vmin;
+  cursor: pointer;
+  height: 3vmin;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .button:hover {
+    background-color: $primary_blue;
+    color: $primary_white;
+  }
+}
+
+.optimizationOutputContainer_Component {
+  width: 36vmin;
+  max-width: 50vmin;
+
+  .optimizationSwitchContainer {
+    width: 9vmin;
+    max-width: 15vmin;
+
+    .dotsHeight {
+      max-height: 2vmin;
+    }
+
+    .dotsDiv {
+      height: 1vmin;
+      display: inline-block;
+    }
+  }
+
+  .RightBorder {
+    border-right: 1px solid $primary_gray_3;
+    height: 2vmin;
+  }
+}
+
+.dots {
+  width: 1vmin;
+  height: 1vmin;
+  border-radius: 50%;
+  display: inline-block;
+
+  &.green {
+    background-color: $primary_green;
+  }
+
+  &.grey {
+    background-color: $primary_gray_2;
+  }
+}
+
+.bottom {
+  position: relative;
+}
+
+.optimizationOutputExpandableContainer {
+  height: 100%;
+  padding-bottom: 0.5vmin;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    width: 0.7vmin;
+    height: 4.5vmin;
+    background-color: $primary_blue_bg;
+    border-bottom: 1px solid $primary_gray_4;
+    top: 0;
+    right: 0;
+    z-index: 9;
+  }
+
+  .expandableTableContainer {
+    height: calc(100% - 14.5vmin);
+    overflow-y: auto;
+    @include boxShadow_kpi;
+    margin: 1vmin 0 1.5vmin 0;
+    border-radius: 0.8vmin;
+
+    &::-webkit-scrollbar-track-piece:start {
+      background: transparent !important;
+      margin-top: 4.5vmin !important;
+    }
+
+    table {
+      thead {
+        height: 4.5vmin;
+      }
+    }
+  }
+}
+
+.table_dropdownContainerHeader span {
+  word-wrap: break-word;
+  display: block;
+  white-space: normal;
+  overflow-wrap: break-word;
+  text-wrap: wrap;
+}
+
+.Optimization_Output.whatIfMode {
+  &::-webkit-scrollbar {
+    width: 0.5vmin;
+  }
+
+  height: calc(100% - 5.5vmin);
+  scrollbar-width: thin;
+}
+
+.LoadBottom {
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    height: 5.7vmin;
+    background-color: $primary_blue_bg;
+    top: 0;
+    right: 0;
+    z-index: 88;
+    width: 0.5vmin;
+
+    &.index-0 {
+      width: 4.5vmin;
+    }
+
+    &.index-1 {
+      width: 4.5vmin;
+    }
+
+    &.index-2345 {
+      width: 0.5vmin;
+    }
+
+    &.whatIfMode {
+      width: 0.5vmin;
+    }
+  }
+}
+
+.bottom.PriceInput {
+  position: relative;
+
+  table {
+    thead {
+      height: 4.5vmin;
+    }
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    width: 3.3vmin;
+    height: 4.5vmin;
+    background-color: #eaf9ff;
+    top: 0;
+    right: 0;
+    z-index: 999;
+  }
+}
+
+.whatIfBtnGroupContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2vmin;
+  height: 3.5vmin;
+  margin: 1.5vmin 0;
+
+  button {
+    height: 100%;
+    padding: 0.25vmin 2vmin 0 2vmin;
+    border: none;
+    border-radius: 0.3vmin;
+    color: $primary_white;
+    letter-spacing: 0.09vmin;
+
+    &.grayBtn {
+      background-color: $primary_gray_2;
+      cursor: not-allowed;
+    }
+
+    &.blueBtn {
+      background-color: $primary_blue;
+    }
+  }
+}
+
+.imgContainer {
+  height: 2vmin;
+  display: flex;
+  align-items: center;
+
+  .img {
+    display: inline-flex;
+    margin: 0px;
+    padding: 0px;
+    overflow: hidden;
+    width: 2vmin;
+    height: 2vmin;
+
+    img {
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+    }
+
+    &:hover {
+      img {
+        filter: invert(46%) sepia(44%) saturate(4344%) hue-rotate(169deg)
+          brightness(98%) contrast(101%);
+      }
+    }
+
+    .workflowCount {
+      align-content: center;
+      padding: 30% 12% 20% 14%;
+      border-radius: 50%;
+      top: -3%;
+      right: -25% !important;
+      line-height: 0;
+      font-weight: bolder;
+    }
+  }
+
+  .bellIconBtn {
+    border: none;
+    background-color: transparent;
+    padding: 0;
+    // display: inline-block;
+    outline: none;
+    width: 2.6vmin;
+    height: 2.6vmin;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    img {
+      width: 100%;
+      height: 100%;
+      vertical-align: unset !important;
+      cursor: pointer;
+    }
+
+    &:hover {
+      img {
+        filter: invert(46%) sepia(44%) saturate(4344%) hue-rotate(169deg)
+          brightness(98%) contrast(101%);
+      }
+    }
+  }
+}
+
+.copyImg {
+  width: 3vmin;
+  height: 3vmin;
+  cursor: pointer;
+  transition: opacity 0.3s;
+  padding-bottom: 2px;
+}
+
+.inputTextStyle {
+  border: 1px solid $primary_gray_3;
+  padding: 1vmin;
+  border-radius: 0.3vmin;
+  height: 35vmin;
+  width: 100%;
+  font-size: 2vmin;
+  // text-transform: uppercase;
+}

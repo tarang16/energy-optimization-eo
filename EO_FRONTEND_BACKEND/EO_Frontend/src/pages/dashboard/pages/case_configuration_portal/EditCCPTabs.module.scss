@@ -1,0 +1,274 @@
+@use 'config/scss/variables' as *;
+@use 'src/config/scss/typography' as *;
+
+.rowStyle {
+  padding: 2vmin 4vmin 1vmin 3vmin;
+  height: 100%;
+
+  .EditCcpTabsTopContainer {
+    height: calc(100% - 6vmin);
+    max-height: calc(100vh - 22vmin);
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  .tagDetailsWrapper {
+    border-radius: 0.5vmin;
+    background: $primary_yellow_80;
+    padding: 1.5vmin 1.5vmin;
+
+    &__top {
+      border-bottom: 1px dashed $primary_gray_2;
+      padding-bottom: 1.5vmin;
+    }
+
+    .rowItem {
+      :global(.col-6) {
+        width: 16vmin;
+      }
+
+      :global(.col-8) {
+        width: calc(100% - 16vmin);
+      }
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  .dropdownWrapper {
+    margin-top: 1.5vmin;
+
+    .rowItem {
+      :global(.col-4) {
+        width: 17.5vmin;
+      }
+
+      :global(.col-8) {
+        width: calc(100% - 17.5vmin);
+      }
+    }
+  }
+
+  .limitedLabelText {
+    margin-top: 1.5vmin;
+  }
+
+  .editCcpTabsTableContainer {
+    margin-top: 1vmin;
+  }
+
+  .rowItem {
+    margin-bottom: 1.5vmin;
+    gap: 2vmin;
+    flex-wrap: nowrap;
+
+    input[type='number']::-webkit-inner-spin-button,
+    input[type='number']::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      margin: 0;
+    }
+  }
+
+  .grayLightText {
+    color: $primary_gray_2;
+    line-height: 1.4vmin;
+  }
+
+  .btnContainer {
+    button {
+      width: 14vmin;
+      border-radius: 0.5vmin;
+      color: $primary_white;
+      padding: 0.8vmin 0.5vmin 0.5vmin 0.5vmin;
+      font-size: 1.6vmin;
+      font-weight: 500;
+      text-transform: uppercase;
+
+      &:disabled {
+        pointer-events: inherit !important;
+        cursor: not-allowed !important;
+        opacity: 0.7;
+        background-color: $primary_gray_2;
+      }
+
+      &.saveBtn {
+        background-color: $primary_blue;
+        border: none;
+      }
+
+      &.cancelBtn {
+        background-color: $primary_gray;
+        border: none;
+      }
+    }
+  }
+}
+
+.infoIcon {
+  width: 1.8vmin;
+  height: 1.8vmin;
+  margin-bottom: 0.7vmin;
+}
+
+.borderBottom {
+  margin-bottom: 2vmin;
+  margin-top: 1vmin;
+  width: 100%;
+  background-color: $primary_gray_3;
+}
+
+.limitWrapper {
+  @include boxShadow_kpi;
+  border-left: 1px solid $primary_gray_4;
+  border-right: 1px solid $primary_gray_4;
+  border-radius: 0.5vmin;
+  width: 100%;
+  padding: 2vmin 1.5vmin;
+  margin-top: 2vmin;
+}
+
+.minMaxWrapper {
+  // width: 44%;
+  // display: flex;
+  // flex-direction: column;
+  // justify-content: space-between;
+  // gap: 2vmin;
+}
+
+.radioWrapper {
+  width: 44%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-top: 1vmin;
+}
+
+.borderVerticle {
+  width: 1px;
+  background-color: $primary_gray_3;
+}
+
+.minMaxItem {
+  gap: 0.7vmin;
+  flex-wrap: nowrap;
+}
+
+.ccpInputBox {
+  display: block;
+  padding: 0.9vmin 0.8vmin;
+  border: 1px solid $primary_gray_3;
+  border-radius: 0.2vmin;
+  width: 100%;
+
+  &:focus {
+    outline: none;
+    border: 1px solid $primary_gray_3;
+  }
+
+  &:disabled {
+    border: 1px solid $primary_gray_12;
+    background-color: $primary_gray_12;
+  }
+}
+
+.radioButton {
+  margin-bottom: 1vmin;
+
+  input[type='radio'] {
+    border: 1px solid $primary_blue !important;
+  }
+}
+
+.defaultWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid $primary_gray_3;
+  border-radius: 0.5vmin;
+  margin-top: 2vmin;
+  padding: 1.5vmin;
+}
+
+.valueArea {
+  width: 44%;
+}
+
+.textArea {
+  width: 44%;
+}
+
+.btnContainer {
+  margin-top: 2vmin;
+
+  button {
+    width: 14vmin;
+    border-radius: 0.3vmin;
+    color: $primary_white;
+    padding: 0.8vmin 0.5vmin 0.5vmin 0.5vmin;
+    font-size: 1.6vmin;
+    font-weight: 500;
+    text-transform: uppercase;
+
+    &:disabled {
+      pointer-events: inherit !important;
+      cursor: not-allowed !important;
+      background-color: $primary_gray_2;
+    }
+
+    &.saveBtn {
+      background-color: $primary_blue;
+      border: none;
+
+      &:disabled {
+        opacity: 0.7;
+        background-color: $primary_gray_2;
+      }
+    }
+
+    &.cancelBtn {
+      background-color: $primary_gray;
+      border: none;
+
+      &:disabled {
+        opacity: 0.7;
+        background-color: $primary_gray_2;
+      }
+    }
+  }
+}
+
+.ccpTagsTooltip {
+  z-index: 11;
+  width: 40vmin;
+}
+
+.dropDownContainer {
+  width: 100%;
+}
+
+.boundField {
+  height: 3.5vmin;
+  display: flex;
+  align-items: center;
+
+  label {
+    width: unset !important;
+    min-width: 12vmin !important;
+    margin-right: 0.5vmin;
+  }
+
+  :global(.form-control) {
+    padding: 0 1vmin !important;
+    flex-grow: 1;
+    border-radius: 0.3vmin;
+    border: 1px solid $primary_gray_3;
+
+    &:focus {
+      border: 1px solid $primary_blue;
+    }
+  }
+}

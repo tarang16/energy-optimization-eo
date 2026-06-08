@@ -1,0 +1,75 @@
+@use 'config/scss/variables' as *;
+
+.sidebar {
+  width: 100%;
+  height: 100%;
+  background: $primary_white;
+  @include sidebar_boxshadow;
+  padding: 1.5vmin 0;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 1vmin;
+  padding: 0 1.5vmin 1.5vmin;
+  border-bottom: 1px solid $primary_gray_4;
+  margin-bottom: 1vmin;
+}
+
+.brandIcon {
+  width: 2.4vmin;
+  height: 2.4vmin;
+  filter: invert(49%) sepia(74%) saturate(2003%) hue-rotate(163deg) brightness(90%) contrast(103%);
+}
+
+.brandText {
+  font-family: 'sabic_headline_bold', serif;
+  font-size: 1.6vmin;
+  font-weight: 700;
+  color: $primary_dark_blue;
+  text-transform: uppercase;
+  letter-spacing: 0.05vmin;
+}
+
+.navList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4vmin;
+}
+
+.navLink {
+  display: flex;
+  align-items: center;
+  gap: 1vmin;
+  padding: 1vmin 1.4vmin;
+  margin: 0 0.8vmin;
+  border-radius: 0.4vmin;
+  text-decoration: none;
+  font-size: 1.4vmin;
+  font-weight: 600;
+  font-family: 'sabic_text_regular', serif;
+  transition: all 0.2s ease;
+}
+
+.navIconWrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.4vmin;
+  height: 2.4vmin;
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.navLabel {
+  text-transform: uppercase;
+  letter-spacing: 0.05vmin;
+  font-family: 'sabic_text_bold', serif;
+}

@@ -1,0 +1,6 @@
+numpy>=1.24
+pandas>=2.0
+iapws>=1.5            # IAPWS-IF97 steam tables (recommended)
+scikit-learn>=1.2     # regression EnPI baselining (optional)
+pyomo>=6.6            # MINLP optimizer skeleton (optional)
+streamlit>=1.30       # dashboard demo (optional)

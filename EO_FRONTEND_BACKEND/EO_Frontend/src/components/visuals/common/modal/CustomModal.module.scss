@@ -1,0 +1,44 @@
+@use 'config/scss/variables' as *;
+
+.modalContainer {
+  .header {
+    cursor: pointer !important;
+  }
+}
+
+.cancelBtnContainer {
+  width: 2.8vmin;
+  height: 2.8vmin;
+
+  button {
+    width: 100%;
+    height: 100%;
+
+    .img {
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+    }
+  }
+}
+
+:global(.modal > .modal-dialog) {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+:global(.modal > .modal-dialog > .modal-content) {
+  background-color: transparent !important;
+}
+
+:global(.modal > .modal-dialog > .modal-content > .react-draggable) {
+  position: relative !important;
+}
+
+.mainHeader {
+  height: 5vmin;
+}
+
+.subTitleHeader {
+  margin-bottom: 1vmin;
+}

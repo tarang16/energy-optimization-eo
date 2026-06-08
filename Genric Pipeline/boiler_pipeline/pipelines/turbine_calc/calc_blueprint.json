@@ -1,0 +1,62 @@
+{
+  "version": "2.0",
+  "description": "Generic steam turbine calculation chain \u2014 applied to every Turbine in system_config.json.",
+  "attributes": [
+    {
+      "attribute_name": "INLET_FLOW_T_H",
+      "hierarchy_level": "Turbine",
+      "formula": "INLET_FLOW_RAW / INLET_FLOW_DIV",
+      "data_type": "real",
+      "uom": "T/HR"
+    },
+    {
+      "attribute_name": "STATUS",
+      "hierarchy_level": "Turbine",
+      "formula": "if(INLET_FLOW_T_H > MIN_FLOW_THRESH, 1, 0)",
+      "data_type": "real",
+      "uom": ""
+    },
+    {
+      "attribute_name": "INLET_ENTHALPY_KJKG",
+      "hierarchy_level": "Turbine",
+      "formula": "(H_IN_A - H_IN_B * INLET_PRESSURE + H_IN_C * INLET_TEMP) * 0.239 + 2",
+      "data_type": "real",
+      "uom": "KJ/KG"
+    },
+    {
+      "attribute_name": "EXHAUST_ENTHALPY_KJKG",
+      "hierarchy_level": "Turbine",
+      "formula": "(H_OUT_A - H_OUT_B * EXHAUST_PRESSURE + H_OUT_C * EXHAUST_TEMP) * 0.239 + 2",
+      "data_type": "real",
+      "uom": "KJ/KG"
+    },
+    {
+      "attribute_name": "ENTHALPY_DROP_KJKG",
+      "hierarchy_level": "Turbine",
+      "formula": "INLET_ENTHALPY_KJKG - EXHAUST_ENTHALPY_KJKG",
+      "data_type": "real",
+      "uom": "KJ/KG"
+    },
+    {
+      "attribute_name": "DELIVERED_POWER_KW",
+      "hierarchy_level": "Turbine",
+      "formula": "INLET_FLOW_T_H * 1000 / 3600 * ENTHALPY_DROP_KJKG * STATUS",
+      "data_type": "real",
+      "uom": "KW"
+    },
+    {
+      "attribute_name": "STEAM_RATE_KG_PER_KWH",
+      "hierarchy_level": "Turbine",
+      "formula": "if(DELIVERED_POWER_KW > 0, INLET_FLOW_T_H * 1000 / DELIVERED_POWER_KW, 0)",
+      "data_type": "real",
+      "uom": "KG/KWH"
+    },
+    {
+      "attribute_name": "POWER_LOAD_PCT",
+      "hierarchy_level": "Turbine",
+      "formula": "if(RATED_POWER_KW > 0, DELIVERED_POWER_KW / RATED_POWER_KW * 100, 0)",
+      "data_type": "real",
+      "uom": "%"
+    }
+  ]
+}

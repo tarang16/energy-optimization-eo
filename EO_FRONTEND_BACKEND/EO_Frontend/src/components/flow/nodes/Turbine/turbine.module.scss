@@ -1,0 +1,114 @@
+.turbineCompoOff {
+  min-height: 10vmin;
+}
+
+.turbineCompoOff .s {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.turbineCompoOff .label {
+  margin-bottom: 10px;
+}
+
+.turbineCompoOff .textWrapper {
+  left: 0;
+  text-align: center;
+  top: -1px;
+  text-transform: uppercase;
+}
+
+.turbineCompoOff .turbineOff {
+  background-color: transparent;
+  border-radius: 10px;
+  height: 50px;
+  overflow: hidden;
+  position: relative;
+  width: 75px;
+}
+
+.turbineCompoOff .turbine {
+  background-image: url('../../../../assets/sabic_icons/network_icons/turbineComoOff.svg');
+  background-size: 100% 100%;
+  height: 42px;
+  left: 16px;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 42px;
+}
+
+.turbineCompoOff .div {
+  color: #303030;
+  font-family: 'sabic_text_regular', serif;
+  font-size: 14px;
+  font-weight: 400;
+  left: 17px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 16px;
+}
+
+.turbineCompoOff .key {
+  margin-top: 10px;
+}
+
+.turbineCompo {
+  min-height: 10vmin;
+}
+
+.turbineCompo .s {
+  align-items: center;
+  display: inline-flex;
+  flex-direction: column;
+  gap: 2px;
+  justify-content: center;
+  position: relative;
+}
+
+.turbineCompo .label {
+  margin-bottom: 10px;
+}
+
+.turbineCompo .textWrapper {
+  text-transform: uppercase;
+}
+
+.turbineCompo .turbine_on {
+  background-color: transparent;
+  border-radius: 10px;
+  height: 50px;
+  overflow: hidden;
+  position: relative;
+  width: 75px;
+}
+
+.turbineCompo .turbine {
+  background-image: url('../../../../assets/sabic_icons/network_icons/turbineCompoOn.svg');
+  background-size: 100% 100%;
+  height: 42px;
+  left: 16px;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 42px;
+}
+
+.turbineCompo .div {
+  color: #2ba402;
+  font-family: 'sabic_text_regular', serif;
+  font-size: 14px;
+  font-weight: 400;
+  left: 17px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 16px;
+}
+
+.turbineCompo .key {
+  margin-top: 10px;
+}

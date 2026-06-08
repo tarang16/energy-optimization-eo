@@ -1,0 +1,89 @@
+@use 'config/scss/variables' as *;
+
+.dropdown {
+  position: relative;
+}
+
+.dropdownSelect {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: transparent;
+  background-color: $primary_white;
+  border: 1px solid $primary_gray_3;
+  border-radius: 0.3vmin;
+  cursor: pointer;
+  color: $primary_gray_3;
+  padding: 0.6vmin 1vmin;
+}
+
+.activeVal {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  margin-top: 0.3vmin;
+  overflow: hidden;
+  width: 100%;
+}
+
+.dropdownList {
+  text-transform: uppercase;
+  position: absolute;
+  z-index: 20;
+  top: 110%;
+  left: 0;
+  background-color: $primary_white;
+  border-radius: 0.3vmin;
+  box-shadow: 0px 0px 4px 0px $primary_gray_3;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  text-align: left;
+  overflow: auto;
+  display: none;
+
+  li {
+    font-size: 1.4vmin !important;
+    padding: 0.6vmin 1vmin !important;
+  }
+}
+
+.dropdownOption {
+  cursor: pointer;
+  padding: 10px;
+  color: $primary_gray;
+}
+
+.dropdownOption:hover {
+  background-color: $primary_gray_4;
+}
+
+.dropDownActive {
+  display: block;
+  z-index: 999;
+}
+
+.dropdown_icon {
+  min-width: 1.3vmin;
+  width: 1.3vmin;
+  min-height: 1.3vmin;
+  height: 1.3vmin;
+  background-image: url('../../../../assets/sabic_icons/sidebar/arrow_down_angel_bracket.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+
+  background-size: 100%;
+
+  &.rotateDropdownIcon {
+    transform: rotate(180deg);
+  }
+}
+
+.checkIconImg {
+  width: 2vmin;
+  filter: none !important;
+}
+
+.disabled {
+  background-color: $primary_gray_5;
+  cursor: not-allowed;
+}

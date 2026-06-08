@@ -1,0 +1,132 @@
+.motorCompo {
+  min-height: 10vmin;
+}
+
+.motorCompo .s {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.motorCompo .label {
+  margin-bottom: 10px;
+}
+
+.motorCompo .textWrapper {
+  text-transform: uppercase;
+}
+
+.motorCompo .motorOn {
+  border-radius: 10px;
+  height: 30px;
+  overflow: hidden;
+  position: relative;
+  width: 75px;
+}
+
+.motorCompo .group {
+  height: 28px;
+  left: 17px;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 43px;
+}
+
+.motorCompo .overlapGroup {
+  background: linear-gradient(
+    180deg,
+    rgb(141, 141, 141) 0%,
+    rgba(215, 215, 215, 0.84) 50%,
+    rgb(141, 141, 141) 100%
+  );
+  border: 1.5px solid;
+  border-color: #34c759;
+  border-radius: 30px;
+  height: 28px;
+  position: relative;
+  width: 41px;
+}
+
+.motorCompo .div {
+  color: #2aa402;
+  font-family: 'sabic_text_regular', serif;
+  font-size: 14px;
+  font-weight: 400;
+  left: 15px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 5px;
+}
+
+.motorCompo .key {
+  margin-top: 10px;
+}
+
+.motorCompoOff {
+  min-height: 10vmin;
+}
+
+.motorCompoOff .s {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.motorCompoOff .label {
+  margin-bottom: 10px;
+}
+
+.motorCompoOff .textWrapper {
+  text-transform: uppercase;
+}
+
+.motorCompoOff .motorOff {
+  border-radius: 10px;
+  height: 30px;
+  overflow: hidden;
+  position: relative;
+  width: 75px;
+}
+
+.motorCompoOff .group {
+  height: 28px;
+  left: 17px;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 43px;
+}
+
+.motorCompoOff .overlapGroup {
+  background: linear-gradient(
+    180deg,
+    rgb(141, 141, 141) 0%,
+    rgba(215, 215, 215, 0.84) 50%,
+    rgb(141, 141, 141) 100%
+  );
+  border: 1.5px solid transparent;
+  border-radius: 30px;
+  height: 28px;
+  position: relative;
+  width: 41px;
+}
+
+.motorCompoOff .div {
+  color: #303030;
+  font-family: 'sabic_text_regular', serif;
+  font-size: 14px;
+  font-weight: 400;
+  left: 15px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 5px;
+}
+
+.motorCompoOff .key {
+  margin-top: 10px;
+}

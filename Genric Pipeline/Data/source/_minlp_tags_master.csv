@@ -1,0 +1,792 @@
+tag_name,role,formula,lower_bound,upper_bound,flag_integer,equipment_category,equipment_id,uom,active_flag
+AC_A_Flow_To_Header,post_optimizer,"if([Air_Compressor_Turbine_A_Status]==0,0,[Total_Air_Demand]/[Air_Compressor_Drives_Running])",,,,system,,MT/ HR,1
+AC_A_Max_Alloc,post_optimizer,[act_AIR_COMPRESSOR_A_Vent_flow]*[Air_Compressor_Turbine_A_Status],,,,system,,°C,1
+AC_B_Flow_To_Header,post_optimizer,"if([Air_Compressor_Motor_B_Status]==0,0,[Total_Air_Demand]/[Air_Compressor_Drives_Running])",,,,system,,MT/ HR,1
+AC_B_Max_Alloc,post_optimizer,[act_AIR_COMPRESSOR_B_Vent_flow]*[Air_Compressor_Motor_B_Status],,,,system,,°C,1
+AC_C_Flow_To_Header,post_optimizer,"if([Air_Compressor_Motor_C_Status]==0,0,[Total_Air_Demand]/[Air_Compressor_Drives_Running])",,,,system,,MT/ HR,1
+AC_C_Max_Alloc,post_optimizer,[act_AIR_COMPRESSOR_C_Vent_flow]*[Air_Compressor_Motor_C_Status],,,,system,,$/ HR,1
+AC_D_Flow_To_Header,post_optimizer,"if([Air_Compressor_Turbine_D_Status]==0,0,[Total_Air_Demand]/[Air_Compressor_Drives_Running])",,,,system,,MT/ HR,1
+AC_D_Max_Alloc,post_optimizer,[act_AIR_COMPRESSOR_D_Vent_flow]*[Air_Compressor_Turbine_D_Status],,,,system,,-,1
+AC_total_Max_Alloc,post_optimizer,[AC_A_Max_Alloc]+[AC_B_Max_Alloc]+[AC_C_Max_Alloc]+[AC_D_Max_Alloc],,,,system,,-,1
+AIR_COMPRESSOR_A_Vent_flow,post_optimizer,"if([AC_total_Max_Alloc]==0,0,[AC_A_Max_Alloc]*[Total_air_vent]/[AC_total_Max_Alloc])",,,,air_compressor,,%,1
+AIR_COMPRESSOR_B_Vent_flow,post_optimizer,"if([AC_total_Max_Alloc]==0,0,[AC_B_Max_Alloc]*[Total_air_vent]/[AC_total_Max_Alloc])",,,,air_compressor,,%,1
+AIR_COMPRESSOR_C_Vent_flow,post_optimizer,"if([AC_total_Max_Alloc]==0,0,[AC_C_Max_Alloc]*[Total_air_vent]/[AC_total_Max_Alloc])",,,,air_compressor,,%,1
+AIR_COMPRESSOR_D_Vent_flow,post_optimizer,"if([AC_total_Max_Alloc]==0,0,[AC_D_Max_Alloc]*[Total_air_vent]/[AC_total_Max_Alloc])",,,,air_compressor,,%,1
+Air_Compressor_A_Rated_Flow,parameter,15.435,,,,air_compressor,,MT/ HR,1
+Air_Compressor_B_Rated_Flow,parameter,15.435,,,,air_compressor,,MT/ HR,1
+Air_Compressor_C_Rated_Flow,parameter,11.27,,,,air_compressor,,MT/ HR,1
+Air_Compressor_D_Rated_Flow,parameter,11.27,,,,air_compressor,,MT/ HR,1
+Air_Compressor_Drives_Running,decision_variable,[Air_Compressor_Turbine_A_Status]+[Air_Compressor_Turbine_D_Status]+[Air_Compressor_Motor_C_Status]+[Air_Compressor_Motor_B_Status],"if([Whatif_running]==0,if(([Total_Air_Demand]+ [Buffer_in_Air_Flow_Margin])>28,min([Air_Compressor_Drives_Running],3),2),0)","if([Whatif_running]==0,if(([Total_Air_Demand]+ [Buffer_in_Air_Flow_Margin])>28,min([Air_Compressor_Drives_Running],3),2),4)",1,air_compressor,,Number,1
+Air_Compressor_Motor_B_Power,decision_variable,[Air_Compressor_Motor_B_Status]*([act_Air_Compressor_Motor_B_Status]*[Air_Compressor_Motor_B_Power_param]*(1-[Air_Compressor_Motor_B_Power_Imbalance])+(1-[act_Air_Compressor_Motor_B_Status])*((0.0930*([Air_compressor_B_Discharge_flow]))/0.9)),0,3,0,air_compressor,,MW,1
+Air_Compressor_Motor_B_Power_Imbalance,decision_variable,[Air_Compressor_Motor_B_Status]*([Air_Compressor_Motor_B_Power_Regression]-((0.0930*([Air_compressor_B_Discharge_flow]))/0.9))/((0.0930*([Air_compressor_B_Discharge_flow]+(1-[Air_Compressor_Motor_B_Status])))/0.9),-100,100,0,air_compressor,,Number,1
+Air_Compressor_Motor_B_Power_Regression,parameter,(0.0930*([Air_compressor_B_Discharge_flow])/0.9),,,,air_compressor,,BARG,1
+Air_Compressor_Motor_B_Power_param,parameter,[Air_Compressor_Motor_B_Power],,,,air_compressor,,%,1
+Air_Compressor_Motor_B_Status,decision_variable,,0,1,1,air_compressor,,Number,1
+Air_Compressor_Motor_C_Power,decision_variable,[Air_Compressor_Motor_C_Status]*([act_Air_Compressor_Motor_C_Status]*[Air_Compressor_Motor_C_Power_param]*(1-[Air_Compressor_Motor_C_Power_Imbalance])+(1-[act_Air_Compressor_Motor_C_Status])*((0.0896*([Air_compressor_C_Discharge_flow]))/0.9)),0,3,0,air_compressor,,MW,1
+Air_Compressor_Motor_C_Power_Imbalance,decision_variable,[Air_Compressor_Motor_C_Status]*([Air_Compressor_Motor_C_Power_Regression]-((0.0896*([Air_compressor_C_Discharge_flow]))/0.9))/((0.0896*([Air_compressor_C_Discharge_flow]+(1-[Air_Compressor_Motor_C_Status])))/0.9),-100,100,0,air_compressor,,°C,1
+Air_Compressor_Motor_C_Power_Regression,parameter,(0.0896*([Air_compressor_C_Discharge_flow])/0.9),,,,air_compressor,,,1
+Air_Compressor_Motor_C_Power_param,parameter,[Air_Compressor_Motor_C_Power],,,,air_compressor,,%,1
+Air_Compressor_Motor_C_Status,decision_variable,,0,1,1,air_compressor,,Number,1
+Air_Compressor_Motors_Running,decision_variable,[Air_Compressor_Motor_B_Status]+[Air_Compressor_Motor_C_Status],"if([Whatif_running]==0,0,0)",2,1,air_compressor,,MT/ HR,1
+Air_Compressor_Turbine_A_Status,decision_variable,,0,"if([Whatif_running]==0,[Air_Compressor_Turbine_A_Status],1)",1,turbine,,Number,1
+Air_Compressor_Turbine_A_Steam,decision_variable,[Air_Compressor_Turbine_A_Status]*([act_Air_Compressor_Turbine_A_Status]*[Air_Compressor_Turbine_A_Steam_param]*(1-[Air_Compressor_Turbine_A_Steam_Imbalance])+(1-[act_Air_Compressor_Turbine_A_Status])*((14.691*([Air_compressor_A_Discharge_flow])*89.55 + 5079)/0.9/1000)) + (1-[Air_Compressor_Turbine_A_Status])*[Air_Compressor_Turbine_A_Steam_warmup],0,40,0,turbine,,MT/ HR,1
+Air_Compressor_Turbine_A_Steam_Imbalance,decision_variable,[Air_Compressor_Turbine_A_Status]*([Air_Compressor_Turbine_A_Steam_Regression]-((14.691*([Air_compressor_A_Discharge_flow])*89.55 + 5079)/0.9/1000))/((14.691*([Air_compressor_A_Discharge_flow]+(1-[Air_Compressor_Turbine_A_Status]))*89.55 + 5079)/0.9/1000),-100,100,0,turbine,,°C,1
+Air_Compressor_Turbine_A_Steam_Regression,parameter,((14.691*([Air_compressor_A_Discharge_flow])*89.55+5079)/0.9/1000),,,,turbine,,BARG,1
+Air_Compressor_Turbine_A_Steam_param,parameter,[Air_Compressor_Turbine_A_Steam],,,,turbine,,%,1
+Air_Compressor_Turbine_A_Steam_raw,raw_pi_input,,,,,turbine,,MT/ HR,1
+Air_Compressor_Turbine_A_Steam_warmup,parameter,"if([Air_Compressor_Turbine_A_Steam_raw]>100 && [Air_Compressor_Turbine_A_Steam_raw]<12500 && [Air_Compressor_Turbine_A_Status]==0,[Air_Compressor_Turbine_A_Steam_raw]/1000,0)",,,,turbine,,-,1
+Air_Compressor_Turbine_D_Status,decision_variable,,0,"if([Whatif_running]==0,[Air_Compressor_Turbine_D_Status],1)",1,turbine,,Number,1
+Air_Compressor_Turbine_D_Steam,decision_variable,[Air_Compressor_Turbine_D_Status]*([act_Air_Compressor_Turbine_D_Status]*[Air_Compressor_Turbine_D_Steam_param]*(1-[Air_Compressor_Turbine_D_Steam_Imbalance])+(1-[act_Air_Compressor_Turbine_D_Status])*((13.34*([Air_compressor_D_Discharge_flow])*92.96 + 4614.5)/0.9/1000)) +(1-[Air_Compressor_Turbine_D_Status])*[Air_Compressor_Turbine_D_Steam_warmup],0,40,0,turbine,,MT/ HR,1
+Air_Compressor_Turbine_D_Steam_Imbalance,decision_variable,[Air_Compressor_Turbine_D_Status]*([Air_Compressor_Turbine_D_Steam_Regression]-((13.34*([Air_compressor_D_Discharge_flow])*92.96 + 4614.5)/0.9/1000))/((13.34*([Air_compressor_D_Discharge_flow]+(1-[Air_Compressor_Turbine_D_Status]))*92.96 + 4614.5)/0.9/1000),-100,100,0,turbine,,MT/ HR,1
+Air_Compressor_Turbine_D_Steam_Regression,parameter,((13.34*([Air_compressor_D_Discharge_flow])*92.96+4614.5)/0.9/1000),,,,turbine,,°C,1
+Air_Compressor_Turbine_D_Steam_param,parameter,[Air_Compressor_Turbine_D_Steam],,,,turbine,,%,1
+Air_Compressor_Turbine_D_Steam_raw,raw_pi_input,,,,,turbine,,MT/ HR,1
+Air_Compressor_Turbine_D_Steam_warmup,parameter,"if([Air_Compressor_Turbine_D_Steam_raw]>100 && [Air_Compressor_Turbine_D_Steam_raw]<12500 && [Air_Compressor_Turbine_D_Status]==0,[Air_Compressor_Turbine_D_Steam_raw]/1000,0)",,,,turbine,,-,1
+Air_Compressor_Turbines_Running,decision_variable,[Air_Compressor_Turbine_A_Status]+[Air_Compressor_Turbine_D_Status],"if([Whatif_running]==0,if([Air_Compressor_Turbines_Running]==1,1,0),0)","if([Whatif_running]==0,[Air_Compressor_Turbines_Running],2)",1,turbine,,MT/ HR,1
+Air_compressor_A_Discharge_flow,decision_variable,,0,"if([Whatif_running]==0,[air_compressor_max_capacity],17.309)",0,air_compressor,,MT/ HR,1
+Air_compressor_B_Discharge_flow,decision_variable,,0,"if([Whatif_running]==0,[air_compressor_max_capacity],17.309)",0,air_compressor,,MT/ HR,1
+Air_compressor_C_Discharge_flow,decision_variable,,0,"if([Whatif_running]==0,[air_compressor_c_max_capacity],11.89)",0,air_compressor,,MT/ HR,1
+Air_compressor_D_Discharge_flow,decision_variable,,0,"if([Whatif_running]==0,[air_compressor_max_capacity],17.309)",0,air_compressor,,MT/ HR,1
+BFW_A_Motor_Power,decision_variable,[BFW_A_Motor_Status]*([BFW_A_Motor_Power_cons]-[BFW_A_Motor_Power_Imbalance]),0,2,0,bfw_system,,KW,1
+BFW_A_Motor_Power_Imbalance,decision_variable,[BFW_A_Motor_Status]*([BFW_A_Motor_Power_Regression]-((-0.0016*([BFW_Flow_Consumption]/([BFW_Drives_Running]+(1-[BFW_A_Motor_Status])))**2+ 1.8045*([BFW_Flow_Consumption]/([BFW_Drives_Running]+(1-[BFW_A_Motor_Status]))) + 401.61)/1000)/0.95),-5,5,0,bfw_system,,MT/ HR,1
+BFW_A_Motor_Power_Regression,parameter,((-0.0016*([BFW_Flow_Consumption]/[BFW_Drives_Running])^2+1.8045*([BFW_Flow_Consumption]/[BFW_Drives_Running])+401.61)/1000)/0.95,,,,bfw_system,,$/ MT,1
+BFW_A_Motor_Power_cons,parameter,"if([BFW_A_Motor_Status]==1,[BFW_A_Motor_Power],[BFW_A_Motor_Power_Regression])",,,,bfw_system,,-,1
+BFW_A_Motor_Status,decision_variable,,"if([Whatif_running]==0,if(([LP_Steam_Dumping_Valve_PC0024A_Steam_flow_out_UO]+[LP_Steam_Vent_valve_PV0024B_Steam_flow_out_UO])<10,[BFW_A_Motor_Status],0),0)","if([Whatif_running]==0,if(([LP_Steam_Dumping_Valve_PC0024A_Steam_flow_out_UO]+[LP_Steam_Vent_valve_PV0024B_Steam_flow_out_UO])<10,[BFW_A_Motor_Status],if([BFW_A_Motor_Status]==1,1,if(max((1-[BFW_A_Motor_Status])*80 , (1-[BFW_D_Motor_Status])*75 , (1-[BFW_F_Motor_Status])*70) == 80,1,0))),1)",1,bfw_system,,GJ/ HR,1
+BFW_B_Turb_Status,decision_variable,,"if([Whatif_running]==0,if(([LP_Steam_Dumping_Valve_PC0024A_Steam_flow_out_UO]+[LP_Steam_Vent_valve_PV0024B_Steam_flow_out_UO])<10,[BFW_B_Turb_Status],0),0)","if([Whatif_running]==0,if(([LP_Steam_Dumping_Valve_PC0024A_Steam_flow_out_UO]+[LP_Steam_Vent_valve_PV0024B_Steam_flow_out_UO])<10,[BFW_B_Turb_Status],1),1)",1,turbine,BFW_B_Turb,MT/ HR,1
+BFW_B_Turb_Steam,decision_variable,[BFW_B_Turb_Status]*([BFW_B_Turb_Steam_cons]-[BFW_B_Turb_Steam_Imbalance]) + (1-[BFW_B_Turb_Status])*[BFW_B_Turb_Steam_warmup],0,20,0,turbine,BFW_B_Turb,MT/ HR,1
+BFW_B_Turb_Steam_Imbalance,decision_variable,[BFW_B_Turb_Status]*([BFW_B_Turb_Steam_Regression]-((-0.0233*([BFW_Flow_Consumption]/([BFW_Drives_Running]+(1-[BFW_B_Turb_Status])))**2 + 26.665*([BFW_Flow_Consumption]/([BFW_Drives_Running]+(1-[BFW_B_Turb_Status]))) + 10505)/1000)),-5,5,0,turbine,BFW_B_Turb,MT/ HR,1
+BFW_B_Turb_Steam_Regression,parameter,((-0.0233*([BFW_Flow_Consumption]/[BFW_Drives_Running])^2+26.665*([BFW_Flow_Consumption]/[BFW_Drives_Running])+10505)/1000),,,,turbine,BFW_B_Turb,%,1
+BFW_B_Turb_Steam_cons,raw_pi_input,,,,,turbine,BFW_B_Turb,-,1
+BFW_B_Turb_Steam_raw,raw_pi_input,,,,,turbine,BFW_B_Turb,KG/ HR,1
+BFW_B_Turb_Steam_warmup,parameter,"if([BFW_B_Turb_Steam_raw]>100 && [BFW_B_Turb_Steam_raw]<8000 && [BFW_B_Turb_Status]==0,[BFW_B_Turb_Steam_raw]/1000,0)",,,,turbine,BFW_B_Turb,,1
+BFW_C_Turb_Status,decision_variable,,"if([Whatif_running]==0,if(([LP_Steam_Dumping_Valve_PC0024A_Steam_flow_out_UO]+[LP_Steam_Vent_valve_PV0024B_Steam_flow_out_UO])<10,[BFW_C_Turb_Status],0),0)","if([Whatif_running]==0,if(([LP_Steam_Dumping_Valve_PC0024A_Steam_flow_out_UO]+[LP_Steam_Vent_valve_PV0024B_Steam_flow_out_UO])<10,[BFW_C_Turb_Status],1),1)",1,turbine,BFW_C_Turb,Number,1
+BFW_C_Turb_Steam,decision_variable,[BFW_C_Turb_Status]*([BFW_C_Turb_Steam_cons]-[BFW_C_Turb_Steam_Imbalance]) + (1-[BFW_C_Turb_Status])*[BFW_C_Turb_Steam_warmup],0,20,0,turbine,BFW_C_Turb,MT/ HR,1
+BFW_C_Turb_Steam_Imbalance,decision_variable,[BFW_C_Turb_Status]*([BFW_C_Turb_Steam_Regression]-((-0.0233*([BFW_Flow_Consumption]/([BFW_Drives_Running]+(1-[BFW_C_Turb_Status])))**2 + 26.665*([BFW_Flow_Consumption]/([BFW_Drives_Running]+(1-[BFW_C_Turb_Status]))) + 10505)/1000)),-5,5,0,turbine,BFW_C_Turb,MT/ HR,1
+BFW_C_Turb_Steam_Regression,parameter,((-0.0233*([BFW_Flow_Consumption]/[BFW_Drives_Running])^2+26.665*([BFW_Flow_Consumption]/[BFW_Drives_Running])+10505)/1000),,,,turbine,BFW_C_Turb,%,1
+BFW_C_Turb_Steam_cons,raw_pi_input,,,,,turbine,BFW_C_Turb,-,1
+BFW_C_Turb_Steam_raw,raw_pi_input,,,,,turbine,BFW_C_Turb,KG/ HR,1
+BFW_C_Turb_Steam_warmup,parameter,"if([BFW_C_Turb_Steam_raw]>100 && [BFW_C_Turb_Steam_raw]<8000 && [BFW_C_Turb_Status]==0,[BFW_C_Turb_Steam_raw]/1000,0)",,,,turbine,BFW_C_Turb,,1
+BFW_D_Motor_Power,decision_variable,[BFW_D_Motor_Status]*([BFW_D_Motor_Power_cons]-[BFW_D_Motor_Power_Imbalance]),0,2,0,bfw_system,,KW,1
+BFW_D_Motor_Power_Imbalance,decision_variable,[BFW_D_Motor_Status]*([BFW_D_Motor_Power_Regression]-((-0.0016*([BFW_Flow_Consumption]/([BFW_Drives_Running]+(1-[BFW_D_Motor_Status])))**2+ 1.8045*([BFW_Flow_Consumption]/([BFW_Drives_Running]+(1-[BFW_D_Motor_Status]))) + 401.61)/1000)/0.95),-5,5,0,bfw_system,,MT/ HR,1
+BFW_D_Motor_Power_Regression,parameter,((-0.0016*([BFW_Flow_Consumption]/[BFW_Drives_Running])^2+1.8045*([BFW_Flow_Consumption]/[BFW_Drives_Running])+401.61)/1000)/0.95,,,,bfw_system,,%,1
+BFW_D_Motor_Power_cons,parameter,"if([BFW_D_Motor_Status]==1,[BFW_D_Motor_Power],[BFW_D_Motor_Power_Regression])",,,,bfw_system,,-,1
+BFW_D_Motor_Status,decision_variable,,"if([Whatif_running]==0,if(([LP_Steam_Dumping_Valve_PC0024A_Steam_flow_out_UO]+[LP_Steam_Vent_valve_PV0024B_Steam_flow_out_UO])<10,[BFW_D_Motor_Status],0),0)","if([Whatif_running]==0,if(([LP_Steam_Dumping_Valve_PC0024A_Steam_flow_out_UO]+[LP_Steam_Vent_valve_PV0024B_Steam_flow_out_UO])<10,[BFW_D_Motor_Status],if([BFW_D_Motor_Status]==1,1,if(max((1-[BFW_A_Motor_Status])*80 , (1-[BFW_D_Motor_Status])*75 , (1-[BFW_F_Motor_Status])*70) == 75,1,0))),1)",1,bfw_system,,Number,1
+BFW_Drives_Running,decision_variable,[BFW_A_Motor_Status]+ [BFW_B_Turb_Status] + [BFW_C_Turb_Status] + [BFW_D_Motor_Status] + [BFW_E_Turb_Status] + [BFW_F_Motor_Status],"if([Whatif_running]==0,[BFW_Drives_Running],[BFW_Drives_Running])","if([Whatif_running]==0,[BFW_Drives_Running],[BFW_Drives_Running])",1,bfw_system,,KW,1
+BFW_E_Turb_Status,decision_variable,,"if([Whatif_running]==0,if(([LP_Steam_Dumping_Valve_PC0024A_Steam_flow_out_UO]+[LP_Steam_Vent_valve_PV0024B_Steam_flow_out_UO])<10,[BFW_E_Turb_Status],0),0)","if([Whatif_running]==0,if(([LP_Steam_Dumping_Valve_PC0024A_Steam_flow_out_UO]+[LP_Steam_Vent_valve_PV0024B_Steam_flow_out_UO])<10,[BFW_E_Turb_Status],1),1)",1,turbine,BFW_E_Turb,Number,1
+BFW_E_Turb_Steam,decision_variable,[BFW_E_Turb_Status]*([BFW_E_Turb_Steam_cons]-[BFW_E_Turb_Steam_Imbalance]) + (1-[BFW_E_Turb_Status])*[BFW_E_Turb_Steam_warmup],0,20,0,turbine,BFW_E_Turb,MT/ HR,1
+BFW_E_Turb_Steam_Imbalance,decision_variable,[BFW_E_Turb_Status]*([BFW_E_Turb_Steam_Regression]-((-0.0233*([BFW_Flow_Consumption]/([BFW_Drives_Running]+(1-[BFW_E_Turb_Status])))**2 + 26.665*([BFW_Flow_Consumption]/([BFW_Drives_Running]+(1-[BFW_E_Turb_Status]))) + 10505)/1000)),-5,5,0,turbine,BFW_E_Turb,GJ/ HR,1
+BFW_E_Turb_Steam_Regression,parameter,((-0.0233*([BFW_Flow_Consumption]/[BFW_Drives_Running])^2+26.665*([BFW_Flow_Consumption]/[BFW_Drives_Running])+10505)/1000),,,,turbine,BFW_E_Turb,MT/ HR,1
+BFW_E_Turb_Steam_cons,raw_pi_input,,,,,turbine,BFW_E_Turb,-,1
+BFW_E_Turb_Steam_raw,raw_pi_input,,,,,turbine,BFW_E_Turb,KG/ HR,1
+BFW_E_Turb_Steam_warmup,parameter,"if([BFW_E_Turb_Steam_raw]>100 && [BFW_E_Turb_Steam_raw]<8000 && [BFW_E_Turb_Status]==0,[BFW_E_Turb_Steam_raw]/1000,0)",,,,turbine,BFW_E_Turb,,1
+BFW_F_Motor_Power,decision_variable,[BFW_F_Motor_Status]*([BFW_F_Motor_Power_cons]-[BFW_F_Motor_Power_Imbalance]),0,2,0,bfw_system,,MW,1
+BFW_F_Motor_Power_Imbalance,decision_variable,[BFW_F_Motor_Status]*([BFW_F_Motor_Power_Regression]-((-0.0016*([BFW_Flow_Consumption]/([BFW_Drives_Running]+(1-[BFW_F_Motor_Status])))**2+ 1.8045*([BFW_Flow_Consumption]/([BFW_Drives_Running]+(1-[BFW_F_Motor_Status]))) + 401.61)/1000)/0.95),-5,5,0,bfw_system,,$/ HR,1
+BFW_F_Motor_Power_Regression,parameter,((-0.0016*([BFW_Flow_Consumption]/[BFW_Drives_Running])^2+1.8045*([BFW_Flow_Consumption]/[BFW_Drives_Running])+401.61)/1000)/0.95,,,,bfw_system,,MT/ HR,1
+BFW_F_Motor_Power_cons,parameter,"if([BFW_F_Motor_Status]==1,[BFW_F_Motor_Power],[BFW_F_Motor_Power_Regression])",,,,bfw_system,,-,1
+BFW_F_Motor_Status,decision_variable,,"if([Whatif_running]==0,if(([LP_Steam_Dumping_Valve_PC0024A_Steam_flow_out_UO]+[LP_Steam_Vent_valve_PV0024B_Steam_flow_out_UO])<10,[BFW_F_Motor_Status],0),0)","if([Whatif_running]==0,if(([LP_Steam_Dumping_Valve_PC0024A_Steam_flow_out_UO]+[LP_Steam_Vent_valve_PV0024B_Steam_flow_out_UO])<10,[BFW_F_Motor_Status],if([BFW_F_Motor_Status]==1,1,if(max((1-[BFW_A_Motor_Status])*80 , (1-[BFW_D_Motor_Status])*75 , (1-[BFW_F_Motor_Status])*70) == 70,1,0))),1)",1,bfw_system,,Number,1
+BFW_Flow_Consumption,decision_variable,[Total_BFW_Consumption] -([VHP_BFW_FROM_U_O]+[VHP_DESPHTR_BFW_FROM_U_O]+([Deaerator_LPS]*0.02)),0,"if([Whatif_running]==0,max([BFW_Flow_Consumption],1200),1200)",0,bfw_system,,MT/ HR,1
+BFW_Imbalance,decision_variable,(1-[Whatif_running])*[BFW_Imbalance] + [Whatif_running]*([act_BFW_Imbalance]*[Total_BFW_Consumption]/[act_Total_BFW_Consumption]),"if([Whatif_running]==0,[BFW_Imbalance],-400)","if([Whatif_running]==0,[BFW_Imbalance],400)",0,bfw_system,,Number,1
+BFW_Imbalance_Enthalpy,parameter,([Total_BFW_Generated]*109)-([Return_Condensate]*75+[DMW_Makeup]*40+([Deaerator_A_LPS]-[Deaerator_A_LPS_Vent]+[Deaerator_B_LPS]-[Deaerator_B_LPS_Vent])*684+[Condensate_From_P_7106_to_Deaerator_Header]*75),,,,bfw_system,,GJ/ HR,1
+BFW_Motors_Running,decision_variable,[BFW_Drives_Running]-[BFW_Turbines_Running],"if([Whatif_running]==0,min(3,if(([LP_Steam_Dumping_Valve_PC0024A_Steam_flow_out_UO]+[LP_Steam_Vent_valve_PV0024B_Steam_flow_out_UO])>10 && ([LP_Steam_Dumping_Valve_PC0024A_Steam_flow_out_UO]+[LP_Steam_Vent_valve_PV0024B_Steam_flow_out_UO])<21 , [BFW_Motors_Running]+1, 0)),0)","if([Whatif_running]==0,if([BFW_Motors_Running]<=1,2,max([BFW_Motors_Running],2)),3)",1,bfw_system,,MT/ HR,1
+BFW_TO_LAO,raw_pi_input,,,,,bfw_system,,MT/ HR,1
+BFW_Turbines_Running,decision_variable,[BFW_B_Turb_Status]+[BFW_C_Turb_Status]+[BFW_E_Turb_Status],"if([Whatif_running]==0,if([BFW_Turbines_Running]==0,0,[BFW_Turbines_Running]-1),0)","if([Whatif_running]==0,[BFW_Turbines_Running],3)",1,turbine,,MT/ HR,1
+BFW_pump_Rated_Flow,parameter,336,,,,bfw_system,,GJ/ T,1
+BFW_to_Boilers,post_optimizer,[Total_BLR_HPS_Generation]/0.99,,,,bfw_system,,MT/ HR,1
+BFW_to_EOEG_1,raw_pi_input,,,,,bfw_system,,MT/ HR,1
+BFW_to_EOEG_2,raw_pi_input,,,,,bfw_system,,MT/ HR,1
+BFW_to_EOEG_3,raw_pi_input,,,,,bfw_system,,KG/ HR,1
+BFW_to_HP_to_MP_Letdown_Flow_In_PV0007A_UO,decision_variable,,0,25,0,bfw_system,,Number,1
+BFW_to_HP_to_MP_Letdown_Flow_In_PV0007B_UO,decision_variable,,0,25,0,bfw_system,,Number,1
+BFW_to_MP_to_LP_Letdown_Flow_In,parameter,0,,,,bfw_system,,MT/ HR,1
+BLR_1_Capacity,parameter,150,,,,system,,MT/ HR,1
+BLR_1_HPS_Gen,decision_variable,[Fuel_BLR_1] * [LHV] / [Spec_En_Cons_BLR_1]*[BLR_1_Status] + (1-[BLR_1_Status])*[BLR_1_HPS_Gen_warmup],"if([Whatif_running]==0,[BLR_1_Status]*if([opt_flag]==1,if((([Boiler_opt_running]==3) && [max_spec_en_consumption_blr]!=1 && [max2_spec_en_consumption_blr]!=1 && [BLR_1_Status]==1) || (([Boiler_opt_running]==4) && [max_spec_en_consumption_blr]!=1 && [BLR_1_Status]==1),[BLR_1_HPS_Gen],0),min([BLR_1_HPS_Gen],[BLR_2_HPS_Gen],[BLR_3_HPS_Gen],[BLR_4_HPS_Gen],[BLR_5_HPS_Gen])-8),0)","if([Whatif_running]==0,if([opt_flag]==1,150,max([BLR_1_HPS_Gen],[BLR_2_HPS_Gen],[BLR_3_HPS_Gen],[BLR_4_HPS_Gen],[BLR_5_HPS_Gen])+8),150)",0,system,,Volts,1
+BLR_1_HPS_Gen_warmup,parameter,"if([BLR_1_Status]==0,[BLR_1_HPS_Gen],0)",,,,system,,-,1
+BLR_1_Status,decision_variable,,0,"if([Whatif_running]==0,if(([Boiler_opt_running]<[Total_Boilers_Running])&& ([Boiler_opt_running]==3) && ([max_spec_en_consumption_blr]==1 || [max2_spec_en_consumption_blr]==1),0,if(([Boiler_opt_running]<[Total_Boilers_Running])&& ([Boiler_opt_running]==4) && ([max_spec_en_consumption_blr]==1),0,[BLR_1_Status])),if((if(ceil((([ETH_HPS_Demand]+[VHP_BFW_to_ETH]*0+[ETH_LPS_Demand]+[EOEG_1_MPS_Demand]+[EOEG_1_LPS_Demand]+[EOEG_2_MPS_Demand]+[EOEG_2_LPS_Demand]+[EOEG_3_MPS_Demand]+[EOEG_3_LPS_Demand]+[LAO_LP_Steam_Demand]+80*(if([ETH_Plant_Status]==1 || [EOEG1_Plant_Status]==1 || [EOEG2_Plant_Status]==1 || [EOEG3_Plant_Status]==1,1,0)))*1.2+[Buffer_Steam_in_Boilers])/140)>5, 5 ,ceil((([ETH_HPS_Demand]+[VHP_BFW_to_ETH]*0+[ETH_LPS_Demand]+[EOEG_1_MPS_Demand]+[EOEG_1_LPS_Demand]+[EOEG_2_MPS_Demand]+[EOEG_2_LPS_Demand]+[EOEG_3_MPS_Demand]+[EOEG_3_LPS_Demand]+[LAO_LP_Steam_Demand]+80*(if([ETH_Plant_Status]==1 || [EOEG1_Plant_Status]==1 || [EOEG2_Plant_Status]==1 || [EOEG3_Plant_Status]==1,1,0)))*1.2+[Buffer_Steam_in_Boilers])/140)))>=1,1,0))",1,system,,GJ/ T,1
+BLR_2_Capacity,parameter,150,,,,system,,MT/ HR,1
+BLR_2_HPS_Gen,decision_variable,[Fuel_BLR_2] * [LHV] / [Spec_En_Cons_BLR_2]*[BLR_2_Status]+ (1-[BLR_2_Status])*[BLR_2_HPS_Gen_warmup],"if([Whatif_running]==0,[BLR_2_Status]*if([opt_flag]==1,if((([Boiler_opt_running]==3) && [max_spec_en_consumption_blr]!=2 && [max2_spec_en_consumption_blr]!=2 && [BLR_2_Status]==1) || (([Boiler_opt_running]==4) && [max_spec_en_consumption_blr]!=2 && [BLR_2_Status]==1),[BLR_2_HPS_Gen],0),min([BLR_1_HPS_Gen],[BLR_2_HPS_Gen],[BLR_3_HPS_Gen],[BLR_4_HPS_Gen],[BLR_5_HPS_Gen])-8),0)","if([Whatif_running]==0,if([opt_flag]==1,150,max([BLR_1_HPS_Gen],[BLR_2_HPS_Gen],[BLR_3_HPS_Gen],[BLR_4_HPS_Gen],[BLR_5_HPS_Gen])+8),150)",0,system,,MT/ HR,1
+BLR_2_HPS_Gen_warmup,parameter,"if([BLR_2_Status]==0,[BLR_2_HPS_Gen],0)",,,,system,,-,1
+BLR_2_Status,decision_variable,,0,"if([Whatif_running]==0,if(([Boiler_opt_running]<[Total_Boilers_Running])&& ([Boiler_opt_running]==3) && ([max_spec_en_consumption_blr]==2 || [max2_spec_en_consumption_blr]==2),0,if(([Boiler_opt_running]<[Total_Boilers_Running])&& ([Boiler_opt_running]==4) && ([max_spec_en_consumption_blr]==2),0,[BLR_2_Status])),if((if(ceil((([ETH_HPS_Demand]+[VHP_BFW_to_ETH]*0+[ETH_LPS_Demand]+[EOEG_1_MPS_Demand]+[EOEG_1_LPS_Demand]+[EOEG_2_MPS_Demand]+[EOEG_2_LPS_Demand]+[EOEG_3_MPS_Demand]+[EOEG_3_LPS_Demand]+[LAO_LP_Steam_Demand]+80*(if([ETH_Plant_Status]==1 || [EOEG1_Plant_Status]==1 || [EOEG2_Plant_Status]==1 || [EOEG3_Plant_Status]==1,1,0)))*1.2+[Buffer_Steam_in_Boilers])/140)>5, 5 ,ceil((([ETH_HPS_Demand]+[VHP_BFW_to_ETH]*0+[ETH_LPS_Demand]+[EOEG_1_MPS_Demand]+[EOEG_1_LPS_Demand]+[EOEG_2_MPS_Demand]+[EOEG_2_LPS_Demand]+[EOEG_3_MPS_Demand]+[EOEG_3_LPS_Demand]+[LAO_LP_Steam_Demand]+80*(if([ETH_Plant_Status]==1 || [EOEG1_Plant_Status]==1 || [EOEG2_Plant_Status]==1 || [EOEG3_Plant_Status]==1,1,0)))*1.2+[Buffer_Steam_in_Boilers])/140)))>=2,1,0))",1,system,,KCAL/ KG,1
+BLR_3_Capacity,parameter,150,,,,system,,MT/ HR,1
+BLR_3_HPS_Gen,decision_variable,[Fuel_BLR_3] * [LHV] / [Spec_En_Cons_BLR_3]*[BLR_3_Status]+ (1-[BLR_3_Status])*[BLR_3_HPS_Gen_warmup],"if([Whatif_running]==0,[BLR_3_Status]*if([opt_flag]==1,if((([Boiler_opt_running]==3) && [max_spec_en_consumption_blr]!=3 && [max2_spec_en_consumption_blr]!=3 && [BLR_3_Status]==1) || (([Boiler_opt_running]==4) && [max_spec_en_consumption_blr]!=3 && [BLR_3_Status]==1),[BLR_3_HPS_Gen],0),min([BLR_1_HPS_Gen],[BLR_2_HPS_Gen],[BLR_3_HPS_Gen],[BLR_4_HPS_Gen],[BLR_5_HPS_Gen])-8),0)","if([Whatif_running]==0,if([opt_flag]==1,150,max([BLR_1_HPS_Gen],[BLR_2_HPS_Gen],[BLR_3_HPS_Gen],[BLR_4_HPS_Gen],[BLR_5_HPS_Gen])+8),150)",0,system,,MT/ HR,1
+BLR_3_HPS_Gen_warmup,parameter,"if([BLR_3_Status]==0,[BLR_3_HPS_Gen],0)",,,,system,,-,1
+BLR_3_Status,decision_variable,,0,"if([Whatif_running]==0,if(([Boiler_opt_running]<[Total_Boilers_Running])&& ([Boiler_opt_running]==3) && ([max_spec_en_consumption_blr]==3 || [max2_spec_en_consumption_blr]==3),0,if(([Boiler_opt_running]<[Total_Boilers_Running])&& ([Boiler_opt_running]==4) && ([max_spec_en_consumption_blr]==3),0,[BLR_3_Status])),if((if(ceil((([ETH_HPS_Demand]+[VHP_BFW_to_ETH]*0+[ETH_LPS_Demand]+[EOEG_1_MPS_Demand]+[EOEG_1_LPS_Demand]+[EOEG_2_MPS_Demand]+[EOEG_2_LPS_Demand]+[EOEG_3_MPS_Demand]+[EOEG_3_LPS_Demand]+[LAO_LP_Steam_Demand]+80*(if([ETH_Plant_Status]==1 || [EOEG1_Plant_Status]==1 || [EOEG2_Plant_Status]==1 || [EOEG3_Plant_Status]==1,1,0)))*1.2+[Buffer_Steam_in_Boilers])/140)>5, 5 ,ceil((([ETH_HPS_Demand]+[VHP_BFW_to_ETH]*0+[ETH_LPS_Demand]+[EOEG_1_MPS_Demand]+[EOEG_1_LPS_Demand]+[EOEG_2_MPS_Demand]+[EOEG_2_LPS_Demand]+[EOEG_3_MPS_Demand]+[EOEG_3_LPS_Demand]+[LAO_LP_Steam_Demand]+80*(if([ETH_Plant_Status]==1 || [EOEG1_Plant_Status]==1 || [EOEG2_Plant_Status]==1 || [EOEG3_Plant_Status]==1,1,0)))*1.2+[Buffer_Steam_in_Boilers])/140)))>=3,1,0))",1,system,,Number,1
+BLR_4_Capacity,parameter,150,,,,system,,MT/ HR,1
+BLR_4_HPS_Gen,decision_variable,[Fuel_BLR_4] * [LHV] / [Spec_En_Cons_BLR_4]*[BLR_4_Status]+ (1-[BLR_4_Status])*[BLR_4_HPS_Gen_warmup],"if([Whatif_running]==0,[BLR_4_Status]*if([opt_flag]==1,if((([Boiler_opt_running]==3) && [max_spec_en_consumption_blr]!=4 && [max2_spec_en_consumption_blr]!=4 && [BLR_4_Status]==1) || (([Boiler_opt_running]==4) && [max_spec_en_consumption_blr]!=4 && [BLR_4_Status]==1), [BLR_4_HPS_Gen],0),min([BLR_1_HPS_Gen],[BLR_2_HPS_Gen],[BLR_3_HPS_Gen],[BLR_4_HPS_Gen],[BLR_5_HPS_Gen])-8),0)","if([Whatif_running]==0,if([opt_flag]==1,150,max([BLR_1_HPS_Gen],[BLR_2_HPS_Gen],[BLR_3_HPS_Gen],[BLR_4_HPS_Gen],[BLR_5_HPS_Gen])+8),150)",0,system,,MT/ HR,1
+BLR_4_HPS_Gen_warmup,parameter,"if([BLR_4_Status]==0,[BLR_4_HPS_Gen],0)",,,,system,,-,1
+BLR_4_Status,decision_variable,,0,"if([Whatif_running]==0,if(([Boiler_opt_running]<[Total_Boilers_Running])&& ([Boiler_opt_running]==3) && ([max_spec_en_consumption_blr]==4 || [max2_spec_en_consumption_blr]==4),0,if(([Boiler_opt_running]<[Total_Boilers_Running])&& ([Boiler_opt_running]==4) && ([max_spec_en_consumption_blr]==4),0,[BLR_4_Status])),if((if(ceil((([ETH_HPS_Demand]+[VHP_BFW_to_ETH]*0+[ETH_LPS_Demand]+[EOEG_1_MPS_Demand]+[EOEG_1_LPS_Demand]+[EOEG_2_MPS_Demand]+[EOEG_2_LPS_Demand]+[EOEG_3_MPS_Demand]+[EOEG_3_LPS_Demand]+[LAO_LP_Steam_Demand]+80*(if([ETH_Plant_Status]==1 || [EOEG1_Plant_Status]==1 || [EOEG2_Plant_Status]==1 || [EOEG3_Plant_Status]==1,1,0)))*1.2+[Buffer_Steam_in_Boilers])/140)>5, 5 ,ceil((([ETH_HPS_Demand]+[VHP_BFW_to_ETH]*0+[ETH_LPS_Demand]+[EOEG_1_MPS_Demand]+[EOEG_1_LPS_Demand]+[EOEG_2_MPS_Demand]+[EOEG_2_LPS_Demand]+[EOEG_3_MPS_Demand]+[EOEG_3_LPS_Demand]+[LAO_LP_Steam_Demand]+80*(if([ETH_Plant_Status]==1 || [EOEG1_Plant_Status]==1 || [EOEG2_Plant_Status]==1 || [EOEG3_Plant_Status]==1,1,0)))*1.2+[Buffer_Steam_in_Boilers])/140)))>=4,1,0))",1,system,,Number,1
+BLR_5_Capacity,parameter,150,,,,system,,$/ HR,1
+BLR_5_HPS_Gen,decision_variable,[Fuel_BLR_5] * [LHV] / [Spec_En_Cons_BLR_5]*[BLR_5_Status] + (1-[BLR_5_Status])*[BLR_5_HPS_Gen_warmup],"if([Whatif_running]==0,[BLR_5_Status]*if([opt_flag]==1,if((([Boiler_opt_running]==3) && [max_spec_en_consumption_blr]!=5 && [max2_spec_en_consumption_blr]!=5 && [BLR_5_Status]==1) || (([Boiler_opt_running]==4) && [max_spec_en_consumption_blr]!=5 && [BLR_5_Status]==1),[BLR_5_HPS_Gen],0),min([BLR_1_HPS_Gen],[BLR_2_HPS_Gen],[BLR_3_HPS_Gen],[BLR_4_HPS_Gen],[BLR_5_HPS_Gen])-8),0)","if([Whatif_running]==0,if([opt_flag]==1,150,max([BLR_1_HPS_Gen],[BLR_2_HPS_Gen],[BLR_3_HPS_Gen],[BLR_4_HPS_Gen],[BLR_5_HPS_Gen])+8),150)",0,system,,MT/ HR,1
+BLR_5_HPS_Gen_warmup,parameter,"if([BLR_5_Status]==0,[BLR_5_HPS_Gen],0)",,,,system,,-,1
+BLR_5_Status,decision_variable,,0,"if([Whatif_running]==0,if(([Boiler_opt_running]<[Total_Boilers_Running])&& ([Boiler_opt_running]==3) && ([max_spec_en_consumption_blr]==5 || [max2_spec_en_consumption_blr]==5),0,if(([Boiler_opt_running]<[Total_Boilers_Running])&& ([Boiler_opt_running]==4) && ([max_spec_en_consumption_blr]==5),0,[BLR_5_Status])),if((if(ceil((([ETH_HPS_Demand]+[VHP_BFW_to_ETH]*0+[ETH_LPS_Demand]+[EOEG_1_MPS_Demand]+[EOEG_1_LPS_Demand]+[EOEG_2_MPS_Demand]+[EOEG_2_LPS_Demand]+[EOEG_3_MPS_Demand]+[EOEG_3_LPS_Demand]+[LAO_LP_Steam_Demand]+80*(if([ETH_Plant_Status]==1 || [EOEG1_Plant_Status]==1 || [EOEG2_Plant_Status]==1 || [EOEG3_Plant_Status]==1,1,0)))*1.2+[Buffer_Steam_in_Boilers])/140)>5, 5 ,ceil((([ETH_HPS_Demand]+[VHP_BFW_to_ETH]*0+[ETH_LPS_Demand]+[EOEG_1_MPS_Demand]+[EOEG_1_LPS_Demand]+[EOEG_2_MPS_Demand]+[EOEG_2_LPS_Demand]+[EOEG_3_MPS_Demand]+[EOEG_3_LPS_Demand]+[LAO_LP_Steam_Demand]+80*(if([ETH_Plant_Status]==1 || [EOEG1_Plant_Status]==1 || [EOEG2_Plant_Status]==1 || [EOEG3_Plant_Status]==1,1,0)))*1.2+[Buffer_Steam_in_Boilers])/140)))>=5,1,0))",1,system,,Number,1
+BOILER_A_STACK_TEMPERATURE,post_optimizer,"if([BOILER_A_FLUE_GAS_OXGYGEN_flag]==0,[BOILER_A_STACK_TEMPERATURE],min([BOILER_A_STACK_TEMPERATURE],(0.368798083 * [BLR_1_HPS_Gen] + 0.356735113 * [BOILER_A_FLUE_GAS_OXGYGEN] + 117.0923065))*[BLR_1_Status])",,,,system,,°C,1
+BOILER_B_STACK_TEMPERATURE,post_optimizer,"if([BOILER_B_FLUE_GAS_OXGYGEN_flag]==0,[BOILER_B_STACK_TEMPERATURE],min([BOILER_B_STACK_TEMPERATURE],(0.446275852 * [BLR_2_HPS_Gen] + 0.310062436 * [BOILER_B_FLUE_GAS_OXGYGEN] + 110.2389869))*[BLR_2_Status])",,,,system,,°C,1
+BOILER_C_STACK_TEMPERATURE,post_optimizer,"if([BOILER_C_FLUE_GAS_OXGYGEN_flag]==0,[BOILER_C_STACK_TEMPERATURE],min([BOILER_C_STACK_TEMPERATURE],(0.399051143 * [BLR_3_HPS_Gen] - 0.176072266 * [BOILER_C_FLUE_GAS_OXGYGEN] + 116.3971552))*[BLR_3_Status])",,,,system,,°C,1
+BOILER_D_STACK_TEMPERATURE,post_optimizer,"if([BOILER_D_FLUE_GAS_OXGYGEN_flag]==0,[BOILER_D_STACK_TEMPERATURE],min([BOILER_D_STACK_TEMPERATURE],(0.399089856 * [BLR_4_HPS_Gen] - 0.482676221 * [BOILER_D_FLUE_GAS_OXGYGEN] + 114.6594118))*[BLR_4_Status])",,,,system,,°C,1
+BOILER_E_STACK_TEMPERATURE,post_optimizer,"if([Boiler_5_O2_flag]==0,[BOILER_E_STACK_TEMPERATURE],min([BOILER_E_STACK_TEMPERATURE],(0.313555668 * [BLR_5_HPS_Gen] + 0.475167776 * [BOILER_E_FLUE_GAS_OXGYGEN] + 132.5695951))*[BLR_5_Status])",,,,system,,°C,1
+Boiler_CBD,raw_pi_input,,,,,system,,GJ/ HR,1
+Boiler_opt_running,parameter,"if([Total_Boilers_Running]<5,[Total_Boilers_Running], if(ceil(([Total_BLR_HPS_Generation]+[Buffer_Steam_in_Boilers])/140)>5, 5 ,ceil(([Total_BLR_HPS_Generation]+[Buffer_Steam_in_Boilers])/140)))",,,,system,,%,1
+Buffer_Steam_in_Boilers,parameter,100,,,,system,,MT/ HR,1
+Buffer_in_Air_Flow_Margin,parameter,0,,,,system,,$/ HR,1
+Buffer_in_BFW_Flow_Margin,parameter,0,,,,bfw_system,,$/ HR,1
+Buffer_in_DWM_Flow_Margin,parameter,0,,,,system,,KG/ HR,1
+Buffer_in_VHP_Flow_Margin,parameter,0,,,,system,,$/ HR,1
+C2_power_delta,parameter,"min(5,(([Specific_energy_consumption_in_C2R]-if(missing([Specific_energy_consumption_in_C2R_peeo]) || [opportunity_energy_olf_cold]==[opportunity_threshold] || missing([opportunity_energy_olf_cold]),[Specific_energy_consumption_in_C2R],min([Specific_energy_consumption_in_C2R],[Specific_energy_consumption_in_C2R_peeo])))*[Ethylene_total_flow])*3.6*1000/([HP_Steam_Enthalpy]*4.184))",,,,electrical,,$/ HR,1
+CBD_energy_saving_BLR1,post_optimizer,[CBD_energy_saving_BLR1]*[BLR_1_Status],,,,system,,MT/ HR,1
+CBD_energy_saving_BLR2,post_optimizer,[CBD_energy_saving_BLR2]*[BLR_2_Status],,,,system,,MT/ HR,1
+CBD_energy_saving_BLR3,post_optimizer,[CBD_energy_saving_BLR3]*[BLR_3_Status],,,,system,,MT/ HR,1
+CBD_energy_saving_BLR4,post_optimizer,[CBD_energy_saving_BLR4]*[BLR_4_Status],,,,system,,MT/ HR,1
+CBD_energy_saving_BLR5,post_optimizer,[CBD_energy_saving_BLR5]*[BLR_5_Status],,,,system,,MT/ HR,1
+CO2_Power_Consumption,raw_pi_input,,,,,electrical,,ON/ OFF,1
+CWS_Return_Temperature,raw_pi_input,,,,,cw_system,,,1
+CW_Circuit_1_cooling_duty,parameter,[Total_CW_Demand]*4.184*[CW_Circuit_1_delta_Temp]/(3.6*1000),,,,cw_system,,µS/ cm,1
+CW_Circuit_1_delta_Temp,parameter,[CWS_Return_Temperature]-[CW_Circuit_1_return_temp],,,,cw_system,,µS/ cm,1
+CW_Circuit_1_return_temp,raw_pi_input,,,,,cw_system,,MT/ HR,1
+CW_Demand_Header_2,post_optimizer,((-1017.6*[CW_Header_2_Pressure]*[CW_Header_2_Pressure]+8495.3*[CW_Header_2_Pressure]-1655)*[Total_CW_Motors_Header_2_Running])*[EOEG3_Plant_Status],,,,cw_system,,-,1
+CW_Drives_Running,decision_variable,[CW_Turbine_A_Status]+[CW_Turbine_B_Status]+[CW_Motor_C_Status]+[CW_Motor_D_Status]+[CW_Motor_E_Status]+[CW_Motor_F_Status]+[CW_Turbine_G_Status],"if([Whatif_running]==0,if([Flag_CW_Stop]==1,[CW_Drives_Running]-1,[CW_Drives_Running]),0)","if([Whatif_running]==0,if([Flag_CW_Stop]==1,[CW_Drives_Running]-1,[CW_Drives_Running]),7)",1,cw_system,,Number,1
+CW_Motor_7814A_Power,post_optimizer,[CW_Motor_7814A_Status]*2.55*0.9,,,,cw_system,,%,1
+CW_Motor_7814A_Status,post_optimizer,[EOEG3_Plant_Status]*[CW_Motor_7814A_Status],,,,cw_system,,-,1
+CW_Motor_7814B_Power,post_optimizer,[CW_Motor_7814B_Status]*2.55*0.9,,,,cw_system,,%,1
+CW_Motor_7814B_Status,post_optimizer,[EOEG3_Plant_Status]*[CW_Motor_7814B_Status],,,,cw_system,,-,1
+CW_Motor_7814C_Power,post_optimizer,[CW_Motor_7814C_Status]*2.55*0.9,,,,cw_system,,%,1
+CW_Motor_7814C_Status,post_optimizer,[EOEG3_Plant_Status]*[CW_Motor_7814C_Status],,,,cw_system,,-,1
+CW_Motor_C_Power,decision_variable,[CW_Motor_C_Status]*([CW_Motor_C_Power_Imbalance]+2.55*0.90),0,3,0,cw_system,,MW,1
+CW_Motor_C_Power_Imbalance,parameter,([CW_Motor_C_Power]-[CW_Motor_C_Power_Regression])*[CW_Motor_C_Status],,,,cw_system,,,1
+CW_Motor_C_Power_Regression,parameter,[CW_Motor_C_Status]*2.55*0.9,,,,cw_system,,,1
+CW_Motor_C_Status,decision_variable,,0,1,1,cw_system,,Number,1
+CW_Motor_D_Power,decision_variable,[CW_Motor_D_Status]*([CW_Motor_D_Power_Imbalance]+2.55*0.90),0,3,0,cw_system,,MW,1
+CW_Motor_D_Power_Imbalance,parameter,([CW_Motor_D_Power]-[CW_Motor_D_Power_Regression])*[CW_Motor_D_Status],,,,cw_system,,,1
+CW_Motor_D_Power_Regression,parameter,[CW_Motor_D_Status]*2.55*0.9,,,,cw_system,,MT/ HR,1
+CW_Motor_D_Status,decision_variable,,0,1,1,cw_system,,Number,1
+CW_Motor_E_Power,decision_variable,[CW_Motor_E_Status]*([CW_Motor_E_Power_Imbalance]+2.55*0.90),0,3,0,cw_system,,MW,1
+CW_Motor_E_Power_Imbalance,parameter,([CW_Motor_E_Power]-[CW_Motor_E_Power_Regression])*[CW_Motor_E_Status],,,,cw_system,,,1
+CW_Motor_E_Power_Regression,parameter,[CW_Motor_E_Status]*2.55*0.9,,,,cw_system,,,1
+CW_Motor_E_Status,decision_variable,,0,1,1,cw_system,,Number,1
+CW_Motor_F_Power,decision_variable,[CW_Motor_F_Status]*([CW_Motor_F_Power_Imbalance]+2.55*0.90),0,3,0,cw_system,,MW,1
+CW_Motor_F_Power_Imbalance,parameter,([CW_Motor_F_Power]-[CW_Motor_F_Power_Regression])*[CW_Motor_F_Status],,,,cw_system,,,1
+CW_Motor_F_Power_Regression,parameter,[CW_Motor_F_Status]*2.55*0.9,,,,cw_system,,,1
+CW_Motor_F_Status,decision_variable,,0,1,1,cw_system,,Number,1
+CW_Motors_Running,decision_variable,[CW_Motor_C_Status]+[CW_Motor_D_Status]+[CW_Motor_E_Status]+[CW_Motor_F_Status],0,4,1,cw_system,,MT/ HR,1
+CW_TO_CO2,parameter,1800,,,,cw_system,,BARG,1
+CW_TO_EG1,parameter,"max(0,min(22000,if([EOEG1_Plant_Status]==1,if([CW_TO_EG1_totalizer_delta]>17000,[CW_TO_EG1_totalizer_delta],[CW_TO_EG1_totalizer_delta]*1.732),[CW_TO_EG1_totalizer_delta]*1.732))) + 0*if([EG1_EOE]>30,if([EG2_EOE]>30,[CW_TO_EG2],19000),if([CW_Drives_Running]<6,0,19000))",,,,cw_system,,MT/ HR,1
+CW_TO_EG1_totalizer,raw_pi_input,,,,,cw_system,,-,1
+CW_TO_EG1_totalizer_delta,parameter,[CW_TO_EG1_totalizer]-[CW_TO_EG1_totalizer_lag],,,,cw_system,,-,1
+CW_TO_EG1_totalizer_lag,raw_pi_input,,,,,cw_system,,-,1
+CW_TO_EG2,raw_pi_input,,,,,cw_system,,MT/ HR,1
+CW_TO_ETH,raw_pi_input,,,,,cw_system,,MT/ HR,1
+CW_TO_LAO,raw_pi_input,,,,,cw_system,,MT/ HR,1
+CW_TO_UTILITIES,raw_pi_input,,,,,cw_system,,KG/ HR,1
+CW_Turbine_A_Status,decision_variable,,0,1,1,turbine,,Number,1
+CW_Turbine_A_Steam,decision_variable,[CW_Turbine_A_Status]*([CW_Turbine_A_Steam_Imbalance]+38*0.90) +(1-[CW_Turbine_A_Status])*[CW_Turbine_A_Steam_warmup],0,50,0,turbine,,KG/ HR,1
+CW_Turbine_A_Steam_Imbalance,parameter,([CW_Turbine_A_Steam]-[CW_Turbine_A_Steam_Regression])*[CW_Turbine_A_Status],,,,turbine,,,1
+CW_Turbine_A_Steam_Regression,parameter,[CW_Turbine_A_Status]*38*0.9,,,,turbine,,MT/ HR,1
+CW_Turbine_A_Steam_raw,parameter,[CW_Turbine_A_Steam],,,,turbine,,°C,1
+CW_Turbine_A_Steam_warmup,parameter,"if([CW_Turbine_A_Steam_raw]>0.1 && [CW_Turbine_A_Steam_raw]<16 && [CW_Turbine_A_Status]==0,[CW_Turbine_A_Steam_raw],0)",,,,turbine,,-,1
+CW_Turbine_B_Status,decision_variable,,0,1,1,turbine,,Number,1
+CW_Turbine_B_Steam,decision_variable,[CW_Turbine_B_Status]*([CW_Turbine_B_Steam_Imbalance]+38*0.90) +(1-[CW_Turbine_B_Status])*[CW_Turbine_B_Steam_warmup],0,50,0,turbine,,KG/ HR,1
+CW_Turbine_B_Steam_Imbalance,parameter,([CW_Turbine_B_Steam]-[CW_Turbine_B_Steam_Regression])*[CW_Turbine_B_Status],,,,turbine,,,1
+CW_Turbine_B_Steam_Regression,parameter,[CW_Turbine_B_Status]*38*0.9,,,,turbine,,MT/ HR,1
+CW_Turbine_B_Steam_raw,parameter,[CW_Turbine_B_Steam],,,,turbine,,°C,1
+CW_Turbine_B_Steam_warmup,parameter,"if([CW_Turbine_B_Steam_raw]>0.1 && [CW_Turbine_B_Steam_raw]<16 && [CW_Turbine_B_Status]==0,[CW_Turbine_B_Steam_raw],0)",,,,turbine,,-,1
+CW_Turbine_G_Status,decision_variable,,0,1,1,turbine,,Number,1
+CW_Turbine_G_Steam,decision_variable,[CW_Turbine_G_Status]*([CW_Turbine_G_Steam_Imbalance]+38*0.90) +(1-[CW_Turbine_G_Status])*[CW_Turbine_G_Steam_warmup],0,50,0,turbine,,MT/ HR,1
+CW_Turbine_G_Steam_Imbalance,parameter,([CW_Turbine_G_Steam]-[CW_Turbine_G_Steam_Regression])*[CW_Turbine_G_Status],,,,turbine,,°C,1
+CW_Turbine_G_Steam_Regression,parameter,[CW_Turbine_G_Status]*38*0.9,,,,turbine,,,1
+CW_Turbine_G_Steam_raw,parameter,[CW_Turbine_G_Steam],,,,turbine,,,1
+CW_Turbine_G_Steam_warmup,parameter,"if([CW_Turbine_G_Steam_raw]>0.1 && [CW_Turbine_G_Steam_raw]<16 && [CW_Turbine_G_Status]==0,[CW_Turbine_G_Steam_raw],0)",,,,turbine,,-,1
+CW_Turbines_Running,decision_variable,[CW_Turbine_A_Status]+[CW_Turbine_B_Status]+[CW_Turbine_G_Status],"if([Whatif_running]==0,if([CW_Turbines_Running]==0,0,[CW_Turbines_Running]-1),0)","if([Whatif_running]==0,[CW_Turbines_Running],3)",1,turbine,,MT/ HR,1
+Condensate_From_P_7106_to_Deaerator_Header,decision_variable,[LP_Steam_Dumping_Valve_PC0024A_Steam_flow_out_UO]+[Boiler_CBD]+[Condensate_from_Traps],0,"if([Whatif_running]==0,max([Condensate_From_P_7106_to_Deaerator_Header],100),100)",0,system,,MT/ HR,1
+Condensate_Recovery_Ratio_ETH,parameter,"if([ETH_Plant_Status]==0,0,min(0.8,([ETH_CLEAN_COND_TO_U_O]+[ETH_suspect_COND_TO_U_O_corrected])/([ETH_HPS_Demand]+[ETH_LPS_Demand]+[VHP_BFW_to_ETH]+[DSP_BFW_TO_ETH])))",,,,system,,BARG,1
+Condensate_from_Traps,parameter,5,,,,system,,MT/ HR,1
+Contribution_from_SEUs,post_optimizer,[Plant_HP_Steam_Demand]*[HP_Steam_Cost] + [Plant_MP_Steam_Demand]*[MP_steam_generation_Cost] + [Plant_LP_Steam_Demand]*[LP_Steam_Cost]+ [Fuel_Consumption_Plants]*[LHV]*[Fuel_Rate] + [Power_Consumption_Plants]*3.6*[Power_Rate],,,,system,,MT/ HR,1
+DMW_Drives_Running,decision_variable,[DMW_Turbine_A_Status]+[DMW_Pump_Motor_B_Status]+[DMW_Turbine_C_Status],"if([Whatif_running]==0,[DMW_Drives_Running],0)","if([Whatif_running]==0,[DMW_Drives_Running],3)",1,dmw_system,,MT/ HR,1
+DMW_Imbalance,decision_variable,(1-[Whatif_running])*[DMW_Imbalance] + [Whatif_running]*([act_DMW_Imbalance]*[DMW_Makeup]/[act_DMW_Makeup]),"if([Whatif_running]==0,[DMW_Imbalance],-400)","if([Whatif_running]==0,[DMW_Imbalance],400)",0,dmw_system,,Number,1
+DMW_Makeup,decision_variable,,0,"if([Whatif_running]==0,max([DMW_Makeup],700),700)",0,dmw_system,,MW,1
+DMW_Motor_B_Power,decision_variable,[DMW_Pump_Motor_B_Status]*([DMW_Motor_B_Power_cons]-[DMW_Pump_Motor_B_Power_Imbalance]),0,1,0,dmw_system,,MW,1
+DMW_Motor_B_Power_Regression,parameter,(-8E-05*([Total_DMW_Demand]/[DMW_Drives_Running])^2+0.1835*([Total_DMW_Demand]/[DMW_Drives_Running])+36.904)/1000,,,,dmw_system,,MT/ HR,1
+DMW_Motor_B_Power_cons,parameter,"if([DMW_Pump_Motor_B_Status]==1,[DMW_Motor_B_Power],[DMW_Motor_B_Power_Regression])",,,,dmw_system,,-,1
+DMW_Pump_Motor_B_Power_Imbalance,decision_variable,[DMW_Pump_Motor_B_Status]*([DMW_Motor_B_Power_Regression]-(-8E-05*([Total_DMW_Demand]/([DMW_Drives_Running]+(1-[DMW_Pump_Motor_B_Status])))**2 + 0.1835*([Total_DMW_Demand]/([DMW_Drives_Running]+(1-[DMW_Pump_Motor_B_Status]))) + 36.904)/1000),-5,5,0,dmw_system,,GJ/ HR,1
+DMW_Pump_Motor_B_Status,decision_variable,,0,"if([Whatif_running]==0,if(([LP_Steam_Dumping_Valve_PC0024A_Steam_flow_out_UO]+[LP_Steam_Vent_valve_PV0024B_Steam_flow_out_UO])>5 && ([LP_Steam_Dumping_Valve_PC0024A_Steam_flow_out_UO]+[LP_Steam_Vent_valve_PV0024B_Steam_flow_out_UO])<10 ,1,[DMW_Pump_Motor_B_Status]),if([Return_Condensate]==0,0,1))",1,dmw_system,,Number,1
+DMW_Pump_Rated_Flow,parameter,350,,,,dmw_system,,MT/ HR,1
+DMW_Rate,parameter,1.957333,,,,dmw_system,,$/ GJ,1
+DMW_Turbine_A_Status,decision_variable,,0,"if([Whatif_running]==0,[DMW_Turbine_A_Status],1)",1,turbine,,Number,1
+DMW_Turbine_A_Steam,decision_variable,[DMW_Turbine_A_Status]*([DMW_Turbine_A_Steam_cons]-[DMW_Turbine_A_Steam_Imbalance])+(1-[DMW_Turbine_A_Status])*[DMW_Turbine_A_Steam_warmup],0,7,0,turbine,,MT/ HR,1
+DMW_Turbine_A_Steam_Imbalance,decision_variable,[DMW_Turbine_A_Status]*([DMW_Turbine_A_Steam_Regression]-((-0.0023*([Total_DMW_Demand]/([DMW_Drives_Running]+(1-[DMW_Turbine_A_Status])))**2 + 5.4956*([Total_DMW_Demand]/([DMW_Drives_Running]+(1-[DMW_Turbine_A_Status]))) + 3330.4)/1000)/0.8),-5,5,0,turbine,,$/ HR,1
+DMW_Turbine_A_Steam_Regression,parameter,((-0.0023*([Total_DMW_Demand]/[DMW_Drives_Running])^2+5.4956*([Total_DMW_Demand]/[DMW_Drives_Running])+3330.4)/1000)/0.8,,,,turbine,,ON/ OFF,1
+DMW_Turbine_A_Steam_cons,parameter,"if([DMW_Turbine_A_Status]==1,[DMW_Turbine_A_Steam],[DMW_Turbine_A_Steam_Regression])",,,,turbine,,GJ/ T,1
+DMW_Turbine_A_Steam_raw,raw_pi_input,,,,,turbine,,KG/ HR,1
+DMW_Turbine_A_Steam_warmup,parameter,"if([DMW_Turbine_A_Steam_raw]>100 && [DMW_Turbine_A_Steam_raw]<2500 && [DMW_Turbine_A_Status]==0,[DMW_Turbine_A_Steam_raw]/1000,0)",,,,turbine,,,1
+DMW_Turbine_C_Status,decision_variable,,0,"if([Whatif_running]==0,[DMW_Turbine_C_Status],1)",1,turbine,,Number,1
+DMW_Turbine_C_Steam,decision_variable,[DMW_Turbine_C_Status]*([DMW_Turbine_C_Steam_cons]-[DMW_Turbine_C_Steam_Imbalance])+(1-[DMW_Turbine_C_Status])*[DMW_Turbine_C_Steam_warmup],0,10,0,turbine,,MT/ HR,1
+DMW_Turbine_C_Steam_Imbalance,decision_variable,[DMW_Turbine_C_Status]*([DMW_Turbine_C_Steam_Regression]-((-0.0023*([Total_DMW_Demand]/([DMW_Drives_Running]+(1-[DMW_Turbine_C_Status])))**2 + 5.4956*([Total_DMW_Demand]/([DMW_Drives_Running]+(1-[DMW_Turbine_C_Status]))) + 3330.4)/1000)/0.8),-5,5,0,turbine,,$/ HR,1
+DMW_Turbine_C_Steam_Regression,parameter,((-0.0023*([Total_DMW_Demand]/[DMW_Drives_Running])^2+5.4956*([Total_DMW_Demand]/[DMW_Drives_Running])+3330.4)/1000)/0.8,,,,turbine,,$/ HR,1
+DMW_Turbine_C_Steam_cons,parameter,"if([DMW_Turbine_C_Status]==1,[DMW_Turbine_C_Steam],[DMW_Turbine_C_Steam_Regression])",,,,turbine,,-,1
+DMW_Turbine_C_Steam_raw,raw_pi_input,,,,,turbine,,KG/ HR,1
+DMW_Turbine_C_Steam_warmup,parameter,"if([DMW_Turbine_C_Steam_raw]>100 && [DMW_Turbine_C_Steam_raw]<2500 && [DMW_Turbine_C_Status]==0,[DMW_Turbine_C_Steam_raw]/1000,0)",,,,turbine,,-,1
+DMW_Turbines_Running,decision_variable,[DMW_Turbine_A_Status]+[DMW_Turbine_C_Status],"if([Whatif_running]==0,if([DMW_Turbines_Running]==0,0,[DMW_Turbines_Running]-1),0)","if([Whatif_running]==0,[DMW_Turbines_Running],2)",1,turbine,,MT/ HR,1
+DSP_BFW_TO_CAUSTIC_DILUTION,raw_pi_input,,,,,bfw_system,,MT/ HR,1
+DSP_BFW_TO_EG1,raw_pi_input,,,,,bfw_system,,KG/ HR,1
+DSP_BFW_TO_EG2,raw_pi_input,,,,,bfw_system,,MT/ HR,1
+DSP_BFW_TO_EG3,parameter,"if([EOEG3_Plant_Status]==0,0,[DSP_BFW_TO_EG3_raw])",,,,bfw_system,,MT/ HR,1
+DSP_BFW_TO_EG3_raw,raw_pi_input,,,,,bfw_system,,$/ HR,1
+DSP_BFW_TO_ETH,parameter,"if([ETH_Plant_Status]==0,0,[DSP_BFW_TO_ETH_raw])",,,,bfw_system,,MT/ HR,1
+DSP_BFW_TO_ETH_raw,raw_pi_input,,,,,bfw_system,,%,1
+Deaerator_A_LPS,decision_variable,,0.0,100.0,0,system,,MT/ HR,0
+Deaerator_A_LPS_Vent,decision_variable,([Deaerator_A_LPS]*0.02),0.0,5.0,0,system,,MT/ HR,0
+Deaerator_B_LPS,decision_variable,,0.0,100.0,0,system,,MT/ HR,0
+Deaerator_B_LPS_Vent,decision_variable,([Deaerator_B_LPS]*0.02),0.0,5.0,0,system,,MW,0
+Deaerator_LPS,decision_variable,[Whatif_running]*0.055*[Total_BFW_Consumption] + (1-[Whatif_running])*[Deaerator_LPS],"if([Whatif_running]==0,0,0)","if([Whatif_running]==0,200,200)",0,system,,MT/ HR,1
+Drying_Column_Critical_Tray_EG1,raw_pi_input,,,,,eoeg_plant,,MT/ HR,1
+Drying_Column_Critical_Tray_EG1_peeo,unresolved,,,,,eoeg_plant,,,
+Drying_Column_Critical_Tray_EG2,raw_pi_input,,,,,eoeg_plant,,MT/ HR,1
+Drying_Column_Critical_Tray_EG2_peeo,unresolved,,,,,eoeg_plant,,,
+EG1_CLEAN_COND_TO_U_O,raw_pi_input,,,,,eoeg_plant,,KG/ HR,1
+EG1_DEG_production_flow,raw_pi_input,,,,,eoeg_plant,,MT/ HR,1
+EG1_EOE,parameter,"(max(0,[EG1_MEG_production_flow]*0.71)+max(0,[EG1_DEG_production_flow]*0.83)+max(0,([EG1_TEG_production_flow]/1000*0.88))+max(0,([EG1_HEG_production_flow]/1000*0.91)))",,,,eoeg_plant,,$/ GJ,1
+EG1_HEG_production_flow,raw_pi_input,,,,,eoeg_plant,,MT/ HR,1
+EG1_LP_to_C_2220,raw_pi_input,,,,,eoeg_plant,,MT/ HR,1
+EG1_LP_to_C_2220_Adjusted,parameter,"if(missing([EG1_LP_to_C_2220_peeo]) || missing([opportunity_energy_eg1_co2])||missing([Process_flow_of_C_2220_E_2220_peeo])|| [opportunity_energy_eg1_co2]==[opportunity_threshold] || [Process_flow_of_C_2220_E_2220]==0,[EG1_LP_to_C_2220],if(([EG1_LP_to_C_2220]/[Process_flow_of_C_2220_E_2220])<([EG1_LP_to_C_2220_peeo]/[Process_flow_of_C_2220_E_2220_peeo]),[EG1_LP_to_C_2220],max([EG1_LP_to_C_2220]-2,min([EG1_LP_to_C_2220],([Process_flow_of_C_2220_E_2220]*[EG1_LP_to_C_2220_peeo]/[Process_flow_of_C_2220_E_2220_peeo])))))",,,,eoeg_plant,,-,1
+EG1_LP_to_C_2220_peeo,unresolved,,,,,eoeg_plant,,,
+EG1_LP_to_C_2310,raw_pi_input,,,,,eoeg_plant,,MT/ HR,1
+EG1_LP_to_C_2310_Adjusted,parameter,"if(missing([EG1_LP_to_C_2310_peeo]) || missing([opportunity_energy_eg1_eg])||missing([Process_flow_of_C_2310_E_2310_peeo])|| [opportunity_energy_eg1_eg]==[opportunity_threshold] || [Process_flow_of_C_2310_E_2310]==0,[EG1_LP_to_C_2310],if(([EG1_LP_to_C_2310]/[Process_flow_of_C_2310_E_2310])<([EG1_LP_to_C_2310_peeo]/[Process_flow_of_C_2310_E_2310_peeo]),[EG1_LP_to_C_2310],max([EG1_LP_to_C_2310]-2,min([EG1_LP_to_C_2310],([Process_flow_of_C_2310_E_2310]*[EG1_LP_to_C_2310_peeo]/[Process_flow_of_C_2310_E_2310_peeo])))))",,,,eoeg_plant,,-,1
+EG1_LP_to_C_2310_peeo,unresolved,,,,,eoeg_plant,,,
+EG1_LP_to_E_2220,raw_pi_input,,,,,eoeg_plant,,MT/ HR,1
+EG1_LP_to_E_2220_Adjusted,parameter,"if(missing([EG1_LP_to_E_2220_peeo]) || missing([opportunity_energy_eg1_co2])||missing([Process_flow_of_C_2220_E_2220_peeo])|| [opportunity_energy_eg1_co2]==[opportunity_threshold] || [Process_flow_of_C_2220_E_2220]==0,[EG1_LP_to_E_2220],if(([EG1_LP_to_E_2220]/[Process_flow_of_C_2220_E_2220])<([EG1_LP_to_E_2220_peeo]/[Process_flow_of_C_2220_E_2220_peeo]),[EG1_LP_to_E_2220],max([EG1_LP_to_E_2220]-2,min([EG1_LP_to_E_2220],([Process_flow_of_C_2220_E_2220]*[EG1_LP_to_E_2220_peeo]/[Process_flow_of_C_2220_E_2220_peeo])))))",,,,eoeg_plant,,-,1
+EG1_LP_to_E_2220_peeo,unresolved,,,,,eoeg_plant,,,
+EG1_LP_to_E_2310,raw_pi_input,,,,,eoeg_plant,,KG/ HR,1
+EG1_LP_to_E_2310_Adjusted,parameter,"if(missing([EG1_LP_to_E_2310_peeo]) || missing([opportunity_energy_eg1_eg])||missing([Process_flow_of_C_2310_E_2310_peeo])|| [opportunity_energy_eg1_eg]==[opportunity_threshold] || [Process_flow_of_C_2310_E_2310]==0,[EG1_LP_to_E_2310],if(([EG1_LP_to_E_2310]/[Process_flow_of_C_2310_E_2310])<([EG1_LP_to_E_2310_peeo]/[Process_flow_of_C_2310_E_2310_peeo]),[EG1_LP_to_E_2310],max([EG1_LP_to_E_2310]-2,min([EG1_LP_to_E_2310],([Process_flow_of_C_2310_E_2310]*[EG1_LP_to_E_2310_peeo]/[Process_flow_of_C_2310_E_2310_peeo])))))",,,,eoeg_plant,,-,1
+EG1_LP_to_E_2310_peeo,unresolved,,,,,eoeg_plant,,,
+EG1_LP_to_E_2523,raw_pi_input,,,,,eoeg_plant,,MT/ HR,1
+EG1_LP_to_E_2523_Adjusted,parameter,"if(missing([EG1_LP_to_E_2523_peeo]) || missing([opportunity_energy_eg1_eg])||missing([Process_flow_of_E_2523_peeo])|| [opportunity_energy_eg1_eg]==[opportunity_threshold] || [Process_flow_of_E_2523]==0,[EG1_LP_to_E_2523],if(([EG1_LP_to_E_2523]/[Process_flow_of_E_2523])<([EG1_LP_to_E_2523_peeo]/[Process_flow_of_E_2523_peeo]),[EG1_LP_to_E_2523],max([EG1_LP_to_E_2523]-2,min([EG1_LP_to_E_2523],([Process_flow_of_E_2523]*[EG1_LP_to_E_2523_peeo]/[Process_flow_of_E_2523_peeo])))))",,,,eoeg_plant,,-,1
+EG1_LP_to_E_2523_peeo,unresolved,,,,,eoeg_plant,,,
+EG1_MEG_production_flow,raw_pi_input,,,,,eoeg_plant,,MT/ HR,1
+EG1_MP_to_E_2531,raw_pi_input,,,,,eoeg_plant,,MT/ HR,1
+EG1_MP_to_E_2531_Adjusted,parameter,"if(missing([EG1_MP_to_E_2531_peeo]) || missing([opportunity_energy_eg1_eg])||missing([Process_flow_of_E_2531])|| [opportunity_energy_eg1_eg]==[opportunity_threshold] ||[Process_flow_of_E_2531]==0,[EG1_MP_to_E_2531],if(([EG1_MP_to_E_2531]/[Process_flow_of_E_2531])<([EG1_MP_to_E_2531_peeo]/[Process_flow_of_E_2531_peeo]),[EG1_MP_to_E_2531],max([EG1_MP_to_E_2531]-2,min([EG1_MP_to_E_2531],([Process_flow_of_E_2531]*[EG1_MP_to_E_2531_peeo]/[Process_flow_of_E_2531_peeo])))))",,,,eoeg_plant,,-,1
+EG1_MP_to_E_2531_peeo,unresolved,,,,,eoeg_plant,,,
+EG1_MP_to_E_2610,raw_pi_input,,,,,eoeg_plant,,%,1
+EG1_MP_to_E_2610_Adjusted,parameter,"if([Drying_Column_Critical_Tray_EG1]-[Drying_Column_Critical_Tray_EG1_peeo]>2&&[Drying_Column_Critical_Tray_EG1]-[Drying_Column_Critical_Tray_EG1_peeo]<5,[EG1_MP_to_E_2610]-0.5,[EG1_MP_to_E_2610])",,,,eoeg_plant,,-,1
+EG1_MP_to_E_2620,raw_pi_input,,,,,eoeg_plant,,%,1
+EG1_MP_to_E_2620_Adjusted,parameter,"if([MEG_Column_Critical_Tray_EG1]-[MEG_Column_Critical_Tray_EG1_peeo]>2&&[MEG_Column_Critical_Tray_EG1]-[MEG_Column_Critical_Tray_EG1_peeo]<5,[EG1_MP_to_E_2620]-0.5,[EG1_MP_to_E_2620])",,,,eoeg_plant,,-,1
+EG1_TEG_production_flow,raw_pi_input,,,,,eoeg_plant,,KG/ HR,1
+EG1_suspect_COND_TO_U_O,raw_pi_input,,,,,eoeg_plant,,MT/ HR,1
+EG1_suspect_COND_TO_U_O_corrected,parameter,"if([EOEG1_Plant_Status]==0,0,[EG1_suspect_COND_TO_U_O]*[Polished_Condenstae_to_Deaerator]/([ETH_suspect_COND_TO_U_O]+[EG1_suspect_COND_TO_U_O]+[EG2_suspect_COND_TO_U_O]+[EG3_suspect_COND_TO_U_O]))",,,,eoeg_plant,,°C,1
+EG2_CLEAN_COND_TO_U_O,raw_pi_input,,,,,eoeg_plant,,MT/ HR,1
+EG2_EOE,raw_pi_input,,,,,eoeg_plant,,$/ M3,1
+EG2_LP_to_C_4220,raw_pi_input,,,,,eoeg_plant,,KG/ HR,1
+EG2_LP_to_C_4220_Adjusted,parameter,"if(missing([EG2_LP_to_C_4220_peeo]) || missing([opportunity_energy_eg2_co2])||missing([Process_flow_of_C_4220_E_4220_peeo])|| [opportunity_energy_eg2_co2]==[opportunity_threshold] || [Process_flow_of_C_4220_E_4220]==0,[EG2_LP_to_C_4220],if(([EG2_LP_to_C_4220]/[Process_flow_of_C_4220_E_4220])<([EG2_LP_to_C_4220_peeo]/[Process_flow_of_C_4220_E_4220_peeo]),[EG2_LP_to_C_4220],max([EG2_LP_to_C_4220]-2,min([EG2_LP_to_C_4220],([Process_flow_of_C_4220_E_4220]*[EG2_LP_to_C_4220_peeo]/[Process_flow_of_C_4220_E_4220_peeo])))))",,,,eoeg_plant,,-,1
+EG2_LP_to_C_4220_peeo,unresolved,,,,,eoeg_plant,,,
+EG2_LP_to_C_4310,raw_pi_input,,,,,eoeg_plant,,MT/ HR,1
+EG2_LP_to_C_4310_Adjusted,parameter,"if(missing([EG2_LP_to_C_4310_peeo]) || missing([opportunity_energy_eg2_eg])||missing([Process_flow_of_C_4310_E_4310])|| [opportunity_energy_eg2_eg]==[opportunity_threshold] || [Process_flow_of_C_4310_E_4310]==0,[EG2_LP_to_C_4310],if(([EG2_LP_to_C_4310]/[Process_flow_of_C_4310_E_4310])<([EG2_LP_to_C_4310_peeo]/[Process_flow_of_C_4310_E_4310_peeo]),[EG2_LP_to_C_4310],max([EG2_LP_to_C_4310]-2,min([EG2_LP_to_C_4310],([Process_flow_of_C_4310_E_4310]*[EG2_LP_to_C_4310_peeo]/[Process_flow_of_C_4310_E_4310_peeo])))))",,,,eoeg_plant,,-,1
+EG2_LP_to_C_4310_peeo,unresolved,,,,,eoeg_plant,,,
+EG2_LP_to_E_4220,raw_pi_input,,,,,eoeg_plant,,KG/ HR,1
+EG2_LP_to_E_4220_Adjusted,parameter,"if(missing([EG2_LP_to_E_4220_peeo]) || missing([opportunity_energy_eg2_co2])||missing([Process_flow_of_C_4220_E_4220_peeo])|| [opportunity_energy_eg2_co2]==[opportunity_threshold] || [Process_flow_of_C_4220_E_4220]==0,[EG2_LP_to_E_4220],if(([EG2_LP_to_E_4220]/[Process_flow_of_C_4220_E_4220])<([EG2_LP_to_E_4220_peeo]/[Process_flow_of_C_4220_E_4220_peeo]),[EG2_LP_to_E_4220],max([EG2_LP_to_E_4220]-2,min([EG2_LP_to_E_4220],([Process_flow_of_C_4220_E_4220]*[EG2_LP_to_E_4220_peeo]/[Process_flow_of_C_4220_E_4220_peeo])))))",,,,eoeg_plant,,-,1
+EG2_LP_to_E_4220_peeo,unresolved,,,,,eoeg_plant,,,
+EG2_LP_to_E_4310,raw_pi_input,,,,,eoeg_plant,,KG/ HR,1
+EG2_LP_to_E_4310_Adjusted,parameter,"if(missing([EG2_LP_to_E_4310_peeo]) || missing([opportunity_energy_eg2_eg])||missing([Process_flow_of_C_4310_E_4310_peeo])|| [opportunity_energy_eg2_eg]==[opportunity_threshold] || [Process_flow_of_C_4310_E_4310]==0,[EG2_LP_to_E_4310],if(([EG2_LP_to_E_4310]/[Process_flow_of_C_4310_E_4310])<([EG2_LP_to_E_4310_peeo]/[Process_flow_of_C_4310_E_4310_peeo]),[EG2_LP_to_E_4310],max([EG2_LP_to_E_4310]-2,min([EG2_LP_to_E_4310],([Process_flow_of_C_4310_E_4310]*[EG2_LP_to_E_4310_peeo]/[Process_flow_of_C_4310_E_4310_peeo])))))",,,,eoeg_plant,,-,1
+EG2_LP_to_E_4310_peeo,unresolved,,,,,eoeg_plant,,,
+EG2_LP_to_E_4523,raw_pi_input,,,,,eoeg_plant,,MT/ HR,1
+EG2_LP_to_E_4523_Adjusted,parameter,"if(missing([EG2_LP_to_E_4523_peeo]) || missing([opportunity_energy_eg2_eg])||missing([Process_flow_of_E_4523_peeo])|| [opportunity_energy_eg2_eg]==[opportunity_threshold] || [Process_flow_of_E_4523]==0,[EG2_LP_to_E_4523],if(([EG2_LP_to_E_4523]/[Process_flow_of_E_4523])<([EG2_LP_to_E_4523_peeo]/[Process_flow_of_E_4523_peeo]),[EG2_LP_to_E_4523],max([EG2_LP_to_E_4523]-2,min([EG2_LP_to_E_4523],([Process_flow_of_E_4523]*[EG2_LP_to_E_4523_peeo]/[Process_flow_of_E_4523_peeo])))))",,,,eoeg_plant,,-,1
+EG2_LP_to_E_4523_peeo,unresolved,,,,,eoeg_plant,,,
+EG2_MP_to_E_4531,raw_pi_input,,,,,eoeg_plant,,MT/ HR,1
+EG2_MP_to_E_4531_Adjusted,parameter,"if(missing([EG2_MP_to_E_4531_peeo]) || missing([opportunity_energy_eg2_eg])||missing([Process_flow_of_E_4531_peeo])|| [opportunity_energy_eg2_eg]==[opportunity_threshold] || [Process_flow_of_E_4531]==0,[EG2_MP_to_E_4531],if(([EG2_MP_to_E_4531]/[Process_flow_of_E_4531])<([EG2_MP_to_E_4531_peeo]/[Process_flow_of_E_4531_peeo]),[EG2_MP_to_E_4531],max([EG2_MP_to_E_4531]-2,min([EG2_MP_to_E_4531],([Process_flow_of_E_4531]*[EG2_MP_to_E_4531_peeo]/[Process_flow_of_E_4531_peeo])))))",,,,eoeg_plant,,-,1
+EG2_MP_to_E_4531_peeo,unresolved,,,,,eoeg_plant,,,
+EG2_MP_to_E_4610,raw_pi_input,,,,,eoeg_plant,,%,1
+EG2_MP_to_E_4610_Adjusted,parameter,"if([Drying_Column_Critical_Tray_EG2]-[Drying_Column_Critical_Tray_EG2_peeo]>2&&[Drying_Column_Critical_Tray_EG2]-[Drying_Column_Critical_Tray_EG2_peeo]<5,[EG2_MP_to_E_4610]-0.5,[EG2_MP_to_E_4610])",,,,eoeg_plant,,-,1
+EG2_MP_to_E_4620,raw_pi_input,,,,,eoeg_plant,,%,1
+EG2_MP_to_E_4620_Adjusted,parameter,"if([MEG_Column_Critical_Tray_EG2]-[MEG_Column_Critical_Tray_EG2_peeo]>2&&[MEG_Column_Critical_Tray_EG2]-[MEG_Column_Critical_Tray_EG2_peeo]<5,[EG2_MP_to_E_4620]-0.5,[EG2_MP_to_E_4620])",,,,eoeg_plant,,-,1
+EG2_suspect_COND_TO_U_O,raw_pi_input,,,,,eoeg_plant,,MT/ HR,1
+EG2_suspect_COND_TO_U_O_corrected,parameter,"if([EOEG2_Plant_Status]==0,0,[EG2_suspect_COND_TO_U_O]*[Polished_Condenstae_to_Deaerator]/([ETH_suspect_COND_TO_U_O]+[EG1_suspect_COND_TO_U_O]+[EG2_suspect_COND_TO_U_O]+[EG3_suspect_COND_TO_U_O]))",,,,eoeg_plant,,-,1
+EG3_CLEAN_COND_TO_U_O,raw_pi_input,,,,,eoeg_plant,,MT/ HR,1
+EG3_LP_to_C_6220,raw_pi_input,,,,,eoeg_plant,,KG/ HR,1
+EG3_LP_to_C_6220_Adjusted,parameter,"if(missing([EG3_LP_to_C_6220_peeo]) || missing([opportunity_energy_eg3_co2])||missing([Process_flow_of_E_6220_peeo])|| [opportunity_energy_eg3_co2]==[opportunity_threshold] || [Process_flow_of_E_6220]==0,[EG3_LP_to_C_6220],if(([EG3_LP_to_C_6220]/[Process_flow_of_E_6220])<([EG3_LP_to_C_6220_peeo]/[Process_flow_of_E_6220_peeo]),[EG3_LP_to_C_6220],max([EG3_LP_to_C_6220]-2,min([EG3_LP_to_C_6220],([Process_flow_of_E_6220]*[EG3_LP_to_C_6220_peeo]/[Process_flow_of_E_6220_peeo])))))",,,,eoeg_plant,,GJ/ HR,1
+EG3_LP_to_C_6220_peeo,unresolved,,,,,eoeg_plant,,,
+EG3_LP_to_E_6220,raw_pi_input,,,,,eoeg_plant,,MT/ HR,1
+EG3_LP_to_E_6220_Adjusted,parameter,"if(missing([EG3_LP_to_E_6220_peeo]) || missing([opportunity_energy_eg3_co2])||missing([Process_flow_of_E_6220_peeo])|| [opportunity_energy_eg3_co2]==[opportunity_threshold] || [Process_flow_of_E_6220]==0,[EG3_LP_to_E_6220],if(([EG3_LP_to_E_6220]/[Process_flow_of_E_6220])<([EG3_LP_to_E_6220_peeo]/[Process_flow_of_E_6220_peeo]),[EG3_LP_to_E_6220],max([EG3_LP_to_E_6220]-2,min([EG3_LP_to_E_6220],([Process_flow_of_E_6220]*[EG3_LP_to_E_6220_peeo]/[Process_flow_of_E_6220_peeo])))))",,,,eoeg_plant,,GJ/ HR,1
+EG3_LP_to_E_6220_peeo,unresolved,,,,,eoeg_plant,,,
+EG3_LP_to_E_6523,raw_pi_input,,,,,eoeg_plant,,MT/ HR,1
+EG3_LP_to_E_6523_Adjusted,parameter,"if(missing([opportunity_energy_eg3_co2]) || [opportunity_energy_eg3_co2]==[opportunity_threshold],[EG3_LP_to_E_6523],min([EG3_LP_to_E_6523],[EG3_LP_to_E_6523_peeo]))",,,,eoeg_plant,,MWH,1
+EG3_LP_to_E_6523_peeo,unresolved,,,,,eoeg_plant,,,
+EG3_MP_to_E_6531,raw_pi_input,,,,,eoeg_plant,,KG/ HR,1
+EG3_MP_to_E_6531_Adjusted,parameter,"if(missing([EG3_MP_to_E_6531_peeo]) || missing([opportunity_energy_eg3_eg])||missing([Process_flow_of_E_6531_peeo])|| [opportunity_energy_eg3_eg]==[opportunity_threshold] || [Process_flow_of_E_4531]==0,[EG3_MP_to_E_6531],if(([EG3_MP_to_E_6531]/[Process_flow_of_E_6531])<([EG3_MP_to_E_6531_peeo]/[Process_flow_of_E_6531_peeo]),[EG3_MP_to_E_6531],max([EG3_MP_to_E_6531]-2,min([EG3_MP_to_E_6531],([Process_flow_of_E_6531]*[EG3_MP_to_E_6531_peeo]/[Process_flow_of_E_6531_peeo])))))",,,,eoeg_plant,,-,1
+EG3_MP_to_E_6531_peeo,unresolved,,,,,eoeg_plant,,,
+EG3_MP_to_E_6620,raw_pi_input,,,,,eoeg_plant,,%,1
+EG3_MP_to_E_6620_Adjusted,parameter,"if([MEG_Column_Critical_Tray_EG3]-[MEG_Column_Critical_Tray_EG3_peeo]>2&&[MEG_Column_Critical_Tray_EG3]-[MEG_Column_Critical_Tray_EG3_peeo]<5,[EG3_MP_to_E_6620]-0.5,[EG3_MP_to_E_6620])",,,,eoeg_plant,,-,1
+EG3_suspect_COND_TO_U_O,parameter,"if([EOEG3_Plant_Status]==0,0,[EG3_suspect_COND_TO_U_O_raw])",,,,eoeg_plant,,MT/ HR,1
+EG3_suspect_COND_TO_U_O_corrected,parameter,"if([EOEG3_Plant_Status]==0,0,[EG3_suspect_COND_TO_U_O]*[Polished_Condenstae_to_Deaerator]/([ETH_suspect_COND_TO_U_O]+[EG1_suspect_COND_TO_U_O]+[EG2_suspect_COND_TO_U_O]+[EG3_suspect_COND_TO_U_O]))",,,,eoeg_plant,,-,1
+EG3_suspect_COND_TO_U_O_raw,raw_pi_input,,,,,eoeg_plant,,$/ HR,1
+EOEG1_Plant_Status,raw_pi_input,,,,,eoeg_plant,,KG/ HR,1
+EOEG2_Plant_Status,raw_pi_input,,,,,eoeg_plant,,KG/ HR,1
+EOEG3_Plant_Status,raw_pi_input,,,,,eoeg_plant,,KG/ HR,1
+EOEG_1_HPS_Demand,parameter,"if([EOEG1_Plant_Status]==0,0,if([EOEG_1_HPS_Demand_raw]<5,0,[EOEG_1_HPS_Demand_raw]))",,,,eoeg_plant,,°C,1
+EOEG_1_HPS_Demand_raw,raw_pi_input,,,,,eoeg_plant,,$/ HR,1
+EOEG_1_LPS_Demand,post_optimizer,"if([EOEG1_Plant_Status]==0,0,if(([EOEG_1_LPS_Demand]-[EOEG_1_LPS_Demand_delta])<0,0,([EOEG_1_LPS_Demand]-[EOEG_1_LPS_Demand_delta])))",,,,eoeg_plant,,MT/ HR,1
+EOEG_1_LPS_Demand_delta,parameter,"if(missing(abs((min([EG1_LP_to_C_2220]+[EG1_LP_to_E_2220],[EG1_LP_to_C_2220_Adjusted]+[EG1_LP_to_E_2220_Adjusted])+min([EG1_LP_to_C_2310]+[EG1_LP_to_E_2310],[EG1_LP_to_C_2310_Adjusted]+[EG1_LP_to_E_2310_Adjusted])+[EG1_LP_to_E_2523_Adjusted])-([EG1_LP_to_E_2220]+[EG1_LP_to_C_2220]+[EG1_LP_to_C_2310]+[EG1_LP_to_E_2310]+[EG1_LP_to_E_2523]))),0,abs((min([EG1_LP_to_C_2220]+[EG1_LP_to_E_2220],[EG1_LP_to_C_2220_Adjusted]+[EG1_LP_to_E_2220_Adjusted])+min([EG1_LP_to_C_2310]+[EG1_LP_to_E_2310],[EG1_LP_to_C_2310_Adjusted]+[EG1_LP_to_E_2310_Adjusted])+[EG1_LP_to_E_2523_Adjusted])-([EG1_LP_to_E_2220]+[EG1_LP_to_C_2220]+[EG1_LP_to_C_2310]+[EG1_LP_to_E_2310]+[EG1_LP_to_E_2523])))",,,,eoeg_plant,,-,1
+EOEG_1_MPS_Demand,post_optimizer,"if([EOEG1_Plant_Status]==0,0,if(([EOEG_1_MPS_Demand]-[EOEG_1_MPS_Demand_delta])<0,0,([EOEG_1_MPS_Demand]-[EOEG_1_MPS_Demand_delta])))",,,,eoeg_plant,,MT/ HR,1
+EOEG_1_MPS_Demand_delta,parameter,"if(missing(abs(([EG1_MP_to_E_2531_Adjusted]+[EG1_MP_to_E_2610_Adjusted]+[EG1_MP_to_E_2620_Adjusted])-([EG1_MP_to_E_2531]+[EG1_MP_to_E_2610]+[EG1_MP_to_E_2620]))),0,abs(([EG1_MP_to_E_2531_Adjusted]+[EG1_MP_to_E_2610_Adjusted]+[EG1_MP_to_E_2620_Adjusted])-([EG1_MP_to_E_2531]+[EG1_MP_to_E_2610]+[EG1_MP_to_E_2620])))",,,,eoeg_plant,,-,1
+EOEG_1_Power_Consumption,raw_pi_input,,,,,eoeg_plant,,KG/ HR,1
+EOEG_2_HPS_Demand,parameter,"if([EOEG2_Plant_Status]==0,0,if([EOEG_2_HPS_Demand_raw]<5,0,[EOEG_2_HPS_Demand_raw]))",,,,eoeg_plant,,MT/ HR,1
+EOEG_2_HPS_Demand_raw,raw_pi_input,,,,,eoeg_plant,,$/ HR,1
+EOEG_2_LPS_Demand,post_optimizer,"if([EOEG2_Plant_Status]==0,0,if(([EOEG_2_LPS_Demand]-[EOEG_2_LPS_Demand_delta])<0,0,([EOEG_2_LPS_Demand]-[EOEG_2_LPS_Demand_delta])))",,,,eoeg_plant,,MT/ HR,1
+EOEG_2_LPS_Demand_delta,parameter,"if(missing(abs((min([EG2_LP_to_C_4220]+[EG2_LP_to_E_4220],[EG2_LP_to_C_4220_Adjusted]+[EG2_LP_to_E_4220_Adjusted])+min([EG2_LP_to_C_4310]+[EG2_LP_to_E_4310],[EG2_LP_to_C_4310_Adjusted]+[EG2_LP_to_E_4310_Adjusted])+[EG2_LP_to_E_4523_Adjusted])-([EG2_LP_to_E_4220]+[EG2_LP_to_C_4220]+[EG2_LP_to_C_4310]+[EG2_LP_to_E_4310]+[EG2_LP_to_E_4523]))),0,abs((min([EG2_LP_to_C_4220]+[EG2_LP_to_E_4220],[EG2_LP_to_C_4220_Adjusted]+[EG2_LP_to_E_4220_Adjusted])+min([EG2_LP_to_C_4310]+[EG2_LP_to_E_4310],[EG2_LP_to_C_4310_Adjusted]+[EG2_LP_to_E_4310_Adjusted])+[EG2_LP_to_E_4523_Adjusted])-([EG2_LP_to_E_4220]+[EG2_LP_to_C_4220]+[EG2_LP_to_C_4310]+[EG2_LP_to_E_4310]+[EG2_LP_to_E_4523])))",,,,eoeg_plant,,-,1
+EOEG_2_MPS_Demand,post_optimizer,"if([EOEG2_Plant_Status]==0,0,if(([EOEG_2_MPS_Demand]-[EOEG_2_MPS_Demand_delta])<0,0,([EOEG_2_MPS_Demand]-[EOEG_2_MPS_Demand_delta])))",,,,eoeg_plant,,MT/ HR,1
+EOEG_2_MPS_Demand_delta,parameter,"if(missing(abs(([EG2_MP_to_E_4610_Adjusted]+[EG2_MP_to_E_4620_Adjusted]+[EG2_MP_to_E_4531_Adjusted])-([EG2_MP_to_E_4610]+[EG2_MP_to_E_4620]+[EG2_MP_to_E_4531]))),0,abs(([EG2_MP_to_E_4610_Adjusted]+[EG2_MP_to_E_4620_Adjusted]+[EG2_MP_to_E_4531_Adjusted])-([EG2_MP_to_E_4610]+[EG2_MP_to_E_4620]+[EG2_MP_to_E_4531])))",,,,eoeg_plant,,-,1
+EOEG_2_Power_Consumption,raw_pi_input,,,,,eoeg_plant,,KG/ HR,1
+EOEG_3_HPS_Demand,parameter,"if([EOEG3_Plant_Status]==0,0,if([EOEG_3_HPS_Demand_raw]<5,0,[EOEG_3_HPS_Demand_raw]))",,,,eoeg_plant,,MT/ HR,1
+EOEG_3_HPS_Demand_raw,raw_pi_input,,,,,eoeg_plant,,$/ HR,1
+EOEG_3_LPS_Demand,post_optimizer,"if([EOEG3_Plant_Status]==0,0,if(([EOEG_3_LPS_Demand]-[EOEG_3_LPS_Demand_delta])<0,0,([EOEG_3_LPS_Demand]-[EOEG_3_LPS_Demand_delta])))",,,,eoeg_plant,,MT/ HR,1
+EOEG_3_LPS_Demand_delta,parameter,"if(missing(abs((min([EG3_LP_to_E_6220]+[EG3_LP_to_C_6220],[EG3_LP_to_E_6220_Adjusted]+[EG3_LP_to_C_6220_Adjusted])+[EG3_LP_to_E_6523_Adjusted])-([EG3_LP_to_E_6220]+[EG3_LP_to_C_6220]+[EG3_LP_to_E_6523]))),0,abs((min([EG3_LP_to_E_6220]+[EG3_LP_to_C_6220],[EG3_LP_to_E_6220_Adjusted]+[EG3_LP_to_C_6220_Adjusted])+[EG3_LP_to_E_6523_Adjusted])-([EG3_LP_to_E_6220]+[EG3_LP_to_C_6220]+[EG3_LP_to_E_6523])))",,,,eoeg_plant,,MW,1
+EOEG_3_MPS_Demand,post_optimizer,"if([EOEG3_Plant_Status]==0,0,if(([EOEG_3_MPS_Demand]-[EOEG_3_MPS_Demand_delta])<0,0,([EOEG_3_MPS_Demand]-[EOEG_3_MPS_Demand_delta])))",,,,eoeg_plant,,MT/ HR,1
+EOEG_3_MPS_Demand_delta,parameter,"if(missing(abs(([EG3_MP_to_E_6620_Adjusted]+[EG3_MP_to_E_6531_Adjusted])-([EG3_MP_to_E_6620]+[EG3_MP_to_E_6531]))),0,abs(([EG3_MP_to_E_6620_Adjusted]+[EG3_MP_to_E_6531_Adjusted])-([EG3_MP_to_E_6620]+[EG3_MP_to_E_6531])))",,,,eoeg_plant,,-,1
+EOEG_3_Power_Consumption,raw_pi_input,,,,,eoeg_plant,,ON/ OFF,1
+ETH_CLEAN_COND_TO_U_O,parameter,"if([ETH_Plant_Status]==0,0,[ETH_CLEAN_COND_TO_U_O_raw])",,,,system,,KG/ HR,1
+ETH_CLEAN_COND_TO_U_O_raw,raw_pi_input,,,,,system,,%,1
+ETH_HPS_Demand,post_optimizer,"if([ETH_Plant_Status]==0,0,if(([ETH_HPS_Demand]-([ETH_HPS_Demand_delta]))<0,0,([ETH_HPS_Demand]-([ETH_HPS_Demand_delta]))))",,,,system,,-,1
+ETH_HPS_Demand_delta,parameter,"if(missing([C2_power_delta] + [Eth_CGC_turbine_Duty_delta]),0,[C2_power_delta] + [Eth_CGC_turbine_Duty_delta])",,,,system,,-,1
+ETH_LPS_Demand,post_optimizer,"if([ETH_Plant_Status]==0,0,if(([ETH_LPS_Demand]-([ETH_LPS_Demand_delta]))<0,0,([ETH_LPS_Demand]-([ETH_LPS_Demand_delta]))))",,,,system,,MT/ HR,1
+ETH_LPS_Demand_delta,parameter,"if(missing(([Ethane_feed_saturator_inlet_steam_flow]-[Ethane_feed_saturator_inlet_steam_flow_Adjusted])+min(5,(([Specific_energy_consumption_in_C3R]-if(missing([Specific_energy_consumption_in_C3R_Adjusted]) || [opportunity_energy_olf_cold]==[opportunity_threshold] || missing([opportunity_energy_olf_cold]),[Specific_energy_consumption_in_C3R],min([Specific_energy_consumption_in_C3R],[Specific_energy_consumption_in_C3R_Adjusted])))*[Ethylene_total_flow])*3.6*1000/([HP_Steam_Enthalpy]*4.184))),0,min(20,[Ethane_feed_saturator_inlet_steam_flow]-[Ethane_feed_saturator_inlet_steam_flow_Adjusted])+min(5,(([Specific_energy_consumption_in_C3R]-if(missing([Specific_energy_consumption_in_C3R_Adjusted]) || [opportunity_energy_olf_cold]==[opportunity_threshold] || missing([opportunity_energy_olf_cold]),[Specific_energy_consumption_in_C3R],min([Specific_energy_consumption_in_C3R],[Specific_energy_consumption_in_C3R_Adjusted])))*[Ethylene_total_flow])*3.6*1000/([HP_Steam_Enthalpy]*4.184)))",,,,system,,%,1
+ETH_Plant_Status,raw_pi_input,,,,,system,,KG/ HR,1
+ETH_Power_Consumption,raw_pi_input,,,,,electrical,,KG/ HR,1
+ETH_suspect_COND_TO_U_O,raw_pi_input,,,,,system,,MT/ HR,1
+ETH_suspect_COND_TO_U_O_corrected,parameter,"if([ETH_Plant_Status]==0,0,[ETH_suspect_COND_TO_U_O]*[Polished_Condenstae_to_Deaerator]/([ETH_suspect_COND_TO_U_O]+[EG1_suspect_COND_TO_U_O]+[EG2_suspect_COND_TO_U_O]+[EG3_suspect_COND_TO_U_O]))",,,,system,,-,1
+Eth_CGC_turbine_Duty_delta,parameter,"min(5,(([Total_specific_Power]-if(missing([Total_specific_Power_peeo]) || [opportunity_energy_olf_cgc]==[opportunity_threshold] || missing([opportunity_energy_olf_cgc]),[Total_specific_Power],min([Total_specific_Power],[Total_specific_Power_peeo])))*[Ethylene_total_flow]/1000)*3.6*1000/([HP_Steam_Enthalpy]*4.184))",,,,turbine,,-,1
+Ethane_feed_saturator_inlet_steam_flow,raw_pi_input,,,,,system,,°C,1
+Ethane_feed_saturator_inlet_steam_flow_Adjusted,parameter,"if(missing([Ethane_feed_saturator_inlet_steam_flow_peeo]) || missing([opportunity_energy_olf_qt]) || [opportunity_energy_olf_qt]==[opportunity_threshold],[Ethane_feed_saturator_inlet_steam_flow],min([Ethane_feed_saturator_inlet_steam_flow],[Ethane_feed_saturator_inlet_steam_flow_peeo]))",,,,system,,-,1
+Ethane_feed_saturator_inlet_steam_flow_peeo,unresolved,,,,,system,,,
+Ethylene_total_flow,raw_pi_input,,,,,system,,GJ/ HR,1
+FDF_A_Motor_Power,decision_variable,[FDF_A_Motor_Status]*[BLR_1_Status]*(0.0067*[BLR_1_HPS_Gen]**2 + 0.225*[BLR_1_HPS_Gen] + 217.82)/1000,0,1,0,fd_fan,,Number,1
+FDF_A_Motor_Status,decision_variable,,0,0,1,fd_fan,,Number,1
+FDF_B_Motor_Power,decision_variable,[FDF_B_Motor_Status]*[BLR_2_Status]*(0.0067*[BLR_2_HPS_Gen]**2 + 0.225*[BLR_2_HPS_Gen] + 217.82)/1000,0,1,0,fd_fan,,Number,1
+FDF_B_Motor_Status,decision_variable,,0,0,1,fd_fan,,Number,1
+FD_Fan_BLR_1_Steam,decision_variable,(1-[FDF_A_Motor_Status])*[BLR_1_Status]*(([FD_Fan_BLR_1_Steam_raw]/1000)-([FD_Fan_BLR_1_Steam_reg]-((0.4255*[BLR_1_HPS_Gen]**2 - 32.667*[BLR_1_HPS_Gen] + 4378.1)/1000)))+(1-[BLR_1_Status])*(1-[FDF_A_Motor_Status])*[FD_Fan_BLR_1_Steam_warmup],0,"if([Whatif_running]==0,max([FD_Fan_BLR_1_Steam],10),10)",0,fd_fan,FD_FAN_BLR_1,MT/ HR,1
+FD_Fan_BLR_1_Steam_raw,raw_pi_input,,,,,fd_fan,FD_FAN_BLR_1,%,1
+FD_Fan_BLR_1_Steam_reg,parameter,((0.4255*[BLR_1_HPS_Gen]^2 - 32.667*[BLR_1_HPS_Gen] + 4378.1)/1000),,,,fd_fan,FD_FAN_BLR_1,KG/ HR,1
+FD_Fan_BLR_1_Steam_warmup,parameter,"if([BLR_1_Status]==0,[FD_Fan_BLR_1_Steam_raw]/1000,0)",,,,fd_fan,FD_FAN_BLR_1,-,1
+FD_Fan_BLR_2_Steam,decision_variable,(1-[FDF_B_Motor_Status])*[BLR_2_Status]*(([FD_Fan_BLR_2_Steam_raw]/1000)-([FD_Fan_BLR_2_Steam_reg]-((0.4601*[BLR_2_HPS_Gen]**2 - 39.276*[BLR_2_HPS_Gen] + 4711.7)/1000)))+(1-[BLR_2_Status])*(1-[FDF_B_Motor_Status])*[FD_Fan_BLR_2_Steam_warmup],0,"if([Whatif_running]==0,max([FD_Fan_BLR_2_Steam],10),10)",0,fd_fan,FD_FAN_BLR_2,MT/ HR,1
+FD_Fan_BLR_2_Steam_raw,raw_pi_input,,,,,fd_fan,FD_FAN_BLR_2,%,1
+FD_Fan_BLR_2_Steam_reg,parameter,((0.4601*[BLR_2_HPS_Gen]^2 - 39.276*[BLR_2_HPS_Gen] + 4711.7)/1000),,,,fd_fan,FD_FAN_BLR_2,KG/ HR,1
+FD_Fan_BLR_2_Steam_warmup,parameter,"if([BLR_2_Status]==0,[FD_Fan_BLR_2_Steam_raw]/1000,0)",,,,fd_fan,FD_FAN_BLR_2,-,1
+FD_Fan_BLR_3_Steam,decision_variable,[BLR_3_Status]*(([FD_Fan_BLR_3_Steam_raw]/1000)-([FD_Fan_BLR_3_Steam_reg]-((0.4481*[BLR_3_HPS_Gen]**2 - 35.004*[BLR_3_HPS_Gen] + 4701.3)/1000))) + (1-[BLR_3_Status])*[FD_Fan_BLR_3_Steam_warmup],0,"if([Whatif_running]==0,max([FD_Fan_BLR_3_Steam],10),10)",0,fd_fan,FD_FAN_BLR_3,MT/ HR,1
+FD_Fan_BLR_3_Steam_raw,raw_pi_input,,,,,fd_fan,FD_FAN_BLR_3,KG/ HR,1
+FD_Fan_BLR_3_Steam_reg,parameter,((0.4481*[BLR_3_HPS_Gen]^2 - 35.004*[BLR_3_HPS_Gen] + 4701.3)/1000),,,,fd_fan,FD_FAN_BLR_3,KG/ HR,1
+FD_Fan_BLR_3_Steam_warmup,parameter,"if([BLR_3_Status]==0,[FD_Fan_BLR_3_Steam_raw]/1000,0)",,,,fd_fan,FD_FAN_BLR_3,-,1
+FD_Fan_BLR_4_Steam,decision_variable,[BLR_4_Status]*(([FD_Fan_BLR_4_Steam_raw]/1000)-([FD_Fan_BLR_4_Steam_reg]-((0.4828*[BLR_4_HPS_Gen]**2 - 46.088*[BLR_4_HPS_Gen] + 5015.5)/1000)))+ (1-[BLR_4_Status])*[FD_Fan_BLR_4_Steam_warmup],0,"if([Whatif_running]==0,max([FD_Fan_BLR_4_Steam],10),10)",0,fd_fan,FD_FAN_BLR_4,MT/ HR,1
+FD_Fan_BLR_4_Steam_raw,raw_pi_input,,,,,fd_fan,FD_FAN_BLR_4,KG/ HR,1
+FD_Fan_BLR_4_Steam_reg,parameter,((0.4828*[BLR_4_HPS_Gen]^2 - 46.088*[BLR_4_HPS_Gen] + 5015.5)/1000),,,,fd_fan,FD_FAN_BLR_4,KG/ HR,1
+FD_Fan_BLR_4_Steam_warmup,parameter,"if([BLR_4_Status]==0,[FD_Fan_BLR_4_Steam_raw]/1000,0)",,,,fd_fan,FD_FAN_BLR_4,-,1
+FD_Fan_BLR_5_Steam,decision_variable,[BLR_5_Status]*(([FD_Fan_BLR_5_Steam_raw]/1000)-([FD_Fan_BLR_5_Steam_reg]-((0.0843*[BLR_5_HPS_Gen]**2 + 9.2624*[BLR_5_HPS_Gen] + 4772.4)/1000)))+ (1-[BLR_5_Status])*[FD_Fan_BLR_5_Steam_warmup],0,"if([Whatif_running]==0,max([FD_Fan_BLR_5_Steam],10),10)",0,fd_fan,FD_FAN_BLR_5,MT/ HR,1
+FD_Fan_BLR_5_Steam_raw,raw_pi_input,,,,,fd_fan,FD_FAN_BLR_5,KG/ HR,1
+FD_Fan_BLR_5_Steam_reg,parameter,((0.0843*[BLR_5_HPS_Gen]^2 + 9.2624*[BLR_5_HPS_Gen] + 4772.4)/1000),,,,fd_fan,FD_FAN_BLR_5,KG/ HR,1
+FD_Fan_BLR_5_Steam_warmup,parameter,"if([BLR_5_Status]==0,[FD_Fan_BLR_5_Steam_raw]/1000,0)",,,,fd_fan,FD_FAN_BLR_5,-,1
+FUEL_GAS_From_UO_to_ETH,post_optimizer,"if([ETH_Plant_Status]==0,0,round(([FUEL_GAS_From_UO_to_ETH]-[FUEL_GAS_From_UO_to_ETH_delta]),3))",,,,fuel,,MT/ HR,1
+FUEL_GAS_From_UO_to_ETH_delta,parameter,"if(missing(if([ETH_Plant_Status]==0,0,(([FUEL_GAS_From_UO_to_ETH]/[Total_Furnace_fuel])*([Total_Furnace_fuel]-[Total_Furnace_fuel_min])))),0,if([ETH_Plant_Status]==0,0,(([FUEL_GAS_From_UO_to_ETH]/[Total_Furnace_fuel])*([Total_Furnace_fuel]-[Total_Furnace_fuel_min]))))",,,,fuel,,$/ M3,1
+FUEL_GAS_From_UO_to_Flare,raw_pi_input,,,,,fuel,,MW,1
+FUEL_GAS_From_UO_to_Incinerator,parameter,[FUEL_GAS_From_UO_to_Incinerator_raw]/1000,,,,fuel,,MW,1
+FUEL_GAS_From_UO_to_Incinerator_raw,raw_pi_input,,,,,fuel,,KG/ HR,1
+FUEL_GAS_From_UO_to_LAO,post_optimizer,"if([LAO_Plant_Status]==0,0,round([FUEL_GAS_From_UO_to_LAO]-([FUEL_GAS_From_UO_to_LAO_delta]),3))",,,,fuel,,MW,1
+FUEL_GAS_From_UO_to_LAO_Opt,raw_pi_input,,,,,fuel,,%,1
+FUEL_GAS_From_UO_to_LAO_delta,parameter,"if([LAO_Plant_Status]==0,0,if(([FUEL_GAS_From_UO_to_LAO]-[FUEL_GAS_From_UO_to_LAO_Opt]>0.2),[FUEL_GAS_From_UO_to_LAO]-[FUEL_GAS_From_UO_to_LAO_Opt],0))*0",,,,fuel,,KG/ HR,1
+FUR_1_FLUE_GAS_O2,raw_pi_input,,,,,system,,MT/ HR,1
+FUR_1_FLUE_GAS_O2_Adjusted,parameter,"if([Furnace_O2_Check]==1&&[FUR_1_FLUE_GAS_O2]-(0.0258*[Fur_1_HC_Feed]^2-2.4007*[Fur_1_HC_Feed]+58.52)*[Furnace_1_Status]>0.2,(0.0258*[Fur_1_HC_Feed]^2-2.4007*[Fur_1_HC_Feed]+58.52)*[Furnace_1_Status],[FUR_1_FLUE_GAS_O2])",,,,system,,-,1
+FUR_1_PASS_1_ETHANE_FEED,raw_pi_input,,,,,system,,°C,1
+FUR_1_PASS_2_ETHANE_FEED,raw_pi_input,,,,,system,,MT/ HR,1
+FUR_1_PASS_3_ETHANE_FEED,raw_pi_input,,,,,system,,-,1
+FUR_1_PASS_4_ETHANE_FEED,raw_pi_input,,,,,system,,MT/ HR,1
+FUR_1_PASS_5_ETHANE_FEED,raw_pi_input,,,,,system,,MT/ HR,1
+FUR_1_PASS_6_ETHANE_FEED,raw_pi_input,,,,,system,,MT/ HR,1
+FUR_1_PASS_7_ETHANE_FEED,raw_pi_input,,,,,system,,MT/ HR,1
+FUR_1_PASS_8_ETHANE_FEED,raw_pi_input,,,,,system,,MT/ HR,1
+FUR_1_STACK_TEMPERATURE,raw_pi_input,,,,,system,,$/ HR,1
+FUR_1_STACK_TEMPERATURE_Adjusted,parameter,"max(150,[FUR_1_STACK_TEMPERATURE]-(144.4672+0.0525*[Fur_1_HC_Feed]+0.008392*[Furnace_A_COT]+2.84088*[FUR_1_FLUE_GAS_O2]-(144.4672+0.0525*[Fur_1_HC_Feed]+0.008392*[Furnace_A_COT]+2.84088*[FUR_1_FLUE_GAS_O2_Adjusted])))*[Furnace_1_Status]",,,,system,,°C,1
+FUR_2_FLUE_GAS_O2,raw_pi_input,,,,,system,,MT/ HR,1
+FUR_2_FLUE_GAS_O2_Adjusted,parameter,"if([Furnace_O2_Check]==1&&[FUR_2_FLUE_GAS_O2]-(0.0302*[Fur_2_HC_Feed]^2-2.8183*[Fur_2_HC_Feed]+68.367)*[Furnace_2_Status]>0.2,(0.0302*[Fur_2_HC_Feed]^2-2.8183*[Fur_2_HC_Feed]+68.367)*[Furnace_2_Status],[FUR_2_FLUE_GAS_O2])",,,,system,,MT/ HR,1
+FUR_2_PASS_1_ETHANE_FEED,raw_pi_input,,,,,system,,°C,1
+FUR_2_PASS_2_ETHANE_FEED,raw_pi_input,,,,,system,,MT/ HR,1
+FUR_2_PASS_3_ETHANE_FEED,raw_pi_input,,,,,system,,MT/ HR,1
+FUR_2_PASS_4_ETHANE_FEED,raw_pi_input,,,,,system,,MT/ HR,1
+FUR_2_PASS_5_ETHANE_FEED,raw_pi_input,,,,,system,,MT/ HR,1
+FUR_2_PASS_6_ETHANE_FEED,raw_pi_input,,,,,system,,MT/ HR,1
+FUR_2_PASS_7_ETHANE_FEED,raw_pi_input,,,,,system,,BARG,1
+FUR_2_PASS_8_ETHANE_FEED,raw_pi_input,,,,,system,,MT/ HR,1
+FUR_2_STACK_TEMPERATURE,raw_pi_input,,,,,system,,$/ HR,1
+FUR_2_STACK_TEMPERATURE_Adjusted,parameter,"max(150,[FUR_2_STACK_TEMPERATURE]-(165.4715-0.09271*[Fur_2_HC_Feed]-0.00632*[Furnace_B_COT]+1.622539*[FUR_2_FLUE_GAS_O2]-(165.4715-0.09271*[Fur_2_HC_Feed]-0.00632*[Furnace_B_COT]+1.622539*[FUR_2_FLUE_GAS_O2_Adjusted])))*[Furnace_2_Status]",,,,system,,-,1
+FUR_3_FLUE_GAS_O2,raw_pi_input,,,,,system,,GJ/ T,1
+FUR_3_FLUE_GAS_O2_Adjusted,parameter,"if([Furnace_O2_Check]==1&&[FUR_3_FLUE_GAS_O2]-(0.0291*[Fur_3_HC_Feed]^2-2.8908*[Fur_3_HC_Feed]+74.849)*[Furnace_3_Status]>0.2,(0.0291*[Fur_3_HC_Feed]^2-2.8908*[Fur_3_HC_Feed]+74.849)*[Furnace_3_Status],[FUR_3_FLUE_GAS_O2])",,,,system,,MT/ HR,1
+FUR_3_PASS_1_ETHANE_FEED,raw_pi_input,,,,,system,,BARG,1
+FUR_3_PASS_2_ETHANE_FEED,raw_pi_input,,,,,system,,MT/ HR,1
+FUR_3_PASS_3_ETHANE_FEED,raw_pi_input,,,,,system,,MT/ HR,1
+FUR_3_PASS_4_ETHANE_FEED,raw_pi_input,,,,,system,,MT/ HR,1
+FUR_3_PASS_5_ETHANE_FEED,raw_pi_input,,,,,system,,MT/ HR,1
+FUR_3_PASS_6_ETHANE_FEED,raw_pi_input,,,,,system,,MT/ HR,1
+FUR_3_PASS_7_ETHANE_FEED,raw_pi_input,,,,,system,,MT/ HR,1
+FUR_3_PASS_8_ETHANE_FEED,raw_pi_input,,,,,system,,MT/ HR,1
+FUR_3_STACK_TEMPERATURE,raw_pi_input,,,,,system,,$/ HR,1
+FUR_3_STACK_TEMPERATURE_Adjusted,parameter,"max(150,[FUR_3_STACK_TEMPERATURE]-(134.6519+0.026405*[Fur_3_HC_Feed]+0.012979*[Furnace_C_COT]+2.596037*[FUR_3_FLUE_GAS_O2]-(134.6519+0.026405*[Fur_3_HC_Feed]+0.012979*[Furnace_C_COT]+2.596037*[FUR_3_FLUE_GAS_O2_Adjusted])))*[Furnace_3_Status]",,,,system,,-,1
+FUR_4_FLUE_GAS_O2,raw_pi_input,,,,,system,,GJ/ T,1
+FUR_4_FLUE_GAS_O2_Adjusted,parameter,"if([Furnace_O2_Check]==1&&[FUR_4_FLUE_GAS_O2]-(0.0253*[Fur_4_HC_Feed]^2-2.3958*[Fur_4_HC_Feed]+59.697)*[Furnace_4_Status]>0.2,(0.0253*[Fur_4_HC_Feed]^2-2.3958*[Fur_4_HC_Feed]+59.697)*[Furnace_4_Status],[FUR_4_FLUE_GAS_O2])",,,,system,,MT/ HR,1
+FUR_4_PASS_1_ETHANE_FEED,raw_pi_input,,,,,system,,°C,1
+FUR_4_PASS_2_ETHANE_FEED,raw_pi_input,,,,,system,,MT/ HR,1
+FUR_4_PASS_3_ETHANE_FEED,raw_pi_input,,,,,system,,MT/ HR,1
+FUR_4_PASS_4_ETHANE_FEED,raw_pi_input,,,,,system,,MT/ HR,1
+FUR_4_PASS_5_ETHANE_FEED,raw_pi_input,,,,,system,,MT/ HR,1
+FUR_4_PASS_6_ETHANE_FEED,raw_pi_input,,,,,system,,MT/ HR,1
+FUR_4_PASS_7_ETHANE_FEED,raw_pi_input,,,,,system,,MT/ HR,1
+FUR_4_PASS_8_ETHANE_FEED,raw_pi_input,,,,,system,,MT/ HR,1
+FUR_4_STACK_TEMPERATURE,raw_pi_input,,,,,system,,$/ HR,1
+FUR_4_STACK_TEMPERATURE_Adjusted,parameter,"max(150,[FUR_4_STACK_TEMPERATURE]-(112.2612+0.009309*[Fur_4_HC_Feed]+0.045304*[Furnace_D_COT]+3.549782*[FUR_4_FLUE_GAS_O2]-(112.2612+0.009309*[Fur_4_HC_Feed]+0.045304*[Furnace_D_COT]+3.549782*[FUR_4_FLUE_GAS_O2_Adjusted])))*[Furnace_4_Status]",,,,system,,-,1
+FUR_5_FLUE_GAS_O2,raw_pi_input,,,,,system,,GJ/ T,1
+FUR_5_FLUE_GAS_O2_Adjusted,parameter,"if([Furnace_O2_Check]==1&&[FUR_5_FLUE_GAS_O2]-(0.0322*[Fur_5_HC_Feed]^2-3.0343*[Fur_5_HC_Feed]+73.997)*[Furnace_5_Status]>0.2,(0.0322*[Fur_5_HC_Feed]^2-3.0343*[Fur_5_HC_Feed]+73.997)*[Furnace_5_Status],[FUR_5_FLUE_GAS_O2])",,,,system,,MT/ HR,1
+FUR_5_PASS_1_ETHANE_FEED,raw_pi_input,,,,,system,,°C,1
+FUR_5_PASS_2_ETHANE_FEED,raw_pi_input,,,,,system,,MT/ HR,1
+FUR_5_PASS_3_ETHANE_FEED,raw_pi_input,,,,,system,,MT/ HR,1
+FUR_5_PASS_4_ETHANE_FEED,raw_pi_input,,,,,system,,MT/ HR,1
+FUR_5_PASS_5_ETHANE_FEED,raw_pi_input,,,,,system,,MT/ HR,1
+FUR_5_PASS_6_ETHANE_FEED,raw_pi_input,,,,,system,,MT/ HR,1
+FUR_5_PASS_7_ETHANE_FEED,raw_pi_input,,,,,system,,MT/ HR,1
+FUR_5_PASS_8_ETHANE_FEED,raw_pi_input,,,,,system,,MT/ HR,1
+FUR_5_STACK_TEMPERATURE,raw_pi_input,,,,,system,,$/ HR,1
+FUR_5_STACK_TEMPERATURE_Adjusted,parameter,"max(150,[FUR_5_STACK_TEMPERATURE]-(131.72+0.044*[Fur_5_HC_Feed]+0.0177*[Furnace_E_COT]+2.3949*[FUR_5_FLUE_GAS_O2]-(131.72+0.044*[Fur_5_HC_Feed]+0.0177*[Furnace_E_COT]+2.3949*[FUR_5_FLUE_GAS_O2_Adjusted])))*[Furnace_5_Status]",,,,system,,-,1
+FUR_6_FLUE_GAS_O2,raw_pi_input,,,,,system,,GJ/ T,1
+FUR_6_FLUE_GAS_O2_Adjusted,parameter,"if([Furnace_O2_Check]==1&&[FUR_6_FLUE_GAS_O2]-(0.0312*[Fur_6_HC_Feed]^2-2.9678*[Fur_6_HC_Feed]+73.279)*[Furnace_6_Status]>0.2,(0.0312*[Fur_6_HC_Feed]^2-2.9678*[Fur_6_HC_Feed]+73.279)*[Furnace_6_Status],[FUR_6_FLUE_GAS_O2])",,,,system,,MT/ HR,1
+FUR_6_PASS_1_ETHANE_FEED,raw_pi_input,,,,,system,,KG/ HR,1
+FUR_6_PASS_2_ETHANE_FEED,raw_pi_input,,,,,system,,MT/ HR,1
+FUR_6_PASS_3_ETHANE_FEED,raw_pi_input,,,,,system,,MT/ HR,1
+FUR_6_PASS_4_ETHANE_FEED,raw_pi_input,,,,,system,,MT/ HR,1
+FUR_6_PASS_5_ETHANE_FEED,raw_pi_input,,,,,system,,MT/ HR,1
+FUR_6_PASS_6_ETHANE_FEED,raw_pi_input,,,,,system,,MT/ HR,1
+FUR_6_PASS_7_ETHANE_FEED,raw_pi_input,,,,,system,,MT/ HR,1
+FUR_6_PASS_8_ETHANE_FEED,raw_pi_input,,,,,system,,MT/ HR,1
+FUR_6_STACK_TEMPERATURE,raw_pi_input,,,,,system,,$/ HR,1
+FUR_6_STACK_TEMPERATURE_Adjusted,parameter,"max(150,[FUR_6_STACK_TEMPERATURE]-(144.48+0.0035*[Fur_6_HC_Feed]+0.00069*[Furnace_F_COT]+1.9567*[FUR_6_FLUE_GAS_O2]-(144.48+0.0035*[Fur_6_HC_Feed]+0.00069*[Furnace_F_COT]+1.9567*[FUR_6_FLUE_GAS_O2_Adjusted])))*[Furnace_6_Status]",,,,system,,-,1
+FUR_7_FLUE_GAS_O2,raw_pi_input,,,,,system,,GJ/ T,1
+FUR_7_FLUE_GAS_O2_Adjusted,parameter,"if([Furnace_O2_Check]==1&&[FUR_7_FLUE_GAS_O2]-(0.0298*[Fur_7_HC_Feed]^2-2.9399*[Fur_7_HC_Feed]+75.021)*[Furnace_7_Status]>0.2,(0.0298*[Fur_7_HC_Feed]^2-2.9399*[Fur_7_HC_Feed]+75.021)*[Furnace_7_Status],[FUR_7_FLUE_GAS_O2])",,,,system,,-,1
+FUR_7_PASS_1_ETHANE_FEED,raw_pi_input,,,,,system,,KG/ HR,1
+FUR_7_PASS_2_ETHANE_FEED,raw_pi_input,,,,,system,,MT/ HR,1
+FUR_7_PASS_3_ETHANE_FEED,raw_pi_input,,,,,system,,MT/ HR,1
+FUR_7_PASS_4_ETHANE_FEED,raw_pi_input,,,,,system,,MT/ HR,1
+FUR_7_PASS_5_ETHANE_FEED,raw_pi_input,,,,,system,,MT/ HR,1
+FUR_7_PASS_6_ETHANE_FEED,raw_pi_input,,,,,system,,MT/ HR,1
+FUR_7_PASS_7_ETHANE_FEED,raw_pi_input,,,,,system,,MT/ HR,1
+FUR_7_PASS_8_ETHANE_FEED,raw_pi_input,,,,,system,,MT/ HR,1
+FUR_7_STACK_TEMPERATURE,raw_pi_input,,,,,system,,$/ HR,1
+FUR_7_STACK_TEMPERATURE_Adjusted,parameter,"max(150,[FUR_7_STACK_TEMPERATURE]-(147.37+0.04478*[Fur_7_HC_Feed]+0.002745*[Furnace_G_COT]+2.467*[FUR_7_FLUE_GAS_O2]-(147.37+0.04478*[Fur_7_HC_Feed]+0.002745*[Furnace_G_COT]+2.467*[FUR_7_FLUE_GAS_O2_Adjusted])))*[Furnace_7_Status]",,,,system,,MT/ HR,1
+FUR_8_FLUE_GAS_O2,raw_pi_input,,,,,system,,GJ/ T,1
+FUR_8_FLUE_GAS_O2_Adjusted,parameter,"if([Furnace_O2_Check]==1&&[FUR_8_FLUE_GAS_O2]-(0.0397*[Fur_8_HC_Feed]^2-3.6171*[Fur_8_HC_Feed]+85.623)*[Furnace_8_Status]>0.2,(0.0397*[Fur_8_HC_Feed]^2-3.6171*[Fur_8_HC_Feed]+85.623)*[Furnace_8_Status],[FUR_8_FLUE_GAS_O2])",,,,system,,-,1
+FUR_8_PASS_1_ETHANE_FEED,raw_pi_input,,,,,system,,KG/ HR,1
+FUR_8_PASS_2_ETHANE_FEED,raw_pi_input,,,,,system,,MT/ HR,1
+FUR_8_PASS_3_ETHANE_FEED,raw_pi_input,,,,,system,,MT/ HR,1
+FUR_8_PASS_4_ETHANE_FEED,raw_pi_input,,,,,system,,MT/ HR,1
+FUR_8_PASS_5ETHANE_FEED,raw_pi_input,,,,,system,,MT/ HR,1
+FUR_8_PASS_6_ETHANE_FEED,raw_pi_input,,,,,system,,MT/ HR,1
+FUR_8_PASS_7_ETHANE_FEED,raw_pi_input,,,,,system,,MT/ HR,1
+FUR_8_PASS_8_ETHANE_FEED,raw_pi_input,,,,,system,,MT/ HR,1
+FUR_8_STACK_TEMPERATURE,raw_pi_input,,,,,system,,$/ HR,1
+FUR_8_STACK_TEMPERATURE_Adjusted,parameter,"max(150,[FUR_8_STACK_TEMPERATURE]-(123.8049+0.072179*[Fur_8_HC_Feed]+0.027*[Furnace_H_COT]+3.0799*[FUR_8_FLUE_GAS_O2]-(123.8049+0.072179*[Fur_8_HC_Feed]+0.027*[Furnace_H_COT]+3.0799*[FUR_8_FLUE_GAS_O2_Adjusted])))*[Furnace_8_Status]",,,,system,,-,1
+FUR_9_FLUE_GAS_O2,raw_pi_input,,,,,system,,MT/ HR,1
+FUR_9_FLUE_GAS_O2_Adjusted,parameter,"if([Furnace_O2_Check]==1&&[FUR_9_FLUE_GAS_O2]-(0.0274*[Fur_9_HC_Feed]^2-2.6445*[Fur_9_HC_Feed]+66.598)*[Furnace_9_Status]>0.2,(0.0274*[Fur_9_HC_Feed]^2-2.6445*[Fur_9_HC_Feed]+66.598)*[Furnace_9_Status],[FUR_9_FLUE_GAS_O2])",,,,system,,-,1
+FUR_9_PASS_1_ETHANE_FEED,raw_pi_input,,,,,system,,KG/ HR,1
+FUR_9_PASS_2_ETHANE_FEED,raw_pi_input,,,,,system,,MT/ HR,1
+FUR_9_PASS_3_ETHANE_FEED,raw_pi_input,,,,,system,,MT/ HR,1
+FUR_9_PASS_4_ETHANE_FEED,raw_pi_input,,,,,system,,MT/ HR,1
+FUR_9_PASS_5ETHANE_FEED,raw_pi_input,,,,,system,,MT/ HR,1
+FUR_9_PASS_6_ETHANE_FEED,raw_pi_input,,,,,system,,MT/ HR,1
+FUR_9_PASS_7_ETHANE_FEED,raw_pi_input,,,,,system,,MT/ HR,1
+FUR_9_PASS_8_ETHANE_FEED,raw_pi_input,,,,,system,,MT/ HR,1
+FUR_9_STACK_TEMPERATURE,raw_pi_input,,,,,system,,$/ HR,1
+FUR_9_STACK_TEMPERATURE_Adjusted,parameter,"max(150,[FUR_9_STACK_TEMPERATURE]-(137.9672+0.00739*[Fur_9_HC_Feed]+0.000607*[Furnace_J_COT]+1.71189*[FUR_9_FLUE_GAS_O2]-(137.9672+0.00739*[Fur_9_HC_Feed]+0.000607*[Furnace_J_COT]+1.71189*[FUR_9_FLUE_GAS_O2_Adjusted])))*[Furnace_9_Status]",,,,system,,-,1
+Flag_CW_Stop,parameter,"if(([ETH_Plant_Status]==0||[EOEG1_Plant_Status]==0||[EOEG2_Plant_Status]==0||[CW_Drives_Running]==7)&&([Total_CW_Demand]-[New_CW_Flow]>12500),1,0)",,,,cw_system,,-,1
+Fuel_BLR_1,decision_variable,[Fuel_BLR_1]*[BLR_1_Status],0,"if([Whatif_running]==0,max(12,[Fuel_BLR_1]),12)",0,fuel,,MT/ HR,1
+Fuel_BLR_2,decision_variable,[Fuel_BLR_2]*[BLR_2_Status],0,"if([Whatif_running]==0,max(12,[Fuel_BLR_2]),12)",0,fuel,,MT/ HR,1
+Fuel_BLR_3,decision_variable,[Fuel_BLR_3]*[BLR_3_Status],0,"if([Whatif_running]==0,max(12,[Fuel_BLR_3]),12)",0,fuel,,%,1
+Fuel_BLR_4,decision_variable,[Fuel_BLR_4]*[BLR_4_Status],0,"if([Whatif_running]==0,max(12,[Fuel_BLR_4]),12)",0,fuel,,%,1
+Fuel_BLR_5,decision_variable,[Fuel_BLR_5]*[BLR_5_Status],0,"if([Whatif_running]==0,max(12,[Fuel_BLR_5]),12)",0,fuel,,KG/ HR,1
+Fuel_Consumption_Plants,post_optimizer,[Fuel_Consumption_Plants_fixed]+[Fuel_Consumption_Plants_changes],,,,fuel,,GJ/ T,1
+Fuel_Consumption_Plants_U_O,parameter,[FUEL_GAS_From_UO_to_Flare]+[FUEL_GAS_From_UO_to_Incinerator],,,,fuel,,GJ/ T,1
+Fuel_Consumption_Plants_changes,post_optimizer,[FUEL_GAS_From_UO_to_ETH] + [FUEL_GAS_From_UO_to_LAO] ,,,,fuel,,GJ/ T,1
+Fuel_Consumption_Plants_fixed,parameter,[NG_Fuel_to_EG1]+[NG_Fuel_to_EG2]+[NG_Fuel_to_EG3],,,,fuel,,GJ/ T,1
+Fuel_Rate,parameter,2.040000,,,,fuel,,KCAL/ KG,1
+Fur_1_HC_Feed,parameter,"if([Furnace_1_Status]==0,0,[Furnace1_Feed]/(1+[Overall_SHC_Ratio]))",,,,system,,-,1
+Fur_2_HC_Feed,parameter,"if([Furnace_2_Status]==0,0,[Furnace2_Feed]/(1+[Overall_SHC_Ratio]))",,,,system,,-,1
+Fur_3_HC_Feed,parameter,"if([Furnace_3_Status]==0,0,[Furnace3_Feed]/(1+[Overall_SHC_Ratio]))",,,,system,,-,1
+Fur_4_HC_Feed,parameter,"if([Furnace_4_Status]==0,0,[Furnace4_Feed]/(1+[Overall_SHC_Ratio]))",,,,system,,-,1
+Fur_5_HC_Feed,parameter,"if([Furnace_5_Status]==0,0,[Furnace5_Feed]/(1+[Overall_SHC_Ratio]))",,,,system,,,1
+Fur_6_HC_Feed,parameter,"if([Furnace_6_Status]==0,0,[Furnace6_Feed]/(1+[Overall_SHC_Ratio]))",,,,system,,GJ/ HR,1
+Fur_7_HC_Feed,parameter,"if([Furnace_7_Status]==0,0,[Furnace7_Feed]/(1+[Overall_SHC_Ratio]))",,,,system,,GJ/ HR,1
+Fur_8_HC_Feed,parameter,"if([Furnace_8_Status]==0,0,[Furnace8_Feed]/(1+[Overall_SHC_Ratio]))",,,,system,,GJ/ HR,1
+Fur_9_HC_Feed,parameter,"if([Furnace_9_Status]==0,0,[Furnace9_Feed]/(1+[Overall_SHC_Ratio]))",,,,system,,,1
+Furnace1_Feed,parameter,[FUR_1_PASS_1_ETHANE_FEED]+[FUR_1_PASS_2_ETHANE_FEED]+[FUR_1_PASS_3_ETHANE_FEED]+[FUR_1_PASS_4_ETHANE_FEED]+[FUR_1_PASS_5_ETHANE_FEED]+[FUR_1_PASS_6_ETHANE_FEED]+[FUR_1_PASS_7_ETHANE_FEED]+[FUR_1_PASS_8_ETHANE_FEED],,,,system,,MT/ HR,1
+Furnace2_Feed,parameter,[FUR_2_PASS_1_ETHANE_FEED]+[FUR_2_PASS_2_ETHANE_FEED]+[FUR_2_PASS_3_ETHANE_FEED]+[FUR_2_PASS_4_ETHANE_FEED]+[FUR_2_PASS_5_ETHANE_FEED]+[FUR_2_PASS_6_ETHANE_FEED]+[FUR_2_PASS_7_ETHANE_FEED]+[FUR_2_PASS_8_ETHANE_FEED],,,,system,,GJ/ HR,1
+Furnace3_Feed,parameter,[FUR_3_PASS_1_ETHANE_FEED]+[FUR_3_PASS_2_ETHANE_FEED]+[FUR_3_PASS_3_ETHANE_FEED]+[FUR_3_PASS_4_ETHANE_FEED]+[FUR_3_PASS_5_ETHANE_FEED]+[FUR_3_PASS_6_ETHANE_FEED]+[FUR_3_PASS_7_ETHANE_FEED]+[FUR_3_PASS_8_ETHANE_FEED],,,,system,,MT/ HR,1
+Furnace4_Feed,parameter,[FUR_4_PASS_1_ETHANE_FEED]+[FUR_4_PASS_2_ETHANE_FEED]+[FUR_4_PASS_3_ETHANE_FEED]+[FUR_4_PASS_4_ETHANE_FEED]+[FUR_4_PASS_5_ETHANE_FEED]+[FUR_4_PASS_6_ETHANE_FEED]+[FUR_4_PASS_7_ETHANE_FEED]+[FUR_4_PASS_8_ETHANE_FEED],,,,system,,GJ/ HR,1
+Furnace5_Feed,parameter,[FUR_5_PASS_1_ETHANE_FEED]+[FUR_5_PASS_2_ETHANE_FEED]+[FUR_5_PASS_3_ETHANE_FEED]+[FUR_5_PASS_4_ETHANE_FEED]+[FUR_5_PASS_5_ETHANE_FEED]+[FUR_5_PASS_6_ETHANE_FEED]+[FUR_5_PASS_7_ETHANE_FEED]+[FUR_5_PASS_8_ETHANE_FEED],,,,system,,MT/ HR,1
+Furnace6_Feed,parameter,[FUR_6_PASS_1_ETHANE_FEED]+[FUR_6_PASS_2_ETHANE_FEED]+[FUR_6_PASS_3_ETHANE_FEED]+[FUR_6_PASS_4_ETHANE_FEED]+[FUR_6_PASS_5_ETHANE_FEED]+[FUR_6_PASS_6_ETHANE_FEED]+[FUR_6_PASS_7_ETHANE_FEED]+[FUR_6_PASS_8_ETHANE_FEED],,,,system,,GJ/ HR,1
+Furnace7_Feed,parameter,[FUR_7_PASS_1_ETHANE_FEED]+[FUR_7_PASS_2_ETHANE_FEED]+[FUR_7_PASS_3_ETHANE_FEED]+[FUR_7_PASS_4_ETHANE_FEED]+[FUR_7_PASS_5_ETHANE_FEED]+[FUR_7_PASS_6_ETHANE_FEED]+[FUR_7_PASS_7_ETHANE_FEED]+[FUR_7_PASS_8_ETHANE_FEED],,,,system,,MT/ HR,1
+Furnace8_Feed,parameter,[FUR_8_PASS_1_ETHANE_FEED]+[FUR_8_PASS_2_ETHANE_FEED]+[FUR_8_PASS_3_ETHANE_FEED]+[FUR_8_PASS_4_ETHANE_FEED]+[FUR_8_PASS_5ETHANE_FEED]+[FUR_8_PASS_6_ETHANE_FEED]+[FUR_8_PASS_7_ETHANE_FEED]+[FUR_8_PASS_8_ETHANE_FEED],,,,system,,GJ/ HR,1
+Furnace9_Feed,parameter,[FUR_9_PASS_1_ETHANE_FEED]+[FUR_9_PASS_2_ETHANE_FEED]+[FUR_9_PASS_3_ETHANE_FEED]+[FUR_9_PASS_4_ETHANE_FEED]+[FUR_9_PASS_5ETHANE_FEED]+[FUR_9_PASS_6_ETHANE_FEED]+[FUR_9_PASS_7_ETHANE_FEED]+[FUR_9_PASS_8_ETHANE_FEED],,,,system,,MT/ HR,1
+Furnace_1_Status,parameter,"if([Furnace_1_Status_PIAF]==1,1,0)",,,,system,,MT/ HR,1
+Furnace_1_Status_PIAF,raw_pi_input,,,,,system,,%,1
+Furnace_2_Status,parameter,"if([Furnace_2_Status_PIAF]==1,1,0)",,,,system,,MT/ HR,1
+Furnace_2_Status_PIAF,raw_pi_input,,,,,system,,-,1
+Furnace_3_Status,parameter,"if([Furnace_3_Status_PIAF]==1,1,0)",,,,system,,MT/ HR,1
+Furnace_3_Status_PIAF,raw_pi_input,,,,,system,,-,1
+Furnace_4_Status,parameter,"if([Furnace_4_Status_PIAF]==1,1,0)",,,,system,,MT/ HR,1
+Furnace_4_Status_PIAF,raw_pi_input,,,,,system,,%,1
+Furnace_5_Status,parameter,"if([Furnace_5_Status_PIAF]==1,1,0)",,,,system,,MT/ HR,1
+Furnace_5_Status_PIAF,raw_pi_input,,,,,system,,GJ/ HR,1
+Furnace_6_Status,parameter,"if([Furnace_6_Status_PIAF]==1,1,0)",,,,system,,MT/ HR,1
+Furnace_6_Status_PIAF,raw_pi_input,,,,,system,,GJ/ HR,1
+Furnace_7_Status,parameter,"if([Furnace_7_Status_PIAF]==1,1,0)",,,,system,,MT/ HR,1
+Furnace_7_Status_PIAF,raw_pi_input,,,,,system,,GJ/ HR,1
+Furnace_8_Status,parameter,"if([Furnace_8_Status_PIAF]==1,1,0)",,,,system,,MT/ HR,1
+Furnace_8_Status_PIAF,raw_pi_input,,,,,system,,GJ/ HR,1
+Furnace_9_Status,parameter,"if([Furnace_9_Status_PIAF]==1,1,0)",,,,system,,MT/ HR,1
+Furnace_9_Status_PIAF,raw_pi_input,,,,,system,,GJ/ HR,1
+Furnace_A_COT,raw_pi_input,,,,,system,,$/ HR,1
+Furnace_A_Fuel_gas_flow,raw_pi_input,,,,,fuel,,-,1
+Furnace_A_Fuel_gas_flow_Adjusted,parameter,"if([Furnace_1_Status]==0,0,[Furnace_A_Fuel_gas_flow]*([furn1_net_efficiency]/[furn1_net_efficiency_Adjusted]))",,,,fuel,,-,1
+Furnace_B_COT,raw_pi_input,,,,,system,,$/ HR,1
+Furnace_B_Fuel_gas_flow,raw_pi_input,,,,,fuel,,-,1
+Furnace_B_Fuel_gas_flow_Adjusted,parameter,"if([Furnace_2_Status]==0,0,[Furnace_B_Fuel_gas_flow]*([furn2_net_efficiency]/[furn2_net_efficiency_Adjusted]))",,,,fuel,,-,1
+Furnace_C_COT,raw_pi_input,,,,,system,,$/ HR,1
+Furnace_C_Fuel_gas_flow,raw_pi_input,,,,,fuel,,-,1
+Furnace_C_Fuel_gas_flow_Adjusted,parameter,"if([Furnace_3_Status]==0,0,[Furnace_C_Fuel_gas_flow]*([furn3_net_efficiency]/[furn3_net_efficiency_Adjusted]))",,,,fuel,,-,1
+Furnace_D_COT,raw_pi_input,,,,,system,,$/ HR,1
+Furnace_D_Fuel_gas_flow,raw_pi_input,,,,,fuel,,-,1
+Furnace_D_Fuel_gas_flow_Adjusted,parameter,"if([Furnace_4_Status]==0,0,[Furnace_D_Fuel_gas_flow]*([furn4_net_efficiency]/[furn4_net_efficiency_Adjusted]))",,,,fuel,,-,1
+Furnace_E_COT,raw_pi_input,,,,,system,,$/ HR,1
+Furnace_E_Fuel_gas_flow,raw_pi_input,,,,,fuel,,-,1
+Furnace_E_Fuel_gas_flow_Adjusted,parameter,"if([Furnace_5_Status]==0,0,[Furnace_E_Fuel_gas_flow]*([furn5_net_efficiency]/[furn5_net_efficiency_Adjusted]))",,,,fuel,,-,1
+Furnace_F_COT,raw_pi_input,,,,,system,,$/ HR,1
+Furnace_F_Fuel_gas_flow,raw_pi_input,,,,,fuel,,-,1
+Furnace_F_Fuel_gas_flow_Adjusted,parameter,"if([Furnace_6_Status]==0,0,[Furnace_F_Fuel_gas_flow]*([furn6_net_efficiency]/[furn6_net_efficiency_Adjusted]))",,,,fuel,,-,1
+Furnace_G_COT,raw_pi_input,,,,,system,,$/ HR,1
+Furnace_G_Fuel_gas_flow,raw_pi_input,,,,,fuel,,-,1
+Furnace_G_Fuel_gas_flow_Adjusted,parameter,"if([Furnace_7_Status]==0,0,[Furnace_G_Fuel_gas_flow]*([furn7_net_efficiency]/[furn7_net_efficiency_Adjusted]))",,,,fuel,,-,1
+Furnace_H_COT,raw_pi_input,,,,,system,,$/ HR,1
+Furnace_H_Fuel_gas_flow,raw_pi_input,,,,,fuel,,-,1
+Furnace_H_Fuel_gas_flow_Adjusted,parameter,"if([Furnace_8_Status]==0,0,[Furnace_H_Fuel_gas_flow]*([furn8_net_efficiency]/[furn8_net_efficiency_Adjusted]))",,,,fuel,,-,1
+Furnace_J_COT,raw_pi_input,,,,,system,,$/ HR,1
+Furnace_J_Fuel_gas_flow,raw_pi_input,,,,,fuel,,-,1
+Furnace_J_Fuel_gas_flow_Adjusted,parameter,"if([Furnace_9_Status]==0,0,[Furnace_J_Fuel_gas_flow]*([furn9_net_efficiency]/[furn9_net_efficiency_Adjusted]))",,,,fuel,,-,1
+Furnace_O2_Check,parameter,"if(([VHP_to_HP_Let_Down_Valve_Opening_PX7024A_ETH]>0||[VHP_to_HP_Let_Down_Valve_Opening_PX7024B_ETH]>12)&&[Suction_Press_1Stage]<0.55,1,0 )",,,,system,,%,1
+HP_Steam_Consumption,decision_variable,[ETH_HPS_Demand] +[EOEG_1_HPS_Demand]+[EOEG_2_HPS_Demand]+[EOEG_3_HPS_Demand]+ [BFW_E_Turb_Steam] + [BFW_B_Turb_Steam] + [BFW_C_Turb_Steam] + [VHP_BFW_B_Turb_Steam] + [VHP_BFW_C_Turb_Steam] + [CW_Turbine_A_Steam] + [CW_Turbine_B_Steam] + [CW_Turbine_G_Steam] + [Air_Compressor_Turbine_A_Steam] + [Air_Compressor_Turbine_D_Steam] + [FD_Fan_BLR_1_Steam] + [FD_Fan_BLR_2_Steam] + [FD_Fan_BLR_3_Steam] + [FD_Fan_BLR_4_Steam] + [FD_Fan_BLR_5_Steam] + [MP_Steam_Generation]*0.91+ [HP_Steam_Vent_valve_PV0012_Steam_flow_out_UO],0,"if([Whatif_running]==0,max([HP_Steam_Consumption],750),750)",0,header,,MT/ HR,1
+HP_Steam_Enthalpy,decision_variable,((2175.54628147543-1.32764297764643*(45.5)+2.71544961166282*(402))*0.239)+764*0,0.0,800.0,0,header,,MT/ HR,0
+HP_Steam_Imbalance,decision_variable,(1-[Whatif_running])*[HP_Steam_Imbalance] + [Whatif_running]*([act_HP_Steam_Imbalance]*[HP_Steam_Consumption]/[act_HP_Steam_Consumption]),"if([Whatif_running]==0,[HP_Steam_Imbalance],-300)","if([Whatif_running]==0,[HP_Steam_Imbalance],300)",0,header,,MT/ HR,1
+HP_Steam_Vent_valve_PV0012_Opening_UO,post_optimizer,[HP_Steam_Vent_valve_PV0012_Steam_flow_out_UO]/2.059,,,,header,,KG/ HR,1
+HP_Steam_Vent_valve_PV0012_Steam_flow_out_UO,decision_variable,2.059*([HP_Steam_Vent_valve_PV0012_Opening_UO]),0,"if([Whatif_running]==0,[HP_Steam_Vent_valve_PV0012_Steam_flow_out_UO],205.9)",0,header,,MT/ HR,1
+HP_to_MP_Letdown_HPS_Flow_In_PV0007A_UO,decision_variable,((-0.0078*([HP_to_MP_Letdown_Valve_Opening_PV0007A_UO])**2+2.86*([HP_to_MP_Letdown_Valve_Opening_PV0007A_UO]))),0,208,0,letdown,,Number,1
+HP_to_MP_Letdown_HPS_Flow_In_PV0007B_UO,decision_variable,((-0.0078*([HP_to_MP_Letdown_Valve_Opening_PV0007B_UO])**2+2.86*([HP_to_MP_Letdown_Valve_Opening_PV0007B_UO]))),0,208,0,letdown,,Number,1
+HP_to_MP_Letdown_MPS_Flow_Out_PV0007A_UO,decision_variable,,0,250,0,letdown,,Number,1
+HP_to_MP_Letdown_MPS_Flow_Out_PV0007B_UO,decision_variable,,0,250,0,letdown,,MT/ HR,1
+HP_to_MP_Letdown_Valve_Opening_PV0007A_UO,decision_variable,,0.0,100.0,0,letdown,,%,0
+HP_to_MP_Letdown_Valve_Opening_PV0007B_UO,decision_variable,,0.0,100.0,0,letdown,,%,0
+LAO_LP_Steam_Demand,raw_pi_input,,,,,header,,$/ MT,1
+LAO_Plant_Status,raw_pi_input,,,,,system,,MT/ HR,1
+LAO_Power_Consumption,raw_pi_input,,,,,electrical,,ON/ OFF,1
+LHV,raw_pi_input,,,,,fuel,,MT/ HR,1
+LPS_from_Drives,decision_variable,[BFW_E_Turb_Steam]+[BFW_B_Turb_Steam]+ [BFW_C_Turb_Steam]+ [VHP_BFW_B_Turb_Steam]+ [VHP_BFW_C_Turb_Steam]+ [CW_Turbine_A_Steam]+ [CW_Turbine_B_Steam]+ [CW_Turbine_G_Steam]+ [Air_Compressor_Turbine_A_Steam]+ [Air_Compressor_Turbine_D_Steam]+ [DMW_Turbine_A_Steam]+ [DMW_Turbine_C_Steam]+ [FD_Fan_BLR_1_Steam]+[FD_Fan_BLR_2_Steam]+ [FD_Fan_BLR_3_Steam]+ [FD_Fan_BLR_4_Steam]+ [FD_Fan_BLR_5_Steam],0,"if([Whatif_running]==0,max([LPS_from_Drives],500),500)",0,system,,Number,1
+LP_Steam_Consumption,decision_variable,[ETH_LPS_Demand]+[EOEG_1_LPS_Demand]+[EOEG_2_LPS_Demand]+[EOEG_3_LPS_Demand]+[Deaerator_LPS]+[LP_Steam_Vent_valve_PV0024B_Steam_flow_out_UO]+[LP_Steam_Dumping_Valve_PC0024A_Steam_flow_out_UO] +[LAO_LP_Steam_Demand],0,"if([Whatif_running]==0,max([LP_Steam_Consumption],400),400)",0,header,,MT/ HR,1
+LP_Steam_Dumping_Valve_PC0024A_Opening_UO,decision_variable,,0.0,100.0,0,header,,%,0
+LP_Steam_Dumping_Valve_PC0024A_Steam_flow_out_UO,decision_variable,0.724*[LP_Steam_Dumping_Valve_PC0024A_Opening_UO],0,"if([Whatif_running]==0,[LP_Steam_Dumping_Valve_PC0024A_Steam_flow_out_UO],72.4)",0,header,,MT/ HR,1
+LP_Steam_Generation,decision_variable,([MP_to_LP_Letdown_LPS_Flow_Out_PV013A_UO]+[MP_to_LP_Letdown_LPS_Flow_Out_PV013B_UO]+[MP_to_LP_Letdown_LPS_Flow_Out_PV31_UO]+[MP_to_LP_Letdown_LPS_Flow_Out_PV32_UO])+[LPS_from_Drives]+([Total_BLR_HPS_Generation]*0.01*0.21),0,"if([Whatif_running]==0,max([LP_Steam_Generation],350),350)",0,header,,MT/ HR,1
+LP_Steam_Imbalance,decision_variable,(1-[Whatif_running])*[LP_Steam_Imbalance] + [Whatif_running]*([act_LP_Steam_Imbalance]*[LP_Steam_Consumption]/[act_LP_Steam_Consumption]),"if([Whatif_running]==0,[LP_Steam_Imbalance],-300)","if([Whatif_running]==0,[LP_Steam_Imbalance],300)",0,header,,MT/ HR,1
+LP_Steam_Vent_valve_PV0024B_Opening_UO,decision_variable,,0.0,100.0,0,header,,KG/ HR,0
+LP_Steam_Vent_valve_PV0024B_Steam_flow_out_UO,decision_variable,1.208*[LP_Steam_Vent_valve_PV0024B_Opening_UO],0,"if([Whatif_running]==0,[LP_Steam_Vent_valve_PV0024B_Steam_flow_out_UO],120.8)",0,header,,MT/ HR,1
+MEG_Column_Critical_Tray_EG1,raw_pi_input,,,,,eoeg_plant,,MT/ HR,1
+MEG_Column_Critical_Tray_EG1_peeo,unresolved,,,,,eoeg_plant,,,
+MEG_Column_Critical_Tray_EG2,raw_pi_input,,,,,eoeg_plant,,MT/ HR,1
+MEG_Column_Critical_Tray_EG2_peeo,unresolved,,,,,eoeg_plant,,,
+MEG_Column_Critical_Tray_EG3,raw_pi_input,,,,,eoeg_plant,,MT/ HR,1
+MEG_Column_Critical_Tray_EG3_peeo,unresolved,,,,,eoeg_plant,,,
+MP_Steam_Consumption,decision_variable,[EOEG_1_MPS_Demand]+[EOEG_2_MPS_Demand]+[EOEG_3_MPS_Demand]+[DMW_Turbine_A_Steam]+ [DMW_Turbine_C_Steam]+ [MP_to_LP_Letdown_MPS_Flow_In_PV013A_UO]+ [MP_to_LP_Letdown_MPS_Flow_In_PV013B_UO]+ [MP_to_LP_Letdown_MPS_Flow_In_PV31_UO]+ [MP_to_LP_Letdown_MPS_Flow_In_PV32_UO],0,"if([Whatif_running]==0,max([MP_Steam_Consumption],300),300)",0,header,,MT/ HR,1
+MP_Steam_Generation,decision_variable,[HP_to_MP_Letdown_MPS_Flow_Out_PV0007A_UO]+[HP_to_MP_Letdown_MPS_Flow_Out_PV0007B_UO],0,"if([Whatif_running]==0,max([MP_Steam_Generation],600),600)",0,header,,MT/ HR,1
+MP_Steam_Imbalance,decision_variable,(1-[Whatif_running])*[MP_Steam_Imbalance]+[Whatif_running]*([act_MP_Steam_Imbalance]*[MP_Steam_Consumption]/[act_MP_Steam_Consumption]),"if([Whatif_running]==0,[MP_Steam_Imbalance],-300)","if([Whatif_running]==0,[MP_Steam_Imbalance],300)",0,header,,MT/ HR,1
+MP_to_LP_Letdown_LPS_Flow_Out_PV013A_UO,decision_variable,[MP_to_LP_Letdown_MPS_Flow_In_PV013A_UO]+[BFW_to_MP_to_LP_Letdown_Flow_In],0,5,0,letdown,,MT/ HR,1
+MP_to_LP_Letdown_LPS_Flow_Out_PV013B_UO,decision_variable,[MP_to_LP_Letdown_MPS_Flow_In_PV013B_UO]+[BFW_to_MP_to_LP_Letdown_Flow_In],0,5,0,letdown,,MT/ HR,1
+MP_to_LP_Letdown_LPS_Flow_Out_PV31_UO,decision_variable,[MP_to_LP_Letdown_MPS_Flow_In_PV31_UO]+[BFW_to_MP_to_LP_Letdown_Flow_In],0,1,0,letdown,,MT/ HR,1
+MP_to_LP_Letdown_LPS_Flow_Out_PV32_UO,decision_variable,[MP_to_LP_Letdown_MPS_Flow_In_PV32_UO]+[BFW_to_MP_to_LP_Letdown_Flow_In],0,1,0,letdown,,MT/ HR,1
+MP_to_LP_Letdown_MPS_Flow_In_PV013A_UO,decision_variable,(0.0039*([MP_to_LP_Letdown_Valve_Opening_PV013A_UO])**2+0.047*([MP_to_LP_Letdown_Valve_Opening_PV013A_UO])),0,5,0,letdown,,MT/ HR,1
+MP_to_LP_Letdown_MPS_Flow_In_PV013B_UO,decision_variable,(0.0039*([MP_to_LP_Letdown_Valve_Opening_PV013B_UO])**2+0.047*([MP_to_LP_Letdown_Valve_Opening_PV013B_UO])),0,5,0,letdown,,MT/ HR,1
+MP_to_LP_Letdown_MPS_Flow_In_PV31_UO,decision_variable,0.677*([MP_to_LP_Letdown_Valve_Opening_PV31_UO]),0,"if([Whatif_running]==0,1,67.7)",0,letdown,,MT/ HR,1
+MP_to_LP_Letdown_MPS_Flow_In_PV32_UO,decision_variable,0.677*([MP_to_LP_Letdown_Valve_Opening_PV32_UO]),0,"if([Whatif_running]==0,1,67.7)",0,letdown,,MT/ HR,1
+MP_to_LP_Letdown_Valve_Opening_PV013A_UO,decision_variable,,0.0,100.0,0,letdown,,AMP,0
+MP_to_LP_Letdown_Valve_Opening_PV013B_UO,decision_variable,,0.0,100.0,0,letdown,,AMP,0
+MP_to_LP_Letdown_Valve_Opening_PV31_UO,decision_variable,,0.0,100.0,0,letdown,,%,0
+MP_to_LP_Letdown_Valve_Opening_PV32_UO,decision_variable,,0.0,100.0,0,letdown,,%,0
+NATURAL_GAS_Import_CTM,decision_variable,,0.0,100.0,0,system,,MT/ HR,0
+NG_Fuel_to_EG1,raw_pi_input,,,,,eoeg_plant,,ON/ OFF,1
+NG_Fuel_to_EG2,parameter,"if([EOEG2_Plant_Status]==0,0,if([NG_Fuel_to_EG2_raw]<5,[NG_Fuel_to_EG2_raw],[NG_Fuel_to_EG2_raw]/1000))",,,,eoeg_plant,,MW,1
+NG_Fuel_to_EG2_raw,raw_pi_input,,,,,eoeg_plant,,$/ HR,1
+NG_Fuel_to_EG3,parameter,"if([EOEG3_Plant_Status]==0,0,[NG_Fuel_to_EG3_raw]/1000)",,,,eoeg_plant,,MW,1
+NG_Fuel_to_EG3_raw,raw_pi_input,,,,,eoeg_plant,,$/ HR,1
+New_CW_Flow,parameter,[CW_Circuit_1_cooling_duty]*3.6/4.18/10*1000,,,,cw_system,,-,1
+Objective_2,objective,([Total_Power_for_Drives]+[Power_Consumption_Plant_U_O])*3.6*[Power_Rate]+([Total_Fuel_for_Boilers]+[Fuel_Consumption_Plants_U_O])*([LHV])*[Fuel_Rate]+[DMW_Makeup]*[DMW_Rate],,,,system,,%,1
+Optimized_fuel_H1111,parameter,[Furnace_A_Fuel_gas_flow_Adjusted],,,,fuel,,%,1
+Optimized_fuel_H1112,parameter,[Furnace_B_Fuel_gas_flow_Adjusted],,,,fuel,,%,1
+Optimized_fuel_H1113,parameter,[Furnace_C_Fuel_gas_flow_Adjusted],,,,fuel,,%,1
+Optimized_fuel_H1114,parameter,[Furnace_D_Fuel_gas_flow_Adjusted],,,,fuel,,%,1
+Optimized_fuel_H1115,parameter,[Furnace_E_Fuel_gas_flow_Adjusted],,,,fuel,,%,1
+Optimized_fuel_H1116,parameter,[Furnace_F_Fuel_gas_flow_Adjusted],,,,fuel,,%,1
+Optimized_fuel_H1117,parameter,[Furnace_G_Fuel_gas_flow_Adjusted],,,,fuel,,%,1
+Optimized_fuel_H1118,parameter,[Furnace_H_Fuel_gas_flow_Adjusted],,,,fuel,,%,1
+Optimized_fuel_H1119,parameter,[Furnace_J_Fuel_gas_flow_Adjusted],,,,fuel,,%,1
+Overall_SHC_Ratio,raw_pi_input,,,,,system,,,1
+Plant_HP_Steam_Demand,post_optimizer,[EOEG_1_HPS_Demand] + [EOEG_2_HPS_Demand] + [EOEG_3_HPS_Demand] + [ETH_HPS_Demand],,,,header,,-,1
+Plant_LP_Steam_Demand,post_optimizer,[EOEG_1_LPS_Demand] + [EOEG_2_LPS_Demand] + [EOEG_3_LPS_Demand] + [ETH_LPS_Demand] + [LAO_LP_Steam_Demand],,,,header,,-,1
+Plant_MP_Steam_Demand,post_optimizer,[EOEG_1_MPS_Demand] + [EOEG_2_MPS_Demand] + [EOEG_3_MPS_Demand],,,,header,,-,1
+Polished_Condenstae_to_Deaerator,raw_pi_input,,,,,system,,KG/ HR,1
+Power_Consumption_Plant_U_O,parameter,[UO_Power_Consumption_without_Drives],,,,electrical,,GJ/ T,1
+Power_Consumption_Plants,parameter,[ETH_Power_Consumption]+[EOEG_1_Power_Consumption]+[EOEG_2_Power_Consumption]+[EOEG_3_Power_Consumption]+[LAO_Power_Consumption]+[CO2_Power_Consumption],,,,electrical,,GJ/ T,1
+Power_Rate,parameter,13.334000,,,,electrical,,KCAL/ KG,1
+Process_flow_of_C_2220_E_2220,raw_pi_input,,,,,system,,%,1
+Process_flow_of_C_2220_E_2220_peeo,unresolved,,,,,system,,,
+Process_flow_of_C_2310_E_2310,parameter,[Process_flow_of_E_2523],,,,system,,%,1
+Process_flow_of_C_2310_E_2310_peeo,unresolved,,,,,system,,,
+Process_flow_of_C_4220_E_4220,raw_pi_input,,,,,system,,%,1
+Process_flow_of_C_4220_E_4220_peeo,unresolved,,,,,system,,,
+Process_flow_of_C_4310_E_4310,parameter,[Process_flow_of_E_4523],,,,system,,%,1
+Process_flow_of_C_4310_E_4310_peeo,unresolved,,,,,system,,,
+Process_flow_of_E_2523,raw_pi_input,,,,,system,,%,1
+Process_flow_of_E_2523_peeo,unresolved,,,,,system,,,
+Process_flow_of_E_2531,parameter,[Process_flow_of_E_2523],,,,system,,%,1
+Process_flow_of_E_2531_peeo,unresolved,,,,,system,,,
+Process_flow_of_E_4523,raw_pi_input,,,,,system,,%,1
+Process_flow_of_E_4523_peeo,unresolved,,,,,system,,,
+Process_flow_of_E_4531,parameter,[Process_flow_of_E_4523],,,,system,,%,1
+Process_flow_of_E_4531_peeo,unresolved,,,,,system,,,
+Process_flow_of_E_6220,raw_pi_input,,,,,system,,MT/ HR,1
+Process_flow_of_E_6220_peeo,unresolved,,,,,system,,,
+Process_flow_of_E_6531,raw_pi_input,,,,,system,,%,1
+Process_flow_of_E_6531_peeo,unresolved,,,,,system,,,
+Return_Condensate,parameter,([ETH_CLEAN_COND_TO_U_O]+[ETH_suspect_COND_TO_U_O_corrected])*[Condensate_Recovery_Ratio_ETH]+[EG1_CLEAN_COND_TO_U_O]+[EG2_CLEAN_COND_TO_U_O]+[EG3_CLEAN_COND_TO_U_O]+[EG1_suspect_COND_TO_U_O_corrected]+[EG2_suspect_COND_TO_U_O_corrected]+[EG3_suspect_COND_TO_U_O_corrected],,,,system,,MT/ HR,1
+SEU_Enable,post_optimizer,"if([SEU_Enable]==0,1,0)",,,,system,,KG/ HR,1
+Sea_water_makeup_CW,post_optimizer,"if([Whatif_running]==0, if(([Sea_water_cond_CT_LIMS]<85000)&&([CW_Circuit_1_return_temp]<38), [act_Sea_water_makeup_CW]-500, [act_Sea_water_makeup_CW]) ,[act_Sea_water_makeup_CW]*([CW_Demand_Header_2]+[Total_CW_Demand])/[act_Total_CW_Demand_including_EG3])",,,,system,,°C,1
+Spec_En_Cons_BLR_1,decision_variable,((8E-06*[BLR_1_HPS_Gen]**2 - 0.0017 *[BLR_1_HPS_Gen] +3.0167)*(1-[Spec_En_Cons_BLR_1_dev]))*[BLR_1_Status]+(1-[BLR_1_Status])*5,2,5,0,system,,KG/ HR,1
+Spec_En_Cons_BLR_1_Opt,raw_pi_input,,,,,system,,GJ/ T,1
+Spec_En_Cons_BLR_1_dev,parameter,"if([BLR_1_Status]==0,0,([Spec_En_Cons_BLR_1_Opt]-[Spec_En_Cons_BLR_1])/[Spec_En_Cons_BLR_1_Opt])",,,,system,,Number,1
+Spec_En_Cons_BLR_2,decision_variable,((8E-06*[BLR_2_HPS_Gen]**2 - 0.0017 *[BLR_2_HPS_Gen] +3.0167)*(1-[Spec_En_Cons_BLR_2_dev]))*[BLR_2_Status]+(1-[BLR_2_Status])*5,2,5,0,system,,KG/ HR,1
+Spec_En_Cons_BLR_2_Opt,raw_pi_input,,,,,system,,KG/ HR,1
+Spec_En_Cons_BLR_2_dev,parameter,"if([BLR_2_Status]==0,0,([Spec_En_Cons_BLR_2_Opt]-[Spec_En_Cons_BLR_2])/[Spec_En_Cons_BLR_2_Opt])",,,,system,,Number,1
+Spec_En_Cons_BLR_3,decision_variable,((8E-06*[BLR_3_HPS_Gen]**2 - 0.0017 *[BLR_3_HPS_Gen] +3.0167)*(1-[Spec_En_Cons_BLR_3_dev]))*[BLR_3_Status]+(1-[BLR_3_Status])*5,2,5,0,system,,GJ/ T,1
+Spec_En_Cons_BLR_3_Opt,raw_pi_input,,,,,system,,°C,1
+Spec_En_Cons_BLR_3_dev,parameter,"if([BLR_3_Status]==0,0,([Spec_En_Cons_BLR_3_Opt]-[Spec_En_Cons_BLR_3])/[Spec_En_Cons_BLR_3_Opt])",,,,system,,Number,1
+Spec_En_Cons_BLR_4,decision_variable,((8E-06*[BLR_4_HPS_Gen]**2 - 0.0017 *[BLR_4_HPS_Gen] +3.0167)*(1-[Spec_En_Cons_BLR_4_dev]))*[BLR_4_Status]+(1-[BLR_4_Status])*5,2,5,0,system,,GJ/ T,1
+Spec_En_Cons_BLR_4_Opt,raw_pi_input,,,,,system,,°C,1
+Spec_En_Cons_BLR_4_dev,parameter,"if([BLR_4_Status]==0,0,([Spec_En_Cons_BLR_4_Opt]-[Spec_En_Cons_BLR_4])/[Spec_En_Cons_BLR_4_Opt])",,,,system,,Number,1
+Spec_En_Cons_BLR_5,decision_variable,((8E-06*[BLR_5_HPS_Gen]**2 - 0.0017 *[BLR_5_HPS_Gen] +3.0167)*(1-[Spec_En_Cons_BLR_5_dev]))*[BLR_5_Status]+(1-[BLR_5_Status])*5,2,5,0,system,,GJ/ T,1
+Spec_En_Cons_BLR_5_Opt,raw_pi_input,,,,,system,,MT/ HR,1
+Spec_En_Cons_BLR_5_dev,parameter,"if([BLR_5_Status]==0,0,([Spec_En_Cons_BLR_5_Opt]-[Spec_En_Cons_BLR_5])/[Spec_En_Cons_BLR_5_Opt])",,,,system,,Number,1
+Specific_energy_consumption_in_C2R,raw_pi_input,,,,,system,,GJ/ HR,1
+Specific_energy_consumption_in_C2R_peeo,unresolved,,,,,system,,,
+Specific_energy_consumption_in_C3R,raw_pi_input,,,,,system,,GJ/ HR,1
+Specific_energy_consumption_in_C3R_Adjusted,parameter,"if(missing([Specific_energy_consumption_in_C3R_peeo]) || [opportunity_energy_olf_cold]==[opportunity_threshold] || missing([opportunity_energy_olf_cold]),[Specific_energy_consumption_in_C3R],min([Specific_energy_consumption_in_C3R],[Specific_energy_consumption_in_C3R_peeo]))",,,,system,,GJ/ HR,1
+Specific_energy_consumption_in_C3R_peeo,unresolved,,,,,system,,,
+Steam_Generation_from_Boilers,decision_variable,,aswqa,aqawsaweqa,0,system,,MT/ HR,0
+Suction_Press_1Stage,raw_pi_input,,,,,system,,KW,1
+Total_Air_Demand,parameter,([Air_compressor_A_Discharge_flow]*[Air_Compressor_Turbine_A_Status]+[Air_compressor_B_Discharge_flow]*[Air_Compressor_Motor_B_Status]+[Air_compressor_C_Discharge_flow]*[Air_Compressor_Motor_C_Status]+[Air_compressor_D_Discharge_flow]*[Air_Compressor_Turbine_D_Status]),,,,system,,GJ/ T,1
+Total_BFW_Consumption,decision_variable,[VHP_BFW_FROM_U_O]+[VHP_DESPHTR_BFW_FROM_U_O]+[BFW_to_EOEG_1] + [BFW_to_EOEG_2] +[BFW_to_EOEG_3] + [BFW_TO_LAO] + [DSP_BFW_TO_ETH] +[DSP_BFW_TO_EG1] +[DSP_BFW_TO_EG2] +[DSP_BFW_TO_EG3] +[DSP_BFW_TO_CAUSTIC_DILUTION] + ([Total_BLR_HPS_Generation]/.99)+([Deaerator_LPS]*0.02),0,"if([Whatif_running]==0,max([Total_BFW_Consumption],1800),1800)",0,bfw_system,,MT/ HR,1
+Total_BFW_Generated,decision_variable,,0,"if([Whatif_running]==0,max([Total_BFW_Generated],1800),1800)",0,bfw_system,,Number,1
+Total_BLR_HPS_Generation,decision_variable,[BLR_1_HPS_Gen]+[BLR_2_HPS_Gen]+[BLR_3_HPS_Gen]+[BLR_4_HPS_Gen]+[BLR_5_HPS_Gen],0,"if([Whatif_running]==0,[Total_BLR_HPS_Generation],750)",0,system,,MT/ HR,1
+Total_Boilers_Running,decision_variable,[BLR_1_Status]+[BLR_2_Status]+[BLR_3_Status]+[BLR_4_Status]+[BLR_5_Status],"if([Whatif_running]==0,[Boiler_opt_running],(if(ceil((([ETH_HPS_Demand]+[VHP_BFW_to_ETH]*0+[ETH_LPS_Demand]+[EOEG_1_MPS_Demand]+[EOEG_1_LPS_Demand]+[EOEG_2_MPS_Demand]+[EOEG_2_LPS_Demand]+[EOEG_3_MPS_Demand]+[EOEG_3_LPS_Demand]+[LAO_LP_Steam_Demand]+80*(if([ETH_Plant_Status]==1 || [EOEG1_Plant_Status]==1 || [EOEG2_Plant_Status]==1 || [EOEG3_Plant_Status]==1,1,0)))*1.2+[Buffer_Steam_in_Boilers])/140)>5, 5 ,ceil((([ETH_HPS_Demand]+[VHP_BFW_to_ETH]*0+[ETH_LPS_Demand]+[EOEG_1_MPS_Demand]+[EOEG_1_LPS_Demand]+[EOEG_2_MPS_Demand]+[EOEG_2_LPS_Demand]+[EOEG_3_MPS_Demand]+[EOEG_3_LPS_Demand]+[LAO_LP_Steam_Demand]+80*(if([ETH_Plant_Status]==1 || [EOEG1_Plant_Status]==1 || [EOEG2_Plant_Status]==1 || [EOEG3_Plant_Status]==1,1,0)))*1.2+[Buffer_Steam_in_Boilers])/140))))","if([Whatif_running]==0,[Boiler_opt_running],(if(ceil((([ETH_HPS_Demand]+[ETH_LPS_Demand]+[VHP_BFW_to_ETH]*0+[EOEG_1_MPS_Demand]+[EOEG_1_LPS_Demand]+[EOEG_2_MPS_Demand]+[EOEG_2_LPS_Demand]+[EOEG_3_MPS_Demand]+[EOEG_3_LPS_Demand]+[LAO_LP_Steam_Demand]+80*(if([ETH_Plant_Status]==1 || [EOEG1_Plant_Status]==1 || [EOEG2_Plant_Status]==1 || [EOEG3_Plant_Status]==1,1,0)))*1.2+[Buffer_Steam_in_Boilers])/140)>5, 5 ,ceil((([ETH_HPS_Demand]+[VHP_BFW_to_ETH]*0+[ETH_LPS_Demand]+[EOEG_1_MPS_Demand]+[EOEG_1_LPS_Demand]+[EOEG_2_MPS_Demand]+[EOEG_2_LPS_Demand]+[EOEG_3_MPS_Demand]+[EOEG_3_LPS_Demand]+[LAO_LP_Steam_Demand]+80*(if([ETH_Plant_Status]==1 || [EOEG1_Plant_Status]==1 || [EOEG2_Plant_Status]==1 || [EOEG3_Plant_Status]==1,1,0)))*1.2+[Buffer_Steam_in_Boilers])/140))))",1,system,,Number,1
+Total_CW_Demand,parameter,([CW_TO_UTILITIES]+[CW_TO_LAO]+[CW_TO_EG1]+[CW_TO_EG2]+[CW_TO_ETH]+[CW_TO_CO2]),,,,cw_system,,Number,1
+Total_CW_Motors_Header_2_Running,post_optimizer,[CW_Motor_7814A_Status]+[CW_Motor_7814B_Status]+[CW_Motor_7814C_Status],,,,cw_system,,-,1
+Total_DMW_Demand,decision_variable,[DMW_Imbalance] + [DMW_Makeup],0,"if([Whatif_running]==0,max([Total_DMW_Demand],1000),1000)",0,dmw_system,,MT/ HR,1
+Total_Drives_Running,decision_variable,[BFW_Drives_Running]+[VHP_BFW_Drives_Running]+[CW_Drives_Running]+[Air_Compressor_Drives_Running]+[DMW_Drives_Running]+[BLR_1_Status]+[BLR_2_Status]+[BLR_3_Status]+[BLR_4_Status]+[BLR_5_Status],0.0,28.0,0,system,,GJ/ HR,0
+Total_Fuel_Consumption,decision_variable,[Total_Fuel_Consumption_without_Boilers] + [Total_Fuel_for_Boilers],0.0,100.0,0,fuel,,MT/ HR,0
+Total_Fuel_Consumption_without_Boilers,parameter,[Fuel_Consumption_Plants_fixed]+[Fuel_Consumption_Plants_changes]+[Fuel_Consumption_Plants_U_O],,,,fuel,,MT/ HR,1
+Total_Fuel_Imbalance,derived_pre_optimizer,[Total_Fuel_Supply]  - [Total_Fuel_Consumption_without_Boilers] - [Total_Fuel_for_Boilers],,,,fuel,,MT/ HR,1
+Total_Fuel_Supply,decision_variable,[NATURAL_GAS_Import_CTM],0.0,100.0,0,fuel,,MT/ HR,0
+Total_Fuel_for_Boilers,decision_variable,[Fuel_BLR_1]+[Fuel_BLR_2]+[Fuel_BLR_3]+[Fuel_BLR_4]+[Fuel_BLR_5],0,"if([Whatif_running]==0,max([Total_Fuel_for_Boilers],50),50)",0,fuel,,MT/ HR,1
+Total_Furnace_fuel,parameter,[Furnace_A_Fuel_gas_flow]*[Furnace_1_Status]+[Furnace_B_Fuel_gas_flow]*[Furnace_2_Status]+[Furnace_C_Fuel_gas_flow]*[Furnace_3_Status]+[Furnace_D_Fuel_gas_flow]*[Furnace_4_Status]+[Furnace_E_Fuel_gas_flow]*[Furnace_5_Status]+[Furnace_F_Fuel_gas_flow]*[Furnace_6_Status]+[Furnace_G_Fuel_gas_flow]*[Furnace_7_Status]+[Furnace_H_Fuel_gas_flow]*[Furnace_8_Status]+[Furnace_J_Fuel_gas_flow]*[Furnace_9_Status],,,,fuel,,%,1
+Total_Furnace_fuel_min,parameter,"min([Furnace_A_Fuel_gas_flow]*[Furnace_1_Status],[Optimized_fuel_H1111])+min([Furnace_B_Fuel_gas_flow]*[Furnace_2_Status],[Optimized_fuel_H1112])+min([Furnace_C_Fuel_gas_flow]*[Furnace_3_Status],[Optimized_fuel_H1113])+min([Furnace_D_Fuel_gas_flow]*[Furnace_4_Status],[Optimized_fuel_H1114])+min([Furnace_E_Fuel_gas_flow]*[Furnace_5_Status],[Optimized_fuel_H1115])+min([Furnace_F_Fuel_gas_flow]*[Furnace_6_Status],[Optimized_fuel_H1116])+min([Furnace_G_Fuel_gas_flow]*[Furnace_7_Status],[Optimized_fuel_H1117])+min([Furnace_H_Fuel_gas_flow]*[Furnace_8_Status],[Optimized_fuel_H1118])+min([Furnace_J_Fuel_gas_flow]*[Furnace_9_Status],[Optimized_fuel_H1119])",,,,fuel,,%,1
+Total_Motors_Running,decision_variable,[Total_Drives_Running] -[Total_Steam_Turbines_Running],0.0,11.0,0,system,,$/ MT,0
+Total_Power_Consumption,decision_variable,[Total_Power_Consumption_without_Drives] + [Total_Power_for_Drives],0.0,150.0,0,electrical,,ON/ OFF,0
+Total_Power_Consumption_U_O,post_optimizer,[Total_Power_for_Drives]+[Power_Consumption_Plant_U_O]+[CW_Motor_7814A_Power] +[CW_Motor_7814B_Power]+[CW_Motor_7814C_Power]+[Sea_CT_Fans_all]*[Sea_CT_Fan_power]/1000,,,,electrical,,GJ/ T,1
+Total_Power_Consumption_without_Drives,post_optimizer,[Power_Consumption_Plants]+[Power_Consumption_Plant_U_O],,,,electrical,,ON/ OFF,1
+Total_Power_for_Drives,decision_variable,[BFW_D_Motor_Power]+[BFW_F_Motor_Power]+[BFW_A_Motor_Power]+[VHP_BFW_A_Motor_Power]+[CW_Motor_C_Power]+[CW_Motor_D_Power]+[CW_Motor_E_Power]+[CW_Motor_F_Power]+[Air_Compressor_Motor_C_Power]+[Air_Compressor_Motor_B_Power]+[DMW_Motor_B_Power]+[FDF_A_Motor_Power]+[FDF_B_Motor_Power],0,"if([Whatif_running]==0,max([Total_Power_for_Drives],16),16)",0,electrical,,MW,1
+Total_Steam_Turbines_Running,decision_variable,[BLR_1_Status]+[BLR_2_Status] +[BLR_3_Status] +[BLR_4_Status] +[BLR_5_Status] +[BFW_E_Turb_Status] +[BFW_B_Turb_Status] +[BFW_C_Turb_Status] +[VHP_BFW_B_Turb_Status] +[VHP_BFW_C_Turb_Status] +[CW_Turbine_A_Status] +[CW_Turbine_B_Status] +[CW_Turbine_G_Status] +[Air_Compressor_Turbine_A_Status] +[Air_Compressor_Turbine_D_Status] +[DMW_Turbine_A_Status] +[DMW_Turbine_C_Status],0.0,17.0,0,turbine,,MT/ HR,0
+Total_air_vent,decision_variable,[total_air_generated]-[Total_Air_Demand],"if([Whatif_running]==0,min(5,[Total_air_vent]),0)","if([Whatif_running]==0,[Total_air_vent],70)",0,system,,-,1
+Total_specific_Power,parameter,0,,,,electrical,,$/ HR,1
+Total_specific_Power_peeo,unresolved,,,,,electrical,,,
+UO_All_MP_to_LP_letdown,decision_variable,[MP_to_LP_Letdown_LPS_Flow_Out_PV013A_UO] + [MP_to_LP_Letdown_LPS_Flow_Out_PV013B_UO] + [MP_to_LP_Letdown_LPS_Flow_Out_PV31_UO] + [MP_to_LP_Letdown_LPS_Flow_Out_PV32_UO],0,100,0,letdown,,MW,1
+UO_Power_Consumption_without_Drives,raw_pi_input,,,,,electrical,,ON/ OFF,1
+VHP_BFW_A_Motor_Power,decision_variable,[VHP_BFW_A_Motor_Status]*([VHP_BFW_A_Motor_Power_cons]),0,3,0,bfw_system,,MW,1
+VHP_BFW_A_Motor_Power_Regression,parameter,(-0.0041*([VHP_Flow_Demand]/[VHP_BFW_Drives_Running])^2+4.8802*([VHP_Flow_Demand]/[VHP_BFW_Drives_Running])+525.15)/(0.95*1000),,,,bfw_system,,MT/ HR,1
+VHP_BFW_A_Motor_Power_cons,parameter,"if([VHP_BFW_A_Motor_Status]==1,[VHP_BFW_A_Motor_Power],[VHP_BFW_A_Motor_Power_Regression])",,,,bfw_system,,-,1
+VHP_BFW_A_Motor_Status,decision_variable,,0,"if([Whatif_running]==0,[VHP_BFW_A_Motor_Status],1)",1,bfw_system,,Number,1
+VHP_BFW_B_Turb_Status,decision_variable,,0,"if([Whatif_running]==0,[VHP_BFW_B_Turb_Status],1)",1,turbine,BFW_B_Turb,Number,1
+VHP_BFW_B_Turb_Steam,decision_variable,[VHP_BFW_B_Turb_Status]*([VHP_BFW_B_Turb_Steam_cons]) + (1-[VHP_BFW_B_Turb_Status])*[VHP_BFW_B_Turb_Steam_warmup],0,40,0,turbine,BFW_B_Turb,MT/ HR,1
+VHP_BFW_B_Turb_Steam_cons,raw_pi_input,,,,,turbine,BFW_B_Turb,-,1
+VHP_BFW_B_Turb_Steam_raw,raw_pi_input,,,,,turbine,BFW_B_Turb,KG/ HR,1
+VHP_BFW_B_Turb_Steam_warmup,parameter,"if([VHP_BFW_B_Turb_Steam_raw]>100 && [VHP_BFW_B_Turb_Steam_raw]<16000 && [VHP_BFW_B_Turb_Status]==0,[VHP_BFW_B_Turb_Steam_raw]/1000,0)",,,,turbine,BFW_B_Turb,-,1
+VHP_BFW_C_Turb_Status,decision_variable,,0,"if([Whatif_running]==0,[VHP_BFW_C_Turb_Status],1)",1,turbine,BFW_C_Turb,Number,1
+VHP_BFW_C_Turb_Steam,decision_variable,[VHP_BFW_C_Turb_Status]*([VHP_BFW_C_Turb_Steam_cons]) + (1-[VHP_BFW_C_Turb_Status])*[VHP_BFW_C_Turb_Steam_warmup],0,40,0,turbine,BFW_C_Turb,MT/ HR,1
+VHP_BFW_C_Turb_Steam_cons,raw_pi_input,,,,,turbine,BFW_C_Turb,-,1
+VHP_BFW_C_Turb_Steam_raw,raw_pi_input,,,,,turbine,BFW_C_Turb,KG/ HR,1
+VHP_BFW_C_Turb_Steam_warmup,parameter,"if([VHP_BFW_C_Turb_Steam_raw]>100 && [VHP_BFW_C_Turb_Steam_raw]<16000 && [VHP_BFW_C_Turb_Status]==0,[VHP_BFW_C_Turb_Steam_raw]/1000,0)",,,,turbine,BFW_C_Turb,-,1
+VHP_BFW_Drives_Running,decision_variable,[VHP_BFW_B_Turb_Status]+[VHP_BFW_C_Turb_Status]+[VHP_BFW_A_Motor_Status],"if([Whatif_running]==0,1,ceil([VHP_BFW_to_ETH]/326))","if([Whatif_running]==0,3,ceil([VHP_BFW_to_ETH]/326))",1,bfw_system,,Number,1
+VHP_BFW_FROM_U_O,raw_pi_input,,,,,bfw_system,,MT/ HR,1
+VHP_BFW_Turbines_Running,decision_variable,[VHP_BFW_B_Turb_Status]+[VHP_BFW_C_Turb_Status],"if([Whatif_running]==0,if([VHP_BFW_Turbines_Running]==0,0,[VHP_BFW_Turbines_Running]-1),0)","if([Whatif_running]==0,[VHP_BFW_Turbines_Running],2)",1,turbine,,MT/ HR,1
+VHP_BFW_to_ETH,parameter,"if([ETH_Plant_Status]==0,0,([VHP_BFW_FROM_U_O]+[VHP_DESPHTR_BFW_FROM_U_O]))",,,,bfw_system,,MT/ HR,1
+VHP_DESPHTR_BFW_FROM_U_O,raw_pi_input,,,,,bfw_system,,MT/ HR,1
+VHP_Flow_Demand,raw_pi_input,,,,,system,,MT/ HR,1
+VHP_Steam_Pressure,decision_variable,,95.0,115.0,0,header,,MT/ HR,0
+VHP_Steam_Temperature,decision_variable,,10.0,100.0,0,header,,BARG,0
+VHP_pump_Rated_Flow,parameter,326,,,,system,,MT/ HR,1
+VHP_to_HP_Let_Down_Valve_Opening_PX7024A_ETH,raw_pi_input,,,,,system,,%,1
+VHP_to_HP_Let_Down_Valve_Opening_PX7024B_ETH,raw_pi_input,,,,,system,,%,1
+Whatif_running,parameter,0,,,,system,,KG/ HR,1
+act_Air_Compressor_Motor_B_Status,parameter,[Air_Compressor_Motor_B_Status],,,,air_compressor,,Number,1
+act_Air_Compressor_Motor_C_Status,parameter,[Air_Compressor_Motor_C_Status],,,,air_compressor,,KW,1
+act_Air_Compressor_Turbine_A_Status,parameter,[Air_Compressor_Turbine_A_Status],,,,turbine,,KW,1
+act_Air_Compressor_Turbine_D_Status,parameter,[Air_Compressor_Turbine_D_Status],,,,turbine,,KW,1
+act_BFW_Imbalance,parameter,[BFW_Imbalance],,,,bfw_system,,BARG,1
+act_DMW_Imbalance,parameter,[DMW_Imbalance],,,,dmw_system,,MT/ HR,1
+act_DMW_Makeup,parameter,[DMW_Makeup],,,,dmw_system,,°C,1
+act_HP_Steam_Consumption,parameter,[HP_Steam_Consumption],,,,header,,%,1
+act_HP_Steam_Imbalance,parameter,[HP_Steam_Imbalance],,,,header,,%,1
+act_LP_Steam_Consumption,parameter,[LP_Steam_Consumption],,,,header,,%,1
+act_LP_Steam_Imbalance,parameter,[LP_Steam_Imbalance],,,,header,,°C,1
+act_MP_Steam_Consumption,parameter,[MP_Steam_Consumption],,,,header,,%,1
+act_MP_Steam_Imbalance,parameter,[MP_Steam_Imbalance],,,,header,,-,1
+act_Total_BFW_Consumption,parameter,[Total_BFW_Consumption],,,,bfw_system,,BARG,1
+act_running,post_optimizer,0,,,,system,,GJ/ T,1
+air_compressor_c_max_capacity,parameter,"max([Air_compressor_C_Discharge_flow],11.89)",,,,air_compressor,,-,1
+air_compressor_max_capacity,parameter,"max([Air_compressor_A_Discharge_flow],[Air_compressor_B_Discharge_flow],[Air_compressor_D_Discharge_flow],17.309)",,,,air_compressor,,-,1
+furn1_net_efficiency,parameter,"if((101.6157+0.002369*[Fur_1_HC_Feed]-0.00256*[Furnace_A_COT]-0.039*[FUR_1_STACK_TEMPERATURE]-0.4*[FUR_1_FLUE_GAS_O2])>100,100,(101.6157+0.002369*[Fur_1_HC_Feed]-0.00256*[Furnace_A_COT]-0.039*[FUR_1_STACK_TEMPERATURE]-0.4*[FUR_1_FLUE_GAS_O2]))*[Furnace_1_Status]",,,,system,,,1
+furn1_net_efficiency_Adjusted,parameter,"if((101.6157+0.002369*[Fur_1_HC_Feed]-0.00256*[Furnace_A_COT]-0.039*[FUR_1_STACK_TEMPERATURE_Adjusted]-0.4*[FUR_1_FLUE_GAS_O2_Adjusted])>100,100,(101.6157+0.002369*[Fur_1_HC_Feed]-0.00256*[Furnace_A_COT]-0.039*[FUR_1_STACK_TEMPERATURE_Adjusted]-0.4*[FUR_1_FLUE_GAS_O2_Adjusted]))*[Furnace_1_Status]",,,,system,,-,1
+furn2_net_efficiency,parameter,"if((104.1190836+0.02056157*[Fur_2_HC_Feed]-0.00470304*[Furnace_B_COT]-0.0481841*[FUR_2_STACK_TEMPERATURE]-0.37763244*[FUR_2_FLUE_GAS_O2])>100,100,(104.1190836+0.02056157*[Fur_2_HC_Feed]-0.00470304*[Furnace_B_COT]-0.0481841*[FUR_2_STACK_TEMPERATURE]-0.37763244*[FUR_2_FLUE_GAS_O2]))*[Furnace_2_Status]",,,,system,,,1
+furn2_net_efficiency_Adjusted,parameter,"if((104.1190836+0.02056157*[Fur_2_HC_Feed]-0.00470304*[Furnace_B_COT]-0.0481841*[FUR_2_STACK_TEMPERATURE_Adjusted]-0.37763244*[FUR_2_FLUE_GAS_O2_Adjusted])>100,100,(104.1190836+0.02056157*[Fur_2_HC_Feed]-0.00470304*[Furnace_B_COT]-0.0481841*[FUR_2_STACK_TEMPERATURE_Adjusted]-0.37763244*[FUR_2_FLUE_GAS_O2_Adjusted]))*[Furnace_2_Status]",,,,system,,-,1
+furn3_net_efficiency,parameter,"if((101.292+0.001*[Fur_3_HC_Feed]-0.002*[Furnace_C_COT]-0.039*[FUR_3_STACK_TEMPERATURE]-0.3709*[FUR_3_FLUE_GAS_O2])>100,100,(101.292+0.001*[Fur_3_HC_Feed]-0.002*[Furnace_C_COT]-0.039*[FUR_3_STACK_TEMPERATURE]-0.3709*[FUR_3_FLUE_GAS_O2]))*[Furnace_3_Status]",,,,system,,,1
+furn3_net_efficiency_Adjusted,parameter,"if((101.292+0.001*[Fur_3_HC_Feed]-0.002*[Furnace_C_COT]-0.039*[FUR_3_STACK_TEMPERATURE_Adjusted]-0.3709*[FUR_3_FLUE_GAS_O2_Adjusted])>100,100,(101.292+0.001*[Fur_3_HC_Feed]-0.002*[Furnace_C_COT]-0.039*[FUR_3_STACK_TEMPERATURE_Adjusted]-0.3709*[FUR_3_FLUE_GAS_O2_Adjusted]))*[Furnace_3_Status]",,,,system,,-,1
+furn4_net_efficiency,parameter,"if((99.234+0.0201*[Fur_4_HC_Feed]-0.001*[Furnace_D_COT]-0.036*[FUR_4_STACK_TEMPERATURE]-0.356*[FUR_4_FLUE_GAS_O2])>100,100,(99.234+0.0201*[Fur_4_HC_Feed]-0.001*[Furnace_D_COT]-0.036*[FUR_4_STACK_TEMPERATURE]-0.356*[FUR_4_FLUE_GAS_O2]))*[Furnace_4_Status]",,,,system,,,1
+furn4_net_efficiency_Adjusted,parameter,"if((99.234+0.0201*[Fur_4_HC_Feed]-0.001*[Furnace_D_COT]-0.036*[FUR_4_STACK_TEMPERATURE_Adjusted]-0.356*[FUR_4_FLUE_GAS_O2_Adjusted])>100,100,(99.234+0.0201*[Fur_4_HC_Feed]-0.001*[Furnace_D_COT]-0.036*[FUR_4_STACK_TEMPERATURE_Adjusted]-0.356*[FUR_4_FLUE_GAS_O2_Adjusted]))*[Furnace_4_Status]",,,,system,,-,1
+furn5_net_efficiency,parameter,"if((101.4302+0.0049*[Fur_5_HC_Feed]-0.00526*[Furnace_E_COT]-0.0254*[FUR_5_STACK_TEMPERATURE]-0.26*[FUR_5_FLUE_GAS_O2])>100,100,(101.4302+0.0049*[Fur_5_HC_Feed]-0.00526*[Furnace_E_COT]-0.0254*[FUR_5_STACK_TEMPERATURE]-0.26*[FUR_5_FLUE_GAS_O2]))*[Furnace_5_Status]",,,,system,,-,1
+furn5_net_efficiency_Adjusted,parameter,"if((101.4302+0.0049*[Fur_5_HC_Feed]-0.00526*[Furnace_E_COT]-0.0254*[FUR_5_STACK_TEMPERATURE_Adjusted]-0.26*[FUR_5_FLUE_GAS_O2_Adjusted])>100,100,(101.4302+0.0049*[Fur_5_HC_Feed]-0.00526*[Furnace_E_COT]-0.0254*[FUR_5_STACK_TEMPERATURE_Adjusted]-0.26*[FUR_5_FLUE_GAS_O2_Adjusted]))*[Furnace_5_Status]",,,,system,,-,1
+furn6_net_efficiency,parameter,"if((99.749+0.001059*[Fur_6_HC_Feed]-0.00136*[Furnace_F_COT]-0.03489*[FUR_6_STACK_TEMPERATURE]-0.2991*[FUR_6_FLUE_GAS_O2])>100,100,(99.749+0.001059*[Fur_6_HC_Feed]-0.00136*[Furnace_F_COT]-0.03489*[FUR_6_STACK_TEMPERATURE]-0.2991*[FUR_6_FLUE_GAS_O2]))*[Furnace_6_Status]",,,,system,,-,1
+furn6_net_efficiency_Adjusted,parameter,"if((99.749+0.001059*[Fur_6_HC_Feed]-0.00136*[Furnace_F_COT]-0.03489*[FUR_6_STACK_TEMPERATURE_Adjusted]-0.2991*[FUR_6_FLUE_GAS_O2_Adjusted])>100,100,(99.749+0.001059*[Fur_6_HC_Feed]-0.00136*[Furnace_F_COT]-0.03489*[FUR_6_STACK_TEMPERATURE_Adjusted]-0.2991*[FUR_6_FLUE_GAS_O2_Adjusted]))*[Furnace_6_Status]",,,,system,,-,1
+furn7_net_efficiency,parameter,"if((102.1861+0.01229*[Fur_7_HC_Feed]-0.00198*[Furnace_G_COT]-0.045*[FUR_7_STACK_TEMPERATURE]-0.5129*[FUR_7_FLUE_GAS_O2])>100,100,(102.1861+0.01229*[Fur_7_HC_Feed]-0.00198*[Furnace_G_COT]-0.045*[FUR_7_STACK_TEMPERATURE]-0.5129*[FUR_7_FLUE_GAS_O2]))*[Furnace_7_Status]",,,,system,,-,1
+furn7_net_efficiency_Adjusted,parameter,"if((102.1861+0.01229*[Fur_7_HC_Feed]-0.00198*[Furnace_G_COT]-0.045*[FUR_7_STACK_TEMPERATURE_Adjusted]-0.5129*[FUR_7_FLUE_GAS_O2_Adjusted])>100,100,(102.1861+0.01229*[Fur_7_HC_Feed]-0.00198*[Furnace_G_COT]-0.045*[FUR_7_STACK_TEMPERATURE_Adjusted]-0.5129*[FUR_7_FLUE_GAS_O2_Adjusted]))*[Furnace_7_Status]",,,,system,,-,1
+furn8_net_efficiency,parameter,"if((105.4328+0.0039*[Fur_8_HC_Feed]-0.0038*[Furnace_H_COT]-0.054*[FUR_8_STACK_TEMPERATURE]-0.475*[FUR_8_FLUE_GAS_O2])>100,100,(105.4328+0.0039*[Fur_8_HC_Feed]-0.0038*[Furnace_H_COT]-0.054*[FUR_8_STACK_TEMPERATURE]-0.475*[FUR_8_FLUE_GAS_O2]))*[Furnace_8_Status]",,,,system,,°C,1
+furn8_net_efficiency_Adjusted,parameter,"if((105.4328+0.0039*[Fur_8_HC_Feed]-0.0038*[Furnace_H_COT]-0.054*[FUR_8_STACK_TEMPERATURE_Adjusted]-0.475*[FUR_8_FLUE_GAS_O2_Adjusted])>100,100,(105.4328+0.0039*[Fur_8_HC_Feed]-0.0038*[Furnace_H_COT]-0.054*[FUR_8_STACK_TEMPERATURE_Adjusted]-0.475*[FUR_8_FLUE_GAS_O2_Adjusted]))*[Furnace_8_Status]",,,,system,,-,1
+furn9_net_efficiency,parameter,"if((99.12391+0.003416*[Fur_9_HC_Feed]-0.00012*[Furnace_J_COT]-0.03907*[FUR_9_STACK_TEMPERATURE]-0.25296*[FUR_9_FLUE_GAS_O2])>100,100,(99.12391+0.003416*[Fur_9_HC_Feed]-0.00012*[Furnace_J_COT]-0.03907*[FUR_9_STACK_TEMPERATURE]-0.25296*[FUR_9_FLUE_GAS_O2]))*[Furnace_9_Status]",,,,system,,°C,1
+furn9_net_efficiency_Adjusted,parameter,"if((99.12391+0.003416*[Fur_9_HC_Feed]-0.00012*[Furnace_J_COT]-0.03907*[FUR_9_STACK_TEMPERATURE_Adjusted]-0.25296*[FUR_9_FLUE_GAS_O2_Adjusted])>100,100,(99.12391+0.003416*[Fur_9_HC_Feed]-0.00012*[Furnace_J_COT]-0.03907*[FUR_9_STACK_TEMPERATURE_Adjusted]-0.25296*[FUR_9_FLUE_GAS_O2_Adjusted]))*[Furnace_9_Status]",,,,system,,-,1
+max2_spec_en_consumption,parameter,"max([Spec_En_Cons_BLR_1]*(if([BLR_1_Status]==[max_spec_en_consumption_blr],0,1)),[Spec_En_Cons_BLR_2]*(if([BLR_2_Status]==[max_spec_en_consumption_blr],0,1)), [Spec_En_Cons_BLR_3]* (if([BLR_3_Status]==[max_spec_en_consumption_blr],0,1)) ,[Spec_En_Cons_BLR_4]*(if([BLR_4_Status]==[max_spec_en_consumption_blr],0,1)),[Spec_En_Cons_BLR_5]*(if([BLR_5_Status]==[max_spec_en_consumption_blr],0,1)))",,,,system,,RPM,1
+max2_spec_en_consumption_blr,parameter,"if([max2_spec_en_consumption]==[Spec_En_Cons_BLR_1] && ([max_spec_en_consumption_blr]!=1) ,1,if([max2_spec_en_consumption]==[Spec_En_Cons_BLR_2] && ([max_spec_en_consumption_blr]!=2) ,2,if([max2_spec_en_consumption]==[Spec_En_Cons_BLR_3] && ([max_spec_en_consumption_blr]!=3),3,if([max2_spec_en_consumption]==[Spec_En_Cons_BLR_4] && ([max_spec_en_consumption_blr]!=4),4,5))))",,,,system,,%,1
+max_load,parameter,"max([BLR_1_HPS_Gen],[BLR_2_HPS_Gen],[BLR_3_HPS_Gen],[BLR_4_HPS_Gen],[BLR_5_HPS_Gen])",,,,system,,-,1
+max_load_opt,decision_variable,,0,"if([Whatif_running]==0,max([max_load_opt],150),150)",0,system,,%,1
+max_spec_en_consumption,raw_pi_input,,,,,system,,%,1
+max_spec_en_consumption_blr,parameter,"if([max_spec_en_consumption]==[Spec_En_Cons_BLR_1],1,if([max_spec_en_consumption]==[Spec_En_Cons_BLR_2],2,if([max_spec_en_consumption]==[Spec_En_Cons_BLR_3],3,if([max_spec_en_consumption]==[Spec_En_Cons_BLR_4],4,5))))",,,,system,,%,1
+min_load,parameter,"min(([BLR_1_HPS_Gen]+(1-[BLR_1_Status])*150),([BLR_2_HPS_Gen]+(1-[BLR_2_Status])*150),([BLR_3_HPS_Gen]+(1-[BLR_3_Status])*150),([BLR_4_HPS_Gen]+(1-[BLR_4_Status])*150),([BLR_5_HPS_Gen]+(1-[BLR_5_Status])*150))",,,,system,,%,1
+min_load_opt,decision_variable,,0,150,0,system,,°C,1
+minimum_flow_BFW,parameter,"if(([LP_Steam_Dumping_Valve_PC0024A_Steam_flow_out_UO]+[LP_Steam_Vent_valve_PV0024B_Steam_flow_out_UO])<5,0,1)",,,,system,,KJ/ (KG-K),1
+opportunity_energy_eg1_co2,parameter,0,,,,eoeg_plant,,PPB,1
+opportunity_energy_eg1_eg,parameter,0,,,,eoeg_plant,,KW,1
+opportunity_energy_eg2_co2,parameter,0,,,,eoeg_plant,,GJ/ HR,1
+opportunity_energy_eg2_eg,parameter,0,,,,eoeg_plant,,GJ/ HR,1
+opportunity_energy_eg3_co2,parameter,0,,,,eoeg_plant,,KW,1
+opportunity_energy_eg3_eg,parameter,0,,,,eoeg_plant,,KW,1
+opportunity_energy_olf_cgc,parameter,0,,,,system,,MT/ HR,1
+opportunity_energy_olf_cold,parameter,0,,,,system,,PPB,1
+opportunity_energy_olf_qt,parameter,0,,,,system,,KG/ HR,1
+opportunity_threshold,parameter,50000,,,,system,,-,1
+opt_flag,parameter,"if([Boiler_opt_running]<[Total_Boilers_Running],1,0)",,,,system,,%,1
+total_air_generated,decision_variable,[Air_compressor_A_Discharge_flow]*[Air_Compressor_Turbine_A_Status]+[Air_compressor_B_Discharge_flow]*[Air_Compressor_Motor_B_Status]+[Air_compressor_C_Discharge_flow]*[Air_Compressor_Motor_C_Status]+[Air_compressor_D_Discharge_flow]*[Air_Compressor_Turbine_D_Status],"if([Whatif_running]==0,[Total_Air_Demand],[Total_Air_Demand])",100,0,system,,-,1

@@ -1,0 +1,285 @@
+@use 'config/scss/variables' as *;
+@use 'src/config/scss/typography' as *;
+
+.parentContainerWI {
+  padding: 0 2vmin;
+
+  .WorkflowInstanceTabs {
+    // overflow: hidden;
+    height: calc(100% - 1.5vmin);
+    background-color: $primary_white;
+
+    :global(.active) {
+      background-color: $primary_blue !important;
+    }
+
+    :global(.nav.nav-tabs) {
+      display: flex;
+      justify-content: flex-start;
+      border-top-left-radius: 4px;
+      width: 100% !important;
+      height: calc(4.5vmin) !important;
+      overflow: hidden;
+
+      :global(.nav-item) {
+        height: calc(100%) !important;
+        padding: 0 !important;
+        overflow: hidden;
+        position: relative;
+        width: 32vmin !important;
+
+        &:first-child {
+          z-index: 1;
+        }
+
+        &:nth-child(2) {
+          z-index: 2;
+          left: -2vmin;
+        }
+
+        &:nth-child(3) {
+          z-index: 2;
+          left: -4vmin;
+        }
+
+        :global(.nav-link) {
+          height: 100% !important;
+          color: $primary_gray !important;
+          @include text13;
+          font-family: 'sabic_text_bold', serif;
+          font-weight: 400;
+          padding: 0 !important;
+          padding-top: 0.4vmin !important;
+          background-color: none !important;
+          border: none;
+          background-image: url('../../assets/sabic_icons/common/tabsImg.svg');
+          background-size: 100%;
+          background-repeat: no-repeat;
+          background-position: center center;
+          position: absolute;
+          bottom: 0;
+          margin-bottom: 0;
+
+          &:hover {
+            background-color: transparent !important;
+          }
+        }
+
+        :global(.nav-link.active) {
+          padding: 0 !important;
+          padding-top: 0.4vmin !important;
+          background-color: transparent !important;
+          background-image: url('../../assets/sabic_icons/common/tabsImgActive.svg');
+          color: $primary_white !important;
+        }
+      }
+
+      :global(.nav-item:has(.nav-link.active)) {
+        z-index: 10;
+      }
+    }
+
+    :global(.tab-content) {
+      height: calc(100% - 4.5vmin);
+      border-top: 1px solid $primary_gray_4;
+      @include boxShadow_card;
+      padding: 1vmin;
+
+      :global(.tab-pane.active) {
+        background-color: $primary_white !important;
+      }
+    }
+  }
+}
+
+.corruptedInstanceContainer {
+  .retrAllyButton {
+    height: 100%;
+    background-color: $primary_blue;
+    padding: 1vmin 2vmin 0.8vmin 2vmin;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: $primary_white;
+    border: 1px solid $primary_blue;
+    border-radius: 0.3vmin;
+    cursor: pointer;
+
+    &.disabled {
+      background-color: $primary_gray_2;
+      cursor: not-allowed;
+      border: none !important;
+      outline: none !important;
+    }
+  }
+}
+
+.WorkflowInstanceContainer {
+  .topTabContainer {
+    height: calc(100% - 0.5vmin);
+
+    &.topTabContainerFullHeight {
+      height: 100%;
+    }
+
+    :global(.active) {
+      background-color: $primary_blue !important;
+    }
+
+    :global(.nav.nav-tabs) {
+      width: 100%;
+      height: calc(4.5vmin) !important;
+      display: flex;
+      justify-content: flex-start;
+      border-top-left-radius: 4px;
+
+      :global(.nav-item) {
+        padding: 0 !important;
+        position: relative;
+        height: 100%;
+        min-width: fit-content !important;
+        width: unset !important;
+        filter: drop-shadow(0px -0.13vmin 0.25vmin rgba(0, 0, 0, 0.1));
+        padding-top: 0.3vmin !important;
+        margin-right: -0.7vmin;
+
+        :global(.nav-link) {
+          height: 100%;
+          color: $primary_gray !important;
+          @include text14;
+          font-family: 'sabic_text_bold', serif;
+          padding: 0.25vmin 7vmin 0 7vmin;
+          clip-path: polygon(
+            2.5vmin 0%,
+            calc(100% - 2.5vmin) 0%,
+            100% 100%,
+            0% 100%
+          );
+          border-top-left-radius: 3.2vmin;
+          border-top-right-radius: 3.2vmin;
+          overflow: hidden;
+          background-color: $primary_blue_bg;
+          min-width: fit-content;
+          position: relative;
+        }
+
+        :global(.nav-link.active) {
+          color: $primary_white !important;
+        }
+      }
+
+      :global {
+        @for $i from 1 through 30 {
+          .nav-item:nth-child(#{$i}) {
+            z-index: #{31 - $i};
+          }
+        }
+      }
+
+      :global(.nav-item:has(.nav-link.active)) {
+        z-index: 50;
+      }
+    }
+
+    :global(.tab-content) {
+      height: calc(100% - 4.5vmin);
+      @include boxShadow_card;
+      border-radius: 0.3vmin;
+      border-top: 1px solid $primary_gray_4;
+
+      :global(.tab-pane) {
+        padding: 1vmin;
+        border-radius: 0.3vmin;
+      }
+
+      :global(.tab-pane.active) {
+        background-color: $primary_white !important;
+      }
+    }
+  }
+}
+
+.corruptedInstanceTableContainer {
+  height: calc(100% - 1.5vmin);
+
+  .retryButton {
+    height: 100%;
+    background-color: $primary_blue;
+    padding: 1vmin 2vmin 0.8vmin 2vmin;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: $primary_white;
+    border: 1px solid $primary_blue;
+    border-radius: 0.3vmin;
+  }
+
+  .retryAllButton {
+    width: auto !important;
+    padding: 1vmin 2vmin 0.8vmin 2vmin !important;
+  }
+
+  .odsArrowBtn {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+
+    img {
+      width: 2.5vmin;
+      height: 2.5vmin;
+      filter: none;
+    }
+  }
+
+  :global(.ag-root-wrapper) {
+    box-shadow: none !important;
+  }
+
+  :global(.ag-header-cell-text) {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+
+  :global(.ag-header-cell) {
+    &:not(:last-child) {
+      &::after {
+        content: '';
+        width: 1px;
+        height: 47%;
+        background: $primary_gray_3;
+      }
+    }
+  }
+
+  :global(.ag-theme-alpine .ag-header) {
+    padding-top: 0.8vmin;
+    height: 4vmin !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  :global(.ag-row) {
+    :global(.ag-cell) {
+      &:first-child {
+        padding-left: 2vmin !important;
+      }
+    }
+  }
+
+  :global(.ag-header-cell-label) {
+    text-transform: uppercase;
+  }
+
+  .equipment-cell {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: unset;
+    width: unset;
+    height: auto;
+  }
+}

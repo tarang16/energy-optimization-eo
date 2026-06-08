@@ -1,0 +1,20 @@
+@use 'config/scss/variables' as *;
+
+// Loader STARTS
+.loaderContainer {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+
+  .loader {
+    height: 5vmin;
+    width: 5vmin;
+  }
+
+  img {
+    filter: unset !important;
+  }
+}

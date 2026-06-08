@@ -1,0 +1,132 @@
+{
+  "version": "2.0",
+  "description": "Generic boiler calculation chain \u2014 applied to every Boiler in system_config.json.",
+  "attributes": [
+    {
+      "attribute_name": "BOILER_LOAD",
+      "hierarchy_level": "Boiler",
+      "formula": "STEAM_FLOW_RAW / RATED_STEAM_KGH * 100",
+      "data_type": "real",
+      "uom": "%"
+    },
+    {
+      "attribute_name": "HPS_GEN",
+      "hierarchy_level": "Boiler",
+      "formula": "if(STEAM_FLOW_RAW < 0, 0, STEAM_FLOW_RAW / 1000)",
+      "data_type": "real",
+      "uom": "T/HR"
+    },
+    {
+      "attribute_name": "STATUS",
+      "hierarchy_level": "Boiler",
+      "formula": "if((BOILER_LOAD > MIN_LOAD_PCT) && (DESUPERHEATER_OUTLET_TEMP > STEAM_TEMP_ON_THRESH) && (HP_STEAM_PRESSURE > STEAM_PRESS_ON_THRESH), 1, 0)",
+      "data_type": "real",
+      "uom": ""
+    },
+    {
+      "attribute_name": "FUEL_FLOW",
+      "hierarchy_level": "Boiler",
+      "formula": "FUEL_GAS_FLOW * STATUS / 1000",
+      "data_type": "real",
+      "uom": "T/HR"
+    },
+    {
+      "attribute_name": "CAPACITY",
+      "hierarchy_level": "Boiler",
+      "formula": "CAPACITY_T_H",
+      "data_type": "real",
+      "uom": "T/HR"
+    },
+    {
+      "attribute_name": "SPEC_EN_CONS",
+      "hierarchy_level": "Boiler",
+      "formula": "if(HPS_GEN == 0, 0, FUEL_FLOW * plant.BOILER_LHV / HPS_GEN)",
+      "data_type": "real",
+      "uom": "KCAL/T"
+    },
+    {
+      "attribute_name": "SPEC_EN_CONS_OPT",
+      "hierarchy_level": "Boiler",
+      "formula": "(SEC_OPT_A * HPS_GEN ** 2 + SEC_OPT_B * HPS_GEN + SEC_OPT_C) * STATUS",
+      "data_type": "real",
+      "uom": "GJ/T"
+    },
+    {
+      "attribute_name": "SPEC_EN_CONS_DEV",
+      "hierarchy_level": "Boiler",
+      "formula": "if(STATUS == 0, 0, (SPEC_EN_CONS_OPT - SPEC_EN_CONS) / SPEC_EN_CONS_OPT)",
+      "data_type": "real",
+      "uom": "ratio"
+    },
+    {
+      "attribute_name": "HPS_GEN_WARMUP",
+      "hierarchy_level": "Boiler",
+      "formula": "if(STATUS == 0, HPS_GEN, 0)",
+      "data_type": "real",
+      "uom": "T/HR"
+    },
+    {
+      "attribute_name": "FD_FAN_STEAM",
+      "hierarchy_level": "Boiler",
+      "formula": "if(FD_FAN_STEAM_RAW < FD_FAN_NOISE_KGH, 0, FD_FAN_STEAM_RAW / 1000)",
+      "data_type": "real",
+      "uom": "T/HR"
+    },
+    {
+      "attribute_name": "FD_FAN_STEAM_REG",
+      "hierarchy_level": "Boiler",
+      "formula": "(FD_FAN_C0 + FD_FAN_C1 * HPS_GEN + FD_FAN_C2 * HPS_GEN ** 2) / 1000",
+      "data_type": "real",
+      "uom": "T/HR"
+    },
+    {
+      "attribute_name": "FD_FAN_STEAM_WARMUP",
+      "hierarchy_level": "Boiler",
+      "formula": "if((FD_FAN_STEAM_RAW > 100) && (FD_FAN_STEAM_RAW < FD_FAN_MAX_KGH) && (STATUS == 0), FD_FAN_STEAM_RAW / 1000, 0)",
+      "data_type": "real",
+      "uom": "T/HR"
+    },
+    {
+      "attribute_name": "STACK_TEMP_REG",
+      "hierarchy_level": "Boiler",
+      "formula": "STACK_TEMP_A * HPS_GEN + STACK_TEMP_B * FLUE_GAS_OXYGEN + STACK_TEMP_C",
+      "data_type": "real",
+      "uom": "C"
+    },
+    {
+      "attribute_name": "STACK_TEMP_CLIPPED",
+      "hierarchy_level": "Boiler",
+      "formula": "if((FLUE_GAS_OXYGEN == 0) || (STACK_TEMPERATURE == 0), STACK_TEMPERATURE, min(STACK_TEMPERATURE, STACK_TEMP_REG) * STATUS)",
+      "data_type": "real",
+      "uom": "C"
+    },
+    {
+      "attribute_name": "FUEL_INPUT_GJ_H",
+      "hierarchy_level": "Boiler",
+      "formula": "FUEL_FLOW * plant.BOILER_LHV * 4.184 / 1000",
+      "data_type": "real",
+      "uom": "GJ/H"
+    },
+    {
+      "attribute_name": "USEFUL_HEAT_GJ_H",
+      "hierarchy_level": "Boiler",
+      "formula": "HPS_GEN * 2.8",
+      "data_type": "real",
+      "uom": "GJ/H"
+    },
+    {
+      "attribute_name": "EFFICIENCY_PCT",
+      "hierarchy_level": "Boiler",
+      "formula": "if(FUEL_INPUT_GJ_H == 0, 0, USEFUL_HEAT_GJ_H / FUEL_INPUT_GJ_H * 100)",
+      "data_type": "real",
+      "uom": "%"
+    },
+    {
+      "attribute_name": "CO2_T_PER_H",
+      "hierarchy_level": "Boiler",
+      "formula": "FUEL_INPUT_GJ_H * CO2_KG_PER_GJ / 1000",
+      "data_type": "real",
+      "uom": "T/H"
+    }
+  ]
+}

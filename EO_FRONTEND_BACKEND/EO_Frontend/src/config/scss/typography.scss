@@ -1,0 +1,524 @@
+@use './variables' as *;
+
+* {
+  color: $primary_gray;
+}
+
+.sabic_regular {
+  font-family: 'sabic_text_regular', serif;
+}
+
+.sabic_light {
+  font-family: 'sabic_text_light', serif;
+}
+
+.sabic_bold {
+  font-family: 'sabic_text_bold', serif;
+}
+
+.sabic_heading_regular {
+  font-family: 'sabic_headline_regular', serif;
+}
+
+.sabic_heading_light {
+  font-family: 'sabic_headline_light', serif;
+}
+
+.sabic_heading_bold {
+  font-family: 'sabic_headline_bold', serif;
+}
+
+@mixin text10 {
+  color: $primary_gray;
+  font-size: 1vmin;
+  font-style: normal;
+  line-height: 1.2;
+}
+
+@mixin text11 {
+  color: $primary_gray;
+  font-size: 1.1vmin;
+  font-style: normal;
+  line-height: 1.2;
+}
+
+@mixin text12 {
+  color: $primary_gray;
+  font-size: 1.2vmin;
+  font-style: normal;
+  line-height: 1.2;
+}
+
+@mixin text13 {
+  color: $primary_gray;
+  font-size: 1.3vmin;
+  font-style: normal;
+  line-height: 1.2;
+}
+
+@mixin text14 {
+  color: $primary_gray;
+  font-size: 1.4vmin;
+  font-style: normal;
+  line-height: 1.2;
+}
+
+@mixin text15 {
+  color: $primary_gray;
+  font-size: 1.5vmin;
+  font-style: normal;
+  line-height: 1.2;
+}
+
+@mixin text16 {
+  color: $primary_gray;
+  font-size: 1.6vmin;
+  font-style: normal;
+  line-height: 1.2;
+}
+
+@mixin text17 {
+  color: $primary_gray;
+  font-size: 1.7vmin;
+  font-style: normal;
+  line-height: 1.2;
+}
+
+@mixin text18 {
+  color: $primary_gray;
+  font-size: 1.8vmin;
+  font-style: normal;
+  line-height: 1.2;
+}
+
+@mixin text20 {
+  color: $primary_gray;
+  font-size: 2vmin;
+  font-style: normal;
+  line-height: 1.2;
+}
+
+@mixin text22 {
+  color: $primary_gray;
+  font-size: 2.2vmin;
+  font-style: normal;
+  line-height: 1.2;
+}
+
+@mixin text24 {
+  color: $primary_gray;
+  font-size: 2.4vmin;
+  font-style: normal;
+  line-height: 1.2;
+}
+
+@mixin text26 {
+  color: $primary_gray;
+  font-size: 2.6vmin;
+  font-style: normal;
+  line-height: 1.2;
+}
+
+@mixin text28 {
+  color: $primary_gray;
+  font-size: 2.8vmin;
+  font-style: normal;
+  line-height: 1.2;
+}
+
+@mixin text30 {
+  color: $primary_gray;
+  font-size: 3vmin;
+  font-style: normal;
+  line-height: 1.2;
+}
+
+.text-10-light {
+  @include text10;
+  font-family: 'sabic_text_light', serif;
+  font-weight: 300;
+}
+
+.text-10-regular {
+  @include text10;
+  font-family: 'sabic_text_regular', serif;
+  font-weight: 400;
+}
+
+.text-10-bold {
+  @include text10;
+  font-family: 'sabic_text_bold', serif;
+  font-weight: 700;
+}
+
+.text-11px-light {
+  font-family: 'sabic_text_light', serif;
+  font-weight: 300;
+  font-size: 11px;
+  font-style: normal;
+  line-height: 15px;
+}
+
+.text-11-light {
+  @include text11;
+  font-family: 'sabic_text_light', serif;
+  font-weight: 300;
+}
+
+.text-11-regular {
+  @include text11;
+  font-family: 'sabic_text_regular', serif;
+  font-weight: 400;
+}
+
+.text-11-bold {
+  @include text11;
+  font-family: 'sabic_text_bold', serif;
+  font-weight: 700;
+}
+
+.text-12-light {
+  @include text12;
+  font-family: 'sabic_text_light', serif;
+  font-weight: 300;
+}
+
+.text-12-regular {
+  @include text12;
+  font-family: 'sabic_text_regular', serif;
+  font-weight: 400;
+}
+
+.text-12-bold {
+  @include text12;
+  font-family: 'sabic_text_bold', serif;
+  font-weight: 700;
+}
+
+.text-13-light {
+  @include text13;
+  font-family: 'sabic_text_light', serif;
+  font-weight: 300;
+}
+
+.text-13-regular {
+  @include text13;
+  font-family: 'sabic_text_regular', serif;
+  font-weight: 400;
+}
+
+.text-13-bold {
+  @include text13;
+  font-family: 'sabic_text_bold', serif;
+  font-weight: 700;
+}
+
+.text-14-light {
+  @include text14;
+  font-family: 'sabic_text_light', serif;
+  font-weight: 300;
+}
+
+.text-14px-regular {
+  font-family: 'sabic_text_regular', serif;
+  font-weight: 400;
+  font-size: 14px;
+  font-style: normal;
+  line-height: 18px;
+}
+
+.text-14-regular {
+  @include text14;
+  font-family: 'sabic_text_regular', serif;
+  font-weight: 400;
+}
+
+.text-14px-bold {
+  font-family: 'sabic_text_bold', serif;
+  font-weight: 700;
+  font-size: 14px;
+  font-style: normal;
+  line-height: 18px;
+}
+
+.text-14-bold {
+  @include text14;
+  font-family: 'sabic_text_bold', serif;
+  font-weight: 700;
+}
+
+.text-15-light {
+  @include text15;
+  font-family: 'sabic_text_light', serif;
+  font-weight: 300;
+}
+
+.text-15-regular {
+  @include text15;
+  font-family: 'sabic_text_regular', serif;
+  font-weight: 400;
+}
+
+.text-15-bold {
+  @include text15;
+  font-family: 'sabic_text_bold', serif;
+  font-weight: 700;
+}
+
+.text-16-light {
+  @include text16;
+  font-family: 'sabic_text_light', serif;
+  font-weight: 300;
+}
+
+.text-16-regular {
+  @include text16;
+  font-family: 'sabic_text_regular', serif;
+  font-weight: 400;
+}
+
+.text-16-bold {
+  @include text16;
+  font-family: 'sabic_text_bold', serif;
+  font-weight: 700;
+}
+
+.text-17-light {
+  @include text17;
+  font-family: 'sabic_text_light', serif;
+  font-weight: 300;
+}
+
+.text-17-regular {
+  @include text17;
+  font-family: 'sabic_text_regular', serif;
+  font-weight: 400;
+}
+
+.text-17-bold {
+  @include text17;
+  font-family: 'sabic_text_bold', serif;
+  font-weight: 700;
+}
+
+.text-18-light {
+  @include text18;
+  font-family: 'sabic_text_light', serif;
+  font-weight: 300;
+}
+
+.text-18-regular {
+  @include text18;
+  font-family: 'sabic_text_regular', serif;
+  font-weight: 400;
+}
+
+.text-18-bold {
+  @include text18;
+  font-family: 'sabic_text_bold', serif;
+  font-weight: 700;
+}
+
+.text-20-light {
+  @include text20;
+  font-family: 'sabic_text_light', serif;
+  font-weight: 300;
+}
+
+.text-20-regular {
+  @include text20;
+  font-family: 'sabic_text_regular', serif;
+  font-weight: 400;
+}
+
+.text-20-bold {
+  @include text20;
+  font-family: 'sabic_text_bold', serif;
+  font-weight: 700;
+}
+
+.text-22-light {
+  @include text22;
+  font-family: 'sabic_text_light', serif;
+  font-weight: 300;
+}
+
+.text-22-regular {
+  @include text22;
+  font-family: 'sabic_text_regular', serif;
+  font-weight: 400;
+}
+
+.text-22-bold {
+  @include text22;
+  font-family: 'sabic_text_bold', serif;
+  font-weight: 700;
+}
+
+.text-24-light {
+  @include text24;
+  font-family: 'sabic_text_light', serif;
+  font-weight: 300;
+}
+
+.text-24-regular {
+  @include text24;
+  font-family: 'sabic_text_regular', serif;
+  font-weight: 400;
+}
+
+.text-24-bold {
+  @include text24;
+  font-family: 'sabic_text_bold', serif;
+  font-weight: 700;
+}
+
+.text-26-light {
+  @include text26;
+  font-family: 'sabic_text_light', serif;
+  font-weight: 300;
+}
+
+.text-26-regular {
+  @include text26;
+  font-family: 'sabic_text_regular', serif;
+  font-weight: 400;
+}
+
+.text-26-bold {
+  @include text26;
+  font-family: 'sabic_text_bold', serif;
+  font-weight: 700;
+}
+
+.text-28-light {
+  @include text28;
+  font-family: 'sabic_text_light', serif;
+  font-weight: 300;
+}
+
+.text-28-regular {
+  @include text28;
+  font-family: 'sabic_text_regular', serif;
+  font-weight: 400;
+}
+
+.text-28-bold {
+  @include text28;
+  font-family: 'sabic_text_bold', serif;
+  font-weight: 700;
+}
+
+.text-30-light {
+  @include text30;
+  font-family: 'sabic_text_light', serif;
+  font-weight: 300;
+}
+
+.text-30-regular {
+  @include text30;
+  font-family: 'sabic_text_regular', serif;
+  font-weight: 400;
+}
+
+.text-30-bold {
+  @include text30;
+  font-family: 'sabic_text_bold', serif;
+  font-weight: 700;
+}
+
+.fw-100 {
+  font-weight: 100;
+}
+
+.fw-200 {
+  font-weight: 200;
+}
+
+.fw-300 {
+  font-weight: 300;
+}
+
+.fw-400 {
+  font-weight: 400;
+}
+
+.fw-500 {
+  font-weight: 500;
+}
+
+.fw-600 {
+  font-weight: 600;
+}
+
+.fw-700 {
+  font-weight: 700;
+}
+
+.fw-800 {
+  font-weight: 800;
+}
+
+.fw-900 {
+  font-weight: 900;
+}
+
+// Line height and letter spacing and custom margin Starts
+
+.line_height_13 {
+  line-height: 1.3vmin;
+}
+
+.defaultLineHeight {
+  line-height: 1;
+}
+
+.line_height_15 {
+  line-height: 1.5vmin;
+}
+
+.line_height_12_per {
+  line-height: 1.2;
+}
+
+.letter_spacing09 {
+  letter-spacing: 0.09vmin;
+}
+
+.letter_spacing05 {
+  letter-spacing: 0.05vmin;
+}
+
+.mt_03 {
+  margin-top: 0.3vmin;
+}
+
+.mb_03 {
+  margin-bottom: 0.3vmin;
+}
+
+.mb_05 {
+  margin-bottom: 0.5vmin;
+}
+
+.mt_04 {
+  margin-top: 0.4vmin;
+}
+
+.mt_05 {
+  margin-top: 0.5vmin;
+}
+
+.mt_06 {
+  margin-top: 0.6vmin;
+}
+
+.mt_07 {
+  margin-top: 0.7vmin;
+}
+
+// Line height and letter spacing and custom margin Starts Ends
+
+.pt_07 {
+  padding-top: 0.7vmin;
+}

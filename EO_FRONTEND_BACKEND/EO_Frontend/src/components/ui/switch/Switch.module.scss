@@ -1,0 +1,55 @@
+@use 'config/scss/variables' as *;
+
+.switchContainer {
+  display: inline-block;
+
+  .subSwitchContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    input[type='checkbox'] {
+      height: 0;
+      width: 0;
+      visibility: hidden;
+    }
+
+    label {
+      cursor: pointer;
+      text-indent: -9999px;
+      width: 5vmin;
+      height: 2.5vmin;
+      background: $primary_gray_2;
+      display: block;
+      border-radius: 3vmin;
+      position: relative;
+    }
+
+    label:after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 1.8vmin;
+      height: 1.8vmin;
+      left: 0.6vmin;
+      background: $primary_white;
+      border-radius: 50%;
+      // transition: 0.3s;
+    }
+
+    input:checked + label {
+      background: $primary_blue;
+    }
+
+    input:disabled + label {
+      background: $primary_gray_2;
+      cursor: not-allowed;
+    }
+
+    input:checked + label:after {
+      left: calc(100% - 0.6vmin);
+      transform: translate(-100%, -50%);
+    }
+  }
+}

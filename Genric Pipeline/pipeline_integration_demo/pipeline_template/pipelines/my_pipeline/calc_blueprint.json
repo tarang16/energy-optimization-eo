@@ -1,0 +1,9 @@
+[
+  {
+    "_doc": "One entry per calculated attribute. 'level' must match a level name in system_config. 'formula' uses sensor attribute names from instantiated_attributes.",
+    "_doc_formula_syntax": "Supported: arithmetic (+,-,*,/), max(child.attr), avg(child.attr), lag(attr,n), rolling_avg(attr,window), delta(attr), parent.attr",
+    "level": "YourLevel",
+    "attribute_name": "your_calculated_attribute",
+    "formula": "sensor_a / sensor_b"
+  }
+]

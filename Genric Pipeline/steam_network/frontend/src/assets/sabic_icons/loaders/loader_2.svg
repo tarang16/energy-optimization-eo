@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" width="273" height="273" style="shape-rendering: auto; display: block; background: rgba(255, 255, 255, 0);" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<g>
+		<rect fill="#65c3ea80" height="13" width="13" y="11" x="11">
+			<animate calcMode="discrete" begin="0s" repeatCount="indefinite" dur="6s" keyTimes="0;0.05;1" values="#009FDF;#65c3ea80;#65c3ea80" attributeName="fill">
+			</animate>
+		</rect>
+		<rect fill="#65c3ea80" height="13" width="13" y="11" x="24">
+			<animate calcMode="discrete" begin="0.3s" repeatCount="indefinite" dur="6s" keyTimes="0;0.05;1" values="#009FDF;#65c3ea80;#65c3ea80" attributeName="fill">
+			</animate>
+		</rect>
+		<rect fill="#65c3ea80" height="13" width="13" y="11" x="37">
+			<animate calcMode="discrete" begin="0.6s" repeatCount="indefinite" dur="6s" keyTimes="0;0.05;1" values="#009FDF;#65c3ea80;#65c3ea80" attributeName="fill">
+			</animate>
+		</rect>
+		<rect fill="#65c3ea80" height="13" width="13" y="11" x="50">
+			<animate calcMode="discrete" begin="0.9s" repeatCount="indefinite" dur="6s" keyTimes="0;0.05;1" values="#009FDF;#65c3ea80;#65c3ea80" attributeName="fill">
+			</animate>
+		</rect>
+		<rect fill="#65c3ea80" height="13" width="13" y="11" x="63">
+			<animate calcMode="discrete" begin="1.2s" repeatCount="indefinite" dur="6s" keyTimes="0;0.05;1" values="#009FDF;#65c3ea80;#65c3ea80" attributeName="fill">
+			</animate>
+		</rect>
+		<rect fill="#65c3ea80" height="13" width="13" y="11" x="76">
+			<animate calcMode="discrete" begin="1.5s" repeatCount="indefinite" dur="6s" keyTimes="0;0.05;1" values="#009FDF;#65c3ea80;#65c3ea80" attributeName="fill">
+			</animate>
+		</rect>
+		<rect fill="#65c3ea80" height="13" width="13" y="24" x="11">
+			<animate calcMode="discrete" begin="5.7s" repeatCount="indefinite" dur="6s" keyTimes="0;0.05;1" values="#009FDF;#65c3ea80;#65c3ea80" attributeName="fill">
+			</animate>
+		</rect>
+		<rect fill="#65c3ea80" height="13" width="13" y="24" x="76">
+			<animate calcMode="discrete" begin="1.8s" repeatCount="indefinite" dur="6s" keyTimes="0;0.05;1" values="#009FDF;#65c3ea80;#65c3ea80" attributeName="fill">
+			</animate>
+		</rect>
+		<rect fill="#65c3ea80" height="13" width="13" y="37" x="11">
+			<animate calcMode="discrete" begin="5.4s" repeatCount="indefinite" dur="6s" keyTimes="0;0.05;1" values="#009FDF;#65c3ea80;#65c3ea80" attributeName="fill">
+			</animate>
+		</rect>
+		<rect fill="#65c3ea80" height="13" width="13" y="37" x="76">
+			<animate calcMode="discrete" begin="2.1s" repeatCount="indefinite" dur="6s" keyTimes="0;0.05;1" values="#009FDF;#65c3ea80;#65c3ea80" attributeName="fill">
+			</animate>
+		</rect>
+		<rect fill="#65c3ea80" height="13" width="13" y="50" x="11">
+			<animate calcMode="discrete" begin="5.1s" repeatCount="indefinite" dur="6s" keyTimes="0;0.05;1" values="#009FDF;#65c3ea80;#65c3ea80" attributeName="fill">
+			</animate>
+		</rect>
+		<rect fill="#65c3ea80" height="13" width="13" y="50" x="76">
+			<animate calcMode="discrete" begin="2.4s" repeatCount="indefinite" dur="6s" keyTimes="0;0.05;1" values="#009FDF;#65c3ea80;#65c3ea80" attributeName="fill">
+			</animate>
+		</rect>
+		<rect fill="#65c3ea80" height="13" width="13" y="63" x="11">
+			<animate calcMode="discrete" begin="4.8s" repeatCount="indefinite" dur="6s" keyTimes="0;0.05;1" values="#009FDF;#65c3ea80;#65c3ea80" attributeName="fill">
+			</animate>
+		</rect>
+		<rect fill="#65c3ea80" height="13" width="13" y="63" x="76">
+			<animate calcMode="discrete" begin="2.7s" repeatCount="indefinite" dur="6s" keyTimes="0;0.05;1" values="#009FDF;#65c3ea80;#65c3ea80" attributeName="fill">
+			</animate>
+		</rect>
+		<rect fill="#65c3ea80" height="13" width="13" y="76" x="11">
+			<animate calcMode="discrete" begin="4.5s" repeatCount="indefinite" dur="6s" keyTimes="0;0.05;1" values="#009FDF;#65c3ea80;#65c3ea80" attributeName="fill">
+			</animate>
+		</rect>
+		<rect fill="#65c3ea80" height="13" width="13" y="76" x="24">
+			<animate calcMode="discrete" begin="4.2s" repeatCount="indefinite" dur="6s" keyTimes="0;0.05;1" values="#009FDF;#65c3ea80;#65c3ea80" attributeName="fill">
+			</animate>
+		</rect>
+		<rect fill="#65c3ea80" height="13" width="13" y="76" x="37">
+			<animate calcMode="discrete" begin="3.9s" repeatCount="indefinite" dur="6s" keyTimes="0;0.05;1" values="#009FDF;#65c3ea80;#65c3ea80" attributeName="fill">
+			</animate>
+		</rect>
+		<rect fill="#65c3ea80" height="13" width="13" y="76" x="50">
+			<animate calcMode="discrete" begin="3.6s" repeatCount="indefinite" dur="6s" keyTimes="0;0.05;1" values="#009FDF;#65c3ea80;#65c3ea80" attributeName="fill">
+			</animate>
+		</rect>
+		<rect fill="#65c3ea80" height="13" width="13" y="76" x="63">
+			<animate calcMode="discrete" begin="3.3s" repeatCount="indefinite" dur="6s" keyTimes="0;0.05;1" values="#009FDF;#65c3ea80;#65c3ea80" attributeName="fill">
+			</animate>
+		</rect>
+		<rect fill="#65c3ea80" height="13" width="13" y="76" x="76">
+			<animate calcMode="discrete" begin="3s" repeatCount="indefinite" dur="6s" keyTimes="0;0.05;1" values="#009FDF;#65c3ea80;#65c3ea80" attributeName="fill">
+			</animate>
+		</rect>
+	</g>
+	<text x="50" y="52" fill="#009FDF" font-size="30px" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-weight="bold">
+		EO
+	</text>
+</svg>

@@ -1,0 +1,12 @@
+{
+  "rows": 1222,
+  "distinct_elements": 143,
+  "distinct_attributes": 1205,
+  "distinct_pi_tags": 167,
+  "coverage": {
+    "rows_with_pi": 351,
+    "rows_with_formula": 0,
+    "rows_with_default": 0,
+    "rows_total": 1222
+  }
+}

@@ -1,0 +1,40 @@
+@use 'src/config/scss/_variables' as *;
+@use 'src/config/scss/typography' as *;
+
+.parentContainerErrorLogging {
+  @include boxShadow_card;
+  width: calc(100% - 4vmin);
+  margin: 0 auto;
+  height: calc(100% - 1.5vmin);
+  padding: 0 0 1vmin 0;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    width: 4px;
+    height: 8vmin;
+    background-color: $primary_blue_bg;
+    top: 0;
+    right: 0;
+  }
+
+  :global(.globalServerSideTableContainer .table thead th) {
+    border-top: none;
+    border-bottom: none;
+  }
+
+  :global(.globalServerSideTableContainer table thead tr th h2) {
+    font-size: 1.3vmin !important;
+  }
+
+  :global(.globalServerSideTableContainer .table thead) {
+    height: 8vmin;
+  }
+
+  :global(.globalServerSideTableContainer) {
+    &::-webkit-scrollbar-track-piece:start {
+      margin-top: 8vmin;
+    }
+  }
+}

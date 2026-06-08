@@ -1,0 +1,260 @@
+@use 'config/scss/variables' as *;
+
+.ccpTabMainContainer {
+  padding: 0 0.5vmin 0.5vmin 0.5vmin;
+  height: 100%;
+}
+
+.editBtnImage {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2vmin;
+  height: 2vmin;
+  margin: 0 auto;
+
+  img {
+    @include blue_filter_icon_important;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.boundFieldBtnContainer {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  gap: 2vmin;
+  margin-top: 3vmin;
+  height: 3.5vmin;
+
+  button {
+    border: none;
+    height: 100%;
+    width: 14vmin;
+    border-radius: 0.3vmin;
+
+    &.saveBtn {
+      background-color: $primary_blue;
+      color: $primary_white;
+    }
+
+    &:disabled {
+      pointer-events: inherit;
+      cursor: not-allowed;
+      opacity: 0.65;
+    }
+
+    &.cancelBtn {
+      background-color: $primary_gray_2;
+      color: $primary_white;
+    }
+
+    &.deleteBtn {
+      background-color: $primary_orange;
+      color: $primary_white;
+    }
+  }
+}
+
+.boundField {
+  height: 3.5vmin;
+  display: flex;
+  align-items: center;
+
+  label {
+    width: unset !important;
+    min-width: 12vmin !important;
+    margin-right: 0.5vmin;
+  }
+
+  :global(.form-control) {
+    padding: 0 1vmin !important;
+    flex-grow: 1;
+    border-radius: 0.3vmin;
+    border: 1px solid $primary_gray_3;
+
+    &:focus {
+      border: 1px solid $primary_blue;
+    }
+  }
+}
+
+.equipementTableContainer {
+  height: calc(100% - 6vmin);
+  overflow-y: auto;
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-track-piece:start {
+    background: transparent !important;
+    margin-top: 5.5vmin !important;
+  }
+
+  .table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0px;
+
+    thead {
+      height: 5.5vmin;
+      width: 100%;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+
+      tr {
+        th {
+          position: relative;
+          padding: 0.5vmin;
+          background-color: $primary_blue_bg;
+          color: $primary_gray;
+          font-size: 1.2vmin;
+          font-family: 'sabic_text_bold', serif;
+          text-align: left;
+          text-transform: uppercase;
+
+          &:first-child {
+            width: 30%;
+          }
+
+          &:nth-child(2) {
+            width: 30%;
+          }
+
+          &:nth-child(3),
+          &:nth-child(4) {
+            text-align: center;
+          }
+        }
+      }
+    }
+
+    tbody {
+      /* subtract the height of the fixed header */
+      overflow-y: auto;
+      height: calc(100% - 5.5vmin);
+
+      tr {
+        td {
+          text-align: left;
+          padding: 1vmin 0.5vmin;
+          font-size: 1.3vmin;
+          line-height: 1.2;
+          color: $primary_gray;
+          font-family: 'sabic_text_regular', serif;
+          background-color: $primary_white;
+          position: relative;
+          vertical-align: middle;
+          border-bottom: 1px solid #e6e7e8;
+          height: 5.5vmin;
+          text-transform: uppercase;
+        }
+      }
+    }
+  }
+}
+
+.loader.load {
+  img {
+    filter: unset;
+  }
+}
+
+table {
+  tr {
+    th {
+      font-size: 1.2vmin !important;
+    }
+  }
+
+  tbody {
+    tr {
+      td {
+        font-size: 1.2vmin !important;
+      }
+    }
+  }
+}
+
+.seuDetailsWrapperContainer,
+.subModelWrapperContainer {
+  table {
+    tbody {
+      tr {
+        td {
+          word-break: break-all;
+        }
+      }
+    }
+  }
+}
+
+.editSeuDetailsConfiguration {
+  border: 1px solid $primary_gray_3;
+  border-radius: 0.5vmin;
+  padding: 1.5vmin;
+
+  .commentInputBox {
+    border: 1px solid $primary_gray_3;
+    border-radius: 0.3vmin !important;
+    outline: none;
+    box-shadow: none;
+    padding: 1vmin !important;
+    color: $primary_gray;
+    height: 4vmin;
+
+    &:focus,
+    &:focus-visible {
+      border: 1px solid $primary_blue !important;
+    }
+
+    &:disabled {
+      background-color: $primary_gray_6;
+    }
+  }
+
+  .infoIcon {
+    width: 1.8vmin;
+    height: 1.8vmin;
+    cursor: pointer;
+    filter: brightness(0) saturate(100%) invert(27%) sepia(0%) saturate(638%)
+      hue-rotate(273deg) brightness(95%) contrast(83%);
+  }
+}
+
+// ade by me
+.costPerUnitContainer {
+  padding: 0.5vmin;
+  height: 100%;
+  position: relative;
+
+  &__tabButton {
+    height: 3.5vmin;
+    display: flex;
+    gap: 1.5vmin;
+
+    button {
+      padding-top: 0.3vmin;
+      width: auto;
+      height: 100%;
+      border: none;
+      border-radius: 1vmin;
+      background-color: $primary_blue_bg;
+
+      &.btnActive {
+        background-color: $primary_blue;
+        color: $primary_white;
+      }
+    }
+  }
+
+  &__tabContent {
+    height: calc(100% - 3.5vmin);
+  }
+}

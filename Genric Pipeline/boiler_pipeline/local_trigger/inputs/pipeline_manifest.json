@@ -1,0 +1,160 @@
+{
+  "model_id": "boiler_calc_v1",
+  "version": "v1",
+  "system_id": "united_boiler_plant",
+  "feature_flag": "boiler_calc",
+  "input_config_sheets": {
+    "instantiated_attrs": "intantiated_attributes",
+    "sensors_mapping": "Sensors_Mapping"
+  },
+  "output_schemas": {
+    "output_attribute_values": {
+      "mandatory": true,
+      "db_table": "output_attribute_values_table",
+      "natural_key": [
+        "run_id",
+        "timestamp",
+        "element_code",
+        "attribute"
+      ],
+      "partition_interval": "month",
+      "fields": [
+        {
+          "name": "model_id",
+          "type": "string",
+          "nullable": false
+        },
+        {
+          "name": "run_id",
+          "type": "string",
+          "nullable": false
+        },
+        {
+          "name": "timestamp",
+          "type": "datetime",
+          "nullable": false
+        },
+        {
+          "name": "element_code",
+          "type": "string",
+          "nullable": false
+        },
+        {
+          "name": "attribute",
+          "type": "string",
+          "nullable": false
+        },
+        {
+          "name": "value",
+          "type": "float",
+          "nullable": true
+        }
+      ],
+      "allowed_combinations": [
+        {
+          "attribute": "STATUS",
+          "element_code": "57db313d-bba0-598e-8f03-0af6d096a157"
+        },
+        {
+          "attribute": "HPS_GEN",
+          "element_code": "57db313d-bba0-598e-8f03-0af6d096a157"
+        },
+        {
+          "attribute": "FUEL_FLOW",
+          "element_code": "57db313d-bba0-598e-8f03-0af6d096a157"
+        },
+        {
+          "attribute": "BOILER_LOAD",
+          "element_code": "57db313d-bba0-598e-8f03-0af6d096a157"
+        },
+        {
+          "attribute": "SPEC_EN_CONS",
+          "element_code": "57db313d-bba0-598e-8f03-0af6d096a157"
+        },
+        {
+          "attribute": "SPEC_EN_CONS_OPT",
+          "element_code": "57db313d-bba0-598e-8f03-0af6d096a157"
+        },
+        {
+          "attribute": "SPEC_EN_CONS_DEV",
+          "element_code": "57db313d-bba0-598e-8f03-0af6d096a157"
+        },
+        {
+          "attribute": "FD_FAN_STEAM",
+          "element_code": "57db313d-bba0-598e-8f03-0af6d096a157"
+        },
+        {
+          "attribute": "FD_FAN_STEAM_REG",
+          "element_code": "57db313d-bba0-598e-8f03-0af6d096a157"
+        },
+        {
+          "attribute": "STACK_TEMP_CLIPPED",
+          "element_code": "57db313d-bba0-598e-8f03-0af6d096a157"
+        },
+        {
+          "attribute": "FUEL_INPUT_GJ_H",
+          "element_code": "57db313d-bba0-598e-8f03-0af6d096a157"
+        },
+        {
+          "attribute": "USEFUL_HEAT_GJ_H",
+          "element_code": "57db313d-bba0-598e-8f03-0af6d096a157"
+        },
+        {
+          "attribute": "EFFICIENCY_PCT",
+          "element_code": "57db313d-bba0-598e-8f03-0af6d096a157"
+        },
+        {
+          "attribute": "CO2_T_PER_H",
+          "element_code": "57db313d-bba0-598e-8f03-0af6d096a157"
+        }
+      ]
+    },
+    "imputation_history": {
+      "mandatory": false,
+      "db_table": "imputation_history_table",
+      "natural_key": [
+        "run_id",
+        "timestamp",
+        "sensor"
+      ],
+      "partition_interval": "none",
+      "fields": [
+        {
+          "name": "model_id",
+          "type": "string",
+          "nullable": false
+        },
+        {
+          "name": "run_id",
+          "type": "string",
+          "nullable": false
+        },
+        {
+          "name": "timestamp",
+          "type": "datetime",
+          "nullable": false
+        },
+        {
+          "name": "sensor",
+          "type": "string",
+          "nullable": false
+        },
+        {
+          "name": "raw_value",
+          "type": "float",
+          "nullable": true
+        },
+        {
+          "name": "modified_value",
+          "type": "float",
+          "nullable": false
+        },
+        {
+          "name": "sip_policy",
+          "type": "string",
+          "nullable": false
+        }
+      ]
+    }
+  }
+}

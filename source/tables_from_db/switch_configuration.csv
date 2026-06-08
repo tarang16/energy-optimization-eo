@@ -1,0 +1,19 @@
+﻿switch_configuration_id,parameter,logic,description,show_warning,show_alert,model_status,active
+1,parameter_nan_check,skip,skip model if parameter value is nan,0,1,off,1
+2,lower_bound_switch,lower_bound_value,Use value for lower bound,0,0,on,1
+3,lower_bound_switch,lower_bound_expression,use expression for lower bound,0,0,on,1
+4,upper_bound_switch,upper_bound_value,use value for upper bound,0,0,on,1
+5,upper_bound_switch,upper_bound_expression,use expression for upper bound,0,0,on,1
+6,initial_value_switch,actual_value,use actual value for initial value,0,0,on,1
+7,initial_value_switch,lower_bound,use lower bound value for initial value,0,0,on,1
+8,initial_value_switch,upper_bound,use upper bound value for initial value,0,0,on,1
+9,initial_value_switch,mean_of_bounds,"use mean of lower and upper bounds ",0,0,on,1
+10,initial_value_switch,last_good_value,use last good value for initial value,0,0,on,1
+11,initial_value_switch,last_optimum_value,use last optimum value for initial value,0,0,on,1
+12,optimizer_status,optimizer_solution_not_found,optimizer failed to converge due to maximum iteration reached,0,1,off_opt_nf,1
+13,optimizer_status,optimizer_file_not_found,optimizer failed to converge,0,1,off_opt_nf,1
+14,optimizer_status,optimizer_variable_or_parameter_not_available,optimum not found due to variable or parameter is missing,0,1,on_param_nf,1
+15,optimizer_status,unknown_error,unknown error,0,1,off_opt_nf,1
+16,optimizer_status,optimizer_converged_successfully,optimizer converged successfully,0,0,on,1
+17,optimizer_status,consider_actual_as_optimum,considered actual values as optimum due to infeasible region,1,0,on_opt_as_act,1
+18,optimizer_status,syntax_error,"optimum not foud due to syntax error in constraints or objective, considering actual and optimum",0,1,on_syntax_error,1

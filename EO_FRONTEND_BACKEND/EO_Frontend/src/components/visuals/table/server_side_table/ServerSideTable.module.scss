@@ -1,0 +1,306 @@
+@use 'src/config/scss/_variables' as *;
+@use 'src/config/scss/typography' as *;
+@use 'src/config/scss/common' as *;
+
+.hidePopper {
+  display: none !important;
+}
+
+.serverSideTableMainContainer {
+  position: relative;
+
+  .serverSideTableContainer {
+    overflow: auto;
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar:horizontal {
+      height: 1vmin !important;
+    }
+
+    &::-webkit-scrollbar-track-piece:start {
+      background: transparent;
+      margin-top: 9.9vmin;
+      margin-left: 0.2vmin;
+    }
+
+    table {
+      border-collapse: separate;
+      border-spacing: 0px;
+
+      thead {
+        height: 10vmin;
+        background-color: $primary_blue_bg;
+        position: sticky;
+        top: 0;
+        z-index: 990;
+
+        th {
+          vertical-align: middle;
+          background-color: $primary_blue_bg;
+          text-transform: uppercase;
+          border-top: 1px solid $primary_gray_3;
+          border-bottom: 1px solid $primary_gray_3;
+
+          .headerFilter {
+            h2 {
+              font-size: 1.4vmin;
+              color: $primary_gray;
+              font-weight: 600;
+            }
+          }
+
+          .searchImgBox {
+            margin-top: 0.7vmin;
+
+            input {
+              height: 2.5vmin;
+              padding: 0.5vmin 3vmin 0.5vmin 0.5vmin;
+              background-image: url('../../../../assets/sabic_icons/header/search_icon.svg');
+              background-repeat: no-repeat;
+              background-position: 0.5vmin center;
+              background-size: 1.25vmin;
+
+              &:focus {
+                background-image: none;
+              }
+            }
+
+            .crossIconContainer {
+              background-color: transparent;
+              border: none;
+              padding: 0;
+              cursor: pointer;
+              position: absolute;
+              right: 0;
+              top: 50%;
+              transform: translateY(-50%);
+              width: 2.5vmin;
+              height: 2.5vmin;
+
+              img {
+                width: 100%;
+                height: 100%;
+                filter: unset;
+              }
+            }
+          }
+
+          .editBox {
+            display: inline-block;
+            height: 100%;
+            padding: 0.8vmin 0.6vmin 0.65vmin 0.6vmin;
+            border-radius: 0.3vmin;
+            box-shadow: 0px 0px 5px 0px $primary_shadow_card;
+            border: 0;
+            width: 100%;
+            outline: none;
+            color: $primary_gray;
+            position: relative;
+
+            &.backgroundImgNone {
+              background-image: none;
+            }
+
+            &::placeholder {
+              font-weight: 300;
+              font-size: 1.5vmin;
+            }
+
+            &:focus {
+              background-color: $primary_white;
+              outline: 1px solid $primary_gray_2;
+
+              &::placeholder {
+                color: transparent;
+              }
+            }
+
+            &::-webkit-input-placeholder {
+              font-size: 2.5vmin;
+              font-weight: normal;
+              color: $primary_gray_2;
+            }
+          }
+
+          .arrowDownImg {
+            width: 1.5vmin;
+            cursor: pointer;
+            filter: unset;
+          }
+        }
+      }
+
+      tbody {
+        tr {
+          position: relative;
+          border-bottom: 1px solid $primary_gray_3;
+
+          td {
+            position: relative;
+            vertical-align: middle;
+            font-family: 'sabic_text_regular', serif;
+            font-size: 1.3vmin;
+            font-weight: 500;
+            color: $primary_gray_2;
+            text-transform: uppercase;
+
+            .expandStack {
+              gap: 2vmin;
+            }
+
+            .blueExpandBtn {
+              @include blue_filter_icon;
+              cursor: pointer;
+              width: 2vmin;
+              height: 2vmin;
+            }
+          }
+
+          &:nth-child(odd) {
+            td {
+              background-color: $primary_bg;
+            }
+          }
+
+          &:last-child {
+            border-bottom: none !important;
+          }
+        }
+      }
+    }
+  }
+}
+
+:global(.customResponsiveWidth) {
+  :global(.modal_body) {
+    padding: 2vmin 2vmin 2vmin 2vmin !important;
+
+    :global(.expandContent) {
+      width: 100%;
+      height: 100%;
+      overflow-y: auto;
+
+      P {
+        padding-right: 1.2vmin;
+        font-size: 1.6vmin;
+        font-weight: 600;
+        word-break: break-all;
+      }
+    }
+  }
+}
+
+.anchorLink {
+  line-height: 1.9vmin;
+  cursor: pointer;
+
+  &:hover {
+    color: $primary_blue_hover;
+  }
+}
+
+.btnContainer {
+  button {
+    display: inline-block;
+    width: 100%;
+    border-radius: 0.4vmin;
+    color: $primary_white;
+    padding: 0.8vmin 0.6vmin 0.4vmin 0.6vmin;
+    font-size: 1.4vmin;
+    font-weight: 400;
+    text-transform: uppercase;
+
+    &.EditBtn {
+      background-color: $primary_blue;
+      border: none;
+    }
+
+    &.active {
+      background-color: $primary_bg !important;
+    }
+  }
+}
+
+.serversideTable_DP_container {
+  &.marginTop {
+    margin-top: 0.7vmin;
+  }
+
+  :global(.react-datepicker-wrapper) {
+    width: 100%;
+
+    :global(.react-datepicker__input-container) {
+      input {
+        height: 2.5vmin;
+        border-radius: 0.3vmin;
+        padding: 0.5vmin 3vmin 0.5vmin 0.5vmin;
+        border: 1px solid transparent;
+        width: 100%;
+        box-shadow: 0px 0px 3px 0px $primary_shadow_card;
+        background-image: url('../../../../assets/sabic_icons/header/calender_gray_icon.svg');
+        background-repeat: no-repeat;
+        background-position: 0.5vmin center;
+        background-size: 1.25vmin;
+        min-width: 17vmin;
+
+        &.backgroundImgNone {
+          background-image: none;
+        }
+
+        &:focus {
+          outline: 1px solid $primary_gray_2;
+          background-image: none;
+        }
+      }
+    }
+  }
+
+  .posDatePicker {
+    top: calc(100% + 0.5vmin);
+
+    .submitBtn {
+      background-color: $primary_blue;
+      font-size: 1.4vmin;
+      border: 1px solid $primary_blue;
+      border-radius: 0.3vmin;
+      text-transform: uppercase;
+      color: $primary_white;
+      padding: 0.8vmin 1.5vmin 0.45vmin 1.5vmin;
+    }
+
+    .cancelBtn {
+      background-color: $primary_gray_2;
+      font-size: 1.4vmin;
+      border: 1px solid $primary_gray_2;
+      border-radius: 0.3vmin;
+      text-transform: uppercase;
+      color: $primary_white;
+      padding: 0.8vmin 1.5vmin 0.45vmin 1.5vmin;
+    }
+  }
+
+  .crossIconContainer {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 2.5vmin;
+    height: 2.5vmin;
+
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+
+.backgroundImgNone {
+  background-image: none;
+}

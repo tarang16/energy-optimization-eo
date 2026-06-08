@@ -1,0 +1,42 @@
+@use 'src/config/scss/_variables' as *;
+
+.performance_predicted_card {
+  background-color: $primary_white;
+  box-shadow: 0px 0px 5px 1px $primary_gray_4;
+  height: 100%;
+
+  .SortingModal_btn {
+    visibility: hidden;
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+
+    img {
+      width: 2.1vmin;
+      height: 2.1vmin;
+    }
+  }
+
+  .visibelSortModal_Performancebtn,
+  .visibelSortModal_Predictedbtn {
+    &:hover {
+      .SortingModal_btn {
+        visibility: visible;
+      }
+    }
+  }
+}
+
+.predictedKpiWidth {
+  :global(.modal-dialog.modal-xl) {
+    width: 60vmin;
+    margin: 0 auto;
+  }
+}
+
+.performanceKpiWidth {
+  :global(.modal-dialog.modal-xl) {
+    width: 75vmin;
+    margin: 0 auto;
+  }
+}

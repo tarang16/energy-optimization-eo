@@ -1,0 +1,90 @@
+{
+  "total_leaves": 179,
+  "by_bucket": {
+    "needs_pi_in_hierarchy": 146,
+    "inferred_chain": 31,
+    "regression": 1,
+    "composition_derived": 1
+  },
+  "by_bucket_by_boiler_unit": {},
+  "examples_per_bucket": {
+    "composition_derived": [
+      {
+        "tag": "DMW_Makeup",
+        "formula": "([DMW_MAKEUP_Near_Clean_Condensate_Header]+[DMW_MAKEUP_Near_Suspect_Condensate_Header])/1000",
+        "notes": "references composition tags: ['DMW_MAKEUP_Near_Clean_Condensate_Header', 'DMW_MAKEUP_Near_Suspect_Condensate_Header']"
+      }
+    ],
+    "inferred_chain": [
+      {
+        "tag": "BFW_TO_LAO",
+        "formula": "if([LAO_Plant_Status]==0,0,[BFW_TO_LAO_raw]/1000)",
+        "notes": "composite of 2 other L2 tags"
+      },
+      {
+        "tag": "BFW_to_EOEG_1",
+        "formula": "if([EOEG1_Plant_Status]==0,0,[BFW_to_EOEG_1_raw])",
+        "notes": "composite of 2 other L2 tags"
+      },
+      {
+        "tag": "BFW_to_EOEG_2",
+        "formula": "if([EOEG2_Plant_Status]==0,0,[BFW_to_EOEG_2_raw])",
+        "notes": "composite of 2 other L2 tags"
+      },
+      {
+        "tag": "BFW_to_EOEG_3",
+        "formula": "if([EOEG3_Plant_Status]==0,0,[BFW_to_EOEG_3_raw])",
+        "notes": "composite of 2 other L2 tags"
+      },
+      {
+        "tag": "DSP_BFW_TO_CAUSTIC_DILUTION",
+        "formula": "[DSP_BFW_TO_CAUSTIC_DILUTION_raw]/1000",
+        "notes": "passthrough to DSP_BFW_TO_CAUSTIC_DILUTION_raw"
+      },
+      {
+        "tag": "DSP_BFW_TO_EG1",
+        "formula": "if([EOEG1_Plant_Status]==0,0,[DSP_BFW_TO_EG1_raw])",
+        "notes": "composite of 2 other L2 tags"
+      }
+    ],
+    "needs_pi_in_hierarchy": [
+      {
+        "tag": "DSP_BFW_TO_EG3_raw",
+        "formula": NaN,
+        "notes": "no inferred formula; appears in master_pi_data -> raw PI snapshot input"
+      },
+      {
+        "tag": "DSP_BFW_TO_ETH_raw",
+        "formula": NaN,
+        "notes": "no inferred formula; appears in master_pi_data -> raw PI snapshot input"
+      },
+      {
+        "tag": "LHV",
+        "formula": NaN,
+        "notes": "no inferred formula; appears in master_pi_data -> raw PI snapshot input"
+      },
+      {
+        "tag": "VHP_BFW_FROM_U_O",
+        "formula": NaN,
+        "notes": "no inferred formula; appears in master_pi_data -> raw PI snapshot input"
+      },
+      {
+        "tag": "VHP_DESPHTR_BFW_FROM_U_O",
+        "formula": NaN,
+        "notes": "no inferred formula; appears in master_pi_data -> raw PI snapshot input"
+      },
+      {
+        "tag": "BFW_B_Turb_Steam_raw",
+        "formula": NaN,
+        "notes": "no inferred formula; appears in master_pi_data -> raw PI snapshot input"
+      }
+    ],
+    "regression": [
+      {
+        "tag": "ETH_Plant_Status",
+        "formula": "if(if(missing([Total_Ethylene_Production_ETH_Plant]),0,[Total_Ethylene_Production_ETH_Plant])>100,1,0)",
+        "notes": "references regression-style tags: ['Total_Ethylene_Production_ETH_Plant', 'Total_Ethylene_Production_ETH_Plant']"
+      }
+    ]
+  }
+}

@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?><process version="10.4.003">
+  <context>
+    <input/>
+    <output/>
+    <macros/>
+  </context>
+  <operator activated="true" class="process" compatibility="10.4.003" expanded="true" name="Process">
+    <parameter key="logverbosity" value="init"/>
+    <parameter key="random_seed" value="2001"/>
+    <parameter key="send_mail" value="never"/>
+    <parameter key="notification_email" value=""/>
+    <parameter key="process_duration_for_mail" value="30"/>
+    <parameter key="encoding" value="SYSTEM"/>
+    <process expanded="true">
+      <operator activated="true" class="subprocess" compatibility="10.4.003" expanded="true" height="124" name="Main" width="90" x="447" y="136">
+        <process expanded="true">
+          <operator activated="true" class="multiply" compatibility="10.4.003" expanded="true" height="82" name="sub_model" width="90" x="45" y="34"/>
+          <operator activated="true" class="extract_macro" compatibility="10.4.003" expanded="true" height="68" name="Extract Macro (4)" width="90" x="179" y="34">
+            <parameter key="macro" value="noe"/>
+            <parameter key="macro_type" value="number_of_examples"/>
+            <parameter key="statistics" value="average"/>
+            <parameter key="attribute_name" value=""/>
+            <list key="additional_macros"/>
+            <description align="center" color="transparent" colored="false" width="126">extract number of example</description>
+          </operator>
+          <operator activated="true" class="multiply" compatibility="10.4.003" expanded="true" height="82" name="sub_model_child" width="90" x="45" y="136"/>
+          <operator activated="true" class="multiply" compatibility="10.4.003" expanded="true" height="82" name="user_ip_table (2)" width="90" x="45" y="238"/>
+          <operator activated="true" class="concurrency:loop" compatibility="10.4.003" expanded="true" height="124" name="Loop (2)" width="90" x="380" y="34">
+            <parameter key="number_of_iterations" value="%{noe}"/>
+            <parameter key="iteration_macro" value="itr"/>
+            <parameter key="reuse_results" value="true"/>
+            <parameter key="enable_parallel_execution" value="true"/>
+            <process expanded="true">
+              <operator activated="true" class="extract_macro" compatibility="10.4.003" expanded="true" height="68" name="Extract Macro" width="90" x="380" y="34">
+                <parameter key="macro" value="sub_model_name"/>
+                <parameter key="macro_type" value="data_value"/>
+                <parameter key="statistics" value="average"/>
+                <parameter key="attribute_name" value="sub_model_name"/>
+                <parameter key="example_index" value="%{itr}"/>
+                <list key="additional_macros">
+                  <parameter key="sub_model_id" value="sub_model_id"/>
+                  <parameter key="sub_model_expression" value="sub_model_expression"/>
+                  <parameter key="sub_model_type" value="sub_model_type"/>
+                </list>
+              </operator>
+              <operator activated="true" class="branch" compatibility="10.4.003" expanded="true" height="103" name="Demand calculation" width="90" x="380" y="238">
+                <parameter key="condition_type" value="expression"/>
+                <parameter key="condition_value" value="'model_type {=} equation'"/>
+                <parameter key="expression" value="%{sub_model_type}==&quot;equation&quot;"/>
+                <parameter key="io_object" value="ANOVAMatrix"/>
+                <parameter key="return_inner_output" value="true"/>
+                <process expanded="true">
+                  <operator activated="true" class="blending:generate_columns" compatibility="10.4.003" expanded="true" height="82" name="Generate Attributes (3)" width="90" x="112" y="136">
+                    <list key="function_descriptions">
+                      <parameter key="%{sub_model_name}" value="eval(%{sub_model_expression})"/>
+                    </list>
+                    <parameter key="keep_all_columns" value="true"/>
+                    <parameter key="default_time_zone" value="Asia/Riyadh"/>
+                    <description align="center" color="transparent" colored="false" width="126">evaluate sub model expression</description>
+                  </operator>
+                  <connect from_port="condition" to_port="input 1"/>
+                  <connect from_port="input 1" to_op="Generate Attributes (3)" to_port="table input"/>
+                  <connect from_op="Generate Attributes (3)" from_port="table output" to_port="input 2"/>
+                  <portSpacing port="source_condition" spacing="0"/>
+                  <portSpacing port="source_input 1" spacing="0"/>
+                  <portSpacing port="source_input 2" spacing="0"/>
+                  <portSpacing port="sink_input 1" spacing="0"/>
+                  <portSpacing port="sink_input 2" spacing="0"/>
+                  <portSpacing port="sink_input 3" spacing="0"/>
+                </process>
+                <process expanded="true">
+                  <operator activated="true" class="generate_macro" compatibility="10.4.003" expanded="true" height="68" name="Generate Macro" width="90" x="45" y="340">
+                    <list key="function_descriptions">
+                      <parameter key="model_file" value="rint(parse(%{case_id}))+&quot;_what_if_model_files/&quot;+&quot;Data_Model_File_&quot;+%{sub_model_name}"/>
+                    </list>
+                    <description align="center" color="transparent" colored="false" width="126">prepare model file path</description>
+                  </operator>
+                  <operator activated="true" class="retrieve" compatibility="10.4.003" expanded="true" height="68" name="model_file" width="90" x="313" y="34">
+                    <parameter key="repository_entry" value="../../02_Model_Files/%{model_file}"/>
+                    <description align="center" color="transparent" colored="false" width="126">retreive model file from repository</description>
+                  </operator>
+                  <operator activated="true" class="multiply" compatibility="10.4.003" expanded="true" height="103" name="user input" width="90" x="246" y="289"/>
+                  <operator activated="true" class="multiply" compatibility="10.4.003" expanded="true" height="103" name="sub model child" width="90" x="45" y="34"/>
+                  <operator activated="true" class="subprocess" compatibility="10.4.003" expanded="true" height="103" name="preprocessing" width="90" x="380" y="187">
+                    <process expanded="true">
+                      <operator activated="true" class="filter_examples" compatibility="10.4.003" expanded="true" height="103" name="Filter Examples (6)" width="90" x="45" y="187">
+                        <parameter key="parameter_expression" value=""/>
+                        <parameter key="condition_class" value="custom_filters"/>
+                        <parameter key="invert_filter" value="false"/>
+                        <list key="filters_list">
+                          <parameter key="filters_entry_key" value="sub_model_id.eq.%{sub_model_id}"/>
+                        </list>
+                        <parameter key="filters_logic_and" value="true"/>
+                        <parameter key="filters_check_metadata" value="true"/>
+                      </operator>
+                      <operator activated="true" class="transpose" compatibility="10.4.003" expanded="true" height="82" name="Transpose" width="90" x="45" y="34"/>
+                      <operator activated="true" class="concurrency:join" compatibility="10.4.003" expanded="true" height="82" name="Join (5)" width="90" x="246" y="34">
+                        <parameter key="remove_double_attributes" value="true"/>
+                        <parameter key="join_type" value="inner"/>
+                        <parameter key="use_id_attribute_as_key" value="false"/>
+                        <list key="key_attributes">
+                          <parameter key="id" value="tag_name"/>
+                        </list>
+                        <parameter key="keep_both_join_attributes" value="false"/>
+                      </operator>
+                      <operator activated="true" class="blending:select_attributes" compatibility="10.4.003" expanded="true" height="82" name="Select Attributes (6)" width="90" x="380" y="34">
+                        <parameter key="type" value="include attributes"/>
+                        <parameter key="attribute_filter_type" value="a subset"/>
+                        <parameter key="select_attribute" value=""/>
+                        <parameter key="select_subset" value="id␞value"/>
+                        <parameter key="also_apply_to_special_attributes_(id,_label..)" value="false"/>
+                      </operator>
+                      <operator activated="true" class="transpose" compatibility="10.4.003" expanded="true" height="82" name="Transpose (7)" width="90" x="514" y="34"/>
+                      <connect from_port="in 1" to_op="Transpose" to_port="example set input"/>
+                      <connect from_port="in 2" to_op="Filter Examples (6)" to_port="example set input"/>
+                      <connect from_op="Filter Examples (6)" from_port="example set output" to_op="Join (5)" to_port="right"/>
+                      <connect from_op="Transpose" from_port="example set output" to_op="Join (5)" to_port="left"/>
+                      <connect from_op="Join (5)" from_port="join" to_op="Select Attributes (6)" to_port="example set input"/>
+                      <connect from_op="Select Attributes (6)" from_port="example set output" to_op="Transpose (7)" to_port="example set input"/>
+                      <connect from_op="Transpose (7)" from_port="example set output" to_port="out 1"/>
+                      <portSpacing port="source_in 1" spacing="0"/>
+                      <portSpacing port="source_in 2" spacing="0"/>
+                      <portSpacing port="source_in 3" spacing="0"/>
+                      <portSpacing port="sink_out 1" spacing="0"/>
+                      <portSpacing port="sink_out 2" spacing="0"/>
+                    </process>
+                    <description align="center" color="transparent" colored="false" width="126">prepare model child inputs for sub model&lt;br/&gt;&lt;br/&gt;I/P 1: user_input&lt;br/&gt;I/P 2: sub_model_child</description>
+                  </operator>
+                  <operator activated="true" class="apply_model" compatibility="10.4.003" expanded="true" height="82" name="Apply Model (2)" width="90" x="514" y="85">
+                    <list key="application_parameters"/>
+                    <description align="center" color="transparent" colored="false" width="126">model inferrence</description>
+                  </operator>
+                  <operator activated="true" class="rename_by_replacing" compatibility="10.4.003" expanded="true" height="82" name="Rename by Replacing" width="90" x="648" y="85">
+                    <parameter key="attribute_filter_type" value="all"/>
+                    <parameter key="attribute" value=""/>
+                    <parameter key="attributes" value=""/>
+                    <parameter key="use_except_expression" value="false"/>
+                    <parameter key="value_type" value="attribute_value"/>
+                    <parameter key="use_value_type_exception" value="false"/>
+                    <parameter key="except_value_type" value="time"/>
+                    <parameter key="block_type" value="attribute_block"/>
+                    <parameter key="use_block_type_exception" value="false"/>
+                    <parameter key="except_block_type" value="value_matrix_row_start"/>
+                    <parameter key="invert_selection" value="false"/>
+                    <parameter key="include_special_attributes" value="true"/>
+                    <parameter key="replace_what" value="\w+\((.*?)\)"/>
+                    <parameter key="replace_by" value="%{sub_model_name}"/>
+                  </operator>
+                  <operator activated="true" class="operator_toolbox:merge" compatibility="2.17.000" expanded="true" height="103" name="Merge Attributes (2)" width="90" x="916" y="238">
+                    <parameter key="handling_of_duplicate_attributes" value="keep_only_first"/>
+                    <parameter key="handling_of_special_attributes" value="keep_first_special_other_regular"/>
+                    <parameter key="handling_of_duplicate_annotations" value="keep_only_first"/>
+                    <description align="center" color="transparent" colored="false" width="126">merging with existing dataframe</description>
+                  </operator>
+                  <connect from_port="condition" to_op="sub model child" to_port="input"/>
+                  <connect from_port="input 1" to_op="user input" to_port="input"/>
+                  <connect from_op="model_file" from_port="output" to_op="Apply Model (2)" to_port="model"/>
+                  <connect from_op="user input" from_port="output 1" to_op="Merge Attributes (2)" to_port="example set 2"/>
+                  <connect from_op="user input" from_port="output 2" to_op="preprocessing" to_port="in 1"/>
+                  <connect from_op="sub model child" from_port="output 1" to_op="preprocessing" to_port="in 2"/>
+                  <connect from_op="sub model child" from_port="output 2" to_port="input 1"/>
+                  <connect from_op="preprocessing" from_port="out 1" to_op="Apply Model (2)" to_port="unlabelled data"/>
+                  <connect from_op="Apply Model (2)" from_port="labelled data" to_op="Rename by Replacing" to_port="example set input"/>
+                  <connect from_op="Rename by Replacing" from_port="example set output" to_op="Merge Attributes (2)" to_port="example set 1"/>
+                  <connect from_op="Merge Attributes (2)" from_port="merged set" to_port="input 2"/>
+                  <portSpacing port="source_condition" spacing="0"/>
+                  <portSpacing port="source_input 1" spacing="0"/>
+                  <portSpacing port="source_input 2" spacing="0"/>
+                  <portSpacing port="sink_input 1" spacing="0"/>
+                  <portSpacing port="sink_input 2" spacing="0"/>
+                  <portSpacing port="sink_input 3" spacing="0"/>
+                </process>
+                <description align="center" color="transparent" colored="false" width="126">I/P 1: sub_model_child&lt;br/&gt;I/P 2: user_input_&lt;br/&gt;dataframe</description>
+              </operator>
+              <connect from_port="input 1" to_op="Extract Macro" to_port="example set"/>
+              <connect from_port="input 2" to_op="Demand calculation" to_port="condition"/>
+              <connect from_port="input 3" to_op="Demand calculation" to_port="input 1"/>
+              <connect from_op="Extract Macro" from_port="example set" to_port="output 1"/>
+              <connect from_op="Demand calculation" from_port="input 1" to_port="output 2"/>
+              <connect from_op="Demand calculation" from_port="input 2" to_port="output 3"/>
+              <portSpacing port="source_input 1" spacing="0"/>
+              <portSpacing port="source_input 2" spacing="0"/>
+              <portSpacing port="source_input 3" spacing="0"/>
+              <portSpacing port="source_input 4" spacing="0"/>
+              <portSpacing port="sink_output 1" spacing="0"/>
+              <portSpacing port="sink_output 2" spacing="0"/>
+              <portSpacing port="sink_output 3" spacing="0"/>
+              <portSpacing port="sink_output 4" spacing="0"/>
+              <description align="center" color="transparent" colored="true" height="85" resized="true" width="218" x="315" y="113">sub_model_name&lt;br&gt;sub_model_id&lt;br&gt;sub_model_type&lt;br&gt;sub_model_expression</description>
+            </process>
+            <description align="center" color="transparent" colored="false" width="126">I/P 1: sub model&lt;br&gt;I/P 2: sub model child&lt;br&gt;I/P 3: user_input&lt;br&gt;&lt;br&gt;O/P 1: Sub model&lt;br&gt;O/P 2: submodel values(Demands)</description>
+          </operator>
+          <connect from_port="in 1" to_op="sub_model" to_port="input"/>
+          <connect from_port="in 2" to_op="sub_model_child" to_port="input"/>
+          <connect from_port="in 3" to_op="user_ip_table (2)" to_port="input"/>
+          <connect from_op="sub_model" from_port="output 1" to_op="Extract Macro (4)" to_port="example set"/>
+          <connect from_op="Extract Macro (4)" from_port="example set" to_op="Loop (2)" to_port="input 1"/>
+          <connect from_op="sub_model_child" from_port="output 1" to_op="Loop (2)" to_port="input 2"/>
+          <connect from_op="user_ip_table (2)" from_port="output 1" to_op="Loop (2)" to_port="input 3"/>
+          <connect from_op="Loop (2)" from_port="output 1" to_port="out 1"/>
+          <connect from_op="Loop (2)" from_port="output 3" to_port="out 2"/>
+          <portSpacing port="source_in 1" spacing="0"/>
+          <portSpacing port="source_in 2" spacing="0"/>
+          <portSpacing port="source_in 3" spacing="0"/>
+          <portSpacing port="source_in 4" spacing="0"/>
+          <portSpacing port="sink_out 1" spacing="0"/>
+          <portSpacing port="sink_out 2" spacing="0"/>
+          <portSpacing port="sink_out 3" spacing="0"/>
+        </process>
+        <description align="center" color="transparent" colored="false" width="126">I/P 1: sub model&lt;br&gt;I/P 2: sub model child&lt;br&gt;I/P 3: user_input&lt;br&gt;&lt;br&gt;O/P 1: Sub model&lt;br&gt;O/P 2: submodel values(Demands)</description>
+      </operator>
+      <connect from_port="input 1" to_op="Main" to_port="in 1"/>
+      <connect from_port="input 2" to_op="Main" to_port="in 2"/>
+      <connect from_port="input 3" to_op="Main" to_port="in 3"/>
+      <connect from_op="Main" from_port="out 1" to_port="result 1"/>
+      <connect from_op="Main" from_port="out 2" to_port="result 2"/>
+      <portSpacing port="source_input 1" spacing="0"/>
+      <portSpacing port="source_input 2" spacing="0"/>
+      <portSpacing port="source_input 3" spacing="0"/>
+      <portSpacing port="source_input 4" spacing="0"/>
+      <portSpacing port="sink_result 1" spacing="0"/>
+      <portSpacing port="sink_result 2" spacing="0"/>
+      <portSpacing port="sink_result 3" spacing="0"/>
+      <description align="center" color="green" colored="true" height="512" resized="true" width="278" x="12" y="38">Demand Calculation&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;Author:&lt;br&gt;Trupti jadhav&lt;br&gt;Akshay Hasabe&lt;br&gt;Karthik Sanagapalli&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;Overview:&lt;br&gt;In this process, the demand is calculated by leveraging a sub-model or a sub-model expression. This sub-model utilizes various plant parameters that are provided by the user through an interactive dashboard. These inputs allow the system to dynamically compute the demand based on the specific conditions and configurations defined by the user.&lt;br&gt;</description>
+      <description align="center" color="purple" colored="true" height="512" resized="true" width="423" x="291" y="38">MAIN</description>
+    </process>
+  </operator>
+</process>

@@ -1,0 +1,43 @@
+﻿ccp_info_id,parameter,logic,active,description,show_warning,show_alert,model_status
+1,tag_out_of_bound_switch,no_check,1,do not check min and max,0,0,on
+2,tag_out_of_bound_switch,skip,1,"Model offline, As tag value is out of bounds",0,1,off
+3,tag_out_of_bound_switch,default_warning,1,Default value considered as tag value is out of bounds,1,0,on_default
+4,tag_out_of_bound_switch,default_no_warning,1,model Run with Defaults,0,0,on
+5,tag_out_of_bound_switch,bound_warning,1,Boundry value considered as tag value is out of bounds,1,0,on_default
+6,tag_out_of_bound_switch,bound_no_warning,1,bound at limits without warning,0,0,on
+7,tag_stuck_switch,no_check,1,no check,0,0,on
+8,tag_stuck_switch,skip,1,Model offline as tag value is stuck,0,1,off
+9,tag_stuck_switch,default_warning,1,Default value considered as tag value is stuck,1,0,on_default
+10,tag_stuck_switch,default_no_warning,1,consider default with no warning,0,0,on
+11,tag_stuck_switch,value_warning,1,Tag Value is stuck,1,0,on_default
+12,tag_nan_switch,no_check,1,no check,0,0,on
+13,tag_nan_switch,skip,1,Model offline as tag value is nan,0,1,off
+14,tag_nan_switch,default_warning,1,Default value considered as tag value is NAN,1,0,on_default
+15,tag_nan_switch,default_no_warning,1,consider default with no warning,0,0,on
+16,default_switch,no_check,1,no check,0,0,on
+17,default_switch,default_warning,1,Default Value Considered,1,0,on_default
+18,default_switch,default_no_warning,1,consider default with no warning,0,0,on
+19,parameter_nan_check,skip,1,skip model if parameter value is nan,0,1,off
+20,lower_bound_switch,lower_bound_value,1,Use value for lower bound,0,0,on
+21,lower_bound_switch,lower_bound_expression,1,use expression for lower bound,0,0,on
+22,upper_bound_switch,upper_bound_value,1,use value for upper bound,0,0,on
+23,upper_bound_switch,upper_bound_expression,1,use expression for upper bound,0,0,on
+24,initial_value_switch,actual_value,1,use actual value for initial value,0,0,on
+25,initial_value_switch,lower_bound,1,use lower bound value for initial value,0,0,on
+26,initial_value_switch,upper_bound,1,use upper bound value for initial value,0,0,on
+27,initial_value_switch,mean_of_bounds,1,"use mean of lower and upper bounds ",0,0,on
+28,tag_out_of_bound_switch,last_good_value_warning,1,Last good value considered,1,0,on_default
+29,tag_out_of_bound_switch,last_good_value_no_warning,1,Consider last good value with no warning,0,0,on
+30,tag_stuck_switch,last_good_value_warning,1,Last good value considered,1,0,on_default
+31,tag_stuck_switch,last_good_value_no_warning,1,Consider last good value with no warning,0,0,on
+32,tag_nan_switch,last_good_value_warning,1,Last good value considered,1,0,on_default
+33,tag_nan_switch,last_good_value_no_warning,1,Consider last good value with no warning,0,0,on
+34,default_switch,last_good_value_warning,1,Last good value considered,1,0,on_default
+35,default_switch,last_good_value_no_warning,1,Consider last good value with no warning,0,0,on
+36,initial_value_switch,last_good_value,1,use last good value for initial value,0,0,on
+37,initial_value_switch,last_optimum_value,1,use last optimum value for initial value,0,0,on
+38,optimizer_status,optimizer_solution_not_found,1,optimizer failed to converge due to maximum iteration reached,0,1,off_opt_nf
+39,optimizer_status,optimizer_file_not_found,1,optimizer failed to converge,0,1,off_opt_nf
+40,optimizer_status,optimizer_variable_not_available,1,variable is missing,0,1,off_opt_nf
+41,optimizer_status,unknown_error,1,unknown error,0,1,off_opt_nf
+42,optimizer_status,optimizer_converged_successfully,1,optimizer converged successfully,0,0,on

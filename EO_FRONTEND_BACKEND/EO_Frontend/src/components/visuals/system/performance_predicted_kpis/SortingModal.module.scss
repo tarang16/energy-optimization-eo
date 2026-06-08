@@ -1,0 +1,60 @@
+@use 'src/config/scss/_variables' as *;
+
+.kpi_sorting_parent {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1vmin;
+
+  .topContainer {
+    .infoIocn {
+      width: 2.5vmin;
+    }
+  }
+
+  .kpi_Sorting_container {
+    height: 100%;
+    margin-bottom: 2vmin;
+    overflow-y: auto;
+    display: block !important;
+    justify-content: start !important;
+    flex-flow: unset !important;
+    // flex-direction: column !important;
+    flex-wrap: wrap !important;
+  }
+
+  .buttonContainer {
+    height: 5vmin;
+    display: flex;
+    justify-content: end;
+    gap: 2vmin;
+
+    button {
+      height: 100%;
+      padding: 1vmin 2vmin 0.7vmin 2vmin;
+      border: none;
+      text-transform: uppercase;
+      letter-spacing: 0.1vmin;
+      background-color: transparent;
+      border-radius: 0.3vmin;
+
+      &.applyBtn {
+        border: 1px solid $primary_blue;
+        background-color: $primary_blue;
+        color: $primary_white;
+      }
+
+      &.resetBtn {
+        border: 1px solid $primary_blue;
+        background-color: transparent;
+        color: $primary_blue;
+      }
+
+      &.cancelBtn {
+        border: 1px solid $primary_blue;
+        background-color: $primary_blue_80;
+        color: $primary_blue;
+      }
+    }
+  }
+}

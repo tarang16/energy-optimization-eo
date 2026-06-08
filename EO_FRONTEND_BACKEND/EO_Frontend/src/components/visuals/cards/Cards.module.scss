@@ -1,0 +1,65 @@
+@use 'src/config/scss/_variables' as *;
+
+.box {
+  // box-shadow: 0px 0px 5px 0px $primary_shadow_card_dark_lighter;
+  padding: 0.5vmin;
+  padding-top: 1.2vmin;
+  border-radius: 0.8vmin;
+}
+
+.dynamicDateBox {
+  &_top {
+    padding-bottom: 0.36vmin;
+
+    .title {
+      span {
+        display: inline-block;
+        margin-bottom: 0.3vmin;
+      }
+    }
+  }
+
+  &_bottom {
+    padding-top: 0.36vmin;
+
+    .customBottomMargin {
+      margin-bottom: 0.3vmin;
+    }
+
+    &_left {
+      width: 40%;
+    }
+
+    &_right {
+      width: 60%;
+    }
+  }
+}
+
+.actionButtonContainer {
+  position: 'absolute' !important;
+  right: 0;
+  bottom: 0;
+  height: '100%' !important;
+  width: 'auto' !important;
+  padding: '4px' !important;
+}
+
+.customSpacingClass {
+  padding-top: 0 !important;
+  padding-bottom: 1.5rem !important;
+}
+
+.causeTableClass {
+  padding-bottom: 1.5rem !important;
+}
+
+.equalWidthLabel {
+  min-width: 8vmin;
+}
+
+// :global(.react-tooltip) {
+// 	&.tooltipStyle {
+// 		padding: 40px !important;
+// 	}
+// }

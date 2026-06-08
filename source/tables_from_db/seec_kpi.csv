@@ -1,0 +1,6 @@
+﻿seec_kpi_id,case_id,seec_kpi_name,seec_kpi_uom_id,seec_kpi_description,active
+1,1,seec_baseline,23,"seec baseline ",1
+2,1,seec_actual,23,eec actual,1
+3,1,seec_gain,17,seec gain,1
+4,1,seec_target,23,seec target,1
+5,1,seec_enpi,17,seec enpi,1

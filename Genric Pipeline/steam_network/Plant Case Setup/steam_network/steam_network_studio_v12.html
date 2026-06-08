@@ -1,0 +1,2022 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Steam Network Studio</title>
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0a0e17;--bg2:#111827;--bg3:#1a2236;--bg4:#232f47;--bg5:#2d3a55;
+  --border:#2a3450;--border2:#3a4a6b;--border3:#4a5a80;
+  --text:#e6edf3;--text2:#8b949e;--text3:#5a6578;
+  --orange:#f0883e;--orange2:#d2691e;--orange3:#ff9f43;--orange-glow:rgba(240,136,62,.3);
+  --green:#3fb950;--red:#f85149;--blue:#58a6ff;--purple:#bc8cff;--yellow:#f0c040;--cyan:#56d4dd;--pink:#f778ba;
+  --radius:10px;--radius2:8px;
+  --font:'Segoe UI',system-ui,-apple-system,sans-serif;
+  --mono:'Cascadia Code','Fira Code',Consolas,monospace;
+  --transition:all .25s cubic-bezier(.4,0,.2,1);
+}
+html{font-size:14px}
+body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:16px}
+::-webkit-scrollbar{width:7px;height:7px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:var(--border2);border-radius:4px}
+::-webkit-scrollbar-thumb:hover{background:var(--border3)}
+
+.studio{width:100%;max-width:1280px;background:var(--bg2);border:1px solid var(--border);border-radius:16px;box-shadow:0 32px 96px rgba(0,0,0,.55);display:flex;flex-direction:column;max-height:96vh;overflow:hidden}
+.studio-header{padding:18px 28px 0;display:flex;align-items:center;gap:14px}
+.studio-icon{width:46px;height:46px;border-radius:12px;background:linear-gradient(135deg,var(--orange),var(--orange2));display:flex;align-items:center;justify-content:center;font-size:22px}
+.studio-title h1{font-size:18px;font-weight:700;letter-spacing:.2px}
+.studio-title p{font-size:12px;color:var(--text2);margin-top:2px}
+.studio-actions{margin-left:auto;display:flex;gap:8px}
+
+.tab-bar{display:flex;gap:0;padding:14px 28px 0;border-bottom:1px solid var(--border);overflow-x:auto}
+.tab{padding:10px 16px 12px;font-size:12.5px;font-weight:500;color:var(--text3);cursor:pointer;transition:var(--transition);border-bottom:2px solid transparent;display:flex;align-items:center;gap:8px;white-space:nowrap;background:none;border-top:none;border-left:none;border-right:none;font-family:var(--font)}
+.tab:hover{color:var(--text2)}
+.tab.active{color:var(--orange);border-bottom-color:var(--orange);font-weight:600}
+.tab.completed{color:var(--green)}
+.tab .tab-num{width:22px;height:22px;border-radius:50%;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;background:var(--bg3);color:var(--text3);transition:var(--transition)}
+.tab.active .tab-num{background:var(--orange);color:#fff}
+.tab.completed .tab-num{background:var(--green);color:#fff}
+
+.body{flex:1;overflow-y:auto;padding:24px 28px;min-height:400px}
+.pane{display:none;animation:fade .25s ease}
+.pane.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+
+.footer{padding:14px 28px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;background:var(--bg2)}
+.footer-info{font-size:12px;color:var(--text3);display:flex;align-items:center;gap:8px}
+.footer-info .dot{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 8px rgba(63,185,80,.6)}
+
+.btn{padding:9px 18px;border-radius:var(--radius2);font-size:13px;font-weight:600;cursor:pointer;transition:var(--transition);border:none;display:inline-flex;align-items:center;gap:8px;font-family:var(--font)}
+.btn-primary{background:var(--orange);color:#fff}
+.btn-primary:hover{background:var(--orange3);box-shadow:0 4px 20px var(--orange-glow);transform:translateY(-1px)}
+.btn-secondary{background:transparent;color:var(--text2);border:1px solid var(--border)}
+.btn-secondary:hover{border-color:var(--text2);color:var(--text)}
+.btn-success{background:var(--green);color:#fff}
+.btn-success:hover{box-shadow:0 4px 20px rgba(63,185,80,.4);transform:translateY(-1px)}
+.btn-ghost{background:transparent;color:var(--text2);border:none}
+.btn-ghost:hover{color:var(--text);background:var(--bg3)}
+.btn-sm{padding:6px 12px;font-size:12px}
+.btn-xs{padding:4px 8px;font-size:11px}
+.btn:disabled{opacity:.4;cursor:not-allowed;transform:none!important}
+
+.form-group{margin-bottom:14px}
+.form-label{display:block;font-size:11px;font-weight:600;color:var(--text2);margin-bottom:6px;text-transform:uppercase;letter-spacing:.7px}
+.form-hint{font-size:11px;color:var(--text3);margin-bottom:8px;line-height:1.5}
+.form-input{width:100%;padding:9px 12px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius2);color:var(--text);font-size:13px;font-family:var(--font);transition:var(--transition);outline:none}
+.form-input:focus{border-color:var(--orange);box-shadow:0 0 0 3px rgba(240,136,62,.12)}
+.form-input::placeholder{color:var(--text3)}
+.form-input.small{padding:6px 10px;font-size:12px}
+.form-row{display:grid;gap:10px}
+.form-row-2{grid-template-columns:1fr 1fr}
+.form-row-3{grid-template-columns:1fr 1fr 1fr}
+.form-row-4{grid-template-columns:repeat(4,1fr)}
+
+.section-title{font-size:13px;font-weight:700;color:var(--text);margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px}
+.section-title .accent{width:4px;height:14px;background:var(--orange);border-radius:2px}
+.section-hint{font-size:11px;color:var(--text3);margin-bottom:14px;line-height:1.6}
+
+.item-card{display:flex;align-items:center;gap:12px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius2);padding:10px 12px;margin-bottom:8px;transition:var(--transition)}
+.item-card:hover{border-color:var(--border2)}
+.item-card .ic-icon{font-size:18px;flex-shrink:0}
+.item-card input.ic-name{flex:1;background:transparent;border:1px solid transparent;color:var(--text);font-size:13px;font-weight:600;padding:4px 8px;border-radius:6px;font-family:var(--font);outline:none;transition:var(--transition)}
+.item-card input.ic-name:focus{border-color:var(--orange);background:var(--bg)}
+.item-card .ic-meta{font-size:11px;color:var(--text2);font-family:var(--mono)}
+.item-card .ic-del{width:26px;height:26px;border-radius:6px;background:transparent;border:none;color:var(--text3);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:var(--transition);opacity:.5}
+.item-card:hover .ic-del{opacity:1}
+.item-card .ic-del:hover{background:rgba(248,81,73,.15);color:var(--red)}
+
+.sys-card{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:14px;margin-bottom:10px;transition:var(--transition)}
+.sys-card:hover{border-color:var(--border2)}
+.sys-card-header{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.sys-card-header .sys-color{width:12px;height:12px;border-radius:50%;flex-shrink:0;box-shadow:0 0 6px currentColor}
+.sys-card-header h4{font-size:13px;font-weight:600;flex:1}
+
+.chip-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.chip{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:12px;font-size:11px;font-weight:600;border:1px solid var(--border);background:var(--bg);cursor:pointer;transition:var(--transition)}
+.chip:hover{border-color:var(--border2)}
+.chip.assigned{border-color:var(--orange);background:rgba(240,136,62,.08);color:var(--orange)}
+
+.h-card{display:flex;align-items:center;gap:12px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius2);padding:10px 12px;margin-bottom:8px;cursor:grab;transition:var(--transition)}
+.h-card:hover{border-color:var(--border2)}
+.h-card .h-grip{color:var(--text3);font-size:14px}
+.h-card .h-color{width:8px;height:30px;border-radius:4px}
+.h-card .h-rank{width:24px;height:24px;border-radius:50%;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.h-card input{background:transparent;border:1px solid transparent;color:var(--text);font-family:var(--font);outline:none;transition:var(--transition);padding:3px 6px;border-radius:5px}
+.h-card input:focus{border-color:var(--orange);background:var(--bg)}
+.h-card .h-name{flex:1;font-size:13px;font-weight:600}
+.h-card .h-prange{width:90px;font-size:12px;text-align:center;font-family:var(--mono)}
+.h-card .h-uom{width:64px;font-size:11px;text-align:center}
+.h-card .h-del{width:26px;height:26px;border-radius:6px;background:transparent;border:none;color:var(--text3);cursor:pointer;opacity:.4;transition:var(--transition)}
+.h-card:hover .h-del{opacity:1}
+.h-card .h-del:hover{background:rgba(248,81,73,.15);color:var(--red)}
+
+.h-preview{display:flex;align-items:center;gap:4px;margin-top:14px;padding:12px;background:var(--bg);border-radius:var(--radius2)}
+.h-preview .bar{height:8px;border-radius:4px;flex:1;min-width:30px;box-shadow:0 0 8px currentColor}
+.h-preview .arrow{color:var(--text3);font-size:10px}
+
+.add-row{display:flex;align-items:center;justify-content:center;gap:6px;padding:10px;border:1px dashed var(--border);border-radius:var(--radius2);color:var(--text3);font-size:13px;cursor:pointer;transition:var(--transition);margin-top:8px}
+.add-row:hover{border-color:var(--orange);color:var(--orange);background:rgba(240,136,62,.04)}
+
+.pill{display:flex;align-items:center;gap:8px;padding:9px 14px;border-radius:var(--radius2);border:1.5px solid var(--border);background:var(--bg3);cursor:pointer;transition:var(--transition)}
+.pill:hover{border-color:var(--border2)}
+.pill.active{border-color:var(--orange);background:rgba(240,136,62,.06);box-shadow:0 0 0 3px rgba(240,136,62,.1)}
+.pill .pill-dot{width:10px;height:10px;border-radius:50%}
+.pill .pill-name{font-size:12.5px;font-weight:600}
+.pill .pill-count{font-size:10px;font-weight:700;font-family:var(--mono);background:var(--bg);padding:1px 6px;border-radius:8px;color:var(--text2)}
+.pill.active .pill-count{background:var(--orange);color:#fff}
+.pill.done{border-color:var(--green)}
+.pill.done .pill-count{background:var(--green);color:#fff}
+.pill-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+
+.eq-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px;margin:6px 0}
+.eq-card{display:flex;align-items:center;gap:10px;padding:11px 12px;border-radius:var(--radius2);border:1px solid var(--border);background:var(--bg3);transition:var(--transition)}
+.eq-card:hover{border-color:var(--border2)}
+.eq-card.has-items{border-color:var(--orange);background:rgba(240,136,62,.04)}
+.eq-card .e-icon{font-size:18px}
+.eq-card .e-name{flex:1;font-size:12px;font-weight:600;line-height:1.3}
+.eq-card .e-count{width:50px;padding:5px 8px;background:var(--bg);border:1px solid var(--border);border-radius:6px;color:var(--text);font-size:13px;font-family:var(--mono);text-align:center;outline:none;transition:var(--transition)}
+.eq-card .e-count:focus{border-color:var(--orange);box-shadow:0 0 0 2px rgba(240,136,62,.15)}
+
+.section-label{font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.6px;margin:12px 0 6px;padding-bottom:4px;border-bottom:1px solid var(--border)}
+.section-label:first-child{margin-top:0}
+.section-label.gen-label{color:var(--orange)}
+.section-label.con-label{color:var(--green)}
+.section-label.let-label{color:var(--cyan)}
+
+.subtabs{display:flex;gap:0;border-radius:var(--radius2);overflow:hidden;border:1px solid var(--border);margin-bottom:12px}
+.subtab{flex:1;padding:9px 12px;background:var(--bg3);border:none;color:var(--text2);font-size:12.5px;font-weight:600;cursor:pointer;transition:var(--transition);font-family:var(--font);display:flex;align-items:center;justify-content:center;gap:8px}
+.subtab.active{background:var(--bg4);color:var(--text);border-bottom:2px solid var(--orange)}
+.subtab .scount{font-size:11px;font-weight:700;font-family:var(--mono);background:var(--bg);padding:1px 7px;border-radius:8px;color:var(--text3)}
+.subtab.active .scount{background:var(--orange);color:#fff}
+
+.attr-table{width:100%;border-collapse:collapse;font-size:12px;margin-top:6px;background:var(--bg3);border-radius:var(--radius2);overflow:hidden}
+.attr-table thead{background:var(--bg4)}
+.attr-table th{text-align:left;font-weight:600;color:var(--text2);padding:8px 10px;font-size:11px;text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border)}
+.attr-table td{padding:5px 8px;border-bottom:1px solid var(--border);vertical-align:middle}
+.attr-table tbody tr:hover{background:var(--bg4)}
+.attr-table input,.attr-table select{background:var(--bg);border:1px solid var(--border);color:var(--text);padding:5px 7px;border-radius:5px;font-size:12px;font-family:var(--mono);outline:none;width:100%;transition:var(--transition)}
+.attr-table input:focus,.attr-table select:focus{border-color:var(--orange);box-shadow:0 0 0 2px rgba(240,136,62,.15)}
+.attr-table .num{font-family:var(--mono);font-size:11px;color:var(--text3);text-align:center}
+.attr-table .sip-cell{display:flex;align-items:center;gap:4px}
+.attr-table .sip-cell input[type="checkbox"]{width:14px;height:14px;cursor:pointer;accent-color:var(--orange)}
+
+.instance-tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.itab{padding:7px 12px;border-radius:6px;background:var(--bg3);border:1px solid var(--border);color:var(--text2);font-size:12px;cursor:pointer;font-family:var(--font);transition:var(--transition)}
+.itab:hover{border-color:var(--border2)}
+.itab.active{background:var(--orange);color:#fff;border-color:var(--orange)}
+.itab.warning{border-color:var(--yellow);color:var(--yellow)}
+
+.review-stats{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-bottom:18px}
+.rs{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius2);padding:12px;text-align:center;transition:var(--transition)}
+.rs:hover{border-color:var(--orange);transform:translateY(-1px)}
+.rs .val{font-size:24px;font-weight:800;font-family:var(--mono);color:var(--orange);line-height:1}
+.rs .lbl{font-size:10px;color:var(--text2);text-transform:uppercase;letter-spacing:.5px;margin-top:4px}
+
+.warn{display:flex;align-items:flex-start;gap:8px;padding:9px 12px;border-radius:6px;font-size:12px;margin-bottom:6px;line-height:1.5}
+.warn.error{background:rgba(248,81,73,.08);border:1px solid rgba(248,81,73,.2);color:var(--red)}
+.warn.warning{background:rgba(240,136,62,.08);border:1px solid rgba(240,136,62,.2);color:var(--orange)}
+.warn.ok{background:rgba(63,185,80,.08);border:1px solid rgba(63,185,80,.25);color:var(--green)}
+
+.tree{font-family:var(--mono);font-size:11px;color:var(--text2);background:var(--bg);padding:14px;border-radius:var(--radius2);border:1px solid var(--border);max-height:360px;overflow:auto;line-height:1.7}
+.tree .tnode{color:var(--text)}
+.tree .tlevel{color:var(--orange);font-weight:600}
+.tree .tcount{color:var(--text3);font-size:10px}
+
+.toast-container{position:fixed;bottom:20px;right:20px;z-index:9999;display:flex;flex-direction:column;gap:6px}
+.toast{padding:10px 16px;border-radius:8px;font-size:12px;font-weight:500;animation:slide .25s ease;box-shadow:0 8px 24px rgba(0,0,0,.5);max-width:340px}
+.toast.success{background:rgba(63,185,80,.15);border:1px solid rgba(63,185,80,.3);color:var(--green)}
+.toast.info{background:rgba(88,166,255,.15);border:1px solid rgba(88,166,255,.3);color:var(--blue)}
+.toast.warn{background:rgba(240,136,62,.15);border:1px solid rgba(240,136,62,.3);color:var(--orange)}
+@keyframes slide{from{opacity:0;transform:translateX(30px)}to{opacity:1;transform:translateX(0)}}
+
+.badge{display:inline-flex;align-items:center;padding:2px 7px;border-radius:10px;font-size:10px;font-weight:700;font-family:var(--mono)}
+.badge-orange{background:rgba(240,136,62,.15);color:var(--orange)}
+.badge-green{background:rgba(63,185,80,.15);color:var(--green)}
+.badge-blue{background:rgba(88,166,255,.15);color:var(--blue)}
+
+@media(max-width:900px){
+  .review-stats{grid-template-columns:repeat(3,1fr)}
+  .form-row-3,.form-row-4{grid-template-columns:1fr 1fr}
+}
+@media(max-width:640px){
+  body{padding:8px}.studio{max-height:100vh;border-radius:12px}
+  .body{padding:14px 16px}.tab-bar{padding:10px 14px 0}.studio-header{padding:14px 14px 0}
+  .footer{padding:10px 14px}
+  .form-row-2,.form-row-3,.form-row-4{grid-template-columns:1fr}
+  .review-stats{grid-template-columns:repeat(2,1fr)}
+}
+
+.diagram-tooltip { position: absolute; background: rgba(13, 17, 23, 0.95); border: 1px solid #4a5a80; color: #e6edf3; padding: 10px 14px; border-radius: 6px; font-family: 'Cascadia Code', monospace; font-size: 11px; pointer-events: none; opacity: 0; transition: opacity 0.1s ease-in-out; z-index: 999999; box-shadow: 0 8px 24px rgba(0,0,0,0.6); line-height: 1.4; min-width: 180px; }
+</style>
+
+
+<script src="https://d3js.org/d3.v7.min.js"></script>
+
+<style>
+/* ============ UFD (Utility Flow Diagram) — DCS styling ============ */
+#diagramBox { background:#0d1117 !important; }
+.ufd-svg     { background:#0d1117; display:block;
+               font-family:'Cascadia Code','Fira Code',Consolas,monospace; }
+
+/* Headers — visible lines + invisible hover hitboxes */
+.ufd-header-line { stroke-width:4px; stroke-linecap:butt; pointer-events:none; }
+.ufd-header-hit  { /* fat invisible hitbox; events attached in JS */ }
+.ufd-header-text { font-family:'Cascadia Code',monospace; font-size:11px;
+                   font-weight:700; letter-spacing:.5px; pointer-events:none; }
+.ufd-header-sub  { fill:#7a8aa6; font-family:'Cascadia Code',monospace;
+                   font-size:9px; pointer-events:none; }
+.ufd-header-cap  { pointer-events:none; }
+
+/* Orthogonal flow paths with animated dashes (high P → low P) */
+.ufd-flow {
+  fill:none; stroke-width:1.8px;
+  stroke-linejoin:miter; stroke-linecap:butt; opacity:.95;
+}
+.ufd-flow-anim {
+  stroke-dasharray:6 4;
+  animation: ufd-flow 1.1s linear infinite;
+}
+@keyframes ufd-flow {
+  from { stroke-dashoffset: 0; }
+  to   { stroke-dashoffset: -20; }
+}
+
+/* Equipment — shared */
+.ufd-node     { fill:#161b22; stroke:#7a8aa6; stroke-width:1.5px; }
+.ufd-node-tag { fill:#8b949e; font-size:9px;
+                font-family:'Cascadia Code',monospace; text-anchor:middle;
+                letter-spacing:.4px; pointer-events:none; }
+.ufd-node-qty { fill:#e6edf3; font-size:9.5px; font-weight:700;
+                font-family:'Cascadia Code',monospace; text-anchor:middle;
+                dominant-baseline:hanging; pointer-events:none; }
+
+/* Turbines (trapezoid) */
+.ufd-turbine  { fill:#0f1a2e; stroke:#56d4dd; }
+.ufd-shaft    { stroke:#56d4dd; stroke-width:1.5px; }
+
+/* Boilers / Generators (rectangle + pass-lines) */
+.ufd-boiler   { fill:#1a1410; stroke:#f0883e; }
+.ufd-pass     { stroke:#f0883e; stroke-width:1px; opacity:.55; }
+.ufd-flame    { fill:none; stroke:#f85149; stroke-width:1.4px; }
+
+/* Consumers / Exchangers (circle + S-curve tube bundle) */
+.ufd-exchanger{ fill:#0e1a14; stroke:#3fb950; }
+.ufd-tube     { fill:none; stroke:#3fb950; stroke-width:1.4px; }
+
+/* Letdowns / PRDS (bowtie valve + vertical actuator stem) */
+.ufd-valve    { fill:#2a1a0f; stroke:#f0c040; }
+.ufd-stem     { stroke:#f0c040; stroke-width:1.4px; }
+.ufd-actuator { fill:#1a1a1a; stroke:#f0c040; stroke-width:1px; }
+
+/* Tooltip — body-attached, absolute page coords, top z-index */
+.ufd-tooltip {
+  position:absolute; z-index:999999; pointer-events:none;
+  background:rgba(13,17,23,.97); border:1px solid #4a5a80;
+  color:#e6edf3; padding:10px 14px; border-radius:6px;
+  font-family:'Cascadia Code','Fira Code',Consolas,monospace;
+  font-size:11px; line-height:1.55;
+  min-width:220px; max-width:360px;
+  box-shadow:0 12px 36px rgba(0,0,0,.7);
+  transition:opacity .08s linear; opacity:0;
+}
+.ufd-tooltip .ufd-tt-title { font-weight:700; font-size:12px;
+                             letter-spacing:.4px; margin-bottom:2px; }
+.ufd-tooltip .ufd-tt-meta  { color:#8b949e; font-size:10px; margin-bottom:6px; }
+.ufd-tooltip .ufd-tt-sec   { margin-top:6px; font-size:10px; color:#8b949e;
+                             border-top:1px solid #2a3450; padding-top:4px; }
+.ufd-tooltip .ufd-tt-lbl   { display:inline-block; color:#f0883e;
+                             font-weight:700; margin-right:6px; }
+.ufd-tooltip .ufd-tt-none  { color:#5a6578; font-style:italic; font-size:10px; }
+.ufd-tooltip b             { color:#f0c040; }
+</style>
+
+</head>
+
+
+<body>
+<div class="studio">
+  <div class="studio-header">
+    <div class="studio-icon">⚙️</div>
+    <div class="studio-title">
+      <h1>Steam Network Studio</h1>
+      <p>Digital twin configurator · <strong id="lblAffiliate">United</strong> → <strong id="lblNetwork">Steam Network</strong></p>
+    </div>
+    <div class="studio-actions">
+      <button class="btn btn-secondary btn-sm" onclick="loadDemoConfig()">📂 Load Sample</button>
+      <button class="btn btn-secondary btn-sm" onclick="resetAll()">🗑️ Reset</button>
+    </div>
+  </div>
+
+  <div class="tab-bar">
+    <button class="tab active" data-tab="1" onclick="switchTab(1)"><span class="tab-num">1</span> Affiliate &amp; Plants</button>
+    <button class="tab" data-tab="2" onclick="switchTab(2)"><span class="tab-num">2</span> Steam Networks</button>
+    <button class="tab" data-tab="3" onclick="switchTab(3)"><span class="tab-num">3</span> Headers</button>
+    <button class="tab" data-tab="4" onclick="switchTab(4)"><span class="tab-num">4</span> Equipment</button>
+    <button class="tab" data-tab="5" onclick="switchTab(5)"><span class="tab-num">5</span> Attributes</button>
+    <button class="tab" data-tab="6" onclick="switchTab(6)"><span class="tab-num">6</span> Review &amp; Export</button>
+  </div>
+
+  <div class="body">
+
+    <!-- ============== TAB 1: AFFILIATE & PLANTS ============== -->
+    <div class="pane active" id="pane1">
+      <div class="section-title"><span class="accent"></span>Affiliate (Corporate Entity)</div>
+      <div class="section-hint">Level 1 of the domain hierarchy. The parent corporate entity that owns one or more plants.</div>
+      <div class="form-row form-row-2">
+        <div class="form-group">
+          <label class="form-label">Affiliate Name</label>
+          <input class="form-input" id="inpAffiliate" value="United"
+                 oninput="S.affiliate=this.value;updateHeaderLabels()">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Region / Description</label>
+          <input class="form-input" id="inpRegion" value="Petrochemical Complex"
+                 oninput="S.region=this.value">
+        </div>
+      </div>
+
+      <div class="section-title" style="margin-top:18px"><span class="accent"></span>Plants (Facilities)</div>
+      <div class="section-hint">Level 2. Individual facilities served by the steam network. Examples: OLF, EG1, EG2.</div>
+      <div class="form-group">
+        <label class="form-label">Number of Plants</label>
+        <input type="number" class="form-input" id="inpPlantCount" min="1" max="20" value="3"
+               style="width:120px" onchange="updatePlantCount(+this.value)">
+      </div>
+      <div id="plantList"></div>
+    </div>
+
+    <!-- ============== TAB 2: STEAM NETWORKS ============== -->
+    <div class="pane" id="pane2">
+      <div class="section-title"><span class="accent"></span>Steam Networks (Level 3)</div>
+      <div class="section-hint">Each network is a logical steam grid. A common utility network can serve multiple plants, or each plant can have its own dedicated network.</div>
+      <div class="form-group">
+        <label class="form-label">Number of Networks</label>
+        <input type="number" class="form-input" id="inpNetCount" min="1" max="10" value="1"
+               style="width:120px" onchange="updateNetCount(+this.value)">
+      </div>
+      <div id="networkList"></div>
+    </div>
+
+    <!-- ============== TAB 3: HEADERS ============== -->
+    <div class="pane" id="pane3">
+      <div class="section-title"><span class="accent"></span>Steam Header Levels (per Network)</div>
+      <div class="section-hint">The pressure-level backbone of each steam grid. Standard levels: VHP (~100 bar), HP (~40), MP (~15), LP (~5), LLP (~2). Drag to reorder by descending pressure.</div>
+      <div id="netSelWrap3" style="display:none" class="form-group">
+        <label class="form-label">Select Network</label>
+        <div class="pill-row" id="netSel3"></div>
+      </div>
+      <div id="headerContent" style="display:none">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+          <p style="font-size:13px;font-weight:600">Headers for <strong id="hdrNetLabel" style="color:var(--orange)"></strong></p>
+          <div style="display:flex;align-items:center;gap:8px">
+            <span class="form-label" style="margin:0;white-space:nowrap">Count:</span>
+            <input type="number" class="form-input small" id="inpHdrCount" min="2" max="8" value="5" style="width:60px" onchange="updateHdrCount(+this.value)">
+          </div>
+        </div>
+        <div id="headerList"></div>
+        <div class="add-row" onclick="addHeader()">+ Add Custom Header</div>
+        <div class="h-preview" id="hPreview"></div>
+      </div>
+    </div>
+
+    <!-- ============== TAB 4: EQUIPMENT ============== -->
+    <div class="pane" id="pane4">
+      <div class="section-title"><span class="accent"></span>Equipment per Header (Level 5)</div>
+      <div class="section-hint">Define how many of each equipment type sit on each header. Sources push steam in; consumers/letdowns pull it out.</div>
+      <div id="netSelWrap4" style="display:none" class="form-group">
+        <label class="form-label">Select Network</label>
+        <div class="pill-row" id="netSel4"></div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Select Header</label>
+        <div class="pill-row" id="eqHdrSel"></div>
+      </div>
+      <div id="eqContent" style="display:none">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+          <p style="font-size:13px;font-weight:600">Equipment for <strong id="eqHdrLabel" style="color:var(--orange)"></strong></p>
+          <span class="badge badge-orange" id="eqTotalBadge">0</span>
+        </div>
+        <div class="subtabs">
+          <button class="subtab active" id="subtabGen" onclick="switchSubtab('gen')">🔥 Generators <span class="scount" id="genSubCnt">0</span></button>
+          <button class="subtab" id="subtabCon" onclick="switchSubtab('con')">🏗️ Consumers, Turbines &amp; Letdowns <span class="scount" id="conSubCnt">0</span></button>
+        </div>
+        <div id="genCards"></div>
+        <div id="conCards" style="display:none"></div>
+        <div id="tbnCards" style="display:none"></div>
+        <div id="letCards" style="display:none"></div>
+      </div>
+    </div>
+
+    <!-- ============== TAB 5: ATTRIBUTES ============== -->
+    <div class="pane" id="pane5">
+      <div class="section-title"><span class="accent"></span>Per-Instance Attributes &amp; PI Tags (Level 6)</div>
+      <div class="section-hint">Each equipment instance carries a set of attributes (templates auto-loaded from the All Attributes catalog). Fill in PI sensor IDs, SIP min/max %, default values.</div>
+      <div id="netSelWrap5" style="display:none" class="form-group">
+        <label class="form-label">Select Network</label>
+        <div class="pill-row" id="netSel5"></div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Select Equipment Instance</label>
+        <div class="instance-tabs" id="instanceTabs"></div>
+      </div>
+      <div id="attrContent" style="display:none">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+          <p style="font-size:13px;font-weight:600">Attributes for <strong id="attrInstLabel" style="color:var(--orange)"></strong>
+             <span class="badge badge-blue" id="attrInstType" style="margin-left:6px"></span></p>
+          <button class="btn btn-secondary btn-xs" onclick="bulkFillSip()">⚙️ Bulk Fill SIP</button>
+        </div>
+        <table class="attr-table">
+          <thead>
+            <tr>
+              <th style="width:22px">#</th>
+              <th>Attribute Name</th>
+              <th style="width:90px">UOM</th>
+              <th style="width:180px">PI Sensors (csv)</th>
+              <th style="width:60px">SIP</th>
+              <th style="width:70px">Min %</th>
+              <th style="width:70px">Max %</th>
+              <th style="width:90px">Default</th>
+              <th style="width:24px"></th>
+            </tr>
+          </thead>
+          <tbody id="attrTableBody"></tbody>
+        </table>
+        <div class="add-row" onclick="addAttribute()">+ Add Custom Attribute</div>
+      </div>
+    </div>
+
+    <!-- ============== TAB 6: REVIEW & EXPORT ============== -->
+    <div class="pane" id="pane6">
+      <div class="review-stats" id="reviewStats"></div>
+      <div class="section-title"><span class="accent"></span>Validation</div>
+      <div id="validationBox" style="margin-bottom:18px"></div>
+      <div class="section-title"><span class="accent"></span>Hierarchy Preview</div>
+      <div class="tree" id="treeBox"></div>
+      <div class="section-title" style="margin-top:18px;display:flex;align-items:center;gap:8px">
+        <span class="accent"></span>Network Flow Diagram (Auto-Generated)
+        <div style="margin-left:auto;display:flex;gap:6px">
+          <button class="btn btn-secondary btn-xs" onclick="exportDiagramSVG()">⬇ SVG</button>
+          <button class="btn btn-secondary btn-xs" onclick="exportDiagramPNG()">🖼️ PNG</button>
+        </div>
+      </div>
+      <div class="section-hint">Dynamically rendered D3.js schematic showing the live thermodynamic structure based on your Tab 4 configurations.</div>
+      <div id="diagramBox" style="background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius2);height:540px;overflow:hidden;position:relative;margin-bottom:20px;box-shadow:inset 0 0 20px rgba(0,0,0,0.15);"></div>
+
+    </div>
+
+  </div>
+
+  <div class="footer">
+    <button class="btn btn-secondary btn-sm" id="btnBack" onclick="prevTab()" style="visibility:hidden">← Back</button>
+    <div class="footer-info"><span class="dot"></span> <span id="footerStatus">Step 1 of 6</span></div>
+    <div style="display:flex;gap:8px">
+      <button class="btn btn-primary btn-sm" id="btnNext" onclick="nextTab()">Next →</button>
+      <button class="btn btn-success btn-sm" id="btnExport" onclick="exportXlsx()" style="display:none">📊 Export XLSX</button>
+    </div>
+  </div>
+</div>
+<div class="toast-container" id="toasts"></div>
+
+<script>
+/* ============================================================
+   STEAM NETWORK STUDIO  (vanilla JS, no build)
+   Exports XLSX matching `Steam Network_all_attributes.xlsx`
+   ============================================================ */
+
+const COLORS=['#f85149','#f0883e','#f0c040','#3fb950','#58a6ff','#bc8cff','#56d4dd','#f778ba'];
+const STD_HEADERS=[
+  {name:'VHP Steam Header (100-110 KG/CM2A)', range:'100-110', uom:'KG/CM2A', level:'VHP Steam Header'},
+  {name:'HP-2 Steam Header (40-45 KG/CM2A)',  range:'40-45',   uom:'KG/CM2A', level:'HP-2 Steam Header'},
+  {name:'HP-1 Steam Header (30-35 KG/CM2A)',  range:'30-35',   uom:'KG/CM2A', level:'HP-1 Steam Header (30-35 KG/CM2A)'},
+  {name:'MP-2 Steam Header (20-25 KG/CM2A)',  range:'20-25',   uom:'KG/CM2A', level:'MP-2 Steam Header (20-25 KG/CM2A)'},
+  {name:'MP-1 Steam Header (12-15 KG/CM2A)',  range:'12-15',   uom:'KG/CM2A', level:'MP-1 Steam Header'},
+  {name:'LP-1 Steam Header (5-7 KG/CM2A)',    range:'5-7',     uom:'KG/CM2A', level:'LP-1 Steam Header'},
+  {name:'LP-2 Steam Header (2-3 KG/CM2A)',    range:'2-3',     uom:'KG/CM2A', level:'LP-2 Steam Header'},
+  {name:'Condensate Header',                   range:'',        uom:'',        level:'Return Condensate Header'},
+];
+
+const GEN_TYPES=[
+  // ── Boilers / heat sources ─────────────────────────────────────────────
+  {key:'fuel_fired_boiler',name:'Fuel Fired Boiler',icon:'🔥',cat:'Boiler',template_root:'HP Fuel Fired  Boiler'},
+  {key:'heat_recovery_steam_generator',name:'Heat Recovery Steam Generator',icon:'♨️',cat:'HRSG',template_root:'HP Fuel Fired  Boiler'},
+  {key:'waste_heat_boiler',name:'Waste Heat Boiler',icon:'🌡️',cat:'Boiler',template_root:'MP Boiler'},
+  // Turbines moved to TURBINE_TYPES (routed model: source header → destination header[s]).
+  // ── Imports / other sources ────────────────────────────────────────────
+  {key:'steam_import',name:'Steam Import',icon:'📥',cat:'Import',template_root:'VHP Steam Header'},
+  {key:'saturator',name:'Saturator',icon:'💧',cat:'Other',template_root:'VHP Steam Header'},
+];
+
+const CON_TYPES=[
+  {key:'steam_exchanger',name:'Steam Exchanger',icon:'🌡️',cat:'Process',template_root:''},
+  {key:'air_cooler',name:'Air Cooler',icon:'❄️',cat:'Process',template_root:''},
+  {key:'steam_export',name:'Steam Export',icon:'📤',cat:'Export',template_root:''},
+  {key:'steam_vent',name:'Steam Vent',icon:'💨',cat:'Vent',template_root:''},
+  {key:'deaerator',name:'Deaerator',icon:'🫧',cat:'Deaerator',template_root:'Deaerator',restrict:'LP'},
+];
+
+/* Turbines: routed equipment with source header + destination header(s).
+   - backpressure: 1 destination (exhaust → lower header) — both ports required
+   - extraction:   2 destinations (extraction → mid header, exhaust → lower header)
+   - extraction-condensing: 1 destination (extraction → mid header; exhaust to condenser, no header)
+   - condensing:   0 destinations (exhaust to condenser, no header)
+   `dsts` declares each destination port: {role:'exh'|'extr', label:'Exhaust'|'Extraction'}. */
+const TURBINE_SUBCATS = [
+  {id:'', label:'(Generic)'},
+  {id:'bfw', label:'BFW Turbine'},
+  {id:'id', label:'ID Turbine'},
+  {id:'fd', label:'FD Turbine'},
+  {id:'air_comp', label:'Air Compressor Turbine'},
+  {id:'cw', label:'CW Turbine'},
+  {id:'process', label:'Process Turbine'},
+  {id:'other', label:'Other...'}
+];
+const TURBINE_TYPES=[
+  {key:'backpressure_turbine',     name:'Backpressure Turbine',           icon:'⚙️',cat:'Turbine',template_root:'VHP Backpressure Steam Turbine',     dsts:[{role:'exh',label:'Exhaust →'}]},
+  {key:'extraction_turbine',       name:'Extraction Turbine',             icon:'⚙️',cat:'Turbine',template_root:'VHP Extraction Steam Turbine',       dsts:[{role:'extr',label:'Extraction →'},{role:'exh',label:'Exhaust →'}]},
+  {key:'extraction_cond_turbine',  name:'Extraction-Condensing Turbine',  icon:'⚙️',cat:'Turbine',template_root:'VHP Extraction-Condensing Turbine',  dsts:[{role:'extr',label:'Extraction →'},{role:'exh',label:'Exhaust →'}]},
+  {key:'condensing_turbine',       name:'Condensing Turbine',             icon:'⚙️',cat:'Turbine',template_root:'VHP Condensing Steam Turbine',       dsts:[]},
+];
+function _turbineRouteKey(typeKey, dsts, subcat){ return [typeKey + (subcat ? ':' + subcat : ''), ...(dsts||[])].join('|'); }
+function _parseTurbineRouteKey(rk){
+  const parts = String(rk||'').split('|');
+  const idx = parts[0].indexOf(':');
+  if(idx > -1) {
+    return { typeKey: parts[0].substring(0, idx), subcat: parts[0].substring(idx+1), dsts: parts.slice(1) };
+  }
+  return { typeKey: parts[0], subcat: '', dsts: parts.slice(1) };
+}
+function _turbineTypeOf(rk){ return TURBINE_TYPES.find(t=>t.key===_parseTurbineRouteKey(rk).typeKey); }
+function _turbineRouteLabel(rk){
+  const {typeKey,dsts,subcat} = _parseTurbineRouteKey(rk);
+  const t = TURBINE_TYPES.find(x=>x.key===typeKey);
+  const sc = TURBINE_SUBCATS.find(x=>x.id===subcat);
+  const scLabel = sc ? sc.label : (subcat==='other' ? 'Other' : subcat);
+  const n = t ? t.name + (scLabel && scLabel !== '(Generic)' ? ` (${scLabel})` : '') : rk;
+  if(!t) return rk;
+  if(!t.dsts.length) return `${n} (→ condenser)`;
+  const parts = t.dsts.map((d,i)=>`${d.label} ${dsts[i]||'?'}`).join(', ');
+  return `${n} — ${parts}`;
+}
+
+/* === ATTRIBUTE TEMPLATES (extracted from Steam Network_all_attributes.xlsx) === */
+const ATTR_TEMPLATES={"HP Boiler Air Preheater":[{"name":"Air Inlet Temperature","uom":"degC"},{"name":"Air Outlet Temperature","uom":"degC"},{"name":"Air Side Differential Pressure","uom":""},{"name":"Flue Inlet Temperature","uom":"degC"},{"name":"Flue Outlet Temperature","uom":"degC"},{"name":"Leakage","uom":""}],"HP Boiler BFW Pump":[{"name":"Bearing Temperature","uom":""},{"name":"Discharge Flow","uom":"metric_ton/h"},{"name":"Discharge Pressure","uom":"bar"},{"name":"Driver Steam Flow","uom":"metric_ton/h"},{"name":"Exhaust Pressure","uom":"bar"},{"name":"Exhaust Temperature","uom":"degC"},{"name":"Inlet Steam Pressure","uom":"bar"},{"name":"Inlet Steam Temperature","uom":"degC"},{"name":"Motor Current","uom":"A"},{"name":"Power Output","uom":"kW"},{"name":"Speed","uom":"rpm"},{"name":"Suction Pressure","uom":"bar"},{"name":"Vibration","uom":""},{"name":"Wetness Fraction","uom":""}],"HP Boiler BFW System":[{"name":"BFW Header Pressure","uom":"bar"},{"name":"BFW Header Temperature","uom":"degC"},{"name":"BFW Inlet Flow","uom":"metric_ton/h"},{"name":"BFW Quality (Conductivity)","uom":""}],"HP Boiler Blowdown System":[{"name":"Blowdown Conductivity","uom":""},{"name":"Blowdown Flow Conroller Opening","uom":"percent"},{"name":"Blowdown TDS","uom":""},{"name":"Continuous Blowdown Flow","uom":"metric_ton/h"},{"name":"Flash Drum Pressure","uom":"bar"},{"name":"Flash Steam Flow","uom":"metric_ton/h"},{"name":"Intermittent Blowdown Flow","uom":"metric_ton/h"}],"HP Boiler Burner":[{"name":"Burner Air Flow","uom":""},{"name":"Burner Backpressure","uom":"bar"},{"name":"Burner Fuel Flow","uom":"m³/h"},{"name":"Flame Status","uom":""},{"name":"Pilot Status","uom":""}],"HP Boiler Combustion System":[{"name":"Atomizing Steam Flow","uom":"metric_ton/h"},{"name":"Burner Header Pressure","uom":"bar"},{"name":"Excess O2 Setpoint","uom":"vol%"},{"name":"Pilot Gas Flow","uom":"metric_ton/h"},{"name":"Total Combustion Air Flow","uom":""}],"HP Boiler Convection Section":[{"name":"Draft at Arch","uom":""},{"name":"Flue Inlet Temperature","uom":"degC"},{"name":"Flue Outlet Temperature","uom":"degC"}],"HP Boiler Desuperheater":[{"name":"Inlet Steam Temperature","uom":"degC"},{"name":"Outlet Steam Setpoint","uom":""},{"name":"Outlet Steam Temperature","uom":"degC"},{"name":"Spray Valve Opening","uom":"percent"},{"name":"Spray Water Flow","uom":""}],"HP Boiler Economizer":[{"name":"BFW Inlet Temperature","uom":"degC"},{"name":"BFW Outlet Temperature","uom":"degC"},{"name":"Flue Inlet Temperature","uom":"degC"},{"name":"Flue Outlet Temperature","uom":"degC"}],"HP Boiler Evaporator Section":[{"name":"Inlet Gas Temperature","uom":"degC"},{"name":"Outlet Gas Temperature","uom":"degC"},{"name":"Steam Generation","uom":"metric_ton/h"},{"name":"Tube Differential Pressure","uom":""}],"HP Boiler FD Fan":[{"name":"Bearing Temperature","uom":"degC"},{"name":"Discharge Pressure","uom":"bar"},{"name":"Exhaust Pressure","uom":"bar"},{"name":"Exhaust Temperature","uom":"degC"},{"name":"Inlet Damper Opening","uom":"percent"},{"name":"Inlet Steam Flow","uom":"metric_ton/h"},{"name":"Inlet Steam Pressure","uom":"bar"},{"name":"Inlet Steam Temperature","uom":"degC"},{"name":"Motor Current","uom":"A"},{"name":"Speed","uom":"rpm"},{"name":"Vibration","uom":""}],"HP Boiler ID Fan":[{"name":"Bearing Temperature","uom":"degC"},{"name":"Discharge Pressure","uom":"bar"},{"name":"Exhaust Pressure","uom":"bar"},{"name":"Exhaust Temperature","uom":"degC"},{"name":"Inlet Damper Opening","uom":"percent"},{"name":"Inlet Steam Flow","uom":"metric_ton/h"},{"name":"Inlet Steam Pressure","uom":"bar"},{"name":"Inlet Steam Temperature","uom":"degC"},{"name":"Motor Current","uom":"A"},{"name":"Speed","uom":"rpm"},{"name":"Vibration","uom":""}],"HP Boiler Radiant Section":[{"name":"Box Draft","uom":""},{"name":"Radiant Box Temperature","uom":"degC"},{"name":"Tube Skin Temperature (TMT)","uom":"degC"}],"HP Boiler Soot Blower System":[{"name":"Cycle Status","uom":""},{"name":"Last Run Time","uom":""},{"name":"Soot Blower Steam Flow","uom":"metric_ton/h"},{"name":"Soot Blower Steam Pressure","uom":""}],"HP Boiler Stack":[{"name":"CO in Flue Gas","uom":""},{"name":"Flue Gas Flow","uom":""},{"name":"NOx Emission","uom":""},{"name":"O2 in Flue Gas","uom":""},{"name":"SOx Emission","uom":""},{"name":"Stack Draft","uom":""},{"name":"Stack Temperature","uom":"degC"}],"HP Boiler Steam Drum":[{"name":"Drum Level","uom":""},{"name":"Drum Pressure","uom":""},{"name":"Drum Temperature","uom":"degC"},{"name":"Drum Vent Flow","uom":""}],"HP Boiler Superheater":[{"name":"Attemperator Flow Opening","uom":""},{"name":"Attemperator Spray Flow","uom":""},{"name":"Steam Inlet Pressure","uom":"bar"},{"name":"Steam Inlet Temperature","uom":"degC"},{"name":"Steam Outlet Pressure","uom":"bar"},{"name":"Steam Outlet Temperature","uom":"degC"},{"name":"Tube Skin Temperature","uom":"degC"}],"HP Condensing Steam Turbine":[{"name":"Inlet Steam Pressure","uom":"bar"}],"HP Fuel Fired  Boiler":[{"name":"Drum Level","uom":""},{"name":"Drum Pressure","uom":"bar"},{"name":"Flue Gas CO","uom":"mol%"},{"name":"Flue Gas O2","uom":"mol%"},{"name":"Fuel Gas C1","uom":"mol%"},{"name":"Fuel Gas C2","uom":"mol%"},{"name":"Fuel Gas C3","uom":"mol%"},{"name":"Fuel Gas Calorific Value","uom":""},{"name":"Fuel Gas CH3OH","uom":"mol%"},{"name":"Fuel Gas CO2","uom":"mol%"},{"name":"Fuel Gas Flow","uom":"metric_ton/h"},{"name":"Fuel Gas H2","uom":"mol%"},{"name":"Fuel Gas iC4","uom":"mol%"},{"name":"Fuel Gas iC5","uom":"mol%"},{"name":"Fuel Gas Molecular Weight","uom":""},{"name":"Fuel Gas N2","uom":"mol%"},{"name":"Fuel Gas nC4","uom":"mol%"},{"name":"Fuel Gas nC5","uom":"mol%"},{"name":"Fuel oil Flow","uom":"metric_ton/h"},{"name":"Furnace Draft","uom":"mmHg"},{"name":"Liquid Fuel Component1","uom":"mol%"},{"name":"Liquid Fuel Component2","uom":"mol%"},{"name":"Liquid Fuel Component3","uom":""},{"name":"Stack Temperature","uom":"mol%"},{"name":"Steam Generation Flow","uom":"metric_ton/h"},{"name":"Steam Outlet Pressure","uom":"bar"},{"name":"Steam Outlet Temperature","uom":"degC"}],"MP Boiler":[{"name":"Drum Level","uom":""},{"name":"Drum Pressure","uom":"bar"},{"name":"Flue Gas CO","uom":"mol%"},{"name":"Flue Gas O2","uom":"mol%"},{"name":"Fuel Gas C1","uom":"mol%"},{"name":"Fuel Gas C2","uom":"mol%"},{"name":"Fuel Gas C3","uom":"mol%"},{"name":"Fuel Gas Calorific Value","uom":""},{"name":"Fuel Gas CH3OH","uom":"mol%"},{"name":"Fuel Gas CO2","uom":"mol%"},{"name":"Fuel Gas Flow","uom":"metric_ton/h"},{"name":"Fuel Gas H2","uom":"mol%"},{"name":"Fuel Gas iC4","uom":"mol%"},{"name":"Fuel Gas iC5","uom":"mol%"},{"name":"Fuel Gas Molecular Weight","uom":""},{"name":"Fuel Gas N2","uom":"mol%"},{"name":"Fuel Gas nC4","uom":"mol%"},{"name":"Fuel Gas nC5","uom":"mol%"},{"name":"Fuel oil Flow","uom":"metric_ton/h"},{"name":"Furnace Draft","uom":"mmHg"},{"name":"Liquid Fuel Component1","uom":"mol%"},{"name":"Liquid Fuel Component2","uom":"mol%"},{"name":"Liquid Fuel Component3","uom":""},{"name":"Stack Temperature","uom":"mol%"},{"name":"Steam Generation Flow","uom":"metric_ton/h"},{"name":"Steam Outlet Pressure","uom":"bar"},{"name":"Steam Outlet Temperature","uom":"degC"}],"MP Boiler Air Preheater":[{"name":"Air Inlet Temperature","uom":"degC"},{"name":"Air Outlet Temperature","uom":"degC"},{"name":"Air Side Differential Pressure","uom":""},{"name":"Flue Inlet Temperature","uom":"degC"},{"name":"Flue Outlet Temperature","uom":"degC"},{"name":"Leakage","uom":""}],"MP Boiler BFW Pump":[{"name":"Bearing Temperature","uom":""},{"name":"Discharge Flow","uom":"metric_ton/h"},{"name":"Discharge Pressure","uom":"bar"},{"name":"Driver Steam Flow","uom":"metric_ton/h"},{"name":"Exhaust Pressure","uom":"bar"},{"name":"Exhaust Temperature","uom":"degC"},{"name":"Inlet Steam Pressure","uom":"bar"},{"name":"Inlet Steam Temperature","uom":"degC"},{"name":"Motor Current","uom":"A"},{"name":"Power Output","uom":"kW"},{"name":"Speed","uom":"rpm"},{"name":"Suction Pressure","uom":"bar"},{"name":"Vibration","uom":""},{"name":"Wetness Fraction","uom":""}],"MP Boiler BFW System":[{"name":"BFW Header Pressure","uom":"bar"},{"name":"BFW Header Temperature","uom":"degC"},{"name":"BFW Inlet Flow","uom":"metric_ton/h"},{"name":"BFW Quality (Conductivity)","uom":""}],"MP Boiler Blowdown System":[{"name":"Blowdown Conductivity","uom":""},{"name":"Blowdown Flow Conroller Opening","uom":"percent"},{"name":"Blowdown TDS","uom":""},{"name":"Continuous Blowdown Flow","uom":"metric_ton/h"},{"name":"Flash Drum Pressure","uom":"bar"},{"name":"Flash Steam Flow","uom":"metric_ton/h"},{"name":"Intermittent Blowdown Flow","uom":"metric_ton/h"}],"MP Boiler Burner":[{"name":"Burner Air Flow","uom":""},{"name":"Burner Backpressure","uom":"bar"},{"name":"Burner Fuel Flow","uom":"m³/h"},{"name":"Flame Status","uom":""},{"name":"Pilot Status","uom":""}],"MP Boiler Combustion System":[{"name":"Atomizing Steam Flow","uom":"metric_ton/h"},{"name":"Burner Header Pressure","uom":"bar"},{"name":"Excess O2 Setpoint","uom":"vol%"},{"name":"Pilot Gas Flow","uom":"metric_ton/h"},{"name":"Total Combustion Air Flow","uom":""}],"MP Boiler Convection Section":[{"name":"Draft at Arch","uom":""},{"name":"Flue Inlet Temperature","uom":"degC"},{"name":"Flue Outlet Temperature","uom":"degC"}],"MP Boiler Desuperheater":[{"name":"Inlet Steam Temperature","uom":"degC"},{"name":"Outlet Steam Setpoint","uom":""},{"name":"Outlet Steam Temperature","uom":"degC"},{"name":"Spray Valve Opening","uom":"percent"},{"name":"Spray Water Flow","uom":""}],"MP Boiler Economizer":[{"name":"BFW Inlet Temperature","uom":"degC"},{"name":"BFW Outlet Temperature","uom":"degC"},{"name":"Flue Inlet Temperature","uom":"degC"},{"name":"Flue Outlet Temperature","uom":"degC"}],"MP Boiler Evaporator Section":[{"name":"Inlet Gas Temperature","uom":"degC"},{"name":"Outlet Gas Temperature","uom":"degC"},{"name":"Steam Generation","uom":"metric_ton/h"},{"name":"Tube Differential Pressure","uom":""}],"MP Boiler FD Fan":[{"name":"Bearing Temperature","uom":"degC"},{"name":"Discharge Pressure","uom":"bar"},{"name":"Exhaust Pressure","uom":"bar"},{"name":"Exhaust Temperature","uom":"degC"},{"name":"Inlet Damper Opening","uom":"percent"},{"name":"Inlet Steam Flow","uom":"metric_ton/h"},{"name":"Inlet Steam Pressure","uom":"bar"},{"name":"Inlet Steam Temperature","uom":"degC"},{"name":"Motor Current","uom":"A"},{"name":"Speed","uom":"rpm"},{"name":"Vibration","uom":""}],"MP Boiler ID Fan":[{"name":"Bearing Temperature","uom":"degC"},{"name":"Discharge Pressure","uom":"bar"},{"name":"Exhaust Pressure","uom":"bar"},{"name":"Exhaust Temperature","uom":"degC"},{"name":"Inlet Damper Opening","uom":"percent"},{"name":"Inlet Steam Flow","uom":"metric_ton/h"},{"name":"Inlet Steam Pressure","uom":"bar"},{"name":"Inlet Steam Temperature","uom":"degC"},{"name":"Motor Current","uom":"A"},{"name":"Speed","uom":"rpm"},{"name":"Vibration","uom":""}],"MP Boiler Radiant Section":[{"name":"Box Draft","uom":""},{"name":"Radiant Box Temperature","uom":"degC"},{"name":"Tube Skin Temperature (TMT)","uom":"degC"}],"MP Boiler Soot Blower System":[{"name":"Cycle Status","uom":""},{"name":"Last Run Time","uom":""},{"name":"Soot Blower Steam Flow","uom":"metric_ton/h"},{"name":"Soot Blower Steam Pressure","uom":""}],"MP Boiler Stack":[{"name":"CO in Flue Gas","uom":""},{"name":"Flue Gas Flow","uom":""},{"name":"NOx Emission","uom":""},{"name":"O2 in Flue Gas","uom":""},{"name":"SOx Emission","uom":""},{"name":"Stack Draft","uom":""},{"name":"Stack Temperature","uom":"degC"}],"MP Boiler Steam Drum":[{"name":"Drum Level","uom":""},{"name":"Drum Pressure","uom":""},{"name":"Drum Temperature","uom":"degC"},{"name":"Drum Vent Flow","uom":""}],"MP Boiler Superheater":[{"name":"Attemperator Flow Opening","uom":""},{"name":"Attemperator Spray Flow","uom":""},{"name":"Steam Inlet Pressure","uom":"bar"},{"name":"Steam Inlet Temperature","uom":"degC"},{"name":"Steam Outlet Pressure","uom":"bar"},{"name":"Steam Outlet Temperature","uom":"degC"},{"name":"Tube Skin Temperature","uom":"degC"}],"MP Condensing Steam Turbine":[{"name":"Inlet Steam Pressure","uom":"bar"}],"System":[{"name":"Ambient Temperature","uom":"degC"},{"name":"Relative Humidity","uom":""}],"VHP Backpressure Steam Turbine":[{"name":"Bearing Temperature","uom":"degC"},{"name":"Gland Steam Flow","uom":"kg/hr"},{"name":"Governor Valve Opening","uom":"percent"},{"name":"Inlet Steam Flow","uom":"t/hr"},{"name":"Inlet Steam Pressure","uom":"bar"},{"name":"Inlet Steam Temperature","uom":"degC"},{"name":"Outlet Steam Flow","uom":"t/hr"},{"name":"Outlet Steam Pressure","uom":"bar"},{"name":"Outlet Steam Temperature","uom":"degC"},{"name":"Turbine Speed","uom":"rpm"}],"VHP Condensing Steam Turbine":[{"name":"Bearing Temperature","uom":"degC"},{"name":"Exhaust Condensae Flow","uom":"metric_ton/h"},{"name":"Exhaust Pressure","uom":"bar"},{"name":"Exhaust Temperature","uom":"degC"},{"name":"Gland Steam Flow","uom":"kg/h"},{"name":"Governor Valve Opening","uom":"percent"},{"name":"Inlet Steam Flow","uom":"metric_ton/h"},{"name":"Inlet Steam Pressure","uom":"bar"},{"name":"Inlet Steam Temperature","uom":"degC"},{"name":"Speed","uom":"rpm"},{"name":"Vibration","uom":"um"}],"VHP Extraction Steam Turbine":[{"name":"Bearing Temperature","uom":"degC"},{"name":"Extraction Pressure","uom":"bar"},{"name":"Extraction Steam Flow","uom":"metric_ton/h"},{"name":"ExtractionTemperature","uom":"degC"},{"name":"Gland Steam Flow","uom":"kg/h"},{"name":"Governor Valve Opening","uom":"percent"},{"name":"Inlet Steam Flow","uom":"metric_ton/h"},{"name":"Inlet Steam Pressure","uom":"bar"},{"name":"Inlet Steam Temperature","uom":"degC"},{"name":"Turbine Speed","uom":"rpm"}],"VHP Extraction-Condensing Turbine":[{"name":"Bearing Temperature","uom":"degC"},{"name":"Exhaust Condensae Flow","uom":"metric_ton/h"},{"name":"Exhaust Pressure","uom":"bar"},{"name":"Exhaust Temperature","uom":"degC"},{"name":"Extraction Governor Valve Opening","uom":"percent"},{"name":"Extraction Pressure","uom":"bar"},{"name":"Extraction Steam Flow","uom":"metric_ton/h"},{"name":"ExtractionTemperature","uom":"degC"},{"name":"Inlet Steam Flow","uom":"metric_ton/h"},{"name":"Inlet Steam Pressure","uom":"bar"},{"name":"Inlet Steam Temperature","uom":"degC"},{"name":"Turbine Speed","uom":"rpm"}],"VHP Steam Header":[{"name":"Steam Pressure","uom":"bar"},{"name":"Steam Temperature","uom":"degC"}],"Steam Vent":[{"name":"Steam Flow","uom":"metric_ton/h"},{"name":"Steam Pressure","uom":"bar"},{"name":"Steam Temperature","uom":"degC"},{"name":"Vent Valve Opening","uom":"percent"}],"Steam Export":[{"name":"Export Steam Flow","uom":"metric_ton/h"},{"name":"Export Steam Pressure","uom":"bar"},{"name":"Export Steam Temperature","uom":"degC"}],"Steam Exchanger":[{"name":"Condensate Outlet Flow","uom":"metric_ton/h"},{"name":"Process Side Inlet Temperature","uom":"degC"},{"name":"Process Side Outlet Temperature","uom":"degC"},{"name":"Steam Inlet Flow","uom":"metric_ton/h"},{"name":"Steam Inlet Pressure","uom":"bar"},{"name":"Steam Inlet Temperature","uom":"degC"}],"Air Cooler":[{"name":"Air Inlet Temperature","uom":"degC"},{"name":"Fan Motor Current","uom":"A"},{"name":"Fan Speed","uom":"rpm"},{"name":"Process Inlet Temperature","uom":"degC"},{"name":"Process Outlet Temperature","uom":"degC"}],"Deaerator":[{"name":"BFW Outlet Flow","uom":"metric_ton/h"},{"name":"Condensate Inlet Flow","uom":"metric_ton/h"},{"name":"DA Level","uom":""},{"name":"DA Pressure","uom":"bar"},{"name":"DA Temperature","uom":"degC"},{"name":"Heating Steam Flow","uom":"metric_ton/h"},{"name":"Heating Steam Valve Opening","uom":"percent"},{"name":"Make-up Water Flow","uom":"metric_ton/h"},{"name":"Vent Steam Flow","uom":"metric_ton/h"}]};
+
+const SYSTEM_ATTRS=[
+  {name:'Ambient Temperature',uom:'degC'},
+  {name:'Relative Humidity',uom:''},
+];
+
+/* ============ STATE ============ */
+const S={
+  affiliate:'United',
+  region:'Petrochemical Complex',
+  plants:[{id:'p0',name:'OLF'},{id:'p1',name:'EG1'},{id:'p2',name:'EG2'}],
+  networks:[{
+    id:'n0',name:'Steam Network',color:COLORS[1],plantIds:['p0','p1','p2'],
+    headers:[],genCounts:{},conCounts:{},letCounts:{},turbineCounts:{}
+  }],
+  instances:{},   // [networkId+'/'+headerName+'/'+role+'/'+typeKey+'/'+index] → {name, type, attrs:[{name,uom,pi,flagSip,sipMin,sipMax,formula,default}]}
+};
+let curTab=1, selNetId='n0', selHdr=null, selInstanceKey=null, eqSub='gen', dragIdx=null;
+
+function curNet(){return S.networks.find(n=>n.id===selNetId)||S.networks[0];}
+function updateHeaderLabels(){
+  document.getElementById('lblAffiliate').textContent=S.affiliate||'—';
+  document.getElementById('lblNetwork').textContent=curNet().name||'—';
+}
+
+/* ============ INIT ============ */
+function init(){
+  const n=S.networks[0];
+  n.headers=STD_HEADERS.map((h,i)=>({...h,color:COLORS[i]}));
+  const VHP='VHP Steam Header (100-110 KG/CM2A)';
+  const HP2='HP-2 Steam Header (40-45 KG/CM2A)';
+  const HP1='HP-1 Steam Header (30-35 KG/CM2A)';
+  const MP2='MP-2 Steam Header (20-25 KG/CM2A)';
+  const MP1='MP-1 Steam Header (12-15 KG/CM2A)';
+  const LP1='LP-1 Steam Header (5-7 KG/CM2A)';
+  const LP2='LP-2 Steam Header (2-3 KG/CM2A)';
+  const CON='Condensate Header';
+  n.genCounts={[VHP]:{fuel_fired_boiler:2,heat_recovery_steam_generator:1},[HP2]:{},[HP1]:{},[MP2]:{},[MP1]:{},[LP1]:{},[LP2]:{},[CON]:{}};
+  n.conCounts={[VHP]:{steam_exchanger:1},[HP2]:{steam_exchanger:2},[HP1]:{steam_exchanger:1},[MP2]:{},[MP1]:{steam_exchanger:1},[LP1]:{steam_exchanger:1},[LP2]:{steam_vent:1},[CON]:{}};
+  n.letCounts={[VHP]:{[HP2]:1,[HP1]:1},[HP2]:{[MP2]:1},[HP1]:{[MP1]:1},[MP2]:{[LP1]:1},[MP1]:{[LP2]:1},[LP1]:{[CON]:1},[LP2]:{[CON]:1},[CON]:{}};
+  // Turbines (routed): srcHdr → { 'typeKey|dst1|dst2': count }
+  n.turbineCounts={[VHP]:{[`backpressure_turbine|${HP2}`]:1},[HP2]:{},[HP1]:{},[MP2]:{},[MP1]:{},[LP1]:{},[LP2]:{},[CON]:{}};
+  selNetId=n.id;
+  renderPlants(); renderNetworks(); updateHeaderLabels();
+}
+
+/* ============ TABS ============ */
+function switchTab(n){
+  curTab=n;
+  document.querySelectorAll('.tab').forEach(t=>{
+    const tn=+t.dataset.tab;
+    t.classList.toggle('active',tn===n);
+    t.classList.toggle('completed',tn<n);
+    t.querySelector('.tab-num').textContent=tn<n?'✓':tn;
+  });
+  document.querySelectorAll('.pane').forEach(p=>p.classList.remove('active'));
+  document.getElementById('pane'+n).classList.add('active');
+  document.getElementById('btnBack').style.visibility=n===1?'hidden':'';
+  document.getElementById('btnNext').style.display=n===6?'none':'';
+  document.getElementById('btnExport').style.display=n===6?'':'none';
+  if(n===2){renderNetworks();}
+  if(n===3){selHdr=null;renderTab3();}
+  if(n===4){selHdr=null;renderTab4();}
+  if(n===5){selInstanceKey=null;renderTab5();}
+  if(n===6){renderReview();}
+  updateFooter();
+}
+function updateFooter(){document.getElementById('footerStatus').textContent=`Step ${curTab} of 6`;}
+function nextTab(){if(curTab<6)switchTab(curTab+1);}
+function prevTab(){if(curTab>1)switchTab(curTab-1);}
+
+/* ============ TAB 1: AFFILIATE & PLANTS ============ */
+function updatePlantCount(n){
+  n=Math.max(1,Math.min(20,n));
+  while(S.plants.length<n)S.plants.push({id:'p'+Date.now()+S.plants.length,name:'Plant '+(S.plants.length+1)});
+  while(S.plants.length>n){const r=S.plants.pop();S.networks.forEach(net=>net.plantIds=net.plantIds.filter(id=>id!==r.id));}
+  renderPlants();renderNetworks();
+}
+function renderPlants(){
+  document.getElementById('plantList').innerHTML=S.plants.map((p,i)=>`
+    <div class="item-card">
+      <span class="ic-icon">🏭</span>
+      <input class="ic-name" value="${esc(p.name)}" onchange="S.plants[${i}].name=this.value;renderNetworks()">
+      <span class="ic-meta">${p.id}</span>
+      <button class="ic-del" onclick="removePlant(${i})">✕</button>
+    </div>
+  `).join('');
+}
+function removePlant(i){
+  const r=S.plants.splice(i,1)[0];
+  S.networks.forEach(n=>n.plantIds=n.plantIds.filter(id=>id!==r.id));
+  renderPlants();renderNetworks();
+}
+
+/* ============ TAB 2: NETWORKS ============ */
+function updateNetCount(n){
+  n=Math.max(1,Math.min(10,n));
+  while(S.networks.length<n){
+    const i=S.networks.length;
+    S.networks.push({
+      id:'n'+Date.now()+i,name:'Steam Network '+(i+1),color:COLORS[(i+1)%8],plantIds:[],
+      headers:STD_HEADERS.map((h,j)=>({...h,color:COLORS[j]})),
+      genCounts:{},conCounts:{},letCounts:{},turbineCounts:{}
+    });
+  }
+  while(S.networks.length>n)S.networks.pop();
+  if(!S.networks.find(n=>n.id===selNetId))selNetId=S.networks[0].id;
+  renderNetworks();
+}
+function renderNetworks(){
+  document.getElementById('networkList').innerHTML=S.networks.map((net,ni)=>{
+    const chips=S.plants.map(p=>{
+      const a=net.plantIds.includes(p.id);
+      return `<span class="chip ${a?'assigned':''}" onclick="togglePlantAssign('${net.id}','${p.id}')">${a?'✓ ':''}${esc(p.name)}</span>`;
+    }).join('');
+    return `<div class="sys-card">
+      <div class="sys-card-header">
+        <div class="sys-color" style="background:${net.color};color:${net.color}"></div>
+        <input class="ic-name" value="${esc(net.name)}" onchange="S.networks[${ni}].name=this.value;updateHeaderLabels()" style="flex:1;font-size:14px;font-weight:600">
+        ${S.networks.length>1?`<button class="ic-del" onclick="S.networks.splice(${ni},1);renderNetworks()">✕</button>`:''}
+      </div>
+      <div style="font-size:11px;color:var(--text2);margin-bottom:6px">Plants served by this network:</div>
+      <div class="chip-row">${chips}</div>
+    </div>`;
+  }).join('');
+}
+function togglePlantAssign(nid,pid){
+  const net=S.networks.find(n=>n.id===nid);if(!net)return;
+  const i=net.plantIds.indexOf(pid);
+  if(i>=0)net.plantIds.splice(i,1);else net.plantIds.push(pid);
+  renderNetworks();
+}
+
+/* ============ TAB 3: HEADERS ============ */
+function renderTab3(){
+  const multi=S.networks.length>1;
+  document.getElementById('netSelWrap3').style.display=multi?'':'none';
+  if(multi)renderNetSel('netSel3',id=>{selNetId=id;renderTab3();});
+  document.getElementById('headerContent').style.display='';
+  const net=curNet();
+  document.getElementById('hdrNetLabel').textContent=net.name;
+  document.getElementById('inpHdrCount').value=net.headers.length;
+  document.getElementById('headerList').innerHTML=net.headers.map((h,i)=>`
+    <div class="h-card" draggable="true" ondragstart="dragIdx=${i};this.style.opacity='.5'"
+         ondragend="this.style.opacity='1'" ondragover="event.preventDefault()" ondrop="dropH(event,${i})">
+      <span class="h-grip">⠿</span>
+      <div class="h-color" style="background:${h.color};box-shadow:0 0 6px ${h.color}"></div>
+      <span class="h-rank" style="background:${h.color}22;color:${h.color}">${i+1}</span>
+      <input class="h-name" value="${esc(h.name)}" onchange="renameHdr(${i},this.value)">
+      <input class="h-prange" value="${esc(h.range||'')}" placeholder="40-45" onchange="net=curNet();net.headers[${i}].range=this.value">
+      <input class="h-uom"    value="${esc(h.uom||'bar')}" placeholder="bar" onchange="net=curNet();net.headers[${i}].uom=this.value">
+      ${net.headers.length>2?`<button class="h-del" onclick="removeHdr(${i})">✕</button>`:''}
+    </div>
+  `).join('');
+  document.getElementById('hPreview').innerHTML=net.headers.map((h,i)=>
+    `<div class="bar" style="background:${h.color};color:${h.color}" title="${esc(h.name)} (${esc(h.range||'')})"></div>`
+    +(i<net.headers.length-1?'<span class="arrow">→</span>':'')
+  ).join('');
+}
+function renderNetSel(elId,onClick){
+  document.getElementById(elId).innerHTML=S.networks.map(n=>`
+    <div class="pill ${n.id===selNetId?'active':''}" onclick='(${onClick.toString()})("${n.id}")'>
+      <div class="pill-dot" style="background:${n.color}"></div>
+      <span class="pill-name">${esc(n.name)}</span>
+    </div>
+  `).join('');
+}
+function updateHdrCount(n){
+  const net=curNet();n=Math.max(2,Math.min(8,n));
+  while(net.headers.length<n){const i=net.headers.length;const std=STD_HEADERS[i]||{name:'H'+(i+1),range:'',uom:'bar'};net.headers.push({...std,color:COLORS[i%8]});}
+  while(net.headers.length>n)net.headers.pop();
+  const dropped=cleanupInvalidLetdowns(net);
+  if(dropped>0)toast(`Removing header dropped ${dropped} now-invalid letdown${dropped===1?'':'s'}`,'warn');
+  renderTab3();
+}
+function renameHdr(i,v){
+  const net=curNet(),old=net.headers[i].name;
+  if(!v||v===old){renderTab3();return;}
+  net.headers[i].name=v;
+  // First-level (source) keys: gen/con/let/turbineCounts[old] → [v]
+  ['genCounts','conCounts','letCounts','turbineCounts'].forEach(k=>{
+    if(net[k] && net[k][old]){net[k][v]=net[k][old];delete net[k][old];}
+  });
+  // Second-level (destination) keys inside letCounts[*][old]
+  Object.values(net.letCounts).forEach(dstMap=>{
+    if(dstMap[old]!==undefined){dstMap[v]=dstMap[old];delete dstMap[old];}
+  });
+  // Second-level (route-key) destinations inside turbineCounts[*]: routeKey "type|dst1|dst2"
+  Object.values(net.turbineCounts||{}).forEach(routeMap=>{
+    Object.keys(routeMap).forEach(rk=>{
+      const parts = rk.split('|');
+      let changed = false;
+      for(let i=1;i<parts.length;i++){ if(parts[i]===old){parts[i]=v;changed=true;} }
+      if(changed){
+        const nrk = parts.join('|');
+        routeMap[nrk] = (routeMap[nrk]||0) + routeMap[rk];
+        delete routeMap[rk];
+      }
+    });
+  });
+  // Drop orphaned instance keys that reference the old header name
+  Object.keys(S.instances).forEach(k=>{
+    const ins=S.instances[k];
+    if(ins.netId===net.id && ins.hdrName===old)delete S.instances[k];
+  });
+  renderTab3();
+}
+function removeHdr(i){
+  const net=curNet();
+  const removed=net.headers.splice(i,1)[0];
+  if(removed){
+    // Drop any letdowns this header was a source of, OR a destination for
+    delete net.genCounts[removed.name];
+    delete net.conCounts[removed.name];
+    delete net.letCounts[removed.name];
+    if(net.turbineCounts) delete net.turbineCounts[removed.name];
+    Object.values(net.letCounts).forEach(dstMap=>{delete dstMap[removed.name];});
+    // Drop any turbine routings whose destination(s) was this header
+    Object.values(net.turbineCounts||{}).forEach(routeMap=>{
+      Object.keys(routeMap).forEach(rk=>{
+        if(rk.split('|').slice(1).includes(removed.name)) delete routeMap[rk];
+      });
+    });
+    Object.keys(S.instances).forEach(k=>{
+      const ins=S.instances[k];
+      if(ins.netId===net.id && ins.hdrName===removed.name)delete S.instances[k];
+    });
+  }
+  cleanupInvalidLetdowns(net);
+  renderTab3();
+}
+
+/* Drop any letdown whose source is not strictly above its destination by
+   pressure rank. Returns how many were dropped — used for user feedback. */
+function cleanupInvalidLetdowns(net){
+  const rank={};
+  net.headers.forEach((h,i)=>{rank[h.name]=i;});
+  let dropped=0;
+  Object.entries(net.letCounts).forEach(([src,dstMap])=>{
+    if(rank[src]===undefined){
+      // Source header no longer exists
+      dropped+=Object.values(dstMap).reduce((a,b)=>a+b,0);
+      delete net.letCounts[src];
+      return;
+    }
+    Object.keys(dstMap).forEach(dst=>{
+      if(rank[dst]===undefined || rank[dst]<=rank[src]){
+        // Either destination header is gone, OR source is now at-or-below destination
+        dropped+=dstMap[dst]||0;
+        delete dstMap[dst];
+      }
+    });
+    if(Object.keys(dstMap).length===0)delete net.letCounts[src];
+  });
+  // Also drop orphan instance records for invalid letdowns
+  Object.keys(S.instances).forEach(k=>{
+    const ins=S.instances[k];
+    if(ins.netId!==net.id||ins.role!=='let')return;
+    // ins key shape: netId/srcHdr/let/dstHdr/index
+    const parts=k.split('/');
+    const srcH=parts[1],dstH=parts[3];
+    if(rank[srcH]===undefined||rank[dstH]===undefined||rank[dstH]<=rank[srcH]){
+      delete S.instances[k];
+    }
+  });
+  return dropped;
+}
+function dropH(e,to){
+  e.preventDefault();
+  if(dragIdx===null||dragIdx===to)return;
+  const net=curNet();
+  const it=net.headers.splice(dragIdx,1)[0];
+  net.headers.splice(to,0,it);
+  dragIdx=null;
+  const dropped=cleanupInvalidLetdowns(net);
+  if(dropped>0)toast(`Reorder invalidated ${dropped} letdown${dropped===1?'':'s'} — removed`,'warn');
+  renderTab3();
+}
+function addHeader(){
+  const net=curNet(),i=net.headers.length;
+  net.headers.push({name:'H'+(i+1),range:'',uom:'bar',color:COLORS[i%8]});
+  // New header is at the bottom — no existing letdowns can be invalidated, but
+  // run cleanup defensively (no-op in this case).
+  cleanupInvalidLetdowns(net);
+  renderTab3();
+}
+
+/* ============ TAB 4: EQUIPMENT ============ */
+function renderTab4(){
+  const multi=S.networks.length>1;
+  document.getElementById('netSelWrap4').style.display=multi?'':'none';
+  if(multi)renderNetSel('netSel4',id=>{selNetId=id;selHdr=null;renderTab4();});
+  renderEqHdrSel();
+  if(selHdr)renderEqContent();
+  else document.getElementById('eqContent').style.display='none';
+}
+function renderEqHdrSel(){
+  const net=curNet();
+  document.getElementById('eqHdrSel').innerHTML=net.headers.map((h,i)=>{
+    const gc=net.genCounts[h.name]||{},cc=net.conCounts[h.name]||{},tc=(net.turbineCounts||{})[h.name]||{};
+    let t=0;Object.values(gc).forEach(v=>t+=v);Object.values(cc).forEach(v=>t+=v);Object.values(tc).forEach(v=>t+=v);
+    // Letdowns touching this header (outgoing to anything lower + incoming from anything higher)
+    const out=net.letCounts[h.name]||{};
+    Object.values(out).forEach(v=>t+=v);
+    net.headers.forEach((o,oi)=>{
+      if(oi<i){const src=net.letCounts[o.name]||{};t+=(src[h.name]||0);}
+    });
+    return `<div class="pill ${selHdr===h.name?'active':''}" onclick="selectEqHdr('${esc(h.name)}')">
+      <div class="pill-dot" style="background:${h.color}"></div>
+      <span class="pill-name">${esc(h.name)}</span>
+      <span class="pill-count">${t}</span>
+    </div>`;
+  }).join('');
+}
+function selectEqHdr(name){
+  selHdr=name;const net=curNet();
+  if(!net.genCounts[name])net.genCounts[name]={};
+  if(!net.conCounts[name])net.conCounts[name]={};
+  if(!net.letCounts[name])net.letCounts[name]={};
+  if(!net.turbineCounts)net.turbineCounts={};
+  if(!net.turbineCounts[name])net.turbineCounts[name]={};
+  eqSub='gen';
+  document.getElementById('eqContent').style.display='';
+  document.getElementById('eqHdrLabel').textContent=name;
+  renderEqHdrSel();renderEqContent();
+}
+function switchSubtab(w){
+  eqSub=w;
+  ['gen','con'].forEach(k=>{
+    const btn=document.getElementById('subtab'+k.charAt(0).toUpperCase()+k.slice(1));
+    if(btn)btn.classList.toggle('active',w===k);
+  });
+  const genCard=document.getElementById('genCards'); if(genCard) genCard.style.display=w==='gen'?'':'none';
+  const conCard=document.getElementById('conCards'); if(conCard) conCard.style.display=w==='con'?'':'none';
+  const tbnCard=document.getElementById('tbnCards'); if(tbnCard) tbnCard.style.display=w==='con'?'':'none';
+  const letCard=document.getElementById('letCards'); if(letCard) letCard.style.display=w==='con'?'':'none';
+}
+function renderEqContent(){
+  const bodyEl = document.querySelector('.body');
+  const sy = bodyEl ? bodyEl.scrollTop : window.scrollY;
+  const net=curNet(),h=selHdr;
+  const idx=net.headers.findIndex(x=>x.name===h);
+  // All headers below this one are valid letdown / turbine destinations (pressure always drops)
+  const lowerHeaders=net.headers.slice(idx+1);
+  const gc=net.genCounts[h]||{},cc=net.conCounts[h]||{};
+  const outLet=net.letCounts[h]||{};
+  net.turbineCounts = net.turbineCounts || {};
+  const tc = net.turbineCounts[h] = (net.turbineCounts[h] || {});
+
+  let tG=0,tC=0,tT=0,tL=0;
+  Object.values(gc).forEach(v=>tG+=v);
+  Object.values(cc).forEach(v=>tC+=v);
+  Object.values(tc).forEach(v=>tT+=v);
+  lowerHeaders.forEach(o=>{tL+=(outLet[o.name]||0);});
+  document.getElementById('eqTotalBadge').textContent=(tG+tC+tT+tL)+' total';
+  document.getElementById('genSubCnt').textContent=tG;
+  document.getElementById('conSubCnt').textContent=tC+tT+tL;
+  // GENERATORS
+  let gH='';const gCats={};GEN_TYPES.forEach(t=>{(gCats[t.cat]=gCats[t.cat]||[]).push(t);});
+  Object.entries(gCats).forEach(([cat,types])=>{
+    gH+=`<div class="section-label gen-label">${cat}</div><div class="eq-grid">`;
+    types.forEach(t=>{const c=gc[t.key]||0;gH+=eqCard(t,c,'setG');});
+    gH+='</div>';
+  });
+  document.getElementById('genCards').innerHTML=gH;
+  // CONSUMERS — filter by restrict prefix if set (e.g. Deaerator only on LP headers)
+  const hdrPfx=_headerRootPrefix({name:selHdr});
+  let cH='';const cCats={};
+  CON_TYPES.filter(t=>!t.restrict||hdrPfx.startsWith(t.restrict)).forEach(t=>{(cCats[t.cat]=cCats[t.cat]||[]).push(t);});
+  Object.entries(cCats).forEach(([cat,types])=>{
+    cH+=`<div class="section-label con-label">${cat}</div><div class="eq-grid">`;
+    types.forEach(t=>{const c=cc[t.key]||0;cH+=eqCard(t,c,'setC');});
+    cH+='</div>';
+  });
+  document.getElementById('conCards').innerHTML=cH;
+  // TURBINES — routed equipment. Source=this header, destination(s)=lower headers.
+  // Each existing routing is one row: type + dst dropdown(s) + count + remove. Plus an "Add" row per type.
+  let tH='';
+  if(!lowerHeaders.length){
+    tH=`<div style="color:var(--text3);font-size:12px;padding:16px;text-align:center;border:1px dashed var(--border);border-radius:8px">
+        Lowest header — turbines on this header would have nowhere to exhaust. (Condensing turbines still allowed.)</div>`;
+  }
+  TURBINE_TYPES.forEach(tt=>{
+    // Existing routings of this type on this header
+    const existing = Object.entries(tc).filter(([rk])=>_parseTurbineRouteKey(rk).typeKey===tt.key);
+    tH+=`<div class="section-label" style="color:var(--purple,#a78bfa)">${tt.icon} ${esc(tt.name)}</div>`;
+    if(tt.dsts.length && !lowerHeaders.length){
+      tH+=`<div style="color:var(--text3);font-size:11px;padding:6px 8px">No lower headers available — cannot route this turbine type.</div>`;
+    } else {
+      // One row per existing routing
+      existing.forEach(([rk,cnt])=>{
+        const {dsts, subcat} = _parseTurbineRouteKey(rk);
+        const isCustom = subcat && !TURBINE_SUBCATS.find(x=>x.id===subcat && x.id!=='other');
+        const selVal = isCustom ? 'other' : subcat;
+        tH+=`<div class="eq-card has-items" style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+          <span class="e-icon">${tt.icon}</span>
+          <div class="e-name" style="flex:0 0 auto">${esc(tt.name)}</div>
+          <select onchange="setTSubcat('${esc(rk)}',this.value)" style="font-size:12px;padding:2px 4px;background:var(--bg)">`+
+          TURBINE_SUBCATS.map(sc=>`<option value="${sc.id}" ${selVal===sc.id?'selected':''}>${esc(sc.label)}</option>`).join('')+
+          `</select>`;
+        if(selVal === 'other') {
+           const customVal = isCustom && subcat!=='other' ? subcat : '';
+           tH+=`<input type="text" value="${esc(customVal)}" placeholder="Custom name..." onchange="let v=this.value.trim(); v=v.replace(/[|:]/g,'-'); setTSubcat('${esc(rk)}', v||'other')" style="font-size:12px;padding:2px 4px;width:120px;background:var(--bg);border:1px solid var(--border);color:var(--text);border-radius:4px;">`;
+        }
+        tt.dsts.forEach((d,di)=>{
+          /* Exhaust goes to condensate; extraction stays on steam headers only */
+          const pool = (d.role==='exh') ? net.headers.slice(idx+1) : lowerHeaders;
+          tH+=`<span style="font-size:11px;color:var(--text3)">${esc(d.label)}</span>
+            <select onchange="setTRoute('${esc(rk)}',${di},this.value)" style="font-size:12px;padding:2px 4px;background:var(--bg)">`+
+            pool.map(lh=>`<option value="${esc(lh.name)}" ${dsts[di]===lh.name?'selected':''}>${esc(_headerPrefix(lh))}</option>`).join('')+
+            `</select>`;
+        });
+        if(!tt.dsts.length){
+          tH+=`<span style="font-size:11px;color:var(--text3)">(→ condenser)</span>`;
+        }
+        tH+=`<input type="number" class="e-count" min="0" max="50" value="${cnt}"
+                   onchange="setT('${esc(rk)}',+this.value)" onfocus="this.select()">
+          <button onclick="removeTRoute('${esc(rk)}')" style="background:transparent;border:1px solid var(--border);color:var(--text3);padding:2px 8px;border-radius:4px;cursor:pointer;font-size:11px">✕</button>
+        </div>`;
+      });
+      // "Add routing" button
+      tH+=`<div style="margin:6px 0 12px"><button onclick="addTRoute('${esc(tt.key)}')" style="background:var(--bg2);border:1px dashed var(--border);color:var(--text2);padding:6px 12px;border-radius:6px;cursor:pointer;font-size:12px">+ Add ${esc(tt.name)}</button></div>`;
+    }
+  });
+  const tbnCardsEl=document.getElementById('tbnCards'); if(tbnCardsEl) tbnCardsEl.innerHTML=tH;
+  // LETDOWNS — only outgoing (pressure always drops). Source = this header, dest = any lower header.
+  let lH='';
+  if(lowerHeaders.length){
+    lH+=`<div class="section-label let-label">${esc(h)} → Lower Header</div><div class="eq-grid">`;
+    lowerHeaders.forEach(o=>{
+      const t={key:o.name,name:`${h} → ${o.name}`,icon:'🔽'};
+      lH+=eqCard(t,outLet[o.name]||0,'setLOut');
+    });
+    lH+='</div>';
+  } else {
+    lH=`<div style="color:var(--text3);font-size:12px;padding:16px;text-align:center;border:1px dashed var(--border);border-radius:8px">
+        This is the lowest header — no outgoing letdowns possible.</div>`;
+  }
+  document.getElementById('letCards').innerHTML=lH;
+  switchSubtab(eqSub);
+  if(bodyEl) bodyEl.scrollTop = sy;
+  else window.scrollTo(0, sy);
+}
+function eqCard(t,c,fn){
+  return `<div class="eq-card ${c>0?'has-items':''}">
+    <span class="e-icon">${t.icon}</span>
+    <div class="e-name" title="${esc(t.name)}">${esc(t.name)}</div>
+    <input type="number" class="e-count" min="0" max="20" value="${c}" onchange="${fn}('${esc(t.key)}',+this.value)" onfocus="this.select()">
+  </div>`;
+}
+function setG(k,v){const n=curNet();(n.genCounts[selHdr]=n.genCounts[selHdr]||{})[k]=Math.max(0,v);renderEqContent();renderEqHdrSel();}
+function setC(k,v){const n=curNet();(n.conCounts[selHdr]=n.conCounts[selHdr]||{})[k]=Math.max(0,v);renderEqContent();renderEqHdrSel();}
+// TURBINES (routed): srcHdr=selHdr, route key encodes type + destination(s)
+function _turbineMap(){const n=curNet();n.turbineCounts=n.turbineCounts||{};return (n.turbineCounts[selHdr]=n.turbineCounts[selHdr]||{});}
+function setT(routeKey,v){const m=_turbineMap();v=Math.max(0,v|0);if(v===0)delete m[routeKey];else m[routeKey]=v;renderEqContent();renderEqHdrSel();}
+function addTRoute(typeKey){
+  const tt=TURBINE_TYPES.find(x=>x.key===typeKey);if(!tt)return;
+  const net=curNet(),idx=net.headers.findIndex(x=>x.name===selHdr),lower=net.headers.slice(idx+1);
+  if(tt.dsts.length && !lower.length){toast('No lower headers available','warn');return;}
+  // Default destinations: pick condensate for exhaust ports, first lower header for extraction ports
+  const allBelow=net.headers.slice(idx+1);
+  const defaults=tt.dsts.map((d)=>{
+    if(d.role==='exh'){
+      // Pick the condensate header (last in list) or first lower header
+      const cnd=allBelow[allBelow.length-1];
+      return cnd?cnd.name:'';
+    }
+    return lower[0]?lower[0].name:'';
+  });
+  const rk=_turbineRouteKey(tt.key,defaults);
+  const m=_turbineMap();m[rk]=(m[rk]||0)+1;
+  renderEqContent();renderEqHdrSel();
+}
+function setTRoute(oldRk,dstIdx,newDstHdr){
+  const {typeKey,dsts,subcat}=_parseTurbineRouteKey(oldRk);
+  const newDsts=dsts.slice();newDsts[dstIdx]=newDstHdr;
+  const newRk=_turbineRouteKey(typeKey,newDsts,subcat);
+  if(newRk===oldRk){renderEqContent();return;}
+  const m=_turbineMap();
+  m[newRk]=(m[newRk]||0)+(m[oldRk]||0);
+  delete m[oldRk];
+  // Migrate any per-instance attr edits that referenced the old routeKey
+  Object.keys(S.instances).forEach(k=>{
+    const parts=k.split('/');
+    if(parts[2]==='tbn' && parts[3]===oldRk && S.instances[k].netId===curNet().id && S.instances[k].hdrName===selHdr){
+      const idx=parts[4];const nk=parts.slice(0,3).concat([newRk,idx]).join('/');
+      S.instances[nk]=S.instances[k];S.instances[nk].key=nk;
+      delete S.instances[k];
+    }
+  });
+  renderEqContent();renderEqHdrSel();
+}
+function setTSubcat(oldRk, newSubcat){
+  const {typeKey,dsts}=_parseTurbineRouteKey(oldRk);
+  const newRk=_turbineRouteKey(typeKey,dsts,newSubcat);
+  if(newRk===oldRk){renderEqContent();return;}
+  const m=_turbineMap();
+  m[newRk]=(m[newRk]||0)+(m[oldRk]||0);
+  delete m[oldRk];
+  // Migrate instance attrs
+  Object.keys(S.instances).forEach(k=>{
+    const parts=k.split('/');
+    if(parts[2]==='tbn' && parts[3]===oldRk && S.instances[k].netId===curNet().id && S.instances[k].hdrName===selHdr){
+      const idx=parts[4];const nk=parts.slice(0,3).concat([newRk,idx]).join('/');
+      S.instances[nk]=S.instances[k];S.instances[nk].key=nk;
+      delete S.instances[k];
+    }
+  });
+  renderEqContent();renderEqHdrSel();
+}
+function removeTRoute(rk){const m=_turbineMap();delete m[rk];
+  // Drop instance attrs for this route
+  Object.keys(S.instances).forEach(k=>{
+    const parts=k.split('/');
+    if(parts[2]==='tbn' && parts[3]===rk && S.instances[k].netId===curNet().id && S.instances[k].hdrName===selHdr) delete S.instances[k];
+  });
+  renderEqContent();renderEqHdrSel();
+}
+// Outgoing letdown: src=selHdr (current), dst=lower header
+function setLOut(dstName,v){const n=curNet();(n.letCounts[selHdr]=n.letCounts[selHdr]||{})[dstName]=Math.max(0,v);renderEqContent();renderEqHdrSel();}
+// Incoming letdown: src=higher header, dst=selHdr (current)
+function setLIn(srcName,v){const n=curNet();(n.letCounts[srcName]=n.letCounts[srcName]||{})[selHdr]=Math.max(0,v);renderEqContent();renderEqHdrSel();}
+
+/* ============ TAB 5: ATTRIBUTES ============ */
+function renderTab5(){
+  const multi=S.networks.length>1;
+  document.getElementById('netSelWrap5').style.display=multi?'':'none';
+  if(multi)renderNetSel('netSel5',id=>{selNetId=id;selInstanceKey=null;renderTab5();});
+  const instances=buildAllInstances();
+  document.getElementById('instanceTabs').innerHTML=instances.map(ins=>{
+    const filled=isFilled(ins.key);
+    return `<button class="itab ${ins.key===selInstanceKey?'active':''} ${filled?'':'warning'}"
+            onclick="selectInstance('${ins.key}')">${esc(ins.name)}</button>`;
+  }).join('') || '<span style="color:var(--text3);font-size:12px">No equipment yet — add some on Tab 4.</span>';
+  if(selInstanceKey && S.instances[selInstanceKey])renderAttrTable();
+  else document.getElementById('attrContent').style.display='none';
+}
+function selectInstance(key){selInstanceKey=key;ensureInstance(key);renderTab5();}
+function ensureInstance(key){
+  if(S.instances[key])return;
+  // parse key: format is netId/hdrName/role/typeKey-or-routeKey/idx
+  const parts=key.split('/');
+  const [netId,hdrName,role,typeKey,idxStr]=parts;
+  const idx=+idxStr;
+  const net=S.networks.find(n=>n.id===netId);
+  const hdr=net?net.headers.find(h=>h.name===hdrName):null;
+  let typeName='', templateKey='', elementType='';
+  if(role==='gen'){
+    const t=GEN_TYPES.find(x=>x.key===typeKey);
+    typeName=t?t.name:typeKey;
+    elementType=`${hdrName} ${typeName}`;
+    templateKey=resolveTemplate(elementType,t?t.template_root:'');
+  } else if(role==='con'){
+    const t=CON_TYPES.find(x=>x.key===typeKey);
+    typeName=t?t.name:typeKey;
+    elementType=`${hdrName} ${typeName}`;
+    templateKey=resolveTemplate(elementType,t?t.template_root:'');
+  } else if(role==='tbn'){
+    // typeKey here is actually the routeKey "typeKey|dst1|dst2"
+    const {typeKey:tk,dsts} = _parseTurbineRouteKey(typeKey);
+    const t = TURBINE_TYPES.find(x=>x.key===tk);
+    typeName = t?t.name:tk;
+    const srcPfx = hdr ? _headerPrefix(hdr) : hdrName;
+    const dstPfxs = dsts.map(dn=>{
+      const dh = net?net.headers.find(x=>x.name===dn):null;
+      return dh?_headerPrefix(dh):dn;
+    });
+    if(!t || !t.dsts.length){
+      elementType=`${srcPfx} ${typeName}`;
+    } else {
+      elementType=`${srcPfx} to ${dstPfxs.join('+')} ${typeName}`;
+    }
+    templateKey=resolveTemplate(elementType,t?t.template_root:'');
+  } else if(role==='let'){
+    typeName=`Letdown (PRDS) → ${typeKey}`;
+    elementType=`${hdrName} to ${typeKey} PRDS`;
+    templateKey='__PRDS__';   // synthetic default below
+  }
+  const baseName = role==='let'
+    ? `${hdrName} → ${typeKey} PRDS`
+    : role==='tbn'
+      ? elementType
+      : `${hdrName} ${typeName}`.replace(/\s+/g,' ').trim();
+  const letter=String.fromCharCode(65+idx);
+  const instanceName=`${baseName}${letter}`;
+  const PRDS_DEFAULT_TEMPLATE=[
+    {name:'Inlet Pressure',uom:'bar'},
+    {name:'Inlet Temperature',uom:'degC'},
+    {name:'Outlet Pressure',uom:'bar'},
+    {name:'Outlet Temperature',uom:'degC'},
+    {name:'Steam Flow',uom:'metric_ton/h'},
+    {name:'Spray Water Flow',uom:'metric_ton/h'},
+    {name:'Pressure Valve Opening',uom:'percent'},
+    {name:'Temperature Valve Opening',uom:'percent'},
+  ];
+  const template = templateKey==='__PRDS__'
+    ? PRDS_DEFAULT_TEMPLATE
+    : (templateKey && ATTR_TEMPLATES[templateKey] ? ATTR_TEMPLATES[templateKey] : []);
+  const attrs=template.map(t=>({name:t.name,uom:t.uom,pi:'',flagSip:0,sipMin:'',sipMax:'',formula:'',default:''}));
+  S.instances[key]={key,name:instanceName,elementType,attrs,role,hdrName,netId,parentPath:[]};
+}
+function resolveTemplate(elementType,fallback){
+  // exact match first
+  if(ATTR_TEMPLATES[elementType])return elementType;
+  // try common substitutions
+  const guess=elementType.replace('  ',' ').trim();
+  if(ATTR_TEMPLATES[guess])return guess;
+  for(const k of Object.keys(ATTR_TEMPLATES)){
+    if(k.toLowerCase()===elementType.toLowerCase())return k;
+  }
+  return fallback||'';
+}
+function buildAllInstances(){
+  const out=[];
+  const net=curNet();
+  net.headers.forEach(h=>{
+    const gc=net.genCounts[h.name]||{},cc=net.conCounts[h.name]||{},lc=net.letCounts[h.name]||{};
+    const tc=(net.turbineCounts||{})[h.name]||{};
+    Object.entries(gc).forEach(([k,v])=>{for(let i=0;i<v;i++){const key=`${net.id}/${h.name}/gen/${k}/${i}`;ensureInstance(key);out.push(S.instances[key]);}});
+    Object.entries(cc).forEach(([k,v])=>{for(let i=0;i<v;i++){const key=`${net.id}/${h.name}/con/${k}/${i}`;ensureInstance(key);out.push(S.instances[key]);}});
+    Object.entries(tc).forEach(([rk,v])=>{for(let i=0;i<v;i++){const key=`${net.id}/${h.name}/tbn/${rk}/${i}`;ensureInstance(key);out.push(S.instances[key]);}});
+    Object.entries(lc).forEach(([k,v])=>{for(let i=0;i<v;i++){const key=`${net.id}/${h.name}/let/${k}/${i}`;ensureInstance(key);out.push(S.instances[key]);}});
+  });
+  return out;
+}
+function isFilled(key){
+  const ins=S.instances[key];if(!ins||!ins.attrs.length)return true;
+  return ins.attrs.some(a=>a.pi||a.default||a.flagSip);
+}
+function renderAttrTable(){
+  const ins=S.instances[selInstanceKey];
+  document.getElementById('attrContent').style.display='';
+  document.getElementById('attrInstLabel').textContent=ins.name;
+  document.getElementById('attrInstType').textContent=ins.elementType;
+  const body=document.getElementById('attrTableBody');
+  body.innerHTML=ins.attrs.map((a,i)=>`
+    <tr>
+      <td class="num">${i+1}</td>
+      <td><input value="${esc(a.name)}" onchange="upd('name',${i},this.value)"></td>
+      <td><input value="${esc(a.uom)}"  onchange="upd('uom',${i},this.value)"></td>
+      <td><input value="${esc(a.pi)}"   onchange="upd('pi',${i},this.value)" placeholder="PI tag1,PI tag2"></td>
+      <td><div class="sip-cell"><input type="checkbox" ${a.flagSip?'checked':''} onchange="upd('flagSip',${i},this.checked?1:0)"></div></td>
+      <td><input value="${esc(a.sipMin)}" onchange="upd('sipMin',${i},this.value)" placeholder="−5"></td>
+      <td><input value="${esc(a.sipMax)}" onchange="upd('sipMax',${i},this.value)" placeholder="+5"></td>
+      <td><input value="${esc(a.default)}" onchange="upd('default',${i},this.value)"></td>
+      <td><button class="ic-del" onclick="removeAttr(${i})" style="opacity:.6">✕</button></td>
+    </tr>
+  `).join('');
+}
+function upd(k,i,v){S.instances[selInstanceKey].attrs[i][k]=v;}
+function removeAttr(i){S.instances[selInstanceKey].attrs.splice(i,1);renderAttrTable();}
+function addAttribute(){S.instances[selInstanceKey].attrs.push({name:'New Attribute',uom:'',pi:'',flagSip:0,sipMin:'',sipMax:'',formula:'',default:''});renderAttrTable();}
+function bulkFillSip(){
+  const ins=S.instances[selInstanceKey];
+  ins.attrs.forEach(a=>{if(!a.sipMin)a.sipMin='-5';if(!a.sipMax)a.sipMax='5';a.flagSip=1;});
+  renderAttrTable();
+  toast('Bulk-filled SIP for '+ins.attrs.length+' attributes','success');
+}
+
+/* ============ TAB 6: REVIEW ============ */
+function renderReview(){
+  // Make sure all instances are materialised before counting
+  S.networks.forEach(net=>{
+    const oldSel=selNetId;selNetId=net.id;buildAllInstances();selNetId=oldSel;
+  });
+  const totalP=S.plants.length, totalN=S.networks.length;
+  let totalH=0,totalE=0,totalA=0,totalFilled=0;
+  S.networks.forEach(net=>{
+    totalH+=net.headers.length;
+    net.headers.forEach(h=>{
+      ['genCounts','conCounts','letCounts','turbineCounts'].forEach(k=>{
+        Object.values((net[k]||{})[h.name]||{}).forEach(v=>totalE+=v);
+      });
+    });
+  });
+  Object.values(S.instances).forEach(ins=>{totalA+=ins.attrs.length;if(isFilled(ins.key))totalFilled++;});
+  const totalI=Object.keys(S.instances).length;
+  document.getElementById('reviewStats').innerHTML=`
+    <div class="rs"><div class="val">${totalP}</div><div class="lbl">Plants</div></div>
+    <div class="rs"><div class="val">${totalN}</div><div class="lbl">Networks</div></div>
+    <div class="rs"><div class="val">${totalH}</div><div class="lbl">Headers</div></div>
+    <div class="rs"><div class="val">${totalE}</div><div class="lbl">Equipment</div></div>
+    <div class="rs"><div class="val">${totalI}</div><div class="lbl">Instances</div></div>
+    <div class="rs"><div class="val">${totalA}</div><div class="lbl">Attributes</div></div>
+  `;
+  const warnings=getWarnings();
+  document.getElementById('validationBox').innerHTML=warnings.length
+    ? warnings.map(w=>`<div class="warn ${w.t}">${w.t==='error'?'🔴':'🟡'} ${esc(w.m)}</div>`).join('')
+    : `<div class="warn ok">✅ All checks passed — ${totalE} equipment items across ${totalN} networks · ready to export</div>`;
+  // Tree preview
+  document.getElementById('treeBox').innerHTML=buildTree();
+  setTimeout(drawDiagram, 150);
+}
+function getWarnings(){
+  const w=[];
+  if(!S.affiliate)w.push({t:'error',m:'Affiliate name is required'});
+  S.networks.forEach(net=>{
+    if(!net.plantIds.length)w.push({t:'warning',m:`Network "${net.name}" has no plants assigned`});
+    net.headers.forEach(h=>{
+      const hasG=Object.values(net.genCounts[h.name]||{}).some(v=>v>0);
+      const hasC=Object.values(net.conCounts[h.name]||{}).some(v=>v>0);
+      if(!hasG&&hasC)w.push({t:'warning',m:`${net.name} → ${h.name}: has consumers but no generators`});
+      if(!hasG&&!hasC)w.push({t:'warning',m:`${net.name} → ${h.name}: no equipment defined`});
+    });
+  });
+  return w;
+}
+function buildTree(){
+  let h='';
+  h+=`<div class="tnode"><span class="tlevel">📂 ${esc(S.affiliate)}</span></div>`;
+  S.plants.forEach(p=>{
+    h+=`<div style="margin-left:18px">├── <span class="tnode">🏭 ${esc(p.name)}</span></div>`;
+  });
+  S.networks.forEach(net=>{
+    h+=`<div style="margin-left:18px">├── <span class="tlevel" style="color:${net.color}">🌐 ${esc(net.name)}</span> <span class="tcount">(${net.plantIds.length} plant${net.plantIds.length!==1?'s':''})</span></div>`;
+    net.headers.forEach(hdr=>{
+      const gc=net.genCounts[hdr.name]||{},cc=net.conCounts[hdr.name]||{},lc=net.letCounts[hdr.name]||{};
+      const tc=(net.turbineCounts||{})[hdr.name]||{};
+      let totalEq=0;Object.values(gc).forEach(v=>totalEq+=v);Object.values(cc).forEach(v=>totalEq+=v);Object.values(tc).forEach(v=>totalEq+=v);Object.values(lc).forEach(v=>totalEq+=v);
+      h+=`<div style="margin-left:36px">│  ├── <span class="tnode" style="color:${hdr.color}">━ ${esc(hdr.name)}</span> <span class="tcount">${esc(hdr.range||'')} ${esc(hdr.uom||'')} · ${totalEq} eq</span></div>`;
+      Object.entries(gc).forEach(([k,v])=>{if(v>0){const t=GEN_TYPES.find(x=>x.key===k);h+=`<div style="margin-left:54px">│  │  ├── ${t?t.icon:'🔥'} ${esc(t?t.name:k)} × ${v}</div>`;}});
+      Object.entries(cc).forEach(([k,v])=>{if(v>0){const t=CON_TYPES.find(x=>x.key===k);h+=`<div style="margin-left:54px">│  │  ├── ${t?t.icon:'🏗️'} ${esc(t?t.name:k)} × ${v}</div>`;}});
+      Object.entries(tc).forEach(([rk,v])=>{if(v>0){const t=_turbineTypeOf(rk);h+=`<div style="margin-left:54px">│  │  ├── ${t?t.icon:'⚙️'} ${esc(_turbineRouteLabel(rk))} × ${v}</div>`;}});
+      Object.entries(lc).forEach(([k,v])=>{if(v>0){h+=`<div style="margin-left:54px">│  │  ├── 🔽 ${esc(hdr.name)} → ${esc(k)} × ${v}</div>`;}});
+    });
+  });
+  return h;
+}
+
+
+function drawDiagram() {
+  const box = document.getElementById('diagramBox');
+  if(!box) return;
+  box.innerHTML = '';
+  // Always purge stale body-attached tooltips before re-render
+  if (window.d3) d3.select('body').selectAll('.ufd-tooltip').remove();
+
+  if (typeof d3 === 'undefined' || !window.d3) {
+    box.innerHTML = '<div style="padding:20px;color:#8b949e;font-family:monospace">⚠ D3.js failed to load. Check your network.</div>';
+    return;
+  }
+  const net = (typeof curNet === 'function') ? curNet() : null;
+  if (!net || !net.headers || !net.headers.length) {
+    box.innerHTML = '<div style="padding:20px;color:#8b949e;font-family:monospace">⚠ No headers configured. Configure headers in Tab 3.</div>';
+    return;
+  }
+
+  // ─────────────────── Layout dimensions ───────────────────
+  const headers = net.headers;
+  const LANE_H  = 180;            // vertical space per header lane
+  const TOP_PAD = 70, BOT_PAD = 60, LEFT_PAD = 60, RIGHT_PAD = 60;
+  const LET_ZONE_W = Math.max(80, 50 * Math.max(...headers.map(h =>
+                       Object.values(net.letCounts[h.name]||{}).filter(v=>v>0).length
+                     ), 1));
+  const W = Math.max(box.clientWidth || 1000, 920);
+  const H = TOP_PAD + headers.length * LANE_H + BOT_PAD;
+  box.style.overflow = 'auto';
+
+  const svg = d3.select('#diagramBox').append('svg')
+    .attr('class','ufd-svg')
+    .attr('width', W).attr('height', H);
+
+  // ─────────────────── Arrow markers (one per header color) ───────────────────
+  const defs = svg.append('defs');
+  const arrowCache = {};
+  function arrowFor(color){
+    if (arrowCache[color]) return arrowCache[color];
+    const id = 'ufd-arr-' + Object.keys(arrowCache).length;
+    defs.append('marker')
+      .attr('id', id).attr('viewBox', '0 -5 10 10')
+      .attr('refX', 8).attr('refY', 0)
+      .attr('markerWidth', 7).attr('markerHeight', 7)
+      .attr('orient', 'auto').attr('markerUnits','strokeWidth')
+      .append('path').attr('d', 'M0,-4L8,0L0,4Z').attr('fill', color);
+    arrowCache[color] = id; return id;
+  }
+
+  // ─────────────────── Header Y placement ───────────────────
+  const x0 = LEFT_PAD, x1 = W - RIGHT_PAD;
+  const eqZoneEnd = x1 - LET_ZONE_W;     // letdowns live in [eqZoneEnd, x1]
+  const headerMap = {};
+  headers.forEach((h,i) => { h._y = TOP_PAD + i*LANE_H + LANE_H/2; headerMap[h.name] = h; });
+
+  // ─────────────────── Symbol primitives (ISA-ish) ───────────────────
+  function drawTurbine(g, w, h) {
+    // Trapezoid: narrow at top (HP inlet), wide at bottom (LP exhaust)
+    const topW = w * 0.45, botW = w;
+    const pts = [[-topW/2,-h/2],[topW/2,-h/2],[botW/2,h/2],[-botW/2,h/2]];
+    g.append('polygon').attr('class','ufd-node ufd-turbine')
+      .attr('points', pts.map(p=>p.join(',')).join(' '));
+    g.append('line').attr('class','ufd-shaft')
+      .attr('x1', -w*0.65).attr('y1', 0).attr('x2', w*0.65).attr('y2', 0);
+  }
+  function drawBoiler(g, w, h) {
+    g.append('rect').attr('class','ufd-node ufd-boiler')
+      .attr('x', -w/2).attr('y', -h/2).attr('width', w).attr('height', h).attr('rx', 2);
+    for (let i = 1; i < 4; i++) {
+      const yy = -h/2 + (h * i / 4);
+      g.append('line').attr('class','ufd-pass')
+        .attr('x1', -w/2+4).attr('y1', yy).attr('x2', w/2-4).attr('y2', yy);
+    }
+    g.append('path').attr('class','ufd-flame')
+      .attr('d', `M${-8},${h/2+6} q3,-7 6,0 q3,-7 6,0 q3,-7 6,0`)
+      .attr('transform', `translate(${-4},0)`);
+  }
+  function drawExchanger(g, w, h) {
+    const r = Math.min(w, h) / 2;
+    g.append('circle').attr('class','ufd-node ufd-exchanger').attr('r', r);
+    g.append('path').attr('class','ufd-tube')
+      .attr('d', `M${-r*0.7},0 C${-r*0.7},${-r*0.7} ${r*0.7},${-r*0.7} ${r*0.7},0
+                   C${r*0.7},${r*0.7} ${-r*0.7},${r*0.7} ${-r*0.7},0`);
+  }
+  function drawValve(g, w, h) {
+    // Bowtie >< with vertical actuator stem on top
+    const hw = w/2, hh = h*0.35;
+    g.append('polygon').attr('class','ufd-node ufd-valve')
+      .attr('points', `${-hw},${-hh} ${hw},${hh} ${hw},${-hh} ${-hw},${hh}`);
+    g.append('line').attr('class','ufd-stem')
+      .attr('x1', 0).attr('y1', -hh).attr('x2', 0).attr('y2', -h/2 - 6);
+    g.append('rect').attr('class','ufd-actuator')
+      .attr('x', -8).attr('y', -h/2 - 12).attr('width', 16).attr('height', 6);
+  }
+  function classify(role, key) {
+    const k = String(key||'').toLowerCase();
+    if (role === 'let') return 'valve';
+    if (k.indexOf('turbine') >= 0) return 'turbine';
+    if (role === 'gen') return 'boiler';
+    return 'exchanger';
+  }
+
+  // ─────────────────── Build nodes + orthogonal links ───────────────────
+  const nodes = [];
+  const links = [];   // { points:[[x,y]...], color, animated }
+  const eqAreaW = eqZoneEnd - (x0 + 140);
+
+  headers.forEach((h, hi) => {
+    const gc = Object.entries(net.genCounts[h.name] || {}).filter(([,v])=>v>0);
+    const cc = Object.entries(net.conCounts[h.name] || {}).filter(([,v])=>v>0);
+    const tcAll = Object.entries((net.turbineCounts||{})[h.name] || {}).filter(([,v])=>v>0);
+    const lc = Object.entries(net.letCounts[h.name] || {}).filter(([,v])=>v>0);
+
+    // Generators above the header → flow DOWN into header
+    const gStep = gc.length > 0 ? eqAreaW / (gc.length + 1) : 0;
+    gc.forEach(([k,v], i) => {
+      const t = (typeof GEN_TYPES !== 'undefined') ? GEN_TYPES.find(x=>x.key===k) : null;
+      const shape = classify('gen', k);
+      const nx = x0 + 140 + gStep*(i+1);
+      const ny = h._y - 78;
+      nodes.push({ role:'gen', key:k, hdrName:h.name, qty:v, x:nx, y:ny,
+                   w:56, h:46, shape, color:h.color,
+                   name: t ? t.name : k, icon: t ? t.icon : '🔥' });
+      links.push({ points:[[nx, ny + 23],[nx, h._y]], color:h.color, animated:true });
+    });
+
+    // Consumers + turbines share the area below the header → flow OUT (down) of header.
+    // Turbines are drawn alongside consumers, but additionally have routed arrows to their destination header(s).
+    const belowItems = cc.map(([k,v])=>({kind:'con',k,v}))
+                       .concat(tcAll.map(([rk,v])=>({kind:'tbn',k:rk,v})));
+    const bStep = belowItems.length > 0 ? eqAreaW / (belowItems.length + 1) : 0;
+    belowItems.forEach((item, i) => {
+      const nx = x0 + 140 + bStep*(i+1);
+      const ny = h._y + 78;
+      if(item.kind==='con'){
+        const t = (typeof CON_TYPES !== 'undefined') ? CON_TYPES.find(x=>x.key===item.k) : null;
+        const shape = classify('con', item.k);
+        nodes.push({ role:'con', key:item.k, hdrName:h.name, qty:item.v, x:nx, y:ny,
+                     w:56, h:46, shape, color:h.color,
+                     name: t ? t.name : item.k, icon: t ? t.icon : '🏗️' });
+        links.push({ points:[[nx, h._y],[nx, ny - 23]], color:h.color, animated:true });
+      } else {
+        // Turbine: draw on src header, route arrow continues to each destination header
+        const {dsts} = _parseTurbineRouteKey(item.k);
+        const t = _turbineTypeOf(item.k);
+        nodes.push({ role:'tbn', key:item.k, hdrName:h.name, qty:item.v, x:nx, y:ny,
+                     w:56, h:46, shape:'turbine', color:h.color,
+                     name: t?t.name:item.k, icon: t?t.icon:'⚙️' });
+        links.push({ points:[[nx, h._y],[nx, ny - 23]], color:h.color, animated:true });
+        // Exhaust/extraction routing arrows from turbine bottom to destination header(s)
+        dsts.forEach(dn=>{
+          const dh = headerMap[dn]; if(!dh) return;
+          links.push({ points:[[nx, ny + 23],[nx, dh._y]], color:dh.color, animated:true });
+        });
+      }
+    });
+
+    // Letdowns (PRDS) on the right side → from upper header DOWN to lower header
+    lc.forEach(([dstName,v], i) => {
+      const dst = headerMap[dstName]; if (!dst) return;
+      const lx = eqZoneEnd + 30 + i*45;
+      const ly = (h._y + dst._y) / 2;
+      nodes.push({ role:'let', key:'prds', hdrName:h.name, dstName, qty:v,
+                   x:lx, y:ly, w:22, h:30, shape:'valve', color:h.color,
+                   name:`PRDS → ${dstName}`, icon:'🔽' });
+      // Strictly vertical (orthogonal): src header → valve top, valve bottom → dst header
+      links.push({ points:[[lx, h._y],[lx, ly - 15]],  color:h.color,  animated:true });
+      links.push({ points:[[lx, ly + 15],[lx, dst._y]], color:dst.color, animated:true });
+    });
+  });
+
+  // ─────────────────── Render order: links → headers → nodes ───────────────────
+  const linksLayer  = svg.append('g').attr('class','ufd-links');
+  const headerLayer = svg.append('g').attr('class','ufd-headers');
+  const nodesLayer  = svg.append('g').attr('class','ufd-nodes');
+
+  // Links — orthogonal polylines with directional arrows
+  links.forEach(l => {
+    const d = l.points.map((p,i)=>(i?'L':'M') + p[0] + ',' + p[1]).join(' ');
+    linksLayer.append('path')
+      .attr('class', 'ufd-flow' + (l.animated ? ' ufd-flow-anim' : ''))
+      .attr('d', d)
+      .attr('stroke', l.color)
+      .attr('marker-end', 'url(#' + arrowFor(l.color) + ')');
+  });
+
+  // Tooltip — appended directly to <body>, NEVER to #diagramBox or SVG
+  const tooltip = d3.select('body').append('div')
+    .attr('class','ufd-tooltip')
+    .style('opacity', 0);
+
+  function headerSummary(h) {
+    const gc = net.genCounts[h.name] || {};
+    const cc = net.conCounts[h.name] || {};
+    const lc = net.letCounts[h.name] || {};
+    const tc = (net.turbineCounts||{})[h.name] || {};
+    const safeEsc = (typeof esc === 'function') ? esc : (s => String(s==null?'':s));
+    const sum = o => Object.values(o).reduce((a,b)=>a + (+b||0), 0);
+    const gens = Object.entries(gc).filter(([,v])=>v>0).map(([k,v])=>{
+      const t = (typeof GEN_TYPES !== 'undefined') ? GEN_TYPES.find(x=>x.key===k) : null;
+      return `<div>${t?t.icon:'🔥'} ${safeEsc(t?t.name:k)} × <b>${v}</b></div>`;
+    }).join('');
+    const cons = Object.entries(cc).filter(([,v])=>v>0).map(([k,v])=>{
+      const t = (typeof CON_TYPES !== 'undefined') ? CON_TYPES.find(x=>x.key===k) : null;
+      return `<div>${t?t.icon:'🏗️'} ${safeEsc(t?t.name:k)} × <b>${v}</b></div>`;
+    }).join('');
+    const tbns = Object.entries(tc).filter(([,v])=>v>0).map(([rk,v])=>{
+      const t = _turbineTypeOf(rk);
+      return `<div>${t?t.icon:'⚙️'} ${safeEsc(_turbineRouteLabel(rk))} × <b>${v}</b></div>`;
+    }).join('');
+    const lets = Object.entries(lc).filter(([,v])=>v>0)
+      .map(([k,v])=>`<div>🔽 ${safeEsc(h.name)} → ${safeEsc(k)} × <b>${v}</b></div>`).join('');
+    return `<div class="ufd-tt-title" style="color:${h.color}">━ ${safeEsc(h.name)}</div>
+      <div class="ufd-tt-meta">${safeEsc(h.range||'')} ${safeEsc(h.uom||'')}</div>
+      <div class="ufd-tt-sec"><span class="ufd-tt-lbl">GENERATORS</span> ${sum(gc)}</div>${gens || '<div class="ufd-tt-none">— none —</div>'}
+      <div class="ufd-tt-sec"><span class="ufd-tt-lbl">CONSUMERS</span> ${sum(cc)}</div>${cons || '<div class="ufd-tt-none">— none —</div>'}
+      <div class="ufd-tt-sec"><span class="ufd-tt-lbl">TURBINES (routed)</span> ${sum(tc)}</div>${tbns || '<div class="ufd-tt-none">— none —</div>'}
+      <div class="ufd-tt-sec"><span class="ufd-tt-lbl">PRDS / LETDOWNS</span> ${sum(lc)}</div>${lets || '<div class="ufd-tt-none">— none —</div>'}`;
+  }
+
+  // Headers — visible line, end caps, labels (all pointer-events:none),
+  // plus a fat INVISIBLE hitbox that owns all hover events.
+  headers.forEach(h => {
+    // Visible header line
+    headerLayer.append('line')
+      .attr('class','ufd-header-line')
+      .attr('x1', x0).attr('y1', h._y).attr('x2', x1).attr('y2', h._y)
+      .attr('stroke', h.color);
+
+    // End caps for a "bus-bar" look
+    headerLayer.append('rect').attr('class','ufd-header-cap')
+      .attr('x', x0-4).attr('y', h._y-6).attr('width', 6).attr('height', 12)
+      .attr('fill', h.color);
+    headerLayer.append('rect').attr('class','ufd-header-cap')
+      .attr('x', x1-2).attr('y', h._y-6).attr('width', 6).attr('height', 12)
+      .attr('fill', h.color);
+
+    // Labels
+    headerLayer.append('text').attr('class','ufd-header-text')
+      .attr('x', x0+6).attr('y', h._y-10).attr('fill', h.color)
+      .text(h.name);
+    headerLayer.append('text').attr('class','ufd-header-sub')
+      .attr('x', x0+6).attr('y', h._y+18)
+      .text(`${h.range || ''} ${h.uom || ''}`.trim());
+
+    // ── INVISIBLE HITBOX — only this element receives hover events
+    headerLayer.append('line')
+      .attr('class','ufd-header-hit')
+      .attr('x1', x0).attr('y1', h._y).attr('x2', x1).attr('y2', h._y)
+      .attr('stroke', 'transparent')
+      .attr('stroke-width', 30)
+      .style('pointer-events', 'all')
+      .style('cursor', 'help')
+      .on('mouseover', function(){ tooltip.html(headerSummary(h)).style('opacity', 1); })
+      .on('mousemove', function(event){
+        // Absolute page coordinates — survives any scroll / clipping
+        tooltip
+          .style('left', (event.pageX + 15) + 'px')
+          .style('top',  (event.pageY + 15) + 'px');
+      })
+      .on('mouseout',  function(){ tooltip.style('opacity', 0); });
+  });
+
+  // Nodes — drawn last so they sit on top of links
+  nodes.forEach(n => {
+    const g = nodesLayer.append('g')
+      .attr('class', 'ufd-node-g ufd-shape-' + n.shape)
+      .attr('transform', `translate(${n.x},${n.y})`);
+    if      (n.shape === 'turbine')   drawTurbine(g, n.w, n.h);
+    else if (n.shape === 'boiler')    drawBoiler(g, n.w, n.h);
+    else if (n.shape === 'exchanger') drawExchanger(g, n.w, n.h);
+    else                              drawValve(g, n.w, n.h);
+
+    const tag = n.role === 'gen' ? 'GEN' : n.role === 'con' ? 'CON' : 'PRDS';
+    g.append('text').attr('class','ufd-node-tag')
+      .attr('y', -n.h/2 - 8).text(`${n.icon} ${tag}`);
+    g.append('text').attr('class','ufd-node-qty')
+      .attr('y', n.h/2 + 14).text(`Qty: ${n.qty}`);
+
+    // Native SVG title — secondary info on prolonged hover of the symbol itself
+    g.append('title').text(`${n.name}\nHeader: ${n.hdrName}${n.dstName?' → '+n.dstName:''}\nQty: ${n.qty}`);
+  });
+}
+
+/* ============ EXPORT DIAGRAM (SVG / PNG) ============ */
+
+function _collectInlineCSS(){
+  // Pull only the .ufd-* rules so the exported SVG renders the same offline
+  let css = '';
+  for (const sheet of Array.from(document.styleSheets)) {
+    let rules;
+    try { rules = sheet.cssRules; } catch(e){ continue; } // cross-origin
+    if (!rules) continue;
+    for (const r of Array.from(rules)) {
+      if (r.cssText && /\.ufd-|@keyframes ufd-/.test(r.cssText)) css += r.cssText + '\n';
+    }
+  }
+  return css;
+}
+
+function _serializeDiagramSVG(){
+  const src = document.querySelector('#diagramBox svg');
+  if (!src) { toast('No diagram to export — open Tab 6 first','warn'); return null; }
+  const svg = src.cloneNode(true);
+  svg.setAttribute('xmlns','http://www.w3.org/2000/svg');
+  svg.setAttribute('xmlns:xlink','http://www.w3.org/1999/xlink');
+  // Ensure width/height are concrete numbers (for rasterization)
+  const w = src.getAttribute('width')  || src.clientWidth  || 1000;
+  const h = src.getAttribute('height') || src.clientHeight || 600;
+  svg.setAttribute('width', w);
+  svg.setAttribute('height', h);
+  if (!svg.getAttribute('viewBox')) svg.setAttribute('viewBox', `0 0 ${w} ${h}`);
+  // Background rect so PNGs aren't transparent
+  const bg = document.createElementNS('http://www.w3.org/2000/svg','rect');
+  bg.setAttribute('x',0); bg.setAttribute('y',0);
+  bg.setAttribute('width','100%'); bg.setAttribute('height','100%');
+  bg.setAttribute('fill','#0d1117');
+  svg.insertBefore(bg, svg.firstChild);
+  // Inline relevant CSS
+  const styleEl = document.createElementNS('http://www.w3.org/2000/svg','style');
+  styleEl.textContent = _collectInlineCSS();
+  svg.insertBefore(styleEl, svg.firstChild);
+  const xml = new XMLSerializer().serializeToString(svg);
+  return { xml, w:+w, h:+h };
+}
+
+function _fileBase(){
+  const a = (S.affiliate||'site').replace(/\s+/g,'_');
+  const n = (curNet().name||'network').replace(/\s+/g,'_');
+  const stamp = new Date().toISOString().slice(0,10);
+  return `${a}_${n}_diagram_${stamp}`;
+}
+
+function exportDiagramSVG(){
+  const out = _serializeDiagramSVG(); if(!out) return;
+  const blob = new Blob(['<?xml version="1.0" encoding="UTF-8"?>\n' + out.xml],
+                       {type:'image/svg+xml;charset=utf-8'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = _fileBase() + '.svg';
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url), 1000);
+  toast('Exported SVG: ' + a.download,'success');
+}
+
+function exportDiagramPNG(){
+  const out = _serializeDiagramSVG(); if(!out) return;
+  const scale = 2; // retina
+  const img = new Image();
+  const svgBlob = new Blob([out.xml], {type:'image/svg+xml;charset=utf-8'});
+  const url = URL.createObjectURL(svgBlob);
+  img.onload = function(){
+    const canvas = document.createElement('canvas');
+    canvas.width = out.w * scale; canvas.height = out.h * scale;
+    const ctx = canvas.getContext('2d');
+    ctx.fillStyle = '#0d1117';
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+    URL.revokeObjectURL(url);
+    canvas.toBlob(b => {
+      const pUrl = URL.createObjectURL(b);
+      const a = document.createElement('a');
+      a.href = pUrl; a.download = _fileBase() + '.png';
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(()=>URL.revokeObjectURL(pUrl), 1000);
+      toast('Exported PNG: ' + a.download,'success');
+    }, 'image/png');
+  };
+  img.onerror = function(){
+    URL.revokeObjectURL(url);
+    toast('PNG export failed — try SVG instead','warn');
+  };
+  img.src = url;
+}
+
+/* ============ EXPORT XLSX ============ */
+
+/* ─── Helpers that mirror the platform reference file's naming convention ─── */
+function _shortHeaderName(h){
+  // "VHP Steam Header (100-110 KG/CM2A)" -> "VHP Steam Header"
+  // "Condensate Header"                  -> "Condensate Header"
+  return String(h.name || '').replace(/\s*\(.*?\)\s*$/, '').trim();
+}
+function _headerPrefix(h){
+  // First token before " Steam" — e.g. "VHP", "HP-2", "MP-1", "LP".
+  const s = _shortHeaderName(h);
+  const m = s.match(/^(\S+)\s+Steam/);
+  return m ? m[1] : s.split(/\s+/)[0];
+}
+function _headerRootPrefix(h){
+  // Collapses HP-2 / HP-1 -> HP, MP-2 / MP-1 -> MP — used for template lookup.
+  return _headerPrefix(h).replace(/-\d+$/, '');
+}
+function _resolveElementType(h, role, k){
+  // The LABEL written into the Element Type column.
+  // Always reflects the header level (so an HP-2 turbine reads "HP-2 Backpressure
+  // Steam Turbine", never the VHP template name it borrows attributes from).
+  const t = (role === 'gen' ? GEN_TYPES : CON_TYPES).find(x => x.key === k);
+  const tName  = t ? t.name : k;
+  const rootPx = _headerRootPrefix(h);
+  return `${rootPx} ${tName}`;
+}
+function _resolveTemplateKey(h, role, k){
+  // The KEY used to look up the attribute set in ATTR_TEMPLATES. May differ from
+  // the element-type label when a header has no dedicated template
+  // (e.g. HP-2 turbines reuse the VHP attribute schema).
+  const t = (role === 'gen' ? GEN_TYPES : CON_TYPES).find(x => x.key === k);
+  const tName  = t ? t.name : k;
+  const pfx    = _headerPrefix(h);
+  const rootPx = _headerRootPrefix(h);
+  const candidates = [
+    `${pfx} ${tName}`,
+    `${rootPx} ${tName}`,
+    t && t.template_root,
+    tName,
+  ].filter(Boolean);
+  for (const c of candidates) if (ATTR_TEMPLATES[c]) return c;
+  return `${rootPx} ${tName}`;
+}
+function _instanceLeafName(h, role, k, idx){
+  const t = (role === 'gen' ? GEN_TYPES : CON_TYPES).find(x => x.key === k);
+  const tName = t ? t.name : k;
+  return `${_headerPrefix(h)} ${tName}${String.fromCharCode(65+idx)}`;
+}
+function _groupLabel(h, role){
+  const pfx = _headerPrefix(h);
+  if (role === 'gen') return `${pfx} Steam GeneratorA`;
+  if (role === 'con') return `${pfx} Steam ConsumersA`;
+  if (role === 'tbn') return `${pfx} Steam TurbinesA`;
+  if (role === 'let') return `${pfx} Steam LetdownA`;
+  return '';
+}
+// Sub-component parenting inside a boiler (mirrors the reference file's hierarchy)
+const _BOILER_PARENT_OF = {
+  'BFW Pump'      : 'BFW System',
+  'Burner'        : 'Combustion System',
+  'FD Fan'        : 'Combustion System',
+  'ID Fan'        : 'Combustion System',
+  'Desuperheater' : 'Superheater',
+};
+function _isBoilerInstance(role, k){
+  return role === 'gen' && /(boiler|hrsg|heat_recovery|waste_heat)/i.test(k);
+}
+function _boilerSubKeys(h){
+  // All ATTR_TEMPLATES entries of the form "<rootPrefix> Boiler <Component>"
+  const rp = _headerRootPrefix(h);
+  const prefix = `${rp} Boiler `;
+  return Object.keys(ATTR_TEMPLATES).filter(k =>
+    k.startsWith(prefix) && k !== `${rp} Fuel Fired  Boiler` && k !== `${rp} Boiler`
+  );
+}
+
+function exportXlsx(){
+  // Force materialisation across ALL networks without leaving selNetId stranded
+  const _savedSel = selNetId;
+  S.networks.forEach(net => { selNetId = net.id; buildAllInstances(); });
+  selNetId = _savedSel;
+
+  // Cell sanitiser: every value reaching aoa_to_sheet must be a plain string
+  // with no control characters and no surrogate halves, otherwise Excel will
+  // refuse to open the workbook ("we found a problem with some content").
+  const _clean = v => {
+    if (v === null || v === undefined) return '';
+    let s = (typeof v === 'string') ? v : String(v);
+    s = s.replace(/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/g, '');
+    return s;
+  };
+  const _row = arr => {
+    const out = arr.map(_clean);
+    while (out.length < 12) out.push('');
+    return out.slice(0, 12);
+  };
+
+  // ───────────── Build "All Attributes" sheet in the platform's exact shape ─────────────
+  const COL_HEADERS = [
+    'Element ID (key)','Attribute ID (key)','Element Path','Element Type','Attribute Name',
+    'UOM','PI Sensors (comma-separated)','flag_sip (per sensor, 1=on, 0=off)',
+    'SIP Min % (per sensor, comma-sep, blank=−5%)','SIP Max % (per sensor, comma-sep, blank=+5%)',
+    'Formula','Default Value'
+  ];
+  const BANNER = '⚠ Do NOT edit columns A–E. Fill in F (UOM), G (PI Sensors), H (flag_sip: 1=enable, 0=disable per sensor), I (SIP Min %), J (SIP Max %), K (Formula), L (Default Value). SIP Min/Max only apply when flag_sip=1.';
+
+  // Pick the "system" label for Row 1 — matches reference convention of network-rooted paths
+  const sysLabel = (S.networks[0] && S.networks[0].name) || S.affiliate || 'System';
+
+  const rows = [];
+
+  // System-level attrs at root — element path is the network/system name only
+  const sysId = hash(sysLabel);
+  SYSTEM_ATTRS.forEach(a => {
+    rows.push([
+      sysId, hash(sysLabel + '_' + a.name),
+      sysLabel, 'System', a.name, a.uom || '',
+      '', '', '', '', '', ''
+    ]);
+  });
+
+  // Per-instance attrs map (so users' Tab-5 edits survive into export rows)
+  function _findInstanceAttrs(netId, hdrName, role, typeKey, idx){
+    const key = `${netId}/${hdrName}/${role}/${typeKey}/${idx}`;
+    return S.instances[key] && S.instances[key].attrs;
+  }
+
+  // Emit a block of rows from a template (or from user-edited attrs if present).
+  // fallbackAttrs is used when neither overrideAttrs nor a template entry exist,
+  // ensuring the equipment is never silently dropped from the export.
+  function emitBlock(elementType, elementPath, templateKey, overrideAttrs, fallbackAttrs){
+    const tmpl = ATTR_TEMPLATES[templateKey] || [];
+    const attrs = (overrideAttrs && overrideAttrs.length) ? overrideAttrs
+                : tmpl.length                             ? tmpl
+                : (fallbackAttrs || []);
+    if (!attrs.length) return 0;
+    const eid = hash(elementPath);
+    attrs.forEach(a => {
+      rows.push([
+        eid, hash(elementPath + '_' + a.name),
+        elementPath, elementType, a.name, a.uom || '',
+        a.pi || '', a.flagSip ? '1' : '',
+        a.sipMin || '', a.sipMax || '', a.formula || '', a.default || ''
+      ]);
+    });
+    return attrs.length;
+  }
+
+  S.networks.forEach(net => {
+    const netRoot = net.name;
+    net.headers.forEach(h => {
+      const hShort   = _shortHeaderName(h);        // e.g. "VHP Steam Header"
+      const hPrefix  = _headerPrefix(h);           // e.g. "VHP", "HP-2"
+      const hRoot    = _headerRootPrefix(h);       // e.g. "VHP", "HP"
+      const hPath    = `${netRoot} > ${hShort}A`;  // "Steam Network > VHP Steam HeaderA"
+      const hElemTy  = hShort;                     // element-type matches the template key
+
+      // 1) Header element attrs (only if a template exists, matching the reference)
+      emitBlock(hElemTy, hPath, hElemTy);
+
+      // 2) GENERATORS — grouped under "<Prefix> Steam GeneratorA"
+      // GEN_GENERIC_FALLBACK mirrors the consumer pattern: any new generator type
+      // with template_root:'' will still produce rows rather than vanishing silently.
+      const GEN_GENERIC_FALLBACK = [
+        {name:'Steam Generation Flow',uom:'metric_ton/h'},
+        {name:'Steam Outlet Pressure',uom:'bar'},
+        {name:'Steam Outlet Temperature',uom:'degC'},
+      ];
+      Object.entries(net.genCounts[h.name] || {}).forEach(([k, v]) => {
+        if (!v) return;
+        const groupPath = `${hPath} > ${_groupLabel(h, 'gen')}`;
+        for (let i = 0; i < v; i++){
+          const leafName = _instanceLeafName(h, 'gen', k, i);    // "HP Fuel Fired BoilerA"
+          const elemType = _resolveElementType(h, 'gen', k);     // header-prefixed label
+          const tmplKey  = _resolveTemplateKey(h, 'gen', k);     // ATTR_TEMPLATES key
+          const leafPath = `${groupPath} > ${leafName}`;
+          const userAttrs = _findInstanceAttrs(net.id, h.name, 'gen', k, i);
+          emitBlock(elemType, leafPath, tmplKey, userAttrs, GEN_GENERIC_FALLBACK);
+
+          // 3) Boiler sub-components (Air Preheater, BFW System+Pump, etc.)
+          if (_isBoilerInstance('gen', k)){
+            _boilerSubKeys(h).forEach(subKey => {
+              const compName = subKey.replace(`${hRoot} Boiler `, '');
+              const parent   = _BOILER_PARENT_OF[compName];
+              const subPath  = parent
+                ? `${leafPath} > ${hRoot} Boiler ${parent}A > ${subKey}A`
+                : `${leafPath} > ${subKey}A`;
+              emitBlock(subKey, subPath, subKey);
+            });
+          }
+        }
+      });
+
+      // 4) CONSUMERS — grouped under "<Prefix> Steam ConsumersA"
+      // CON_GENERIC_FALLBACK ensures any consumer type with no ATTR_TEMPLATES entry
+      // (template_root:'') still produces rows in the export rather than being silently dropped.
+      const CON_GENERIC_FALLBACK = [
+        {name:'Steam Flow',    uom:'metric_ton/h'},
+        {name:'Steam Pressure',uom:'bar'},
+        {name:'Steam Temperature',uom:'degC'},
+      ];
+      Object.entries(net.conCounts[h.name] || {}).forEach(([k, v]) => {
+        if (!v) return;
+        const groupPath = `${hPath} > ${_groupLabel(h, 'con')}`;
+        for (let i = 0; i < v; i++){
+          const leafName = _instanceLeafName(h, 'con', k, i);
+          const elemType = _resolveElementType(h, 'con', k);    // header-prefixed label
+          const tmplKey  = _resolveTemplateKey(h, 'con', k);    // ATTR_TEMPLATES key
+          const leafPath = `${groupPath} > ${leafName}`;
+          const userAttrs = _findInstanceAttrs(net.id, h.name, 'con', k, i);
+          emitBlock(elemType, leafPath, tmplKey, userAttrs, CON_GENERIC_FALLBACK);
+        }
+      });
+
+      // 4b) TURBINES (routed) — grouped under "<Prefix> Steam TurbinesA".
+      // Element type encodes source + destination prefix(es), e.g. "HP-2 to MP-2 Backpressure Turbine".
+      const TBN_GENERIC_FALLBACK = [
+        {name:'Inlet Steam Flow',uom:'metric_ton/h'},
+        {name:'Inlet Steam Pressure',uom:'bar'},
+        {name:'Inlet Steam Temperature',uom:'degC'},
+        {name:'Outlet Steam Pressure',uom:'bar'},
+        {name:'Outlet Steam Temperature',uom:'degC'},
+      ];
+      Object.entries((net.turbineCounts||{})[h.name] || {}).forEach(([rk, v]) => {
+        if (!v) return;
+        const {typeKey, dsts} = _parseTurbineRouteKey(rk);
+        const tt = TURBINE_TYPES.find(x => x.key === typeKey); if (!tt) return;
+        // Resolve destination header objects + prefixes
+        const dstHdrs = dsts.map(dn => net.headers.find(x => x.name === dn)).filter(Boolean);
+        const dstPfxs = dstHdrs.map(dh => _headerPrefix(dh));
+        const routeStr = tt.dsts.length ? `to ${dstPfxs.join('+')}` : '';
+        const elemType = `${hPrefix} ${routeStr} ${tt.name}`.replace(/\s+/g, ' ').trim();
+        // Template lookup: prefer header-prefixed key, then root, then template_root, then bare name
+        const tCandidates = [
+          `${hPrefix} ${tt.name}`,
+          `${hRoot} ${tt.name}`,
+          tt.template_root,
+          tt.name,
+        ].filter(Boolean);
+        let tmplKey = '';
+        for (const c of tCandidates) { if (ATTR_TEMPLATES[c]) { tmplKey = c; break; } }
+        const groupPath = `${hPath} > ${_groupLabel(h, 'tbn')}`;
+        for (let i = 0; i < v; i++) {
+          const leafName = `${elemType}${String.fromCharCode(65 + i)}`;
+          const leafPath = `${groupPath} > ${leafName}`;
+          const userAttrs = _findInstanceAttrs(net.id, h.name, 'tbn', rk, i);
+          emitBlock(elemType, leafPath, tmplKey, userAttrs, TBN_GENERIC_FALLBACK);
+        }
+      });
+
+      // 5) LETDOWNS — grouped under "<Prefix> Steam LetdownA", element type "<src> to <dst> PRDS"
+      Object.entries(net.letCounts[h.name] || {}).forEach(([dstName, v]) => {
+        if (!v) return;
+        const dst = net.headers.find(x => x.name === dstName);
+        if (!dst) return;
+        const dstPrefix = _headerPrefix(dst);
+        const groupPath = `${hPath} > ${_groupLabel(h, 'let')}`;
+        for (let i = 0; i < v; i++){
+          const leafName = `${hPrefix} to ${dstPrefix} PRDS${String.fromCharCode(65+i)}`;
+          const elemType = `${hPrefix} to ${dstPrefix} PRDS`;
+          const leafPath = `${groupPath} > ${leafName}`;
+          const userAttrs = _findInstanceAttrs(net.id, h.name, 'let', dstName, i);
+          // No platform template for PRDS — emit user-edited attrs if any, otherwise
+          // emit the standard PRDS attribute set so the instance is never silently dropped.
+          const fallback = [
+            {name:'Inlet Pressure',uom:'bar'},
+            {name:'Inlet Temperature',uom:'degC'},
+            {name:'Outlet Pressure',uom:'bar'},
+            {name:'Outlet Temperature',uom:'degC'},
+            {name:'Steam Flow',uom:'metric_ton/h'},
+            {name:'Spray Water Flow',uom:'metric_ton/h'},
+            {name:'Pressure Valve Opening',uom:'percent'},
+            {name:'Temperature Valve Opening',uom:'percent'},
+          ];
+          const attrs = (userAttrs && userAttrs.length) ? userAttrs : fallback;
+          const eid = hash(leafPath);
+          attrs.forEach(a => {
+            rows.push([
+              eid, hash(leafPath + '_' + a.name),
+              leafPath, elemType, a.name, a.uom || '',
+              a.pi || '', a.flagSip ? '1' : '',
+              a.sipMin || '', a.sipMax || '', a.formula || '', a.default || ''
+            ]);
+          });
+        }
+      });
+    });
+  });
+
+  // ───────── Assemble worksheet (single sheet, matches reference exactly) ─────────
+  const sheetRows = [
+    [`System: ${sysLabel}`],
+    [BANNER],
+    COL_HEADERS,
+    ...rows,
+  ];
+  const ws = XLSX.utils.aoa_to_sheet(sheetRows);
+  ws['!cols'] = [{wch:38},{wch:38},{wch:78},{wch:34},{wch:30},{wch:14},
+                 {wch:32},{wch:18},{wch:14},{wch:14},{wch:14},{wch:14}];
+
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, 'All Attributes');
+
+  const filename = `${sysLabel.replace(/\s+/g,'_')}_all_attributes.xlsx`;
+  XLSX.writeFile(wb, filename);
+  toast(`Exported ${rows.length} attribute rows → ${filename}`,'success');
+}
+function buildElementPath(net,ins){
+  // Path: Affiliate > Network > Header > Generator/Consumer Group > Equipment Name
+  const hdr=net.headers.find(h=>h.name===ins.hdrName);
+  let groupLabel='';
+  if(ins.role==='gen')groupLabel=`${ins.hdrName} Steam Generator`+randSuffix(ins.hdrName);
+  else if(ins.role==='con')groupLabel=`${ins.hdrName} Steam Consumer`+randSuffix(ins.hdrName);
+  else if(ins.role==='let')groupLabel=`${ins.hdrName} Letdown`;
+  return `${S.affiliate} > ${net.name} > ${ins.hdrName}${randSuffix(ins.hdrName)} > ${groupLabel} > ${ins.name}`;
+}
+function randSuffix(h){return 'A';}  // matches sample convention "VHP Steam HeaderA"
+
+/* ============ UTILS ============ */
+function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#039;');}
+function hash(s){
+  // Deterministic UUID-like id from input string (32-hex-ish)
+  let h1=0,h2=0;s=String(s);
+  for(let i=0;i<s.length;i++){
+    h1=Math.imul(31,h1)+s.charCodeAt(i)|0;
+    h2=Math.imul(37,h2)+s.charCodeAt(i)*7|0;
+  }
+  const a=(h1>>>0).toString(16).padStart(8,'0');
+  const b=(h2>>>0).toString(16).padStart(8,'0');
+  const c=(Math.imul(h1,h2)>>>0).toString(16).padStart(8,'0');
+  const d=((h1^h2)>>>0).toString(16).padStart(8,'0');
+  return `${a}-${b.slice(0,4)}-${b.slice(4)}-${c.slice(0,4)}-${c.slice(4)}${d}`;
+}
+function toast(msg,type){
+  const c=document.getElementById('toasts'),t=document.createElement('div');
+  t.className='toast '+(type||'info');t.textContent=msg;
+  c.appendChild(t);setTimeout(()=>{t.style.opacity='0';setTimeout(()=>t.remove(),250);},2800);
+}
+function resetAll(){
+  if(!confirm('Reset everything to defaults?'))return;
+  S.affiliate='United';S.plants=[{id:'p0',name:'Plant A'}];
+  S.networks=[{id:'n0',name:'Steam Network',color:COLORS[1],plantIds:['p0'],headers:[],genCounts:{},conCounts:{},letCounts:{},turbineCounts:{}}];
+  S.instances={};selNetId='n0';selHdr=null;selInstanceKey=null;
+  init();switchTab(1);
+}
+function loadDemoConfig(){
+  // Already loaded sample at init — just toast.
+  init();switchTab(1);
+  toast('Loaded United / 3-plant / VHP-HP-MP-LP-LLP sample','info');
+}
+
+init();
+</script>
+</body>
+</html>

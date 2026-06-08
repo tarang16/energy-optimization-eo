@@ -1,0 +1,296 @@
+@use 'config/scss/variables' as *;
+
+.table {
+  position: relative;
+  border-collapse: collapse;
+
+  & > thead {
+    position: sticky;
+    top: 0px;
+    outline: 1px solid $primary_gray_3;
+
+    &::before {
+      content: '';
+      top: 0;
+      position: absolute;
+      z-index: 10;
+      width: 100%;
+      height: 0.5px;
+      background-color: $primary_gray_4;
+    }
+  }
+
+  thead {
+    background-color: $primary_blue_bg;
+    z-index: 10;
+    height: 12vmin;
+    outline: 1px solid $primary_gray_12;
+
+    tr {
+      th {
+        text-transform: uppercase;
+        border: 0px;
+
+        img {
+          &.icons {
+            width: 3.5vmin;
+            height: 3.5vmin;
+          }
+
+          &.ChildIcons {
+            width: 3.5vmin;
+          }
+
+          &.sortIcons {
+            width: 0.63rem;
+          }
+        }
+      }
+
+      th[colspan='3'],
+      th[colspan='2'] {
+        position: relative;
+
+        &::before {
+          content: '';
+          width: 98%;
+          height: 0.1vmin;
+          background-color: $primary_gray_3;
+          z-index: 3;
+          bottom: 0;
+          left: 0;
+          position: absolute;
+        }
+      }
+    }
+  }
+
+  & > tbody {
+    tr {
+      td {
+        border-bottom: 1px solid $primary_gray_12;
+      }
+
+      &.activeRow {
+        height: 4vmin;
+        position: relative;
+
+        td {
+          background-color: $primary_blue_bg;
+          color: $primary_blue !important;
+
+          &:nth-child(2) {
+            position: relative;
+
+            &::before {
+              content: '';
+              position: absolute;
+              left: 0px;
+              bottom: 0;
+              z-index: 3;
+              width: 0.4vmin;
+              height: 100%;
+              // min-height: 2rem;
+              background-color: $primary_blue !important;
+            }
+          }
+        }
+      }
+
+      &.tblRow {
+        position: relative;
+        cursor: pointer;
+
+        &:first-child {
+          td {
+            &:first-child {
+              border-top: none;
+            }
+          }
+        }
+
+        td {
+          color: $primary_blue;
+          height: 8vmin;
+
+          &:first-child {
+            border-top: 1px solid $primary_gray_4;
+          }
+
+          &:nth-child(2) {
+            position: relative;
+
+            &::before {
+              content: '';
+              position: absolute;
+              left: 0;
+              top: 50%;
+              z-index: 3;
+              transform: translateY(-50%);
+              height: calc(100% - 2px);
+              width: 0.4vmin;
+              background-color: $primary_blue;
+            }
+          }
+
+          img {
+            &.cellImage {
+              width: 100% !important;
+              // height: 8vmin;
+            }
+          }
+        }
+
+        .imgCellPlusImg {
+          cursor: pointer;
+          width: 2vmin;
+          padding: 0.6vmin 0;
+        }
+      }
+
+      &.sub {
+        td {
+          color: $primary_gray;
+
+          &:first-child {
+            border-right: 1px solid $primary_gray_12;
+            border-bottom: none;
+            border-top: none;
+          }
+        }
+      }
+    }
+  }
+}
+
+.imgCell {
+  cursor: pointer;
+
+  .imgCellMainImg {
+    width: 85%;
+
+    &.customPaddingLeft {
+      padding-left: 0.9vmin;
+    }
+
+    img {
+      width: 80%;
+    }
+  }
+
+  .imgCellPlusImg {
+    width: 2vmin;
+
+    img {
+      width: 2vmin;
+      cursor: pointer;
+
+      &.active {
+        content: url('../../../../assets/sabic_icons/table/table_minus_icon.svg');
+      }
+
+      &.inactive {
+        content: url('../../../../assets/sabic_icons/table/table_plus_icon.svg');
+      }
+    }
+  }
+}
+
+.editIcon {
+  width: 1.8vmin;
+  cursor: pointer;
+}
+
+.greenPill,
+.redPill,
+.yellowPill {
+  display: inline-block;
+  min-width: 9vmin;
+  width: fit-content;
+  border-radius: 0.4vmin;
+  padding: 0.7vmin 0.2vmin 0.5vmin 0.2vmin;
+}
+
+.greenPill {
+  border: 1px solid $secondary_green;
+  background-color: $secondary_green_Light;
+  color: $secondary_green;
+}
+
+.redPill {
+  border: 1px solid $secondary_orange_60;
+  background-color: $secondary_orange_10;
+  color: $secondary_orange_60;
+}
+
+.yellowPill {
+  border: 1px solid $primary_yellow;
+  background-color: $primary_yellow_80;
+  color: $primary_yellow;
+}
+
+tr {
+  &.activeRow {
+    td {
+      &:first-child {
+        span {
+          color: $primary_blue;
+          line-height: 1.5vmin;
+        }
+      }
+    }
+  }
+}
+
+.ChildIcons {
+  margin: 0 0.8vmin;
+  line-height: 1.3vmin;
+}
+
+.sortIconContainer {
+  margin: 0 0.8vmin;
+  cursor: pointer;
+}
+
+.withBorder {
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    z-index: 2;
+    width: 0.1vmin;
+    height: 2.5vmin;
+    // background-color: $primary_gray_3;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+  }
+}
+
+:global(.left_spacing) {
+  padding-left: 1.5vmin !important;
+}
+
+.subTable1stCell {
+  span:first-child {
+    margin-bottom: 0.3vmin;
+    line-height: 1.5vmin;
+  }
+}
+
+.trendIconHover {
+  cursor: pointer;
+  width: 2vmin;
+  height: 2vmin;
+}
+
+:global(.text-link-parent) {
+  text-decoration: none !important;
+  cursor: default;
+
+  :global(.link-span):hover {
+    cursor: pointer !important;
+    color: #009fdf !important;
+  }
+}

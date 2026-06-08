@@ -1,0 +1,2459 @@
+{
+  "BFW_A_Motor_Power": {
+    "role": "decision_variable",
+    "formula": "[BFW_A_Motor_Status]*([BFW_A_Motor_Power_cons]-[BFW_A_Motor_Power_Imbalance])",
+    "leaf_pi_inputs": [
+      "BFW_TO_LAO",
+      "BFW_to_EOEG_1",
+      "BFW_to_EOEG_2",
+      "BFW_to_EOEG_3",
+      "DSP_BFW_TO_CAUSTIC_DILUTION",
+      "DSP_BFW_TO_EG1",
+      "DSP_BFW_TO_EG2",
+      "DSP_BFW_TO_EG3_raw",
+      "DSP_BFW_TO_ETH_raw",
+      "EOEG3_Plant_Status",
+      "ETH_Plant_Status",
+      "LHV",
+      "Spec_En_Cons_BLR_1_Opt",
+      "Spec_En_Cons_BLR_2_Opt",
+      "Spec_En_Cons_BLR_3_Opt",
+      "Spec_En_Cons_BLR_4_Opt",
+      "Spec_En_Cons_BLR_5_Opt",
+      "VHP_BFW_FROM_U_O",
+      "VHP_DESPHTR_BFW_FROM_U_O"
+    ],
+    "intermediate_tags": [
+      "BFW_A_Motor_Power_Imbalance",
+      "BFW_A_Motor_Power_Regression",
+      "BFW_A_Motor_Power_cons",
+      "BFW_Drives_Running",
+      "BFW_Flow_Consumption",
+      "BLR_1_HPS_Gen",
+      "BLR_1_HPS_Gen_warmup",
+      "BLR_2_HPS_Gen",
+      "BLR_2_HPS_Gen_warmup",
+      "BLR_3_HPS_Gen",
+      "BLR_3_HPS_Gen_warmup",
+      "BLR_4_HPS_Gen",
+      "BLR_4_HPS_Gen_warmup",
+      "BLR_5_HPS_Gen",
+      "BLR_5_HPS_Gen_warmup",
+      "DSP_BFW_TO_EG3",
+      "DSP_BFW_TO_ETH",
+      "Deaerator_LPS",
+      "Fuel_BLR_1",
+      "Fuel_BLR_2",
+      "Fuel_BLR_3",
+      "Fuel_BLR_4",
+      "Fuel_BLR_5",
+      "Spec_En_Cons_BLR_1",
+      "Spec_En_Cons_BLR_1_dev",
+      "Spec_En_Cons_BLR_2",
+      "Spec_En_Cons_BLR_2_dev",
+      "Spec_En_Cons_BLR_3",
+      "Spec_En_Cons_BLR_3_dev",
+      "Spec_En_Cons_BLR_4",
+      "Spec_En_Cons_BLR_4_dev",
+      "Spec_En_Cons_BLR_5",
+      "Spec_En_Cons_BLR_5_dev",
+      "Total_BFW_Consumption",
+      "Total_BLR_HPS_Generation",
+      "Whatif_running"
+    ],
+    "non_pi_leaves": [
+      "BFW_A_Motor_Status",
+      "BFW_B_Turb_Status",
+      "BFW_C_Turb_Status",
+      "BFW_D_Motor_Status",
+      "BFW_E_Turb_Status",
+      "BFW_F_Motor_Status",
+      "BLR_1_Status",
+      "BLR_2_Status",
+      "BLR_3_Status",
+      "BLR_4_Status",
+      "BLR_5_Status"
+    ]
+  },
+  "BFW_A_Motor_Power_Imbalance": {
+    "role": "decision_variable",
+    "formula": "[BFW_A_Motor_Status]*([BFW_A_Motor_Power_Regression]-((-0.0016*([BFW_Flow_Consumption]/([BFW_Drives_Running]+(1-[BFW_A_Motor_Status])))**2+ 1.8045*([BFW_Flow_Consumption]/([BFW_Drives_Running]+(1-[BFW_A_Motor_Status]))) + 401.61)/1000)/0.95)",
+    "leaf_pi_inputs": [
+      "BFW_TO_LAO",
+      "BFW_to_EOEG_1",
+      "BFW_to_EOEG_2",
+      "BFW_to_EOEG_3",
+      "DSP_BFW_TO_CAUSTIC_DILUTION",
+      "DSP_BFW_TO_EG1",
+      "DSP_BFW_TO_EG2",
+      "DSP_BFW_TO_EG3_raw",
+      "DSP_BFW_TO_ETH_raw",
+      "EOEG3_Plant_Status",
+      "ETH_Plant_Status",
+      "LHV",
+      "Spec_En_Cons_BLR_1_Opt",
+      "Spec_En_Cons_BLR_2_Opt",
+      "Spec_En_Cons_BLR_3_Opt",
+      "Spec_En_Cons_BLR_4_Opt",
+      "Spec_En_Cons_BLR_5_Opt",
+      "VHP_BFW_FROM_U_O",
+      "VHP_DESPHTR_BFW_FROM_U_O"
+    ],
+    "intermediate_tags": [
+      "BFW_A_Motor_Power_Regression",
+      "BFW_Drives_Running",
+      "BFW_Flow_Consumption",
+      "BLR_1_HPS_Gen",
+      "BLR_1_HPS_Gen_warmup",
+      "BLR_2_HPS_Gen",
+      "BLR_2_HPS_Gen_warmup",
+      "BLR_3_HPS_Gen",
+      "BLR_3_HPS_Gen_warmup",
+      "BLR_4_HPS_Gen",
+      "BLR_4_HPS_Gen_warmup",
+      "BLR_5_HPS_Gen",
+      "BLR_5_HPS_Gen_warmup",
+      "DSP_BFW_TO_EG3",
+      "DSP_BFW_TO_ETH",
+      "Deaerator_LPS",
+      "Fuel_BLR_1",
+      "Fuel_BLR_2",
+      "Fuel_BLR_3",
+      "Fuel_BLR_4",
+      "Fuel_BLR_5",
+      "Spec_En_Cons_BLR_1",
+      "Spec_En_Cons_BLR_1_dev",
+      "Spec_En_Cons_BLR_2",
+      "Spec_En_Cons_BLR_2_dev",
+      "Spec_En_Cons_BLR_3",
+      "Spec_En_Cons_BLR_3_dev",
+      "Spec_En_Cons_BLR_4",
+      "Spec_En_Cons_BLR_4_dev",
+      "Spec_En_Cons_BLR_5",
+      "Spec_En_Cons_BLR_5_dev",
+      "Total_BFW_Consumption",
+      "Total_BLR_HPS_Generation",
+      "Whatif_running"
+    ],
+    "non_pi_leaves": [
+      "BFW_A_Motor_Status",
+      "BFW_B_Turb_Status",
+      "BFW_C_Turb_Status",
+      "BFW_D_Motor_Status",
+      "BFW_E_Turb_Status",
+      "BFW_F_Motor_Status",
+      "BLR_1_Status",
+      "BLR_2_Status",
+      "BLR_3_Status",
+      "BLR_4_Status",
+      "BLR_5_Status"
+    ]
+  },
+  "BFW_A_Motor_Status": {
+    "role": "decision_variable",
+    "formula": null,
+    "leaf_pi_inputs": [],
+    "intermediate_tags": [],
+    "non_pi_leaves": [
+      "BFW_A_Motor_Status"
+    ]
+  },
+  "BFW_B_Turb_Status": {
+    "role": "decision_variable",
+    "formula": null,
+    "leaf_pi_inputs": [],
+    "intermediate_tags": [],
+    "non_pi_leaves": [
+      "BFW_B_Turb_Status"
+    ]
+  },
+  "BFW_B_Turb_Steam": {
+    "role": "decision_variable",
+    "formula": "[BFW_B_Turb_Status]*([BFW_B_Turb_Steam_cons]-[BFW_B_Turb_Steam_Imbalance]) + (1-[BFW_B_Turb_Status])*[BFW_B_Turb_Steam_warmup]",
+    "leaf_pi_inputs": [
+      "BFW_B_Turb_Steam_cons",
+      "BFW_B_Turb_Steam_raw",
+      "BFW_TO_LAO",
+      "BFW_to_EOEG_1",
+      "BFW_to_EOEG_2",
+      "BFW_to_EOEG_3",
+      "DSP_BFW_TO_CAUSTIC_DILUTION",
+      "DSP_BFW_TO_EG1",
+      "DSP_BFW_TO_EG2",
+      "DSP_BFW_TO_EG3_raw",
+      "DSP_BFW_TO_ETH_raw",
+      "EOEG3_Plant_Status",
+      "ETH_Plant_Status",
+      "LHV",
+      "Spec_En_Cons_BLR_1_Opt",
+      "Spec_En_Cons_BLR_2_Opt",
+      "Spec_En_Cons_BLR_3_Opt",
+      "Spec_En_Cons_BLR_4_Opt",
+      "Spec_En_Cons_BLR_5_Opt",
+      "VHP_BFW_FROM_U_O",
+      "VHP_DESPHTR_BFW_FROM_U_O"
+    ],
+    "intermediate_tags": [
+      "BFW_B_Turb_Steam_Imbalance",
+      "BFW_B_Turb_Steam_Regression",
+      "BFW_B_Turb_Steam_warmup",
+      "BFW_Drives_Running",
+      "BFW_Flow_Consumption",
+      "BLR_1_HPS_Gen",
+      "BLR_1_HPS_Gen_warmup",
+      "BLR_2_HPS_Gen",
+      "BLR_2_HPS_Gen_warmup",
+      "BLR_3_HPS_Gen",
+      "BLR_3_HPS_Gen_warmup",
+      "BLR_4_HPS_Gen",
+      "BLR_4_HPS_Gen_warmup",
+      "BLR_5_HPS_Gen",
+      "BLR_5_HPS_Gen_warmup",
+      "DSP_BFW_TO_EG3",
+      "DSP_BFW_TO_ETH",
+      "Deaerator_LPS",
+      "Fuel_BLR_1",
+      "Fuel_BLR_2",
+      "Fuel_BLR_3",
+      "Fuel_BLR_4",
+      "Fuel_BLR_5",
+      "Spec_En_Cons_BLR_1",
+      "Spec_En_Cons_BLR_1_dev",
+      "Spec_En_Cons_BLR_2",
+      "Spec_En_Cons_BLR_2_dev",
+      "Spec_En_Cons_BLR_3",
+      "Spec_En_Cons_BLR_3_dev",
+      "Spec_En_Cons_BLR_4",
+      "Spec_En_Cons_BLR_4_dev",
+      "Spec_En_Cons_BLR_5",
+      "Spec_En_Cons_BLR_5_dev",
+      "Total_BFW_Consumption",
+      "Total_BLR_HPS_Generation",
+      "Whatif_running"
+    ],
+    "non_pi_leaves": [
+      "BFW_A_Motor_Status",
+      "BFW_B_Turb_Status",
+      "BFW_C_Turb_Status",
+      "BFW_D_Motor_Status",
+      "BFW_E_Turb_Status",
+      "BFW_F_Motor_Status",
+      "BLR_1_Status",
+      "BLR_2_Status",
+      "BLR_3_Status",
+      "BLR_4_Status",
+      "BLR_5_Status"
+    ]
+  },
+  "BFW_B_Turb_Steam_Imbalance": {
+    "role": "decision_variable",
+    "formula": "[BFW_B_Turb_Status]*([BFW_B_Turb_Steam_Regression]-((-0.0233*([BFW_Flow_Consumption]/([BFW_Drives_Running]+(1-[BFW_B_Turb_Status])))**2 + 26.665*([BFW_Flow_Consumption]/([BFW_Drives_Running]+(1-[BFW_B_Turb_Status]))) + 10505)/1000))",
+    "leaf_pi_inputs": [
+      "BFW_TO_LAO",
+      "BFW_to_EOEG_1",
+      "BFW_to_EOEG_2",
+      "BFW_to_EOEG_3",
+      "DSP_BFW_TO_CAUSTIC_DILUTION",
+      "DSP_BFW_TO_EG1",
+      "DSP_BFW_TO_EG2",
+      "DSP_BFW_TO_EG3_raw",
+      "DSP_BFW_TO_ETH_raw",
+      "EOEG3_Plant_Status",
+      "ETH_Plant_Status",
+      "LHV",
+      "Spec_En_Cons_BLR_1_Opt",
+      "Spec_En_Cons_BLR_2_Opt",
+      "Spec_En_Cons_BLR_3_Opt",
+      "Spec_En_Cons_BLR_4_Opt",
+      "Spec_En_Cons_BLR_5_Opt",
+      "VHP_BFW_FROM_U_O",
+      "VHP_DESPHTR_BFW_FROM_U_O"
+    ],
+    "intermediate_tags": [
+      "BFW_B_Turb_Steam_Regression",
+      "BFW_Drives_Running",
+      "BFW_Flow_Consumption",
+      "BLR_1_HPS_Gen",
+      "BLR_1_HPS_Gen_warmup",
+      "BLR_2_HPS_Gen",
+      "BLR_2_HPS_Gen_warmup",
+      "BLR_3_HPS_Gen",
+      "BLR_3_HPS_Gen_warmup",
+      "BLR_4_HPS_Gen",
+      "BLR_4_HPS_Gen_warmup",
+      "BLR_5_HPS_Gen",
+      "BLR_5_HPS_Gen_warmup",
+      "DSP_BFW_TO_EG3",
+      "DSP_BFW_TO_ETH",
+      "Deaerator_LPS",
+      "Fuel_BLR_1",
+      "Fuel_BLR_2",
+      "Fuel_BLR_3",
+      "Fuel_BLR_4",
+      "Fuel_BLR_5",
+      "Spec_En_Cons_BLR_1",
+      "Spec_En_Cons_BLR_1_dev",
+      "Spec_En_Cons_BLR_2",
+      "Spec_En_Cons_BLR_2_dev",
+      "Spec_En_Cons_BLR_3",
+      "Spec_En_Cons_BLR_3_dev",
+      "Spec_En_Cons_BLR_4",
+      "Spec_En_Cons_BLR_4_dev",
+      "Spec_En_Cons_BLR_5",
+      "Spec_En_Cons_BLR_5_dev",
+      "Total_BFW_Consumption",
+      "Total_BLR_HPS_Generation",
+      "Whatif_running"
+    ],
+    "non_pi_leaves": [
+      "BFW_A_Motor_Status",
+      "BFW_B_Turb_Status",
+      "BFW_C_Turb_Status",
+      "BFW_D_Motor_Status",
+      "BFW_E_Turb_Status",
+      "BFW_F_Motor_Status",
+      "BLR_1_Status",
+      "BLR_2_Status",
+      "BLR_3_Status",
+      "BLR_4_Status",
+      "BLR_5_Status"
+    ]
+  },
+  "BFW_C_Turb_Status": {
+    "role": "decision_variable",
+    "formula": null,
+    "leaf_pi_inputs": [],
+    "intermediate_tags": [],
+    "non_pi_leaves": [
+      "BFW_C_Turb_Status"
+    ]
+  },
+  "BFW_C_Turb_Steam": {
+    "role": "decision_variable",
+    "formula": "[BFW_C_Turb_Status]*([BFW_C_Turb_Steam_cons]-[BFW_C_Turb_Steam_Imbalance]) + (1-[BFW_C_Turb_Status])*[BFW_C_Turb_Steam_warmup]",
+    "leaf_pi_inputs": [
+      "BFW_C_Turb_Steam_cons",
+      "BFW_C_Turb_Steam_raw",
+      "BFW_TO_LAO",
+      "BFW_to_EOEG_1",
+      "BFW_to_EOEG_2",
+      "BFW_to_EOEG_3",
+      "DSP_BFW_TO_CAUSTIC_DILUTION",
+      "DSP_BFW_TO_EG1",
+      "DSP_BFW_TO_EG2",
+      "DSP_BFW_TO_EG3_raw",
+      "DSP_BFW_TO_ETH_raw",
+      "EOEG3_Plant_Status",
+      "ETH_Plant_Status",
+      "LHV",
+      "Spec_En_Cons_BLR_1_Opt",
+      "Spec_En_Cons_BLR_2_Opt",
+      "Spec_En_Cons_BLR_3_Opt",
+      "Spec_En_Cons_BLR_4_Opt",
+      "Spec_En_Cons_BLR_5_Opt",
+      "VHP_BFW_FROM_U_O",
+      "VHP_DESPHTR_BFW_FROM_U_O"
+    ],
+    "intermediate_tags": [
+      "BFW_C_Turb_Steam_Imbalance",
+      "BFW_C_Turb_Steam_Regression",
+      "BFW_C_Turb_Steam_warmup",
+      "BFW_Drives_Running",
+      "BFW_Flow_Consumption",
+      "BLR_1_HPS_Gen",
+      "BLR_1_HPS_Gen_warmup",
+      "BLR_2_HPS_Gen",
+      "BLR_2_HPS_Gen_warmup",
+      "BLR_3_HPS_Gen",
+      "BLR_3_HPS_Gen_warmup",
+      "BLR_4_HPS_Gen",
+      "BLR_4_HPS_Gen_warmup",
+      "BLR_5_HPS_Gen",
+      "BLR_5_HPS_Gen_warmup",
+      "DSP_BFW_TO_EG3",
+      "DSP_BFW_TO_ETH",
+      "Deaerator_LPS",
+      "Fuel_BLR_1",
+      "Fuel_BLR_2",
+      "Fuel_BLR_3",
+      "Fuel_BLR_4",
+      "Fuel_BLR_5",
+      "Spec_En_Cons_BLR_1",
+      "Spec_En_Cons_BLR_1_dev",
+      "Spec_En_Cons_BLR_2",
+      "Spec_En_Cons_BLR_2_dev",
+      "Spec_En_Cons_BLR_3",
+      "Spec_En_Cons_BLR_3_dev",
+      "Spec_En_Cons_BLR_4",
+      "Spec_En_Cons_BLR_4_dev",
+      "Spec_En_Cons_BLR_5",
+      "Spec_En_Cons_BLR_5_dev",
+      "Total_BFW_Consumption",
+      "Total_BLR_HPS_Generation",
+      "Whatif_running"
+    ],
+    "non_pi_leaves": [
+      "BFW_A_Motor_Status",
+      "BFW_B_Turb_Status",
+      "BFW_C_Turb_Status",
+      "BFW_D_Motor_Status",
+      "BFW_E_Turb_Status",
+      "BFW_F_Motor_Status",
+      "BLR_1_Status",
+      "BLR_2_Status",
+      "BLR_3_Status",
+      "BLR_4_Status",
+      "BLR_5_Status"
+    ]
+  },
+  "BFW_C_Turb_Steam_Imbalance": {
+    "role": "decision_variable",
+    "formula": "[BFW_C_Turb_Status]*([BFW_C_Turb_Steam_Regression]-((-0.0233*([BFW_Flow_Consumption]/([BFW_Drives_Running]+(1-[BFW_C_Turb_Status])))**2 + 26.665*([BFW_Flow_Consumption]/([BFW_Drives_Running]+(1-[BFW_C_Turb_Status]))) + 10505)/1000))",
+    "leaf_pi_inputs": [
+      "BFW_TO_LAO",
+      "BFW_to_EOEG_1",
+      "BFW_to_EOEG_2",
+      "BFW_to_EOEG_3",
+      "DSP_BFW_TO_CAUSTIC_DILUTION",
+      "DSP_BFW_TO_EG1",
+      "DSP_BFW_TO_EG2",
+      "DSP_BFW_TO_EG3_raw",
+      "DSP_BFW_TO_ETH_raw",
+      "EOEG3_Plant_Status",
+      "ETH_Plant_Status",
+      "LHV",
+      "Spec_En_Cons_BLR_1_Opt",
+      "Spec_En_Cons_BLR_2_Opt",
+      "Spec_En_Cons_BLR_3_Opt",
+      "Spec_En_Cons_BLR_4_Opt",
+      "Spec_En_Cons_BLR_5_Opt",
+      "VHP_BFW_FROM_U_O",
+      "VHP_DESPHTR_BFW_FROM_U_O"
+    ],
+    "intermediate_tags": [
+      "BFW_C_Turb_Steam_Regression",
+      "BFW_Drives_Running",
+      "BFW_Flow_Consumption",
+      "BLR_1_HPS_Gen",
+      "BLR_1_HPS_Gen_warmup",
+      "BLR_2_HPS_Gen",
+      "BLR_2_HPS_Gen_warmup",
+      "BLR_3_HPS_Gen",
+      "BLR_3_HPS_Gen_warmup",
+      "BLR_4_HPS_Gen",
+      "BLR_4_HPS_Gen_warmup",
+      "BLR_5_HPS_Gen",
+      "BLR_5_HPS_Gen_warmup",
+      "DSP_BFW_TO_EG3",
+      "DSP_BFW_TO_ETH",
+      "Deaerator_LPS",
+      "Fuel_BLR_1",
+      "Fuel_BLR_2",
+      "Fuel_BLR_3",
+      "Fuel_BLR_4",
+      "Fuel_BLR_5",
+      "Spec_En_Cons_BLR_1",
+      "Spec_En_Cons_BLR_1_dev",
+      "Spec_En_Cons_BLR_2",
+      "Spec_En_Cons_BLR_2_dev",
+      "Spec_En_Cons_BLR_3",
+      "Spec_En_Cons_BLR_3_dev",
+      "Spec_En_Cons_BLR_4",
+      "Spec_En_Cons_BLR_4_dev",
+      "Spec_En_Cons_BLR_5",
+      "Spec_En_Cons_BLR_5_dev",
+      "Total_BFW_Consumption",
+      "Total_BLR_HPS_Generation",
+      "Whatif_running"
+    ],
+    "non_pi_leaves": [
+      "BFW_A_Motor_Status",
+      "BFW_B_Turb_Status",
+      "BFW_C_Turb_Status",
+      "BFW_D_Motor_Status",
+      "BFW_E_Turb_Status",
+      "BFW_F_Motor_Status",
+      "BLR_1_Status",
+      "BLR_2_Status",
+      "BLR_3_Status",
+      "BLR_4_Status",
+      "BLR_5_Status"
+    ]
+  },
+  "BFW_D_Motor_Power": {
+    "role": "decision_variable",
+    "formula": "[BFW_D_Motor_Status]*([BFW_D_Motor_Power_cons]-[BFW_D_Motor_Power_Imbalance])",
+    "leaf_pi_inputs": [
+      "BFW_TO_LAO",
+      "BFW_to_EOEG_1",
+      "BFW_to_EOEG_2",
+      "BFW_to_EOEG_3",
+      "DSP_BFW_TO_CAUSTIC_DILUTION",
+      "DSP_BFW_TO_EG1",
+      "DSP_BFW_TO_EG2",
+      "DSP_BFW_TO_EG3_raw",
+      "DSP_BFW_TO_ETH_raw",
+      "EOEG3_Plant_Status",
+      "ETH_Plant_Status",
+      "LHV",
+      "Spec_En_Cons_BLR_1_Opt",
+      "Spec_En_Cons_BLR_2_Opt",
+      "Spec_En_Cons_BLR_3_Opt",
+      "Spec_En_Cons_BLR_4_Opt",
+      "Spec_En_Cons_BLR_5_Opt",
+      "VHP_BFW_FROM_U_O",
+      "VHP_DESPHTR_BFW_FROM_U_O"
+    ],
+    "intermediate_tags": [
+      "BFW_D_Motor_Power_Imbalance",
+      "BFW_D_Motor_Power_Regression",
+      "BFW_D_Motor_Power_cons",
+      "BFW_Drives_Running",
+      "BFW_Flow_Consumption",
+      "BLR_1_HPS_Gen",
+      "BLR_1_HPS_Gen_warmup",
+      "BLR_2_HPS_Gen",
+      "BLR_2_HPS_Gen_warmup",
+      "BLR_3_HPS_Gen",
+      "BLR_3_HPS_Gen_warmup",
+      "BLR_4_HPS_Gen",
+      "BLR_4_HPS_Gen_warmup",
+      "BLR_5_HPS_Gen",
+      "BLR_5_HPS_Gen_warmup",
+      "DSP_BFW_TO_EG3",
+      "DSP_BFW_TO_ETH",
+      "Deaerator_LPS",
+      "Fuel_BLR_1",
+      "Fuel_BLR_2",
+      "Fuel_BLR_3",
+      "Fuel_BLR_4",
+      "Fuel_BLR_5",
+      "Spec_En_Cons_BLR_1",
+      "Spec_En_Cons_BLR_1_dev",
+      "Spec_En_Cons_BLR_2",
+      "Spec_En_Cons_BLR_2_dev",
+      "Spec_En_Cons_BLR_3",
+      "Spec_En_Cons_BLR_3_dev",
+      "Spec_En_Cons_BLR_4",
+      "Spec_En_Cons_BLR_4_dev",
+      "Spec_En_Cons_BLR_5",
+      "Spec_En_Cons_BLR_5_dev",
+      "Total_BFW_Consumption",
+      "Total_BLR_HPS_Generation",
+      "Whatif_running"
+    ],
+    "non_pi_leaves": [
+      "BFW_A_Motor_Status",
+      "BFW_B_Turb_Status",
+      "BFW_C_Turb_Status",
+      "BFW_D_Motor_Status",
+      "BFW_E_Turb_Status",
+      "BFW_F_Motor_Status",
+      "BLR_1_Status",
+      "BLR_2_Status",
+      "BLR_3_Status",
+      "BLR_4_Status",
+      "BLR_5_Status"
+    ]
+  },
+  "BFW_D_Motor_Power_Imbalance": {
+    "role": "decision_variable",
+    "formula": "[BFW_D_Motor_Status]*([BFW_D_Motor_Power_Regression]-((-0.0016*([BFW_Flow_Consumption]/([BFW_Drives_Running]+(1-[BFW_D_Motor_Status])))**2+ 1.8045*([BFW_Flow_Consumption]/([BFW_Drives_Running]+(1-[BFW_D_Motor_Status]))) + 401.61)/1000)/0.95)",
+    "leaf_pi_inputs": [
+      "BFW_TO_LAO",
+      "BFW_to_EOEG_1",
+      "BFW_to_EOEG_2",
+      "BFW_to_EOEG_3",
+      "DSP_BFW_TO_CAUSTIC_DILUTION",
+      "DSP_BFW_TO_EG1",
+      "DSP_BFW_TO_EG2",
+      "DSP_BFW_TO_EG3_raw",
+      "DSP_BFW_TO_ETH_raw",
+      "EOEG3_Plant_Status",
+      "ETH_Plant_Status",
+      "LHV",
+      "Spec_En_Cons_BLR_1_Opt",
+      "Spec_En_Cons_BLR_2_Opt",
+      "Spec_En_Cons_BLR_3_Opt",
+      "Spec_En_Cons_BLR_4_Opt",
+      "Spec_En_Cons_BLR_5_Opt",
+      "VHP_BFW_FROM_U_O",
+      "VHP_DESPHTR_BFW_FROM_U_O"
+    ],
+    "intermediate_tags": [
+      "BFW_D_Motor_Power_Regression",
+      "BFW_Drives_Running",
+      "BFW_Flow_Consumption",
+      "BLR_1_HPS_Gen",
+      "BLR_1_HPS_Gen_warmup",
+      "BLR_2_HPS_Gen",
+      "BLR_2_HPS_Gen_warmup",
+      "BLR_3_HPS_Gen",
+      "BLR_3_HPS_Gen_warmup",
+      "BLR_4_HPS_Gen",
+      "BLR_4_HPS_Gen_warmup",
+      "BLR_5_HPS_Gen",
+      "BLR_5_HPS_Gen_warmup",
+      "DSP_BFW_TO_EG3",
+      "DSP_BFW_TO_ETH",
+      "Deaerator_LPS",
+      "Fuel_BLR_1",
+      "Fuel_BLR_2",
+      "Fuel_BLR_3",
+      "Fuel_BLR_4",
+      "Fuel_BLR_5",
+      "Spec_En_Cons_BLR_1",
+      "Spec_En_Cons_BLR_1_dev",
+      "Spec_En_Cons_BLR_2",
+      "Spec_En_Cons_BLR_2_dev",
+      "Spec_En_Cons_BLR_3",
+      "Spec_En_Cons_BLR_3_dev",
+      "Spec_En_Cons_BLR_4",
+      "Spec_En_Cons_BLR_4_dev",
+      "Spec_En_Cons_BLR_5",
+      "Spec_En_Cons_BLR_5_dev",
+      "Total_BFW_Consumption",
+      "Total_BLR_HPS_Generation",
+      "Whatif_running"
+    ],
+    "non_pi_leaves": [
+      "BFW_A_Motor_Status",
+      "BFW_B_Turb_Status",
+      "BFW_C_Turb_Status",
+      "BFW_D_Motor_Status",
+      "BFW_E_Turb_Status",
+      "BFW_F_Motor_Status",
+      "BLR_1_Status",
+      "BLR_2_Status",
+      "BLR_3_Status",
+      "BLR_4_Status",
+      "BLR_5_Status"
+    ]
+  },
+  "BFW_D_Motor_Status": {
+    "role": "decision_variable",
+    "formula": null,
+    "leaf_pi_inputs": [],
+    "intermediate_tags": [],
+    "non_pi_leaves": [
+      "BFW_D_Motor_Status"
+    ]
+  },
+  "BFW_Drives_Running": {
+    "role": "decision_variable",
+    "formula": "[BFW_A_Motor_Status]+ [BFW_B_Turb_Status] + [BFW_C_Turb_Status] + [BFW_D_Motor_Status] + [BFW_E_Turb_Status] + [BFW_F_Motor_Status]",
+    "leaf_pi_inputs": [],
+    "intermediate_tags": [],
+    "non_pi_leaves": [
+      "BFW_A_Motor_Status",
+      "BFW_B_Turb_Status",
+      "BFW_C_Turb_Status",
+      "BFW_D_Motor_Status",
+      "BFW_E_Turb_Status",
+      "BFW_F_Motor_Status"
+    ]
+  },
+  "BFW_E_Turb_Status": {
+    "role": "decision_variable",
+    "formula": null,
+    "leaf_pi_inputs": [],
+    "intermediate_tags": [],
+    "non_pi_leaves": [
+      "BFW_E_Turb_Status"
+    ]
+  },
+  "BFW_E_Turb_Steam": {
+    "role": "decision_variable",
+    "formula": "[BFW_E_Turb_Status]*([BFW_E_Turb_Steam_cons]-[BFW_E_Turb_Steam_Imbalance]) + (1-[BFW_E_Turb_Status])*[BFW_E_Turb_Steam_warmup]",
+    "leaf_pi_inputs": [
+      "BFW_E_Turb_Steam_cons",
+      "BFW_E_Turb_Steam_raw",
+      "BFW_TO_LAO",
+      "BFW_to_EOEG_1",
+      "BFW_to_EOEG_2",
+      "BFW_to_EOEG_3",
+      "DSP_BFW_TO_CAUSTIC_DILUTION",
+      "DSP_BFW_TO_EG1",
+      "DSP_BFW_TO_EG2",
+      "DSP_BFW_TO_EG3_raw",
+      "DSP_BFW_TO_ETH_raw",
+      "EOEG3_Plant_Status",
+      "ETH_Plant_Status",
+      "LHV",
+      "Spec_En_Cons_BLR_1_Opt",
+      "Spec_En_Cons_BLR_2_Opt",
+      "Spec_En_Cons_BLR_3_Opt",
+      "Spec_En_Cons_BLR_4_Opt",
+      "Spec_En_Cons_BLR_5_Opt",
+      "VHP_BFW_FROM_U_O",
+      "VHP_DESPHTR_BFW_FROM_U_O"
+    ],
+    "intermediate_tags": [
+      "BFW_Drives_Running",
+      "BFW_E_Turb_Steam_Imbalance",
+      "BFW_E_Turb_Steam_Regression",
+      "BFW_E_Turb_Steam_warmup",
+      "BFW_Flow_Consumption",
+      "BLR_1_HPS_Gen",
+      "BLR_1_HPS_Gen_warmup",
+      "BLR_2_HPS_Gen",
+      "BLR_2_HPS_Gen_warmup",
+      "BLR_3_HPS_Gen",
+      "BLR_3_HPS_Gen_warmup",
+      "BLR_4_HPS_Gen",
+      "BLR_4_HPS_Gen_warmup",
+      "BLR_5_HPS_Gen",
+      "BLR_5_HPS_Gen_warmup",
+      "DSP_BFW_TO_EG3",
+      "DSP_BFW_TO_ETH",
+      "Deaerator_LPS",
+      "Fuel_BLR_1",
+      "Fuel_BLR_2",
+      "Fuel_BLR_3",
+      "Fuel_BLR_4",
+      "Fuel_BLR_5",
+      "Spec_En_Cons_BLR_1",
+      "Spec_En_Cons_BLR_1_dev",
+      "Spec_En_Cons_BLR_2",
+      "Spec_En_Cons_BLR_2_dev",
+      "Spec_En_Cons_BLR_3",
+      "Spec_En_Cons_BLR_3_dev",
+      "Spec_En_Cons_BLR_4",
+      "Spec_En_Cons_BLR_4_dev",
+      "Spec_En_Cons_BLR_5",
+      "Spec_En_Cons_BLR_5_dev",
+      "Total_BFW_Consumption",
+      "Total_BLR_HPS_Generation",
+      "Whatif_running"
+    ],
+    "non_pi_leaves": [
+      "BFW_A_Motor_Status",
+      "BFW_B_Turb_Status",
+      "BFW_C_Turb_Status",
+      "BFW_D_Motor_Status",
+      "BFW_E_Turb_Status",
+      "BFW_F_Motor_Status",
+      "BLR_1_Status",
+      "BLR_2_Status",
+      "BLR_3_Status",
+      "BLR_4_Status",
+      "BLR_5_Status"
+    ]
+  },
+  "BFW_E_Turb_Steam_Imbalance": {
+    "role": "decision_variable",
+    "formula": "[BFW_E_Turb_Status]*([BFW_E_Turb_Steam_Regression]-((-0.0233*([BFW_Flow_Consumption]/([BFW_Drives_Running]+(1-[BFW_E_Turb_Status])))**2 + 26.665*([BFW_Flow_Consumption]/([BFW_Drives_Running]+(1-[BFW_E_Turb_Status]))) + 10505)/1000))",
+    "leaf_pi_inputs": [
+      "BFW_TO_LAO",
+      "BFW_to_EOEG_1",
+      "BFW_to_EOEG_2",
+      "BFW_to_EOEG_3",
+      "DSP_BFW_TO_CAUSTIC_DILUTION",
+      "DSP_BFW_TO_EG1",
+      "DSP_BFW_TO_EG2",
+      "DSP_BFW_TO_EG3_raw",
+      "DSP_BFW_TO_ETH_raw",
+      "EOEG3_Plant_Status",
+      "ETH_Plant_Status",
+      "LHV",
+      "Spec_En_Cons_BLR_1_Opt",
+      "Spec_En_Cons_BLR_2_Opt",
+      "Spec_En_Cons_BLR_3_Opt",
+      "Spec_En_Cons_BLR_4_Opt",
+      "Spec_En_Cons_BLR_5_Opt",
+      "VHP_BFW_FROM_U_O",
+      "VHP_DESPHTR_BFW_FROM_U_O"
+    ],
+    "intermediate_tags": [
+      "BFW_Drives_Running",
+      "BFW_E_Turb_Steam_Regression",
+      "BFW_Flow_Consumption",
+      "BLR_1_HPS_Gen",
+      "BLR_1_HPS_Gen_warmup",
+      "BLR_2_HPS_Gen",
+      "BLR_2_HPS_Gen_warmup",
+      "BLR_3_HPS_Gen",
+      "BLR_3_HPS_Gen_warmup",
+      "BLR_4_HPS_Gen",
+      "BLR_4_HPS_Gen_warmup",
+      "BLR_5_HPS_Gen",
+      "BLR_5_HPS_Gen_warmup",
+      "DSP_BFW_TO_EG3",
+      "DSP_BFW_TO_ETH",
+      "Deaerator_LPS",
+      "Fuel_BLR_1",
+      "Fuel_BLR_2",
+      "Fuel_BLR_3",
+      "Fuel_BLR_4",
+      "Fuel_BLR_5",
+      "Spec_En_Cons_BLR_1",
+      "Spec_En_Cons_BLR_1_dev",
+      "Spec_En_Cons_BLR_2",
+      "Spec_En_Cons_BLR_2_dev",
+      "Spec_En_Cons_BLR_3",
+      "Spec_En_Cons_BLR_3_dev",
+      "Spec_En_Cons_BLR_4",
+      "Spec_En_Cons_BLR_4_dev",
+      "Spec_En_Cons_BLR_5",
+      "Spec_En_Cons_BLR_5_dev",
+      "Total_BFW_Consumption",
+      "Total_BLR_HPS_Generation",
+      "Whatif_running"
+    ],
+    "non_pi_leaves": [
+      "BFW_A_Motor_Status",
+      "BFW_B_Turb_Status",
+      "BFW_C_Turb_Status",
+      "BFW_D_Motor_Status",
+      "BFW_E_Turb_Status",
+      "BFW_F_Motor_Status",
+      "BLR_1_Status",
+      "BLR_2_Status",
+      "BLR_3_Status",
+      "BLR_4_Status",
+      "BLR_5_Status"
+    ]
+  },
+  "BFW_F_Motor_Power": {
+    "role": "decision_variable",
+    "formula": "[BFW_F_Motor_Status]*([BFW_F_Motor_Power_cons]-[BFW_F_Motor_Power_Imbalance])",
+    "leaf_pi_inputs": [
+      "BFW_TO_LAO",
+      "BFW_to_EOEG_1",
+      "BFW_to_EOEG_2",
+      "BFW_to_EOEG_3",
+      "DSP_BFW_TO_CAUSTIC_DILUTION",
+      "DSP_BFW_TO_EG1",
+      "DSP_BFW_TO_EG2",
+      "DSP_BFW_TO_EG3_raw",
+      "DSP_BFW_TO_ETH_raw",
+      "EOEG3_Plant_Status",
+      "ETH_Plant_Status",
+      "LHV",
+      "Spec_En_Cons_BLR_1_Opt",
+      "Spec_En_Cons_BLR_2_Opt",
+      "Spec_En_Cons_BLR_3_Opt",
+      "Spec_En_Cons_BLR_4_Opt",
+      "Spec_En_Cons_BLR_5_Opt",
+      "VHP_BFW_FROM_U_O",
+      "VHP_DESPHTR_BFW_FROM_U_O"
+    ],
+    "intermediate_tags": [
+      "BFW_Drives_Running",
+      "BFW_F_Motor_Power_Imbalance",
+      "BFW_F_Motor_Power_Regression",
+      "BFW_F_Motor_Power_cons",
+      "BFW_Flow_Consumption",
+      "BLR_1_HPS_Gen",
+      "BLR_1_HPS_Gen_warmup",
+      "BLR_2_HPS_Gen",
+      "BLR_2_HPS_Gen_warmup",
+      "BLR_3_HPS_Gen",
+      "BLR_3_HPS_Gen_warmup",
+      "BLR_4_HPS_Gen",
+      "BLR_4_HPS_Gen_warmup",
+      "BLR_5_HPS_Gen",
+      "BLR_5_HPS_Gen_warmup",
+      "DSP_BFW_TO_EG3",
+      "DSP_BFW_TO_ETH",
+      "Deaerator_LPS",
+      "Fuel_BLR_1",
+      "Fuel_BLR_2",
+      "Fuel_BLR_3",
+      "Fuel_BLR_4",
+      "Fuel_BLR_5",
+      "Spec_En_Cons_BLR_1",
+      "Spec_En_Cons_BLR_1_dev",
+      "Spec_En_Cons_BLR_2",
+      "Spec_En_Cons_BLR_2_dev",
+      "Spec_En_Cons_BLR_3",
+      "Spec_En_Cons_BLR_3_dev",
+      "Spec_En_Cons_BLR_4",
+      "Spec_En_Cons_BLR_4_dev",
+      "Spec_En_Cons_BLR_5",
+      "Spec_En_Cons_BLR_5_dev",
+      "Total_BFW_Consumption",
+      "Total_BLR_HPS_Generation",
+      "Whatif_running"
+    ],
+    "non_pi_leaves": [
+      "BFW_A_Motor_Status",
+      "BFW_B_Turb_Status",
+      "BFW_C_Turb_Status",
+      "BFW_D_Motor_Status",
+      "BFW_E_Turb_Status",
+      "BFW_F_Motor_Status",
+      "BLR_1_Status",
+      "BLR_2_Status",
+      "BLR_3_Status",
+      "BLR_4_Status",
+      "BLR_5_Status"
+    ]
+  },
+  "BFW_F_Motor_Power_Imbalance": {
+    "role": "decision_variable",
+    "formula": "[BFW_F_Motor_Status]*([BFW_F_Motor_Power_Regression]-((-0.0016*([BFW_Flow_Consumption]/([BFW_Drives_Running]+(1-[BFW_F_Motor_Status])))**2+ 1.8045*([BFW_Flow_Consumption]/([BFW_Drives_Running]+(1-[BFW_F_Motor_Status]))) + 401.61)/1000)/0.95)",
+    "leaf_pi_inputs": [
+      "BFW_TO_LAO",
+      "BFW_to_EOEG_1",
+      "BFW_to_EOEG_2",
+      "BFW_to_EOEG_3",
+      "DSP_BFW_TO_CAUSTIC_DILUTION",
+      "DSP_BFW_TO_EG1",
+      "DSP_BFW_TO_EG2",
+      "DSP_BFW_TO_EG3_raw",
+      "DSP_BFW_TO_ETH_raw",
+      "EOEG3_Plant_Status",
+      "ETH_Plant_Status",
+      "LHV",
+      "Spec_En_Cons_BLR_1_Opt",
+      "Spec_En_Cons_BLR_2_Opt",
+      "Spec_En_Cons_BLR_3_Opt",
+      "Spec_En_Cons_BLR_4_Opt",
+      "Spec_En_Cons_BLR_5_Opt",
+      "VHP_BFW_FROM_U_O",
+      "VHP_DESPHTR_BFW_FROM_U_O"
+    ],
+    "intermediate_tags": [
+      "BFW_Drives_Running",
+      "BFW_F_Motor_Power_Regression",
+      "BFW_Flow_Consumption",
+      "BLR_1_HPS_Gen",
+      "BLR_1_HPS_Gen_warmup",
+      "BLR_2_HPS_Gen",
+      "BLR_2_HPS_Gen_warmup",
+      "BLR_3_HPS_Gen",
+      "BLR_3_HPS_Gen_warmup",
+      "BLR_4_HPS_Gen",
+      "BLR_4_HPS_Gen_warmup",
+      "BLR_5_HPS_Gen",
+      "BLR_5_HPS_Gen_warmup",
+      "DSP_BFW_TO_EG3",
+      "DSP_BFW_TO_ETH",
+      "Deaerator_LPS",
+      "Fuel_BLR_1",
+      "Fuel_BLR_2",
+      "Fuel_BLR_3",
+      "Fuel_BLR_4",
+      "Fuel_BLR_5",
+      "Spec_En_Cons_BLR_1",
+      "Spec_En_Cons_BLR_1_dev",
+      "Spec_En_Cons_BLR_2",
+      "Spec_En_Cons_BLR_2_dev",
+      "Spec_En_Cons_BLR_3",
+      "Spec_En_Cons_BLR_3_dev",
+      "Spec_En_Cons_BLR_4",
+      "Spec_En_Cons_BLR_4_dev",
+      "Spec_En_Cons_BLR_5",
+      "Spec_En_Cons_BLR_5_dev",
+      "Total_BFW_Consumption",
+      "Total_BLR_HPS_Generation",
+      "Whatif_running"
+    ],
+    "non_pi_leaves": [
+      "BFW_A_Motor_Status",
+      "BFW_B_Turb_Status",
+      "BFW_C_Turb_Status",
+      "BFW_D_Motor_Status",
+      "BFW_E_Turb_Status",
+      "BFW_F_Motor_Status",
+      "BLR_1_Status",
+      "BLR_2_Status",
+      "BLR_3_Status",
+      "BLR_4_Status",
+      "BLR_5_Status"
+    ]
+  },
+  "BFW_F_Motor_Status": {
+    "role": "decision_variable",
+    "formula": null,
+    "leaf_pi_inputs": [],
+    "intermediate_tags": [],
+    "non_pi_leaves": [
+      "BFW_F_Motor_Status"
+    ]
+  },
+  "BFW_Flow_Consumption": {
+    "role": "decision_variable",
+    "formula": "[Total_BFW_Consumption] -([VHP_BFW_FROM_U_O]+[VHP_DESPHTR_BFW_FROM_U_O]+([Deaerator_LPS]*0.02))",
+    "leaf_pi_inputs": [
+      "BFW_TO_LAO",
+      "BFW_to_EOEG_1",
+      "BFW_to_EOEG_2",
+      "BFW_to_EOEG_3",
+      "DSP_BFW_TO_CAUSTIC_DILUTION",
+      "DSP_BFW_TO_EG1",
+      "DSP_BFW_TO_EG2",
+      "DSP_BFW_TO_EG3_raw",
+      "DSP_BFW_TO_ETH_raw",
+      "EOEG3_Plant_Status",
+      "ETH_Plant_Status",
+      "LHV",
+      "Spec_En_Cons_BLR_1_Opt",
+      "Spec_En_Cons_BLR_2_Opt",
+      "Spec_En_Cons_BLR_3_Opt",
+      "Spec_En_Cons_BLR_4_Opt",
+      "Spec_En_Cons_BLR_5_Opt",
+      "VHP_BFW_FROM_U_O",
+      "VHP_DESPHTR_BFW_FROM_U_O"
+    ],
+    "intermediate_tags": [
+      "BLR_1_HPS_Gen",
+      "BLR_1_HPS_Gen_warmup",
+      "BLR_2_HPS_Gen",
+      "BLR_2_HPS_Gen_warmup",
+      "BLR_3_HPS_Gen",
+      "BLR_3_HPS_Gen_warmup",
+      "BLR_4_HPS_Gen",
+      "BLR_4_HPS_Gen_warmup",
+      "BLR_5_HPS_Gen",
+      "BLR_5_HPS_Gen_warmup",
+      "DSP_BFW_TO_EG3",
+      "DSP_BFW_TO_ETH",
+      "Deaerator_LPS",
+      "Fuel_BLR_1",
+      "Fuel_BLR_2",
+      "Fuel_BLR_3",
+      "Fuel_BLR_4",
+      "Fuel_BLR_5",
+      "Spec_En_Cons_BLR_1",
+      "Spec_En_Cons_BLR_1_dev",
+      "Spec_En_Cons_BLR_2",
+      "Spec_En_Cons_BLR_2_dev",
+      "Spec_En_Cons_BLR_3",
+      "Spec_En_Cons_BLR_3_dev",
+      "Spec_En_Cons_BLR_4",
+      "Spec_En_Cons_BLR_4_dev",
+      "Spec_En_Cons_BLR_5",
+      "Spec_En_Cons_BLR_5_dev",
+      "Total_BFW_Consumption",
+      "Total_BLR_HPS_Generation",
+      "Whatif_running"
+    ],
+    "non_pi_leaves": [
+      "BLR_1_Status",
+      "BLR_2_Status",
+      "BLR_3_Status",
+      "BLR_4_Status",
+      "BLR_5_Status"
+    ]
+  },
+  "BFW_Imbalance": {
+    "role": "decision_variable",
+    "formula": "(1-[Whatif_running])*[BFW_Imbalance] + [Whatif_running]*([act_BFW_Imbalance]*[Total_BFW_Consumption]/[act_Total_BFW_Consumption])",
+    "leaf_pi_inputs": [
+      "BFW_TO_LAO",
+      "BFW_to_EOEG_1",
+      "BFW_to_EOEG_2",
+      "BFW_to_EOEG_3",
+      "DSP_BFW_TO_CAUSTIC_DILUTION",
+      "DSP_BFW_TO_EG1",
+      "DSP_BFW_TO_EG2",
+      "DSP_BFW_TO_EG3_raw",
+      "DSP_BFW_TO_ETH_raw",
+      "EOEG3_Plant_Status",
+      "ETH_Plant_Status",
+      "LHV",
+      "Spec_En_Cons_BLR_1_Opt",
+      "Spec_En_Cons_BLR_2_Opt",
+      "Spec_En_Cons_BLR_3_Opt",
+      "Spec_En_Cons_BLR_4_Opt",
+      "Spec_En_Cons_BLR_5_Opt",
+      "VHP_BFW_FROM_U_O",
+      "VHP_DESPHTR_BFW_FROM_U_O"
+    ],
+    "intermediate_tags": [
+      "BLR_1_HPS_Gen",
+      "BLR_1_HPS_Gen_warmup",
+      "BLR_2_HPS_Gen",
+      "BLR_2_HPS_Gen_warmup",
+      "BLR_3_HPS_Gen",
+      "BLR_3_HPS_Gen_warmup",
+      "BLR_4_HPS_Gen",
+      "BLR_4_HPS_Gen_warmup",
+      "BLR_5_HPS_Gen",
+      "BLR_5_HPS_Gen_warmup",
+      "DSP_BFW_TO_EG3",
+      "DSP_BFW_TO_ETH",
+      "Deaerator_LPS",
+      "Fuel_BLR_1",
+      "Fuel_BLR_2",
+      "Fuel_BLR_3",
+      "Fuel_BLR_4",
+      "Fuel_BLR_5",
+      "Spec_En_Cons_BLR_1",
+      "Spec_En_Cons_BLR_1_dev",
+      "Spec_En_Cons_BLR_2",
+      "Spec_En_Cons_BLR_2_dev",
+      "Spec_En_Cons_BLR_3",
+      "Spec_En_Cons_BLR_3_dev",
+      "Spec_En_Cons_BLR_4",
+      "Spec_En_Cons_BLR_4_dev",
+      "Spec_En_Cons_BLR_5",
+      "Spec_En_Cons_BLR_5_dev",
+      "Total_BFW_Consumption",
+      "Total_BLR_HPS_Generation",
+      "Whatif_running",
+      "act_BFW_Imbalance",
+      "act_Total_BFW_Consumption"
+    ],
+    "non_pi_leaves": [
+      "BLR_1_Status",
+      "BLR_2_Status",
+      "BLR_3_Status",
+      "BLR_4_Status",
+      "BLR_5_Status"
+    ]
+  },
+  "BFW_Motors_Running": {
+    "role": "decision_variable",
+    "formula": "[BFW_Drives_Running]-[BFW_Turbines_Running]",
+    "leaf_pi_inputs": [],
+    "intermediate_tags": [
+      "BFW_Drives_Running",
+      "BFW_Turbines_Running"
+    ],
+    "non_pi_leaves": [
+      "BFW_A_Motor_Status",
+      "BFW_B_Turb_Status",
+      "BFW_C_Turb_Status",
+      "BFW_D_Motor_Status",
+      "BFW_E_Turb_Status",
+      "BFW_F_Motor_Status"
+    ]
+  },
+  "BFW_Turbines_Running": {
+    "role": "decision_variable",
+    "formula": "[BFW_B_Turb_Status]+[BFW_C_Turb_Status]+[BFW_E_Turb_Status]",
+    "leaf_pi_inputs": [],
+    "intermediate_tags": [],
+    "non_pi_leaves": [
+      "BFW_B_Turb_Status",
+      "BFW_C_Turb_Status",
+      "BFW_E_Turb_Status"
+    ]
+  },
+  "BFW_to_Boilers": {
+    "role": "post_optimizer",
+    "formula": "[Total_BLR_HPS_Generation]/0.99",
+    "leaf_pi_inputs": [
+      "LHV",
+      "Spec_En_Cons_BLR_1_Opt",
+      "Spec_En_Cons_BLR_2_Opt",
+      "Spec_En_Cons_BLR_3_Opt",
+      "Spec_En_Cons_BLR_4_Opt",
+      "Spec_En_Cons_BLR_5_Opt"
+    ],
+    "intermediate_tags": [
+      "BLR_1_HPS_Gen",
+      "BLR_1_HPS_Gen_warmup",
+      "BLR_2_HPS_Gen",
+      "BLR_2_HPS_Gen_warmup",
+      "BLR_3_HPS_Gen",
+      "BLR_3_HPS_Gen_warmup",
+      "BLR_4_HPS_Gen",
+      "BLR_4_HPS_Gen_warmup",
+      "BLR_5_HPS_Gen",
+      "BLR_5_HPS_Gen_warmup",
+      "Fuel_BLR_1",
+      "Fuel_BLR_2",
+      "Fuel_BLR_3",
+      "Fuel_BLR_4",
+      "Fuel_BLR_5",
+      "Spec_En_Cons_BLR_1",
+      "Spec_En_Cons_BLR_1_dev",
+      "Spec_En_Cons_BLR_2",
+      "Spec_En_Cons_BLR_2_dev",
+      "Spec_En_Cons_BLR_3",
+      "Spec_En_Cons_BLR_3_dev",
+      "Spec_En_Cons_BLR_4",
+      "Spec_En_Cons_BLR_4_dev",
+      "Spec_En_Cons_BLR_5",
+      "Spec_En_Cons_BLR_5_dev",
+      "Total_BLR_HPS_Generation"
+    ],
+    "non_pi_leaves": [
+      "BLR_1_Status",
+      "BLR_2_Status",
+      "BLR_3_Status",
+      "BLR_4_Status",
+      "BLR_5_Status"
+    ]
+  },
+  "BFW_to_HP_to_MP_Letdown_Flow_In_PV0007A_UO": {
+    "role": "decision_variable",
+    "formula": null,
+    "leaf_pi_inputs": [],
+    "intermediate_tags": [],
+    "non_pi_leaves": [
+      "BFW_to_HP_to_MP_Letdown_Flow_In_PV0007A_UO"
+    ]
+  },
+  "BFW_to_HP_to_MP_Letdown_Flow_In_PV0007B_UO": {
+    "role": "decision_variable",
+    "formula": null,
+    "leaf_pi_inputs": [],
+    "intermediate_tags": [],
+    "non_pi_leaves": [
+      "BFW_to_HP_to_MP_Letdown_Flow_In_PV0007B_UO"
+    ]
+  },
+  "BLR_1_HPS_Gen": {
+    "role": "decision_variable",
+    "formula": "[Fuel_BLR_1] * [LHV] / [Spec_En_Cons_BLR_1]*[BLR_1_Status] + (1-[BLR_1_Status])*[BLR_1_HPS_Gen_warmup]",
+    "leaf_pi_inputs": [
+      "LHV",
+      "Spec_En_Cons_BLR_1_Opt"
+    ],
+    "intermediate_tags": [
+      "BLR_1_HPS_Gen_warmup",
+      "Fuel_BLR_1",
+      "Spec_En_Cons_BLR_1",
+      "Spec_En_Cons_BLR_1_dev"
+    ],
+    "non_pi_leaves": [
+      "BLR_1_Status"
+    ]
+  },
+  "BLR_1_Status": {
+    "role": "decision_variable",
+    "formula": null,
+    "leaf_pi_inputs": [],
+    "intermediate_tags": [],
+    "non_pi_leaves": [
+      "BLR_1_Status"
+    ]
+  },
+  "BLR_2_HPS_Gen": {
+    "role": "decision_variable",
+    "formula": "[Fuel_BLR_2] * [LHV] / [Spec_En_Cons_BLR_2]*[BLR_2_Status]+ (1-[BLR_2_Status])*[BLR_2_HPS_Gen_warmup]",
+    "leaf_pi_inputs": [
+      "LHV",
+      "Spec_En_Cons_BLR_2_Opt"
+    ],
+    "intermediate_tags": [
+      "BLR_2_HPS_Gen_warmup",
+      "Fuel_BLR_2",
+      "Spec_En_Cons_BLR_2",
+      "Spec_En_Cons_BLR_2_dev"
+    ],
+    "non_pi_leaves": [
+      "BLR_2_Status"
+    ]
+  },
+  "BLR_2_Status": {
+    "role": "decision_variable",
+    "formula": null,
+    "leaf_pi_inputs": [],
+    "intermediate_tags": [],
+    "non_pi_leaves": [
+      "BLR_2_Status"
+    ]
+  },
+  "BLR_3_HPS_Gen": {
+    "role": "decision_variable",
+    "formula": "[Fuel_BLR_3] * [LHV] / [Spec_En_Cons_BLR_3]*[BLR_3_Status]+ (1-[BLR_3_Status])*[BLR_3_HPS_Gen_warmup]",
+    "leaf_pi_inputs": [
+      "LHV",
+      "Spec_En_Cons_BLR_3_Opt"
+    ],
+    "intermediate_tags": [
+      "BLR_3_HPS_Gen_warmup",
+      "Fuel_BLR_3",
+      "Spec_En_Cons_BLR_3",
+      "Spec_En_Cons_BLR_3_dev"
+    ],
+    "non_pi_leaves": [
+      "BLR_3_Status"
+    ]
+  },
+  "BLR_3_Status": {
+    "role": "decision_variable",
+    "formula": null,
+    "leaf_pi_inputs": [],
+    "intermediate_tags": [],
+    "non_pi_leaves": [
+      "BLR_3_Status"
+    ]
+  },
+  "BLR_4_HPS_Gen": {
+    "role": "decision_variable",
+    "formula": "[Fuel_BLR_4] * [LHV] / [Spec_En_Cons_BLR_4]*[BLR_4_Status]+ (1-[BLR_4_Status])*[BLR_4_HPS_Gen_warmup]",
+    "leaf_pi_inputs": [
+      "LHV",
+      "Spec_En_Cons_BLR_4_Opt"
+    ],
+    "intermediate_tags": [
+      "BLR_4_HPS_Gen_warmup",
+      "Fuel_BLR_4",
+      "Spec_En_Cons_BLR_4",
+      "Spec_En_Cons_BLR_4_dev"
+    ],
+    "non_pi_leaves": [
+      "BLR_4_Status"
+    ]
+  },
+  "BLR_4_Status": {
+    "role": "decision_variable",
+    "formula": null,
+    "leaf_pi_inputs": [],
+    "intermediate_tags": [],
+    "non_pi_leaves": [
+      "BLR_4_Status"
+    ]
+  },
+  "BLR_5_HPS_Gen": {
+    "role": "decision_variable",
+    "formula": "[Fuel_BLR_5] * [LHV] / [Spec_En_Cons_BLR_5]*[BLR_5_Status] + (1-[BLR_5_Status])*[BLR_5_HPS_Gen_warmup]",
+    "leaf_pi_inputs": [
+      "LHV",
+      "Spec_En_Cons_BLR_5_Opt"
+    ],
+    "intermediate_tags": [
+      "BLR_5_HPS_Gen_warmup",
+      "Fuel_BLR_5",
+      "Spec_En_Cons_BLR_5",
+      "Spec_En_Cons_BLR_5_dev"
+    ],
+    "non_pi_leaves": [
+      "BLR_5_Status"
+    ]
+  },
+  "BLR_5_Status": {
+    "role": "decision_variable",
+    "formula": null,
+    "leaf_pi_inputs": [],
+    "intermediate_tags": [],
+    "non_pi_leaves": [
+      "BLR_5_Status"
+    ]
+  },
+  "BOILER_A_STACK_TEMPERATURE": {
+    "role": "post_optimizer",
+    "formula": "if([BOILER_A_FLUE_GAS_OXGYGEN_flag]==0,[BOILER_A_STACK_TEMPERATURE],min([BOILER_A_STACK_TEMPERATURE],(0.368798083 * [BLR_1_HPS_Gen] + 0.356735113 * [BOILER_A_FLUE_GAS_OXGYGEN] + 117.0923065))*[BLR_1_Status])",
+    "leaf_pi_inputs": [
+      "BOILER_A_FLUE_GAS_OXGYGEN",
+      "LHV",
+      "Spec_En_Cons_BLR_1_Opt"
+    ],
+    "intermediate_tags": [
+      "BLR_1_HPS_Gen",
+      "BLR_1_HPS_Gen_warmup",
+      "BOILER_A_FLUE_GAS_OXGYGEN_Adjusted",
+      "BOILER_A_FLUE_GAS_OXGYGEN_flag",
+      "Fuel_BLR_1",
+      "Spec_En_Cons_BLR_1",
+      "Spec_En_Cons_BLR_1_dev"
+    ],
+    "non_pi_leaves": [
+      "BLR_1_Status",
+      "BOILER_A_FLUE_GAS_OXGYGEN_peeo"
+    ]
+  },
+  "BOILER_B_STACK_TEMPERATURE": {
+    "role": "post_optimizer",
+    "formula": "if([BOILER_B_FLUE_GAS_OXGYGEN_flag]==0,[BOILER_B_STACK_TEMPERATURE],min([BOILER_B_STACK_TEMPERATURE],(0.446275852 * [BLR_2_HPS_Gen] + 0.310062436 * [BOILER_B_FLUE_GAS_OXGYGEN] + 110.2389869))*[BLR_2_Status])",
+    "leaf_pi_inputs": [
+      "BOILER_B_FLUE_GAS_OXGYGEN",
+      "LHV",
+      "Spec_En_Cons_BLR_2_Opt"
+    ],
+    "intermediate_tags": [
+      "BLR_2_HPS_Gen",
+      "BLR_2_HPS_Gen_warmup",
+      "BOILER_B_FLUE_GAS_OXGYGEN_Adjusted",
+      "BOILER_B_FLUE_GAS_OXGYGEN_flag",
+      "Fuel_BLR_2",
+      "Spec_En_Cons_BLR_2",
+      "Spec_En_Cons_BLR_2_dev"
+    ],
+    "non_pi_leaves": [
+      "BLR_2_Status",
+      "BOILER_B_FLUE_GAS_OXGYGEN_peeo"
+    ]
+  },
+  "BOILER_C_STACK_TEMPERATURE": {
+    "role": "post_optimizer",
+    "formula": "if([BOILER_C_FLUE_GAS_OXGYGEN_flag]==0,[BOILER_C_STACK_TEMPERATURE],min([BOILER_C_STACK_TEMPERATURE],(0.399051143 * [BLR_3_HPS_Gen] - 0.176072266 * [BOILER_C_FLUE_GAS_OXGYGEN] + 116.3971552))*[BLR_3_Status])",
+    "leaf_pi_inputs": [
+      "BOILER_C_FLUE_GAS_OXGYGEN",
+      "LHV",
+      "Spec_En_Cons_BLR_3_Opt"
+    ],
+    "intermediate_tags": [
+      "BLR_3_HPS_Gen",
+      "BLR_3_HPS_Gen_warmup",
+      "BOILER_C_FLUE_GAS_OXGYGEN_Adjusted",
+      "BOILER_C_FLUE_GAS_OXGYGEN_flag",
+      "Fuel_BLR_3",
+      "Spec_En_Cons_BLR_3",
+      "Spec_En_Cons_BLR_3_dev"
+    ],
+    "non_pi_leaves": [
+      "BLR_3_Status",
+      "BOILER_C_FLUE_GAS_OXGYGEN_peeo"
+    ]
+  },
+  "BOILER_D_STACK_TEMPERATURE": {
+    "role": "post_optimizer",
+    "formula": "if([BOILER_D_FLUE_GAS_OXGYGEN_flag]==0,[BOILER_D_STACK_TEMPERATURE],min([BOILER_D_STACK_TEMPERATURE],(0.399089856 * [BLR_4_HPS_Gen] - 0.482676221 * [BOILER_D_FLUE_GAS_OXGYGEN] + 114.6594118))*[BLR_4_Status])",
+    "leaf_pi_inputs": [
+      "BOILER_D_FLUE_GAS_OXGYGEN",
+      "LHV",
+      "Spec_En_Cons_BLR_4_Opt"
+    ],
+    "intermediate_tags": [
+      "BLR_4_HPS_Gen",
+      "BLR_4_HPS_Gen_warmup",
+      "BOILER_D_FLUE_GAS_OXGYGEN_Adjusted",
+      "BOILER_D_FLUE_GAS_OXGYGEN_flag",
+      "Fuel_BLR_4",
+      "Spec_En_Cons_BLR_4",
+      "Spec_En_Cons_BLR_4_dev"
+    ],
+    "non_pi_leaves": [
+      "BLR_4_Status",
+      "BOILER_D_FLUE_GAS_OXGYGEN_peeo"
+    ]
+  },
+  "BOILER_E_STACK_TEMPERATURE": {
+    "role": "post_optimizer",
+    "formula": "if([Boiler_5_O2_flag]==0,[BOILER_E_STACK_TEMPERATURE],min([BOILER_E_STACK_TEMPERATURE],(0.313555668 * [BLR_5_HPS_Gen] + 0.475167776 * [BOILER_E_FLUE_GAS_OXGYGEN] + 132.5695951))*[BLR_5_Status])",
+    "leaf_pi_inputs": [
+      "BOILER_E_FLUE_GAS_OXGYGEN",
+      "Boiler_5_O2",
+      "LHV",
+      "Spec_En_Cons_BLR_5_Opt"
+    ],
+    "intermediate_tags": [
+      "BLR_5_HPS_Gen",
+      "BLR_5_HPS_Gen_warmup",
+      "Boiler_5_O2_Adjusted",
+      "Boiler_5_O2_flag",
+      "Fuel_BLR_5",
+      "Spec_En_Cons_BLR_5",
+      "Spec_En_Cons_BLR_5_dev"
+    ],
+    "non_pi_leaves": [
+      "BLR_5_Status",
+      "Boiler_5_O2_peeo"
+    ]
+  },
+  "CBD_energy_saving_BLR1": {
+    "role": "post_optimizer",
+    "formula": "[CBD_energy_saving_BLR1]*[BLR_1_Status]",
+    "leaf_pi_inputs": [],
+    "intermediate_tags": [],
+    "non_pi_leaves": [
+      "BLR_1_Status"
+    ]
+  },
+  "CBD_energy_saving_BLR2": {
+    "role": "post_optimizer",
+    "formula": "[CBD_energy_saving_BLR2]*[BLR_2_Status]",
+    "leaf_pi_inputs": [],
+    "intermediate_tags": [],
+    "non_pi_leaves": [
+      "BLR_2_Status"
+    ]
+  },
+  "CBD_energy_saving_BLR3": {
+    "role": "post_optimizer",
+    "formula": "[CBD_energy_saving_BLR3]*[BLR_3_Status]",
+    "leaf_pi_inputs": [],
+    "intermediate_tags": [],
+    "non_pi_leaves": [
+      "BLR_3_Status"
+    ]
+  },
+  "CBD_energy_saving_BLR4": {
+    "role": "post_optimizer",
+    "formula": "[CBD_energy_saving_BLR4]*[BLR_4_Status]",
+    "leaf_pi_inputs": [],
+    "intermediate_tags": [],
+    "non_pi_leaves": [
+      "BLR_4_Status"
+    ]
+  },
+  "CBD_energy_saving_BLR5": {
+    "role": "post_optimizer",
+    "formula": "[CBD_energy_saving_BLR5]*[BLR_5_Status]",
+    "leaf_pi_inputs": [],
+    "intermediate_tags": [],
+    "non_pi_leaves": [
+      "BLR_5_Status"
+    ]
+  },
+  "ETH_HPS_Demand": {
+    "role": "post_optimizer",
+    "formula": "if([ETH_Plant_Status]==0,0,if(([ETH_HPS_Demand]-([ETH_HPS_Demand_delta]))<0,0,([ETH_HPS_Demand]-([ETH_HPS_Demand_delta]))))",
+    "leaf_pi_inputs": [
+      "ETH_Plant_Status",
+      "Ethylene_total_flow",
+      "Specific_energy_consumption_in_C2R"
+    ],
+    "intermediate_tags": [
+      "C2_power_delta",
+      "ETH_HPS_Demand_delta",
+      "Eth_CGC_turbine_Duty_delta",
+      "HP_Steam_Enthalpy",
+      "Total_specific_Power",
+      "opportunity_energy_olf_cgc",
+      "opportunity_energy_olf_cold",
+      "opportunity_threshold"
+    ],
+    "non_pi_leaves": [
+      "Specific_energy_consumption_in_C2R_peeo",
+      "Total_specific_Power_peeo"
+    ]
+  },
+  "FD_Fan_BLR_1_Steam": {
+    "role": "decision_variable",
+    "formula": "(1-[FDF_A_Motor_Status])*[BLR_1_Status]*(([FD_Fan_BLR_1_Steam_raw]/1000)-([FD_Fan_BLR_1_Steam_reg]-((0.4255*[BLR_1_HPS_Gen]**2 - 32.667*[BLR_1_HPS_Gen] + 4378.1)/1000)))+(1-[BLR_1_Status])*(1-[FDF_A_Motor_Status])*[FD_Fan_BLR_1_Steam_warmup]",
+    "leaf_pi_inputs": [
+      "FD_Fan_BLR_1_Steam_raw",
+      "LHV",
+      "Spec_En_Cons_BLR_1_Opt"
+    ],
+    "intermediate_tags": [
+      "BLR_1_HPS_Gen",
+      "BLR_1_HPS_Gen_warmup",
+      "FD_Fan_BLR_1_Steam_reg",
+      "FD_Fan_BLR_1_Steam_warmup",
+      "Fuel_BLR_1",
+      "Spec_En_Cons_BLR_1",
+      "Spec_En_Cons_BLR_1_dev"
+    ],
+    "non_pi_leaves": [
+      "BLR_1_Status",
+      "FDF_A_Motor_Status"
+    ]
+  },
+  "FD_Fan_BLR_2_Steam": {
+    "role": "decision_variable",
+    "formula": "(1-[FDF_B_Motor_Status])*[BLR_2_Status]*(([FD_Fan_BLR_2_Steam_raw]/1000)-([FD_Fan_BLR_2_Steam_reg]-((0.4601*[BLR_2_HPS_Gen]**2 - 39.276*[BLR_2_HPS_Gen] + 4711.7)/1000)))+(1-[BLR_2_Status])*(1-[FDF_B_Motor_Status])*[FD_Fan_BLR_2_Steam_warmup]",
+    "leaf_pi_inputs": [
+      "FD_Fan_BLR_2_Steam_raw",
+      "LHV",
+      "Spec_En_Cons_BLR_2_Opt"
+    ],
+    "intermediate_tags": [
+      "BLR_2_HPS_Gen",
+      "BLR_2_HPS_Gen_warmup",
+      "FD_Fan_BLR_2_Steam_reg",
+      "FD_Fan_BLR_2_Steam_warmup",
+      "Fuel_BLR_2",
+      "Spec_En_Cons_BLR_2",
+      "Spec_En_Cons_BLR_2_dev"
+    ],
+    "non_pi_leaves": [
+      "BLR_2_Status",
+      "FDF_B_Motor_Status"
+    ]
+  },
+  "FD_Fan_BLR_3_Steam": {
+    "role": "decision_variable",
+    "formula": "[BLR_3_Status]*(([FD_Fan_BLR_3_Steam_raw]/1000)-([FD_Fan_BLR_3_Steam_reg]-((0.4481*[BLR_3_HPS_Gen]**2 - 35.004*[BLR_3_HPS_Gen] + 4701.3)/1000))) + (1-[BLR_3_Status])*[FD_Fan_BLR_3_Steam_warmup]",
+    "leaf_pi_inputs": [
+      "FD_Fan_BLR_3_Steam_raw",
+      "LHV",
+      "Spec_En_Cons_BLR_3_Opt"
+    ],
+    "intermediate_tags": [
+      "BLR_3_HPS_Gen",
+      "BLR_3_HPS_Gen_warmup",
+      "FD_Fan_BLR_3_Steam_reg",
+      "FD_Fan_BLR_3_Steam_warmup",
+      "Fuel_BLR_3",
+      "Spec_En_Cons_BLR_3",
+      "Spec_En_Cons_BLR_3_dev"
+    ],
+    "non_pi_leaves": [
+      "BLR_3_Status"
+    ]
+  },
+  "FD_Fan_BLR_4_Steam": {
+    "role": "decision_variable",
+    "formula": "[BLR_4_Status]*(([FD_Fan_BLR_4_Steam_raw]/1000)-([FD_Fan_BLR_4_Steam_reg]-((0.4828*[BLR_4_HPS_Gen]**2 - 46.088*[BLR_4_HPS_Gen] + 5015.5)/1000)))+ (1-[BLR_4_Status])*[FD_Fan_BLR_4_Steam_warmup]",
+    "leaf_pi_inputs": [
+      "FD_Fan_BLR_4_Steam_raw",
+      "LHV",
+      "Spec_En_Cons_BLR_4_Opt"
+    ],
+    "intermediate_tags": [
+      "BLR_4_HPS_Gen",
+      "BLR_4_HPS_Gen_warmup",
+      "FD_Fan_BLR_4_Steam_reg",
+      "FD_Fan_BLR_4_Steam_warmup",
+      "Fuel_BLR_4",
+      "Spec_En_Cons_BLR_4",
+      "Spec_En_Cons_BLR_4_dev"
+    ],
+    "non_pi_leaves": [
+      "BLR_4_Status"
+    ]
+  },
+  "FD_Fan_BLR_5_Steam": {
+    "role": "decision_variable",
+    "formula": "[BLR_5_Status]*(([FD_Fan_BLR_5_Steam_raw]/1000)-([FD_Fan_BLR_5_Steam_reg]-((0.0843*[BLR_5_HPS_Gen]**2 + 9.2624*[BLR_5_HPS_Gen] + 4772.4)/1000)))+ (1-[BLR_5_Status])*[FD_Fan_BLR_5_Steam_warmup]",
+    "leaf_pi_inputs": [
+      "FD_Fan_BLR_5_Steam_raw",
+      "LHV",
+      "Spec_En_Cons_BLR_5_Opt"
+    ],
+    "intermediate_tags": [
+      "BLR_5_HPS_Gen",
+      "BLR_5_HPS_Gen_warmup",
+      "FD_Fan_BLR_5_Steam_reg",
+      "FD_Fan_BLR_5_Steam_warmup",
+      "Fuel_BLR_5",
+      "Spec_En_Cons_BLR_5",
+      "Spec_En_Cons_BLR_5_dev"
+    ],
+    "non_pi_leaves": [
+      "BLR_5_Status"
+    ]
+  },
+  "FUEL_GAS_From_UO_to_ETH": {
+    "role": "post_optimizer",
+    "formula": "if([ETH_Plant_Status]==0,0,round(([FUEL_GAS_From_UO_to_ETH]-[FUEL_GAS_From_UO_to_ETH_delta]),3))",
+    "leaf_pi_inputs": [
+      "ETH_Plant_Status",
+      "FUR_1_FLUE_GAS_O2",
+      "FUR_1_PASS_1_ETHANE_FEED",
+      "FUR_1_PASS_2_ETHANE_FEED",
+      "FUR_1_PASS_3_ETHANE_FEED",
+      "FUR_1_PASS_4_ETHANE_FEED",
+      "FUR_1_PASS_5_ETHANE_FEED",
+      "FUR_1_PASS_6_ETHANE_FEED",
+      "FUR_1_PASS_7_ETHANE_FEED",
+      "FUR_1_PASS_8_ETHANE_FEED",
+      "FUR_1_STACK_TEMPERATURE",
+      "FUR_2_FLUE_GAS_O2",
+      "FUR_2_PASS_1_ETHANE_FEED",
+      "FUR_2_PASS_2_ETHANE_FEED",
+      "FUR_2_PASS_3_ETHANE_FEED",
+      "FUR_2_PASS_4_ETHANE_FEED",
+      "FUR_2_PASS_5_ETHANE_FEED",
+      "FUR_2_PASS_6_ETHANE_FEED",
+      "FUR_2_PASS_7_ETHANE_FEED",
+      "FUR_2_PASS_8_ETHANE_FEED",
+      "FUR_2_STACK_TEMPERATURE",
+      "FUR_3_FLUE_GAS_O2",
+      "FUR_3_PASS_1_ETHANE_FEED",
+      "FUR_3_PASS_2_ETHANE_FEED",
+      "FUR_3_PASS_3_ETHANE_FEED",
+      "FUR_3_PASS_4_ETHANE_FEED",
+      "FUR_3_PASS_5_ETHANE_FEED",
+      "FUR_3_PASS_6_ETHANE_FEED",
+      "FUR_3_PASS_7_ETHANE_FEED",
+      "FUR_3_PASS_8_ETHANE_FEED",
+      "FUR_3_STACK_TEMPERATURE",
+      "FUR_4_FLUE_GAS_O2",
+      "FUR_4_PASS_1_ETHANE_FEED",
+      "FUR_4_PASS_2_ETHANE_FEED",
+      "FUR_4_PASS_3_ETHANE_FEED",
+      "FUR_4_PASS_4_ETHANE_FEED",
+      "FUR_4_PASS_5_ETHANE_FEED",
+      "FUR_4_PASS_6_ETHANE_FEED",
+      "FUR_4_PASS_7_ETHANE_FEED",
+      "FUR_4_PASS_8_ETHANE_FEED",
+      "FUR_4_STACK_TEMPERATURE",
+      "FUR_5_FLUE_GAS_O2",
+      "FUR_5_PASS_1_ETHANE_FEED",
+      "FUR_5_PASS_2_ETHANE_FEED",
+      "FUR_5_PASS_3_ETHANE_FEED",
+      "FUR_5_PASS_4_ETHANE_FEED",
+      "FUR_5_PASS_5_ETHANE_FEED",
+      "FUR_5_PASS_6_ETHANE_FEED",
+      "FUR_5_PASS_7_ETHANE_FEED",
+      "FUR_5_PASS_8_ETHANE_FEED",
+      "FUR_5_STACK_TEMPERATURE",
+      "FUR_6_FLUE_GAS_O2",
+      "FUR_6_PASS_1_ETHANE_FEED",
+      "FUR_6_PASS_2_ETHANE_FEED",
+      "FUR_6_PASS_3_ETHANE_FEED",
+      "FUR_6_PASS_4_ETHANE_FEED",
+      "FUR_6_PASS_5_ETHANE_FEED",
+      "FUR_6_PASS_6_ETHANE_FEED",
+      "FUR_6_PASS_7_ETHANE_FEED",
+      "FUR_6_PASS_8_ETHANE_FEED",
+      "FUR_6_STACK_TEMPERATURE",
+      "FUR_7_FLUE_GAS_O2",
+      "FUR_7_PASS_1_ETHANE_FEED",
+      "FUR_7_PASS_2_ETHANE_FEED",
+      "FUR_7_PASS_3_ETHANE_FEED",
+      "FUR_7_PASS_4_ETHANE_FEED",
+      "FUR_7_PASS_5_ETHANE_FEED",
+      "FUR_7_PASS_6_ETHANE_FEED",
+      "FUR_7_PASS_7_ETHANE_FEED",
+      "FUR_7_PASS_8_ETHANE_FEED",
+      "FUR_7_STACK_TEMPERATURE",
+      "FUR_8_FLUE_GAS_O2",
+      "FUR_8_PASS_1_ETHANE_FEED",
+      "FUR_8_PASS_2_ETHANE_FEED",
+      "FUR_8_PASS_3_ETHANE_FEED",
+      "FUR_8_PASS_4_ETHANE_FEED",
+      "FUR_8_PASS_5ETHANE_FEED",
+      "FUR_8_PASS_6_ETHANE_FEED",
+      "FUR_8_PASS_7_ETHANE_FEED",
+      "FUR_8_PASS_8_ETHANE_FEED",
+      "FUR_8_STACK_TEMPERATURE",
+      "FUR_9_FLUE_GAS_O2",
+      "FUR_9_PASS_1_ETHANE_FEED",
+      "FUR_9_PASS_2_ETHANE_FEED",
+      "FUR_9_PASS_3_ETHANE_FEED",
+      "FUR_9_PASS_4_ETHANE_FEED",
+      "FUR_9_PASS_5ETHANE_FEED",
+      "FUR_9_PASS_6_ETHANE_FEED",
+      "FUR_9_PASS_7_ETHANE_FEED",
+      "FUR_9_PASS_8_ETHANE_FEED",
+      "FUR_9_STACK_TEMPERATURE",
+      "Furnace_1_Status_PIAF",
+      "Furnace_2_Status_PIAF",
+      "Furnace_3_Status_PIAF",
+      "Furnace_4_Status_PIAF",
+      "Furnace_5_Status_PIAF",
+      "Furnace_6_Status_PIAF",
+      "Furnace_7_Status_PIAF",
+      "Furnace_8_Status_PIAF",
+      "Furnace_9_Status_PIAF",
+      "Furnace_A_COT",
+      "Furnace_A_Fuel_gas_flow",
+      "Furnace_B_COT",
+      "Furnace_B_Fuel_gas_flow",
+      "Furnace_C_COT",
+      "Furnace_C_Fuel_gas_flow",
+      "Furnace_D_COT",
+      "Furnace_D_Fuel_gas_flow",
+      "Furnace_E_COT",
+      "Furnace_E_Fuel_gas_flow",
+      "Furnace_F_COT",
+      "Furnace_F_Fuel_gas_flow",
+      "Furnace_G_COT",
+      "Furnace_G_Fuel_gas_flow",
+      "Furnace_H_COT",
+      "Furnace_H_Fuel_gas_flow",
+      "Furnace_J_COT",
+      "Furnace_J_Fuel_gas_flow",
+      "Overall_SHC_Ratio",
+      "Suction_Press_1Stage",
+      "VHP_to_HP_Let_Down_Valve_Opening_PX7024A_ETH",
+      "VHP_to_HP_Let_Down_Valve_Opening_PX7024B_ETH"
+    ],
+    "intermediate_tags": [
+      "FUEL_GAS_From_UO_to_ETH_delta",
+      "FUR_1_FLUE_GAS_O2_Adjusted",
+      "FUR_1_STACK_TEMPERATURE_Adjusted",
+      "FUR_2_FLUE_GAS_O2_Adjusted",
+      "FUR_2_STACK_TEMPERATURE_Adjusted",
+      "FUR_3_FLUE_GAS_O2_Adjusted",
+      "FUR_3_STACK_TEMPERATURE_Adjusted",
+      "FUR_4_FLUE_GAS_O2_Adjusted",
+      "FUR_4_STACK_TEMPERATURE_Adjusted",
+      "FUR_5_FLUE_GAS_O2_Adjusted",
+      "FUR_5_STACK_TEMPERATURE_Adjusted",
+      "FUR_6_FLUE_GAS_O2_Adjusted",
+      "FUR_6_STACK_TEMPERATURE_Adjusted",
+      "FUR_7_FLUE_GAS_O2_Adjusted",
+      "FUR_7_STACK_TEMPERATURE_Adjusted",
+      "FUR_8_FLUE_GAS_O2_Adjusted",
+      "FUR_8_STACK_TEMPERATURE_Adjusted",
+      "FUR_9_FLUE_GAS_O2_Adjusted",
+      "FUR_9_STACK_TEMPERATURE_Adjusted",
+      "Fur_1_HC_Feed",
+      "Fur_2_HC_Feed",
+      "Fur_3_HC_Feed",
+      "Fur_4_HC_Feed",
+      "Fur_5_HC_Feed",
+      "Fur_6_HC_Feed",
+      "Fur_7_HC_Feed",
+      "Fur_8_HC_Feed",
+      "Fur_9_HC_Feed",
+      "Furnace1_Feed",
+      "Furnace2_Feed",
+      "Furnace3_Feed",
+      "Furnace4_Feed",
+      "Furnace5_Feed",
+      "Furnace6_Feed",
+      "Furnace7_Feed",
+      "Furnace8_Feed",
+      "Furnace9_Feed",
+      "Furnace_1_Status",
+      "Furnace_2_Status",
+      "Furnace_3_Status",
+      "Furnace_4_Status",
+      "Furnace_5_Status",
+      "Furnace_6_Status",
+      "Furnace_7_Status",
+      "Furnace_8_Status",
+      "Furnace_9_Status",
+      "Furnace_A_Fuel_gas_flow_Adjusted",
+      "Furnace_B_Fuel_gas_flow_Adjusted",
+      "Furnace_C_Fuel_gas_flow_Adjusted",
+      "Furnace_D_Fuel_gas_flow_Adjusted",
+      "Furnace_E_Fuel_gas_flow_Adjusted",
+      "Furnace_F_Fuel_gas_flow_Adjusted",
+      "Furnace_G_Fuel_gas_flow_Adjusted",
+      "Furnace_H_Fuel_gas_flow_Adjusted",
+      "Furnace_J_Fuel_gas_flow_Adjusted",
+      "Furnace_O2_Check",
+      "Optimized_fuel_H1111",
+      "Optimized_fuel_H1112",
+      "Optimized_fuel_H1113",
+      "Optimized_fuel_H1114",
+      "Optimized_fuel_H1115",
+      "Optimized_fuel_H1116",
+      "Optimized_fuel_H1117",
+      "Optimized_fuel_H1118",
+      "Optimized_fuel_H1119",
+      "Total_Furnace_fuel",
+      "Total_Furnace_fuel_min",
+      "furn1_net_efficiency",
+      "furn1_net_efficiency_Adjusted",
+      "furn2_net_efficiency",
+      "furn2_net_efficiency_Adjusted",
+      "furn3_net_efficiency",
+      "furn3_net_efficiency_Adjusted",
+      "furn4_net_efficiency",
+      "furn4_net_efficiency_Adjusted",
+      "furn5_net_efficiency",
+      "furn5_net_efficiency_Adjusted",
+      "furn6_net_efficiency",
+      "furn6_net_efficiency_Adjusted",
+      "furn7_net_efficiency",
+      "furn7_net_efficiency_Adjusted",
+      "furn8_net_efficiency",
+      "furn8_net_efficiency_Adjusted",
+      "furn9_net_efficiency",
+      "furn9_net_efficiency_Adjusted"
+    ],
+    "non_pi_leaves": []
+  },
+  "FUEL_GAS_From_UO_to_LAO": {
+    "role": "post_optimizer",
+    "formula": "if([LAO_Plant_Status]==0,0,round([FUEL_GAS_From_UO_to_LAO]-([FUEL_GAS_From_UO_to_LAO_delta]),3))",
+    "leaf_pi_inputs": [
+      "FUEL_GAS_From_UO_to_LAO_Opt",
+      "LAO_Plant_Status"
+    ],
+    "intermediate_tags": [
+      "FUEL_GAS_From_UO_to_LAO_delta"
+    ],
+    "non_pi_leaves": []
+  },
+  "Fuel_BLR_1": {
+    "role": "decision_variable",
+    "formula": "[Fuel_BLR_1]*[BLR_1_Status]",
+    "leaf_pi_inputs": [],
+    "intermediate_tags": [],
+    "non_pi_leaves": [
+      "BLR_1_Status"
+    ]
+  },
+  "Fuel_BLR_2": {
+    "role": "decision_variable",
+    "formula": "[Fuel_BLR_2]*[BLR_2_Status]",
+    "leaf_pi_inputs": [],
+    "intermediate_tags": [],
+    "non_pi_leaves": [
+      "BLR_2_Status"
+    ]
+  },
+  "Fuel_BLR_3": {
+    "role": "decision_variable",
+    "formula": "[Fuel_BLR_3]*[BLR_3_Status]",
+    "leaf_pi_inputs": [],
+    "intermediate_tags": [],
+    "non_pi_leaves": [
+      "BLR_3_Status"
+    ]
+  },
+  "Fuel_BLR_4": {
+    "role": "decision_variable",
+    "formula": "[Fuel_BLR_4]*[BLR_4_Status]",
+    "leaf_pi_inputs": [],
+    "intermediate_tags": [],
+    "non_pi_leaves": [
+      "BLR_4_Status"
+    ]
+  },
+  "Fuel_BLR_5": {
+    "role": "decision_variable",
+    "formula": "[Fuel_BLR_5]*[BLR_5_Status]",
+    "leaf_pi_inputs": [],
+    "intermediate_tags": [],
+    "non_pi_leaves": [
+      "BLR_5_Status"
+    ]
+  },
+  "HP_to_MP_Letdown_HPS_Flow_In_PV0007A_UO": {
+    "role": "decision_variable",
+    "formula": "((-0.0078*([HP_to_MP_Letdown_Valve_Opening_PV0007A_UO])**2+2.86*([HP_to_MP_Letdown_Valve_Opening_PV0007A_UO])))",
+    "leaf_pi_inputs": [
+      "HP_to_MP_Letdown_Valve_Opening_PV0007A_UO"
+    ],
+    "intermediate_tags": [],
+    "non_pi_leaves": []
+  },
+  "HP_to_MP_Letdown_HPS_Flow_In_PV0007B_UO": {
+    "role": "decision_variable",
+    "formula": "((-0.0078*([HP_to_MP_Letdown_Valve_Opening_PV0007B_UO])**2+2.86*([HP_to_MP_Letdown_Valve_Opening_PV0007B_UO])))",
+    "leaf_pi_inputs": [
+      "HP_to_MP_Letdown_Valve_Opening_PV0007B_UO"
+    ],
+    "intermediate_tags": [],
+    "non_pi_leaves": []
+  },
+  "LP_Steam_Generation": {
+    "role": "decision_variable",
+    "formula": "([MP_to_LP_Letdown_LPS_Flow_Out_PV013A_UO]+[MP_to_LP_Letdown_LPS_Flow_Out_PV013B_UO]+[MP_to_LP_Letdown_LPS_Flow_Out_PV31_UO]+[MP_to_LP_Letdown_LPS_Flow_Out_PV32_UO])+[LPS_from_Drives]+([Total_BLR_HPS_Generation]*0.01*0.21)",
+    "leaf_pi_inputs": [
+      "Air_Compressor_Turbine_A_Steam_raw",
+      "Air_Compressor_Turbine_D_Steam_raw",
+      "BFW_B_Turb_Steam_cons",
+      "BFW_B_Turb_Steam_raw",
+      "BFW_C_Turb_Steam_cons",
+      "BFW_C_Turb_Steam_raw",
+      "BFW_E_Turb_Steam_cons",
+      "BFW_E_Turb_Steam_raw",
+      "BFW_TO_LAO",
+      "BFW_to_EOEG_1",
+      "BFW_to_EOEG_2",
+      "BFW_to_EOEG_3",
+      "DMW_Makeup",
+      "DMW_Turbine_A_Steam_raw",
+      "DMW_Turbine_C_Steam_raw",
+      "DSP_BFW_TO_CAUSTIC_DILUTION",
+      "DSP_BFW_TO_EG1",
+      "DSP_BFW_TO_EG2",
+      "DSP_BFW_TO_EG3_raw",
+      "DSP_BFW_TO_ETH_raw",
+      "EOEG3_Plant_Status",
+      "ETH_Plant_Status",
+      "FD_Fan_BLR_1_Steam_raw",
+      "FD_Fan_BLR_2_Steam_raw",
+      "FD_Fan_BLR_3_Steam_raw",
+      "FD_Fan_BLR_4_Steam_raw",
+      "FD_Fan_BLR_5_Steam_raw",
+      "LHV",
+      "MP_to_LP_Letdown_Valve_Opening_PV013A_UO",
+      "MP_to_LP_Letdown_Valve_Opening_PV013B_UO",
+      "MP_to_LP_Letdown_Valve_Opening_PV31_UO",
+      "MP_to_LP_Letdown_Valve_Opening_PV32_UO",
+      "Spec_En_Cons_BLR_1_Opt",
+      "Spec_En_Cons_BLR_2_Opt",
+      "Spec_En_Cons_BLR_3_Opt",
+      "Spec_En_Cons_BLR_4_Opt",
+      "Spec_En_Cons_BLR_5_Opt",
+      "VHP_BFW_B_Turb_Steam_cons",
+      "VHP_BFW_B_Turb_Steam_raw",
+      "VHP_BFW_C_Turb_Steam_cons",
+      "VHP_BFW_C_Turb_Steam_raw",
+      "VHP_BFW_FROM_U_O",
+      "VHP_DESPHTR_BFW_FROM_U_O"
+    ],
+    "intermediate_tags": [
+      "Air_Compressor_Turbine_A_Steam",
+      "Air_Compressor_Turbine_A_Steam_Imbalance",
+      "Air_Compressor_Turbine_A_Steam_Regression",
+      "Air_Compressor_Turbine_A_Steam_param",
+      "Air_Compressor_Turbine_A_Steam_warmup",
+      "Air_Compressor_Turbine_D_Steam",
+      "Air_Compressor_Turbine_D_Steam_Imbalance",
+      "Air_Compressor_Turbine_D_Steam_Regression",
+      "Air_Compressor_Turbine_D_Steam_param",
+      "Air_Compressor_Turbine_D_Steam_warmup",
+      "BFW_B_Turb_Steam",
+      "BFW_B_Turb_Steam_Imbalance",
+      "BFW_B_Turb_Steam_Regression",
+      "BFW_B_Turb_Steam_warmup",
+      "BFW_C_Turb_Steam",
+      "BFW_C_Turb_Steam_Imbalance",
+      "BFW_C_Turb_Steam_Regression",
+      "BFW_C_Turb_Steam_warmup",
+      "BFW_Drives_Running",
+      "BFW_E_Turb_Steam",
+      "BFW_E_Turb_Steam_Imbalance",
+      "BFW_E_Turb_Steam_Regression",
+      "BFW_E_Turb_Steam_warmup",
+      "BFW_Flow_Consumption",
+      "BFW_to_MP_to_LP_Letdown_Flow_In",
+      "BLR_1_HPS_Gen",
+      "BLR_1_HPS_Gen_warmup",
+      "BLR_2_HPS_Gen",
+      "BLR_2_HPS_Gen_warmup",
+      "BLR_3_HPS_Gen",
+      "BLR_3_HPS_Gen_warmup",
+      "BLR_4_HPS_Gen",
+      "BLR_4_HPS_Gen_warmup",
+      "BLR_5_HPS_Gen",
+      "BLR_5_HPS_Gen_warmup",
+      "CW_Turbine_A_Steam",
+      "CW_Turbine_A_Steam_Imbalance",
+      "CW_Turbine_A_Steam_Regression",
+      "CW_Turbine_A_Steam_raw",
+      "CW_Turbine_A_Steam_warmup",
+      "CW_Turbine_B_Steam",
+      "CW_Turbine_B_Steam_Imbalance",
+      "CW_Turbine_B_Steam_Regression",
+      "CW_Turbine_B_Steam_raw",
+      "CW_Turbine_B_Steam_warmup",
+      "CW_Turbine_G_Steam",
+      "CW_Turbine_G_Steam_Imbalance",
+      "CW_Turbine_G_Steam_Regression",
+      "CW_Turbine_G_Steam_raw",
+      "CW_Turbine_G_Steam_warmup",
+      "DMW_Drives_Running",
+      "DMW_Imbalance",
+      "DMW_Turbine_A_Steam",
+      "DMW_Turbine_A_Steam_Imbalance",
+      "DMW_Turbine_A_Steam_Regression",
+      "DMW_Turbine_A_Steam_cons",
+      "DMW_Turbine_A_Steam_warmup",
+      "DMW_Turbine_C_Steam",
+      "DMW_Turbine_C_Steam_Imbalance",
+      "DMW_Turbine_C_Steam_Regression",
+      "DMW_Turbine_C_Steam_cons",
+      "DMW_Turbine_C_Steam_warmup",
+      "DSP_BFW_TO_EG3",
+      "DSP_BFW_TO_ETH",
+      "Deaerator_LPS",
+      "FD_Fan_BLR_1_Steam",
+      "FD_Fan_BLR_1_Steam_reg",
+      "FD_Fan_BLR_1_Steam_warmup",
+      "FD_Fan_BLR_2_Steam",
+      "FD_Fan_BLR_2_Steam_reg",
+      "FD_Fan_BLR_2_Steam_warmup",
+      "FD_Fan_BLR_3_Steam",
+      "FD_Fan_BLR_3_Steam_reg",
+      "FD_Fan_BLR_3_Steam_warmup",
+      "FD_Fan_BLR_4_Steam",
+      "FD_Fan_BLR_4_Steam_reg",
+      "FD_Fan_BLR_4_Steam_warmup",
+      "FD_Fan_BLR_5_Steam",
+      "FD_Fan_BLR_5_Steam_reg",
+      "FD_Fan_BLR_5_Steam_warmup",
+      "Fuel_BLR_1",
+      "Fuel_BLR_2",
+      "Fuel_BLR_3",
+      "Fuel_BLR_4",
+      "Fuel_BLR_5",
+      "LPS_from_Drives",
+      "MP_to_LP_Letdown_LPS_Flow_Out_PV013A_UO",
+      "MP_to_LP_Letdown_LPS_Flow_Out_PV013B_UO",
+      "MP_to_LP_Letdown_LPS_Flow_Out_PV31_UO",
+      "MP_to_LP_Letdown_LPS_Flow_Out_PV32_UO",
+      "MP_to_LP_Letdown_MPS_Flow_In_PV013A_UO",
+      "MP_to_LP_Letdown_MPS_Flow_In_PV013B_UO",
+      "MP_to_LP_Letdown_MPS_Flow_In_PV31_UO",
+      "MP_to_LP_Letdown_MPS_Flow_In_PV32_UO",
+      "Spec_En_Cons_BLR_1",
+      "Spec_En_Cons_BLR_1_dev",
+      "Spec_En_Cons_BLR_2",
+      "Spec_En_Cons_BLR_2_dev",
+      "Spec_En_Cons_BLR_3",
+      "Spec_En_Cons_BLR_3_dev",
+      "Spec_En_Cons_BLR_4",
+      "Spec_En_Cons_BLR_4_dev",
+      "Spec_En_Cons_BLR_5",
+      "Spec_En_Cons_BLR_5_dev",
+      "Total_BFW_Consumption",
+      "Total_BLR_HPS_Generation",
+      "Total_DMW_Demand",
+      "VHP_BFW_B_Turb_Steam",
+      "VHP_BFW_B_Turb_Steam_warmup",
+      "VHP_BFW_C_Turb_Steam",
+      "VHP_BFW_C_Turb_Steam_warmup",
+      "Whatif_running",
+      "act_Air_Compressor_Turbine_A_Status",
+      "act_Air_Compressor_Turbine_D_Status",
+      "act_DMW_Imbalance",
+      "act_DMW_Makeup"
+    ],
+    "non_pi_leaves": [
+      "Air_Compressor_Turbine_A_Status",
+      "Air_Compressor_Turbine_D_Status",
+      "Air_compressor_A_Discharge_flow",
+      "Air_compressor_D_Discharge_flow",
+      "BFW_A_Motor_Status",
+      "BFW_B_Turb_Status",
+      "BFW_C_Turb_Status",
+      "BFW_D_Motor_Status",
+      "BFW_E_Turb_Status",
+      "BFW_F_Motor_Status",
+      "BLR_1_Status",
+      "BLR_2_Status",
+      "BLR_3_Status",
+      "BLR_4_Status",
+      "BLR_5_Status",
+      "CW_Turbine_A_Status",
+      "CW_Turbine_B_Status",
+      "CW_Turbine_G_Status",
+      "DMW_Pump_Motor_B_Status",
+      "DMW_Turbine_A_Status",
+      "DMW_Turbine_C_Status",
+      "FDF_A_Motor_Status",
+      "FDF_B_Motor_Status",
+      "VHP_BFW_B_Turb_Status",
+      "VHP_BFW_C_Turb_Status"
+    ]
+  },
+  "MP_Steam_Generation": {
+    "role": "decision_variable",
+    "formula": "[HP_to_MP_Letdown_MPS_Flow_Out_PV0007A_UO]+[HP_to_MP_Letdown_MPS_Flow_Out_PV0007B_UO]",
+    "leaf_pi_inputs": [],
+    "intermediate_tags": [],
+    "non_pi_leaves": [
+      "HP_to_MP_Letdown_MPS_Flow_Out_PV0007A_UO",
+      "HP_to_MP_Letdown_MPS_Flow_Out_PV0007B_UO"
+    ]
+  },
+  "Spec_En_Cons_BLR_1": {
+    "role": "decision_variable",
+    "formula": "((8E-06*[BLR_1_HPS_Gen]**2 - 0.0017 *[BLR_1_HPS_Gen] +3.0167)*(1-[Spec_En_Cons_BLR_1_dev]))*[BLR_1_Status]+(1-[BLR_1_Status])*5",
+    "leaf_pi_inputs": [
+      "LHV",
+      "Spec_En_Cons_BLR_1_Opt"
+    ],
+    "intermediate_tags": [
+      "BLR_1_HPS_Gen",
+      "BLR_1_HPS_Gen_warmup",
+      "Fuel_BLR_1",
+      "Spec_En_Cons_BLR_1_dev"
+    ],
+    "non_pi_leaves": [
+      "BLR_1_Status"
+    ]
+  },
+  "Spec_En_Cons_BLR_2": {
+    "role": "decision_variable",
+    "formula": "((8E-06*[BLR_2_HPS_Gen]**2 - 0.0017 *[BLR_2_HPS_Gen] +3.0167)*(1-[Spec_En_Cons_BLR_2_dev]))*[BLR_2_Status]+(1-[BLR_2_Status])*5",
+    "leaf_pi_inputs": [
+      "LHV",
+      "Spec_En_Cons_BLR_2_Opt"
+    ],
+    "intermediate_tags": [
+      "BLR_2_HPS_Gen",
+      "BLR_2_HPS_Gen_warmup",
+      "Fuel_BLR_2",
+      "Spec_En_Cons_BLR_2_dev"
+    ],
+    "non_pi_leaves": [
+      "BLR_2_Status"
+    ]
+  },
+  "Spec_En_Cons_BLR_3": {
+    "role": "decision_variable",
+    "formula": "((8E-06*[BLR_3_HPS_Gen]**2 - 0.0017 *[BLR_3_HPS_Gen] +3.0167)*(1-[Spec_En_Cons_BLR_3_dev]))*[BLR_3_Status]+(1-[BLR_3_Status])*5",
+    "leaf_pi_inputs": [
+      "LHV",
+      "Spec_En_Cons_BLR_3_Opt"
+    ],
+    "intermediate_tags": [
+      "BLR_3_HPS_Gen",
+      "BLR_3_HPS_Gen_warmup",
+      "Fuel_BLR_3",
+      "Spec_En_Cons_BLR_3_dev"
+    ],
+    "non_pi_leaves": [
+      "BLR_3_Status"
+    ]
+  },
+  "Spec_En_Cons_BLR_4": {
+    "role": "decision_variable",
+    "formula": "((8E-06*[BLR_4_HPS_Gen]**2 - 0.0017 *[BLR_4_HPS_Gen] +3.0167)*(1-[Spec_En_Cons_BLR_4_dev]))*[BLR_4_Status]+(1-[BLR_4_Status])*5",
+    "leaf_pi_inputs": [
+      "LHV",
+      "Spec_En_Cons_BLR_4_Opt"
+    ],
+    "intermediate_tags": [
+      "BLR_4_HPS_Gen",
+      "BLR_4_HPS_Gen_warmup",
+      "Fuel_BLR_4",
+      "Spec_En_Cons_BLR_4_dev"
+    ],
+    "non_pi_leaves": [
+      "BLR_4_Status"
+    ]
+  },
+  "Spec_En_Cons_BLR_5": {
+    "role": "decision_variable",
+    "formula": "((8E-06*[BLR_5_HPS_Gen]**2 - 0.0017 *[BLR_5_HPS_Gen] +3.0167)*(1-[Spec_En_Cons_BLR_5_dev]))*[BLR_5_Status]+(1-[BLR_5_Status])*5",
+    "leaf_pi_inputs": [
+      "LHV",
+      "Spec_En_Cons_BLR_5_Opt"
+    ],
+    "intermediate_tags": [
+      "BLR_5_HPS_Gen",
+      "BLR_5_HPS_Gen_warmup",
+      "Fuel_BLR_5",
+      "Spec_En_Cons_BLR_5_dev"
+    ],
+    "non_pi_leaves": [
+      "BLR_5_Status"
+    ]
+  },
+  "Steam_Generation_from_Boilers": {
+    "role": "decision_variable",
+    "formula": null,
+    "leaf_pi_inputs": [
+      "Steam_Generation_from_Boilers"
+    ],
+    "intermediate_tags": [],
+    "non_pi_leaves": []
+  },
+  "Total_BFW_Consumption": {
+    "role": "decision_variable",
+    "formula": "[VHP_BFW_FROM_U_O]+[VHP_DESPHTR_BFW_FROM_U_O]+[BFW_to_EOEG_1] + [BFW_to_EOEG_2] +[BFW_to_EOEG_3] + [BFW_TO_LAO] + [DSP_BFW_TO_ETH] +[DSP_BFW_TO_EG1] +[DSP_BFW_TO_EG2] +[DSP_BFW_TO_EG3] +[DSP_BFW_TO_CAUSTIC_DILUTION] + ([Total_BLR_HPS_Generation]/.99)+([Deaerator_LPS]*0.02)",
+    "leaf_pi_inputs": [
+      "BFW_TO_LAO",
+      "BFW_to_EOEG_1",
+      "BFW_to_EOEG_2",
+      "BFW_to_EOEG_3",
+      "DSP_BFW_TO_CAUSTIC_DILUTION",
+      "DSP_BFW_TO_EG1",
+      "DSP_BFW_TO_EG2",
+      "DSP_BFW_TO_EG3_raw",
+      "DSP_BFW_TO_ETH_raw",
+      "EOEG3_Plant_Status",
+      "ETH_Plant_Status",
+      "LHV",
+      "Spec_En_Cons_BLR_1_Opt",
+      "Spec_En_Cons_BLR_2_Opt",
+      "Spec_En_Cons_BLR_3_Opt",
+      "Spec_En_Cons_BLR_4_Opt",
+      "Spec_En_Cons_BLR_5_Opt",
+      "VHP_BFW_FROM_U_O",
+      "VHP_DESPHTR_BFW_FROM_U_O"
+    ],
+    "intermediate_tags": [
+      "BLR_1_HPS_Gen",
+      "BLR_1_HPS_Gen_warmup",
+      "BLR_2_HPS_Gen",
+      "BLR_2_HPS_Gen_warmup",
+      "BLR_3_HPS_Gen",
+      "BLR_3_HPS_Gen_warmup",
+      "BLR_4_HPS_Gen",
+      "BLR_4_HPS_Gen_warmup",
+      "BLR_5_HPS_Gen",
+      "BLR_5_HPS_Gen_warmup",
+      "DSP_BFW_TO_EG3",
+      "DSP_BFW_TO_ETH",
+      "Deaerator_LPS",
+      "Fuel_BLR_1",
+      "Fuel_BLR_2",
+      "Fuel_BLR_3",
+      "Fuel_BLR_4",
+      "Fuel_BLR_5",
+      "Spec_En_Cons_BLR_1",
+      "Spec_En_Cons_BLR_1_dev",
+      "Spec_En_Cons_BLR_2",
+      "Spec_En_Cons_BLR_2_dev",
+      "Spec_En_Cons_BLR_3",
+      "Spec_En_Cons_BLR_3_dev",
+      "Spec_En_Cons_BLR_4",
+      "Spec_En_Cons_BLR_4_dev",
+      "Spec_En_Cons_BLR_5",
+      "Spec_En_Cons_BLR_5_dev",
+      "Total_BLR_HPS_Generation",
+      "Whatif_running"
+    ],
+    "non_pi_leaves": [
+      "BLR_1_Status",
+      "BLR_2_Status",
+      "BLR_3_Status",
+      "BLR_4_Status",
+      "BLR_5_Status"
+    ]
+  },
+  "Total_BFW_Generated": {
+    "role": "decision_variable",
+    "formula": null,
+    "leaf_pi_inputs": [],
+    "intermediate_tags": [],
+    "non_pi_leaves": [
+      "Total_BFW_Generated"
+    ]
+  },
+  "Total_BLR_HPS_Generation": {
+    "role": "decision_variable",
+    "formula": "[BLR_1_HPS_Gen]+[BLR_2_HPS_Gen]+[BLR_3_HPS_Gen]+[BLR_4_HPS_Gen]+[BLR_5_HPS_Gen]",
+    "leaf_pi_inputs": [
+      "LHV",
+      "Spec_En_Cons_BLR_1_Opt",
+      "Spec_En_Cons_BLR_2_Opt",
+      "Spec_En_Cons_BLR_3_Opt",
+      "Spec_En_Cons_BLR_4_Opt",
+      "Spec_En_Cons_BLR_5_Opt"
+    ],
+    "intermediate_tags": [
+      "BLR_1_HPS_Gen",
+      "BLR_1_HPS_Gen_warmup",
+      "BLR_2_HPS_Gen",
+      "BLR_2_HPS_Gen_warmup",
+      "BLR_3_HPS_Gen",
+      "BLR_3_HPS_Gen_warmup",
+      "BLR_4_HPS_Gen",
+      "BLR_4_HPS_Gen_warmup",
+      "BLR_5_HPS_Gen",
+      "BLR_5_HPS_Gen_warmup",
+      "Fuel_BLR_1",
+      "Fuel_BLR_2",
+      "Fuel_BLR_3",
+      "Fuel_BLR_4",
+      "Fuel_BLR_5",
+      "Spec_En_Cons_BLR_1",
+      "Spec_En_Cons_BLR_1_dev",
+      "Spec_En_Cons_BLR_2",
+      "Spec_En_Cons_BLR_2_dev",
+      "Spec_En_Cons_BLR_3",
+      "Spec_En_Cons_BLR_3_dev",
+      "Spec_En_Cons_BLR_4",
+      "Spec_En_Cons_BLR_4_dev",
+      "Spec_En_Cons_BLR_5",
+      "Spec_En_Cons_BLR_5_dev"
+    ],
+    "non_pi_leaves": [
+      "BLR_1_Status",
+      "BLR_2_Status",
+      "BLR_3_Status",
+      "BLR_4_Status",
+      "BLR_5_Status"
+    ]
+  },
+  "Total_Boilers_Running": {
+    "role": "decision_variable",
+    "formula": "[BLR_1_Status]+[BLR_2_Status]+[BLR_3_Status]+[BLR_4_Status]+[BLR_5_Status]",
+    "leaf_pi_inputs": [],
+    "intermediate_tags": [],
+    "non_pi_leaves": [
+      "BLR_1_Status",
+      "BLR_2_Status",
+      "BLR_3_Status",
+      "BLR_4_Status",
+      "BLR_5_Status"
+    ]
+  },
+  "Total_Fuel_for_Boilers": {
+    "role": "decision_variable",
+    "formula": "[Fuel_BLR_1]+[Fuel_BLR_2]+[Fuel_BLR_3]+[Fuel_BLR_4]+[Fuel_BLR_5]",
+    "leaf_pi_inputs": [],
+    "intermediate_tags": [
+      "Fuel_BLR_1",
+      "Fuel_BLR_2",
+      "Fuel_BLR_3",
+      "Fuel_BLR_4",
+      "Fuel_BLR_5"
+    ],
+    "non_pi_leaves": [
+      "BLR_1_Status",
+      "BLR_2_Status",
+      "BLR_3_Status",
+      "BLR_4_Status",
+      "BLR_5_Status"
+    ]
+  },
+  "VHP_BFW_A_Motor_Power": {
+    "role": "decision_variable",
+    "formula": "[VHP_BFW_A_Motor_Status]*([VHP_BFW_A_Motor_Power_cons])",
+    "leaf_pi_inputs": [
+      "VHP_Flow_Demand"
+    ],
+    "intermediate_tags": [
+      "VHP_BFW_A_Motor_Power_Regression",
+      "VHP_BFW_A_Motor_Power_cons",
+      "VHP_BFW_Drives_Running"
+    ],
+    "non_pi_leaves": [
+      "VHP_BFW_A_Motor_Status",
+      "VHP_BFW_B_Turb_Status",
+      "VHP_BFW_C_Turb_Status"
+    ]
+  },
+  "VHP_BFW_A_Motor_Status": {
+    "role": "decision_variable",
+    "formula": null,
+    "leaf_pi_inputs": [],
+    "intermediate_tags": [],
+    "non_pi_leaves": [
+      "VHP_BFW_A_Motor_Status"
+    ]
+  },
+  "VHP_BFW_B_Turb_Status": {
+    "role": "decision_variable",
+    "formula": null,
+    "leaf_pi_inputs": [],
+    "intermediate_tags": [],
+    "non_pi_leaves": [
+      "VHP_BFW_B_Turb_Status"
+    ]
+  },
+  "VHP_BFW_B_Turb_Steam": {
+    "role": "decision_variable",
+    "formula": "[VHP_BFW_B_Turb_Status]*([VHP_BFW_B_Turb_Steam_cons]) + (1-[VHP_BFW_B_Turb_Status])*[VHP_BFW_B_Turb_Steam_warmup]",
+    "leaf_pi_inputs": [
+      "VHP_BFW_B_Turb_Steam_cons",
+      "VHP_BFW_B_Turb_Steam_raw"
+    ],
+    "intermediate_tags": [
+      "VHP_BFW_B_Turb_Steam_warmup"
+    ],
+    "non_pi_leaves": [
+      "VHP_BFW_B_Turb_Status"
+    ]
+  },
+  "VHP_BFW_C_Turb_Status": {
+    "role": "decision_variable",
+    "formula": null,
+    "leaf_pi_inputs": [],
+    "intermediate_tags": [],
+    "non_pi_leaves": [
+      "VHP_BFW_C_Turb_Status"
+    ]
+  },
+  "VHP_BFW_C_Turb_Steam": {
+    "role": "decision_variable",
+    "formula": "[VHP_BFW_C_Turb_Status]*([VHP_BFW_C_Turb_Steam_cons]) + (1-[VHP_BFW_C_Turb_Status])*[VHP_BFW_C_Turb_Steam_warmup]",
+    "leaf_pi_inputs": [
+      "VHP_BFW_C_Turb_Steam_cons",
+      "VHP_BFW_C_Turb_Steam_raw"
+    ],
+    "intermediate_tags": [
+      "VHP_BFW_C_Turb_Steam_warmup"
+    ],
+    "non_pi_leaves": [
+      "VHP_BFW_C_Turb_Status"
+    ]
+  },
+  "VHP_BFW_Drives_Running": {
+    "role": "decision_variable",
+    "formula": "[VHP_BFW_B_Turb_Status]+[VHP_BFW_C_Turb_Status]+[VHP_BFW_A_Motor_Status]",
+    "leaf_pi_inputs": [],
+    "intermediate_tags": [],
+    "non_pi_leaves": [
+      "VHP_BFW_A_Motor_Status",
+      "VHP_BFW_B_Turb_Status",
+      "VHP_BFW_C_Turb_Status"
+    ]
+  },
+  "VHP_BFW_Turbines_Running": {
+    "role": "decision_variable",
+    "formula": "[VHP_BFW_B_Turb_Status]+[VHP_BFW_C_Turb_Status]",
+    "leaf_pi_inputs": [],
+    "intermediate_tags": [],
+    "non_pi_leaves": [
+      "VHP_BFW_B_Turb_Status",
+      "VHP_BFW_C_Turb_Status"
+    ]
+  },
+  "VHP_Steam_Pressure": {
+    "role": "decision_variable",
+    "formula": null,
+    "leaf_pi_inputs": [
+      "VHP_Steam_Pressure"
+    ],
+    "intermediate_tags": [],
+    "non_pi_leaves": []
+  }
+}

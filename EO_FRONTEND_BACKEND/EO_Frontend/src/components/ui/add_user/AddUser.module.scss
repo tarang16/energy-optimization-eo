@@ -1,0 +1,51 @@
+@use 'config/scss/variables' as *;
+
+.searchBarHeight {
+  height: 3.5vmin;
+}
+
+.detailsMainContainer {
+  margin-top: 0.6vmin;
+
+  .detailsContainer {
+    padding: 0.8vmin 0.8vmin;
+    background-color: transparent;
+    border: 1px solid $primary_gray_3;
+    border-radius: 0.3vmin;
+    margin-bottom: 0.6vmin;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    :global(.form-check) {
+      display: flex;
+      align-items: center;
+      gap: 1.5vmin;
+      margin-bottom: 0;
+
+      input {
+        margin-bottom: 4px;
+      }
+    }
+
+    :global(.form-check-label) {
+      width: 100%;
+    }
+
+    :global(.form-check.form-check-reverse) {
+      display: flex !important;
+      justify-content: space-between !important;
+      align-items: center !important;
+      margin-bottom: 0 !important;
+
+      :global(input) {
+        order: 2;
+      }
+    }
+
+    .labelEmail {
+      color: $primary_gray_2;
+    }
+  }
+}

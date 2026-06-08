@@ -1,0 +1,49 @@
+@use 'config/scss/variables' as *;
+
+.header_text {
+  font-size: 1.5vmin;
+  font-family: 'sabic_text_regular', serif;
+}
+
+.current_text_line {
+  position: relative;
+
+  &::before {
+    content: ' ';
+    position: absolute;
+    height: 2px;
+    width: 30px;
+    top: 50%;
+    left: -37px;
+    background-color: #009fdf;
+    transform: translateY(-50%);
+  }
+}
+
+.forecasted_text_line {
+  position: relative;
+
+  &::before {
+    content: ' ';
+    position: absolute;
+    height: 2px;
+    width: 30px;
+    top: 50%;
+    left: -37px;
+    background-color: #c6c8ca;
+    transform: translateY(-50%);
+  }
+}
+
+.set_h6s_sideways_categ {
+  display: flex;
+  flex-direction: row;
+}
+
+.line_color_current {
+  background-color: #009fdf;
+}
+
+.line_color_forecast {
+  background-color: #c6c8ca;
+}

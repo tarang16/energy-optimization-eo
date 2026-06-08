@@ -1,0 +1,70 @@
+.valveOn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.valveOn .valve {
+  border-radius: 10px;
+  height: 55px;
+  overflow: hidden;
+  position: relative;
+  width: 75px;
+}
+
+.valveOn .union {
+  height: 40px;
+  left: 24px;
+  position: absolute;
+  top: 8px;
+  width: 26px;
+}
+
+.valveOn .key {
+  min-height: 2vmin;
+  width: calc(100% - 55px);
+}
+
+.valveOn .textWrapper {
+  left: 0;
+  letter-spacing: 0;
+  line-height: normal;
+  text-align: center;
+  top: -1px;
+}
+
+.valveOff {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.valveOff .valve {
+  border-radius: 10px;
+  height: 55px;
+  overflow: hidden;
+  position: relative;
+  min-width: 75px;
+  max-width: 75px;
+}
+
+.valveOff .union {
+  height: 40px;
+  left: 24px;
+  position: absolute;
+  top: 8px;
+  width: 26px;
+}
+
+.valveOff .key {
+  min-height: 2vmin;
+  width: calc(100% - 55px);
+}
+
+.valveOff .textWrapper {
+  left: 0;
+  letter-spacing: 0;
+  line-height: normal;
+  text-align: center;
+  top: -1px;
+}

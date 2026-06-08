@@ -1,0 +1,1794 @@
+{
+  "timestamp": "2026-03-31 00:00:00",
+  "status_tags": {
+    "Air_Compressor_Motor_B_Status": {
+      "value": 1.0,
+      "is_on": true
+    },
+    "Air_Compressor_Motor_C_Status": {
+      "value": 0.0,
+      "is_on": false
+    },
+    "Air_Compressor_Turbine_A_Status": {
+      "value": 0.0,
+      "is_on": false
+    },
+    "Air_Compressor_Turbine_D_Status": {
+      "value": 0.0,
+      "is_on": false
+    },
+    "Arrazi_Plant_Status": {
+      "value": 0.0,
+      "is_on": false
+    },
+    "BFW_A_Motor_Status": {
+      "value": 0.0,
+      "is_on": false
+    },
+    "BFW_B_Turb_Status": {
+      "value": 1.0,
+      "is_on": true
+    },
+    "BFW_C_Turb_Status": {
+      "value": 1.0,
+      "is_on": true
+    },
+    "BFW_D_Motor_Status": {
+      "value": 0.0,
+      "is_on": false
+    },
+    "BFW_E_Turb_Status": {
+      "value": 1.0,
+      "is_on": true
+    },
+    "BFW_F_Motor_Status": {
+      "value": 0.0,
+      "is_on": false
+    },
+    "BLR_1_Status": {
+      "value": 1.0,
+      "is_on": true
+    },
+    "BLR_2_Status": {
+      "value": 1.0,
+      "is_on": true
+    },
+    "BLR_3_Status": {
+      "value": 1.0,
+      "is_on": true
+    },
+    "BLR_4_Status": {
+      "value": 1.0,
+      "is_on": true
+    },
+    "BLR_5_Status": {
+      "value": 1.0,
+      "is_on": true
+    },
+    "Boiler_A_Status": {
+      "value": 1.0,
+      "is_on": true
+    },
+    "Boiler_B_Status": {
+      "value": 1.0,
+      "is_on": true
+    },
+    "Boiler_C_Status": {
+      "value": 1.0,
+      "is_on": true
+    },
+    "Boiler_D_Status": {
+      "value": 1.0,
+      "is_on": true
+    },
+    "Boiler_E_Status": {
+      "value": 1.0,
+      "is_on": true
+    },
+    "CO2_Plant_Status": {
+      "value": 1.0,
+      "is_on": true
+    },
+    "CW_Motor_7814A_Status": {
+      "value": 0.0,
+      "is_on": false
+    },
+    "CW_Motor_7814B_Status": {
+      "value": 1.0,
+      "is_on": true
+    },
+    "CW_Motor_7814C_Status": {
+      "value": 1.0,
+      "is_on": true
+    },
+    "CW_Motor_C_Status": {
+      "value": 0.0,
+      "is_on": false
+    },
+    "CW_Motor_D_Status": {
+      "value": 0.0,
+      "is_on": false
+    },
+    "CW_Motor_E_Status": {
+      "value": 0.0,
+      "is_on": false
+    },
+    "CW_Motor_F_Status": {
+      "value": 0.0,
+      "is_on": false
+    },
+    "CW_Turbine_A_Status": {
+      "value": 0.0,
+      "is_on": false
+    },
+    "CW_Turbine_B_Status": {
+      "value": 0.0,
+      "is_on": false
+    },
+    "CW_Turbine_G_Status": {
+      "value": 0.0,
+      "is_on": false
+    },
+    "DMW_Pump_Motor_B_Status": {
+      "value": 0.0,
+      "is_on": false
+    },
+    "DMW_Turbine_A_Status": {
+      "value": 1.0,
+      "is_on": true
+    },
+    "DMW_Turbine_C_Status": {
+      "value": 0.0,
+      "is_on": false
+    },
+    "Decoke_status": {
+      "value": 0.0,
+      "is_on": false
+    },
+    "EG1_Regen_status": {
+      "value": 0.0,
+      "is_on": false
+    },
+    "EG1_Stripping_status": {
+      "value": 0.0,
+      "is_on": false
+    },
+    "EG2_Regen_status": {
+      "value": 0.0,
+      "is_on": false
+    },
+    "EG2_Stripping_status": {
+      "value": 0.0,
+      "is_on": false
+    },
+    "EG3_Regen_status": {
+      "value": 1.0,
+      "is_on": true
+    },
+    "EOEG1_Plant_Status": {
+      "value": 0.0,
+      "is_on": false
+    },
+    "EOEG2_Plant_Status": {
+      "value": 0.0,
+      "is_on": false
+    },
+    "EOEG3_Plant_Status": {
+      "value": 1.0,
+      "is_on": true
+    },
+    "ETH_Plant_Status": {
+      "value": 1.0,
+      "is_on": true
+    },
+    "E_1102_Status": {
+      "value": 1.0,
+      "is_on": true
+    },
+    "E_2523_Status": {
+      "value": 0.0,
+      "is_on": false
+    },
+    "E_2531_Status": {
+      "value": 0.0,
+      "is_on": false
+    },
+    "E_2610_Status": {
+      "value": 0.0,
+      "is_on": false
+    },
+    "E_2620_Status": {
+      "value": 0.0,
+      "is_on": false
+    },
+    "E_4523_Status": {
+      "value": 0.0,
+      "is_on": false
+    },
+    "E_4531_Status": {
+      "value": 0.0,
+      "is_on": false
+    },
+    "E_4610_Status": {
+      "value": 0.0,
+      "is_on": false
+    },
+    "E_4620_Status": {
+      "value": 0.0,
+      "is_on": false
+    },
+    "E_6531_Status": {
+      "value": 1.0,
+      "is_on": true
+    },
+    "E_6620_Status": {
+      "value": 1.0,
+      "is_on": true
+    },
+    "FDF_A_Motor_Status": {
+      "value": 0.0,
+      "is_on": false
+    },
+    "FDF_B_Motor_Status": {
+      "value": 0.0,
+      "is_on": false
+    },
+    "Furnace_1_Decoke_Status": {
+      "value": 0.0,
+      "is_on": false
+    },
+    "Furnace_1_Status": {
+      "value": 0.0,
+      "is_on": false
+    },
+    "Furnace_1_Status_PIAF": {
+      "value": 0.0,
+      "is_on": false
+    },
+    "Furnace_2_Decoke_Status": {
+      "value": 0.0,
+      "is_on": false
+    },
+    "Furnace_2_Status": {
+      "value": 1.0,
+      "is_on": true
+    },
+    "Furnace_2_Status_PIAF": {
+      "value": 1.0,
+      "is_on": true
+    },
+    "Furnace_3_Decoke_Status": {
+      "value": 0.0,
+      "is_on": false
+    },
+    "Furnace_3_Status": {
+      "value": 1.0,
+      "is_on": true
+    },
+    "Furnace_3_Status_PIAF": {
+      "value": 1.0,
+      "is_on": true
+    },
+    "Furnace_4_Decoke_Status": {
+      "value": 0.0,
+      "is_on": false
+    },
+    "Furnace_4_Status": {
+      "value": 1.0,
+      "is_on": true
+    },
+    "Furnace_4_Status_PIAF": {
+      "value": 1.0,
+      "is_on": true
+    },
+    "Furnace_5_Decoke_Status": {
+      "value": 0.0,
+      "is_on": false
+    },
+    "Furnace_5_Status": {
+      "value": 1.0,
+      "is_on": true
+    },
+    "Furnace_5_Status_PIAF": {
+      "value": 1.0,
+      "is_on": true
+    },
+    "Furnace_6_Decoke_Status": {
+      "value": 0.0,
+      "is_on": false
+    },
+    "Furnace_6_Status": {
+      "value": 1.0,
+      "is_on": true
+    },
+    "Furnace_6_Status_PIAF": {
+      "value": 1.0,
+      "is_on": true
+    },
+    "Furnace_7_Decoke_Status": {
+      "value": 0.0,
+      "is_on": false
+    },
+    "Furnace_7_Status": {
+      "value": 1.0,
+      "is_on": true
+    },
+    "Furnace_7_Status_PIAF": {
+      "value": 1.0,
+      "is_on": true
+    },
+    "Furnace_8_Decoke_Status": {
+      "value": 0.0,
+      "is_on": false
+    },
+    "Furnace_8_Status": {
+      "value": 1.0,
+      "is_on": true
+    },
+    "Furnace_8_Status_PIAF": {
+      "value": 1.0,
+      "is_on": true
+    },
+    "Furnace_9_Decoke_Status": {
+      "value": 0.0,
+      "is_on": false
+    },
+    "Furnace_9_Status": {
+      "value": 1.0,
+      "is_on": true
+    },
+    "Furnace_9_Status_PIAF": {
+      "value": 1.0,
+      "is_on": true
+    },
+    "KM_2115_Status": {
+      "value": 0.0,
+      "is_on": false
+    },
+    "KM_4115_Status": {
+      "value": 0.0,
+      "is_on": false
+    },
+    "KM_6115_Status": {
+      "value": 1.0,
+      "is_on": true
+    },
+    "KT_1200_Status": {
+      "value": 1.0,
+      "is_on": true
+    },
+    "LAO_Plant_Status": {
+      "value": 1.0,
+      "is_on": true
+    },
+    "PK_5020_status": {
+      "value": 1.0,
+      "is_on": true
+    },
+    "PK_5070_status": {
+      "value": 1.0,
+      "is_on": true
+    },
+    "Regeneration_Gas_Heater_Status": {
+      "value": 0.0,
+      "is_on": false
+    },
+    "Sea_CT_Fan_8028_status": {
+      "value": 0.0,
+      "is_on": false
+    },
+    "Sea_CT_Fan_8029_status": {
+      "value": 0.0,
+      "is_on": false
+    },
+    "Sea_CT_Fan_8030_status": {
+      "value": 0.0,
+      "is_on": false
+    },
+    "Sea_CT_Fan_8031_status": {
+      "value": 0.0,
+      "is_on": false
+    },
+    "Sea_CT_Fan_8032_status": {
+      "value": 0.0,
+      "is_on": false
+    },
+    "Sea_CT_Fan_8033_status": {
+      "value": 0.0,
+      "is_on": false
+    },
+    "Sea_CT_Fan_8034_status": {
+      "value": 0.0,
+      "is_on": false
+    },
+    "Sea_CT_Fan_8035_status": {
+      "value": 0.0,
+      "is_on": false
+    },
+    "Sea_CT_Fan_8036_status": {
+      "value": 0.0,
+      "is_on": false
+    },
+    "Sea_CT_Fan_8037_status": {
+      "value": 0.0,
+      "is_on": false
+    },
+    "Sea_CT_Fan_8038_status": {
+      "value": 0.0,
+      "is_on": false
+    },
+    "Sea_CT_Fan_8039_status": {
+      "value": 0.0,
+      "is_on": false
+    },
+    "Sea_CT_Fan_8040_status": {
+      "value": 1.0,
+      "is_on": true
+    },
+    "Sea_CT_Fan_8041_status": {
+      "value": 1.0,
+      "is_on": true
+    },
+    "Sea_CT_Fan_8409_status": {
+      "value": 1.0,
+      "is_on": true
+    },
+    "Sea_CT_Fan_8410_status": {
+      "value": 0.0,
+      "is_on": false
+    },
+    "Sea_CT_Fan_8411_status": {
+      "value": 0.0,
+      "is_on": false
+    },
+    "Sea_CT_Fan_8412_status": {
+      "value": 0.0,
+      "is_on": false
+    },
+    "Sea_CT_Fan_8413_status": {
+      "value": 0.0,
+      "is_on": false
+    },
+    "Sea_CT_Fan_8414_status": {
+      "value": 0.0,
+      "is_on": false
+    },
+    "Sea_CT_Fan_8602_status": {
+      "value": 0.0,
+      "is_on": false
+    },
+    "Sea_CT_Fan_8604_status": {
+      "value": 0.0,
+      "is_on": false
+    },
+    "Sea_CT_Fan_8606_status": {
+      "value": 1.0,
+      "is_on": true
+    },
+    "Sea_CT_Fan_8608_status": {
+      "value": 1.0,
+      "is_on": true
+    },
+    "Sea_CT_Fan_8610_status": {
+      "value": 1.0,
+      "is_on": true
+    },
+    "Sea_CT_Fan_8612_status": {
+      "value": 1.0,
+      "is_on": true
+    },
+    "Sea_CT_Fan_8626_status": {
+      "value": 0.0,
+      "is_on": false
+    },
+    "Sea_CT_Fan_8627_status": {
+      "value": 0.0,
+      "is_on": false
+    },
+    "Sea_CT_Fan_8628_status": {
+      "value": 0.0,
+      "is_on": false
+    },
+    "Sea_CT_Fan_8629_status": {
+      "value": 0.0,
+      "is_on": false
+    },
+    "Sea_CT_Fan_8630_status": {
+      "value": 0.0,
+      "is_on": false
+    },
+    "Sea_CT_Fan_8631_status": {
+      "value": 0.0,
+      "is_on": false
+    },
+    "Sea_CT_Fan_8632_status": {
+      "value": 0.0,
+      "is_on": false
+    },
+    "Sea_CT_Fan_8633_status": {
+      "value": 0.0,
+      "is_on": false
+    },
+    "Sea_CT_Fan_8634_status": {
+      "value": 0.0,
+      "is_on": false
+    },
+    "Sea_CT_Fan_8635_status": {
+      "value": 0.0,
+      "is_on": false
+    },
+    "UO_Plant_Status": {
+      "value": 1.0,
+      "is_on": true
+    },
+    "VHP_BFW_A_Motor_Status": {
+      "value": 0.0,
+      "is_on": false
+    },
+    "VHP_BFW_B_Turb_Status": {
+      "value": 1.0,
+      "is_on": true
+    },
+    "VHP_BFW_C_Turb_Status": {
+      "value": 1.0,
+      "is_on": true
+    },
+    "V_7101A_Status": {
+      "value": 1.0,
+      "is_on": true
+    },
+    "V_7101B_Status": {
+      "value": 1.0,
+      "is_on": true
+    },
+    "act_Air_Compressor_Motor_B_Status": {
+      "value": 1.0,
+      "is_on": true
+    },
+    "act_Air_Compressor_Motor_C_Status": {
+      "value": 0.0,
+      "is_on": false
+    },
+    "act_Air_Compressor_Turbine_A_Status": {
+      "value": 0.0,
+      "is_on": false
+    },
+    "act_Air_Compressor_Turbine_D_Status": {
+      "value": 0.0,
+      "is_on": false
+    },
+    "plant_status": {
+      "value": 0.0,
+      "is_on": false
+    }
+  },
+  "equipment": [
+    {
+      "element_id": "k_ykcy36",
+      "element_type": "Utility Unit Specific Boiler Burner",
+      "element_path": "United > Fuel Network > Utility Unit [UTI]A > Fuel ConsumersA > Utility Unit Specific BoilerA-specific_boiler_a > Utility Unit Specific Boiler Combustion SystemA > Utility Unit Specific Boiler BurnerA",
+      "status_attributes": {
+        "Flame Status": {
+          "inferred_tag": "Boiler_A_Status",
+          "value": 1.0,
+          "is_on": true
+        },
+        "Pilot Status": {
+          "inferred_tag": "Boiler_A_Status",
+          "value": 1.0,
+          "is_on": true
+        }
+      }
+    },
+    {
+      "element_id": "k_1clqogn",
+      "element_type": "Utility Unit Specific Boiler Soot Blower System",
+      "element_path": "United > Fuel Network > Utility Unit [UTI]A > Fuel ConsumersA > Utility Unit Specific BoilerA-specific_boiler_a > Utility Unit Specific Boiler Soot Blower SystemA",
+      "status_attributes": {
+        "Cycle Status": {
+          "inferred_tag": "Boiler_A_Status",
+          "value": 1.0,
+          "is_on": true
+        }
+      }
+    },
+    {
+      "element_id": "k_1tc26aa",
+      "element_type": "Utility Unit Specific Boiler Burner",
+      "element_path": "United > Fuel Network > Utility Unit [UTI]A > Fuel ConsumersA > Utility Unit Specific BoilerB-specific_boiler_b > Utility Unit Specific Boiler Combustion SystemA > Utility Unit Specific Boiler BurnerA",
+      "status_attributes": {
+        "Flame Status": {
+          "inferred_tag": "Boiler_B_Status",
+          "value": 1.0,
+          "is_on": true
+        },
+        "Pilot Status": {
+          "inferred_tag": "Boiler_B_Status",
+          "value": 1.0,
+          "is_on": true
+        }
+      }
+    },
+    {
+      "element_id": "k_1ah3llj",
+      "element_type": "Utility Unit Specific Boiler Soot Blower System",
+      "element_path": "United > Fuel Network > Utility Unit [UTI]A > Fuel ConsumersA > Utility Unit Specific BoilerB-specific_boiler_b > Utility Unit Specific Boiler Soot Blower SystemA",
+      "status_attributes": {
+        "Cycle Status": {
+          "inferred_tag": "Boiler_B_Status",
+          "value": 1.0,
+          "is_on": true
+        }
+      }
+    },
+    {
+      "element_id": "k_6uh1ua",
+      "element_type": "Utility Unit Specific Boiler Burner",
+      "element_path": "United > Fuel Network > Utility Unit [UTI]A > Fuel ConsumersA > Utility Unit Specific BoilerC-specific_boiler_c > Utility Unit Specific Boiler Combustion SystemA > Utility Unit Specific Boiler BurnerA",
+      "status_attributes": {
+        "Flame Status": {
+          "inferred_tag": "Boiler_C_Status",
+          "value": 1.0,
+          "is_on": true
+        },
+        "Pilot Status": {
+          "inferred_tag": "Boiler_C_Status",
+          "value": 1.0,
+          "is_on": true
+        }
+      }
+    },
+    {
+      "element_id": "k_1su9mqf",
+      "element_type": "Utility Unit Specific Boiler Soot Blower System",
+      "element_path": "United > Fuel Network > Utility Unit [UTI]A > Fuel ConsumersA > Utility Unit Specific BoilerC-specific_boiler_c > Utility Unit Specific Boiler Soot Blower SystemA",
+      "status_attributes": {
+        "Cycle Status": {
+          "inferred_tag": "Boiler_C_Status",
+          "value": 1.0,
+          "is_on": true
+        }
+      }
+    },
+    {
+      "element_id": "k_wop07m",
+      "element_type": "Utility Unit Specific Boiler Burner",
+      "element_path": "United > Fuel Network > Utility Unit [UTI]A > Fuel ConsumersA > Utility Unit Specific BoilerD-specific_boiler_d > Utility Unit Specific Boiler Combustion SystemA > Utility Unit Specific Boiler BurnerA",
+      "status_attributes": {
+        "Flame Status": {
+          "inferred_tag": "Boiler_D_Status",
+          "value": 1.0,
+          "is_on": true
+        },
+        "Pilot Status": {
+          "inferred_tag": "Boiler_D_Status",
+          "value": 1.0,
+          "is_on": true
+        }
+      }
+    },
+    {
+      "element_id": "k_11ufjfb",
+      "element_type": "Utility Unit Specific Boiler Soot Blower System",
+      "element_path": "United > Fuel Network > Utility Unit [UTI]A > Fuel ConsumersA > Utility Unit Specific BoilerD-specific_boiler_d > Utility Unit Specific Boiler Soot Blower SystemA",
+      "status_attributes": {
+        "Cycle Status": {
+          "inferred_tag": "Boiler_D_Status",
+          "value": 1.0,
+          "is_on": true
+        }
+      }
+    },
+    {
+      "element_id": "k_1mifhxu",
+      "element_type": "Utility Unit Specific Boiler Burner",
+      "element_path": "United > Fuel Network > Utility Unit [UTI]A > Fuel ConsumersA > Utility Unit Specific BoilerE-specific_boiler_e > Utility Unit Specific Boiler Combustion SystemA > Utility Unit Specific Boiler BurnerA",
+      "status_attributes": {
+        "Flame Status": {
+          "inferred_tag": "Boiler_E_Status",
+          "value": 1.0,
+          "is_on": true
+        },
+        "Pilot Status": {
+          "inferred_tag": "Boiler_E_Status",
+          "value": 1.0,
+          "is_on": true
+        }
+      }
+    },
+    {
+      "element_id": "k_54fbyv",
+      "element_type": "Utility Unit Specific Boiler Soot Blower System",
+      "element_path": "United > Fuel Network > Utility Unit [UTI]A > Fuel ConsumersA > Utility Unit Specific BoilerE-specific_boiler_e > Utility Unit Specific Boiler Soot Blower SystemA",
+      "status_attributes": {
+        "Cycle Status": {
+          "inferred_tag": "Boiler_E_Status",
+          "value": 1.0,
+          "is_on": true
+        }
+      }
+    },
+    {
+      "element_id": "k_1q38va7",
+      "element_type": "UB HP-2 Fuel Fired Boiler Burner",
+      "element_path": "United > Steam Network > Utility Block [UB]A > Steam Generators & TurbinesA > UB HP-2 Fuel Fired BoilerA-fuel fired boiler a > UB HP-2 Fuel Fired Boiler Combustion SystemA > UB HP-2 Fuel Fired Boiler BurnerA",
+      "status_attributes": {
+        "Flame Status": {
+          "inferred_tag": "BLR_1_Status",
+          "value": 1.0,
+          "is_on": true
+        },
+        "Pilot Status": {
+          "inferred_tag": "BLR_1_Status",
+          "value": 1.0,
+          "is_on": true
+        }
+      }
+    },
+    {
+      "element_id": "k_1o0m2ay",
+      "element_type": "UB HP-2 Fuel Fired Boiler Soot Blower System",
+      "element_path": "United > Steam Network > Utility Block [UB]A > Steam Generators & TurbinesA > UB HP-2 Fuel Fired BoilerA-fuel fired boiler a > UB HP-2 Fuel Fired Boiler Soot Blower SystemA",
+      "status_attributes": {
+        "Cycle Status": {
+          "inferred_tag": "BLR_1_Status",
+          "value": 1.0,
+          "is_on": true
+        }
+      }
+    },
+    {
+      "element_id": "k_1ohvsv3",
+      "element_type": "UB HP-2 Fuel Fired Boiler Burner",
+      "element_path": "United > Steam Network > Utility Block [UB]A > Steam Generators & TurbinesA > UB HP-2 Fuel Fired BoilerB-fuel fired boiler b > UB HP-2 Fuel Fired Boiler Combustion SystemA > UB HP-2 Fuel Fired Boiler BurnerA",
+      "status_attributes": {
+        "Flame Status": {
+          "inferred_tag": "BLR_2_Status",
+          "value": 1.0,
+          "is_on": true
+        },
+        "Pilot Status": {
+          "inferred_tag": "BLR_2_Status",
+          "value": 1.0,
+          "is_on": true
+        }
+      }
+    },
+    {
+      "element_id": "k_5jmv8q",
+      "element_type": "UB HP-2 Fuel Fired Boiler Soot Blower System",
+      "element_path": "United > Steam Network > Utility Block [UB]A > Steam Generators & TurbinesA > UB HP-2 Fuel Fired BoilerB-fuel fired boiler b > UB HP-2 Fuel Fired Boiler Soot Blower SystemA",
+      "status_attributes": {
+        "Cycle Status": {
+          "inferred_tag": "BLR_2_Status",
+          "value": 1.0,
+          "is_on": true
+        }
+      }
+    },
+    {
+      "element_id": "k_xjuehr",
+      "element_type": "UB HP-2 Fuel Fired Boiler Burner",
+      "element_path": "United > Steam Network > Utility Block [UB]A > Steam Generators & TurbinesA > UB HP-2 Fuel Fired BoilerC-fuel fired boiler c > UB HP-2 Fuel Fired Boiler Combustion SystemA > UB HP-2 Fuel Fired Boiler BurnerA",
+      "status_attributes": {
+        "Flame Status": {
+          "inferred_tag": "BLR_3_Status",
+          "value": 1.0,
+          "is_on": true
+        },
+        "Pilot Status": {
+          "inferred_tag": "BLR_3_Status",
+          "value": 1.0,
+          "is_on": true
+        }
+      }
+    },
+    {
+      "element_id": "k_sdx8dm",
+      "element_type": "UB HP-2 Fuel Fired Boiler Soot Blower System",
+      "element_path": "United > Steam Network > Utility Block [UB]A > Steam Generators & TurbinesA > UB HP-2 Fuel Fired BoilerC-fuel fired boiler c > UB HP-2 Fuel Fired Boiler Soot Blower SystemA",
+      "status_attributes": {
+        "Cycle Status": {
+          "inferred_tag": "BLR_3_Status",
+          "value": 1.0,
+          "is_on": true
+        }
+      }
+    },
+    {
+      "element_id": "k_1ie4ggv",
+      "element_type": "UB HP-2 Fuel Fired Boiler Burner",
+      "element_path": "United > Steam Network > Utility Block [UB]A > Steam Generators & TurbinesA > UB HP-2 Fuel Fired BoilerD-fuel fired boiler d > UB HP-2 Fuel Fired Boiler Combustion SystemA > UB HP-2 Fuel Fired Boiler BurnerA",
+      "status_attributes": {
+        "Flame Status": {
+          "inferred_tag": "BLR_4_Status",
+          "value": 1.0,
+          "is_on": true
+        },
+        "Pilot Status": {
+          "inferred_tag": "BLR_4_Status",
+          "value": 1.0,
+          "is_on": true
+        }
+      }
+    },
+    {
+      "element_id": "k_664zsa",
+      "element_type": "UB HP-2 Fuel Fired Boiler Soot Blower System",
+      "element_path": "United > Steam Network > Utility Block [UB]A > Steam Generators & TurbinesA > UB HP-2 Fuel Fired BoilerD-fuel fired boiler d > UB HP-2 Fuel Fired Boiler Soot Blower SystemA",
+      "status_attributes": {
+        "Cycle Status": {
+          "inferred_tag": "BLR_4_Status",
+          "value": 1.0,
+          "is_on": true
+        }
+      }
+    },
+    {
+      "element_id": "k_ute63j",
+      "element_type": "UB HP-2 Fuel Fired Boiler Burner",
+      "element_path": "United > Steam Network > Utility Block [UB]A > Steam Generators & TurbinesA > UB HP-2 Fuel Fired BoilerE-fuel fired boiler e > UB HP-2 Fuel Fired Boiler Combustion SystemA > UB HP-2 Fuel Fired Boiler BurnerA",
+      "status_attributes": {
+        "Flame Status": {
+          "inferred_tag": "BLR_5_Status",
+          "value": 1.0,
+          "is_on": true
+        },
+        "Pilot Status": {
+          "inferred_tag": "BLR_5_Status",
+          "value": 1.0,
+          "is_on": true
+        }
+      }
+    },
+    {
+      "element_id": "k_a4f8kq",
+      "element_type": "UB HP-2 Fuel Fired Boiler Soot Blower System",
+      "element_path": "United > Steam Network > Utility Block [UB]A > Steam Generators & TurbinesA > UB HP-2 Fuel Fired BoilerE-fuel fired boiler e > UB HP-2 Fuel Fired Boiler Soot Blower SystemA",
+      "status_attributes": {
+        "Cycle Status": {
+          "inferred_tag": "BLR_5_Status",
+          "value": 1.0,
+          "is_on": true
+        }
+      }
+    },
+    {
+      "element_id": "k_11hxmyj",
+      "element_type": "OLF Furnace Burner",
+      "element_path": "United > Specific Energy Consumers > OLF [OLF]A > Fuel EnergyA > OLF FurnaceA-furnace a > OLF Furnace Combustion SystemA > OLF Furnace BurnerA",
+      "status_attributes": {
+        "Flame Status": {
+          "inferred_tag": "Furnace_1_Status",
+          "value": 0.0,
+          "is_on": false
+        },
+        "Pilot Status": {
+          "inferred_tag": "Furnace_1_Status",
+          "value": 0.0,
+          "is_on": false
+        }
+      }
+    },
+    {
+      "element_id": "k_7py46z",
+      "element_type": "OLF Furnace Burner",
+      "element_path": "United > Specific Energy Consumers > OLF [OLF]A > Fuel EnergyA > OLF FurnaceB-furnace b > OLF Furnace Combustion SystemA > OLF Furnace BurnerA",
+      "status_attributes": {
+        "Flame Status": {
+          "inferred_tag": "Furnace_2_Status",
+          "value": 1.0,
+          "is_on": true
+        },
+        "Pilot Status": {
+          "inferred_tag": "Furnace_2_Status",
+          "value": 1.0,
+          "is_on": true
+        }
+      }
+    },
+    {
+      "element_id": "k_mrz057",
+      "element_type": "OLF Furnace Burner",
+      "element_path": "United > Specific Energy Consumers > OLF [OLF]A > Fuel EnergyA > OLF FurnaceC-furnace c > OLF Furnace Combustion SystemA > OLF Furnace BurnerA",
+      "status_attributes": {
+        "Flame Status": {
+          "inferred_tag": "Furnace_3_Status",
+          "value": 1.0,
+          "is_on": true
+        },
+        "Pilot Status": {
+          "inferred_tag": "Furnace_3_Status",
+          "value": 1.0,
+          "is_on": true
+        }
+      }
+    },
+    {
+      "element_id": "k_rx46gr",
+      "element_type": "OLF Furnace Burner",
+      "element_path": "United > Specific Energy Consumers > OLF [OLF]A > Fuel EnergyA > OLF FurnaceD-furnace d > OLF Furnace Combustion SystemA > OLF Furnace BurnerA",
+      "status_attributes": {
+        "Flame Status": {
+          "inferred_tag": "Furnace_4_Status",
+          "value": 1.0,
+          "is_on": true
+        },
+        "Pilot Status": {
+          "inferred_tag": "Furnace_4_Status",
+          "value": 1.0,
+          "is_on": true
+        }
+      }
+    },
+    {
+      "element_id": "k_qc6t7",
+      "element_type": "OLF Furnace Burner",
+      "element_path": "United > Specific Energy Consumers > OLF [OLF]A > Fuel EnergyA > OLF FurnaceE-furnace e > OLF Furnace Combustion SystemA > OLF Furnace BurnerA",
+      "status_attributes": {
+        "Flame Status": {
+          "inferred_tag": "Furnace_5_Status",
+          "value": 1.0,
+          "is_on": true
+        },
+        "Pilot Status": {
+          "inferred_tag": "Furnace_5_Status",
+          "value": 1.0,
+          "is_on": true
+        }
+      }
+    },
+    {
+      "element_id": "k_15zgq0r",
+      "element_type": "OLF Furnace Burner",
+      "element_path": "United > Specific Energy Consumers > OLF [OLF]A > Fuel EnergyA > OLF FurnaceF-furnace f > OLF Furnace Combustion SystemA > OLF Furnace BurnerA",
+      "status_attributes": {
+        "Flame Status": {
+          "inferred_tag": "Furnace_6_Status",
+          "value": 1.0,
+          "is_on": true
+        },
+        "Pilot Status": {
+          "inferred_tag": "Furnace_6_Status",
+          "value": 1.0,
+          "is_on": true
+        }
+      }
+    },
+    {
+      "element_id": "k_1l1hlyz",
+      "element_type": "OLF Furnace Burner",
+      "element_path": "United > Specific Energy Consumers > OLF [OLF]A > Fuel EnergyA > OLF FurnaceG-furnace g > OLF Furnace Combustion SystemA > OLF Furnace BurnerA",
+      "status_attributes": {
+        "Flame Status": {
+          "inferred_tag": "Furnace_7_Status",
+          "value": 1.0,
+          "is_on": true
+        },
+        "Pilot Status": {
+          "inferred_tag": "Furnace_7_Status",
+          "value": 1.0,
+          "is_on": true
+        }
+      }
+    },
+    {
+      "element_id": "k_evp9rv",
+      "element_type": "OLF Furnace Burner",
+      "element_path": "United > Specific Energy Consumers > OLF [OLF]A > Fuel EnergyA > OLF FurnaceH-furnace h > OLF Furnace Combustion SystemA > OLF Furnace BurnerA",
+      "status_attributes": {
+        "Flame Status": {
+          "inferred_tag": "Furnace_8_Status",
+          "value": 1.0,
+          "is_on": true
+        },
+        "Pilot Status": {
+          "inferred_tag": "Furnace_8_Status",
+          "value": 1.0,
+          "is_on": true
+        }
+      }
+    },
+    {
+      "element_id": "k_1mq1c3f",
+      "element_type": "OLF Furnace Burner",
+      "element_path": "United > Specific Energy Consumers > OLF [OLF]A > Fuel EnergyA > OLF FurnaceI-furnace i > OLF Furnace Combustion SystemA > OLF Furnace BurnerA",
+      "status_attributes": {
+        "Flame Status": {
+          "inferred_tag": "Furnace_9_Status",
+          "value": 1.0,
+          "is_on": true
+        },
+        "Pilot Status": {
+          "inferred_tag": "Furnace_9_Status",
+          "value": 1.0,
+          "is_on": true
+        }
+      }
+    },
+    {
+      "element_id": "k_v4w36k",
+      "element_type": "LAO Feed Preheater Burner",
+      "element_path": "United > Specific Energy Consumers > LAO [LAO]A > Fuel EnergyA > LAO Feed PreheaterA-feed preheater a > LAO Feed Preheater Combustion SystemA > LAO Feed Preheater BurnerA",
+      "status_attributes": {
+        "Flame Status": {
+          "inferred_tag": "LAO_Plant_Status",
+          "value": 1.0,
+          "is_on": true
+        },
+        "Pilot Status": {
+          "inferred_tag": "LAO_Plant_Status",
+          "value": 1.0,
+          "is_on": true
+        }
+      }
+    },
+    {
+      "element_id": "k_1k8uhbs",
+      "element_type": "UTI Boiler Burner",
+      "element_path": "United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerA-boiler a > UTI Boiler Combustion SystemA > UTI Boiler BurnerA",
+      "status_attributes": {
+        "Flame Status": {
+          "inferred_tag": "Boiler_A_Status",
+          "value": 1.0,
+          "is_on": true
+        },
+        "Pilot Status": {
+          "inferred_tag": "Boiler_A_Status",
+          "value": 1.0,
+          "is_on": true
+        }
+      }
+    },
+    {
+      "element_id": "k_2ystyr",
+      "element_type": "UTI Boiler Soot Blower System",
+      "element_path": "United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerA-boiler a > UTI Boiler Soot Blower SystemA",
+      "status_attributes": {
+        "Cycle Status": {
+          "inferred_tag": "Boiler_A_Status",
+          "value": 1.0,
+          "is_on": true
+        }
+      }
+    },
+    {
+      "element_id": "k_1sddr4o",
+      "element_type": "UTI Boiler Burner",
+      "element_path": "United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerB-boiler b > UTI Boiler Combustion SystemA > UTI Boiler BurnerA",
+      "status_attributes": {
+        "Flame Status": {
+          "inferred_tag": "Boiler_B_Status",
+          "value": 1.0,
+          "is_on": true
+        },
+        "Pilot Status": {
+          "inferred_tag": "Boiler_B_Status",
+          "value": 1.0,
+          "is_on": true
+        }
+      }
+    },
+    {
+      "element_id": "k_16gtolv",
+      "element_type": "UTI Boiler Soot Blower System",
+      "element_path": "United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerB-boiler b > UTI Boiler Soot Blower SystemA",
+      "status_attributes": {
+        "Cycle Status": {
+          "inferred_tag": "Boiler_B_Status",
+          "value": 1.0,
+          "is_on": true
+        }
+      }
+    },
+    {
+      "element_id": "k_5dagzc",
+      "element_type": "UTI Boiler Burner",
+      "element_path": "United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerC-boiler c > UTI Boiler Combustion SystemA > UTI Boiler BurnerA",
+      "status_attributes": {
+        "Flame Status": {
+          "inferred_tag": "Boiler_C_Status",
+          "value": 1.0,
+          "is_on": true
+        },
+        "Pilot Status": {
+          "inferred_tag": "Boiler_C_Status",
+          "value": 1.0,
+          "is_on": true
+        }
+      }
+    },
+    {
+      "element_id": "k_105fmr7",
+      "element_type": "UTI Boiler Soot Blower System",
+      "element_path": "United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerC-boiler c > UTI Boiler Soot Blower SystemA",
+      "status_attributes": {
+        "Cycle Status": {
+          "inferred_tag": "Boiler_C_Status",
+          "value": 1.0,
+          "is_on": true
+        }
+      }
+    },
+    {
+      "element_id": "k_f5o63c",
+      "element_type": "UTI Boiler Burner",
+      "element_path": "United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerD-boiler d > UTI Boiler Combustion SystemA > UTI Boiler BurnerA",
+      "status_attributes": {
+        "Flame Status": {
+          "inferred_tag": "Boiler_D_Status",
+          "value": 1.0,
+          "is_on": true
+        },
+        "Pilot Status": {
+          "inferred_tag": "Boiler_D_Status",
+          "value": 1.0,
+          "is_on": true
+        }
+      }
+    },
+    {
+      "element_id": "k_1k0zhn7",
+      "element_type": "UTI Boiler Soot Blower System",
+      "element_path": "United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerD-boiler d > UTI Boiler Soot Blower SystemA",
+      "status_attributes": {
+        "Cycle Status": {
+          "inferred_tag": "Boiler_D_Status",
+          "value": 1.0,
+          "is_on": true
+        }
+      }
+    },
+    {
+      "element_id": "k_gfv2d4",
+      "element_type": "UTI Boiler Burner",
+      "element_path": "United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerE-boiler e > UTI Boiler Combustion SystemA > UTI Boiler BurnerA",
+      "status_attributes": {
+        "Flame Status": {
+          "inferred_tag": "Boiler_E_Status",
+          "value": 1.0,
+          "is_on": true
+        },
+        "Pilot Status": {
+          "inferred_tag": "Boiler_E_Status",
+          "value": 1.0,
+          "is_on": true
+        }
+      }
+    },
+    {
+      "element_id": "k_1o996ib",
+      "element_type": "UTI Boiler Soot Blower System",
+      "element_path": "United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerE-boiler e > UTI Boiler Soot Blower SystemA",
+      "status_attributes": {
+        "Cycle Status": {
+          "inferred_tag": "Boiler_E_Status",
+          "value": 1.0,
+          "is_on": true
+        }
+      }
+    }
+  ],
+  "errors": {
+    "energy_bill_efficiency": "'Total_Energy_Bill_optimum'",
+    "opportunity_energy_bills": "'Total_Benifit_actual'",
+    "fuel_efficiency": "'Total_Fuel_Consumption_optimum'",
+    "opportunity_fuel": "'Total_Fuel_Consumption_actual'",
+    "energy_intensity_index": "'Specific_Energy_Consumption_optimum'",
+    "opportunity_co2": "'Total_Power_Consumption_actual'",
+    "opportunity_power": "'Total_Power_Consumption_actual'",
+    "energy_efficiency": "'Total_Energy_Consumption_optimum'",
+    "Power_Bill_delta": "'Power_Bill_actual'",
+    "Fuel_Bill_delta": "'Fuel_Bill_actual'",
+    "DMW_Bill_delta": "'DMW_Bill_actual'",
+    "Carbon_Neutrality_Index": "'Total_Energy_Consumption_optimum'",
+    "Power_Consumption_delta": "'Total_Power_Consumption_actual'",
+    "Fuel_Consumption_delta": "'Total_Fuel_Consumption_actual'",
+    "Steam_Generation_from_Boilers_Benefit": "'Steam_Generation_from_Boilers_actual'",
+    "HP_Steam_Consumption_Benefit": "'HP_Steam_Consumption_actual'",
+    "MP_Steam_Consumption_Benefit": "'MP_Steam_Consumption_actual'",
+    "LP_Steam_Consumption_Benefit": "'LP_Steam_Consumption_actual'",
+    "NATURAL_GAS_Import_CTM_Benefit": "'NATURAL_GAS_Import_CTM_actual'",
+    "DM_Water_Makeup_Benefit": "'DMW_Makeup_actual'",
+    "BLR_1_HPS_Gen_Benefit": "'BLR_1_HPS_Gen_actual'",
+    "BLR_2_HPS_Gen_Benefit": "'BLR_2_HPS_Gen_actual'",
+    "BLR_3_HPS_Gen_Benefit": "'BLR_3_HPS_Gen_actual'",
+    "BLR_4_HPS_Gen_Benefit": "'BLR_4_HPS_Gen_actual'",
+    "BLR_5_HPS_Gen_Benefit": "'BLR_5_HPS_Gen_actual'",
+    "BFW_A_Motor_Power_Benefit": "'BFW_A_Motor_Power_actual'",
+    "BFW_D_Motor_Power_Benefit": "'BFW_D_Motor_Power_actual'",
+    "BFW_F_Motor_Power_Benefit": "'BFW_F_Motor_Power_actual'",
+    "BFW_B_Turb_Steam_Benefit": "'BFW_B_Turb_Steam_actual'",
+    "BFW_C_Turb_Steam_Benefit": "'BFW_C_Turb_Steam_actual'",
+    "BFW_E_Turb_Steam_Benefit": "'BFW_E_Turb_Steam_actual'",
+    "VHP_BFW_A_Motor_Power_Benefit": "'VHP_BFW_A_Motor_Power_actual'",
+    "VHP_BFW_B_Turb_Steam_Benefit": "'VHP_BFW_B_Turb_Steam_actual'",
+    "VHP_BFW_C_Turb_Steam_Benefit": "'VHP_BFW_C_Turb_Steam_actual'",
+    "Air_Compressor_Turbine_A_Steam_Benefit": "'Air_Compressor_Turbine_A_Steam_actual'",
+    "Air_Compressor_Turbine_D_Steam_Benefit": "'Air_Compressor_Turbine_D_Steam_actual'",
+    "Air_Compressor_Motor_B_Power_Benefit": "'Air_Compressor_Motor_B_Power_actual'",
+    "Air_Compressor_Motor_C_Power_Benefit": "'Air_Compressor_Motor_C_Power_actual'",
+    "DMW_Turbine_A_Steam_Benefit": "'DMW_Turbine_A_Steam_actual'",
+    "DMW_Turbine_C_Steam_Benefit": "'DMW_Turbine_C_Steam_actual'",
+    "DMW_Motor_B_Power_Benefit": "'DMW_Motor_B_Power_actual'",
+    "CW_Turbine_A_Steam_Benefit": "'CW_Turbine_A_Steam_actual'",
+    "CW_Turbine_B_Steam_Benefit": "'CW_Turbine_B_Steam_actual'",
+    "CW_Turbine_G_Steam_Benefit": "'CW_Turbine_G_Steam_actual'",
+    "CW_Motor_C_Power_Benefit": "'CW_Motor_C_Power_actual'",
+    "CW_Motor_D_Power_Benefit": "'CW_Motor_D_Power_actual'",
+    "CW_Motor_E_Power_Benefit": "'CW_Motor_E_Power_actual'",
+    "CW_Motor_F_Power_Benefit": "'CW_Motor_F_Power_actual'",
+    "FD_Fan_BLR_1_Steam_Benefit": "'FD_Fan_BLR_1_Steam_actual'",
+    "FD_Fan_BLR_2_Steam_Benefit": "'FD_Fan_BLR_2_Steam_actual'",
+    "FD_Fan_BLR_3_Steam_Benefit": "'FD_Fan_BLR_3_Steam_actual'",
+    "FD_Fan_BLR_4_Steam_Benefit": "'FD_Fan_BLR_4_Steam_actual'",
+    "FD_Fan_BLR_5_Steam_Benefit": "'FD_Fan_BLR_5_Steam_actual'",
+    "LP_Steam_Dumping_Valve_PC0024A_Steam_flow_out_UO_Benefit": "'LP_Steam_Dumping_Valve_PC0024A_Steam_flow_out_UO_actual'",
+    "HP_Steam_Vent_valve_PV0012_Steam_flow_out_UO_Benefit": "'HP_Steam_Vent_valve_PV0012_Steam_flow_out_UO_actual'",
+    "LP_Steam_Vent_valve_PV0024B_Steam_flow_out_UO_Benefit": "'LP_Steam_Vent_valve_PV0024B_Steam_flow_out_UO_actual'",
+    "HP_Steam_Vent_Valve_PC7032_Steam_Flow_Out_ETH_Benefit": "'HP_Steam_Vent_Valve_PC7032_Steam_Flow_Out_ETH_actual'",
+    "HP_Steam_Vent_Valve_PC7027_Steam_Flow_Out_ETH_Benefit": "'HP_Steam_Vent_Valve_PC7027_Steam_Flow_Out_ETH_actual'",
+    "LP_Steam_Vent_Valve_PC7028_Steam_Flow_Out_ETH_Benefit": "'LP_Steam_Vent_Valve_PC7028_Steam_Flow_Out_ETH_actual'",
+    "seec_gain": "'gain'",
+    "seec_baseline": "'baseline'",
+    "Turbine_exhaust_pressure": "name 'MISSING_NUMERIC' is not defined",
+    "Venting_Dumping_ub": "name 'LP_Steam_Dumping_Valve_PC0024A_Steam_flow_out_UO' is not defined",
+    "EOEG_1_HPS_Demand_benifit": "'EOEG_1_HPS_Demand_actual'",
+    "EOEG_2_HPS_Demand_benifit": "'EOEG_2_HPS_Demand_actual'",
+    "EOEG_3_HPS_Demand_benifit": "'EOEG_3_HPS_Demand_actual'",
+    "ETH_HPS_Demand_benifit": "'ETH_HPS_Demand_actual'",
+    "EOEG_1_LPS_Demand_benifit": "'EOEG_1_LPS_Demand_actual'",
+    "EOEG_2_LPS_Demand_benifit": "'EOEG_2_LPS_Demand_actual'",
+    "EOEG_3_LPS_Demand_benifit": "'EOEG_3_LPS_Demand_actual'",
+    "LAO_LP_Steam_Demand_benifit": "'LAO_LP_Steam_Demand_actual'",
+    "ETH_LPS_Demand_benifit": "'ETH_LPS_Demand_actual'",
+    "EOEG_1_MPS_Demand_benifit": "'EOEG_1_MPS_Demand_actual'",
+    "EOEG_2_MPS_Demand_benifit": "'EOEG_2_MPS_Demand_actual'",
+    "EOEG_3_MPS_Demand_benifit": "'EOEG_3_MPS_Demand_actual'",
+    "BFW_to_EOEG_1_benifit": "'BFW_to_EOEG_1_actual'",
+    "BFW_to_EOEG_2_benifit": "'BFW_to_EOEG_2_actual'",
+    "BFW_to_EOEG_3_benifit": "'BFW_to_EOEG_3_actual'",
+    "BFW_TO_LAO_benifit": "'BFW_TO_LAO_actual'",
+    "VHP_BFW_to_ETH_benifit": "'VHP_BFW_to_ETH_actual'",
+    "CW_TO_ETH_benifit": "'CW_TO_ETH_actual'",
+    "CW_TO_EG1_benifit": "'CW_TO_EG1_actual'",
+    "CW_TO_EG2_benifit": "'CW_TO_EG2_actual'",
+    "CW_TO_LAO_benifit": "'CW_TO_LAO_actual'",
+    "CW_TO_UTILITIES_benifit": "'CW_TO_UTILITIES_actual'",
+    "FUEL_GAS_From_UO_to_ETH_benifit": "'FUEL_GAS_From_UO_to_ETH_actual'",
+    "FUEL_GAS_From_UO_to_LAO_benifit": "'FUEL_GAS_From_UO_to_LAO_actual'",
+    "seec_taget": "'target'",
+    "seec_enpi": "'enpi'",
+    "seec_actual": "'actual'",
+    "EG1_MP_to_E_2610_Adjusted": "'Drying_Column_Critical_Tray_EG1_peeo'",
+    "EG1_MP_to_E_2620_Adjusted": "'MEG_Column_Critical_Tray_EG1_peeo'",
+    "EG2_MP_to_E_4610_Adjusted": "'Drying_Column_Critical_Tray_EG2_peeo'",
+    "EG2_MP_to_E_4620_Adjusted": "'MEG_Column_Critical_Tray_EG2_peeo'",
+    "EG3_MP_to_E_6620_Adjusted": "'MEG_Column_Critical_Tray_EG3_peeo'",
+    "Plant_HP_Steam_Demand_Benefit": "'Plant_HP_Steam_Demand_actual'",
+    "Plant_MP_Steam_Demand_Benefit": "'Plant_MP_Steam_Demand_actual'",
+    "Plant_LP_Steam_Demand_Benefit": "'Plant_LP_Steam_Demand_actual'",
+    "Plant_BFW_Demand_Benefit": "'Plant_BFW_Demand_actual'",
+    "VHP_BFW_To_ETH_Benefit": "'VHP_BFW_to_ETH_actual'",
+    "Percentage_Contribution_SEU": "'opportunity_energy_bills_actual'",
+    "Power_Consumption_Energy_delta": "'Total_Power_Consumption_actual'",
+    "Fuel_Consumption_Energy_delta": "'Total_Fuel_Consumption_actual'",
+    "AIR_COMPRESSOR_A_Vent_flow_benifit": "'AIR_COMPRESSOR_A_Vent_flow_actual'",
+    "AIR_COMPRESSOR_B_Vent_flow_benifit": "'AIR_COMPRESSOR_B_Vent_flow_actual'",
+    "AIR_COMPRESSOR_C_Vent_flow_benifit": "'AIR_COMPRESSOR_C_Vent_flow_actual'",
+    "AIR_COMPRESSOR_D_Vent_flow_benifit": "'AIR_COMPRESSOR_D_Vent_flow_actual'",
+    "MEG_Column_Critical_Tray_EG1_Adjusted": "'MEG_Column_Critical_Tray_EG1_peeo'",
+    "Drying_Column_Critical_Tray_EG1_Adjusted": "'Drying_Column_Critical_Tray_EG1_peeo'",
+    "MEG_Column_Critical_Tray_EG2_Adjusted": "'MEG_Column_Critical_Tray_EG2_peeo'",
+    "Drying_Column_Critical_Tray_EG2_Adjusted": "'Drying_Column_Critical_Tray_EG2_peeo'",
+    "MEG_Column_Critical_Tray_EG3_Adjusted": "'MEG_Column_Critical_Tray_EG3_peeo'",
+    "Total_Benifit": "'Total_Energy_Bill_actual'",
+    "opportunity_from_seus": "'Contribution_from_SEUs_actual'",
+    "BOILER_A_FLUE_GAS_OXGYGEN_Adjusted": "'BOILER_A_FLUE_GAS_OXGYGEN_peeo'",
+    "BOILER_B_FLUE_GAS_OXGYGEN_Adjusted": "'BOILER_B_FLUE_GAS_OXGYGEN_peeo'",
+    "BOILER_C_FLUE_GAS_OXGYGEN_Adjusted": "'BOILER_C_FLUE_GAS_OXGYGEN_peeo'",
+    "BOILER_D_FLUE_GAS_OXGYGEN_Adjusted": "'BOILER_D_FLUE_GAS_OXGYGEN_peeo'",
+    "BOILER_E_FLUE_GAS_OXGYGEN_Adjusted": "'BOILER_E_FLUE_GAS_OXGYGEN_peeo'",
+    "Process_flow_of_E_2523_Adjusted": "'Process_flow_of_E_2523_peeo'",
+    "Process_flow_of_E_2610_Adjusted": "'Process_flow_of_E_2610_peeo'",
+    "Process_flow_of_E_2620_Adjusted": "'Process_flow_of_E_2620_peeo'",
+    "Process_flow_of_E_4523_Adjusted": "'Process_flow_of_E_4523_peeo'",
+    "Process_flow_of_E_4610_Adjusted": "'Process_flow_of_E_4610_peeo'",
+    "Process_flow_of_E_4620_Adjusted": "'Process_flow_of_E_4620_peeo'",
+    "Process_flow_of_E_6531_Adjusted": "'Process_flow_of_E_6531_peeo'",
+    "Process_flow_of_C_2220_E_2220_Adjusted": "'Process_flow_of_C_2220_E_2220_peeo'",
+    "Process_flow_of_C_4220_E_4220_Adjusted": "'Process_flow_of_C_4220_E_4220_peeo'",
+    "Process_flow_of_E_6220_Adjusted": "'Process_flow_of_E_6220_peeo'",
+    "CW_Chem_bill_delta": "'CW_Chem_bill_actual'",
+    "ECT_perc_type_Eth_elect_energy": "'ECT_elect_Eth_Total_energy'",
+    "ECT_perc_type_EG1_elect_energy": "'ECT_elect_EG1_Total_energy'",
+    "ECT_perc_type_EG2_elect_energy": "'ECT_elect_EG2_Total_energy'",
+    "ECT_perc_type_EG3_elect_energy": "'ECT_elect_EG3_Total_energy'",
+    "ECT_perc_type_LAO_elect_energy": "'ECT_elect_LAO_Total_energy'",
+    "ECT_perc_type_UO_elect_energy": "'ECT_elect_UO_Total_energy'",
+    "ECT_perc_type_Eth_fuel_energy": "'ECT_fuel_Eth_Total_energy'",
+    "ECT_perc_type_EG1_fuel_energy": "'ECT_fuel_EG1_Total_energy'",
+    "ECT_perc_type_EG2_fuel_energy": "'ECT_fuel_EG2_Total_energy'",
+    "ECT_perc_type_EG3_fuel_energy": "'ECT_fuel_EG3_Total_energy'",
+    "ECT_perc_type_LAO_fuel_energy": "'ECT_fuel_LAO_Total_energy'",
+    "ECT_perc_type_UO_fuel_energy": "'ECT_fuel_UO_Total_energy'",
+    "ECT_perc_type_Eth_HP_Steam_energy": "'ECT_HP_Steam_Eth_Total_energy'",
+    "ECT_perc_type_EG1_HP_Steam_energy": "'ECT_HP_Steam_EG1_Total_energy'",
+    "ECT_perc_type_EG2_HP_Steam_energy": "'ECT_HP_Steam_EG2_Total_energy'",
+    "ECT_perc_type_EG3_HP_Steam_energy": "'ECT_HP_Steam_EG3_Total_energy'",
+    "ECT_perc_type_LAO_HP_Steam_energy": "'ECT_HP_Steam_LAO_Total_energy'",
+    "ECT_perc_type_UO_HP_Steam_energy": "'ECT_HP_Steam_UO_Total_energy'",
+    "ECT_perc_type_Eth_MP_Steam_energy": "'ECT_MP_Steam_Eth_Total_energy'",
+    "ECT_perc_type_EG1_MP_Steam_energy": "'ECT_MP_Steam_EG1_Total_energy'",
+    "ECT_perc_type_EG2_MP_Steam_energy": "'ECT_MP_Steam_EG2_Total_energy'",
+    "ECT_perc_type_EG3_MP_Steam_energy": "'ECT_MP_Steam_EG3_Total_energy'",
+    "ECT_perc_type_LAO_MP_Steam_energy": "'ECT_MP_Steam_LAO_Total_energy'",
+    "ECT_perc_type_UO_MP_Steam_energy": "'ECT_MP_Steam_UO_Total_energy'",
+    "ECT_perc_type_Eth_LP_Steam_energy": "'ECT_LP_Steam_Eth_Total_energy'",
+    "ECT_perc_type_EG1_LP_Steam_energy": "'ECT_LP_Steam_EG1_Total_energy'",
+    "ECT_perc_type_EG2_LP_Steam_energy": "'ECT_LP_Steam_EG2_Total_energy'",
+    "ECT_perc_type_EG3_LP_Steam_energy": "'ECT_LP_Steam_EG3_Total_energy'",
+    "ECT_perc_type_LAO_LP_Steam_energy": "'ECT_LP_Steam_LAO_Total_energy'",
+    "ECT_perc_type_UO_LP_Steam_energy": "'ECT_LP_Steam_UO_Total_energy'",
+    "ECT_Eth_SEU_energy_reduction": "'ECT_Eth_SEU_energy_actual'",
+    "ECT_EG1_SEU_energy_reduction": "'ECT_EG1_SEU_energy_actual'",
+    "ECT_EG2_SEU_energy_reduction": "'ECT_EG2_SEU_energy_actual'",
+    "ECT_EG3_SEU_energy_reduction": "'ECT_EG3_SEU_energy_actual'",
+    "ECT_LAO_SEU_energy_reduction": "'ECT_LAO_SEU_energy_actual'",
+    "ECT_UO_SEU_energy_reduction": "'ECT_UO_SEU_energy_actual'",
+    "ECT_all_SEU_energy_reduction": "'ECT_all_plants_SEU_energy_actual'",
+    "ECT_elect_Eth_SEU_energy_reduction": "'ECT_elect_Eth_SEU_energy_actual'",
+    "ECT_elect_EG1_SEU_energy_reduction": "'ECT_elect_EG1_SEU_energy_actual'",
+    "ECT_elect_EG2_SEU_energy_reduction": "'ECT_elect_EG2_SEU_energy_actual'",
+    "ECT_elect_EG3_SEU_energy_reduction": "'ECT_elect_EG3_SEU_energy_actual'",
+    "ECT_elect_LAO_SEU_energy_reduction": "'ECT_elect_LAO_SEU_energy_actual'",
+    "ECT_elect_UO_SEU_energy_reduction": "'ECT_elect_UO_SEU_energy_actual'",
+    "ECT_fuel_Eth_SEU_energy_reduction": "'ECT_fuel_Eth_SEU_energy_actual'",
+    "ECT_fuel_EG1_SEU_energy_reduction": "'ECT_fuel_EG1_SEU_energy_actual'",
+    "ECT_fuel_EG2_SEU_energy_reduction": "'ECT_fuel_EG2_SEU_energy_actual'",
+    "ECT_fuel_EG3_SEU_energy_reduction": "'ECT_fuel_EG3_SEU_energy_actual'",
+    "ECT_fuel_LAO_SEU_energy_reduction": "'ECT_fuel_LAO_SEU_energy_actual'",
+    "ECT_fuel_UO_SEU_energy_reduction": "'ECT_fuel_UO_SEU_energy_actual'",
+    "ECT_LP_Steam_Eth_SEU_energy_reduction": "'ECT_LP_Steam_Eth_SEU_energy_actual'",
+    "ECT_LP_Steam_EG1_SEU_energy_reduction": "'ECT_LP_Steam_EG1_SEU_energy_actual'",
+    "ECT_LP_Steam_EG2_SEU_energy_reduction": "'ECT_LP_Steam_EG2_SEU_energy_actual'",
+    "ECT_LP_Steam_EG3_SEU_energy_reduction": "'ECT_LP_Steam_EG3_SEU_energy_actual'",
+    "ECT_LP_Steam_LAO_SEU_energy_reduction": "'ECT_LP_Steam_LAO_SEU_energy_actual'",
+    "ECT_LP_Steam_UO_SEU_energy_reduction": "'ECT_LP_Steam_UO_SEU_energy_actual'",
+    "ECT_MP_Steam_Eth_SEU_energy_reduction": "'ECT_MP_Steam_Eth_SEU_energy_actual'",
+    "ECT_MP_Steam_EG1_SEU_energy_reduction": "'ECT_MP_Steam_EG1_SEU_energy_actual'",
+    "ECT_MP_Steam_EG2_SEU_energy_reduction": "'ECT_MP_Steam_EG2_SEU_energy_actual'",
+    "ECT_MP_Steam_EG3_SEU_energy_reduction": "'ECT_MP_Steam_EG3_SEU_energy_actual'",
+    "ECT_MP_Steam_LAO_SEU_energy_reduction": "'ECT_MP_Steam_LAO_SEU_energy_actual'",
+    "ECT_MP_Steam_UO_SEU_energy_reduction": "'ECT_MP_Steam_UO_SEU_energy_actual'",
+    "ECT_HP_Steam_Eth_SEU_energy_reduction": "'ECT_HP_Steam_Eth_SEU_energy_actual'",
+    "ECT_HP_Steam_EG1_SEU_energy_reduction": "'ECT_HP_Steam_EG1_SEU_energy_actual'",
+    "ECT_HP_Steam_EG2_SEU_energy_reduction": "'ECT_HP_Steam_EG2_SEU_energy_actual'",
+    "ECT_HP_Steam_EG3_SEU_energy_reduction": "'ECT_HP_Steam_EG3_SEU_energy_actual'",
+    "ECT_HP_Steam_LAO_SEU_energy_reduction": "'ECT_HP_Steam_LAO_SEU_energy_actual'",
+    "ECT_HP_Steam_UO_SEU_energy_reduction": "'ECT_HP_Steam_UO_SEU_energy_actual'",
+    "C3R_TurbineEfficiency": "'C3R_TotalActualWork'",
+    "C3R_ActualPowerOutputkW": "'C3R_TotalActualWork'",
+    "Contribution_to_SEEC_Fuel": "'Sp_En_H_1111_actual'",
+    "Contribution_to_SEEC_Steam": "'Sp_En_E_2523_actual'",
+    "Contribution_to_SEEC_Elect": "'Sp_En_KM_2115_actual'",
+    "Contribution_to_SEEC_Equi_Fuel": "'Contribution_to_SEEC_Fuel_actual'",
+    "Contribution_to_SEEC_Equi_Steam": "'Contribution_to_SEEC_Steam_actual'",
+    "Contribution_to_SEEC_Equi_Elect": "'Contribution_to_SEEC_Elect_actual'",
+    "EI_percent_improvement": "'EI_Original_sp_energy_actual'",
+    "Power_to_EG_1_benefit": "'Power_to_EG_1_actual'",
+    "Power_to_EG_2_benefit": "'Power_to_EG_2_actual'",
+    "Power_to_EG_3_benefit": "'Power_to_EG_3_actual'",
+    "Power_to_CO2_benefit": "'Power_to_CO2_actual'",
+    "Air_cost_factor": "'Air_Compressor_Turbine_A_Steam_optimum'",
+    "Air_cost_target": "'Air_cost_factor_actual'",
+    "CW_Motor_7814A_Power_Benefit": "'CW_Motor_7814A_Power_actual'",
+    "CW_Motor_7814B_Power_Benefit": "'CW_Motor_7814B_Power_actual'",
+    "CW_Motor_7814C_Power_Benefit": "'CW_Motor_7814C_Power_actual'",
+    "EOEG1_Plant_benifit": "'EOEG_1_MPS_Demand_benifit_actual'",
+    "EOEG2_Plant_benifit": "'EOEG_2_MPS_Demand_benifit_actual'",
+    "EOEG3_Plant_benifit": "'EOEG_3_MPS_Demand_benifit_actual'",
+    "ETH_Plant_benifit": "'ETH_HPS_Demand_benifit_actual'",
+    "LAO_Plant_benifit": "'FUEL_GAS_From_UO_to_LAO_benifit_actual'",
+    "LAO_LPS_Demand_benifit": "'LAO_LP_Steam_Demand_actual'",
+    "BFW_to_Boilers_benefit": "'BFW_to_Boilers_actual'",
+    "Boiler_5_O2_Adjusted": "'Boiler_5_O2_peeo'",
+    "EG1_DEG_Benefit": "'EG1_MP_to_E_2610_actual'",
+    "EG1_MEG_Benefit": "'EG1_MP_to_E_2620_actual'",
+    "EG2_DEG_Benefit": "'EG2_MP_to_E_4610_actual'",
+    "EG2_MEG_Benefit": "'EG2_MP_to_E_4620_actual'",
+    "Power_to_CO2_benefit_1": "'Power_to_CO2_benefit_actual'",
+    "Power_to_CO2_benefit_2": "'Power_to_CO2_benefit_actual'",
+    "Power_to_CO2_benefit_3": "'Power_to_CO2_benefit_actual'",
+    "Furnace_A_benefit": "'Furnace_A_Fuel_gas_flow_actual'",
+    "Furnace_B_benefit": "'Furnace_B_Fuel_gas_flow_actual'",
+    "Furnace_C_benefit": "'Furnace_C_Fuel_gas_flow_actual'",
+    "Furnace_D_benefit": "'Furnace_D_Fuel_gas_flow_actual'",
+    "Furnace_E_benefit": "'Furnace_E_Fuel_gas_flow_actual'",
+    "Furnace_F_benefit": "'Furnace_F_Fuel_gas_flow_actual'",
+    "Furnace_G_benefit": "'Furnace_G_Fuel_gas_flow_actual'",
+    "Furnace_H_benefit": "'Furnace_H_Fuel_gas_flow_actual'",
+    "Furnace_J_benefit": "'Furnace_J_Fuel_gas_flow_actual'",
+    "Excess_O2_Benefit_BLR_1": "'Fuel_BLR_1_optimum'",
+    "Excess_O2_Benefit_BLR_2": "'Fuel_BLR_2_optimum'",
+    "Excess_O2_Benefit_BLR_3": "'Fuel_BLR_3_optimum'",
+    "Excess_O2_Benefit_BLR_4": "'Fuel_BLR_4_optimum'",
+    "Excess_O2_Benefit_BLR_5": "'Fuel_BLR_5_optimum'",
+    "Total_specific_Power_Adjusted": "'Total_specific_Power_peeo'",
+    "EG1_Recycle_gas_compressor_benefit": "'EG1_Recycle_Compressor_Power_actual'",
+    "EG1_Third_Stage_Reactor_Feed_Heater_benefit": "'EG1_LP_to_E_2523_actual'",
+    "EG1_First_Effect_Reboiler_benefit": "'EG1_MP_to_E_2531_actual'",
+    "EG1_Drying_Column_Reboiler_benefit": "'EG1_MP_to_E_2610_actual'",
+    "EG1_MEG_Column_Reboiler_benefit": "'EG1_MP_to_E_2620_actual'",
+    "EG2_Recycle_gas_compressor_benefit": "'EG2_Recycle_Compressor_Power_actual'",
+    "EG2_Third_Stage_Reactor_Feed_Heater_benefit": "'EG2_LP_to_E_4523_actual'",
+    "EG2_First_Effect_Reboiler_benefit": "'EG2_MP_to_E_4531_actual'",
+    "EG2_Drying_Column_Reboiler_benefit": "'EG2_MP_to_E_4610_actual'",
+    "EG2_MEG_Column_Reboiler_benefit": "'EG2_MP_to_E_4620_actual'",
+    "EG3_First_Effect_Reboiler_benefit": "'EG3_MP_to_E_6531_actual'",
+    "EG3_MEG_Column_Reboiler_benefit": "'EG3_MP_to_E_6620_actual'",
+    "Eth_Ethane_feed_saturator_benefit": "'Ethane_feed_saturator_inlet_steam_flow_actual'",
+    "CO2_Raw_Gas_Compressor_benefit": "'Actual_Power_Consumption_5021_actual'",
+    "CO2_Product_Compressor_benefit": "'K_5071_Actual_Power_actual'",
+    "EG3_Recycle_gas_compressor_benefit": "'EG3_Recycle_Compressor_Power_actual'",
+    "EG1_Stripping_System_benefit": "'Total_Steam_To_Stripping_Column_EG1_actual'",
+    "EG2_Stripping_System_benefit": "'Total_Steam_To_Stripping_Column_EG2_actual'",
+    "EG1_Regeneration_System_benefit": "'Total_Steam_To_Regenerator_EG1_actual'",
+    "EG2_Regeneration_System_benefit": "'Total_Steam_To_Regenerator_EG2_actual'",
+    "EG3_Regeneration_System_benefit": "'EG3_LP_to_E_6220_actual'",
+    "BFW_A_Motor_Power_CO2_Emission": "'BFW_A_Motor_Power_actual'",
+    "BFW_D_Motor_Power_CO2_Emission": "'BFW_D_Motor_Power_actual'",
+    "BFW_F_Motor_Power_CO2_Emission": "'BFW_F_Motor_Power_actual'",
+    "CW_Motor_C_Power_CO2_Emission": "'CW_Motor_C_Power_actual'",
+    "CW_Motor_D_Power_CO2_Emission": "'CW_Motor_D_Power_actual'",
+    "CW_Motor_E_Power_CO2_Emission": "'CW_Motor_E_Power_actual'",
+    "CW_Motor_F_Power_CO2_Emission": "'CW_Motor_F_Power_actual'",
+    "Air_Compressor_Motor_B_Power_CO2_Emission": "'Air_Compressor_Motor_B_Power_actual'",
+    "Air_Compressor_Motor_C_Power_CO2_Emission": "'Air_Compressor_Motor_C_Power_actual'",
+    "DMW_Motor_B_Power_CO2_Emission": "'DMW_Motor_B_Power_actual'",
+    "VHP_BFW_A_Motor_Power_CO2_Emission": "'VHP_BFW_A_Motor_Power_actual'",
+    "BFW_B_Turb_Steam_CO2_Emission": "'Boilers_Specific_Energy_Consumption_actual'",
+    "BFW_C_Turb_Steam_CO2_Emission": "'Boilers_Specific_Energy_Consumption_actual'",
+    "BFW_E_Turb_Steam_CO2_Emission": "'Boilers_Specific_Energy_Consumption_actual'",
+    "VHP_BFW_B_Turb_Steam_CO2_Emission": "'Boilers_Specific_Energy_Consumption_actual'",
+    "VHP_BFW_C_Turb_Steam_CO2_Emission": "'Boilers_Specific_Energy_Consumption_actual'",
+    "Air_Compressor_Turbine_A_Steam_CO2_Emission": "'Boilers_Specific_Energy_Consumption_actual'",
+    "Air_Compressor_Turbine_D_Steam_CO2_Emission": "'Boilers_Specific_Energy_Consumption_actual'",
+    "DMW_Turbine_A_Steam_CO2_Emission": "'Boilers_Specific_Energy_Consumption_actual'",
+    "DMW_Turbine_C_Steam_CO2_Emission": "'Boilers_Specific_Energy_Consumption_actual'",
+    "CW_Turbine_A_Steam_CO2_Emission": "'Boilers_Specific_Energy_Consumption_actual'",
+    "CW_Turbine_B_Steam_CO2_Emission": "'Boilers_Specific_Energy_Consumption_actual'",
+    "CW_Turbine_G_Steam_CO2_Emission": "'Boilers_Specific_Energy_Consumption_actual'",
+    "Deaerator_benefit": "'Deaerator_LPS_actual'",
+    "KM_5070_benefit": "'K_5071_Actual_Power_actual'",
+    "CBD_Benefit_BLR_1": "'Fuel_Rate_actual'",
+    "CBD_Benefit_BLR_2": "'Fuel_Rate_actual'",
+    "CBD_Benefit_BLR_3": "'Fuel_Rate_actual'",
+    "CBD_Benefit_BLR_4": "'Fuel_Rate_actual'",
+    "CBD_Benefit_BLR_5": "'Fuel_Rate_actual'",
+    "Sea_CT_Fans_benefit": "'Sea_CT_Fans_all_actual'",
+    "Fuel_Bill": "name 'Total_Fuel_Consumption_U_O' is not defined",
+    "ECT_EG3_SEU_energy": "name 'EG3_Recycle_Compressor_Power' is not defined",
+    "Sp_energy_Eth": "'ECT_Eth_Total_energy_act'",
+    "EI_Original_sp_energy": "'EI_total_energy'",
+    "Sp_energy_EG2": "'ECT_EG2_Total_energy_act'",
+    "Sp_energy_LAO": "'ECT_LAO_Total_energy_act'",
+    "Sp_energy_EG1": "'ECT_EG1_Total_energy_act'",
+    "Sp_energy_EG3": "'ECT_EG3_Total_energy_act'",
+    "Normalized_Boiler_B_Fg_Ethylene_Concentration": "'Boiler_B_Fuel_Composition_Total'",
+    "Normalized_Boiler_E_Fg_Ethylene_Concentration": "'Boiler_E_Fuel_Composition_Total'",
+    "Normalized_Boiler_C_Fg_Ethylene_Concentration": "'Boiler_C_Fuel_Composition_Total'",
+    "Normalized_Boiler_D_Fg_Ethylene_Concentration": "'Boiler_D_Fuel_Composition_Total'",
+    "ECT_elect_Eth_SEU_percent_energy": "'ECT_elect_Eth_Total_energy'",
+    "ECT_elect_Eth_Non_SEU_energy": "'ECT_elect_Eth_Total_energy'",
+    "ECT_elect_LAO_SEU_percent_energy": "'ECT_elect_LAO_Total_energy'",
+    "ECT_elect_LAO_Non_SEU_energy": "'ECT_elect_LAO_Total_energy'",
+    "ECT_fuel_EG1_SEU_percent_energy": "'ECT_fuel_EG1_Total_energy'",
+    "ECT_fuel_EG1_Non_SEU_energy": "'ECT_fuel_EG1_Total_energy'",
+    "ECT_fuel_EG2_Non_SEU_energy": "'ECT_fuel_EG2_Total_energy'",
+    "ECT_fuel_EG2_SEU_percent_energy": "'ECT_fuel_EG2_Total_energy'",
+    "ECT_fuel_EG3_SEU_percent_energy": "'ECT_fuel_EG3_Total_energy'",
+    "ECT_fuel_EG3_Non_SEU_energy": "'ECT_fuel_EG3_Total_energy'",
+    "ECT_LP_Steam_LAO_Non_SEU_energy": "'ECT_LP_Steam_LAO_Total_energy'",
+    "ECT_LP_Steam_LAO_SEU_percent_energy": "'ECT_LP_Steam_LAO_Total_energy'",
+    "ECT_MP_Steam_Eth_Non_SEU_energy": "'ECT_MP_Steam_Eth_Total_energy'",
+    "ECT_MP_Steam_Eth_SEU_percent_energy": "'ECT_MP_Steam_Eth_Total_energy'",
+    "ECT_MP_Steam_LAO_Non_SEU_energy": "'ECT_MP_Steam_LAO_Total_energy'",
+    "ECT_MP_Steam_LAO_SEU_percent_energy": "'ECT_MP_Steam_LAO_Total_energy'",
+    "ECT_MP_Steam_UO_Non_SEU_energy": "'ECT_MP_Steam_UO_Total_energy'",
+    "ECT_MP_Steam_UO_SEU_percent_energy": "'ECT_MP_Steam_UO_Total_energy'",
+    "ECT_HP_Steam_Eth_Non_SEU_energy": "'ECT_HP_Steam_Eth_Total_energy'",
+    "ECT_HP_Steam_Eth_SEU_percent_energy": "'ECT_HP_Steam_Eth_Total_energy'",
+    "ECT_HP_Steam_EG1_Non_SEU_energy": "'ECT_HP_Steam_EG1_Total_energy'",
+    "ECT_HP_Steam_EG1_SEU_percent_energy": "'ECT_HP_Steam_EG1_Total_energy'",
+    "ECT_HP_Steam_EG2_Non_SEU_energy": "'ECT_HP_Steam_EG2_Total_energy'",
+    "ECT_HP_Steam_EG2_SEU_percent_energy": "'ECT_HP_Steam_EG2_Total_energy'",
+    "ECT_HP_Steam_EG3_SEU_percent_energy": "'ECT_HP_Steam_EG3_Total_energy'",
+    "ECT_HP_Steam_EG3_Non_SEU_energy": "'ECT_HP_Steam_EG3_Total_energy'",
+    "ECT_HP_Steam_LAO_Non_SEU_energy": "'ECT_HP_Steam_LAO_Total_energy'",
+    "ECT_HP_Steam_LAO_SEU_percent_energy": "'ECT_HP_Steam_LAO_Total_energy'",
+    "C2R_expo": "name 'C2R_N' is not defined",
+    "C2R_pr_exp": "name 'C2R_N' is not defined",
+    "C2R_pr_exp2": "name 'C2R_N' is not defined",
+    "EG1_MP_to_E_2531_Adjusted": "'EG1_MP_to_E_2531_peeo'",
+    "ETH_Surface_condenser_controller_level_opening_Adjusted": "'ETH_Surface_condenser_controller_level_opening_peeo'",
+    "C2_power_Adjusted": "'C2_power_peeo'",
+    "CGC_Disch_Correc_Temp_4Stage_Adjusted": "'CGC_Disch_Correc_Temp_4Stage_peeo'",
+    "E_1308_level_Adjusted": "'E_1308_level_peeo'",
+    "LP_steam_pressure_to_saturator_Adjusted": "'LP_steam_pressure_to_saturator_peeo'",
+    "CGC_Disch_Correc_Temp_1Stage_Adjusted": "'CGC_Disch_Correc_Temp_1Stage_peeo'",
+    "W_EOE_ratio_EG3_Adjusted": "'W_EOE_ratio_EG3_peeo'",
+    "C2_power_delta": "'Specific_energy_consumption_in_C2R_peeo'",
+    "EG3_LP_to_C_6220_Adjusted": "'EG3_LP_to_C_6220_peeo'",
+    "EG2_LP_to_E_4310_Adjusted": "'EG2_LP_to_E_4310_peeo'",
+    "EG3_LP_to_E_6220_Adjusted": "'EG3_LP_to_E_6220_peeo'",
+    "Eth_CGC_turbine_Duty_Adjusted": "'Eth_CGC_turbine_Duty_peeo'",
+    "C2_compressor_RPM_Adjusted": "'C2_compressor_RPM_peeo'",
+    "HP_Steam_from_CGC_Extraction_Adjusted": "'Total_specific_Power_peeo'",
+    "C3R_surface_condenser_level_controller_opening_Adjusted": "'C3R_surface_condenser_level_controller_opening_peeo'",
+    "C2R_turbine_Inlet_steam_pressure_Adjusted": "'C2R_turbine_Inlet_steam_pressure_peeo'",
+    "C2_splitter_control_tray_temperature_controller_opening_Adjusted": "'C2_splitter_control_tray_temperature_controller_opening_peeo'",
+    "CGC_Interstage_DP_2Stage_Adjusted": "'CGC_Interstage_DP_2Stage_peeo'",
+    "C2_splitter_top_analyzer_C2H6_Adjusted": "'C2_splitter_top_analyzer_C2H6_peeo'",
+    "EG2_LP_to_E_4220_Adjusted": "'EG2_LP_to_E_4220_peeo'",
+    "CGC_Interstage_DP_1Stage_Adjusted": "'CGC_Interstage_DP_1Stage_peeo'",
+    "W_EOE_ratio_EG1_Adjusted": "'W_EOE_ratio_EG1_peeo'",
+    "EG2_LP_to_E_4523_Adjusted": "'EG2_LP_to_E_4523_peeo'",
+    "Ethane_feed_saturator_inlet_steam_flow_Adjusted": "'Ethane_feed_saturator_inlet_steam_flow_peeo'",
+    "EG1_Extraction_steam_from_5th_effect_evaporator_to_6th_effect_reboiler_Adjusted": "'EG1_Extraction_steam_from_5th_effect_evaporator_to_6th_effect_reboiler_peeo'",
+    "EG3_LP_to_E_6310_Adjusted": "'EG3_LP_to_E_6310_peeo'",
+    "Ethylene_surge_drum_vent_to_CGC_5Th_stage_controller_opening_Adjusted": "'Ethylene_surge_drum_vent_to_CGC_5Th_stage_controller_opening_peeo'",
+    "E_1310_level_Adjusted": "'E_1310_level_peeo'",
+    "Specific_energy_consumption_in_C2R_Adjusted": "'Specific_energy_consumption_in_C2R_peeo'",
+    "C3R_turbine_Inlet_steam_flow_Adjusted": "'C3R_turbine_Inlet_steam_flow_peeo'",
+    "C3_power_Adjusted": "'C3_power_peeo'",
+    "EG1_LP_to_E_2220_Adjusted": "'EG1_LP_to_E_2220_peeo'",
+    "EG2_MP_to_E_4531_Adjusted": "'EG2_MP_to_E_4531_peeo'",
+    "CGC_Interstage_DP_4Stage_Adjusted": "'CGC_Interstage_DP_4Stage_peeo'",
+    "Eth_saturator_Blowdown_flow_Adjusted": "'Eth_saturator_Blowdown_flow_peeo'",
+    "C2_splitter_reflux_controller_opening_Adjusted": "'C2_splitter_reflux_controller_opening_peeo'",
+    "EG3_MP_to_E_6531_Adjusted": "'EG3_MP_to_E_6531_peeo'",
+    "W_EOE_ratio_EG2_Adjusted": "'W_EOE_ratio_EG2_peeo'",
+    "CGC_Disch_Correc_Temp_3Stage_Adjusted": "'CGC_Disch_Correc_Temp_3Stage_peeo'",
+    "Fuel_gas_drum_pressure_Adjusted": "'Fuel_gas_drum_pressure_peeo'",
+    "EG2_Extraction_steam_from_5th_effect_evaporator_to_6th_effect_reboiler_Adjusted": "'EG2_Extraction_steam_from_5th_effect_evaporator_to_6th_effect_reboiler_peeo'",
+    "EG1_LP_to_C_2220_Adjusted": "'EG1_LP_to_C_2220_peeo'",
+    "C3_compressor_suction_pressure_Adjusted": "'C3_compressor_suction_pressure_peeo'",
+    "EG3_8th_effect_reboiler_extraction_steam_inlet_Adjusted": "'EG3_8th_effect_reboiler_extraction_steam_inlet_peeo'",
+    "CGC_Interstage_DP_3Stage_Adjusted": "'CGC_Interstage_DP_3Stage_peeo'",
+    "C2_splitter_control_tray_temperature_Adjusted": "'C2_splitter_control_tray_temperature_peeo'",
+    "EG1_LP_to_C_2310_Adjusted": "'EG1_LP_to_C_2310_peeo'",
+    "E_1307_level_Adjusted": "'E_1307_level_peeo'",
+    "C3_power_delta": "'Specific_energy_consumption_in_C3R_peeo'",
+    "EG1_LP_to_E_2310_Adjusted": "'EG1_LP_to_E_2310_peeo'",
+    "C2R_turbine_Inlet_steam_temp_Adjusted": "'C2R_turbine_Inlet_steam_temp_peeo'",
+    "EG2_LP_to_C_4220_Adjusted": "'EG2_LP_to_C_4220_peeo'",
+    "C3R_turbine_Inlet_steam_temp_Adjusted": "'C3R_turbine_Inlet_steam_temp_peeo'",
+    "EG2_LP_to_C_4310_Adjusted": "'EG2_LP_to_C_4310_peeo'",
+    "EG3_LP_to_C_6310_Adjusted": "'EG3_LP_to_C_6310_peeo'",
+    "EG3_LP_to_E_6523_Adjusted": "'EG3_LP_to_E_6523_peeo'",
+    "Eth_CGC_turbine_Duty_delta": "'Total_specific_Power_peeo'",
+    "CGC_Extraction_Opening_Adjusted": "'CGC_Extraction_Opening_peeo'",
+    "E_1402_level_Adjusted": "'E_1402_level_peeo'",
+    "E_1309_level_Adjusted": "'E_1309_level_peeo'",
+    "Ethylene_in_tail_gas_Adjusted": "'Ethylene_in_tail_gas_peeo'",
+    "C2R_turbine_Inlet_steam_flow_Adjusted": "'C2R_turbine_Inlet_steam_flow_peeo'",
+    "Eth_ethylene_flow_C2_splitter_reflux_Adjusted": "'Eth_ethylene_flow_C2_splitter_reflux_peeo'",
+    "Ethylene_in_recycle_ethane_Adjusted": "'Ethylene_in_recycle_ethane_peeo'",
+    "Specific_energy_consumption_in_C3R_Adjusted": "'Specific_energy_consumption_in_C3R_peeo'",
+    "CGC_Disch_Correc_Temp_2Stage_Adjusted": "'CGC_Disch_Correc_Temp_2Stage_peeo'",
+    "C2R_governer_opening_Adjusted": "'C2R_governer_opening_peeo'",
+    "C2_compressor_suction_pressure_Adjusted": "'C2_compressor_suction_pressure_peeo'",
+    "C3R_turbine_Inlet_steam_pressure_Adjusted": "'C3R_turbine_Inlet_steam_pressure_peeo'",
+    "EG1_LP_to_E_2523_Adjusted": "'EG1_LP_to_E_2523_peeo'",
+    "E2523_inlet_LMTD": "module 'numpy' has no attribute 'np'",
+    "E4523_inlet_LMTD": "module 'numpy' has no attribute 'np'",
+    "HP_Steam_Cost": "'Costing_total_BFW_Cost'",
+    "BFW_Cost": "'Total_BFW_cost_per_hour'",
+    "Reactor_Outlet_R_2520_Leg_Temp_Delta_KEV_Adjusted": "'Reactor_Outlet_R_2520_Leg_Temp_Delta_peeo'",
+    "Chest_Pressure_E_2620_KEV_Adjusted": "'Chest_Pressure_E_2620_peeo'",
+    "Glycol_Reactor_R_2520_Inlet_KEV_Adjusted": "'Glycol_Reactor_R_2520_Inlet_peeo'",
+    "C2310_Bottom_Pressure_KEV_Adjusted": "'C2310_Bottom_Pressure_peeo'",
+    "Fractional_Conversion_Bicarbonate_C_2220_KEV_Adjusted": "'Fractional_Conversion_Bicarbonate_C_2220_peeo'",
+    "Chest_Pressure_E_2610_KEV_Adjusted": "'Chest_Pressure_E_2610_peeo'",
+    "Cycle_Water_Bleed_Eo_EG1_KEV_Adjusted": "'Cycle_Water_Bleed_Eo_EG1_peeo'",
+    "Stripper_Column_C_2310_Top_Temp_KEV_Adjusted": "'Stripper_Column_C_2310_Top_Temp_peeo'",
+    "5th_Effect_Evaporator_C_2535_Overhead_Pressure_KEV_Adjusted": "'5th_Effect_Evaporator_C_2535_Overhead_Pressure_peeo'",
+    "Recycle_Water_Tank_Meg_EG1_KEV_Adjusted": "'Recycle_Water_Tank_Meg_EG1_peeo'",
+    "Regenerator_C_2220_Bottom_Temp_KEV_Adjusted": "'Regenerator_C_2220_Bottom_Temp_peeo'",
+    "Treated_Water_To_5th_Effect_Evaporator_C_2535_KEV_Adjusted": "'Treated_Water_To_5th_Effect_Evaporator_C_2535_peeo'",
+    "Critical_Tray_Temperature_C_2610_KEV_Adjusted": "'Drying_Column_Critical_Tray_EG1_peeo'",
+    "Treated_Water_To_3rd_Effect_Evaporator_C_2533_KEV_Adjusted": "'Treated_Water_To_3rd_Effect_Evaporator_C_2533_peeo'",
+    "Treated_Water_To_4th_Effect_Evaporator_C_2534_KEV_Adjusted": "'Treated_Water_To_4th_Effect_Evaporator_C_2534_peeo'",
+    "Critical_Tray_Temperature_C_2620_KEV_Adjusted": "'MEG_Column_Critical_Tray_EG1_peeo'",
+    "Treated_Water_To_1st_Effect_Evaporator_C_2531_KEV_Adjusted": "'Treated_Water_To_1st_Effect_Evaporator_C_2531_peeo'",
+    "Treated_Water_To_2nd_Effect_Evaporator_C_2532_KEV_Adjusted": "'Treated_Water_To_2nd_Effect_Evaporator_C_2532_peeo'",
+    "Steam_Flow_E_2523_KEV_Adjusted": "'EG1_LP_to_E_2523_peeo'",
+    "Treated_Water_To_5th_Effect_Evaporator_C_4535_KEV_Adjusted": "'Treated_Water_To_5th_Effect_Evaporator_C_4535_peeo'",
+    "Recycle_Water_Tank_Meg_EG2_KEV_Adjusted": "'Recycle_Water_Tank_Meg_EG2_peeo'",
+    "Glycol_Reactor_R_4520_Inlet_KEV_Adjusted": "'Glycol_Reactor_R_4520_Inlet_peeo'",
+    "Treated_Water_To_2nd_Effect_Evaporator_C_4532_KEV_Adjusted": "'Treated_Water_To_2nd_Effect_Evaporator_C_4532_peeo'",
+    "Treated_Water_To_1st_Effect_Evaporator_C_4531_KEV_Adjusted": "'Treated_Water_To_1st_Effect_Evaporator_C_4531_peeo'",
+    "C4310_Bottom_Pressure_KEV_Adjusted": "'C4310_Bottom_Pressure_peeo'",
+    "Cycle_Water_Bleed_Eo_EG2_KEV_Adjusted": "'Cycle_Water_Bleed_Eo_EG2_peeo'",
+    "Treated_Water_To_3rd_Effect_Evaporator_C_4533_KEV_Adjusted": "'Treated_Water_To_3rd_Effect_Evaporator_C_4533_peeo'",
+    "Critical_Tray_Temperature_C_4610_KEV_Adjusted": "'Drying_Column_Critical_Tray_EG2_peeo'",
+    "Critical_Tray_Temperature_C_4620_KEV_Adjusted": "'MEG_Column_Critical_Tray_EG2_peeo'",
+    "5th_Effect_Evaporator_C_4535_Overhead_Pressure_KEV_Adjusted": "'5th_Effect_Evaporator_C_4535_Overhead_Pressure_peeo'",
+    "Chest_Pressure_E_4610_KEV_Adjusted": "'Chest_Pressure_E_4610_peeo'",
+    "Stripper_Column_C_4310_Top_Temp_KEV_Adjusted": "'Stripper_Column_C_4310_Top_Temp_peeo'",
+    "Fractional_Conversion_Bicarbonate_C_4220_KEV_Adjusted": "'Fractional_Conversion_Bicarbonate_C_4220_peeo'",
+    "Chest_Pressure_E_4620_KEV_Adjusted": "'Chest_Pressure_E_4620_peeo'",
+    "Reactor_Outlet_R_4520_Leg_Temp_Delta_KEV_Adjusted": "'Reactor_Outlet_R_4520_Leg_Temp_Delta_peeo'",
+    "Steam_Flow_E_4523_KEV_Adjusted": "'EG2_LP_to_E_4523_peeo'",
+    "Treated_Water_To_4th_Effect_Evaporator_C_4534_KEV_Adjusted": "'Treated_Water_To_4th_Effect_Evaporator_C_4534_peeo'",
+    "Regenerator_C_4220_Bottom_Temp_KEV_Adjusted": "'Regenerator_C_4220_Bottom_Temp_peeo'",
+    "Treated_Water_To_5th_Effect_Evaporator_C_6535_KEV_Adjusted": "'Treated_Water_To_5th_Effect_Evaporator_C_6535_peeo'",
+    "Treated_Water_To_4th_Effect_Evaporator_C_6534_KEV_Adjusted": "'Treated_Water_To_4th_Effect_Evaporator_C_6534_peeo'",
+    "Treated_Water_To_3rd_Effect_Evaporator_C_6533_KEV_Adjusted": "'Treated_Water_To_3rd_Effect_Evaporator_C_6533_peeo'",
+    "Regenerator_C_6220_Bottom_Temp_KEV_Adjusted": "'Regenerator_C_6220_Bottom_Temp_peeo'",
+    "Critical_Tray_Temperature_C_6620_KEV_Adjusted": "'MEG_Column_Critical_Tray_EG3_peeo'",
+    "Chest_Pressure_E_6620_KEV_Adjusted": "'Chest_Pressure_E_6620_peeo'",
+    "Recycle_Water_Tank_Meg_EG3_KEV_Adjusted": "'Recycle_Water_Tank_Meg_EG3_peeo'",
+    "Treated_Water_To_1st_Effect_Evaporator_C_6531_KEV_Adjusted": "'Treated_Water_To_1st_Effect_Evaporator_C_6531_peeo'",
+    "Treated_Water_To_7th_Effect_Evaporator_C_6537_KEV_Adjusted": "'Treated_Water_To_7th_Effect_Evaporator_C_6537_peeo'",
+    "Treated_Water_To_2nd_Effect_Evaporator_C_6532_KEV_Adjusted": "'Treated_Water_To_2nd_Effect_Evaporator_C_6532_peeo'",
+    "7th_Effect_Evaporator_C_6537_Overhead_Pressure_KEV_Adjusted": "'7th_Effect_Evaporator_C_6537_Overhead_Pressure_peeo'",
+    "Treated_Water_To_6th_Effect_Evaporator_C_6536_KEV_Adjusted": "'Treated_Water_To_6th_Effect_Evaporator_C_6536_peeo'",
+    "Fractional_Conversion_Bicarbonate_C_6220_KEV_Adjusted": "'Fractional_Conversion_Bicarbonate_C_6220_peeo'",
+    "ETH_HPS_Demand": "name 'ETH_HPS_Demand_old' is not defined",
+    "LAO_Indirect_Efficiency": "'LAO_Total_Heat_Absorbed_Per_Kg_Of_Fuel'",
+    "LAO_Heat_Loss_Due_To_H2O_In_Stack_L3_Adjusted": "'LAO_Total_H2O_Per_Kg_Of_Fuel_Adjusted'",
+    "LAO_Heat_Loss_Due_To_H2O_In_Stack_L3": "'LAO_Total_H2O_Per_Kg_Of_Fuel'",
+    "LAO_Indirect_Efficiency_Adjusted": "'LAO_Total_Heat_Absorbed_Per_Kg_Of_Fuel_Adjusted'",
+    "ECT_LP_Steam_EG1_Non_SEU_energy": "'ECT_LP_Steam_EG1_Total_energy'",
+    "ECT_LP_Steam_EG1_SEU_percent_energy": "'ECT_LP_Steam_EG1_Total_energy'",
+    "ECT_MP_Steam_EG1_SEU_percent_energy": "'ECT_MP_Steam_EG1_Total_energy'",
+    "ECT_MP_Steam_EG1_Non_SEU_energy": "'ECT_MP_Steam_EG1_Total_energy'",
+    "ECT_LP_Steam_EG2_SEU_percent_energy": "'ECT_LP_Steam_EG2_Total_energy'",
+    "ECT_LP_Steam_EG2_Non_SEU_energy": "'ECT_LP_Steam_EG2_Total_energy'",
+    "ECT_MP_Steam_EG2_Non_SEU_energy": "'ECT_MP_Steam_EG2_Total_energy'",
+    "ECT_MP_Steam_EG2_SEU_percent_energy": "'ECT_MP_Steam_EG2_Total_energy'",
+    "ECT_LP_Steam_EG3_SEU_percent_energy": "'ECT_LP_Steam_EG3_Total_energy'",
+    "ECT_LP_Steam_EG3_Non_SEU_energy": "'ECT_LP_Steam_EG3_Total_energy'",
+    "ECT_EG3_SEU_percent_energy": "'ECT_EG3_Total_energy'",
+    "ECT_EG3_Non_SEU_energy": "'ECT_EG3_Total_energy'",
+    "ECT_MP_Steam_EG3_Non_SEU_energy": "'ECT_MP_Steam_EG3_Total_energy'",
+    "ECT_MP_Steam_EG3_SEU_percent_energy": "'ECT_MP_Steam_EG3_Total_energy'",
+    "ECT_LP_Steam_Eth_SEU_percent_energy": "'ECT_LP_Steam_Eth_Total_energy'",
+    "ECT_LP_Steam_Eth_Non_SEU_energy": "'ECT_LP_Steam_Eth_Total_energy'",
+    "Boiler_A_Boiler_Indirect_Efficiency": "'Boiler_A_Total_Heat_Input_Per_Kg_Of_Fuel'",
+    "Boiler_A_Heat_Loss_Due_To_H2O_In_Stack_L3": "'Boiler_A_Total_H2O_Per_Kg_Of_Fuel'",
+    "Boiler_B_Heat_Loss_Due_To_H2O_In_Stack_L3": "'Boiler_B_Total_H2O_Per_Kg_Of_Fuel'",
+    "Boiler_B_Boiler_Indirect_Efficiency": "'Boiler_B_Total_Heat_Input_Per_Kg_Of_Fuel'",
+    "Boiler_C_Boiler_Indirect_Efficiency": "'Boiler_C_Total_Heat_Input_Per_Kg_Of_Fuel'",
+    "Boiler_C_Heat_Loss_Due_To_H2O_In_Stack_L3": "'Boiler_C_Total_H2O_Per_Kg_Of_Fuel'",
+    "Boiler_D_Boiler_Indirect_Efficiency": "'Boiler_D_Total_Heat_Input_Per_Kg_Of_Fuel'",
+    "Boiler_D_Heat_Loss_Due_To_H2O_In_Stack_L3": "'Boiler_D_Total_H2O_Per_Kg_Of_Fuel'",
+    "Boiler_E_Heat_Loss_Due_To_H2O_In_Stack_L3": "'Boiler_E_Total_H2O_Per_Kg_Of_Fuel'",
+    "Boiler_E_Boiler_Indirect_Efficiency": "'Boiler_E_Total_Heat_Input_Per_Kg_Of_Fuel'",
+    "ECT_HP_Steam_UO_Non_SEU_energy": "'ECT_HP_Steam_UO_Total_energy'",
+    "ECT_HP_Steam_UO_SEU_percent_energy": "'ECT_HP_Steam_UO_Total_energy'",
+    "ECT_LP_Steam_UO_Non_SEU_energy": "'ECT_LP_Steam_UO_Total_energy'",
+    "ECT_LP_Steam_UO_SEU_percent_energy": "'ECT_LP_Steam_UO_Total_energy'",
+    "EG1_Comp_eff": "module 'numpy' has no attribute 'np'",
+    "EG2_Comp_eff": "module 'numpy' has no attribute 'np'",
+    "EG3_Comp_eff": "module 'numpy' has no attribute 'np'",
+    "ECT_UO_Non_SEU_energy": "'ECT_UO_Total_energy'",
+    "ECT_UO_SEU_percent_energy": "'ECT_UO_Total_energy'",
+    "ECT_elect_UO_Non_SEU_energy": "'ECT_elect_UO_Total_energy'",
+    "ECT_elect_UO_SEU_percent_energy": "'ECT_elect_UO_Total_energy'",
+    "Normalized_Boiler_E_Fg_Nc5_Concentration": "'Boiler_E_Fuel_Composition_Total'",
+    "Normalized_Boiler_C_Fg_Nc5_Concentration": "'Boiler_C_Fuel_Composition_Total'",
+    "Normalized_Boiler_B_Fg_Nc5_Concentration": "'Boiler_B_Fuel_Composition_Total'",
+    "Normalized_Boiler_D_Fg_Nc5_Concentration": "'Boiler_D_Fuel_Composition_Total'",
+    "Normalized_Boiler_C_Fg_Hydrogen_Concentration": "'Boiler_C_Fuel_Composition_Total'",
+    "Normalized_Boiler_D_Fg_Hydrogen_Concentration": "'Boiler_D_Fuel_Composition_Total'",
+    "Normalized_Boiler_E_Fg_Hydrogen_Concentration": "'Boiler_E_Fuel_Composition_Total'",
+    "Normalized_Boiler_B_Fg_Hydrogen_Concentration": "'Boiler_B_Fuel_Composition_Total'",
+    "Normalized_Boiler_C_Fg_Ic5_Concentration": "'Boiler_C_Fuel_Composition_Total'",
+    "Normalized_Boiler_E_Fg_Ic5_Concentration": "'Boiler_E_Fuel_Composition_Total'",
+    "Normalized_Boiler_B_Fg_Ic5_Concentration": "'Boiler_B_Fuel_Composition_Total'",
+    "Normalized_Boiler_D_Fg_Ic5_Concentration": "'Boiler_D_Fuel_Composition_Total'",
+    "Normalized_Boiler_D_Fg_Ic4_Concentration": "'Boiler_D_Fuel_Composition_Total'",
+    "Normalized_Boiler_E_Fg_Ic4_Concentration": "'Boiler_E_Fuel_Composition_Total'",
+    "Normalized_Boiler_C_Fg_Ic4_Concentration": "'Boiler_C_Fuel_Composition_Total'",
+    "Normalized_Boiler_B_Fg_Ic4_Concentration": "'Boiler_B_Fuel_Composition_Total'",
+    "Normalized_Boiler_B_Fg_Propane_Concentration": "'Boiler_B_Fuel_Composition_Total'",
+    "Normalized_Boiler_C_Fg_Propane_Concentration": "'Boiler_C_Fuel_Composition_Total'",
+    "Normalized_Boiler_E_Fg_Propane_Concentration": "'Boiler_E_Fuel_Composition_Total'",
+    "Normalized_Boiler_D_Fg_Propane_Concentration": "'Boiler_D_Fuel_Composition_Total'",
+    "Normalized_Boiler_C_Fg_Ethane_Concentration": "'Boiler_C_Fuel_Composition_Total'",
+    "Normalized_Boiler_E_Fg_Ethane_Concentration": "'Boiler_E_Fuel_Composition_Total'",
+    "Normalized_Boiler_B_Fg_Ethane_Concentration": "'Boiler_B_Fuel_Composition_Total'",
+    "Normalized_Boiler_D_Fg_Ethane_Concentration": "'Boiler_D_Fuel_Composition_Total'",
+    "Normalized_Boiler_C_Fg_Ch4_Concentration": "'Boiler_C_Fuel_Composition_Total'",
+    "Normalized_Boiler_D_Fg_Ch4_Concentration": "'Boiler_D_Fuel_Composition_Total'",
+    "Normalized_Boiler_E_Fg_Ch4_Concentration": "'Boiler_E_Fuel_Composition_Total'",
+    "Normalized_Boiler_B_Fg_Ch4_Concentration": "'Boiler_B_Fuel_Composition_Total'",
+    "Normalized_Boiler_D_Fg_Nc4_Concentration": "'Boiler_D_Fuel_Composition_Total'",
+    "Normalized_Boiler_B_Fg_Nc4_Concentration": "'Boiler_B_Fuel_Composition_Total'",
+    "Normalized_Boiler_C_Fg_Nc4_Concentration": "'Boiler_C_Fuel_Composition_Total'",
+    "Normalized_Boiler_E_Fg_Nc4_Concentration": "'Boiler_E_Fuel_Composition_Total'",
+    "Normalized_Boiler_D_Fg_N2_Concentration": "'Boiler_D_Fuel_Composition_Total'",
+    "Normalized_Boiler_B_Fg_N2_Concentration": "'Boiler_B_Fuel_Composition_Total'",
+    "Normalized_Boiler_E_Fg_N2_Concentration": "'Boiler_E_Fuel_Composition_Total'",
+    "Normalized_Boiler_C_Fg_N2_Concentration": "'Boiler_C_Fuel_Composition_Total'",
+    "ECT_elect_EG1_SEU_percent_energy": "'ECT_elect_EG1_Total_energy'",
+    "ECT_elect_EG1_Non_SEU_energy": "'ECT_elect_EG1_Total_energy'",
+    "ECT_EG1_SEU_percent_energy": "'ECT_EG1_Total_energy'",
+    "ECT_EG1_Non_SEU_energy": "'ECT_EG1_Total_energy'",
+    "ECT_EG2_SEU_percent_energy": "'ECT_EG2_Total_energy'",
+    "ECT_EG2_Non_SEU_energy": "'ECT_EG2_Total_energy'",
+    "ECT_elect_EG2_SEU_percent_energy": "'ECT_elect_EG2_Total_energy'",
+    "ECT_elect_EG2_Non_SEU_energy": "'ECT_elect_EG2_Total_energy'",
+    "ECT_elect_EG3_SEU_percent_energy": "'ECT_elect_EG3_Total_energy'",
+    "ECT_elect_EG3_Non_SEU_energy": "'ECT_elect_EG3_Total_energy'",
+    "ECT_fuel_LAO_SEU_percent_energy": "'ECT_fuel_LAO_Total_energy'",
+    "ECT_fuel_LAO_Non_SEU_energy": "'ECT_fuel_LAO_Total_energy'",
+    "ECT_LAO_SEU_percent_energy": "'ECT_LAO_Total_energy'",
+    "ECT_LAO_Non_SEU_energy": "'ECT_LAO_Total_energy'",
+    "Boiler_D_Avg_Cp_Of_Fuel_Gas_Sensible_Heat_Corrected": "'Boiler_D_Cp_Total_Fuel_At_Ref_Temp'",
+    "Boiler_B_Avg_Cp_Of_Fuel_Gas_Sensible_Heat_Corrected": "'Boiler_B_Cp_Total_Fuel_At_Ref_Temp'",
+    "Boiler_E_Avg_Cp_Of_Fuel_Gas_Sensible_Heat_Corrected": "'Boiler_E_Cp_Total_Fuel_At_Ref_Temp'",
+    "Boiler_C_Avg_Cp_Of_Fuel_Gas_Sensible_Heat_Corrected": "'Boiler_C_Cp_Total_Fuel_At_Ref_Temp'",
+    "ECT_Eth_SEU_percent_energy": "'ECT_Eth_Total_energy'",
+    "ECT_Eth_Non_SEU_energy": "'ECT_Eth_Total_energy'",
+    "ECT_fuel_Eth_SEU_percent_energy": "'ECT_fuel_Eth_Total_energy'",
+    "ECT_fuel_Eth_Non_SEU_energy": "'ECT_fuel_Eth_Total_energy'",
+    "Boiler_A_Avg_Cp_Of_Fuel_Gas_Sensible_Heat_Corrected": "'Boiler_A_Cp_Total_Fuel_At_Ref_Temp'",
+    "Boiler_D_Fg_Ch4_Mass_Fraction": "'Boiler_D_Total_Fuel_Compostion_Mass'",
+    "Boiler_D_Fg_Propane_Mass_Fraction": "'Boiler_D_Total_Fuel_Compostion_Mass'",
+    "Boiler_D_Fg_Ethylene_Mass_Fraction": "'Boiler_D_Total_Fuel_Compostion_Mass'",
+    "Boiler_D_Fg_Nc5_Mass_Fraction": "'Boiler_D_Total_Fuel_Compostion_Mass'",
+    "Boiler_D_Fg_Ic4_Mass_Fraction": "'Boiler_D_Total_Fuel_Compostion_Mass'",
+    "Boiler_D_Fg_Ic5_Mass_Fraction": "'Boiler_D_Total_Fuel_Compostion_Mass'",
+    "Boiler_D_Fg_Hydrogen_Mass_Fraction": "'Boiler_D_Total_Fuel_Compostion_Mass'",
+    "Boiler_D_Fg_Nc4_Mass_Fraction": "'Boiler_D_Total_Fuel_Compostion_Mass'",
+    "Boiler_D_Fg_Ethane_Mass_Fraction": "'Boiler_D_Total_Fuel_Compostion_Mass'",
+    "Boiler_B_Fg_Ic5_Mass_Fraction": "'Boiler_B_Total_Fuel_Compostion_Mass'",
+    "Boiler_B_Fg_Nc4_Mass_Fraction": "'Boiler_B_Total_Fuel_Compostion_Mass'",
+    "Boiler_B_Fg_Ethane_Mass_Fraction": "'Boiler_B_Total_Fuel_Compostion_Mass'",
+    "Boiler_B_Fg_Nc5_Mass_Fraction": "'Boiler_B_Total_Fuel_Compostion_Mass'",
+    "Boiler_B_Fg_Propane_Mass_Fraction": "'Boiler_B_Total_Fuel_Compostion_Mass'",
+    "Boiler_B_Fg_Hydrogen_Mass_Fraction": "'Boiler_B_Total_Fuel_Compostion_Mass'",
+    "Boiler_B_Fg_Ic4_Mass_Fraction": "'Boiler_B_Total_Fuel_Compostion_Mass'",
+    "Boiler_B_Fg_Ethylene_Mass_Fraction": "'Boiler_B_Total_Fuel_Compostion_Mass'",
+    "Boiler_B_Fg_Ch4_Mass_Fraction": "'Boiler_B_Total_Fuel_Compostion_Mass'",
+    "Boiler_E_Fg_Nc4_Mass_Fraction": "'Boiler_E_Total_Fuel_Compostion_Mass'",
+    "Boiler_E_Fg_Hydrogen_Mass_Fraction": "'Boiler_E_Total_Fuel_Compostion_Mass'",
+    "Boiler_E_Fg_Ch4_Mass_Fraction": "'Boiler_E_Total_Fuel_Compostion_Mass'",
+    "Boiler_E_Fg_Ic5_Mass_Fraction": "'Boiler_E_Total_Fuel_Compostion_Mass'",
+    "Boiler_E_Fg_Ethane_Mass_Fraction": "'Boiler_E_Total_Fuel_Compostion_Mass'",
+    "Boiler_E_Fg_Ethylene_Mass_Fraction": "'Boiler_E_Total_Fuel_Compostion_Mass'",
+    "Boiler_E_Fg_Nc5_Mass_Fraction": "'Boiler_E_Total_Fuel_Compostion_Mass'",
+    "Boiler_E_Fg_Propane_Mass_Fraction": "'Boiler_E_Total_Fuel_Compostion_Mass'",
+    "Boiler_E_Fg_Ic4_Mass_Fraction": "'Boiler_E_Total_Fuel_Compostion_Mass'",
+    "Boiler_C_Fg_Ch4_Mass_Fraction": "'Boiler_C_Total_Fuel_Compostion_Mass'",
+    "Boiler_C_Fg_Ic4_Mass_Fraction": "'Boiler_C_Total_Fuel_Compostion_Mass'",
+    "Boiler_C_Fg_Ic5_Mass_Fraction": "'Boiler_C_Total_Fuel_Compostion_Mass'",
+    "Boiler_C_Fg_Ethane_Mass_Fraction": "'Boiler_C_Total_Fuel_Compostion_Mass'",
+    "Boiler_C_Fg_Propane_Mass_Fraction": "'Boiler_C_Total_Fuel_Compostion_Mass'",
+    "Boiler_C_Fg_Hydrogen_Mass_Fraction": "'Boiler_C_Total_Fuel_Compostion_Mass'",
+    "Boiler_C_Fg_Nc4_Mass_Fraction": "'Boiler_C_Total_Fuel_Compostion_Mass'",
+    "Boiler_C_Fg_Nc5_Mass_Fraction": "'Boiler_C_Total_Fuel_Compostion_Mass'",
+    "Boiler_C_Fg_Ethylene_Mass_Fraction": "'Boiler_C_Total_Fuel_Compostion_Mass'",
+    "ECT_all_SEU_percent_energy": "'ECT_all_plants_Total_energy'",
+    "ECT_fuel_UO_SEU_percent_energy": "'ECT_fuel_UO_Total_energy'",
+    "ECT_fuel_UO_Non_SEU_energy": "'ECT_fuel_UO_Total_energy'",
+    "Boiler_D_Flue_Gas_Per_Fuel_Mass_Ratio": "'Boiler_D_Total_H2O_Per_Kg_Of_Fuel'",
+    "Boiler_B_Flue_Gas_Per_Fuel_Mass_Ratio": "'Boiler_B_Total_H2O_Per_Kg_Of_Fuel'",
+    "Boiler_E_Flue_Gas_Per_Fuel_Mass_Ratio": "'Boiler_E_Total_H2O_Per_Kg_Of_Fuel'",
+    "Boiler_C_Flue_Gas_Per_Fuel_Mass_Ratio": "'Boiler_C_Total_H2O_Per_Kg_Of_Fuel'",
+    "Boiler_D_Flue_Gas_Mw": "'Boiler_D_Total_H2O_Per_Kg_Of_Fuel'",
+    "Boiler_B_Flue_Gas_Mw": "'Boiler_B_Total_H2O_Per_Kg_Of_Fuel'",
+    "Boiler_E_Flue_Gas_Mw": "'Boiler_E_Total_H2O_Per_Kg_Of_Fuel'",
+    "Boiler_C_Flue_Gas_Mw": "'Boiler_C_Total_H2O_Per_Kg_Of_Fuel'",
+    "LAO_Flue_Gas_Per_Fuel_Mass_Ratio": "'LAO_Total_H2O_Per_Kg_Of_Fuel'",
+    "Boiler_A_Flue_Gas_Per_Fuel_Mass_Ratio": "'Boiler_A_Total_H2O_Per_Kg_Of_Fuel'",
+    "LAO_Flue_Gas_Per_Fuel_Mass_Ratio_Adjusted": "'LAO_Total_H2O_Per_Kg_Of_Fuel_Adjusted'",
+    "LAO_Flue_Gas_Mw": "'LAO_Total_H2O_Per_Kg_Of_Fuel'",
+    "Boiler_A_Flue_Gas_Mw": "'Boiler_A_Total_H2O_Per_Kg_Of_Fuel'",
+    "LAO_Flue_Gas_Mw_Adjusted": "'LAO_Total_H2O_Per_Kg_Of_Fuel_Adjusted'"
+  }
+}

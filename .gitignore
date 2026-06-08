@@ -1,0 +1,70 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# Environment
+.env
+.env.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+_run.log
+
+# ── Excluded folders ──────────────────────────────────────────────
+_obsolete/
+.claude/settings.local.json
+.claude/scheduled_tasks.lock
+
+# Node.js (safety net; EO_Frontend/.gitignore handles it locally too)
+node_modules/
+
+# .NET build artifacts
+**/bin/
+**/obj/
+*.user
+
+# SQL Server database backup files (too large for GitHub)
+*.bak
+
+# Notebook output folder (generated xlsx — not source)
+output/
+outputs/
+
+# Generated report xlsx (re-created each pipeline run)
+step_validation_*.xlsx
+python_vs_db_parity_*.xlsx
+optimizer_qc_report_*.xlsx
+run_metadata_*.json
+*.bak_*.ipynb
+
+# Generated KPI output xlsx (re-created by build_*.py scripts)
+SEU_KPI_Packages.xlsx
+SEU_All_KPIs.xlsx
+SEU_Sheet_KPIs.xlsx
+KPI_Output.xlsx
+KPI_Reconciliation*.xlsx
+KPI_Inferred_Mapping*.xlsx
+KPI_By_InputFingerprint.xlsx
+master_pi_sheet.xlsx
+Boiler_PEEO_Tags_with_results.xlsx
+
+# Other large binary outputs
+*.xlsx.bak
+.~*.xlsx
+~$*

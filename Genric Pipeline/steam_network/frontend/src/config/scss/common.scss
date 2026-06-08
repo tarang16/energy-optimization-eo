@@ -1,0 +1,18 @@
+@use './variables' as *;
+
+.bg_primary_white { background-color: $primary_white; }
+.bg_primary_blue_bg { background-color: $primary_blue_bg; }
+.bg_primary_gray_4 { background-color: $primary_gray_4; }
+
+.text_primary_blue { color: $primary_blue; }
+.text_primary_gray { color: $primary_gray; }
+.text_primary_gray_2 { color: $primary_gray_2; }
+.text_primary_white { color: $primary_white; }
+.text_primary_green { color: $primary_green; }
+.text_primary_orange { color: $primary_orange; }
+
+.border_primary_gray_3 { border: 1px solid $primary_gray_3; }
+
+.cursor-pointer { cursor: pointer; }
+.cursor-default { cursor: default; }
+.cursor-not-allowed { cursor: not-allowed; }

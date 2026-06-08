@@ -1,0 +1,384 @@
+{
+  "model_id": "boiler_calc_v1",
+  "version": "v1",
+  "system_id": "boiler_plant",
+  "feature_flag": "boiler_calc",
+  "input_config_sheets": {
+    "instantiated_attrs": "intantiated_attributes",
+    "sensors_mapping": "Sensors_Mapping"
+  },
+  "output_schemas": {
+    "output_attribute_values": {
+      "mandatory": true,
+      "db_table": "output_attribute_values_table",
+      "natural_key": [
+        "run_id",
+        "timestamp",
+        "element_code",
+        "attribute"
+      ],
+      "partition_interval": "month",
+      "fields": [
+        {
+          "name": "model_id",
+          "type": "string",
+          "nullable": false
+        },
+        {
+          "name": "run_id",
+          "type": "string",
+          "nullable": false
+        },
+        {
+          "name": "timestamp",
+          "type": "datetime",
+          "nullable": false
+        },
+        {
+          "name": "element_code",
+          "type": "string",
+          "nullable": false
+        },
+        {
+          "name": "attribute",
+          "type": "string",
+          "nullable": false
+        },
+        {
+          "name": "value",
+          "type": "float",
+          "nullable": true
+        }
+      ],
+      "allowed_combinations": [
+        {
+          "attribute": "STATUS",
+          "element_code": "57db313d-bba0-598e-8f03-0af6d096a157"
+        },
+        {
+          "attribute": "HPS_GEN",
+          "element_code": "57db313d-bba0-598e-8f03-0af6d096a157"
+        },
+        {
+          "attribute": "FUEL_FLOW",
+          "element_code": "57db313d-bba0-598e-8f03-0af6d096a157"
+        },
+        {
+          "attribute": "BOILER_LOAD",
+          "element_code": "57db313d-bba0-598e-8f03-0af6d096a157"
+        },
+        {
+          "attribute": "SPEC_EN_CONS",
+          "element_code": "57db313d-bba0-598e-8f03-0af6d096a157"
+        },
+        {
+          "attribute": "SPEC_EN_CONS_OPT",
+          "element_code": "57db313d-bba0-598e-8f03-0af6d096a157"
+        },
+        {
+          "attribute": "SPEC_EN_CONS_DEV",
+          "element_code": "57db313d-bba0-598e-8f03-0af6d096a157"
+        },
+        {
+          "attribute": "FD_FAN_STEAM",
+          "element_code": "57db313d-bba0-598e-8f03-0af6d096a157"
+        },
+        {
+          "attribute": "FD_FAN_STEAM_REG",
+          "element_code": "57db313d-bba0-598e-8f03-0af6d096a157"
+        },
+        {
+          "attribute": "STACK_TEMP_CLIPPED",
+          "element_code": "57db313d-bba0-598e-8f03-0af6d096a157"
+        },
+        {
+          "attribute": "FUEL_INPUT_GJ_H",
+          "element_code": "57db313d-bba0-598e-8f03-0af6d096a157"
+        },
+        {
+          "attribute": "USEFUL_HEAT_GJ_H",
+          "element_code": "57db313d-bba0-598e-8f03-0af6d096a157"
+        },
+        {
+          "attribute": "EFFICIENCY_PCT",
+          "element_code": "57db313d-bba0-598e-8f03-0af6d096a157"
+        },
+        {
+          "attribute": "CO2_T_PER_H",
+          "element_code": "57db313d-bba0-598e-8f03-0af6d096a157"
+        },
+        {
+          "attribute": "STATUS",
+          "element_code": "99015c6b-97d3-5b59-92d5-11c1ea6eb68f"
+        },
+        {
+          "attribute": "HPS_GEN",
+          "element_code": "99015c6b-97d3-5b59-92d5-11c1ea6eb68f"
+        },
+        {
+          "attribute": "FUEL_FLOW",
+          "element_code": "99015c6b-97d3-5b59-92d5-11c1ea6eb68f"
+        },
+        {
+          "attribute": "BOILER_LOAD",
+          "element_code": "99015c6b-97d3-5b59-92d5-11c1ea6eb68f"
+        },
+        {
+          "attribute": "SPEC_EN_CONS",
+          "element_code": "99015c6b-97d3-5b59-92d5-11c1ea6eb68f"
+        },
+        {
+          "attribute": "SPEC_EN_CONS_OPT",
+          "element_code": "99015c6b-97d3-5b59-92d5-11c1ea6eb68f"
+        },
+        {
+          "attribute": "SPEC_EN_CONS_DEV",
+          "element_code": "99015c6b-97d3-5b59-92d5-11c1ea6eb68f"
+        },
+        {
+          "attribute": "FD_FAN_STEAM",
+          "element_code": "99015c6b-97d3-5b59-92d5-11c1ea6eb68f"
+        },
+        {
+          "attribute": "FD_FAN_STEAM_REG",
+          "element_code": "99015c6b-97d3-5b59-92d5-11c1ea6eb68f"
+        },
+        {
+          "attribute": "STACK_TEMP_CLIPPED",
+          "element_code": "99015c6b-97d3-5b59-92d5-11c1ea6eb68f"
+        },
+        {
+          "attribute": "FUEL_INPUT_GJ_H",
+          "element_code": "99015c6b-97d3-5b59-92d5-11c1ea6eb68f"
+        },
+        {
+          "attribute": "USEFUL_HEAT_GJ_H",
+          "element_code": "99015c6b-97d3-5b59-92d5-11c1ea6eb68f"
+        },
+        {
+          "attribute": "EFFICIENCY_PCT",
+          "element_code": "99015c6b-97d3-5b59-92d5-11c1ea6eb68f"
+        },
+        {
+          "attribute": "CO2_T_PER_H",
+          "element_code": "99015c6b-97d3-5b59-92d5-11c1ea6eb68f"
+        },
+        {
+          "attribute": "STATUS",
+          "element_code": "0b91d938-03f0-5600-b325-f831fd539948"
+        },
+        {
+          "attribute": "HPS_GEN",
+          "element_code": "0b91d938-03f0-5600-b325-f831fd539948"
+        },
+        {
+          "attribute": "FUEL_FLOW",
+          "element_code": "0b91d938-03f0-5600-b325-f831fd539948"
+        },
+        {
+          "attribute": "BOILER_LOAD",
+          "element_code": "0b91d938-03f0-5600-b325-f831fd539948"
+        },
+        {
+          "attribute": "SPEC_EN_CONS",
+          "element_code": "0b91d938-03f0-5600-b325-f831fd539948"
+        },
+        {
+          "attribute": "SPEC_EN_CONS_OPT",
+          "element_code": "0b91d938-03f0-5600-b325-f831fd539948"
+        },
+        {
+          "attribute": "SPEC_EN_CONS_DEV",
+          "element_code": "0b91d938-03f0-5600-b325-f831fd539948"
+        },
+        {
+          "attribute": "FD_FAN_STEAM",
+          "element_code": "0b91d938-03f0-5600-b325-f831fd539948"
+        },
+        {
+          "attribute": "FD_FAN_STEAM_REG",
+          "element_code": "0b91d938-03f0-5600-b325-f831fd539948"
+        },
+        {
+          "attribute": "STACK_TEMP_CLIPPED",
+          "element_code": "0b91d938-03f0-5600-b325-f831fd539948"
+        },
+        {
+          "attribute": "FUEL_INPUT_GJ_H",
+          "element_code": "0b91d938-03f0-5600-b325-f831fd539948"
+        },
+        {
+          "attribute": "USEFUL_HEAT_GJ_H",
+          "element_code": "0b91d938-03f0-5600-b325-f831fd539948"
+        },
+        {
+          "attribute": "EFFICIENCY_PCT",
+          "element_code": "0b91d938-03f0-5600-b325-f831fd539948"
+        },
+        {
+          "attribute": "CO2_T_PER_H",
+          "element_code": "0b91d938-03f0-5600-b325-f831fd539948"
+        },
+        {
+          "attribute": "STATUS",
+          "element_code": "8d011aee-b730-5ce7-8790-7ee7b0ad8dad"
+        },
+        {
+          "attribute": "HPS_GEN",
+          "element_code": "8d011aee-b730-5ce7-8790-7ee7b0ad8dad"
+        },
+        {
+          "attribute": "FUEL_FLOW",
+          "element_code": "8d011aee-b730-5ce7-8790-7ee7b0ad8dad"
+        },
+        {
+          "attribute": "BOILER_LOAD",
+          "element_code": "8d011aee-b730-5ce7-8790-7ee7b0ad8dad"
+        },
+        {
+          "attribute": "SPEC_EN_CONS",
+          "element_code": "8d011aee-b730-5ce7-8790-7ee7b0ad8dad"
+        },
+        {
+          "attribute": "SPEC_EN_CONS_OPT",
+          "element_code": "8d011aee-b730-5ce7-8790-7ee7b0ad8dad"
+        },
+        {
+          "attribute": "SPEC_EN_CONS_DEV",
+          "element_code": "8d011aee-b730-5ce7-8790-7ee7b0ad8dad"
+        },
+        {
+          "attribute": "FD_FAN_STEAM",
+          "element_code": "8d011aee-b730-5ce7-8790-7ee7b0ad8dad"
+        },
+        {
+          "attribute": "FD_FAN_STEAM_REG",
+          "element_code": "8d011aee-b730-5ce7-8790-7ee7b0ad8dad"
+        },
+        {
+          "attribute": "STACK_TEMP_CLIPPED",
+          "element_code": "8d011aee-b730-5ce7-8790-7ee7b0ad8dad"
+        },
+        {
+          "attribute": "FUEL_INPUT_GJ_H",
+          "element_code": "8d011aee-b730-5ce7-8790-7ee7b0ad8dad"
+        },
+        {
+          "attribute": "USEFUL_HEAT_GJ_H",
+          "element_code": "8d011aee-b730-5ce7-8790-7ee7b0ad8dad"
+        },
+        {
+          "attribute": "EFFICIENCY_PCT",
+          "element_code": "8d011aee-b730-5ce7-8790-7ee7b0ad8dad"
+        },
+        {
+          "attribute": "CO2_T_PER_H",
+          "element_code": "8d011aee-b730-5ce7-8790-7ee7b0ad8dad"
+        },
+        {
+          "attribute": "STATUS",
+          "element_code": "da0df97a-124a-5aaf-be0f-bb8619424292"
+        },
+        {
+          "attribute": "HPS_GEN",
+          "element_code": "da0df97a-124a-5aaf-be0f-bb8619424292"
+        },
+        {
+          "attribute": "FUEL_FLOW",
+          "element_code": "da0df97a-124a-5aaf-be0f-bb8619424292"
+        },
+        {
+          "attribute": "BOILER_LOAD",
+          "element_code": "da0df97a-124a-5aaf-be0f-bb8619424292"
+        },
+        {
+          "attribute": "SPEC_EN_CONS",
+          "element_code": "da0df97a-124a-5aaf-be0f-bb8619424292"
+        },
+        {
+          "attribute": "SPEC_EN_CONS_OPT",
+          "element_code": "da0df97a-124a-5aaf-be0f-bb8619424292"
+        },
+        {
+          "attribute": "SPEC_EN_CONS_DEV",
+          "element_code": "da0df97a-124a-5aaf-be0f-bb8619424292"
+        },
+        {
+          "attribute": "FD_FAN_STEAM",
+          "element_code": "da0df97a-124a-5aaf-be0f-bb8619424292"
+        },
+        {
+          "attribute": "FD_FAN_STEAM_REG",
+          "element_code": "da0df97a-124a-5aaf-be0f-bb8619424292"
+        },
+        {
+          "attribute": "STACK_TEMP_CLIPPED",
+          "element_code": "da0df97a-124a-5aaf-be0f-bb8619424292"
+        },
+        {
+          "attribute": "FUEL_INPUT_GJ_H",
+          "element_code": "da0df97a-124a-5aaf-be0f-bb8619424292"
+        },
+        {
+          "attribute": "USEFUL_HEAT_GJ_H",
+          "element_code": "da0df97a-124a-5aaf-be0f-bb8619424292"
+        },
+        {
+          "attribute": "EFFICIENCY_PCT",
+          "element_code": "da0df97a-124a-5aaf-be0f-bb8619424292"
+        },
+        {
+          "attribute": "CO2_T_PER_H",
+          "element_code": "da0df97a-124a-5aaf-be0f-bb8619424292"
+        }
+      ]
+    },
+    "imputation_history": {
+      "mandatory": false,
+      "db_table": "imputation_history_table",
+      "natural_key": [
+        "run_id",
+        "timestamp",
+        "sensor"
+      ],
+      "partition_interval": "none",
+      "fields": [
+        {
+          "name": "model_id",
+          "type": "string",
+          "nullable": false
+        },
+        {
+          "name": "run_id",
+          "type": "string",
+          "nullable": false
+        },
+        {
+          "name": "timestamp",
+          "type": "datetime",
+          "nullable": false
+        },
+        {
+          "name": "sensor",
+          "type": "string",
+          "nullable": false
+        },
+        {
+          "name": "raw_value",
+          "type": "float",
+          "nullable": true
+        },
+        {
+          "name": "modified_value",
+          "type": "float",
+          "nullable": false
+        },
+        {
+          "name": "sip_policy",
+          "type": "string",
+          "nullable": false
+        }
+      ]
+    }
+  }
+}

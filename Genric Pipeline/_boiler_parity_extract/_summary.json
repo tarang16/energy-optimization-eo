@@ -1,0 +1,77 @@
+{
+  "inferred": {
+    "total": 3342,
+    "boiler_rows": 707
+  },
+  "variables": {
+    "total": 172,
+    "boiler_rows": 24,
+    "cols": [
+      "tag_name",
+      "lower_bound_value",
+      "lower_bound_expression",
+      "upper_bound_value",
+      "upper_bound_expression",
+      "flag_integer",
+      "source_flag"
+    ]
+  },
+  "derived_equations": {
+    "total": 117,
+    "boiler_rows": 18,
+    "cols": [
+      "tag_name",
+      "formula_expression",
+      "active",
+      "source_flag"
+    ]
+  },
+  "derived_equation_post_optimizer": {
+    "total": 82,
+    "boiler_rows": 5
+  },
+  "constraints": {
+    "total": 44,
+    "boiler_rows": 0,
+    "cols": [
+      "system",
+      "expression",
+      "active",
+      "source_flag"
+    ]
+  },
+  "master_pi_data": {
+    "total_cols": 1474,
+    "boiler_cols": 129
+  },
+  "tag": {
+    "total": 4497,
+    "boiler_rows": 787,
+    "cols": [
+      "tag_name",
+      "pi_name",
+      "tag_type",
+      "data_type"
+    ]
+  },
+  "inferred_tag_rm_block_mapping": {
+    "total": 2850,
+    "boiler_rows": 662,
+    "cols": [
+      "model_id",
+      "tag_name",
+      "data_enrichment_inferred_calculation",
+      "post_optimizer_inferred_calculation",
+      "pre_optimizer_iterative_inferred",
+      "data_ingestion_seu_seec_inferred_calc",
+      "data_enrichment_peeo_adjusted_inferred",
+      "whatif_inferred"
+    ]
+  },
+  "objective": [
+    {
+      "tag_name": "Objective_2",
+      "direction": -1
+    }
+  ]
+}

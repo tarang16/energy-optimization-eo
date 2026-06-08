@@ -1,0 +1,607 @@
+<?xml version="1.0" encoding="UTF-8"?><process version="10.4.003">
+  <context>
+    <input/>
+    <output/>
+    <macros>
+      <macro>
+        <key>model_id</key>
+        <value>from_api</value>
+      </macro>
+      <macro>
+        <key>time_stamp</key>
+        <value>from_api</value>
+      </macro>
+    </macros>
+  </context>
+  <operator activated="true" class="process" compatibility="10.4.003" expanded="true" name="Process">
+    <parameter key="logverbosity" value="init"/>
+    <parameter key="random_seed" value="2001"/>
+    <parameter key="send_mail" value="never"/>
+    <parameter key="notification_email" value=""/>
+    <parameter key="process_duration_for_mail" value="30"/>
+    <parameter key="encoding" value="SYSTEM"/>
+    <process expanded="true">
+      <operator activated="true" class="handle_exception" compatibility="10.4.003" expanded="true" height="82" name="Handle Exception" width="90" x="380" y="136">
+        <parameter key="exception_macro" value="error"/>
+        <parameter key="add_details_to_log" value="true"/>
+        <process expanded="true">
+          <operator activated="true" class="generate_macro" compatibility="10.4.003" expanded="true" height="68" name="Generate Macro (2)" width="90" x="45" y="340">
+            <list key="function_descriptions">
+              <parameter key="block_level_0" value="lower(%{process_name})"/>
+              <parameter key="block" value="%{block_level_0}"/>
+            </list>
+          </operator>
+          <operator activated="true" class="subprocess" compatibility="10.4.003" expanded="true" height="82" name="api_inputs (4)" width="90" x="112" y="85">
+            <process expanded="true">
+              <operator activated="true" class="generate_macro" compatibility="10.4.003" expanded="true" height="68" name="Generate Macro" width="90" x="45" y="85">
+                <list key="function_descriptions">
+                  <parameter key="block_level_1" value="concat(%{block_level_0},&quot;/api_input&quot;)"/>
+                  <parameter key="block" value="%{block_level_1}"/>
+                </list>
+              </operator>
+              <operator activated="true" class="parse_numbers" compatibility="10.4.003" expanded="true" height="82" name="Parse Numbers" width="90" x="246" y="34">
+                <parameter key="attribute_filter_type" value="all"/>
+                <parameter key="attribute" value=""/>
+                <parameter key="attributes" value=""/>
+                <parameter key="use_except_expression" value="false"/>
+                <parameter key="value_type" value="nominal"/>
+                <parameter key="use_value_type_exception" value="false"/>
+                <parameter key="except_value_type" value="file_path"/>
+                <parameter key="block_type" value="single_value"/>
+                <parameter key="use_block_type_exception" value="false"/>
+                <parameter key="except_block_type" value="single_value"/>
+                <parameter key="invert_selection" value="false"/>
+                <parameter key="include_special_attributes" value="false"/>
+                <parameter key="decimal_character" value="."/>
+                <parameter key="grouped_digits" value="false"/>
+                <parameter key="grouping_character" value=","/>
+                <parameter key="infinity_representation" value=""/>
+                <parameter key="unparsable_value_handling" value="skip attribute"/>
+              </operator>
+              <operator activated="true" class="remember" compatibility="10.0.000" expanded="true" height="68" name="api_inputs (5)" width="90" x="380" y="34">
+                <parameter key="name" value="api_inputs"/>
+                <parameter key="io_object" value="ExampleSet"/>
+                <parameter key="store_which" value="1"/>
+                <parameter key="remove_from_process" value="true"/>
+              </operator>
+              <connect from_port="in 1" to_op="Parse Numbers" to_port="example set input"/>
+              <connect from_op="Parse Numbers" from_port="example set output" to_op="api_inputs (5)" to_port="store"/>
+              <portSpacing port="source_in 1" spacing="0"/>
+              <portSpacing port="source_in 2" spacing="0"/>
+              <portSpacing port="sink_out 1" spacing="0"/>
+            </process>
+            <description align="center" color="transparent" colored="false" width="126">Prepare and recall&lt;br&gt;API input of&lt;br&gt;user defined plant parameters</description>
+          </operator>
+          <operator activated="true" class="subprocess" compatibility="10.4.003" expanded="true" height="68" name="Data initialization" width="90" x="246" y="85">
+            <process expanded="true">
+              <operator activated="true" class="generate_macro" compatibility="10.4.003" expanded="true" height="68" name="Generate Macro (3)" width="90" x="112" y="136">
+                <list key="function_descriptions">
+                  <parameter key="block_level_1" value="concat(%{block_level_0},&quot;/data initialization&quot;)"/>
+                  <parameter key="block" value="%{block_level_1}"/>
+                </list>
+                <description align="center" color="transparent" colored="false" width="126">block</description>
+              </operator>
+              <operator activated="true" class="set_macros" compatibility="10.4.003" expanded="true" height="68" name="Set Macros (2)" width="90" x="246" y="136">
+                <list key="macros">
+                  <parameter key="connection_sql_eo" value="/Connections/MSSQL_EO_2024"/>
+                </list>
+                <description align="center" color="transparent" colored="false" width="126">conn initialization&lt;br/&gt;sql_connections</description>
+              </operator>
+              <operator activated="true" class="subprocess" compatibility="10.4.003" expanded="true" height="68" name="Read Tables (2)" width="90" x="514" y="136">
+                <process expanded="true">
+                  <operator activated="true" class="generate_macro" compatibility="10.4.003" expanded="true" height="68" name="Generate Macro (4)" width="90" x="45" y="85">
+                    <list key="function_descriptions">
+                      <parameter key="block_level_2" value="concat(%{block_level_1},&quot;/read tables&quot;)"/>
+                      <parameter key="block" value="%{block_level_2}"/>
+                    </list>
+                    <description align="center" color="transparent" colored="false" width="126">block</description>
+                  </operator>
+                  <operator activated="true" class="jdbc_connectors:read_database" compatibility="10.4.003" expanded="true" height="82" name="Read Database (22)" width="90" x="45" y="187">
+                    <parameter key="define_connection" value="repository"/>
+                    <parameter key="connection_entry" value="%{connection_sql_eo}"/>
+                    <parameter key="database_system" value="MySQL"/>
+                    <parameter key="define_query" value="query"/>
+                    <parameter key="query" value="SELECT mt.model_tag_id,mt.tag_id,t.tag_name,t.tag_type,t.data_type&#10;FROM &quot;dbo&quot;.&quot;model&quot; m&#10;INNER JOIN &quot;dbo&quot;.&quot;model_tag&quot; mt ON m.model_id = mt.model_id&#10;INNER JOIN &quot;dbo&quot;.&quot;tag&quot; t ON mt.tag_id = t.tag_id&#10;WHERE m.model_id = %{model_id} AND t.active = 1 and mt.active=1 &#10;"/>
+                    <parameter key="use_default_schema" value="true"/>
+                    <parameter key="prepare_statement" value="false"/>
+                    <enumeration key="parameters"/>
+                    <parameter key="data_management" value="auto"/>
+                  </operator>
+                  <operator activated="true" class="remember" compatibility="10.0.000" expanded="true" height="68" name="tags" width="90" x="179" y="187">
+                    <parameter key="name" value="tags"/>
+                    <parameter key="io_object" value="ExampleSet"/>
+                    <parameter key="store_which" value="1"/>
+                    <parameter key="remove_from_process" value="true"/>
+                  </operator>
+                  <operator activated="true" class="jdbc_connectors:read_database" compatibility="10.4.003" expanded="true" height="82" name="Read Database (23)" width="90" x="45" y="340">
+                    <parameter key="define_connection" value="repository"/>
+                    <parameter key="connection_entry" value="%{connection_sql_eo}"/>
+                    <parameter key="database_system" value="MySQL"/>
+                    <parameter key="define_query" value="query"/>
+                    <parameter key="query" value="select sub_model_id, t.tag_name,mt.model_tag_id,sub_model_expression,sub_model_name,sub_model_type,algorithm,sb.&quot;order&quot;,response_output&#10;from dbo.sub_model sb&#10;join dbo.model_tag mt&#10;on mt.model_tag_id = sb.target_model_tag_id&#10;join dbo.tag t&#10;on mt.tag_id = t.tag_id&#10;where model_id = %{model_id} and sb.active = 1&#10;"/>
+                    <parameter key="use_default_schema" value="true"/>
+                    <parameter key="prepare_statement" value="false"/>
+                    <enumeration key="parameters"/>
+                    <parameter key="data_management" value="auto"/>
+                  </operator>
+                  <operator activated="true" class="remember" compatibility="10.0.000" expanded="true" height="68" name="sub_model (3)" width="90" x="179" y="340">
+                    <parameter key="name" value="sub_model"/>
+                    <parameter key="io_object" value="ExampleSet"/>
+                    <parameter key="store_which" value="1"/>
+                    <parameter key="remove_from_process" value="true"/>
+                  </operator>
+                  <operator activated="true" class="jdbc_connectors:read_database" compatibility="10.4.003" expanded="true" height="82" name="Read Database (26)" width="90" x="45" y="442">
+                    <parameter key="define_connection" value="repository"/>
+                    <parameter key="connection_entry" value="%{connection_sql_eo}"/>
+                    <parameter key="database_system" value="MySQL"/>
+                    <parameter key="define_query" value="query"/>
+                    <parameter key="query" value="select sub_model_id, tag_name&#10;from dbo.sub_model_child sb&#10;join dbo.model_tag mt&#10;on mt.model_tag_id = sb.child_model_tag_id&#10;join dbo.tag t&#10;on mt.tag_id = t.tag_id&#10;where model_id = %{model_id} and sb.active = 1 and flag_sub_model_input = 1&#10;"/>
+                    <parameter key="use_default_schema" value="true"/>
+                    <parameter key="prepare_statement" value="false"/>
+                    <enumeration key="parameters"/>
+                    <parameter key="data_management" value="auto"/>
+                  </operator>
+                  <operator activated="true" class="remember" compatibility="10.0.000" expanded="true" height="68" name="sub_model_child (3)" width="90" x="179" y="442">
+                    <parameter key="name" value="sub_model_child"/>
+                    <parameter key="io_object" value="ExampleSet"/>
+                    <parameter key="store_which" value="1"/>
+                    <parameter key="remove_from_process" value="true"/>
+                  </operator>
+                  <operator activated="true" class="jdbc_connectors:read_database" compatibility="10.4.003" expanded="true" height="82" name="Read Database (7)" width="90" x="45" y="544">
+                    <parameter key="define_connection" value="repository"/>
+                    <parameter key="connection_entry" value="%{connection_sql_eo}"/>
+                    <parameter key="database_system" value="MySQL"/>
+                    <parameter key="define_query" value="query"/>
+                    <parameter key="query" value="select [model_id],&#10;[tag_id],&#10;[time_stamp],&#10;[actual],&#10;[optimum],&#10;[design],&#10;[current]&#10;from dbo.model_Output  &#10;where model_id = %{model_id} and time_stamp = (select max(last_run_time) as last_sucessful_time  from (select * from Run_Info  where (model_status = 'on' or model_status = 'on_default')  and model_id =%{model_id} and last_run_time &lt;= '%{time_stamp}') as rn)&#10;"/>
+                    <parameter key="use_default_schema" value="true"/>
+                    <parameter key="table_name" value="case"/>
+                    <parameter key="prepare_statement" value="true"/>
+                    <enumeration key="parameters"/>
+                    <parameter key="data_management" value="auto"/>
+                  </operator>
+                  <operator activated="true" class="remember" compatibility="10.0.000" expanded="true" height="68" name="model_output" width="90" x="179" y="544">
+                    <parameter key="name" value="model_output"/>
+                    <parameter key="io_object" value="ExampleSet"/>
+                    <parameter key="store_which" value="1"/>
+                    <parameter key="remove_from_process" value="true"/>
+                  </operator>
+                  <operator activated="true" class="jdbc_connectors:read_database" compatibility="10.4.003" expanded="true" height="82" name="Read Database (8)" width="90" x="447" y="136">
+                    <parameter key="define_connection" value="repository"/>
+                    <parameter key="connection_entry" value="%{connection_sql_eo}"/>
+                    <parameter key="database_system" value="MySQL"/>
+                    <parameter key="define_query" value="query"/>
+                    <parameter key="query" value="SELECT *&#10;FROM &quot;dbo&quot;.&quot;what_if_user_inputs&quot;&#10;where active = 1"/>
+                    <parameter key="use_default_schema" value="true"/>
+                    <parameter key="prepare_statement" value="false"/>
+                    <enumeration key="parameters"/>
+                    <parameter key="data_management" value="auto"/>
+                  </operator>
+                  <operator activated="true" class="concurrency:join" compatibility="10.4.003" expanded="true" height="82" name="Join" width="90" x="581" y="85">
+                    <parameter key="remove_double_attributes" value="true"/>
+                    <parameter key="join_type" value="inner"/>
+                    <parameter key="use_id_attribute_as_key" value="false"/>
+                    <list key="key_attributes">
+                      <parameter key="model_tag_id" value="model_tag_id"/>
+                    </list>
+                    <parameter key="keep_both_join_attributes" value="false"/>
+                  </operator>
+                  <operator activated="true" class="remember" compatibility="10.0.000" expanded="true" height="68" name="user_inputs" width="90" x="715" y="85">
+                    <parameter key="name" value="user_inputs"/>
+                    <parameter key="io_object" value="ExampleSet"/>
+                    <parameter key="store_which" value="1"/>
+                    <parameter key="remove_from_process" value="true"/>
+                  </operator>
+                  <operator activated="true" class="jdbc_connectors:read_database" compatibility="10.4.003" expanded="true" height="82" name="Read Database" width="90" x="45" y="646">
+                    <parameter key="define_connection" value="repository"/>
+                    <parameter key="connection_entry" value="%{connection_sql_eo}"/>
+                    <parameter key="database_system" value="MySQL"/>
+                    <parameter key="define_query" value="query"/>
+                    <parameter key="query" value="select * from dbo.model where model_id = %{model_id}"/>
+                    <parameter key="use_default_schema" value="true"/>
+                    <parameter key="prepare_statement" value="false"/>
+                    <enumeration key="parameters"/>
+                    <parameter key="data_management" value="auto"/>
+                  </operator>
+                  <operator activated="true" class="extract_macro" compatibility="10.4.003" expanded="true" height="68" name="Extract Macro (27)" width="90" x="179" y="646">
+                    <parameter key="macro" value="case_id"/>
+                    <parameter key="macro_type" value="data_value"/>
+                    <parameter key="statistics" value="average"/>
+                    <parameter key="attribute_name" value="case_id"/>
+                    <parameter key="example_index" value="1"/>
+                    <list key="additional_macros"/>
+                    <description align="center" color="transparent" colored="false" width="126">case_id</description>
+                  </operator>
+                  <connect from_op="Read Database (22)" from_port="output" to_op="tags" to_port="store"/>
+                  <connect from_op="tags" from_port="stored" to_op="Join" to_port="left"/>
+                  <connect from_op="Read Database (23)" from_port="output" to_op="sub_model (3)" to_port="store"/>
+                  <connect from_op="Read Database (26)" from_port="output" to_op="sub_model_child (3)" to_port="store"/>
+                  <connect from_op="Read Database (7)" from_port="output" to_op="model_output" to_port="store"/>
+                  <connect from_op="Read Database (8)" from_port="output" to_op="Join" to_port="right"/>
+                  <connect from_op="Join" from_port="join" to_op="user_inputs" to_port="store"/>
+                  <connect from_op="Read Database" from_port="output" to_op="Extract Macro (27)" to_port="example set"/>
+                  <portSpacing port="source_in 1" spacing="0"/>
+                  <portSpacing port="sink_out 1" spacing="0"/>
+                  <description align="center" color="purple" colored="true" height="52" resized="false" width="569" x="404" y="14">Primary tables</description>
+                  <description align="center" color="gray" colored="true" height="59" resized="false" width="259" x="304" y="359">Read sub model table to be used in demand calculation in main block</description>
+                  <description align="center" color="gray" colored="true" height="59" resized="false" width="258" x="306" y="452">Read sub_model_child table to be used in demand calculation in main block</description>
+                  <description align="center" color="gray" colored="true" height="67" resized="false" width="258" x="308" y="543">Read model output for given timestamp to be merged with user inputs to calculate demands</description>
+                  <description align="center" color="gray" colored="true" height="67" resized="false" width="258" x="842" y="98">Read what if input table from dashboard sql connecton and joining tags to get corresponding tag name</description>
+                </process>
+                <description align="center" color="transparent" colored="false" width="126">Read tables</description>
+              </operator>
+              <operator activated="true" class="subprocess" compatibility="10.4.003" expanded="true" height="68" name="prepare_user_input" width="90" x="782" y="136">
+                <process expanded="true">
+                  <operator activated="true" class="generate_macro" compatibility="10.4.003" expanded="true" height="68" name="Generate Macro (5)" width="90" x="45" y="442">
+                    <list key="function_descriptions">
+                      <parameter key="block_level_2" value="concat(%{block_level_1},&quot;/prepare user input &quot;)"/>
+                      <parameter key="block" value="%{block_level_2}"/>
+                    </list>
+                    <description align="center" color="transparent" colored="false" width="126">block</description>
+                  </operator>
+                  <operator activated="true" class="recall" compatibility="10.4.003" expanded="true" height="68" name="api_inputs (6)" width="90" x="45" y="340">
+                    <parameter key="name" value="api_inputs"/>
+                    <parameter key="io_object" value="ExampleSet"/>
+                    <parameter key="remove_from_store" value="true"/>
+                  </operator>
+                  <operator activated="true" class="recall" compatibility="10.4.003" expanded="true" height="68" name="what_if_user_inputs (9)" width="90" x="45" y="238">
+                    <parameter key="name" value="user_inputs"/>
+                    <parameter key="io_object" value="ExampleSet"/>
+                    <parameter key="remove_from_store" value="true"/>
+                  </operator>
+                  <operator activated="true" class="concurrency:join" compatibility="10.4.003" expanded="true" height="82" name="Join (5)" width="90" x="179" y="238">
+                    <parameter key="remove_double_attributes" value="true"/>
+                    <parameter key="join_type" value="left"/>
+                    <parameter key="use_id_attribute_as_key" value="false"/>
+                    <list key="key_attributes">
+                      <parameter key="model_tag_id" value="model_tag_id"/>
+                    </list>
+                    <parameter key="keep_both_join_attributes" value="false"/>
+                    <description align="center" color="transparent" colored="false" width="126">LEFT&lt;br/&gt;model_tag_id</description>
+                  </operator>
+                  <operator activated="true" class="filter_examples" compatibility="10.4.003" expanded="true" height="103" name="Filter Examples" width="90" x="313" y="238">
+                    <parameter key="parameter_expression" value=""/>
+                    <parameter key="condition_class" value="custom_filters"/>
+                    <parameter key="invert_filter" value="false"/>
+                    <list key="filters_list">
+                      <parameter key="filters_entry_key" value="tag_name.is_not_missing."/>
+                    </list>
+                    <parameter key="filters_logic_and" value="true"/>
+                    <parameter key="filters_check_metadata" value="true"/>
+                    <description align="center" color="transparent" colored="false" width="124">tag_name not missing</description>
+                  </operator>
+                  <operator activated="true" class="recall" compatibility="10.4.003" expanded="true" height="68" name="model_output (3)" width="90" x="45" y="34">
+                    <parameter key="name" value="model_output"/>
+                    <parameter key="io_object" value="ExampleSet"/>
+                    <parameter key="remove_from_store" value="true"/>
+                  </operator>
+                  <operator activated="true" class="recall" compatibility="10.4.003" expanded="true" height="68" name="tags (2)" width="90" x="45" y="136">
+                    <parameter key="name" value="tags"/>
+                    <parameter key="io_object" value="ExampleSet"/>
+                    <parameter key="remove_from_store" value="true"/>
+                  </operator>
+                  <operator activated="true" class="concurrency:join" compatibility="10.4.003" expanded="true" height="82" name="Join (13)" width="90" x="179" y="34">
+                    <parameter key="remove_double_attributes" value="true"/>
+                    <parameter key="join_type" value="left"/>
+                    <parameter key="use_id_attribute_as_key" value="false"/>
+                    <list key="key_attributes">
+                      <parameter key="tag_id" value="tag_id"/>
+                    </list>
+                    <parameter key="keep_both_join_attributes" value="false"/>
+                    <description align="center" color="transparent" colored="false" width="126">LEFT&lt;br/&gt;tag_id</description>
+                  </operator>
+                  <operator activated="true" class="blending:select_attributes" compatibility="10.4.003" expanded="true" height="82" name="Select Attributes (3)" width="90" x="313" y="34">
+                    <parameter key="type" value="include attributes"/>
+                    <parameter key="attribute_filter_type" value="a subset"/>
+                    <parameter key="select_attribute" value="tag_name"/>
+                    <parameter key="select_subset" value="actual␞tag_name␞tag_id"/>
+                    <parameter key="also_apply_to_special_attributes_(id,_label..)" value="false"/>
+                    <description align="center" color="transparent" colored="false" width="126">actual&lt;br/&gt;tag_name&lt;br/&gt;tag_id</description>
+                  </operator>
+                  <operator activated="true" class="blending:select_attributes" compatibility="10.4.003" expanded="true" height="82" name="Select Attributes (7)" width="90" x="447" y="238">
+                    <parameter key="type" value="include attributes"/>
+                    <parameter key="attribute_filter_type" value="a subset"/>
+                    <parameter key="select_attribute" value="tag_name"/>
+                    <parameter key="select_subset" value="tag_name␞value␞tag_id"/>
+                    <parameter key="also_apply_to_special_attributes_(id,_label..)" value="false"/>
+                    <description align="center" color="transparent" colored="false" width="126">tag_id&lt;br/&gt;tag_name&lt;br/&gt;value</description>
+                  </operator>
+                  <operator activated="true" class="concurrency:join" compatibility="10.4.003" expanded="true" height="82" name="Join (14)" width="90" x="581" y="34">
+                    <parameter key="remove_double_attributes" value="true"/>
+                    <parameter key="join_type" value="outer"/>
+                    <parameter key="use_id_attribute_as_key" value="false"/>
+                    <list key="key_attributes">
+                      <parameter key="tag_id" value="tag_id"/>
+                    </list>
+                    <parameter key="keep_both_join_attributes" value="false"/>
+                    <description align="center" color="transparent" colored="false" width="126">Outer&lt;br&gt;tag_id</description>
+                  </operator>
+                  <operator activated="true" class="blending:generate_columns" compatibility="10.4.003" expanded="true" height="82" name="Generate Attributes" width="90" x="715" y="34">
+                    <list key="function_descriptions">
+                      <parameter key="value" value="if(missing([value]),[actual],[value])"/>
+                    </list>
+                    <parameter key="keep_all_columns" value="true"/>
+                    <parameter key="default_time_zone" value="Asia/Calcutta"/>
+                    <description align="center" color="transparent" colored="false" width="126">if value column is missing replace with actual value else keep ser value</description>
+                  </operator>
+                  <operator activated="true" class="blending:select_attributes" compatibility="10.4.003" expanded="true" height="82" name="Select Attributes (11)" width="90" x="849" y="34">
+                    <parameter key="type" value="include attributes"/>
+                    <parameter key="attribute_filter_type" value="a subset"/>
+                    <parameter key="select_attribute" value="tag_name"/>
+                    <parameter key="select_subset" value="tag_name␞value"/>
+                    <parameter key="also_apply_to_special_attributes_(id,_label..)" value="false"/>
+                    <description align="center" color="transparent" colored="false" width="126">tag_name&lt;br/&gt;value</description>
+                  </operator>
+                  <operator activated="true" class="filter_examples" compatibility="10.4.003" expanded="true" height="103" name="Filter Examples (6)" width="90" x="983" y="34">
+                    <parameter key="parameter_expression" value=""/>
+                    <parameter key="condition_class" value="custom_filters"/>
+                    <parameter key="invert_filter" value="false"/>
+                    <list key="filters_list">
+                      <parameter key="filters_entry_key" value="tag_name.is_not_missing."/>
+                    </list>
+                    <parameter key="filters_logic_and" value="true"/>
+                    <parameter key="filters_check_metadata" value="true"/>
+                    <description align="center" color="transparent" colored="false" width="126">tag_name not missing</description>
+                  </operator>
+                  <operator activated="true" class="remove_duplicates" compatibility="10.4.003" expanded="true" height="103" name="Remove Duplicates (2)" width="90" x="1117" y="34">
+                    <parameter key="attribute_filter_type" value="all"/>
+                    <parameter key="attribute" value=""/>
+                    <parameter key="attributes" value=""/>
+                    <parameter key="use_except_expression" value="false"/>
+                    <parameter key="value_type" value="attribute_value"/>
+                    <parameter key="use_value_type_exception" value="false"/>
+                    <parameter key="except_value_type" value="time"/>
+                    <parameter key="block_type" value="attribute_block"/>
+                    <parameter key="use_block_type_exception" value="false"/>
+                    <parameter key="except_block_type" value="value_matrix_row_start"/>
+                    <parameter key="invert_selection" value="false"/>
+                    <parameter key="include_special_attributes" value="false"/>
+                    <parameter key="treat_missing_values_as_duplicates" value="false"/>
+                    <description align="center" color="transparent" colored="false" width="126">all</description>
+                  </operator>
+                  <operator activated="true" class="remember" compatibility="10.0.000" expanded="true" height="68" name="what_if_user_inputs (10)" width="90" x="1251" y="34">
+                    <parameter key="name" value="what_if_user_inputs"/>
+                    <parameter key="io_object" value="ExampleSet"/>
+                    <parameter key="store_which" value="1"/>
+                    <parameter key="remove_from_process" value="true"/>
+                  </operator>
+                  <connect from_op="api_inputs (6)" from_port="result" to_op="Join (5)" to_port="right"/>
+                  <connect from_op="what_if_user_inputs (9)" from_port="result" to_op="Join (5)" to_port="left"/>
+                  <connect from_op="Join (5)" from_port="join" to_op="Filter Examples" to_port="example set input"/>
+                  <connect from_op="Filter Examples" from_port="example set output" to_op="Select Attributes (7)" to_port="example set input"/>
+                  <connect from_op="model_output (3)" from_port="result" to_op="Join (13)" to_port="left"/>
+                  <connect from_op="tags (2)" from_port="result" to_op="Join (13)" to_port="right"/>
+                  <connect from_op="Join (13)" from_port="join" to_op="Select Attributes (3)" to_port="example set input"/>
+                  <connect from_op="Select Attributes (3)" from_port="example set output" to_op="Join (14)" to_port="left"/>
+                  <connect from_op="Select Attributes (7)" from_port="example set output" to_op="Join (14)" to_port="right"/>
+                  <connect from_op="Join (14)" from_port="join" to_op="Generate Attributes" to_port="table input"/>
+                  <connect from_op="Generate Attributes" from_port="table output" to_op="Select Attributes (11)" to_port="example set input"/>
+                  <connect from_op="Select Attributes (11)" from_port="example set output" to_op="Filter Examples (6)" to_port="example set input"/>
+                  <connect from_op="Filter Examples (6)" from_port="example set output" to_op="Remove Duplicates (2)" to_port="example set input"/>
+                  <connect from_op="Remove Duplicates (2)" from_port="example set output" to_op="what_if_user_inputs (10)" to_port="store"/>
+                  <portSpacing port="source_in 1" spacing="0"/>
+                  <portSpacing port="sink_out 1" spacing="0"/>
+                </process>
+                <description align="center" color="transparent" colored="false" width="126">Prepare user inputs, merging user input with the actual data of nearest input timestamp where energy optimizer has converged</description>
+              </operator>
+              <portSpacing port="source_in 1" spacing="0"/>
+              <portSpacing port="sink_out 1" spacing="0"/>
+              <description align="center" color="purple" colored="true" height="58" resized="false" width="303" x="79" y="31">DEFINE&lt;br&gt;UPSTREAM INPUTS &amp;amp; CONNECTIONS</description>
+              <description align="center" color="purple" colored="true" height="57" resized="false" width="261" x="390" y="32">READ DATABASE TABLES</description>
+              <description align="center" color="purple" colored="true" height="56" resized="false" width="279" x="659" y="33">PREPARE USER INPUTS</description>
+            </process>
+            <description align="center" color="transparent" colored="false" width="126">Read tables&lt;br&gt;and&lt;br&gt;Prepare user inputs</description>
+          </operator>
+          <operator activated="true" class="subprocess" compatibility="10.4.003" expanded="true" height="82" name="MAIN" width="90" x="447" y="85">
+            <process expanded="true">
+              <operator activated="true" class="generate_macro" compatibility="10.4.003" expanded="true" height="68" name="Generate Macro (6)" width="90" x="45" y="340">
+                <list key="function_descriptions">
+                  <parameter key="block_level_1" value="concat(%{block_level_0},&quot;/main&quot;)"/>
+                  <parameter key="block" value="%{block_level_1}"/>
+                </list>
+                <description align="center" color="transparent" colored="false" width="126">block</description>
+              </operator>
+              <operator activated="true" class="recall" compatibility="10.4.003" expanded="true" height="68" name="sub_model" width="90" x="45" y="34">
+                <parameter key="name" value="sub_model"/>
+                <parameter key="io_object" value="ExampleSet"/>
+                <parameter key="remove_from_store" value="false"/>
+              </operator>
+              <operator activated="true" class="blending:sort" compatibility="10.4.003" expanded="true" height="82" name="Sort (2)" width="90" x="179" y="34">
+                <list key="sort_by">
+                  <parameter key="order" value="ascending"/>
+                </list>
+                <description align="center" color="transparent" colored="false" width="126">sorting on order of calculation</description>
+              </operator>
+              <operator activated="true" class="recall" compatibility="10.4.003" expanded="true" height="68" name="sub_model_child (4)" width="90" x="45" y="136">
+                <parameter key="name" value="sub_model_child"/>
+                <parameter key="io_object" value="ExampleSet"/>
+                <parameter key="remove_from_store" value="false"/>
+              </operator>
+              <operator activated="true" class="recall" compatibility="10.4.003" expanded="true" height="68" name="what_if_user_inputs (4)" width="90" x="45" y="238">
+                <parameter key="name" value="what_if_user_inputs"/>
+                <parameter key="io_object" value="ExampleSet"/>
+                <parameter key="remove_from_store" value="false"/>
+              </operator>
+              <operator activated="true" class="blending:set_role" compatibility="10.4.003" expanded="true" height="82" name="Set Role" width="90" x="179" y="238">
+                <list key="set_roles">
+                  <parameter key="tag_name" value="id"/>
+                </list>
+              </operator>
+              <operator activated="true" class="transpose" compatibility="10.4.003" expanded="true" height="82" name="Transpose" width="90" x="313" y="238"/>
+              <operator activated="true" class="productivity:execute_process" compatibility="10.4.003" expanded="true" height="103" name="Execute Demand_calculation" width="90" x="581" y="34">
+                <parameter key="process_location" value="../../01_Common_Processes/demand_calculation"/>
+                <parameter key="use_input" value="true"/>
+                <parameter key="store_output" value="true"/>
+                <parameter key="propagate_metadata_recursively" value="true"/>
+                <parameter key="cache_process" value="true"/>
+                <list key="macros">
+                  <parameter key="case_id" value="%{case_id}"/>
+                </list>
+                <parameter key="fail_for_unknown_macros" value="false"/>
+                <description align="center" color="transparent" colored="false" width="126">Calculate demand based on user inputs&lt;br&gt;I/P 1: sub_model&lt;br&gt;I/P 2: Sub_model_child&lt;br&gt;I/P 3: What if user inputs&lt;br&gt;&lt;br&gt;O/P 1: sub_model&lt;br&gt;O/P 2: Demand values</description>
+              </operator>
+              <operator activated="true" class="subprocess" compatibility="10.4.003" expanded="true" height="103" name="post processing (2)" width="90" x="715" y="34">
+                <process expanded="true">
+                  <operator activated="true" class="generate_macro" compatibility="10.4.003" expanded="true" height="68" name="Generate Macro (7)" width="90" x="45" y="275">
+                    <list key="function_descriptions">
+                      <parameter key="block_level_1" value="concat(%{block_level_0},&quot;/post processing&quot;)"/>
+                      <parameter key="block" value="%{block_level_1}"/>
+                    </list>
+                    <description align="center" color="transparent" colored="false" width="126">block</description>
+                  </operator>
+                  <operator activated="true" class="transpose" compatibility="10.4.003" expanded="true" height="82" name="Transpose (9)" width="90" x="45" y="136"/>
+                  <operator activated="true" class="branch" compatibility="10.4.003" expanded="true" height="103" name="Branch" width="90" x="246" y="34">
+                    <parameter key="condition_type" value="min_examples"/>
+                    <parameter key="condition_value" value="1"/>
+                    <parameter key="expression" value=""/>
+                    <parameter key="io_object" value="ANOVAMatrix"/>
+                    <parameter key="return_inner_output" value="true"/>
+                    <process expanded="true">
+                      <operator activated="true" class="concurrency:join" compatibility="10.4.003" expanded="true" height="82" name="Join (7)" width="90" x="313" y="34">
+                        <parameter key="remove_double_attributes" value="true"/>
+                        <parameter key="join_type" value="inner"/>
+                        <parameter key="use_id_attribute_as_key" value="false"/>
+                        <list key="key_attributes">
+                          <parameter key="tag_name" value="id"/>
+                        </list>
+                        <parameter key="keep_both_join_attributes" value="false"/>
+                        <description align="center" color="transparent" colored="false" width="126">INNER&lt;br/&gt;Tag_name&lt;br/&gt;=&lt;br/&gt;id</description>
+                      </operator>
+                      <operator activated="true" class="blending:select_attributes" compatibility="10.4.003" expanded="true" height="82" name="Select Attributes (9)" width="90" x="447" y="34">
+                        <parameter key="type" value="include attributes"/>
+                        <parameter key="attribute_filter_type" value="a subset"/>
+                        <parameter key="select_attribute" value=""/>
+                        <parameter key="select_subset" value="model_tag_id␞value␞tag_name"/>
+                        <parameter key="also_apply_to_special_attributes_(id,_label..)" value="false"/>
+                        <description align="center" color="transparent" colored="false" width="126">model_tag_id&lt;br/&gt;tag_name&lt;br/&gt;value</description>
+                      </operator>
+                      <connect from_port="condition" to_op="Join (7)" to_port="left"/>
+                      <connect from_port="input 1" to_op="Join (7)" to_port="right"/>
+                      <connect from_op="Join (7)" from_port="join" to_op="Select Attributes (9)" to_port="example set input"/>
+                      <connect from_op="Select Attributes (9)" from_port="example set output" to_port="input 1"/>
+                      <portSpacing port="source_condition" spacing="0"/>
+                      <portSpacing port="source_input 1" spacing="0"/>
+                      <portSpacing port="source_input 2" spacing="0"/>
+                      <portSpacing port="sink_input 1" spacing="0"/>
+                      <portSpacing port="sink_input 2" spacing="0"/>
+                    </process>
+                    <process expanded="true">
+                      <portSpacing port="source_condition" spacing="0"/>
+                      <portSpacing port="source_input 1" spacing="0"/>
+                      <portSpacing port="source_input 2" spacing="0"/>
+                      <portSpacing port="sink_input 1" spacing="0"/>
+                      <portSpacing port="sink_input 2" spacing="0"/>
+                    </process>
+                  </operator>
+                  <connect from_port="in 1" to_op="Branch" to_port="condition"/>
+                  <connect from_port="in 2" to_op="Transpose (9)" to_port="example set input"/>
+                  <connect from_op="Transpose (9)" from_port="example set output" to_op="Branch" to_port="input 1"/>
+                  <connect from_op="Branch" from_port="input 1" to_port="out 1"/>
+                  <portSpacing port="source_in 1" spacing="0"/>
+                  <portSpacing port="source_in 2" spacing="0"/>
+                  <portSpacing port="source_in 3" spacing="0"/>
+                  <portSpacing port="sink_out 1" spacing="0"/>
+                  <portSpacing port="sink_out 2" spacing="0"/>
+                </process>
+                <description align="center" color="transparent" colored="false" width="126">Prepared output for display on the dashboard&lt;br/&gt;&lt;br/&gt;O/P : Demand values corresponding to sub models</description>
+              </operator>
+              <connect from_op="sub_model" from_port="result" to_op="Sort (2)" to_port="example set input"/>
+              <connect from_op="Sort (2)" from_port="example set output" to_op="Execute Demand_calculation" to_port="input 1"/>
+              <connect from_op="sub_model_child (4)" from_port="result" to_op="Execute Demand_calculation" to_port="input 2"/>
+              <connect from_op="what_if_user_inputs (4)" from_port="result" to_op="Set Role" to_port="example set input"/>
+              <connect from_op="Set Role" from_port="example set output" to_op="Transpose" to_port="example set input"/>
+              <connect from_op="Transpose" from_port="example set output" to_op="Execute Demand_calculation" to_port="input 3"/>
+              <connect from_op="Execute Demand_calculation" from_port="result 1" to_op="post processing (2)" to_port="in 1"/>
+              <connect from_op="Execute Demand_calculation" from_port="result 2" to_op="post processing (2)" to_port="in 2"/>
+              <connect from_op="post processing (2)" from_port="out 1" to_port="out 1"/>
+              <portSpacing port="source_in 1" spacing="0"/>
+              <portSpacing port="sink_out 1" spacing="0"/>
+              <portSpacing port="sink_out 2" spacing="0"/>
+            </process>
+            <description align="center" color="transparent" colored="false" width="126">Calculate demand&lt;br&gt;&lt;br&gt;I/P 1: sub_model&lt;br&gt;I/P 2: Sub_model_child&lt;br&gt;I/P 3: What if user inputs&lt;br&gt;&lt;br&gt;O/P: Demand values</description>
+          </operator>
+          <connect from_port="in 1" to_op="api_inputs (4)" to_port="in 1"/>
+          <connect from_op="MAIN" from_port="out 1" to_port="out 1"/>
+          <portSpacing port="source_in 1" spacing="0"/>
+          <portSpacing port="source_in 2" spacing="0"/>
+          <portSpacing port="sink_out 1" spacing="0"/>
+          <portSpacing port="sink_out 2" spacing="0"/>
+          <description align="center" color="purple" colored="true" height="411" resized="true" width="375" x="10" y="19">Inputs and Data initialization</description>
+          <description align="center" color="gray" colored="true" height="413" resized="true" width="213" x="387" y="19">Demand Calculation</description>
+        </process>
+        <process expanded="true">
+          <operator activated="true" breakpoints="after" class="utility:create_exampleset" compatibility="10.4.003" expanded="true" height="68" name="Create ExampleSet (2)" width="90" x="179" y="34">
+            <parameter key="generator_type" value="attribute functions"/>
+            <parameter key="number_of_examples" value="1"/>
+            <parameter key="use_stepsize" value="false"/>
+            <list key="function_descriptions">
+              <parameter key="model_id" value="parse(%{model_id})"/>
+              <parameter key="time_stamp" value="date_now()"/>
+              <parameter key="error_subprocess" value="cut(%{block},0,min(length(%{block}),495))"/>
+              <parameter key="error_category" value="if(contains(lower(%{error}),lower(&quot;database&quot;)),&quot;Database&quot;,&#10;if(contains(lower(%{error}),lower(&quot;failed with: HTTP code 401&quot;))&#10;||contains(lower(%{error}),lower(&quot;HTTP code 503&quot;))&#10;||contains(lower(%{error}),lower(&quot;Failed to lookup data item&quot;))&#10;||contains(lower(%{error}),lower(&quot;data set contains columns of different lengths&quot;))&#10;||contains(lower(%{error}),lower(&quot;operator failed to establish communication with the PI Web API&quot;))&#10;||contains(lower(%{error}),lower(&quot;pi data lagging:&quot;))&#10;,&quot;PI&quot;,&quot;Pipeline&quot;))"/>
+              <parameter key="error_detail" value="cut(%{error},0,min(length(%{error}),995))"/>
+              <parameter key="error_process_name" value="lower(%{process_name})"/>
+            </list>
+            <parameter key="add_id_attribute" value="false"/>
+            <list key="numeric_series_configuration"/>
+            <list key="date_series_configuration"/>
+            <list key="date_series_configuration (interval)"/>
+            <parameter key="date_format" value="yyyy-MM-dd HH:mm:ss"/>
+            <parameter key="time_zone" value="SYSTEM"/>
+            <parameter key="input_csv_text" value="block,error&#10;%{block},%{error}"/>
+            <parameter key="column_separator" value=","/>
+            <parameter key="parse_all_as_nominal" value="false"/>
+            <parameter key="decimal_point_character" value="."/>
+            <parameter key="trim_attribute_names" value="true"/>
+          </operator>
+          <operator activated="true" class="jdbc_connectors:write_database" compatibility="10.4.003" expanded="true" height="82" name="Write Database" width="90" x="313" y="34">
+            <parameter key="define_connection" value="repository"/>
+            <parameter key="connection_entry" value="%{connection_sql_eo}"/>
+            <parameter key="database_system" value="MySQL"/>
+            <parameter key="use_default_schema" value="true"/>
+            <parameter key="table_name" value="error_log"/>
+            <parameter key="overwrite_mode" value="append"/>
+            <parameter key="set_default_varchar_length" value="false"/>
+            <parameter key="default_varchar_length" value="128"/>
+            <parameter key="add_generated_primary_keys" value="false"/>
+            <parameter key="db_key_attribute_name" value="generated_primary_key"/>
+            <parameter key="batch_size" value="100"/>
+          </operator>
+          <operator activated="true" class="utility:create_exampleset" compatibility="10.4.003" expanded="true" height="68" name="Create ExampleSet" width="90" x="447" y="34">
+            <parameter key="generator_type" value="attribute functions"/>
+            <parameter key="number_of_examples" value="1"/>
+            <parameter key="use_stepsize" value="false"/>
+            <list key="function_descriptions">
+              <parameter key="model_tag_id" value="MISSING_NUMERIC"/>
+              <parameter key="value" value="MISSING_NUMERIC"/>
+              <parameter key="tag_name" value="MISSING_NOMINAL"/>
+            </list>
+            <parameter key="add_id_attribute" value="false"/>
+            <list key="numeric_series_configuration"/>
+            <list key="date_series_configuration"/>
+            <list key="date_series_configuration (interval)"/>
+            <parameter key="date_format" value="yyyy-MM-dd HH:mm:ss"/>
+            <parameter key="time_zone" value="SYSTEM"/>
+            <parameter key="column_separator" value=","/>
+            <parameter key="parse_all_as_nominal" value="false"/>
+            <parameter key="decimal_point_character" value="."/>
+            <parameter key="trim_attribute_names" value="true"/>
+          </operator>
+          <connect from_op="Create ExampleSet (2)" from_port="output" to_op="Write Database" to_port="input"/>
+          <connect from_op="Create ExampleSet" from_port="output" to_port="out 1"/>
+          <portSpacing port="source_in 1" spacing="0"/>
+          <portSpacing port="source_in 2" spacing="0"/>
+          <portSpacing port="sink_out 1" spacing="0"/>
+          <portSpacing port="sink_out 2" spacing="0"/>
+        </process>
+      </operator>
+      <connect from_port="input 1" to_op="Handle Exception" to_port="in 1"/>
+      <connect from_op="Handle Exception" from_port="out 1" to_port="result 1"/>
+      <portSpacing port="source_input 1" spacing="0"/>
+      <portSpacing port="source_input 2" spacing="0"/>
+      <portSpacing port="sink_result 1" spacing="0"/>
+      <portSpacing port="sink_result 2" spacing="0"/>
+      <description align="center" color="green" colored="true" height="411" resized="true" width="236" x="10" y="10">What if Demand calculation&lt;br&gt;&lt;br&gt;&lt;br&gt;Trupti Jadhav&lt;br&gt;Akshay Hasabe&lt;br&gt;Karthik Sanagapalli&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;Overview:&lt;br&gt;In this process, the demand is calculated by leveraging a sub-model or a sub-model expression. This sub-model utilizes various plant parameters that are provided by the user through an interactive dashboard. These inputs allow the system to dynamically compute the demand based on the specific conditions and configurations defined by the user.&lt;br&gt;</description>
+      <description align="center" color="purple" colored="true" height="406" resized="true" width="329" x="249" y="15">Demand calculation</description>
+    </process>
+  </operator>
+</process>

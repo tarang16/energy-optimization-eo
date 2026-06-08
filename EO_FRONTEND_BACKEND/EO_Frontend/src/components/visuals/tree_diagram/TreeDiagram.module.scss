@@ -1,0 +1,107 @@
+@use 'src/config/scss/_variables' as *;
+
+.tree_diagram_card {
+  background-color: $primary_white;
+  //   box-shadow: 0px 0px 5px 1px $primary_gray_4;
+  height: 100%;
+  // padding: 2%;
+}
+
+.left_gapcard {
+  // border: 1px solid red;
+  order: 1;
+}
+
+.right_gapcard {
+  // border: 1px solid blue;
+  order: 3;
+}
+
+.middle_gapcard {
+  // border: 1px solid gray;
+  order: 2;
+}
+
+.left_card {
+  // border: 1px solid red;
+  order: 1;
+
+  .bothSideBorder {
+    position: relative;
+    width: 100%;
+
+    // &::before {
+    // 	content: "";
+    // 	position: absolute;
+    // 	height: 1px;
+    // 	width: 35%;
+    // 	background-color: $primary_gray_3;
+    // 	top: 50%;
+    // 	margin-top: 2px;
+    // 	transform: translateY(-50%);
+    // 	right: 0;
+    // }
+  }
+}
+
+.right_card {
+  // border: 1px solid blue;
+  order: 3;
+
+  .bothSideBorder {
+    position: relative;
+    width: 100%;
+
+    // &::after {
+    // 	content: "";
+    // 	position: absolute;
+    // 	height: 1px;
+    // 	width: 35%;
+    // 	background-color: $primary_gray_3;
+    // 	top: 50%;
+    // 	margin-top: 2px;
+    // 	transform: translateY(-50%);
+    // 	left: 0;
+    // }
+  }
+}
+
+.middle_card {
+  // border: 1px solid gray;
+  order: 2;
+  width: 100%;
+
+  .bothSideBorder {
+    position: relative;
+    width: 100%;
+
+    // &::before {
+    // 	content: "";
+    // 	position: absolute;
+    // 	height: 1px;
+    // 	width: 20%;
+    // 	background-color: $primary_gray_3;
+    // 	top: 50%;
+    // 	margin-top: 2px;
+    // 	transform: translateY(-50%);
+    // 	right: 24%;
+    // }
+
+    // &::after {
+    // 	content: "";
+    // 	position: absolute;
+    // 	height: 1px;
+    // 	width: 20%;
+    // 	background-color: $primary_gray_3;
+    // 	top: 50%;
+    // 	margin-top: 2px;
+    // 	transform: translateY(-50%);
+    // 	left: 24%;
+    // }
+  }
+}
+
+.downDirecrionIcon {
+  // transform: rotate(-180deg);
+  width: 2.4vmin !important;
+}

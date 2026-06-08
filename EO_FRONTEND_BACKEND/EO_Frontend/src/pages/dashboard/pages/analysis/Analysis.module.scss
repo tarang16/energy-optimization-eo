@@ -1,0 +1,1054 @@
+@use 'config/scss/variables' as *;
+@use 'src/config/scss/typography' as *;
+
+.customTableHeight {
+  height: calc(100% - 4vmin);
+  position: relative;
+
+  &:after {
+    content: '';
+    position: absolute;
+    background-color: $primary_blue_bg;
+    height: 4vmin;
+    width: 100%;
+    top: 0;
+    right: 0;
+    z-index: 8;
+  }
+
+  table {
+    thead {
+      height: 4vmin !important;
+    }
+
+    tbody {
+      height: calc(100% - 4vmin) !important;
+
+      tr {
+        td {
+          text-align: left;
+          padding: 1vmin 0.5vmin;
+          font-size: 1.3vmin !important;
+          line-height: 1.3;
+          color: $primary_gray;
+          font-family: 'sabic_text_regular', serif;
+          background-color: $primary_bg;
+          position: relative;
+          vertical-align: middle;
+          border-bottom: 1px solid #e6e7e8;
+        }
+      }
+    }
+  }
+}
+
+.analysisMainContainer {
+  width: 100%;
+  height: 100%;
+  padding: 0 1vmin;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+
+  .dateTimePickerContainer {
+    height: 6%;
+    right: 2vmin;
+    padding: 0.7vmin 0;
+
+    :global(.react-datepicker__input-container) {
+      border: 1px solid $primary_gray_3;
+      padding-right: 0.5vmin;
+    }
+
+    :global(
+      .react-datepicker-wrapper > .react-datepicker__input-container > input
+    ) {
+      width: 14vmin;
+      padding: 0.5vmin 1vmin 0.2vmin 1vmin;
+      text-align: left;
+      border: 1px solid transparent !important;
+      background: url('../../../../assets/sabic_new_icons/calendar_icon.svg')
+        no-repeat right;
+      background-size: 2vmin;
+    }
+
+    :global(.react-datepicker-wrapper) {
+      position: relative;
+    }
+  }
+
+  &__top {
+    height: 60%;
+    display: flex;
+
+    .leftContainer {
+      @include boxShadow_card;
+      width: calc(65% - 2vmin);
+      margin: 1vmin;
+      position: relative;
+
+      .selectText {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-transform: uppercase;
+      }
+
+      .tagTitlePaddingDiv {
+        padding: 0 1vmin;
+
+        .tagTitleDiv {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          height: 4vmin;
+          border-bottom: 1px solid $primary_gray_3;
+
+          .titleText {
+            padding-top: 4px;
+          }
+
+          .iconDiv {
+            .titleText {
+              padding-top: 4px;
+            }
+          }
+        }
+      }
+
+      .bottomChartContainer {
+        height: calc(100% - 4vmin);
+      }
+    }
+
+    .rightContainer {
+      width: calc(35% - 2vmin);
+      margin: 1vmin;
+      display: flex;
+      flex-direction: column;
+      gap: 2vmin;
+
+      &__top {
+        height: calc(100% - 15vmin);
+        @include boxShadow_card;
+      }
+
+      &__bottom {
+        height: 15vmin;
+        @include boxShadow_card;
+
+        .headerContainer {
+          height: 3.5vmin;
+          background-color: $primary_blue_bg;
+          display: flex;
+          align-items: center;
+          padding: 0 1vmin;
+
+          .headerText {
+            margin-top: 0.18vmin;
+          }
+        }
+
+        .bodyContainer {
+          height: calc(100% - 3.5vmin);
+          display: flex;
+          flex-direction: column;
+          gap: 1vmin;
+
+          .grayCard {
+            height: 100%;
+            padding: 1vmin;
+            background-color: $primary_bg;
+            border-radius: 0.3vmin;
+            gap: 1vmin;
+
+            .barchartContainer {
+              position: absolute;
+              z-index: 9;
+              top: 0.5vmin;
+              right: 0.5vmin;
+              background-color: $primary_blue_bg;
+              width: 3.5vmin;
+              height: 3.5vmin;
+              padding: 0.5vmin;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+
+              svg {
+                width: 100%;
+                height: 100%;
+              }
+            }
+
+            &__left {
+              width: 13vmin;
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              align-items: center;
+              height: 100%;
+
+              .imgContainer {
+                width: 3vmin;
+                height: 3vmin;
+                margin-bottom: 1vmin;
+
+                img {
+                  width: 100%;
+                  height: 100%;
+                }
+              }
+            }
+
+            &__right {
+              .rightItem {
+                gap: 1vmin;
+                padding: 0 0.5vmin;
+
+                &:first-child {
+                  width: 33%;
+                  border-right: 1px solid $primary_gray_2;
+                }
+
+                &:nth-child(2) {
+                  border-right: 1px solid $primary_gray_2;
+                  width: 23%;
+                }
+
+                &:last-child {
+                  width: 44%;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &__bottom {
+    height: 40%;
+    display: flex;
+    position: relative;
+
+    .bottomCollapseContainer {
+      width: 65%;
+      display: flex;
+      overflow: hidden;
+      transition: width 0.7s ease-in-out;
+
+      .leftContainer {
+        @include boxShadow_card;
+        width: calc(100%);
+        margin: 1vmin;
+
+        :global(.customScrollBarMargin) {
+          &::-webkit-scrollbar-track {
+            background: transparent;
+          }
+
+          &::-webkit-scrollbar-track-piece:start {
+            background: transparent !important;
+            margin-top: 7.5vmin !important;
+          }
+        }
+
+        table {
+          thead {
+            height: 7.5vmin;
+
+            tr {
+              th {
+                text-transform: uppercase !important;
+
+                &::after {
+                  background-color: transparent !important;
+                }
+              }
+
+              th[colspan='3'],
+              th[colspan='2'] {
+                &::before {
+                  content: '';
+                  position: absolute;
+                  bottom: 0;
+                  left: 50%;
+                  transform: translateX(-50%);
+                  width: calc(100% - 2vmin);
+                  height: 1px;
+                  background-color: $primary_gray_3;
+                  z-index: 9;
+                }
+              }
+            }
+          }
+        }
+
+        .chartContainer {
+          width: 60%;
+          height: calc(100%);
+          padding-top: 1vmin;
+        }
+      }
+    }
+
+    .rightContainer {
+      @include boxShadow_card;
+      width: calc(35% - 2vmin);
+      height: calc(100% - 2vmin);
+      // display: flex;
+      margin: 1vmin;
+      // overflow: hidden;
+      transition: right 0.7s ease-in-out;
+
+      .headerContainer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 3.5vmin;
+        padding: 0 1vmin;
+        background-color: $primary_blue_bg;
+
+        .headerText {
+          margin-top: 0.21vmin;
+          text-transform: uppercase;
+        }
+
+        .imgContainer {
+          width: 2.1vmin;
+          height: 2.1vmin;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          img {
+            cursor: pointer;
+            width: 100%;
+            height: 100%;
+          }
+        }
+      }
+
+      .formContainer {
+        height: calc(100% - 3.5vmin);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 1vmin 0vmin;
+
+        .formHeader {
+          margin-bottom: 1.5vmin;
+        }
+
+        .dateContainer {
+          display: flex;
+          // gap: .8vmin;
+
+          justify-content: space-between;
+          margin-bottom: 1vmin;
+
+          &__item {
+            width: 18vmin;
+            max-width: 18vmin;
+            display: flex;
+            // gap: .4vmin;
+            align-items: center;
+
+            .labelText {
+              margin-bottom: 0.5vmin;
+            }
+
+            :global(.react-datepicker-wrapper) {
+              display: block;
+              height: 3.5vmin;
+              width: 100%;
+
+              :global(.react-datepicker__input-container) {
+                height: 100%;
+                display: block;
+                width: 100%;
+                border: 1px solid $primary_gray_3 !important;
+                padding-right: 1vmin;
+
+                input {
+                  display: block;
+                  height: 100% !important;
+                  border-radius: 0;
+                  width: 100%;
+                  cursor: pointer;
+                  color: $primary_gray !important;
+                  padding: 0 1vmin;
+                  padding-top: 0.25vmin;
+                  text-align: left;
+                  border: 1px solid transparent !important;
+                  background: url('../../../../assets/sabic_new_icons/calendar_icon.svg')
+                    no-repeat right;
+                  background-size: 2vmin;
+
+                  &:focus,
+                  &:focus-within,
+                  &:focus-visible {
+                    outline: none !important;
+                    border: 1px solid transparent !important;
+                    color: $primary_gray !important;
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        .baseLineInputNumContainer {
+          width: 15vmin;
+          margin-bottom: 1vmin;
+
+          .labelText {
+            margin-bottom: 0.5vmin;
+          }
+
+          input {
+            border: 1px solid $primary_gray_3;
+            height: 3.5vmin;
+            padding: 0 1vmin;
+
+            &:focus,
+            &:focus-within,
+            &:focus-visible {
+              outline: none !important;
+              border: 1px solid $primary_gray_3;
+              color: $primary_gray !important;
+            }
+          }
+        }
+
+        .infoPopup {
+          display: flex;
+          align-items: end;
+
+          .bottomIcon {
+            height: 3.5vmin;
+            margin: 0 0.4vmin;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            img {
+              width: 2vmin;
+              cursor: pointer;
+              height: 2vmin;
+            }
+          }
+        }
+
+        .formItem {
+          margin-bottom: 1vmin;
+
+          &.inputNumContainer {
+            input,
+            textarea {
+              border: 1px solid $primary_gray_3;
+              height: 3.5vmin;
+              padding: 0 1vmin;
+
+              &:focus,
+              &:focus-within,
+              &:focus-visible {
+                outline: none !important;
+                border: 1px solid $primary_gray_3;
+                color: $primary_gray !important;
+              }
+            }
+
+            textarea {
+              height: initial;
+            }
+
+            .labelText {
+              min-width: 8vmin;
+            }
+
+            .ObjectiveLabelText {
+              // min-width: 14vmin;
+              margin-bottom: 0.5vmin;
+            }
+          }
+
+          .daysCount {
+            height: 3.5vmin;
+          }
+        }
+      }
+
+      .cardContainer {
+        overflow: auto;
+        @include boxShadow_card;
+        height: 100%; // width: calc(100% - 42vmin)
+      }
+    }
+  }
+
+  :global(.customSelectBoxAnalysis) {
+    height: 6vmin;
+
+    :global(.react-select__control) {
+      height: 100%;
+      box-shadow: none;
+
+      &:hover {
+        border: 1px solid $primary_gray_3;
+      }
+
+      :global(.react-select__value-container) {
+        height: 100%;
+        overflow-y: auto;
+      }
+    }
+
+    :global(.react-select__menu) {
+      padding: 0.4vmin !important;
+      margin-bottom: 0.3vmin !important;
+    }
+
+    :global(.react-select__menu-list) {
+      max-height: 20vmin !important;
+      overflow-y: auto;
+    }
+
+    :global(.react-select__control--is-focused) {
+      border: 1px solid $primary_gray_3;
+      outline: none;
+      box-shadow: none;
+    }
+
+    :global(input) {
+      max-width: 100%;
+      border: 0 !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      height: 2vmin !important;
+
+      &:focus,
+      &:focus-within,
+      &:focus-visible {
+        outline: none !important;
+        border: 0 !important;
+        color: $primary_gray !important;
+      }
+    }
+  }
+}
+
+.searchBox {
+  width: 20vmin;
+
+  input {
+    padding: 1vmin;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2vmin;
+    height: 3.5vmin;
+    border: 1px solid $primary_gray_3;
+    outline: none;
+  }
+}
+
+.btnContainer {
+  button {
+    margin-right: 1vmin;
+    background-color: $primary_blue;
+    color: $primary_white;
+    text-transform: uppercase;
+    height: 3vmin;
+    min-width: 13vmin;
+    max-width: 13vmin;
+    border: 1px solid $primary_blue;
+    border-radius: 0.3vmin;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1vmin;
+    // padding: 0.2vmin 0.5vmin 0.2vmin 0.5vmin;
+
+    &:disabled {
+      background-color: $primary_gray_4;
+      border: 1px solid $primary_gray_4;
+      cursor: not-allowed;
+    }
+
+    .addIcon {
+      width: 1.2vmin;
+      height: 1.2vmin;
+      filter: brightness(0) invert(1);
+    }
+
+    span {
+      margin-top: 0.25vmin;
+    }
+  }
+}
+
+:global(.commentItem) {
+  height: 20vmin !important;
+  padding: 0 1.5vmin 1.5vmin 1.5vmin;
+
+  .labelText {
+    min-width: 10vmin;
+    max-width: 10vmin;
+  }
+
+  .textArea {
+    border: 1px solid $primary_gray_3;
+    padding: 1.5vmin;
+    border-radius: 0.3vmin;
+
+    &:focus {
+      outline: none;
+      border: 1px solid $primary_gray_3;
+    }
+  }
+
+  :global(.error-message) {
+    padding-left: 10vmin;
+  }
+}
+
+.cardCcollapse {
+  overflow: hidden;
+  transition: width 2s ease-out;
+}
+
+.noDataTextContainer {
+  height: inherit;
+}
+
+.disabledButton {
+  cursor: not-allowed !important;
+}
+
+.cardCcollapseWidth {
+  overflow: hidden !important;
+  transition: width 0.7s ease-in-out;
+}
+
+.collapseButton {
+  position: absolute;
+  background-color: $primary_blue;
+  right: 2vmin;
+  top: 3.2vmin;
+  z-index: 99;
+  border-radius: 0.3vmin;
+  min-width: 13vmin;
+  max-width: 13vmin;
+  padding: 0 1vmin;
+  height: 3vmin;
+}
+
+.sideCollapsed {
+  cursor: pointer;
+  gap: 1vmin;
+
+  img {
+    filter: brightness(0) invert(1);
+    width: 1.2vmin;
+    height: 1.2vmin;
+  }
+
+  .addBtnText {
+    display: inline-block;
+    margin-top: 0.25vmin;
+  }
+}
+
+.showcardContainer {
+  opacity: 1;
+  transition: opacity 1.7s ease-in;
+}
+
+.hidecardContainer {
+  opacity: 0;
+  transition: opacity 2s;
+}
+
+.line {
+  width: 1010px;
+  top: 67px;
+  left: 28px;
+  border: 1px solid #0000001f;
+}
+
+.ActiveChartIcon {
+  background-color: #eaf9ff !important;
+  border: 1px;
+  height: 34px;
+  cursor: pointer;
+}
+
+.cursorPointer {
+  cursor: pointer;
+}
+
+.chartContainer {
+  width: 100%;
+  height: calc(100%);
+  padding-top: 1vmin;
+
+  :global(.nav.nav-tabs) {
+    display: flex;
+    justify-content: flex-start;
+    border-top-left-radius: 4px;
+    width: 100% !important;
+    height: calc(4vmin) !important;
+    overflow: hidden;
+
+    :global(.nav-item) {
+      height: calc(100%) !important;
+      padding: 0 !important;
+      overflow: hidden;
+      position: relative;
+      width: 100% !important;
+
+      &:first-child {
+        z-index: 1;
+      }
+
+      &:nth-child(2) {
+        z-index: 2;
+      }
+
+      &:not(:first-child) {
+        left: -3vmin;
+      }
+
+      :global(.nav-link) {
+        height: 100% !important;
+        color: $primary_gray !important;
+        @include text14;
+        line-height: 1.4vmin;
+        font-family: 'sabic_text_bold', serif;
+        font-weight: 400;
+        padding: 0 !important;
+        background-color: none !important;
+        border: none;
+        background-image: url('../../../../assets/sabic_icons/common/tabsImg.svg');
+        background-size: 100%;
+        background-repeat: no-repeat;
+        background-position: center center;
+        position: absolute;
+        bottom: 0;
+        margin-bottom: 0;
+
+        &:hover {
+          background-color: transparent !important;
+        }
+      }
+
+      :global(.nav-link.active) {
+        padding: 0 !important;
+        background-color: transparent !important;
+        background-image: url('../../../../assets/sabic_icons/common/tabsImgActive.svg');
+        color: $primary_white !important;
+      }
+    }
+
+    :global(.nav-item:has(.nav-link.active)) {
+      z-index: 10;
+    }
+  }
+
+  :global(.tab-content) {
+    height: calc(100% - 4vmin);
+
+    :global(.tab-pane.active) {
+      background-color: $primary_white !important;
+    }
+  }
+}
+
+.iconDiv {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.editCardBtn {
+  right: 0.4vmin;
+  display: flex;
+  width: 2.2vmin;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  filter: unset;
+
+  img {
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+  }
+}
+
+.infoCardBtn {
+  display: flex;
+  width: 2.2vmin;
+
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+
+  img {
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+  }
+}
+
+.deleteCardBtn {
+  display: flex;
+  width: 2.2vmin;
+
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+
+  img {
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+  }
+}
+
+.downloadCsvModalContainer {
+  height: 80vh;
+
+  .searchContainer {
+    height: 3.5vmin;
+    width: 25vmin;
+    padding: 0;
+    margin: 0 0 1.5vmin 0;
+
+    input {
+      display: inline-block;
+      height: 100%;
+      border: 1px solid $primary_gray_3;
+      border-radius: 0.3vmin;
+      padding: 0.6vmin 1vmin;
+
+      &:focus {
+        outline: none;
+        border-color: $primary_gray_3 !important;
+      }
+    }
+  }
+
+  .dateContainer {
+    :global(
+      .react-datepicker-wrapper .react-datepicker__input-container input
+    ) {
+      width: 18vmin;
+      max-width: 18vmin;
+      background-image: url('../../../../assets/sabic_new_icons/calendar_icon.svg');
+      background-repeat: no-repeat;
+      background-position: calc(100% - 1vmin) center;
+      background-size: 2vmin;
+    }
+  }
+
+  .selectContainer {
+    height: 4vmin;
+    display: flex;
+    justify-content: space-between;
+
+    .leftContainer {
+      width: 40%;
+
+      .singleSelectContainer,
+      .multiSelectContainer {
+        width: 20vmin;
+        max-width: 20vmin;
+      }
+
+      :global(.customWidthheckboxDropdown) {
+        min-width: 100%;
+        max-width: 100%;
+      }
+    }
+
+    .rightContainer {
+      width: 45%;
+
+      .dateContainer {
+        width: 20vmin;
+        max-width: 20vmin;
+
+        :global(
+          .react-datepicker-wrapper > .react-datepicker__input-container > input
+        ) {
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  .detailsContainer {
+    margin: 2vmin 0 1vmin 0;
+    height: calc(100% - 5vmin - 4vmin - 2vmin);
+    @include boxShadow_card;
+    border-radius: 0.6vmin;
+
+    .flexContainer {
+      display: flex;
+      flex-direction: column;
+      padding-bottom: 0.5vmin;
+
+      .topFixContainer {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        background-color: $primary_blue_bg;
+        padding: 1vmin 0.6vmin 1vmin 3vmin;
+
+        .labelText {
+          margin-top: 0.4vmin;
+          text-transform: uppercase;
+        }
+      }
+
+      .listContainer {
+        padding: 0;
+        list-style-type: none;
+        height: 100%;
+        max-height: 100%;
+        overflow-y: auto;
+
+        .listItem {
+          padding: 1vmin 0.6vmin 1vmin 3vmin;
+          border-bottom: 1px solid $primary_gray_4;
+
+          &:last-child {
+            border-bottom: none;
+          }
+
+          .listInnerContainer {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            width: 100%;
+
+            .labelText {
+              margin-top: 0.4vmin;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .submitBtnContainer {
+    height: 4vmin;
+    text-align: end;
+
+    button {
+      cursor: pointer;
+      background-color: $primary_blue;
+      border-radius: 0.3vmin;
+      border: none;
+      color: $primary_white;
+      height: 100%;
+      display: inline-block;
+      text-transform: uppercase;
+      padding: 0 2vmin;
+      letter-spacing: 0.03vmin;
+      padding-top: 0.25vmin;
+    }
+  }
+}
+
+.backgroundGrayButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  cursor: pointer;
+  border-radius: 0.3vmin;
+  border: none;
+  padding: 0;
+
+  img {
+    filter: brightness(0) saturate(100%) invert(49%) sepia(74%) saturate(2003%)
+      hue-rotate(163deg) brightness(90%) contrast(103%);
+    width: 2vmin;
+    height: 2vmin;
+  }
+
+  &.disabledButton {
+    img {
+      filter: unset;
+      opacity: 0.8;
+    }
+  }
+}
+
+.header {
+  height: 4vmin;
+}
+
+.addAnalysisDropdownContainer {
+  .addAnalysisDropdownList {
+    max-height: 10vmin;
+    overflow-y: auto;
+  }
+}
+
+:global(.downloadPaginationContainer) {
+  height: 100% !important;
+  margin-top: 0.5vmin;
+
+  :global(.pagination) {
+    margin-bottom: 0 !important;
+    height: 100% !important;
+  }
+
+  :global(.page-item) {
+    :global(.page-link) {
+      border: 1px solid $primary_gray_3 !important;
+      border-radius: 0 !important;
+      padding: 0.3vmin 0.3vmin 0 0.3vmin !important;
+      min-width: 4vmin !important;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: $primary_gray;
+      font-size: 1.2vmin;
+      font-weight: 500;
+
+      &:focus {
+        box-shadow: none;
+      }
+    }
+
+    &:first-child,
+    &:last-child {
+      :global(.page-link) {
+        span {
+          font-size: 2.5vmin;
+        }
+      }
+    }
+  }
+
+  :global(.page-item.disabled) {
+    cursor: not-allowed !important;
+  }
+
+  :global(.page-item.active) {
+    :global(.page-link) {
+      color: $primary_white;
+      background-color: $primary_blue;
+    }
+  }
+}

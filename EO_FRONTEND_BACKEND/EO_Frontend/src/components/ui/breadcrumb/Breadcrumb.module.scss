@@ -1,0 +1,29 @@
+@use 'config/scss/variables' as *;
+
+.separator {
+  display: flex;
+  width: 2.1vmin;
+  height: 2.1vmin;
+  margin: 0 0.6vmin;
+
+  img {
+    width: 100%;
+    height: 100%;
+    // margin-bottom: .1vmin;
+    // margin-left: .6vmin;
+    // margin-right: .6vmin;
+  }
+}
+
+.box {
+  text-transform: capitalize;
+  text-decoration: none;
+  cursor: pointer;
+  color: $primary_blue !important;
+  line-height: normal !important;
+  margin-top: 3px;
+}
+
+.box:last-child > .separator {
+  display: none;
+}

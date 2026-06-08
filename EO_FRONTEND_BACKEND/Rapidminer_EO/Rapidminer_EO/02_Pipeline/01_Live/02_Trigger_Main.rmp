@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?><process version="10.4.003">
+  <context>
+    <input/>
+    <output/>
+    <macros/>
+  </context>
+  <operator activated="true" class="process" compatibility="10.4.003" expanded="true" name="Process">
+    <parameter key="logverbosity" value="init"/>
+    <parameter key="random_seed" value="2001"/>
+    <parameter key="send_mail" value="never"/>
+    <parameter key="notification_email" value=""/>
+    <parameter key="process_duration_for_mail" value="30"/>
+    <parameter key="encoding" value="SYSTEM"/>
+    <process expanded="true">
+      <operator activated="true" class="free_memory" compatibility="10.4.003" expanded="true" height="68" name="Free Memory" width="90" x="179" y="136"/>
+      <operator activated="true" class="productivity:execute_process" compatibility="10.4.003" expanded="true" height="68" name="Execute Trigger_Service" width="90" x="380" y="136">
+        <parameter key="process_location" value="03_Trigger_Service"/>
+        <parameter key="use_input" value="true"/>
+        <parameter key="store_output" value="false"/>
+        <parameter key="propagate_metadata_recursively" value="false"/>
+        <parameter key="cache_process" value="false"/>
+        <list key="macros">
+          <parameter key="case_id" value="%{case_id}"/>
+        </list>
+        <parameter key="fail_for_unknown_macros" value="false"/>
+      </operator>
+      <operator activated="true" class="free_memory" compatibility="10.4.003" expanded="true" height="68" name="Free Memory (2)" width="90" x="581" y="136"/>
+      <portSpacing port="source_input 1" spacing="0"/>
+      <portSpacing port="sink_result 1" spacing="0"/>
+      <description align="center" color="yellow" colored="false" height="249" resized="true" width="470" x="31" y="239">02_Trigger_main:&lt;br&gt;It is just a wrapper around 03_Trigger_Service. it receives 'case_id' from 01_Master_process and passes the same to '03_Trigger_Service'.&lt;br&gt;Advantage of this wrapper are:&lt;br&gt;1. it is small in size. Therefore, limits the log size created on AIhub once this is triggered for all the cases every hour .&lt;br&gt;&lt;br&gt;2. 01_Master_process usage encoded code to trigger the cases. Since, this process does not change unlike '03_Trigger_Service'. It is ideal to encode this process to avoid frequent updation of encoded code in '01_master_process'.&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;</description>
+    </process>
+  </operator>
+</process>

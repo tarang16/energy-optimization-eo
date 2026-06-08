@@ -1,0 +1,142 @@
+@use 'config/scss/variables' as *;
+
+.primaryBlueButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  background-color: $primary_blue;
+  height: 3.5vmin;
+  border-radius: 0.3vmin;
+  color: $primary_white !important;
+  padding: 0.25vmin 2vmin 0 2vmin;
+}
+
+.saveButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  background-color: $primary_blue;
+  height: 3.5vmin;
+  border-radius: 0.3vmin;
+  color: $primary_white !important;
+  padding: 0.25vmin 2vmin 0 2vmin;
+  z-index: 100;
+}
+
+.primaryGrayButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  background-color: $primary_gray_2;
+  height: 3.5vmin;
+  border-radius: 0.5vmin;
+  color: $primary_white !important;
+  padding: 0.25vmin 2vmin 0 2vmin;
+}
+
+.primaryRedButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  background-color: $primary_orange;
+  height: 3.5vmin;
+  border-radius: 0.5vmin;
+  color: $primary_white !important;
+  padding: 0.25vmin 2vmin 0 2vmin;
+}
+
+:global(.form-control) {
+  box-shadow: none !important;
+  outline: none !important;
+  border-radius: 0.3vmin;
+}
+
+.flowMainContainer {
+  margin: 0.5vmin 1.5vmin 1.5vmin 1.5vmin;
+  height: calc(100% - 2vmin);
+  width: calc(100% - 3vmin);
+
+  .flowContainer {
+    @include boxShadow_kpi;
+    display: flex;
+    height: 100%;
+    padding: 1vmin;
+    overflow-y: hidden;
+    border-radius: 1vmin;
+
+    &__left {
+      width: 30vmin;
+
+      .leftTopSection {
+        height: 40%;
+        padding: 1.5vmin 0.75vmin 1.5vmin 1.5vmin;
+
+        &__scrollContainer {
+          height: 100%;
+          overflow-y: auto;
+
+          .nodeListContainer {
+            padding-right: 0.75vmin;
+
+            .nodeListItem {
+              // min-height: 2.5vmin;
+              padding: 0.5vmin;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              background-color: $primary_blue;
+              color: $primary_white;
+              border-radius: 0.5vmin;
+              cursor: pointer;
+              margin-bottom: 1.5vmin;
+
+              &:last-child {
+                margin-bottom: 0;
+              }
+            }
+          }
+        }
+      }
+
+      .leftBottomSection {
+        height: 60%;
+        padding: 1.5vmin 0.75vmin;
+
+        border-top: 1px solid $primary_gray_3;
+
+        .scrollContainer {
+          padding: 0 0.75vmin;
+          height: 100%;
+          overflow-y: auto;
+        }
+      }
+    }
+
+    &__right {
+      position: relative;
+      width: calc(100% - 30vmin);
+      flex-grow: 1;
+
+      .hideHandleBtn {
+        width: 16vmin;
+        position: absolute;
+        right: 1vmin;
+        top: 1vmin;
+        z-index: 9;
+        color: $primary_white;
+      }
+
+      .positionPrimaryButton {
+        position: absolute;
+        right: 18vmin;
+        top: 1vmin;
+        z-index: 9;
+        color: $primary_white;
+      }
+    }
+  }
+}

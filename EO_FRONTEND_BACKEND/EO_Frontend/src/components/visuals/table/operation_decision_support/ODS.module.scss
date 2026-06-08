@@ -1,0 +1,319 @@
+@use '../../../../config/scss/variables' as *;
+@use '../../../../config/scss/typography.scss' as *;
+
+.odsDropdownContainer {
+  height: 3.5vmin;
+  padding: 0 1.5vmin;
+  margin: 0 0 1.5vmin 0;
+
+  .datePickerOuterContainer {
+    width: 18vmin;
+
+    :global(
+      .react-datepicker-wrapper .react-datepicker__input-container input
+    ) {
+      width: 100% !important;
+      background-image: url('../../../../assets/sabic_new_icons/calendar_icon.svg');
+      background-repeat: no-repeat;
+      background-position: calc(100% - 1vmin) center;
+      background-size: 2vmin;
+    }
+  }
+}
+
+.table_container {
+  overflow: hidden;
+  height: calc(100% - 6vmin);
+  padding: 0 1.5vmin;
+
+  .grid_header {
+    height: 10%;
+
+    p {
+      text-transform: uppercase;
+    }
+
+    .datePickerOuterContainer {
+      display: flex;
+      z-index: 1000000 !important;
+
+      div {
+        div:has(input.datePickerContainer) {
+          display: flex;
+
+          input.datePickerContainer {
+            user-select: none;
+            cursor: pointer;
+            caret-color: transparent;
+            margin: 0;
+            // padding: 0;
+            font-size: 1.4vmin;
+            border: 1px solid $primary_gray_3 !important;
+            padding: 2% 3% 4% 3%;
+          }
+        }
+      }
+    }
+
+    .datePickerContainer {
+      border: 1px solid $primary_gray_3;
+      font-size: 1.5vmin;
+      padding: 4px;
+      color: $primary_gray_2;
+      margin: 0px;
+      outline: none;
+      box-shadow: none;
+    }
+
+    .categoryContainer {
+      display: inline-block;
+      width: 20%;
+
+      &:not(:last-child) {
+        margin-right: 5px;
+      }
+    }
+
+    .optionContainer,
+    .caretContainer {
+      border: 1px solid $primary_gray_3;
+    }
+
+    .caretContainer {
+      color: $primary_gray_2;
+      background-color: $primary_white !important;
+    }
+
+    .optionContainer {
+      height: 200px;
+      top: 35px;
+      border-radius: 3px;
+      border: none;
+      background-color: $primary_gray_4 !important;
+      padding: 7px;
+      box-shadow: 5px 5px 5px $primary_gray_3;
+    }
+
+    .option {
+      padding: 0px;
+
+      &:not(:last-child) {
+        margin-bottom: 4px;
+      }
+
+      color: $primary_gray_2;
+      background-color: $primary_white;
+
+      &:hover {
+        // background-color: $primary_cyan;
+        color: $primary_white;
+      }
+    }
+  }
+
+  .tbl_key_container {
+    height: calc(100% - 0vmin);
+
+    :global(.table-responsive) {
+      overflow-x: hidden !important;
+
+      &::-webkit-scrollbar-track {
+        background: transparent;
+      }
+
+      &::-webkit-scrollbar-track-piece:start {
+        background: transparent !important;
+        margin-top: 7vmin !important;
+      }
+    }
+
+    :global(.sticky_rowspan) {
+      tbody {
+        tr {
+          :global(.sticky_cell) {
+            span {
+              vertical-align: top;
+              position: sticky;
+              top: 8vmin !important;
+            }
+          }
+        }
+      }
+    }
+
+    table {
+      @extend .text-11-light;
+
+      thead {
+        height: 7vmin;
+
+        tr th:not(:last-child)::after {
+          border: none;
+        }
+
+        th {
+          font-weight: normal;
+          padding: 0.4vmin;
+          font-family: 'sabic_text_bold', serif !important;
+          border: none;
+          border-top: 0.5px solid $primary_gray_3;
+
+          &:first-child {
+            border-radius: 0px;
+          }
+
+          &:last-child {
+            border-radius: 0px;
+          }
+        }
+      }
+
+      thead tr th,
+      tbody tr td {
+        // padding: 10px;
+        height: 6.3vmin !important;
+        // font-size: 1.4vmin !important;
+        border-radius: 0px;
+        border-bottom: 0.5px solid $primary_gray_3;
+      }
+
+      tbody {
+        .borderBottomOdsTable {
+          position: relative;
+          padding: 0.4vmin 0;
+          display: flex;
+          align-items: center;
+          height: 5vmin;
+
+          &::before {
+            content: '';
+            position: absolute;
+            width: calc(100% + 2vmin);
+            height: 0.1vmin;
+            background-color: $primary_gray_3;
+            top: 100%;
+            z-index: 8;
+          }
+
+          &:first-child {
+            margin-bottom: 1vmin;
+
+            &::before {
+              top: calc(100% + 1vmin);
+            }
+          }
+
+          &:last-child {
+            margin-bottom: 0;
+
+            &.borderBottomOdsTableLastChild {
+              margin-top: 2vmin;
+            }
+
+            &::before {
+              display: none;
+            }
+          }
+
+          &:not(:first-child, :last-child) {
+            margin-top: 2vmin;
+            margin-bottom: 1vmin;
+
+            &::before {
+              top: calc(100% + 1vmin);
+            }
+          }
+        }
+      }
+    }
+
+    :global(.customNoDataContainer) {
+      height: calc(100% - 7vmin) !important;
+    }
+  }
+}
+
+.regularText {
+  color: inherit;
+}
+
+.dropdownContainer {
+  min-width: 25vmin !important;
+  width: 25vmin !important;
+}
+
+.popupClass {
+  z-index: 999;
+}
+
+.actionBtnGrp {
+  display: flex;
+  align-items: center;
+  gap: 0.6vmin;
+  flex-wrap: nowrap;
+
+  button {
+    border: none;
+    width: 2.2vmin;
+    height: 2.2vmin;
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    img {
+      width: 100%;
+      height: 100%;
+      // filter: unset !important;
+    }
+  }
+}
+
+.cursorDefault {
+  input {
+    cursor: default !important;
+  }
+}
+
+.cursorPointer {
+  input {
+    cursor: pointer !important;
+  }
+}
+
+:global(.tooltip_container) {
+  sub,
+  sup {
+    color: $primary_white !important;
+  }
+}
+
+:global(.workFlowModalWidth) {
+  :global(.modal-dialog.modal-xl) {
+    min-width: 90vw !important;
+  }
+}
+
+// trend-icon in table
+.cumulativeText {
+  width: 50%;
+  flex: 1;
+  text-align: end;
+}
+
+.iconWrapper {
+  width: 50%;
+  flex: 1;
+  flex-shrink: 0;
+  text-align: start;
+
+  img {
+    margin-left: 0.8vmin;
+    height: 1.8vmin;
+    width: 1.8vmin;
+  }
+}
+
+.fixedWidth {
+  width: 20vmin;
+}

@@ -1,0 +1,86 @@
+@use 'config/scss/variables' as *;
+
+.searchBarHeight {
+  height: 4vmin;
+}
+
+.adduserDetailsConatiner {
+  height: calc(100% - 4vmin);
+  padding-top: 0.6vmin;
+  padding-bottom: 0.6vmin;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  .detailsMainContainer {
+    .detailsContainer {
+      padding: 0.5vmin 0.8vmin;
+      background-color: $primary_gray_12;
+      margin-bottom: 0.3vmin;
+
+      .labelName {
+        margin-bottom: 0.4vmin !important;
+      }
+
+      :global(.form-check.form-check-reverse) {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        margin-bottom: 0 !important;
+
+        :global(input) {
+          order: 2;
+        }
+      }
+    }
+  }
+
+  .addUserBtnContainer {
+    text-align: end;
+    height: 3.5vmin;
+
+    .adduserSubmitBtn {
+      background-color: $primary_blue;
+      color: $primary_white;
+      border: none;
+      display: inline-block;
+      height: 100%;
+      border-radius: 0.3vmin;
+      padding-top: 0.3vmin;
+      width: 12vmin;
+      cursor: pointer;
+
+      &:disabled {
+        background-color: $primary_gray_2;
+        color: $primary_white;
+        cursor: not-allowed;
+      }
+    }
+
+    .adduserCancelBtn {
+      background-color: $primary_gray_2;
+      color: $primary_white;
+      border: none;
+      display: inline-block;
+      height: 100%;
+      border-radius: 0.3vmin;
+      padding-top: 0.3vmin;
+      width: 12vmin;
+      cursor: pointer;
+    }
+  }
+}
+
+.blinkingImg {
+  border: none;
+  outline: none;
+  background: transparent;
+  cursor: not-allowed;
+  padding: 0;
+
+  img {
+    width: 3vmin;
+    height: 3vmin;
+    mix-blend-mode: multiply;
+  }
+}

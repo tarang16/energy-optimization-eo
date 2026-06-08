@@ -1,0 +1,60 @@
+@use 'src/config/scss/_variables' as *;
+
+.box {
+  box-shadow: 0px 1px 5px 0px $primary_shadow_card;
+  // height: 100%;
+  border-radius: 0.3rem;
+}
+
+.box:hover {
+  .fadeInElement {
+    animation: fadeIn 0.5s forwards;
+  }
+}
+
+.topImg {
+  width: 1rem;
+  max-width: 1rem;
+  height: 1rem;
+  max-height: 1rem;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+.fadeInElement {
+  background-color: #eaf9ff;
+  opacity: 0;
+  padding: 6px;
+  right: 0;
+}
+
+// .fadeInElement:after {
+//   content: "";
+//   height: 100%;
+//   width: 50%;
+//   position: absolute;
+//   background: white;
+//   border-radius: 120%;
+//   left: -35%;
+//   top: 0;
+//   transition: all 0.8s;
+// }
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.actionButtonContainer {
+  position: 'absolute' !important;
+  right: 0;
+  bottom: 0;
+  height: '100%' !important;
+  width: 'auto' !important;
+  padding: '4px' !important;
+}

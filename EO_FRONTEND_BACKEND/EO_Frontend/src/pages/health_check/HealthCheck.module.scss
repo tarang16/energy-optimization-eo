@@ -1,0 +1,147 @@
+@use 'config/scss/variables' as *;
+
+.healthCheckParentContainer {
+  padding: 0 2vmin 2vmin 2vmin;
+}
+
+.healthCheckContainer {
+  .topContainer {
+    height: 4vmin;
+    margin-bottom: 1.5vmin;
+
+    .showStatus {
+      display: inline-block;
+      padding: 0.8vmin 1vmin 0.8vmin 1vmin;
+      margin-left: 1.3vmin;
+
+      img {
+        width: 2vmin;
+        height: 2vmin;
+      }
+    }
+  }
+
+  .tableContainer {
+    @include boxShadow_card;
+    margin-bottom: 1.5vmin;
+    height: calc(100% - 11.5vmin);
+
+    .trendPopupIcon {
+      cursor: pointer;
+      position: absolute;
+      bottom: 1vmin;
+      right: 1.5vmin;
+      width: 4vmin;
+      height: 4vmin;
+      padding: 0.8vmin;
+      border-radius: 50%;
+      background-color: $primary_blue_bg;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0px 0px 5px 0px $primary_shadow_card;
+      transition: 0.3s ease-in-out;
+
+      &:hover {
+        background-color: $primary_blue;
+
+        img {
+          filter: brightness(0) invert(1);
+        }
+      }
+    }
+
+    .table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0px;
+
+      thead {
+        height: 5.5vmin;
+        width: 100%;
+        position: sticky;
+        top: 0;
+        z-index: 10;
+
+        tr {
+          th {
+            position: relative;
+            padding: 0.5vmin;
+            background-color: $primary_blue_bg;
+            color: $primary_gray;
+            font-size: 1.2vmin;
+            font-family: 'sabic_text_bold', serif;
+            text-align: left;
+
+            &:first-child {
+              border-radius: 3px 0px 0px 3px;
+            }
+
+            &:last-child {
+              border-radius: 0px 3px 3px 0px;
+            }
+
+            &:not(:last-child) {
+              &::after {
+                content: '';
+                position: absolute;
+                height: 47%;
+                width: 1px;
+                background-color: $primary_gray_3;
+                top: 50%;
+                right: 0;
+                transform: translateY(-50%);
+              }
+            }
+          }
+        }
+      }
+
+      tbody {
+        overflow-y: auto;
+        height: calc(100% - 5.5vmin);
+
+        tr {
+          td:first-child {
+            text-align: left;
+          }
+
+          td {
+            text-align: left;
+            padding: 0.5vmin 0.5vmin;
+            font-size: 1.2vmin;
+            color: $primary_gray;
+            font-family: 'sabic_text_regular', serif;
+            background-color: $primary_bg;
+            position: relative;
+            vertical-align: middle;
+            border-bottom: 1px solid $primary_gray_3;
+          }
+        }
+      }
+    }
+  }
+
+  .statusContainer {
+    height: 5vmin;
+    padding: 0.2vmin 2vmin;
+    @include boxShadow_card;
+
+    .imageContainer {
+      gap: 2vmin;
+
+      &__item {
+        img {
+          margin-right: 1.5vmin;
+          width: 2.5vmin;
+          height: 2.5vmin;
+        }
+      }
+    }
+  }
+}
+
+.dropdownContainer {
+  min-width: 25vmin !important;
+  width: 25vmin !important;
+}

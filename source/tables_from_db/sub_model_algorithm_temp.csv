@@ -1,0 +1,4 @@
+﻿sub_model_algorithm_id,sub_model_algorithm_name,algorithm_selector
+1,rf,1
+2,svm,2
+3,glm,3

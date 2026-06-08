@@ -1,0 +1,33 @@
+@use './variables' as *;
+
+* { color: $primary_gray; }
+
+.sabic_regular { font-family: 'sabic_text_regular', serif; }
+.sabic_light { font-family: 'sabic_text_light', serif; }
+.sabic_bold { font-family: 'sabic_text_bold', serif; }
+.sabic_heading_regular { font-family: 'sabic_headline_regular', serif; }
+.sabic_heading_light { font-family: 'sabic_headline_light', serif; }
+.sabic_heading_bold { font-family: 'sabic_headline_bold', serif; }
+
+@mixin text-base($size) {
+  color: $primary_gray;
+  font-size: $size;
+  line-height: 1.2;
+}
+
+.text-10-regular { @include text-base(1vmin);   font-family: 'sabic_text_regular', serif; font-weight: 400; }
+.text-10-bold    { @include text-base(1vmin);   font-family: 'sabic_text_bold', serif;    font-weight: 700; }
+.text-11-regular { @include text-base(1.1vmin); font-family: 'sabic_text_regular', serif; font-weight: 400; }
+.text-11-bold    { @include text-base(1.1vmin); font-family: 'sabic_text_bold', serif;    font-weight: 700; }
+.text-12-regular { @include text-base(1.2vmin); font-family: 'sabic_text_regular', serif; font-weight: 400; }
+.text-12-bold    { @include text-base(1.2vmin); font-family: 'sabic_text_bold', serif;    font-weight: 700; }
+.text-13-regular { @include text-base(1.3vmin); font-family: 'sabic_text_regular', serif; font-weight: 400; }
+.text-13-bold    { @include text-base(1.3vmin); font-family: 'sabic_text_bold', serif;    font-weight: 700; }
+.text-14-regular { @include text-base(1.4vmin); font-family: 'sabic_text_regular', serif; font-weight: 400; }
+.text-14-bold    { @include text-base(1.4vmin); font-family: 'sabic_text_bold', serif;    font-weight: 700; }
+.text-15-regular { @include text-base(1.5vmin); font-family: 'sabic_text_regular', serif; font-weight: 400; }
+.text-15-bold    { @include text-base(1.5vmin); font-family: 'sabic_text_bold', serif;    font-weight: 700; }
+.text-16-regular { @include text-base(1.6vmin); font-family: 'sabic_text_regular', serif; font-weight: 400; }
+.text-16-bold    { @include text-base(1.6vmin); font-family: 'sabic_text_bold', serif;    font-weight: 700; }
+.text-18-bold    { @include text-base(1.8vmin); font-family: 'sabic_text_bold', serif;    font-weight: 700; }
+.text-20-bold    { @include text-base(2vmin);   font-family: 'sabic_text_bold', serif;    font-weight: 700; }

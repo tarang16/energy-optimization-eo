@@ -1,0 +1,123 @@
+# Element-to-MINLP tag mapping for the boiler scope (BLR_1..BLR_5).
+#
+# This file is the user-maintained bridge between:
+#   - the hierarchy sheet's L1 namespace
+#       (Element Path + Attribute Name, e.g. "HP-2 Fuel Fired BoilerA > Steam Generation Flow")
+#   - the MINLP's L2 namespace
+#       (logical tag names like BLR_1_HPS_Gen_raw, Fuel_BLR_1_raw)
+#
+# At runtime, `hierarchy_loader.py` walks the hierarchy CSV, applies this mapping,
+# and emits a wide DataFrame whose column names match the MINLP L2 namespace.
+# Those columns then feed `boiler_calc/calc_blueprint.json`, which computes the
+# 158 inferred-tag formulas the boiler MINLP transitively requires.
+
+scope: boiler
+description: |
+  BLR_1..BLR_5 are the 5 HP-2 Fuel Fired Boilers (A-E) in the hierarchy sheet.
+  The 9 VHP Waste Heat Boilers (A-I) are NOT in scope for boiler_calc; they are
+  heat-recovery, not MINLP-dispatch decisions.
+
+# --- Unit identity: which hierarchy boiler element is which MINLP BLR_n? ---
+units:
+  BLR_1:
+    hierarchy_leaf_element: "HP-2 Fuel Fired BoilerA"
+    aux_elements:
+      fd_fan:  "HP Boiler FD FanA"
+      bfw_pump: "HP Boiler BFW PumpA"
+      stack:    "HP Boiler StackA"
+      drum:     "HP Boiler Steam DrumA"
+  BLR_2:
+    hierarchy_leaf_element: "HP-2 Fuel Fired BoilerB"
+    aux_elements:
+      fd_fan:  "HP Boiler FD FanB"
+      bfw_pump: "HP Boiler BFW PumpB"
+      stack:    "HP Boiler StackB"
+      drum:     "HP Boiler Steam DrumB"
+  BLR_3:
+    hierarchy_leaf_element: "HP-2 Fuel Fired BoilerC"
+    aux_elements:
+      fd_fan:  "HP Boiler FD FanC"
+      bfw_pump: "HP Boiler BFW PumpC"
+      stack:    "HP Boiler StackC"
+      drum:     "HP Boiler Steam DrumC"
+  BLR_4:
+    hierarchy_leaf_element: "HP-2 Fuel Fired BoilerD"
+    aux_elements:
+      fd_fan:  "HP Boiler FD FanD"
+      bfw_pump: "HP Boiler BFW PumpD"
+      stack:    "HP Boiler StackD"
+      drum:     "HP Boiler Steam DrumD"
+  BLR_5:
+    hierarchy_leaf_element: "HP-2 Fuel Fired BoilerE"
+    aux_elements:
+      fd_fan:  "HP Boiler FD FanE"
+      bfw_pump: "HP Boiler BFW PumpE"
+      stack:    "HP Boiler StackE"
+      drum:     "HP Boiler Steam DrumE"
+
+# --- Attribute mapping (boiler-root attributes on HP-2 Fuel Fired Boiler<L>) ---
+# Each entry: MINLP tag pattern -> hierarchy attribute_name
+# `{n}` is the BLR number 1..5; `{L}` is the letter A..E.
+per_boiler_attributes:
+  BLR_{n}_HPS_Gen_raw:            "Steam Generation Flow"        # boiler steam generation [t/h]
+  Fuel_BLR_{n}_raw:               "Fuel Gas Flow"                # main fuel-gas flow [t/h]
+  BOILER_{L}_STACK_TEMPERATURE:   "Stack Temperature"            # stack T [degC]   - lives on HP Boiler Stack<L> if available, else on boiler root
+  Boielr_{L}_Fuel_Gas_Flow:       "Fuel Gas Flow"                # duplicate of Fuel_BLR_{n}_raw with typo; same source
+  # Composition tags for LHV computation
+  BLR_{n}_Fuel_Gas_C1:            "Fuel Gas C1"
+  BLR_{n}_Fuel_Gas_C2:            "Fuel Gas C2"
+  BLR_{n}_Fuel_Gas_C3:            "Fuel Gas C3"
+  BLR_{n}_Fuel_Gas_iC4:           "Fuel Gas iC4"
+  BLR_{n}_Fuel_Gas_iC5:           "Fuel Gas iC5"
+  BLR_{n}_Fuel_Gas_nC4:           "Fuel Gas nC4"
+  BLR_{n}_Fuel_Gas_nC5:           "Fuel Gas nC5"
+  BLR_{n}_Fuel_Gas_H2:            "Fuel Gas H2"
+  BLR_{n}_Fuel_Gas_N2:            "Fuel Gas N2"
+  BLR_{n}_Fuel_Gas_CO2:           "Fuel Gas CO2"
+  BLR_{n}_Fuel_Gas_CH3OH:         "Fuel Gas CH3OH"
+  BLR_{n}_Fuel_Gas_MW:            "Fuel Gas Molecular Weight"
+  BLR_{n}_Fuel_Gas_CV:            "Fuel Gas Calorific Value"
+  BLR_{n}_Flue_Gas_O2:            "Flue Gas O2"
+  BLR_{n}_Flue_Gas_CO:            "Flue Gas CO"
+  BLR_{n}_Drum_Pressure:          "Drum Pressure"
+  BLR_{n}_Drum_Level:             "Drum Level"
+  BLR_{n}_Steam_Outlet_Pressure:  "Steam Outlet Pressure"
+  BLR_{n}_Steam_Outlet_Temperature: "Steam Outlet Temperature"
+
+# --- Aux-element attributes (live on FD Fan / BFW Pump / Stack child elements) ---
+# These attributes are NOT yet in the hierarchy sheet's 27-attribute boiler template.
+# `_hierarchy_additions_needed.csv` (sibling file) lists them as required additions.
+aux_attributes:
+  fd_fan:
+    FD_Fan_BLR_{n}_Steam_raw:     "Steam"   # FD-fan turbine steam consumption [t/h]
+  bfw_pump:
+    VHP_BFW_{L}_AMPS:             "Motor Amps"           # motor current [A] - only A/D have this in MINLP
+    VHP_BFW_{L}_Discharge_flow:   "Discharge Flow"       # discharge flow [t/h]
+    VHP_BFW_{L}_Vibration:        "Vibration"            # vibration [mm/s]
+    VHP_BFW_{L}_Turb_Steam_raw:   "Turbine Steam"        # if BFW pump is steam-turbine driven
+  stack:
+    BOILER_{L}_STACK_TEMPERATURE: "Stack Temperature"    # alternate location if a Stack child element exists
+
+# --- Plant-level / system constants and runtime flags ---
+# These are NOT served by boiler_calc; they come from a sibling `system_calc` module
+# (or are configured constants).  Listed here only for documentation.
+system_inputs_consumed:
+  - LHV                           # fuel calorific value (may be a configured constant)
+  - VHP_Steam_Pressure
+  - VHP_BFW_FROM_U_O
+  - VHP_DESPHTR_BFW_FROM_U_O
+  - ETH_Plant_Status
+  - EOEG1_Plant_Status
+  - EOEG2_Plant_Status
+  - EOEG3_Plant_Status
+  - LAO_Plant_Status
+  - Total_Boilers_Running
+  - opt_flag
+  - Whatif_running
+  - max_spec_en_consumption_blr
+  - max2_spec_en_consumption_blr
+  - Spec_En_Cons_BLR_1_Opt
+  - Spec_En_Cons_BLR_2_Opt
+  - Spec_En_Cons_BLR_3_Opt
+  - Spec_En_Cons_BLR_4_Opt
+  - Spec_En_Cons_BLR_5_Opt

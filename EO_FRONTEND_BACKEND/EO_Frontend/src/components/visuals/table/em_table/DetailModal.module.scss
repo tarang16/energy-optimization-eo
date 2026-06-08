@@ -1,0 +1,185 @@
+@use '../../../../config/scss/variables.scss' as *;
+
+.contentFitWidth {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.modalContent {
+  padding: 16px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.topSection {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 3.5vmin;
+  margin-bottom: 1vmin;
+
+  .indicators {
+    display: flex;
+    gap: 2vmin;
+
+    .indicator {
+      display: flex;
+      align-items: center;
+      gap: 0.8vmin;
+
+      .onIndicator {
+        width: 1.1vmin;
+        height: 1.1vmin;
+        background-color: $secondary_green;
+        border-radius: 50%;
+      }
+
+      .offIndicator {
+        width: 1.1vmin;
+        height: 1.1vmin;
+        background-color: $primary_gray_3;
+        border-radius: 50%;
+      }
+
+      .actualIndicator {
+        width: 1.1vmin;
+        height: 1.1vmin;
+        background-color: $primary_blue;
+        border-radius: 0.3%;
+      }
+
+      .actualIndicatorRed {
+        width: 1.1vmin;
+        height: 1.1vmin;
+        background-color: $primary_orange;
+        border-radius: 0.3%;
+      }
+
+      .targetIndicator {
+        width: 1.1vmin;
+        height: 1.1vmin;
+        background-color: $primary_gray_2;
+        border-radius: 0.3%;
+      }
+    }
+  }
+
+  .selectBoxWrapper {
+    .labelText {
+      min-width: fit-content;
+    }
+
+    :global(.react-select-modifyDetails__menu-list) {
+      max-height: 19vmin;
+      font-size: 1.2vmin;
+    }
+
+    :global(.customSelectBoxField) {
+      height: inherit;
+      min-width: 25vmin;
+      max-width: 25vmin;
+    }
+
+    :global(.react-select-modifyDetails__control) {
+      min-height: unset;
+      height: inherit;
+      font-size: 1.2vmin;
+      padding: 0 0 0 1vmin;
+    }
+
+    :global(
+      .react-select-modifyDetails__control.react-select-modifyDetails__control--is-focused
+    ) {
+      border: 1px solid $primary_blue !important;
+    }
+
+    :global(.react-select-modifyDetails__indicators) {
+      height: 100%;
+    }
+
+    :global(
+      .react-select-modifyDetails__value-container.react-select-modifyDetails__value-container--has-value
+    ) {
+      height: 100%;
+      padding: 0 1vmin;
+    }
+
+    :global(.react-select-modifyDetails__input-container) {
+      height: 100%;
+      max-height: 4vmin;
+      margin: 0;
+      padding: 0;
+    }
+
+    :global(.react-select-modifyDetails__single-value) {
+      margin-top: 0.3vmin;
+    }
+
+    :global(
+      .react-select-modifyDetails__indicator.react-select-modifyDetails__dropdown-indicator
+    ),
+    :global(
+      .react-select-modifyDetails__indicator.react-select-modifyDetails__clear-indicator
+    ) {
+      padding: 1vmin;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      svg {
+        width: 2vmin;
+        filter: brightness(0) saturate(100%) invert(64%) sepia(4%)
+          saturate(240%) hue-rotate(177deg) brightness(92%) contrast(92%);
+      }
+    }
+  }
+}
+
+.dropdown {
+  display: flex;
+}
+
+.parameterSelect {
+  width: 100%;
+}
+
+.TargetContainer {
+  padding: 1vmin 0;
+
+  .TargetValue {
+    span {
+      color: $primary_gray_3;
+    }
+  }
+}
+
+.btnContainer {
+  button {
+    padding: 0;
+    border: none;
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 2vmin;
+
+    img {
+      width: 2.5vmin;
+
+      &:hover {
+        filter: brightness(0) saturate(100%) invert(49%) sepia(19%)
+          saturate(3675%) hue-rotate(163deg) brightness(93%) contrast(102%);
+      }
+    }
+  }
+}
+
+:global(.EMcategodyMdal.react-select-modifyDetails__menu-portal) {
+  z-index: 1080;
+}
+
+:global(.ag-theme-alpine .ag-header-viewport) {
+  overflow-x: hidden !important;
+}

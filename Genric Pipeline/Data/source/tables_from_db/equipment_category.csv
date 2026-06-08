@@ -1,0 +1,13 @@
+﻿equipment_category_id,equipment_category,equipment_type,active
+1,BFW Pump,Motor,1
+2,BFW Pump,Turbine,1
+3,CW Pump,Motor,1
+4,CW Pump,Turbine,1
+5,VHP BFW Pump,Motor,1
+6,VHP BFW Pump,Turbine,1
+7,Air Compressor,Motor,1
+8,Air Compressor,Turbine,1
+9,DMW Pump,Motor,1
+10,DMW Pump,Turbine,1
+11,Boiler,Boiler,1
+12,FD Motor,Motor,1

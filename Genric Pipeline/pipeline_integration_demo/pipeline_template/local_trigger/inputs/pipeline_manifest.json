@@ -1,0 +1,87 @@
+{
+  "_instructions": [
+    "Fill in every TODO field before running your pipeline.",
+    "Sections marked FIXED must not be renamed — platform code depends on those keys.",
+    "Remove all '_instructions', '_doc', and '_doc_*' keys before deploying to production."
+  ],
+
+  "_doc_metadata": "Pipeline identity — used by platform to route and track runs.",
+  "model_id":     "your_pipeline_v1",
+  "version":      "v1",
+  "system_id":    "your_system",
+  "feature_flag": "your_feature_flag",
+
+  "input_config_sheets": {
+    "_doc": "Maps logical key names (used in ctx.input_config) to Excel sheet names in pipeline_input_configs.xlsx.",
+
+    "_doc_fixed": "The two keys below are FIXED — inputs.prepare() depends on them. Do not rename.",
+    "instantiated_attrs": "intantiated_attributes",
+    "sensors_mapping":    "Sensors_Mapping",
+
+    "_doc_extra": "TODO: Add extra sheets your pipeline needs. Key = how you access it via ctx.input_config['key'], value = exact sheet name in the Excel file.",
+    "your_extra_sheet":   "Your_Sheet_Name"
+  },
+
+  "output_schemas": {
+    "_doc": "Declares output channels written by your pipeline. Platform uses this for schema validation and DB routing.",
+    "_doc_standard": "The two channels below are STANDARD — emitted automatically by the pipeline template. Copy as-is.",
+
+    "output_attribute_values": {
+      "_doc": "STANDARD — do not change fields. element_code is the entity UUID from system_config (id field). TODO: list every valid (attribute, element_code) tuple your pipeline emits in 'allowed_combinations'.",
+      "mandatory": true,
+      "db_table": "output_attribute_values_table",
+      "natural_key": ["run_id", "timestamp", "element_code", "attribute"],
+      "partition_interval": "month",
+      "fields": [
+        {"name": "model_id",     "type": "string",   "nullable": false},
+        {"name": "run_id",       "type": "string",   "nullable": false},
+        {"name": "timestamp",    "type": "datetime", "nullable": false},
+        {"name": "element_code", "type": "string",   "nullable": false},
+        {"name": "attribute",    "type": "string",   "nullable": false},
+        {"name": "value",        "type": "float",    "nullable": true}
+      ],
+      "allowed_combinations": [
+        {"attribute": "YourAttr1", "element_code": "uuid-of-entity-1"},
+        {"attribute": "YourAttr1", "element_code": "uuid-of-entity-2"},
+        {"attribute": "YourAttr2", "element_code": "uuid-of-entity-1"}
+      ]
+    },
+
+    "imputation_history": {
+      "_doc": "STANDARD — do not change. One row per imputed sensor value.",
+      "mandatory": false,
+      "db_table": "imputation_history_table",
+      "natural_key": ["run_id", "timestamp", "sensor"],
+      "partition_interval": "none",
+      "fields": [
+        {"name": "model_id",       "type": "string",   "nullable": false},
+        {"name": "run_id",         "type": "string",   "nullable": false},
+        {"name": "timestamp",      "type": "datetime", "nullable": false},
+        {"name": "sensor",         "type": "string",   "nullable": false},
+        {"name": "raw_value",      "type": "float",    "nullable": true},
+        {"name": "modified_value", "type": "float",    "nullable": false},
+        {"name": "sip_policy",     "type": "string",   "nullable": false}
+      ]
+    },
+
+    "_doc_custom": "TODO: Declare your pipeline-specific output channels below.",
+
+    "your_results": {
+      "_doc": "TODO: rename this key and define your channel schema.",
+      "mandatory": true,
+      "db_table": "your_results_table",
+      "natural_key": ["run_id", "timestamp", "entity_id"],
+      "partition_interval": "month",
+      "_doc_partition_interval": "Allowed values: 'month' | 'day' | 'none'",
+      "fields": [
+        {"name": "model_id",   "type": "string",   "nullable": false},
+        {"name": "run_id",     "type": "string",   "nullable": false},
+        {"name": "timestamp",  "type": "datetime", "nullable": false},
+        {"name": "entity_id",  "type": "string",   "nullable": false},
+        {"name": "value",      "type": "float",    "nullable": true},
+        "_doc_field_types":    "Allowed types: string | float | int | datetime",
+        "_doc_field_options":  "Optional field keys: 'allowed' (list of valid values), 'range' ([min, max] for numeric)"
+      ]
+    }
+  }
+}

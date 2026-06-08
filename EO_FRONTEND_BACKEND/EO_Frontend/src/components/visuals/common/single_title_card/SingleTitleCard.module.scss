@@ -1,0 +1,130 @@
+@use 'src/config/scss/_variables' as *;
+
+.card_container {
+  background-color: $primary_white;
+  padding: 0 1.3vmin;
+  margin: 1vmin;
+  box-shadow: 0px 0px 5px 1px $primary_gray_4;
+  height: calc(100% - 2vmin);
+  overflow: hidden;
+
+  &.shadow_none {
+    box-shadow: none;
+  }
+
+  .card_header {
+    border-bottom: 1px solid $primary_gray_4;
+    height: 5vmin;
+    display: flex;
+    align-items: center;
+
+    &__title {
+      text-transform: uppercase;
+      padding-top: 3px;
+    }
+
+    .btn {
+      display: inline-block;
+      width: 8vmin;
+      background-color: $primary_blue;
+      color: $primary_white;
+      padding: 0.7vmin 0.7vmin 0.4vmin 0.7vmin;
+      border-radius: 0.4vmin;
+      border: none;
+    }
+
+    .pendingBtn {
+      display: flex;
+      align-items: center;
+      padding: 0.2vmin 1vmin;
+      background-color: $primary_orange_60;
+      color: $primary_orange;
+      height: 3vmin;
+      border-radius: 0.3vmin;
+      border: 1px solid $secondary_orange_60;
+
+      img {
+        max-width: 2vmin;
+        margin-right: 0.6vmin;
+        filter: none !important;
+      }
+
+      .btnText {
+        margin-top: 0.3vmin;
+      }
+    }
+
+    .completeBtn {
+      display: flex;
+      align-items: center;
+      background-color: $secondary_green_Light;
+      color: $primary_green;
+      height: 3vmin;
+      border-radius: 0.3vmin;
+      border: 1px solid $secondary_green;
+
+      img {
+        max-width: 2vmin;
+        margin-right: 0.6vmin;
+        filter: none;
+      }
+
+      .btnText {
+        margin-top: 0.3vmin;
+      }
+    }
+
+    .searcbarContainer {
+      height: 3vmin;
+      display: flex;
+      align-items: center;
+
+      .search_input {
+        width: 100%;
+        outline: none;
+        border: 1px solid $primary_gray_3;
+        height: 100%;
+        padding: 0.4vmin 2.5vmin 0.3vmin 1vmin;
+        position: relative;
+        font-size: 1.4vmin;
+        border-radius: 0.3vmin;
+
+        &::-webkit-search-cancel-button {
+          position: absolute;
+          right: 0;
+          top: 50%;
+          transform: translateY(-50%);
+          cursor: pointer;
+          background-image: url('../../../../assets/sabic_icons/common/gray_cross.svg');
+          -webkit-appearance: none;
+          height: 1.8vmin;
+          width: 1.8vmin;
+          background-size: cover;
+          background-repeat: no-repeat;
+        }
+
+        &:focus {
+          &::placeholder {
+            color: transparent;
+          }
+        }
+
+        &::-webkit-input-placeholder {
+          font-weight: normal;
+          color: $primary_gray_2;
+        }
+      }
+    }
+
+    .muntiSelectContainer {
+      height: 3vmin;
+    }
+  }
+
+  .card_body {
+    height: calc(100% - 5vmin);
+    padding: 1vmin 0 0.5vmin 0;
+    // overflow-y: auto;
+    // overflow-x: auto;
+  }
+}

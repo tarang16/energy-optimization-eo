@@ -1,0 +1,92 @@
+=== SHEET: derived_equation_post_optimizer ===
+Shape: 82 rows x 3 columns
+
+COLUMN HEADERS:
+  [0] 'tag_name'
+  [1] 'formula_expression'
+  [2] 'active'
+
+ALL ROWS:
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+[0] tag_name: act_running | formula_expression: 0 | active: 1
+[1] tag_name: SEU_Enable | formula_expression: if([SEU_Enable]==0,1,0) | active: 1
+[2] tag_name: FUEL_GAS_From_UO_to_LAO | formula_expression: if([LAO_Plant_Status]==0,0,round([FUEL_GAS_From_UO_to_LAO]-([FUEL_GAS_From_UO_to_LAO_delta]),3)) | active: 1
+[3] tag_name: FUEL_GAS_From_UO_to_ETH | formula_expression: if([ETH_Plant_Status]==0,0,round(([FUEL_GAS_From_UO_to_ETH]-[FUEL_GAS_From_UO_to_ETH_delta]),3)) | active: 1
+[4] tag_name: Fuel_Consumption_Plants_changes | formula_expression: [FUEL_GAS_From_UO_to_ETH] + [FUEL_GAS_From_UO_to_LAO]  | active: 1
+[5] tag_name: Fuel_Consumption_Plants | formula_expression: [Fuel_Consumption_Plants_fixed]+[Fuel_Consumption_Plants_changes] | active: 1
+[6] tag_name: CW_Motor_7814A_Status | formula_expression: [EOEG3_Plant_Status]*[CW_Motor_7814A_Status] | active: 1
+[7] tag_name: CW_Motor_7814B_Status | formula_expression: [EOEG3_Plant_Status]*[CW_Motor_7814B_Status] | active: 1
+[8] tag_name: CW_Motor_7814C_Status | formula_expression: [EOEG3_Plant_Status]*[CW_Motor_7814C_Status] | active: 1
+[9] tag_name: CW_Motor_7814A_Power | formula_expression: [CW_Motor_7814A_Status]*2.55*0.9 | active: 1
+[10] tag_name: CW_Motor_7814B_Power | formula_expression: [CW_Motor_7814B_Status]*2.55*0.9 | active: 1
+[11] tag_name: CW_Motor_7814C_Power | formula_expression: [CW_Motor_7814C_Status]*2.55*0.9 | active: 1
+[12] tag_name: Total_CW_Motors_Header_2_Running | formula_expression: [CW_Motor_7814A_Status]+[CW_Motor_7814B_Status]+[CW_Motor_7814C_Status] | active: 1
+[13] tag_name: CW_Demand_Header_2 | formula_expression: ((-1017.6*[CW_Header_2_Pressure]*[CW_Header_2_Pressure]+8495.3*[CW_Header_2_Pressure]-1655)*[Total_CW_Motors_Header_2_Running])*[EOEG3_Plant_Status] | active: 1
+[14] tag_name: Sea_water_makeup_CW | formula_expression: if([Whatif_running]==0, if(([Sea_water_cond_CT_LIMS]<85000)&&([CW_Circuit_1_return_temp]<38), [act_Sea_water_makeup_CW]-500, [act_Sea_water_makeup_CW]) ,[act_Sea_water_makeup_CW]*([CW_Demand_Header_2]+[Total_CW_Demand])/[act_Total_CW_Demand_including_EG3]) | active: 1
+[15] tag_name: Total_Power_Consumption_U_O | formula_expression: [Total_Power_for_Drives]+[Power_Consumption_Plant_U_O]+[CW_Motor_7814A_Power] +[CW_Motor_7814B_Power]+[CW_Motor_7814C_Power]+[Sea_CT_Fans_all]*[Sea_CT_Fan_power]/1000 | active: 1
+[16] tag_name: Total_Power_Consumption_without_Drives | formula_expression: [Power_Consumption_Plants]+[Power_Consumption_Plant_U_O] | active: 1
+[17] tag_name: Total_Power_Consumption | formula_expression: [Total_Power_Consumption_without_Drives] + [Total_Power_for_Drives] | active: 1
+[18] tag_name: HP_to_MP_Letdown_Valve_Opening_PV0007A_UO | formula_expression: 183.333-(sqrt(8.1796-0.0312*[HP_to_MP_Letdown_HPS_Flow_In_PV0007A_UO]))/0.0156 | active: 1
+[19] tag_name: HP_to_MP_Letdown_Valve_Opening_PV0007B_UO | formula_expression: 183.333-(sqrt(8.1796-0.0312*[HP_to_MP_Letdown_HPS_Flow_In_PV0007B_UO]))/0.0156 | active: 1
+[20] tag_name: MP_to_LP_Letdown_Valve_Opening_PV013A_UO | formula_expression: (sqrt(0.002209+0.0156*[MP_to_LP_Letdown_MPS_Flow_In_PV013A_UO])/0.0078)-6.02564 | active: 1
+[21] tag_name: MP_to_LP_Letdown_Valve_Opening_PV013B_UO | formula_expression: (sqrt(0.002209+0.0156*[MP_to_LP_Letdown_MPS_Flow_In_PV013B_UO])/0.0078)-6.02564 | active: 1
+[22] tag_name: Spec_En_Cons_BLR_1 | formula_expression: [Spec_En_Cons_BLR_1]*[BLR_1_Status] | active: 1
+[23] tag_name: Spec_En_Cons_BLR_2 | formula_expression: [Spec_En_Cons_BLR_2]*[BLR_2_Status] | active: 1
+[24] tag_name: Spec_En_Cons_BLR_3 | formula_expression: [Spec_En_Cons_BLR_3]*[BLR_3_Status] | active: 1
+[25] tag_name: Spec_En_Cons_BLR_4 | formula_expression: [Spec_En_Cons_BLR_4]*[BLR_4_Status] | active: 1
+[26] tag_name: Spec_En_Cons_BLR_5 | formula_expression: [Spec_En_Cons_BLR_5]*[BLR_5_Status] | active: 1
+[27] tag_name: BFW_to_Boilers | formula_expression: [Total_BLR_HPS_Generation]/0.99 | active: 1
+[28] tag_name: Deaerator_A_LPS | formula_expression: [Deaerator_A_LPS_percent]*[Deaerator_LPS] | active: 1
+[29] tag_name: Deaerator_B_LPS | formula_expression: [Deaerator_B_LPS_percent]*[Deaerator_LPS] | active: 1
+[30] tag_name: HP_Steam_Vent_valve_PV0012_Opening_UO | formula_expression: [HP_Steam_Vent_valve_PV0012_Steam_flow_out_UO]/2.059 | active: 1
+[31] tag_name: LP_Steam_Dumping_Valve_PC0024A_Opening_UO | formula_expression: [LP_Steam_Dumping_Valve_PC0024A_Steam_flow_out_UO]/0.724 | active: 1
+[32] tag_name: MP_to_LP_Letdown_Valve_Opening_PV31_UO | formula_expression: [MP_to_LP_Letdown_MPS_Flow_In_PV31_UO]/0.677 | active: 1
+[33] tag_name: MP_to_LP_Letdown_Valve_Opening_PV32_UO | formula_expression: [MP_to_LP_Letdown_MPS_Flow_In_PV32_UO]/0.677 | active: 1
+[34] tag_name: LP_Steam_Vent_valve_PV0024B_Opening_UO | formula_expression: [LP_Steam_Vent_valve_PV0024B_Steam_flow_out_UO]/1.208 | active: 1
+[35] tag_name: Deaerator_A_LPS_Vent | formula_expression: ([Deaerator_A_LPS]*0.02) | active: 1
+[36] tag_name: Deaerator_B_LPS_Vent | formula_expression: ([Deaerator_B_LPS]*0.02) | active: 1
+[37] tag_name: Air_compressor_A_Discharge_flow | formula_expression: [Air_Compressor_Turbine_A_Status]*[Air_compressor_A_Discharge_flow] | active: 1
+[38] tag_name: Air_compressor_B_Discharge_flow | formula_expression: [Air_Compressor_Motor_B_Status]*[Air_compressor_B_Discharge_flow] | active: 1
+[39] tag_name: Air_compressor_C_Discharge_flow | formula_expression: [Air_Compressor_Motor_C_Status]*[Air_compressor_C_Discharge_flow] | active: 1
+[40] tag_name: Air_compressor_D_Discharge_flow | formula_expression: [Air_Compressor_Turbine_D_Status]*[Air_compressor_D_Discharge_flow] | active: 1
+[41] tag_name: AC_A_Flow_To_Header | formula_expression: if([Air_Compressor_Turbine_A_Status]==0,0,[Total_Air_Demand]/[Air_Compressor_Drives_Running]) | active: 1
+[42] tag_name: AC_B_Flow_To_Header | formula_expression: if([Air_Compressor_Motor_B_Status]==0,0,[Total_Air_Demand]/[Air_Compressor_Drives_Running]) | active: 1
+[43] tag_name: AC_C_Flow_To_Header | formula_expression: if([Air_Compressor_Motor_C_Status]==0,0,[Total_Air_Demand]/[Air_Compressor_Drives_Running]) | active: 1
+[44] tag_name: AC_D_Flow_To_Header | formula_expression: if([Air_Compressor_Turbine_D_Status]==0,0,[Total_Air_Demand]/[Air_Compressor_Drives_Running]) | active: 1
+[45] tag_name: AC_A_Max_Alloc | formula_expression: [act_AIR_COMPRESSOR_A_Vent_flow]*[Air_Compressor_Turbine_A_Status] | active: 1
+[46] tag_name: AC_B_Max_Alloc | formula_expression: [act_AIR_COMPRESSOR_B_Vent_flow]*[Air_Compressor_Motor_B_Status] | active: 1
+[47] tag_name: AC_C_Max_Alloc | formula_expression: [act_AIR_COMPRESSOR_C_Vent_flow]*[Air_Compressor_Motor_C_Status] | active: 1
+[48] tag_name: AC_D_Max_Alloc | formula_expression: [act_AIR_COMPRESSOR_D_Vent_flow]*[Air_Compressor_Turbine_D_Status] | active: 1
+[49] tag_name: AC_total_Max_Alloc | formula_expression: [AC_A_Max_Alloc]+[AC_B_Max_Alloc]+[AC_C_Max_Alloc]+[AC_D_Max_Alloc] | active: 1
+[50] tag_name: AIR_COMPRESSOR_A_Vent_flow | formula_expression: if([AC_total_Max_Alloc]==0,0,[AC_A_Max_Alloc]*[Total_air_vent]/[AC_total_Max_Alloc]) | active: 1
+[51] tag_name: AIR_COMPRESSOR_B_Vent_flow | formula_expression: if([AC_total_Max_Alloc]==0,0,[AC_B_Max_Alloc]*[Total_air_vent]/[AC_total_Max_Alloc]) | active: 1
+[52] tag_name: AIR_COMPRESSOR_C_Vent_flow | formula_expression: if([AC_total_Max_Alloc]==0,0,[AC_C_Max_Alloc]*[Total_air_vent]/[AC_total_Max_Alloc]) | active: 1
+[53] tag_name: AIR_COMPRESSOR_D_Vent_flow | formula_expression: if([AC_total_Max_Alloc]==0,0,[AC_D_Max_Alloc]*[Total_air_vent]/[AC_total_Max_Alloc]) | active: 1
+[54] tag_name: EOEG_1_MPS_Demand | formula_expression: if([EOEG1_Plant_Status]==0,0,if(([EOEG_1_MPS_Demand]-[EOEG_1_MPS_Demand_delta])<0,0,([EOEG_1_MPS_Demand]-[EOEG_1_MPS_Demand_delta]))) | active: 1
+[55] tag_name: EOEG_1_LPS_Demand | formula_expression: if([EOEG1_Plant_Status]==0,0,if(([EOEG_1_LPS_Demand]-[EOEG_1_LPS_Demand_delta])<0,0,([EOEG_1_LPS_Demand]-[EOEG_1_LPS_Demand_delta]))) | active: 1
+[56] tag_name: EOEG_2_MPS_Demand | formula_expression: if([EOEG2_Plant_Status]==0,0,if(([EOEG_2_MPS_Demand]-[EOEG_2_MPS_Demand_delta])<0,0,([EOEG_2_MPS_Demand]-[EOEG_2_MPS_Demand_delta]))) | active: 1
+[57] tag_name: EOEG_2_LPS_Demand | formula_expression: if([EOEG2_Plant_Status]==0,0,if(([EOEG_2_LPS_Demand]-[EOEG_2_LPS_Demand_delta])<0,0,([EOEG_2_LPS_Demand]-[EOEG_2_LPS_Demand_delta]))) | active: 1
+[58] tag_name: EOEG_3_MPS_Demand | formula_expression: if([EOEG3_Plant_Status]==0,0,if(([EOEG_3_MPS_Demand]-[EOEG_3_MPS_Demand_delta])<0,0,([EOEG_3_MPS_Demand]-[EOEG_3_MPS_Demand_delta]))) | active: 1
+[59] tag_name: EOEG_3_LPS_Demand | formula_expression: if([EOEG3_Plant_Status]==0,0,if(([EOEG_3_LPS_Demand]-[EOEG_3_LPS_Demand_delta])<0,0,([EOEG_3_LPS_Demand]-[EOEG_3_LPS_Demand_delta]))) | active: 1
+[60] tag_name: ETH_HPS_Demand | formula_expression: if([ETH_Plant_Status]==0,0,if(([ETH_HPS_Demand]-([ETH_HPS_Demand_delta]))<0,0,([ETH_HPS_Demand]-([ETH_HPS_Demand_delta])))) | active: 1
+[61] tag_name: ETH_LPS_Demand | formula_expression: if([ETH_Plant_Status]==0,0,if(([ETH_LPS_Demand]-([ETH_LPS_Demand_delta]))<0,0,([ETH_LPS_Demand]-([ETH_LPS_Demand_delta])))) | active: 1
+[62] tag_name: Plant_HP_Steam_Demand | formula_expression: [EOEG_1_HPS_Demand] + [EOEG_2_HPS_Demand] + [EOEG_3_HPS_Demand] + [ETH_HPS_Demand] | active: 1
+[63] tag_name: Plant_MP_Steam_Demand | formula_expression: [EOEG_1_MPS_Demand] + [EOEG_2_MPS_Demand] + [EOEG_3_MPS_Demand] | active: 1
+[64] tag_name: Plant_LP_Steam_Demand | formula_expression: [EOEG_1_LPS_Demand] + [EOEG_2_LPS_Demand] + [EOEG_3_LPS_Demand] + [ETH_LPS_Demand] + [LAO_LP_Steam_Demand] | active: 1
+[65] tag_name: Contribution_from_SEUs | formula_expression: [Plant_HP_Steam_Demand]*[HP_Steam_Cost] + [Plant_MP_Steam_Demand]*[MP_steam_generation_Cost] + [Plant_LP_Steam_Demand]*[LP_Steam_Cost]+ [Fuel_Consumption_Plants]*[LHV]*[Fuel_Rate] + [Power_Consumption_Plants]*3.6*[Power_Rate] | active: 1
+[66] tag_name: BOILER_A_STACK_TEMPERATURE | formula_expression: if([BOILER_A_FLUE_GAS_OXGYGEN_flag]==0,[BOILER_A_STACK_TEMPERATURE],min([BOILER_A_STACK_TEMPERATURE],(0.368798083 * [BLR_1_HPS_Gen] + 0.356735113 * [BOILER_A_FLUE_GAS_OXGYGEN] + 117.0923065))*[BLR_1_Status]) | active: 1
+[67] tag_name: BOILER_B_STACK_TEMPERATURE | formula_expression: if([BOILER_B_FLUE_GAS_OXGYGEN_flag]==0,[BOILER_B_STACK_TEMPERATURE],min([BOILER_B_STACK_TEMPERATURE],(0.446275852 * [BLR_2_HPS_Gen] + 0.310062436 * [BOILER_B_FLUE_GAS_OXGYGEN] + 110.2389869))*[BLR_2_Status]) | active: 1
+[68] tag_name: BOILER_C_STACK_TEMPERATURE | formula_expression: if([BOILER_C_FLUE_GAS_OXGYGEN_flag]==0,[BOILER_C_STACK_TEMPERATURE],min([BOILER_C_STACK_TEMPERATURE],(0.399051143 * [BLR_3_HPS_Gen] - 0.176072266 * [BOILER_C_FLUE_GAS_OXGYGEN] + 116.3971552))*[BLR_3_Status]) | active: 1
+[69] tag_name: BOILER_D_STACK_TEMPERATURE | formula_expression: if([BOILER_D_FLUE_GAS_OXGYGEN_flag]==0,[BOILER_D_STACK_TEMPERATURE],min([BOILER_D_STACK_TEMPERATURE],(0.399089856 * [BLR_4_HPS_Gen] - 0.482676221 * [BOILER_D_FLUE_GAS_OXGYGEN] + 114.6594118))*[BLR_4_Status]) | active: 1
+[70] tag_name: BOILER_E_STACK_TEMPERATURE | formula_expression: if([Boiler_5_O2_flag]==0,[BOILER_E_STACK_TEMPERATURE],min([BOILER_E_STACK_TEMPERATURE],(0.313555668 * [BLR_5_HPS_Gen] + 0.475167776 * [BOILER_E_FLUE_GAS_OXGYGEN] + 132.5695951))*[BLR_5_Status]) | active: 1
+[71] tag_name: HP_Steam_Consumption | formula_expression: [ETH_HPS_Demand] +[EOEG_1_HPS_Demand]+[EOEG_2_HPS_Demand]+[EOEG_3_HPS_Demand]+ [BFW_E_Turb_Steam] + [BFW_B_Turb_Steam] + [BFW_C_Turb_Steam] + [VHP_BFW_B_Turb_Steam] + [VHP_BFW_C_Turb_Steam] + [CW_Turbine_A_Steam] + [CW_Turbine_B_Steam] + [CW_Turbine_G_Steam] + [Air_Compressor_Turbine_A_Steam] + [Air_Compressor_Turbine_D_Steam] + [FD_Fan_BLR_1_Steam] + [FD_Fan_BLR_2_Steam] + [FD_Fan_BLR_3_Steam] + [FD_Fan_BLR_4_Steam] + [FD_Fan_BLR_5_Steam] + [MP_Steam_Generation]*0.91+ [HP_Steam_Vent_valve_PV0012_Steam_flow_out_UO] | active: 1
+[72] tag_name: MP_Steam_Consumption | formula_expression: [EOEG_1_MPS_Demand]+[EOEG_2_MPS_Demand]+[EOEG_3_MPS_Demand]+[DMW_Turbine_A_Steam]+ [DMW_Turbine_C_Steam]+ [MP_to_LP_Letdown_MPS_Flow_In_PV013A_UO]+ [MP_to_LP_Letdown_MPS_Flow_In_PV013B_UO]+ [MP_to_LP_Letdown_MPS_Flow_In_PV31_UO]+ [MP_to_LP_Letdown_MPS_Flow_In_PV32_UO] | active: 1
+[73] tag_name: LP_Steam_Consumption | formula_expression: [ETH_LPS_Demand]+[EOEG_1_LPS_Demand]+[EOEG_2_LPS_Demand]+[EOEG_3_LPS_Demand]+[Deaerator_LPS]+[LP_Steam_Vent_valve_PV0024B_Steam_flow_out_UO]+[LP_Steam_Dumping_Valve_PC0024A_Steam_flow_out_UO] +[LAO_LP_Steam_Demand] | active: 1
+[74] tag_name: CBD_energy_saving_BLR1 | formula_expression: [CBD_energy_saving_BLR1]*[BLR_1_Status] | active: 1
+[75] tag_name: CBD_energy_saving_BLR2 | formula_expression: [CBD_energy_saving_BLR2]*[BLR_2_Status] | active: 1
+[76] tag_name: CBD_energy_saving_BLR3 | formula_expression: [CBD_energy_saving_BLR3]*[BLR_3_Status] | active: 1
+[77] tag_name: CBD_energy_saving_BLR4 | formula_expression: [CBD_energy_saving_BLR4]*[BLR_4_Status] | active: 1
+[78] tag_name: CBD_energy_saving_BLR5 | formula_expression: [CBD_energy_saving_BLR5]*[BLR_5_Status] | active: 1
+[79] tag_name: Total_Steam_Turbines_Running | formula_expression: [Total_Boilers_Running] +[BFW_Turbines_Running] +[VHP_BFW_B_Turb_Status] +[VHP_BFW_C_Turb_Status] +[CW_Turbine_A_Status] +[CW_Turbine_B_Status] +[CW_Turbine_G_Status] +[Air_Compressor_Turbine_A_Status] +[Air_Compressor_Turbine_D_Status] +[DMW_Turbine_A_Status] +[DMW_Turbine_C_Status]-[FDF_A_Motor_Status]-[FDF_B_Motor_Status] | active: 1
+[80] tag_name: Total_Drives_Running | formula_expression: [BFW_Drives_Running]+[VHP_BFW_Drives_Running]+[CW_Drives_Running]+[Air_Compressor_Drives_Running]+[DMW_Drives_Running]+[Total_Boilers_Running] | active: 1
+[81] tag_name: Total_Motors_Running | formula_expression: [Total_Drives_Running] -[Total_Steam_Turbines_Running] | active: 1

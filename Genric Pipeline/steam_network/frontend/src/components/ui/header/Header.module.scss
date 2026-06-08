@@ -1,0 +1,107 @@
+@use 'config/scss/variables' as *;
+
+.headerContainer {
+  padding: 0 4%;
+}
+
+.PEHeading {
+  a {
+    display: inline-block;
+    width: 19vmin;
+  }
+  img {
+    width: 100%;
+  }
+}
+
+.iconsContainer {
+  .imgContainer {
+    height: 4vmin;
+    display: flex;
+    align-items: center;
+
+    .img {
+      display: inline-block;
+      width: 2.6vmin;
+      height: 2.4vmin;
+      margin-right: 2vmin;
+
+      img {
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+      }
+
+      &:hover img {
+        filter: invert(46%) sepia(44%) saturate(4344%) hue-rotate(169deg)
+          brightness(98%) contrast(101%);
+      }
+    }
+
+    .bellIconBtn {
+      border: none;
+      background: transparent;
+      padding: 0;
+      width: 2.6vmin;
+      height: 2.4vmin;
+      margin-right: 2vmin;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+
+      img {
+        width: 100%;
+        height: 100%;
+      }
+
+      &:hover img {
+        filter: invert(46%) sepia(44%) saturate(4344%) hue-rotate(169deg)
+          brightness(98%) contrast(101%);
+      }
+    }
+  }
+
+  .profileContainer {
+    .userIconContainer {
+      img {
+        width: 5vmin;
+        height: 5vmin;
+        border: 1px solid $primary_gray_3;
+        border-radius: 50%;
+        cursor: initial;
+      }
+    }
+  }
+}
+
+.sabicIcon {
+  img {
+    width: 12vmin;
+    cursor: initial;
+  }
+}
+
+.welcomeText {
+  font-family: 'sabic_headline_light', serif;
+  font-size: 1.4vmin;
+  font-weight: bold;
+  line-height: 1.7vmin;
+  margin: 0 0 0.3vmin 0;
+}
+
+.nameText {
+  font-family: 'sabic_headline_light', serif;
+  font-size: 1.5vmin;
+  font-weight: bold;
+  line-height: normal;
+  text-transform: capitalize;
+  margin: 0 0 0.25vmin 0;
+}
+
+.roleText {
+  font-family: 'sabic_headline_light', serif;
+  font-size: 1.4vmin;
+  font-weight: 400;
+  line-height: 1.7vmin;
+}

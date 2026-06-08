@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?><process version="10.4.003">
+  <context>
+    <input/>
+    <output/>
+    <macros/>
+  </context>
+  <operator activated="true" class="process" compatibility="10.4.003" expanded="true" name="Process">
+    <parameter key="logverbosity" value="init"/>
+    <parameter key="random_seed" value="2001"/>
+    <parameter key="send_mail" value="never"/>
+    <parameter key="notification_email" value=""/>
+    <parameter key="process_duration_for_mail" value="30"/>
+    <parameter key="encoding" value="SYSTEM"/>
+    <process expanded="true">
+      <operator activated="true" class="retrieve" compatibility="10.4.003" expanded="true" height="68" name="Retrieve MSSQL_EO_2024_QA" width="90" x="45" y="340">
+        <parameter key="repository_entry" value="//Local Repository/Connections/MSSQL_EO_2024_QA"/>
+      </operator>
+      <operator activated="true" class="multiply" compatibility="10.4.003" expanded="true" height="208" name="Multiply" width="90" x="179" y="340"/>
+      <operator activated="true" class="jdbc_connectors:read_database" compatibility="10.4.003" expanded="true" height="82" name="sub_model_validation" width="90" x="380" y="646">
+        <parameter key="define_connection" value="repository"/>
+        <parameter key="database_system" value="MySQL"/>
+        <parameter key="define_query" value="query"/>
+        <parameter key="query" value="select top 100 * FROM sub_model_validation order by 1 desc&#10;"/>
+        <parameter key="use_default_schema" value="true"/>
+        <parameter key="prepare_statement" value="false"/>
+        <enumeration key="parameters"/>
+        <parameter key="data_management" value="auto"/>
+      </operator>
+      <operator activated="true" class="jdbc_connectors:read_database" compatibility="10.4.003" expanded="true" height="82" name="sub_model_retraining_history" width="90" x="380" y="544">
+        <parameter key="define_connection" value="repository"/>
+        <parameter key="database_system" value="MySQL"/>
+        <parameter key="define_query" value="query"/>
+        <parameter key="query" value="select top 100 * FROM sub_model_retraining_history order by 1 desc&#10;"/>
+        <parameter key="use_default_schema" value="true"/>
+        <parameter key="prepare_statement" value="false"/>
+        <enumeration key="parameters"/>
+        <parameter key="data_management" value="auto"/>
+      </operator>
+      <operator activated="true" class="jdbc_connectors:read_database" compatibility="10.4.003" expanded="true" height="82" name="model_alert_output" width="90" x="380" y="442">
+        <parameter key="define_connection" value="repository"/>
+        <parameter key="database_system" value="MySQL"/>
+        <parameter key="define_query" value="query"/>
+        <parameter key="query" value="select top 1000 * FROM model_alert_output order by 1 desc&#10;"/>
+        <parameter key="use_default_schema" value="true"/>
+        <parameter key="prepare_statement" value="false"/>
+        <enumeration key="parameters"/>
+        <parameter key="data_management" value="auto"/>
+      </operator>
+      <operator activated="true" class="jdbc_connectors:read_database" compatibility="10.4.003" expanded="true" height="82" name="run_info" width="90" x="380" y="340">
+        <parameter key="define_connection" value="repository"/>
+        <parameter key="database_system" value="MySQL"/>
+        <parameter key="define_query" value="query"/>
+        <parameter key="query" value="select top 100 * FROM run_info order by 1 desc&#10;"/>
+        <parameter key="use_default_schema" value="true"/>
+        <parameter key="prepare_statement" value="false"/>
+        <enumeration key="parameters"/>
+        <parameter key="data_management" value="auto"/>
+      </operator>
+      <operator activated="true" class="jdbc_connectors:read_database" compatibility="10.4.003" expanded="true" height="82" name="aihub_scheduler" width="90" x="380" y="136">
+        <parameter key="define_connection" value="repository"/>
+        <parameter key="database_system" value="MySQL"/>
+        <parameter key="define_query" value="query"/>
+        <parameter key="query" value="select top 100 * FROM aihub_scheduler order by 1 desc&#10;"/>
+        <parameter key="use_default_schema" value="true"/>
+        <parameter key="prepare_statement" value="false"/>
+        <enumeration key="parameters"/>
+        <parameter key="data_management" value="auto"/>
+      </operator>
+      <operator activated="true" class="jdbc_connectors:read_database" compatibility="10.4.003" expanded="true" height="82" name="error_log" width="90" x="380" y="238">
+        <parameter key="define_connection" value="repository"/>
+        <parameter key="database_system" value="MySQL"/>
+        <parameter key="define_query" value="query"/>
+        <parameter key="query" value="select top 100 * FROM error_log order by 1 desc&#10;"/>
+        <parameter key="use_default_schema" value="true"/>
+        <parameter key="prepare_statement" value="false"/>
+        <enumeration key="parameters"/>
+        <parameter key="data_management" value="auto"/>
+      </operator>
+      <connect from_op="Retrieve MSSQL_EO_2024_QA" from_port="output" to_op="Multiply" to_port="input"/>
+      <connect from_op="Multiply" from_port="output 1" to_op="aihub_scheduler" to_port="connection"/>
+      <connect from_op="Multiply" from_port="output 2" to_op="error_log" to_port="connection"/>
+      <connect from_op="Multiply" from_port="output 3" to_op="run_info" to_port="connection"/>
+      <connect from_op="Multiply" from_port="output 4" to_op="model_alert_output" to_port="connection"/>
+      <connect from_op="Multiply" from_port="output 5" to_op="sub_model_retraining_history" to_port="connection"/>
+      <connect from_op="Multiply" from_port="output 6" to_op="sub_model_validation" to_port="connection"/>
+      <connect from_op="sub_model_validation" from_port="output" to_port="result 6"/>
+      <connect from_op="sub_model_retraining_history" from_port="output" to_port="result 5"/>
+      <connect from_op="model_alert_output" from_port="output" to_port="result 4"/>
+      <connect from_op="run_info" from_port="output" to_port="result 3"/>
+      <connect from_op="aihub_scheduler" from_port="output" to_port="result 1"/>
+      <connect from_op="error_log" from_port="output" to_port="result 2"/>
+      <portSpacing port="source_input 1" spacing="0"/>
+      <portSpacing port="sink_result 1" spacing="0"/>
+      <portSpacing port="sink_result 2" spacing="0"/>
+      <portSpacing port="sink_result 3" spacing="0"/>
+      <portSpacing port="sink_result 4" spacing="0"/>
+      <portSpacing port="sink_result 5" spacing="0"/>
+      <portSpacing port="sink_result 6" spacing="0"/>
+      <portSpacing port="sink_result 7" spacing="0"/>
+      <portSpacing port="sink_result 8" spacing="0"/>
+    </process>
+  </operator>
+</process>

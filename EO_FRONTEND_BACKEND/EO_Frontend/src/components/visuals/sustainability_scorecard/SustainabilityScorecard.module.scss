@@ -1,0 +1,89 @@
+@use '/src/config/scss/variables' as *;
+@use '/src/config/scss/typography.scss' as *;
+
+.paraDiv {
+  // height: 3vmin;
+  display: flex;
+  align-items: center;
+
+  p {
+    margin-top: 3px;
+  }
+}
+
+.sustainabilityCardTabs {
+  height: calc(100% - 0vmin);
+
+  ul {
+    height: 4vmin !important;
+    width: 100% !important;
+    margin: 0px !important;
+    padding: 0px !important;
+
+    li {
+      display: inline-block;
+      width: 25% !important;
+      overflow: hidden;
+      margin: 0px !important;
+      padding: 0px !important;
+      border-bottom: 2px solid $primary_gray_4 !important;
+
+      :global(.active) {
+        color: $primary_blue !important;
+        background-color: transparent !important;
+      }
+
+      &:has(:global(.active)) {
+        border-color: $primary_blue !important;
+      }
+
+      button {
+        &:hover {
+          background: transparent !important;
+          color: $primary_blue !important;
+        }
+
+        margin: 0px !important;
+        padding: 0px !important;
+        text-align: center;
+        font-size: 1.2vmin;
+      }
+    }
+  }
+
+  :global(.tab-content) {
+    height: calc(100% - 6vmin) !important;
+
+    :global(.active) {
+      color: $primary_gray !important;
+
+      span {
+        color: $primary_gray;
+        background-color: transparent !important;
+
+        &.text_primary_blue {
+          color: $primary_blue;
+          margin: 0 0.3vmin;
+        }
+      }
+
+      background-color: transparent !important;
+    }
+
+    :global(.tab-pane) {
+      padding: 1vmin 0 !important;
+    }
+  }
+
+  & > span {
+    height: 2vmin;
+  }
+}
+
+.ScoreBoard_table_spacing {
+  height: calc(100% - 3vmin);
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  gap: 1vmin;
+}

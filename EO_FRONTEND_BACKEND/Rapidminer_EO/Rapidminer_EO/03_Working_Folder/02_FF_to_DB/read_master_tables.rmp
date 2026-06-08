@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?><process version="10.4.003">
+  <context>
+    <input/>
+    <output/>
+    <macros/>
+  </context>
+  <operator activated="true" class="process" compatibility="10.4.003" expanded="true" name="Process">
+    <parameter key="logverbosity" value="init"/>
+    <parameter key="random_seed" value="2001"/>
+    <parameter key="send_mail" value="never"/>
+    <parameter key="notification_email" value=""/>
+    <parameter key="process_duration_for_mail" value="30"/>
+    <parameter key="encoding" value="SYSTEM"/>
+    <process expanded="true">
+      <operator activated="true" class="set_macro" compatibility="10.4.003" expanded="true" height="68" name="Set Macro" width="90" x="45" y="34">
+        <parameter key="macro" value="path"/>
+        <parameter key="value" value="//sabic.com/SABICFS/citrix_upm/30781140/My Documents/RapidMiner/Projects/ing_manufacturing_eo_2024_dev/03_Pipeline/working_folder/02_FF_to_DB"/>
+      </operator>
+      <operator activated="true" class="utility:create_exampleset" compatibility="10.4.003" expanded="true" height="68" name="Create ExampleSet" width="90" x="179" y="34">
+        <parameter key="generator_type" value="comma separated text"/>
+        <parameter key="number_of_examples" value="100"/>
+        <parameter key="use_stepsize" value="false"/>
+        <list key="function_descriptions"/>
+        <parameter key="add_id_attribute" value="false"/>
+        <list key="numeric_series_configuration"/>
+        <list key="date_series_configuration"/>
+        <list key="date_series_configuration (interval)"/>
+        <parameter key="date_format" value="yyyy-MM-dd HH:mm:ss"/>
+        <parameter key="time_zone" value="SYSTEM"/>
+        <parameter key="input_csv_text" value="table_macro,table_name&#10;table_name_blocks,ds.blocks&#10;table_name_case_configuration_portal_info,ds.case_configuration_portal_info&#10;table_name_case_info,ds.case_info&#10;table_name_constraint_category,ds.constraint_category&#10;table_name_drive_category,ds.drive_category&#10;table_name_model,ds.model&#10;table_name_unit_of_measurement,ds.unit_of_measurement&#10;table_name_utility_type,ds.utility_type&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;"/>
+        <parameter key="column_separator" value=","/>
+        <parameter key="parse_all_as_nominal" value="false"/>
+        <parameter key="decimal_point_character" value="."/>
+        <parameter key="trim_attribute_names" value="true"/>
+        <description align="center" color="transparent" colored="false" width="126">Define table&lt;br/&gt;names</description>
+      </operator>
+      <operator activated="true" class="extract_macro" compatibility="10.4.003" expanded="true" height="68" name="Extract Macro (2)" width="90" x="313" y="34">
+        <parameter key="macro" value="records"/>
+        <parameter key="macro_type" value="number_of_examples"/>
+        <parameter key="statistics" value="average"/>
+        <parameter key="attribute_name" value=""/>
+        <list key="additional_macros"/>
+      </operator>
+      <operator activated="true" class="retrieve" compatibility="10.4.003" expanded="true" height="68" name="Retrieve MSSQL_EO_2024" width="90" x="313" y="187">
+        <parameter key="repository_entry" value="//ing_manufacturing_eo_2024_dev/Connections/MSSQL_EO_2024"/>
+      </operator>
+      <operator activated="true" breakpoints="after" class="concurrency:loop" compatibility="10.4.003" expanded="true" height="103" name="Loop" width="90" x="447" y="34">
+        <parameter key="number_of_iterations" value="%{records}"/>
+        <parameter key="iteration_macro" value="iteration"/>
+        <parameter key="reuse_results" value="false"/>
+        <parameter key="enable_parallel_execution" value="true"/>
+        <process expanded="true">
+          <operator activated="true" class="extract_macro" compatibility="10.4.003" expanded="true" height="68" name="Extract Macro (4)" width="90" x="45" y="34">
+            <parameter key="macro" value="table_name"/>
+            <parameter key="macro_type" value="data_value"/>
+            <parameter key="statistics" value="average"/>
+            <parameter key="attribute_name" value="table_name"/>
+            <parameter key="example_index" value="%{iteration}"/>
+            <list key="additional_macros"/>
+          </operator>
+          <operator activated="true" class="jdbc_connectors:read_database" compatibility="10.4.003" expanded="true" height="82" name="Read Database (6)" width="90" x="45" y="136">
+            <parameter key="define_connection" value="repository"/>
+            <parameter key="database_system" value="MySQL"/>
+            <parameter key="define_query" value="query"/>
+            <parameter key="query" value="Select * From %{table_name}"/>
+            <parameter key="use_default_schema" value="true"/>
+            <parameter key="prepare_statement" value="false"/>
+            <enumeration key="parameters"/>
+            <parameter key="data_management" value="auto"/>
+          </operator>
+          <operator activated="false" breakpoints="after" class="branch" compatibility="10.4.003" expanded="true" height="103" name="Branch (4)" width="90" x="313" y="289">
+            <parameter key="condition_type" value="expression"/>
+            <parameter key="condition_value" value="1"/>
+            <parameter key="expression" value="parse(%{no_of_rows_extracted})==1"/>
+            <parameter key="io_object" value="ANOVAMatrix"/>
+            <parameter key="return_inner_output" value="true"/>
+            <process expanded="true">
+              <operator activated="true" class="extract_macro" compatibility="10.4.003" expanded="true" height="68" name="Extract Macro (6)" width="90" x="112" y="34">
+                <parameter key="macro" value="old_tag_id"/>
+                <parameter key="macro_type" value="data_value"/>
+                <parameter key="statistics" value="average"/>
+                <parameter key="attribute_name" value="tag_id"/>
+                <parameter key="example_index" value="1"/>
+                <list key="additional_macros"/>
+              </operator>
+              <operator activated="true" class="jdbc_connectors:execute_sql" compatibility="10.4.003" expanded="true" height="82" name="Execute SQL (2)" width="90" x="112" y="187">
+                <parameter key="define_connection" value="repository"/>
+                <parameter key="database_system" value="MySQL"/>
+                <parameter key="query" value="update [ds].[tag]&#10;set [tag_name]='%{new_tag_name}' &#10;where [tag_id] = '%{old_tag_id}'"/>
+                <parameter key="prepare_statement" value="false"/>
+                <enumeration key="parameters"/>
+              </operator>
+              <connect from_port="condition" to_op="Extract Macro (6)" to_port="example set"/>
+              <connect from_port="input 1" to_op="Execute SQL (2)" to_port="connection"/>
+              <portSpacing port="source_condition" spacing="0"/>
+              <portSpacing port="source_input 1" spacing="0"/>
+              <portSpacing port="source_input 2" spacing="0"/>
+              <portSpacing port="sink_input 1" spacing="0"/>
+            </process>
+            <process expanded="true">
+              <portSpacing port="source_condition" spacing="0"/>
+              <portSpacing port="source_input 1" spacing="0"/>
+              <portSpacing port="source_input 2" spacing="0"/>
+              <portSpacing port="sink_input 1" spacing="0"/>
+            </process>
+          </operator>
+          <connect from_port="input 1" to_op="Extract Macro (4)" to_port="example set"/>
+          <connect from_port="input 2" to_op="Read Database (6)" to_port="connection"/>
+          <connect from_op="Read Database (6)" from_port="output" to_port="output 1"/>
+          <portSpacing port="source_input 1" spacing="0"/>
+          <portSpacing port="source_input 2" spacing="0"/>
+          <portSpacing port="source_input 3" spacing="0"/>
+          <portSpacing port="sink_output 1" spacing="0"/>
+          <portSpacing port="sink_output 2" spacing="0"/>
+        </process>
+      </operator>
+      <operator activated="true" class="write_excel" compatibility="10.4.003" expanded="true" height="103" name="Write Excel" width="90" x="581" y="34">
+        <parameter key="excel_file" value="%{path}/read_master.xlsx"/>
+        <parameter key="file_format" value="xlsx"/>
+        <enumeration key="sheet_names">
+          <parameter key="sheet_name_element" value="blocks"/>
+          <parameter key="sheet_name_element" value="case_configuration_portal_info"/>
+          <parameter key="sheet_name_element" value="case_info "/>
+          <parameter key="sheet_name_element" value="constraint_category "/>
+          <parameter key="sheet_name_element" value="drive_category "/>
+          <parameter key="sheet_name_element" value="model "/>
+          <parameter key="sheet_name_element" value="unit_of_measurement "/>
+          <parameter key="sheet_name_element" value="utility_type "/>
+        </enumeration>
+        <parameter key="sheet_name" value="RapidMiner Data"/>
+        <parameter key="date_format" value="yyyy-MM-dd HH:mm:ss"/>
+        <parameter key="number_format" value="#.0"/>
+        <parameter key="encoding" value="SYSTEM"/>
+      </operator>
+      <connect from_op="Create ExampleSet" from_port="output" to_op="Extract Macro (2)" to_port="example set"/>
+      <connect from_op="Extract Macro (2)" from_port="example set" to_op="Loop" to_port="input 1"/>
+      <connect from_op="Retrieve MSSQL_EO_2024" from_port="output" to_op="Loop" to_port="input 2"/>
+      <connect from_op="Loop" from_port="output 1" to_op="Write Excel" to_port="input"/>
+      <connect from_op="Write Excel" from_port="file" to_port="result 1"/>
+      <portSpacing port="source_input 1" spacing="0"/>
+      <portSpacing port="sink_result 1" spacing="0"/>
+      <portSpacing port="sink_result 2" spacing="0"/>
+    </process>
+  </operator>
+</process>

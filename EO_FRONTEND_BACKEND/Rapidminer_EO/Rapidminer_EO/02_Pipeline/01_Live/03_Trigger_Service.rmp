@@ -1,0 +1,944 @@
+<?xml version="1.0" encoding="UTF-8"?><process version="10.4.003">
+  <context>
+    <input/>
+    <output/>
+    <macros/>
+  </context>
+  <operator activated="true" class="process" compatibility="10.4.003" expanded="true" name="Process">
+    <parameter key="logverbosity" value="init"/>
+    <parameter key="random_seed" value="2001"/>
+    <parameter key="send_mail" value="never"/>
+    <parameter key="notification_email" value=""/>
+    <parameter key="process_duration_for_mail" value="30"/>
+    <parameter key="encoding" value="SYSTEM"/>
+    <process expanded="true">
+      <operator activated="true" class="handle_exception" compatibility="10.4.003" expanded="true" height="82" name="Handle Exception" width="90" x="380" y="238">
+        <parameter key="exception_macro" value="error"/>
+        <parameter key="add_details_to_log" value="false"/>
+        <process expanded="true">
+          <operator activated="true" class="branch" compatibility="10.4.003" expanded="true" height="103" name="Input" width="90" x="112" y="136">
+            <parameter key="condition_type" value="macro_defined"/>
+            <parameter key="condition_value" value="case_id"/>
+            <parameter key="expression" value=""/>
+            <parameter key="io_object" value="ANOVAMatrix"/>
+            <parameter key="return_inner_output" value="true"/>
+            <process expanded="true">
+              <operator activated="true" class="set_macros" compatibility="10.4.003" expanded="true" height="68" name="Set Macros (5)" width="90" x="179" y="187">
+                <list key="macros">
+                  <parameter key="block_level_0" value="03_Trigger_Service"/>
+                </list>
+              </operator>
+              <connect from_port="condition" to_port="input 1"/>
+              <connect from_port="input 1" to_port="input 2"/>
+              <portSpacing port="source_condition" spacing="0"/>
+              <portSpacing port="source_input 1" spacing="0"/>
+              <portSpacing port="source_input 2" spacing="0"/>
+              <portSpacing port="sink_input 1" spacing="0"/>
+              <portSpacing port="sink_input 2" spacing="0"/>
+              <portSpacing port="sink_input 3" spacing="0"/>
+            </process>
+            <process expanded="true">
+              <operator activated="true" class="set_macros" compatibility="10.4.003" expanded="true" height="68" name="Set Macros (2)" width="90" x="45" y="187">
+                <list key="macros">
+                  <parameter key="case_id" value="1"/>
+                </list>
+                <description align="center" color="transparent" colored="false" width="126">Set case_id</description>
+              </operator>
+              <operator activated="true" class="set_macro" compatibility="10.4.003" expanded="true" height="68" name="Set Macro" width="90" x="179" y="187">
+                <parameter key="macro" value="block_level_0"/>
+                <parameter key="value" value="03_Trigger_Service"/>
+                <description align="center" color="transparent" colored="false" width="126">Generate block macro</description>
+              </operator>
+              <connect from_port="condition" to_port="input 1"/>
+              <connect from_port="input 1" to_port="input 2"/>
+              <portSpacing port="source_condition" spacing="0"/>
+              <portSpacing port="source_input 1" spacing="0"/>
+              <portSpacing port="source_input 2" spacing="0"/>
+              <portSpacing port="sink_input 1" spacing="0"/>
+              <portSpacing port="sink_input 2" spacing="0"/>
+              <portSpacing port="sink_input 3" spacing="0"/>
+            </process>
+            <description align="center" color="transparent" colored="false" width="124">branch to check if case_id macro defined, This branch will help to run the pipeline standalone by simply defining macro at else part</description>
+          </operator>
+          <operator activated="true" class="subprocess" compatibility="10.4.003" expanded="true" height="68" name="initialize_new_schema" width="90" x="447" y="136">
+            <process expanded="true">
+              <operator activated="true" class="generate_macro" compatibility="10.4.003" expanded="true" height="68" name="Generate Macro (4)" width="90" x="45" y="238">
+                <list key="function_descriptions">
+                  <parameter key="block_level_1" value="concat(%{block_level_0},&quot;/initialize_new_schema&quot;)"/>
+                  <parameter key="block" value="%{block_level_1}"/>
+                </list>
+                <description align="center" color="transparent" colored="false" width="126">Generate block macro</description>
+              </operator>
+              <operator activated="true" class="set_macros" compatibility="10.4.003" expanded="true" height="68" name="Set Macros" width="90" x="313" y="238">
+                <list key="macros">
+                  <parameter key="connection_pi" value="/Connections/PI_CONNECTION"/>
+                  <parameter key="connection_sql_eo" value="/Connections/MSSQL_EO_2024"/>
+                </list>
+                <description align="center" color="transparent" colored="false" width="126">conn initialization&lt;br/&gt;&lt;br/&gt;sql_connection&lt;br/&gt;Pi_connection</description>
+              </operator>
+              <operator activated="true" class="subprocess" compatibility="10.4.003" expanded="true" height="68" name="Read tables" width="90" x="715" y="238">
+                <process expanded="true">
+                  <operator activated="true" class="generate_macro" compatibility="10.4.003" expanded="true" height="68" name="Generate Macro (5)" width="90" x="45" y="34">
+                    <list key="function_descriptions">
+                      <parameter key="block_level_2" value="concat(%{block_level_1},&quot;/read_tables&quot;)"/>
+                      <parameter key="block" value="%{block_level_2}"/>
+                    </list>
+                    <description align="center" color="transparent" colored="false" width="126">Generate block macro</description>
+                  </operator>
+                  <operator activated="true" class="jdbc_connectors:read_database" compatibility="10.4.003" expanded="true" height="82" name="Read Database (3)" width="90" x="179" y="34">
+                    <parameter key="define_connection" value="repository"/>
+                    <parameter key="connection_entry" value="%{connection_sql_eo}"/>
+                    <parameter key="database_system" value="MySQL"/>
+                    <parameter key="define_query" value="query"/>
+                    <parameter key="query" value="SELECT [case_id]&#10;FROM case_info&#10;WHERE [case_id]  = %{case_id}&#10;AND [active]=1"/>
+                    <parameter key="use_default_schema" value="true"/>
+                    <parameter key="table_name" value="case"/>
+                    <parameter key="prepare_statement" value="true"/>
+                    <enumeration key="parameters"/>
+                    <parameter key="data_management" value="auto"/>
+                    <description align="center" color="transparent" colored="false" width="126">Read case table</description>
+                  </operator>
+                  <operator activated="true" class="branch" compatibility="10.4.003" expanded="true" height="82" name="Branch (5)" width="90" x="313" y="34">
+                    <parameter key="condition_type" value="min_examples"/>
+                    <parameter key="condition_value" value="1"/>
+                    <parameter key="expression" value=""/>
+                    <parameter key="io_object" value="ANOVAMatrix"/>
+                    <parameter key="return_inner_output" value="true"/>
+                    <process expanded="true">
+                      <operator activated="true" class="set_macros" compatibility="10.4.003" expanded="true" height="68" name="Set Macros (4)" width="90" x="380" y="34">
+                        <list key="macros">
+                          <parameter key="is_case_active" value="1"/>
+                        </list>
+                        <description align="center" color="transparent" colored="false" width="126">is_case_active = 1</description>
+                      </operator>
+                      <portSpacing port="source_condition" spacing="0"/>
+                      <portSpacing port="source_input 1" spacing="0"/>
+                      <portSpacing port="sink_input 1" spacing="0"/>
+                    </process>
+                    <process expanded="true">
+                      <operator activated="true" class="set_macros" compatibility="10.4.003" expanded="true" height="68" name="Set Macros (3)" width="90" x="246" y="34">
+                        <list key="macros">
+                          <parameter key="is_case_active" value="0"/>
+                        </list>
+                        <description align="center" color="transparent" colored="false" width="126">is_case_active = 0</description>
+                      </operator>
+                      <portSpacing port="source_condition" spacing="0"/>
+                      <portSpacing port="source_input 1" spacing="0"/>
+                      <portSpacing port="sink_input 1" spacing="0"/>
+                    </process>
+                    <description align="center" color="transparent" colored="false" width="126">if input exist then is_case_live = 1 else 0</description>
+                  </operator>
+                  <operator activated="true" class="jdbc_connectors:read_database" compatibility="10.4.003" expanded="true" height="82" name="Read Database" width="90" x="179" y="187">
+                    <parameter key="define_connection" value="repository"/>
+                    <parameter key="connection_entry" value="%{connection_sql_eo}"/>
+                    <parameter key="database_system" value="MySQL"/>
+                    <parameter key="define_query" value="query"/>
+                    <parameter key="query" value="select pm.model_id, mpm.macro_name as parameter,mpm.default_value,pm.category,pm.value &#10;from mst_pipeline_macros mpm join pipeline_macros pm on mpm.mst_pipeline_macro_id = pm.mst_pipeline_macro_id&#10;join model m on pm.model_id=m.model_id&#10;where  mpm.active = 1 and pm.active = 1 and m.case_id=%{case_id}"/>
+                    <parameter key="use_default_schema" value="true"/>
+                    <parameter key="table_name" value="case"/>
+                    <parameter key="prepare_statement" value="true"/>
+                    <enumeration key="parameters"/>
+                    <parameter key="data_management" value="auto"/>
+                    <description align="center" color="transparent" colored="false" width="126">Read pipeline parameter</description>
+                  </operator>
+                  <operator activated="true" class="subprocess" compatibility="10.4.003" expanded="true" height="82" name="pipeline_parameter_macros (2)" width="90" x="313" y="187">
+                    <process expanded="true">
+                      <operator activated="true" class="filter_examples" compatibility="10.4.003" expanded="true" height="103" name="Filter Examples" width="90" x="45" y="34">
+                        <parameter key="parameter_expression" value=""/>
+                        <parameter key="condition_class" value="custom_filters"/>
+                        <parameter key="invert_filter" value="false"/>
+                        <list key="filters_list">
+                          <parameter key="filters_entry_key" value="category.contains.EO"/>
+                        </list>
+                        <parameter key="filters_logic_and" value="true"/>
+                        <parameter key="filters_check_metadata" value="true"/>
+                      </operator>
+                      <operator activated="true" class="blending:generate_columns" compatibility="10.4.003" expanded="true" height="82" name="Generate Attributes (2)" width="90" x="179" y="34">
+                        <list key="function_descriptions">
+                          <parameter key="value" value="if(missing([value]),[default_value],[value])"/>
+                        </list>
+                        <parameter key="keep_all_columns" value="true"/>
+                        <parameter key="default_time_zone" value="Asia/Riyadh"/>
+                        <description align="center" color="transparent" colored="false" width="126">if value is missing update value with default value</description>
+                      </operator>
+                      <operator activated="true" class="operator_toolbox:set_macros_from_exampleset" compatibility="2.17.000" expanded="true" height="82" name="Set Macros from ExampleSet (7)" width="90" x="313" y="34">
+                        <parameter key="macro_name_attribute" value="parameter"/>
+                        <parameter key="value_attribute" value="value"/>
+                      </operator>
+                      <operator activated="true" class="branch" compatibility="10.4.003" expanded="true" height="82" name="check flag write macro defined" width="90" x="514" y="34">
+                        <parameter key="condition_type" value="macro_defined"/>
+                        <parameter key="condition_value" value="flag_write_to_pi_output"/>
+                        <parameter key="expression" value=""/>
+                        <parameter key="io_object" value="ANOVAMatrix"/>
+                        <parameter key="return_inner_output" value="true"/>
+                        <process expanded="true">
+                          <portSpacing port="source_condition" spacing="0"/>
+                          <portSpacing port="source_input 1" spacing="0"/>
+                          <portSpacing port="sink_input 1" spacing="0"/>
+                        </process>
+                        <process expanded="true">
+                          <operator activated="true" class="set_macro" compatibility="10.4.003" expanded="true" height="68" name="Set Macro (3)" width="90" x="313" y="136">
+                            <parameter key="macro" value="flag_write_to_pi_output"/>
+                            <parameter key="value" value="1"/>
+                          </operator>
+                          <portSpacing port="source_condition" spacing="0"/>
+                          <portSpacing port="source_input 1" spacing="0"/>
+                          <portSpacing port="sink_input 1" spacing="0"/>
+                        </process>
+                        <description align="center" color="transparent" colored="false" width="126">check flag_write_to_pi_&lt;br&gt;output&lt;br&gt;macro defined&lt;br&gt;else&lt;br&gt;create macro with value 1</description>
+                      </operator>
+                      <connect from_port="in 1" to_op="Filter Examples" to_port="example set input"/>
+                      <connect from_op="Filter Examples" from_port="example set output" to_op="Generate Attributes (2)" to_port="table input"/>
+                      <connect from_op="Generate Attributes (2)" from_port="table output" to_op="Set Macros from ExampleSet (7)" to_port="exampleset"/>
+                      <portSpacing port="source_in 1" spacing="0"/>
+                      <portSpacing port="source_in 2" spacing="0"/>
+                      <portSpacing port="sink_out 1" spacing="0"/>
+                      <description align="center" color="orange" colored="true" height="51" resized="false" width="129" x="29" y="160">Filter category is EO</description>
+                    </process>
+                    <description align="center" color="transparent" colored="false" width="126">Store pullpi_window_hour and its value in macro</description>
+                  </operator>
+                  <operator activated="true" class="jdbc_connectors:read_database" compatibility="10.4.003" expanded="true" height="82" name="Read Database (20)" width="90" x="179" y="391">
+                    <parameter key="define_connection" value="repository"/>
+                    <parameter key="connection_entry" value="%{connection_sql_eo}"/>
+                    <parameter key="database_system" value="MySQL"/>
+                    <parameter key="define_query" value="query"/>
+                    <parameter key="query" value="SELECT pi_name&#10;FROM tag &#10;INNER JOIN model_tag&#10;ON tag.tag_id = model_tag.tag_id&#10;INNER JOIN model&#10;ON model_tag.model_id = model.model_id&#10;where model_tag.active=1 AND  model_tag.flag_data_available_check = 1 and case_id = %{case_id}&#10;"/>
+                    <parameter key="use_default_schema" value="true"/>
+                    <parameter key="prepare_statement" value="false"/>
+                    <enumeration key="parameters"/>
+                    <parameter key="data_management" value="auto"/>
+                    <description align="center" color="transparent" colored="false" width="124">Read pi tags where flag_data_&lt;br/&gt;available_check is 1</description>
+                  </operator>
+                  <operator activated="true" class="branch" compatibility="10.4.003" expanded="true" height="82" name="Branch" width="90" x="313" y="391">
+                    <parameter key="condition_type" value="min_examples"/>
+                    <parameter key="condition_value" value="1"/>
+                    <parameter key="expression" value=""/>
+                    <parameter key="io_object" value="ANOVAMatrix"/>
+                    <parameter key="return_inner_output" value="true"/>
+                    <process expanded="true">
+                      <operator activated="true" class="remember" compatibility="10.4.003" expanded="true" height="68" name="check_tags" width="90" x="246" y="34">
+                        <parameter key="name" value="check_tags"/>
+                        <parameter key="io_object" value="ExampleSet"/>
+                        <parameter key="store_which" value="1"/>
+                        <parameter key="remove_from_process" value="true"/>
+                      </operator>
+                      <connect from_port="condition" to_op="check_tags" to_port="store"/>
+                      <portSpacing port="source_condition" spacing="0"/>
+                      <portSpacing port="source_input 1" spacing="0"/>
+                      <portSpacing port="sink_input 1" spacing="0"/>
+                    </process>
+                    <process expanded="true">
+                      <operator activated="true" class="jdbc_connectors:read_database" compatibility="10.4.003" expanded="true" height="82" name="Read Database (4)" width="90" x="179" y="85">
+                        <parameter key="define_connection" value="repository"/>
+                        <parameter key="connection_entry" value="%{connection_sql_eo}"/>
+                        <parameter key="database_system" value="MySQL"/>
+                        <parameter key="define_query" value="query"/>
+                        <parameter key="query" value="SELECT TOP 5 pi_name&#10;FROM tag&#10;INNER JOIN model_tag&#10;ON tag.tag_id = model_tag.tag_id&#10;where model_tag.active=1;&#10;"/>
+                        <parameter key="use_default_schema" value="true"/>
+                        <parameter key="prepare_statement" value="false"/>
+                        <enumeration key="parameters"/>
+                        <parameter key="data_management" value="auto"/>
+                      </operator>
+                      <operator activated="true" class="remember" compatibility="10.4.003" expanded="true" height="68" name="check_tags (2)" width="90" x="313" y="85">
+                        <parameter key="name" value="check_tags"/>
+                        <parameter key="io_object" value="ExampleSet"/>
+                        <parameter key="store_which" value="1"/>
+                        <parameter key="remove_from_process" value="true"/>
+                      </operator>
+                      <connect from_op="Read Database (4)" from_port="output" to_op="check_tags (2)" to_port="store"/>
+                      <portSpacing port="source_condition" spacing="0"/>
+                      <portSpacing port="source_input 1" spacing="0"/>
+                      <portSpacing port="sink_input 1" spacing="0"/>
+                    </process>
+                    <description align="center" color="transparent" colored="false" width="126">Branch to store check pi tags</description>
+                  </operator>
+                  <operator activated="true" class="jdbc_connectors:read_database" compatibility="10.4.003" expanded="true" height="82" name="Read Database (59)" width="90" x="179" y="591">
+                    <parameter key="define_connection" value="repository"/>
+                    <parameter key="connection_entry" value="%{connection_sql_eo}"/>
+                    <parameter key="database_system" value="MySQL"/>
+                    <parameter key="define_query" value="query"/>
+                    <parameter key="query" value="select mt.model_tag_id,&#10;m.model_id,&#10;mt.tag_id,&#10;mt.flag_output,&#10;mt.flag_output_run_always,&#10;t.tag_name&#10;FROM dbo.model_tag mt&#10;INNER JOIN dbo.tag t&#10;ON mt.tag_id=t.tag_id&#10;INNER JOIN dbo.model m&#10;ON mt.model_id = m.model_id&#10;WHERE m.case_id=%{case_id} and mt.active=1 and t.active=1 and m.active = 1"/>
+                    <parameter key="use_default_schema" value="true"/>
+                    <parameter key="prepare_statement" value="false"/>
+                    <enumeration key="parameters"/>
+                    <parameter key="data_management" value="auto"/>
+                  </operator>
+                  <operator activated="true" class="remember" compatibility="10.0.000" expanded="true" height="68" name="model_tag (16)" width="90" x="313" y="591">
+                    <parameter key="name" value="model_tag"/>
+                    <parameter key="io_object" value="ExampleSet"/>
+                    <parameter key="store_which" value="1"/>
+                    <parameter key="remove_from_process" value="true"/>
+                  </operator>
+                  <operator activated="true" class="jdbc_connectors:read_database" compatibility="10.4.003" expanded="true" height="82" name="Read Database (5)" width="90" x="447" y="34">
+                    <parameter key="define_connection" value="repository"/>
+                    <parameter key="connection_entry" value="%{connection_sql_eo}"/>
+                    <parameter key="database_system" value="MySQL"/>
+                    <parameter key="define_query" value="query"/>
+                    <parameter key="query" value="select [parameter], [value] from project_configuration&#10;where parameter = 'queue_name'"/>
+                    <parameter key="use_default_schema" value="true"/>
+                    <parameter key="table_name" value="case"/>
+                    <parameter key="prepare_statement" value="true"/>
+                    <enumeration key="parameters"/>
+                    <parameter key="data_management" value="auto"/>
+                    <description align="center" color="transparent" colored="false" width="126">Read project configuration to read queue_name</description>
+                  </operator>
+                  <operator activated="true" class="operator_toolbox:set_macros_from_exampleset" compatibility="2.17.000" expanded="true" height="82" name="Set Macros from ExampleSet" width="90" x="581" y="34">
+                    <parameter key="macro_name_attribute" value="parameter"/>
+                    <parameter key="value_attribute" value="value"/>
+                  </operator>
+                  <connect from_op="Read Database (3)" from_port="output" to_op="Branch (5)" to_port="condition"/>
+                  <connect from_op="Read Database" from_port="output" to_op="pipeline_parameter_macros (2)" to_port="in 1"/>
+                  <connect from_op="Read Database (20)" from_port="output" to_op="Branch" to_port="condition"/>
+                  <connect from_op="Read Database (59)" from_port="output" to_op="model_tag (16)" to_port="store"/>
+                  <connect from_op="Read Database (5)" from_port="output" to_op="Set Macros from ExampleSet" to_port="exampleset"/>
+                  <portSpacing port="source_in 1" spacing="0"/>
+                  <portSpacing port="sink_out 1" spacing="0"/>
+                </process>
+                <description align="center" color="transparent" colored="false" width="126">Reading database tables required to operate trigger service</description>
+              </operator>
+              <portSpacing port="source_in 1" spacing="0"/>
+              <portSpacing port="sink_out 1" spacing="0"/>
+              <description align="center" color="gray" colored="true" height="348" resized="true" width="373" x="580" y="116"/>
+              <description align="center" color="gray" colored="true" height="356" resized="true" width="387" x="171" y="105"/>
+              <description align="center" color="purple" colored="true" height="58" resized="false" width="303" x="200" y="135">DEFINE&lt;br&gt;PI, SQL CONNECTIONS</description>
+              <description align="center" color="purple" colored="true" height="68" resized="false" width="260" x="633" y="132">READ DATABASE TABLES</description>
+            </process>
+            <description align="center" color="transparent" colored="true" width="126">Reading tables, making pi and sql connections and generate trigger serive specific macros</description>
+          </operator>
+          <operator activated="true" class="subprocess" compatibility="10.4.003" expanded="true" height="68" name="main (2)" width="90" x="782" y="136">
+            <process expanded="true">
+              <operator activated="true" class="generate_macro" compatibility="10.4.003" expanded="true" height="68" name="Generate Macro (11)" width="90" x="45" y="493">
+                <list key="function_descriptions">
+                  <parameter key="block_level_1" value="concat(%{block_level_0},&quot;/main&quot;)"/>
+                  <parameter key="block" value="%{block_level_1}"/>
+                </list>
+                <description align="center" color="transparent" colored="false" width="126">Generate block macro</description>
+              </operator>
+              <operator activated="true" class="subprocess" compatibility="10.4.003" expanded="true" height="82" name="data availability check (3)" width="90" x="112" y="187">
+                <process expanded="true">
+                  <operator activated="true" class="generate_macro" compatibility="10.4.003" expanded="true" height="68" name="Generate Macro (12)" width="90" x="45" y="34">
+                    <list key="function_descriptions">
+                      <parameter key="block_level_2" value="concat(%{block_level_1},&quot;/data availability check&quot;)"/>
+                      <parameter key="block" value="%{block_level_2}"/>
+                    </list>
+                    <description align="center" color="transparent" colored="false" width="126">Generate block macro</description>
+                  </operator>
+                  <operator activated="true" class="subprocess" compatibility="10.4.003" expanded="true" height="82" name="get check pi tags" width="90" x="179" y="34">
+                    <process expanded="true">
+                      <operator activated="true" class="recall" compatibility="10.4.003" expanded="true" height="68" name="check_tags (4)" width="90" x="313" y="85">
+                        <parameter key="name" value="check_tags"/>
+                        <parameter key="io_object" value="ExampleSet"/>
+                        <parameter key="remove_from_store" value="true"/>
+                      </operator>
+                      <operator activated="true" class="filter_examples" compatibility="10.4.003" expanded="true" height="103" name="Filter Examples (4)" width="90" x="514" y="85">
+                        <parameter key="parameter_expression" value=""/>
+                        <parameter key="condition_class" value="custom_filters"/>
+                        <parameter key="invert_filter" value="false"/>
+                        <list key="filters_list">
+                          <parameter key="filters_entry_key" value="pi_name.is_not_missing."/>
+                        </list>
+                        <parameter key="filters_logic_and" value="true"/>
+                        <parameter key="filters_check_metadata" value="true"/>
+                        <description align="center" color="transparent" colored="false" width="126">pi_name is not missing</description>
+                      </operator>
+                      <operator activated="true" class="remove_duplicates" compatibility="10.4.003" expanded="true" height="103" name="Remove Duplicates (2)" width="90" x="648" y="85">
+                        <parameter key="attribute_filter_type" value="single"/>
+                        <parameter key="attribute" value="pi_name"/>
+                        <parameter key="attributes" value=""/>
+                        <parameter key="use_except_expression" value="false"/>
+                        <parameter key="value_type" value="attribute_value"/>
+                        <parameter key="use_value_type_exception" value="false"/>
+                        <parameter key="except_value_type" value="time"/>
+                        <parameter key="block_type" value="attribute_block"/>
+                        <parameter key="use_block_type_exception" value="false"/>
+                        <parameter key="except_block_type" value="value_matrix_row_start"/>
+                        <parameter key="invert_selection" value="false"/>
+                        <parameter key="include_special_attributes" value="false"/>
+                        <parameter key="treat_missing_values_as_duplicates" value="false"/>
+                        <description align="center" color="transparent" colored="false" width="126">pi_name</description>
+                      </operator>
+                      <operator activated="true" class="blending:generate_columns" compatibility="10.4.003" expanded="true" height="82" name="Generate Attributes" width="90" x="782" y="85">
+                        <list key="function_descriptions">
+                          <parameter key="root_path" value="if((ends([pi_name],&quot;_EO_CALC_OUTPUT&quot;) &amp;&amp; !ends([pi_name],&quot;PEEO_CALC_OUTPUT&quot;)),%{CALC_OUTPUT_root_path},%{pi_rootpath})"/>
+                        </list>
+                        <parameter key="keep_all_columns" value="true"/>
+                        <parameter key="default_time_zone" value="Asia/Riyadh"/>
+                        <description align="center" color="transparent" colored="false" width="126">root_path</description>
+                      </operator>
+                      <connect from_op="check_tags (4)" from_port="result" to_op="Filter Examples (4)" to_port="example set input"/>
+                      <connect from_op="Filter Examples (4)" from_port="example set output" to_op="Remove Duplicates (2)" to_port="example set input"/>
+                      <connect from_op="Remove Duplicates (2)" from_port="example set output" to_op="Generate Attributes" to_port="table input"/>
+                      <connect from_op="Generate Attributes" from_port="table output" to_port="out 1"/>
+                      <portSpacing port="source_in 1" spacing="0"/>
+                      <portSpacing port="sink_out 1" spacing="0"/>
+                      <portSpacing port="sink_out 2" spacing="0"/>
+                    </process>
+                  </operator>
+                  <operator activated="true" class="productivity:execute_process" compatibility="10.4.003" expanded="true" height="82" name="data availability check (4)" width="90" x="380" y="34">
+                    <parameter key="process_location" value="../../01_Common_Processes/data_availability_check"/>
+                    <parameter key="use_input" value="true"/>
+                    <parameter key="store_output" value="false"/>
+                    <parameter key="propagate_metadata_recursively" value="false"/>
+                    <parameter key="cache_process" value="false"/>
+                    <list key="macros">
+                      <parameter key="case_id" value="%{case_id}"/>
+                      <parameter key="pullpi_window_hour" value="%{pullpi_window_hour}"/>
+                      <parameter key="connection_sql_eo" value="%{connection_sql_eo}"/>
+                      <parameter key="connection_pi" value="%{connection_pi}"/>
+                      <parameter key="max_pullpi_window_hour" value="%{max_pullpi_window_hour}"/>
+                    </list>
+                    <parameter key="fail_for_unknown_macros" value="false"/>
+                  </operator>
+                  <connect from_op="get check pi tags" from_port="out 1" to_op="data availability check (4)" to_port="input 1"/>
+                  <connect from_op="data availability check (4)" from_port="result 1" to_port="out 1"/>
+                  <portSpacing port="source_in 1" spacing="0"/>
+                  <portSpacing port="sink_out 1" spacing="0"/>
+                  <portSpacing port="sink_out 2" spacing="0"/>
+                </process>
+              </operator>
+              <operator activated="true" class="operator_toolbox:set_macros_from_exampleset" compatibility="2.17.000" expanded="true" height="103" name="Set Macros from ExampleSet (2)" width="90" x="447" y="187">
+                <parameter key="macro_name_attribute" value="macro_name"/>
+                <parameter key="value_attribute" value="macro_value"/>
+                <description align="center" color="transparent" colored="false" width="126">Assign macros form example set input&lt;br/&gt;&lt;br/&gt;available_pi_time&lt;br&gt;last_run_time&lt;br&gt;need_to_run_flag&lt;br&gt;pullpi_window_hour&lt;br&gt;</description>
+              </operator>
+              <operator activated="true" class="branch" compatibility="10.4.003" expanded="true" height="82" name="branch_main" width="90" x="782" y="187">
+                <parameter key="condition_type" value="expression"/>
+                <parameter key="condition_value" value="%{need_to_run_flag} &gt; 0"/>
+                <parameter key="expression" value="parse(%{need_to_run_flag}) &gt; 0 &amp;&amp; parse(%{is_case_active})&gt;0"/>
+                <parameter key="io_object" value="ANOVAMatrix"/>
+                <parameter key="return_inner_output" value="true"/>
+                <process expanded="true">
+                  <operator activated="true" class="generate_macro" compatibility="10.4.003" expanded="true" height="68" name="Generate Macro (13)" width="90" x="45" y="595">
+                    <list key="function_descriptions">
+                      <parameter key="block_level_2" value="concat(%{block_level_1},&quot;/branch_main&quot;)"/>
+                      <parameter key="block" value="%{block_level_2}"/>
+                    </list>
+                    <description align="center" color="transparent" colored="false" width="126">Generate block macro</description>
+                  </operator>
+                  <operator activated="true" class="generate_macro" compatibility="10.4.003" expanded="true" height="68" name="Generate Macro (2)" width="90" x="112" y="340">
+                    <list key="function_descriptions">
+                      <parameter key="end_time" value="date_str_custom( &#10;&#9;&#9;&#9;&#9;date_add(&#10;&#9;&#9;&#9;&#9;&#9;date_parse_custom(%{last_run_time}, &quot;dd/MM/yyyy HH:mm:ss&quot;), &#10;&#9;&#9;&#9;&#9;&#9;eval(%{frequency}), &#10;&#9;&#9;&#9;&#9;&#9;DATE_UNIT_MINUTE)&#10;&#9;&#9;&#9;&#9;, &quot;yyyy-MM-dd HH:mm:ss&quot; &#10;&#9;&#9;&#9;)"/>
+                    </list>
+                    <description align="center" color="transparent" colored="false" width="124">compute end_time by add last_run_time and frequency.</description>
+                  </operator>
+                  <operator activated="true" class="subprocess" compatibility="10.4.003" expanded="true" height="229" name="Execute Optimizer (2)" width="90" x="514" y="289">
+                    <process expanded="true">
+                      <operator activated="true" class="generate_macro" compatibility="10.4.003" expanded="true" height="68" name="Generate Macro (14)" width="90" x="45" y="85">
+                        <list key="function_descriptions">
+                          <parameter key="block_level_3" value="concat(%{block_level_2},&quot;/execute_optimizer&quot;)"/>
+                          <parameter key="block" value="%{block_level_3}"/>
+                        </list>
+                        <description align="center" color="transparent" colored="false" width="126">Generate block macro</description>
+                      </operator>
+                      <operator activated="true" class="productivity:execute_process" compatibility="10.4.003" expanded="true" height="229" name="Execute Optimizer_Main (2)" width="90" x="246" y="85">
+                        <parameter key="process_location" value="04_Energy_Optimization"/>
+                        <parameter key="use_input" value="true"/>
+                        <parameter key="store_output" value="false"/>
+                        <parameter key="propagate_metadata_recursively" value="false"/>
+                        <parameter key="cache_process" value="false"/>
+                        <list key="macros">
+                          <parameter key="end_time" value="%{end_time}"/>
+                          <parameter key="pullpi_window_hour" value="%{pullpi_window_hour}"/>
+                          <parameter key="case_id" value="%{case_id}"/>
+                          <parameter key="block" value="%{block}"/>
+                        </list>
+                        <parameter key="fail_for_unknown_macros" value="false"/>
+                        <description align="center" color="transparent" colored="false" width="126">Execute optimizer pipeline&lt;br&gt;&lt;br&gt;I/P macros: end_time, pullpi_window_hour, case_id&lt;br&gt;&lt;br&gt;O/P 1: run_info&lt;br&gt;O/P 2:model_alert_output&lt;br&gt;O/P 3:model_output&lt;br&gt;O/P 4:ods_output&lt;br/&gt;O/P 5: peeo_ods_output&lt;br&gt;O/P 6: seu_output&lt;br/&gt;O/P 7: pi_output&lt;br&gt;O/P 8: equipment_&lt;br/&gt;availability&lt;br&gt;O/P 7: tag_good&lt;br/&gt;_value</description>
+                      </operator>
+                      <operator activated="true" class="branch" compatibility="10.4.003" expanded="true" height="82" name="Branch (4)" width="90" x="380" y="85">
+                        <parameter key="condition_type" value="attribute_available"/>
+                        <parameter key="condition_value" value="block"/>
+                        <parameter key="expression" value=""/>
+                        <parameter key="io_object" value="ANOVAMatrix"/>
+                        <parameter key="return_inner_output" value="true"/>
+                        <process expanded="true">
+                          <operator activated="true" class="extract_macro" compatibility="10.4.003" expanded="true" height="68" name="Extract Macro (3)" width="90" x="45" y="34">
+                            <parameter key="macro" value="block"/>
+                            <parameter key="macro_type" value="data_value"/>
+                            <parameter key="statistics" value="average"/>
+                            <parameter key="attribute_name" value="block"/>
+                            <parameter key="example_index" value="1"/>
+                            <list key="additional_macros">
+                              <parameter key="error" value="error"/>
+                              <parameter key="error_process_name" value="error_process_name"/>
+                            </list>
+                          </operator>
+                          <operator activated="true" class="throw_exception" compatibility="10.4.003" expanded="true" height="68" name="Throw Exception (3)" width="90" x="179" y="34">
+                            <parameter key="message" value="%{error}"/>
+                          </operator>
+                          <connect from_port="condition" to_op="Extract Macro (3)" to_port="example set"/>
+                          <portSpacing port="source_condition" spacing="0"/>
+                          <portSpacing port="source_input 1" spacing="0"/>
+                          <portSpacing port="sink_input 1" spacing="0"/>
+                          <portSpacing port="sink_input 2" spacing="0"/>
+                        </process>
+                        <process expanded="true">
+                          <connect from_port="condition" to_port="input 1"/>
+                          <portSpacing port="source_condition" spacing="0"/>
+                          <portSpacing port="source_input 1" spacing="0"/>
+                          <portSpacing port="sink_input 1" spacing="0"/>
+                          <portSpacing port="sink_input 2" spacing="0"/>
+                        </process>
+                      </operator>
+                      <operator activated="true" class="multiply" compatibility="10.4.003" expanded="true" height="82" name="tag_good_value (7)" width="90" x="581" y="799"/>
+                      <operator activated="true" class="multiply" compatibility="10.4.003" expanded="true" height="82" name="equipment_availability (3)" width="90" x="581" y="697"/>
+                      <operator activated="true" class="multiply" compatibility="10.4.003" expanded="true" height="82" name="ods_output (7)" width="90" x="581" y="391"/>
+                      <operator activated="true" class="multiply" compatibility="10.4.003" expanded="true" height="82" name="model_output (7)" width="90" x="581" y="289"/>
+                      <operator activated="true" class="multiply" compatibility="10.4.003" expanded="true" height="82" name="model_alert_output (7)" width="90" x="581" y="187"/>
+                      <operator activated="true" class="multiply" compatibility="10.4.003" expanded="true" height="82" name="run_info (7)" width="90" x="581" y="85"/>
+                      <operator activated="true" class="multiply" compatibility="10.4.003" expanded="true" height="82" name="peeo_ods_output" width="90" x="581" y="493"/>
+                      <operator activated="true" class="multiply" compatibility="10.4.003" expanded="true" height="82" name="pi_output (3)" width="90" x="581" y="595"/>
+                      <connect from_op="Execute Optimizer_Main (2)" from_port="result 1" to_op="Branch (4)" to_port="condition"/>
+                      <connect from_op="Execute Optimizer_Main (2)" from_port="result 2" to_op="model_alert_output (7)" to_port="input"/>
+                      <connect from_op="Execute Optimizer_Main (2)" from_port="result 3" to_op="model_output (7)" to_port="input"/>
+                      <connect from_op="Execute Optimizer_Main (2)" from_port="result 4" to_op="ods_output (7)" to_port="input"/>
+                      <connect from_op="Execute Optimizer_Main (2)" from_port="result 5" to_op="peeo_ods_output" to_port="input"/>
+                      <connect from_op="Execute Optimizer_Main (2)" from_port="result 6" to_op="pi_output (3)" to_port="input"/>
+                      <connect from_op="Execute Optimizer_Main (2)" from_port="result 7" to_op="equipment_availability (3)" to_port="input"/>
+                      <connect from_op="Execute Optimizer_Main (2)" from_port="result 8" to_op="tag_good_value (7)" to_port="input"/>
+                      <connect from_op="Branch (4)" from_port="input 1" to_op="run_info (7)" to_port="input"/>
+                      <connect from_op="tag_good_value (7)" from_port="output 1" to_port="out 8"/>
+                      <connect from_op="equipment_availability (3)" from_port="output 1" to_port="out 7"/>
+                      <connect from_op="ods_output (7)" from_port="output 1" to_port="out 4"/>
+                      <connect from_op="model_output (7)" from_port="output 1" to_port="out 3"/>
+                      <connect from_op="model_alert_output (7)" from_port="output 1" to_port="out 2"/>
+                      <connect from_op="run_info (7)" from_port="output 1" to_port="out 1"/>
+                      <connect from_op="peeo_ods_output" from_port="output 1" to_port="out 5"/>
+                      <connect from_op="pi_output (3)" from_port="output 1" to_port="out 6"/>
+                      <portSpacing port="source_in 1" spacing="0"/>
+                      <portSpacing port="sink_out 1" spacing="0"/>
+                      <portSpacing port="sink_out 2" spacing="0"/>
+                      <portSpacing port="sink_out 3" spacing="0"/>
+                      <portSpacing port="sink_out 4" spacing="0"/>
+                      <portSpacing port="sink_out 5" spacing="0"/>
+                      <portSpacing port="sink_out 6" spacing="0"/>
+                      <portSpacing port="sink_out 7" spacing="0"/>
+                      <portSpacing port="sink_out 8" spacing="0"/>
+                      <portSpacing port="sink_out 9" spacing="0"/>
+                    </process>
+                    <description align="center" color="transparent" colored="false" width="126">Executes Optimizer_Main pipeline for given case_id / model_id</description>
+                  </operator>
+                  <operator activated="true" class="subprocess" compatibility="10.4.003" expanded="true" height="229" name="TRG_update_db" width="90" x="916" y="289">
+                    <process expanded="true">
+                      <operator activated="true" class="generate_macro" compatibility="10.4.003" expanded="true" height="68" name="Generate Macro (15)" width="90" x="246" y="34">
+                        <list key="function_descriptions">
+                          <parameter key="block_level_3" value="concat(%{block_level_2},&quot;/TRG_update_db&quot;)"/>
+                          <parameter key="block" value="%{block_level_3}"/>
+                        </list>
+                        <description align="center" color="transparent" colored="false" width="126">Generate block macro</description>
+                      </operator>
+                      <operator activated="true" class="multiply" compatibility="10.4.003" expanded="true" height="103" name="run_info (2)" width="90" x="246" y="187"/>
+                      <operator activated="true" class="multiply" compatibility="10.4.003" expanded="true" height="82" name="model_alert_output (2)" width="90" x="246" y="340"/>
+                      <operator activated="true" class="multiply" compatibility="10.4.003" expanded="true" height="82" name="model_output (2)" width="90" x="246" y="442"/>
+                      <operator activated="true" class="subprocess" compatibility="10.4.003" expanded="true" height="103" name="filter write tags" width="90" x="380" y="391">
+                        <process expanded="true">
+                          <operator activated="true" class="concurrency:join" compatibility="10.4.003" expanded="true" height="82" name="Join" width="90" x="45" y="34">
+                            <parameter key="remove_double_attributes" value="true"/>
+                            <parameter key="join_type" value="inner"/>
+                            <parameter key="use_id_attribute_as_key" value="false"/>
+                            <list key="key_attributes">
+                              <parameter key="time_stamp" value="last_run_time"/>
+                            </list>
+                            <parameter key="keep_both_join_attributes" value="false"/>
+                            <description align="center" color="transparent" colored="false" width="126">INNER&lt;br/&gt;time_stamp&lt;br/&gt;=&lt;br/&gt;last_run_time</description>
+                          </operator>
+                          <operator activated="true" class="recall" compatibility="10.4.003" expanded="true" height="68" name="model_tag" width="90" x="45" y="238">
+                            <parameter key="name" value="model_tag"/>
+                            <parameter key="io_object" value="ExampleSet"/>
+                            <parameter key="remove_from_store" value="true"/>
+                          </operator>
+                          <operator activated="true" class="remove_duplicates" compatibility="10.4.003" expanded="true" height="103" name="Remove Duplicates (3)" width="90" x="179" y="238">
+                            <parameter key="attribute_filter_type" value="single"/>
+                            <parameter key="attribute" value="tag_id"/>
+                            <parameter key="attributes" value=""/>
+                            <parameter key="use_except_expression" value="false"/>
+                            <parameter key="value_type" value="attribute_value"/>
+                            <parameter key="use_value_type_exception" value="false"/>
+                            <parameter key="except_value_type" value="time"/>
+                            <parameter key="block_type" value="attribute_block"/>
+                            <parameter key="use_block_type_exception" value="false"/>
+                            <parameter key="except_block_type" value="value_matrix_row_start"/>
+                            <parameter key="invert_selection" value="false"/>
+                            <parameter key="include_special_attributes" value="false"/>
+                            <parameter key="treat_missing_values_as_duplicates" value="false"/>
+                            <description align="center" color="transparent" colored="false" width="126">tag_id</description>
+                          </operator>
+                          <operator activated="true" class="concurrency:join" compatibility="10.4.003" expanded="true" height="82" name="Join (2)" width="90" x="313" y="34">
+                            <parameter key="remove_double_attributes" value="true"/>
+                            <parameter key="join_type" value="left"/>
+                            <parameter key="use_id_attribute_as_key" value="false"/>
+                            <list key="key_attributes">
+                              <parameter key="tag_id" value="tag_id"/>
+                            </list>
+                            <parameter key="keep_both_join_attributes" value="false"/>
+                            <description align="center" color="transparent" colored="false" width="126">INNER&lt;br/&gt;tag_id</description>
+                          </operator>
+                          <operator activated="true" class="filter_examples" compatibility="10.4.003" expanded="true" height="103" name="Filter Examples (5)" width="90" x="447" y="34">
+                            <parameter key="parameter_expression" value=""/>
+                            <parameter key="condition_class" value="custom_filters"/>
+                            <parameter key="invert_filter" value="false"/>
+                            <list key="filters_list">
+                              <parameter key="filters_entry_key" value="model_status.starts_with.off"/>
+                            </list>
+                            <parameter key="filters_logic_and" value="true"/>
+                            <parameter key="filters_check_metadata" value="true"/>
+                            <description align="center" color="transparent" colored="false" width="126">model_Status&lt;br/&gt;starts with&lt;br/&gt;&amp;quot;off&amp;quot;</description>
+                          </operator>
+                          <operator activated="true" class="filter_examples" compatibility="10.4.003" expanded="true" height="103" name="Filter Examples (29)" width="90" x="581" y="238">
+                            <parameter key="parameter_expression" value=""/>
+                            <parameter key="condition_class" value="custom_filters"/>
+                            <parameter key="invert_filter" value="false"/>
+                            <list key="filters_list">
+                              <parameter key="filters_entry_key" value="flag_output.equals.1"/>
+                              <parameter key="filters_entry_key" value="flag_output_run_always.equals.1"/>
+                            </list>
+                            <parameter key="filters_logic_and" value="false"/>
+                            <parameter key="filters_check_metadata" value="true"/>
+                            <description align="center" color="transparent" colored="false" width="126">flag_output = 1&lt;br/&gt;OR&lt;br/&gt;flag_output_&lt;br/&gt;run_always = 1</description>
+                          </operator>
+                          <operator activated="true" class="filter_examples" compatibility="10.4.003" expanded="true" height="103" name="Filter Examples (28)" width="90" x="581" y="34">
+                            <parameter key="parameter_expression" value=""/>
+                            <parameter key="condition_class" value="custom_filters"/>
+                            <parameter key="invert_filter" value="false"/>
+                            <list key="filters_list">
+                              <parameter key="filters_entry_key" value="flag_output_run_always.equals.1"/>
+                            </list>
+                            <parameter key="filters_logic_and" value="false"/>
+                            <parameter key="filters_check_metadata" value="true"/>
+                            <description align="center" color="transparent" colored="false" width="126">flag_output_&lt;br&gt;run_always = 1</description>
+                          </operator>
+                          <operator activated="true" class="append" compatibility="10.4.003" expanded="true" height="103" name="Append (9)" width="90" x="715" y="34">
+                            <parameter key="data_management" value="auto"/>
+                            <parameter key="merge_type" value="all"/>
+                          </operator>
+                          <operator activated="true" class="blending:select_attributes" compatibility="10.4.003" expanded="true" height="82" name="Select Attributes (62)" width="90" x="849" y="34">
+                            <parameter key="type" value="include attributes"/>
+                            <parameter key="attribute_filter_type" value="a subset"/>
+                            <parameter key="select_attribute" value=""/>
+                            <parameter key="select_subset" value="actual␞current␞design␞model_id␞optimum␞polarity␞tag_id␞time_stamp"/>
+                            <parameter key="also_apply_to_special_attributes_(id,_label..)" value="false"/>
+                            <description align="center" color="transparent" colored="false" width="126">model_id&lt;br&gt;tag_id&lt;br&gt;time_stamp&lt;br&gt;actual&lt;br&gt;optimum&lt;br&gt;current&lt;br&gt;polarity&lt;br&gt;design</description>
+                          </operator>
+                          <connect from_port="in 1" to_op="Join" to_port="left"/>
+                          <connect from_port="in 2" to_op="Join" to_port="right"/>
+                          <connect from_op="Join" from_port="join" to_op="Join (2)" to_port="left"/>
+                          <connect from_op="model_tag" from_port="result" to_op="Remove Duplicates (3)" to_port="example set input"/>
+                          <connect from_op="Remove Duplicates (3)" from_port="example set output" to_op="Join (2)" to_port="right"/>
+                          <connect from_op="Join (2)" from_port="join" to_op="Filter Examples (5)" to_port="example set input"/>
+                          <connect from_op="Filter Examples (5)" from_port="example set output" to_op="Filter Examples (28)" to_port="example set input"/>
+                          <connect from_op="Filter Examples (5)" from_port="unmatched example set" to_op="Filter Examples (29)" to_port="example set input"/>
+                          <connect from_op="Filter Examples (29)" from_port="example set output" to_op="Append (9)" to_port="example set 2"/>
+                          <connect from_op="Filter Examples (28)" from_port="example set output" to_op="Append (9)" to_port="example set 1"/>
+                          <connect from_op="Append (9)" from_port="merged set" to_op="Select Attributes (62)" to_port="example set input"/>
+                          <connect from_op="Select Attributes (62)" from_port="example set output" to_port="out 1"/>
+                          <portSpacing port="source_in 1" spacing="0"/>
+                          <portSpacing port="source_in 2" spacing="0"/>
+                          <portSpacing port="source_in 3" spacing="0"/>
+                          <portSpacing port="sink_out 1" spacing="0"/>
+                          <portSpacing port="sink_out 2" spacing="0"/>
+                        </process>
+                      </operator>
+                      <operator activated="true" class="multiply" compatibility="10.4.003" expanded="true" height="82" name="ods_output (2)" width="90" x="246" y="544"/>
+                      <operator activated="true" class="multiply" compatibility="10.4.003" expanded="true" height="82" name="equipment_availability (4)" width="90" x="246" y="850"/>
+                      <operator activated="true" class="multiply" compatibility="10.4.003" expanded="true" height="82" name="tag_good_value (2)" width="90" x="246" y="952"/>
+                      <operator activated="true" class="multiply" compatibility="10.4.003" expanded="true" height="82" name="peeo_ods_output (3)" width="90" x="246" y="646"/>
+                      <operator activated="true" class="multiply" compatibility="10.4.003" expanded="true" height="82" name="pi_output (4)" width="90" x="246" y="748"/>
+                      <operator activated="true" class="productivity:execute_process" compatibility="10.4.003" expanded="true" height="229" name="write data to database (2)" width="90" x="849" y="34">
+                        <parameter key="process_location" value="../../01_Common_Processes/write_data_to_database"/>
+                        <parameter key="use_input" value="true"/>
+                        <parameter key="store_output" value="false"/>
+                        <parameter key="propagate_metadata_recursively" value="false"/>
+                        <parameter key="cache_process" value="false"/>
+                        <list key="macros">
+                          <parameter key="connection_sql_eo" value="%{connection_sql_eo}"/>
+                          <parameter key="flag_write_to_pi_output" value="%{flag_write_to_pi_output}"/>
+                        </list>
+                        <parameter key="fail_for_unknown_macros" value="false"/>
+                        <description align="center" color="transparent" colored="false" width="126">Common&lt;br&gt;process to update&lt;br&gt;database&lt;br&gt;performing required preprocessing&lt;br&gt;&lt;br&gt;I/P 1: run_info&lt;br&gt;I/P 2: model_alert_output&lt;br&gt;I/P 3: model_output&lt;br&gt;I/P 4: ods_output&lt;br&gt;I/P 5: seu_output&lt;br&gt;I/P 6: equipment_availability&lt;br&gt;I/P 7: tag_good_value</description>
+                      </operator>
+                      <connect from_port="in 1" to_op="run_info (2)" to_port="input"/>
+                      <connect from_port="in 2" to_op="model_alert_output (2)" to_port="input"/>
+                      <connect from_port="in 3" to_op="model_output (2)" to_port="input"/>
+                      <connect from_port="in 4" to_op="ods_output (2)" to_port="input"/>
+                      <connect from_port="in 5" to_op="peeo_ods_output (3)" to_port="input"/>
+                      <connect from_port="in 6" to_op="pi_output (4)" to_port="input"/>
+                      <connect from_port="in 7" to_op="equipment_availability (4)" to_port="input"/>
+                      <connect from_port="in 8" to_op="tag_good_value (2)" to_port="input"/>
+                      <connect from_op="run_info (2)" from_port="output 1" to_op="write data to database (2)" to_port="input 1"/>
+                      <connect from_op="run_info (2)" from_port="output 2" to_op="filter write tags" to_port="in 2"/>
+                      <connect from_op="model_alert_output (2)" from_port="output 1" to_op="write data to database (2)" to_port="input 2"/>
+                      <connect from_op="model_output (2)" from_port="output 1" to_op="filter write tags" to_port="in 1"/>
+                      <connect from_op="filter write tags" from_port="out 1" to_op="write data to database (2)" to_port="input 3"/>
+                      <connect from_op="ods_output (2)" from_port="output 1" to_op="write data to database (2)" to_port="input 4"/>
+                      <connect from_op="equipment_availability (4)" from_port="output 1" to_op="write data to database (2)" to_port="input 7"/>
+                      <connect from_op="tag_good_value (2)" from_port="output 1" to_op="write data to database (2)" to_port="input 8"/>
+                      <connect from_op="peeo_ods_output (3)" from_port="output 1" to_op="write data to database (2)" to_port="input 5"/>
+                      <connect from_op="pi_output (4)" from_port="output 1" to_op="write data to database (2)" to_port="input 6"/>
+                      <portSpacing port="source_in 1" spacing="0"/>
+                      <portSpacing port="source_in 2" spacing="0"/>
+                      <portSpacing port="source_in 3" spacing="0"/>
+                      <portSpacing port="source_in 4" spacing="0"/>
+                      <portSpacing port="source_in 5" spacing="0"/>
+                      <portSpacing port="source_in 6" spacing="0"/>
+                      <portSpacing port="source_in 7" spacing="0"/>
+                      <portSpacing port="source_in 8" spacing="0"/>
+                      <portSpacing port="source_in 9" spacing="0"/>
+                      <portSpacing port="sink_out 1" spacing="0"/>
+                    </process>
+                    <description align="center" color="transparent" colored="false" width="126">Update all the inputs into database</description>
+                  </operator>
+                  <operator activated="true" class="subprocess" compatibility="10.4.003" expanded="true" height="68" name="seu_calculation" width="90" x="1251" y="289">
+                    <process expanded="true">
+                      <operator activated="true" class="generate_macro" compatibility="10.4.003" expanded="true" height="68" name="Generate Macro (16)" width="90" x="45" y="34">
+                        <list key="function_descriptions">
+                          <parameter key="block_level_3" value="concat(%{block_level_2},&quot;/seu_calcualtion&quot;)"/>
+                          <parameter key="block" value="%{block_level_3}"/>
+                        </list>
+                        <description align="center" color="transparent" colored="false" width="126">Generate block macro</description>
+                      </operator>
+                      <operator activated="true" class="productivity:execute_process" compatibility="10.4.003" expanded="true" height="82" name="Execute 05_Seu_Calculation" width="90" x="179" y="34">
+                        <parameter key="process_location" value="05_Seu_Calculation"/>
+                        <parameter key="use_input" value="true"/>
+                        <parameter key="store_output" value="false"/>
+                        <parameter key="propagate_metadata_recursively" value="false"/>
+                        <parameter key="cache_process" value="false"/>
+                        <list key="macros">
+                          <parameter key="case_id" value="%{case_id}"/>
+                          <parameter key="flag_write_to_pi_output" value="%{flag_write_to_pi_output}"/>
+                          <parameter key="block" value="%{block_level_2}"/>
+                        </list>
+                        <parameter key="fail_for_unknown_macros" value="false"/>
+                        <description align="center" color="transparent" colored="false" width="126">Execute SEU Calculation&lt;br&gt;&lt;br&gt;Input macro:&lt;br&gt;1. case_id&lt;br&gt;2. flag_write_to_pi_output</description>
+                      </operator>
+                      <operator activated="true" class="branch" compatibility="10.4.003" expanded="true" height="82" name="Branch (6)" width="90" x="313" y="34">
+                        <parameter key="condition_type" value="input_exists"/>
+                        <parameter key="condition_value" value="block"/>
+                        <parameter key="expression" value=""/>
+                        <parameter key="io_object" value="ExampleSet"/>
+                        <parameter key="return_inner_output" value="true"/>
+                        <process expanded="true">
+                          <operator activated="true" class="extract_macro" compatibility="10.4.003" expanded="true" height="68" name="Extract Macro (4)" width="90" x="45" y="34">
+                            <parameter key="macro" value="block"/>
+                            <parameter key="macro_type" value="data_value"/>
+                            <parameter key="statistics" value="average"/>
+                            <parameter key="attribute_name" value="block"/>
+                            <parameter key="example_index" value="1"/>
+                            <list key="additional_macros">
+                              <parameter key="error" value="error"/>
+                              <parameter key="error_process_name" value="error_process_name"/>
+                            </list>
+                          </operator>
+                          <operator activated="true" class="throw_exception" compatibility="10.4.003" expanded="true" height="68" name="Throw Exception" width="90" x="179" y="34">
+                            <parameter key="message" value="%{error}"/>
+                          </operator>
+                          <connect from_port="condition" to_op="Extract Macro (4)" to_port="example set"/>
+                          <portSpacing port="source_condition" spacing="0"/>
+                          <portSpacing port="source_input 1" spacing="0"/>
+                          <portSpacing port="sink_input 1" spacing="0"/>
+                        </process>
+                        <process expanded="true">
+                          <portSpacing port="source_condition" spacing="0"/>
+                          <portSpacing port="source_input 1" spacing="0"/>
+                          <portSpacing port="sink_input 1" spacing="0"/>
+                        </process>
+                      </operator>
+                      <connect from_op="Execute 05_Seu_Calculation" from_port="result 1" to_op="Branch (6)" to_port="condition"/>
+                      <portSpacing port="source_in 1" spacing="0"/>
+                      <portSpacing port="sink_out 1" spacing="0"/>
+                    </process>
+                  </operator>
+                  <operator activated="true" class="subprocess" compatibility="10.4.003" expanded="true" height="68" name="ods_wf_alert" width="90" x="1586" y="289">
+                    <process expanded="true">
+                      <operator activated="true" class="generate_macro" compatibility="10.4.003" expanded="true" height="68" name="Generate Macro (18)" width="90" x="45" y="34">
+                        <list key="function_descriptions">
+                          <parameter key="block_level_3" value="concat(%{block_level_2},&quot;/ods_wf_alert&quot;)"/>
+                          <parameter key="block" value="%{block_level_3}"/>
+                        </list>
+                        <description align="center" color="transparent" colored="false" width="126">Generate block macro</description>
+                      </operator>
+                      <operator activated="true" class="process_scheduling:schedule_process" compatibility="10.4.000" expanded="true" height="68" name="Schedule Process" width="90" x="179" y="34">
+                        <parameter key="process_location" value="06_Ods_Wf_Alert"/>
+                        <enumeration key="process_input"/>
+                        <enumeration key="process_output"/>
+                        <list key="macros">
+                          <parameter key="case_id" value="%{case_id}"/>
+                          <parameter key="end_time" value="%{end_time}"/>
+                          <parameter key="pullpi_window_hour" value="%{pullpi_window_hour}"/>
+                          <parameter key="block" value="%{block}"/>
+                        </list>
+                        <parameter key="forward_macros" value="false"/>
+                        <parameter key="execution_queue" value="%{queue_name}"/>
+                        <parameter key="schedule_mode" value="now"/>
+                        <parameter key="offset" value="10"/>
+                        <parameter key="time_unit" value="seconds"/>
+                        <parameter key="set_start_date" value="false"/>
+                        <parameter key="set_end_date" value="false"/>
+                        <description align="center" color="transparent" colored="false" width="126">Input macros:&lt;br&gt;1. case_id&lt;br&gt;2. end_time&lt;br&gt;3. pullpi_window_hour&lt;br&gt;4. block</description>
+                      </operator>
+                      <portSpacing port="source_in 1" spacing="0"/>
+                      <portSpacing port="sink_out 1" spacing="0"/>
+                    </process>
+                  </operator>
+                  <connect from_op="Execute Optimizer (2)" from_port="out 1" to_op="TRG_update_db" to_port="in 1"/>
+                  <connect from_op="Execute Optimizer (2)" from_port="out 2" to_op="TRG_update_db" to_port="in 2"/>
+                  <connect from_op="Execute Optimizer (2)" from_port="out 3" to_op="TRG_update_db" to_port="in 3"/>
+                  <connect from_op="Execute Optimizer (2)" from_port="out 4" to_op="TRG_update_db" to_port="in 4"/>
+                  <connect from_op="Execute Optimizer (2)" from_port="out 5" to_op="TRG_update_db" to_port="in 5"/>
+                  <connect from_op="Execute Optimizer (2)" from_port="out 6" to_op="TRG_update_db" to_port="in 6"/>
+                  <connect from_op="Execute Optimizer (2)" from_port="out 7" to_op="TRG_update_db" to_port="in 7"/>
+                  <connect from_op="Execute Optimizer (2)" from_port="out 8" to_op="TRG_update_db" to_port="in 8"/>
+                  <portSpacing port="source_condition" spacing="0"/>
+                  <portSpacing port="source_input 1" spacing="0"/>
+                  <portSpacing port="sink_input 1" spacing="0"/>
+                  <description align="center" color="green" colored="true" height="80" resized="true" width="1736" x="34" y="117">BRANCH TO RUN PROCESS IF NEW PI DATA IS AVAILABLE</description>
+                  <description align="center" color="purple" colored="true" height="409" resized="false" width="275" x="33" y="196">COMPUTE&lt;br&gt;end_time</description>
+                  <description align="center" color="purple" colored="true" height="414" resized="false" width="448" x="332" y="193">EXECUTE&lt;br&gt;Optimizer_Main pipeline&lt;br&gt;for new_run_time (end_time)</description>
+                  <description align="center" color="purple" colored="true" height="419" resized="false" width="299" x="802" y="190">TRANSFORM&lt;br&gt;examplesets to db tables&lt;br&gt;UPDATE&lt;br&gt;database</description>
+                  <description align="center" color="purple" colored="true" height="411" resized="true" width="323" x="1108" y="195">Execute seu calculations</description>
+                  <description align="center" color="purple" colored="true" height="410" resized="false" width="322" x="1446" y="196">EXECUTE ODS WF ALERTS</description>
+                </process>
+                <process expanded="true">
+                  <operator activated="true" class="free_memory" compatibility="10.4.003" expanded="true" height="68" name="Free Memory" width="90" x="246" y="238">
+                    <description align="center" color="transparent" colored="false" width="126">Free memory</description>
+                  </operator>
+                  <operator activated="true" class="throw_exception" compatibility="10.4.003" expanded="true" height="68" name="Throw Exception (4)" width="90" x="380" y="136">
+                    <parameter key="message" value="%{ts_check_log}"/>
+                  </operator>
+                  <portSpacing port="source_condition" spacing="0"/>
+                  <portSpacing port="source_input 1" spacing="0"/>
+                  <portSpacing port="sink_input 1" spacing="0"/>
+                </process>
+              </operator>
+              <connect from_op="data availability check (3)" from_port="out 1" to_op="Set Macros from ExampleSet (2)" to_port="exampleset"/>
+              <connect from_op="Set Macros from ExampleSet (2)" from_port="through 1" to_op="branch_main" to_port="condition"/>
+              <portSpacing port="source_in 1" spacing="0"/>
+              <portSpacing port="sink_out 1" spacing="0"/>
+              <description align="center" color="red" colored="true" height="462" resized="false" width="313" x="19" y="25">Execute ts check to check for new run time</description>
+              <description align="center" color="blue" colored="true" height="460" resized="false" width="336" x="670" y="29">EXECUTE EO PIPELINE IF PI TAGS AVAILABLE FOR NEW RUN</description>
+              <description align="center" color="transparent" colored="true" height="232" resized="false" width="244" x="39" y="283">Common process checks run for given end_time is possible for given case_id or not.&lt;br&gt;I/P macros: case_id,sql_connection path, pi_connection path, pullpi_window_hour&lt;br&gt;&lt;br&gt;O/P : available_pi_time, last_run_time,&lt;br&gt;need_to_run_flag,&lt;br&gt;pullpi_window_hour, frequency.</description>
+              <description align="center" color="transparent" colored="true" height="122" resized="false" width="180" x="736" y="301">Branch operates if need_to_run_flag &amp;gt; 0 &lt;br/&gt;&amp;amp;&amp;amp;&lt;br/&gt;is_case_active &amp;gt;0,&lt;br/&gt; and all the speicifed pipelines</description>
+              <description align="center" color="green" colored="true" height="459" resized="false" width="305" x="356" y="26">Set macros from exampleset</description>
+            </process>
+            <description align="center" color="transparent" colored="true" width="126">Subprocess excecutes all the pipelines according to case needs.</description>
+          </operator>
+          <portSpacing port="source_in 1" spacing="0"/>
+          <portSpacing port="sink_out 1" spacing="0"/>
+          <portSpacing port="sink_out 2" spacing="0"/>
+          <description align="center" color="purple" colored="true" height="402" resized="true" width="276" x="36" y="44">SET&lt;br&gt;case_id</description>
+          <description align="center" color="green" colored="true" height="401" resized="true" width="338" x="324" y="46">Initialization Stage&lt;br&gt;Read tables, make pi and sql connections and generate trigger specific macros</description>
+          <description align="center" color="blue" colored="true" height="402" resized="true" width="292" x="666" y="44">MAIN&lt;br&gt;execute pipelines if pi data for next run is available</description>
+        </process>
+        <process expanded="true">
+          <operator activated="true" class="branch" compatibility="10.4.003" expanded="true" height="82" name="Branch (2)" width="90" x="45" y="34">
+            <parameter key="condition_type" value="macro_defined"/>
+            <parameter key="condition_value" value="model_id"/>
+            <parameter key="expression" value=""/>
+            <parameter key="io_object" value="ANOVAMatrix"/>
+            <parameter key="return_inner_output" value="true"/>
+            <process expanded="true">
+              <portSpacing port="source_condition" spacing="0"/>
+              <portSpacing port="source_input 1" spacing="0"/>
+              <portSpacing port="sink_input 1" spacing="0"/>
+            </process>
+            <process expanded="true">
+              <operator activated="true" class="jdbc_connectors:read_database" compatibility="10.4.003" expanded="true" height="82" name="Read Database (2)" width="90" x="45" y="34">
+                <parameter key="define_connection" value="repository"/>
+                <parameter key="connection_entry" value="%{connection_sql_eo}"/>
+                <parameter key="database_system" value="MySQL"/>
+                <parameter key="define_query" value="query"/>
+                <parameter key="query" value="select [model_id] from model with (nolock)&#10;where case_id = %{case_id}&#10;"/>
+                <parameter key="use_default_schema" value="true"/>
+                <parameter key="prepare_statement" value="false"/>
+                <enumeration key="parameters"/>
+                <parameter key="data_management" value="auto"/>
+              </operator>
+              <operator activated="true" class="extract_macro" compatibility="10.4.003" expanded="true" height="68" name="Extract Macro" width="90" x="179" y="34">
+                <parameter key="macro" value="model_id"/>
+                <parameter key="macro_type" value="data_value"/>
+                <parameter key="statistics" value="average"/>
+                <parameter key="attribute_name" value="model_id"/>
+                <parameter key="example_index" value="1"/>
+                <list key="additional_macros"/>
+              </operator>
+              <connect from_op="Read Database (2)" from_port="output" to_op="Extract Macro" to_port="example set"/>
+              <portSpacing port="source_condition" spacing="0"/>
+              <portSpacing port="source_input 1" spacing="0"/>
+              <portSpacing port="sink_input 1" spacing="0"/>
+            </process>
+            <description align="center" color="transparent" colored="false" width="126">macro defined model_id</description>
+          </operator>
+          <operator activated="true" class="branch" compatibility="10.4.003" expanded="true" height="82" name="Branch (3)" width="90" x="179" y="34">
+            <parameter key="condition_type" value="macro_defined"/>
+            <parameter key="condition_value" value="error_process_name"/>
+            <parameter key="expression" value=""/>
+            <parameter key="io_object" value="ANOVAMatrix"/>
+            <parameter key="return_inner_output" value="true"/>
+            <process expanded="true">
+              <portSpacing port="source_condition" spacing="0"/>
+              <portSpacing port="source_input 1" spacing="0"/>
+              <portSpacing port="sink_input 1" spacing="0"/>
+            </process>
+            <process expanded="true">
+              <operator activated="true" class="generate_macro" compatibility="10.4.003" expanded="true" height="68" name="Generate Macro" width="90" x="112" y="85">
+                <list key="function_descriptions">
+                  <parameter key="error_process_name" value="lower(%{process_name})"/>
+                </list>
+              </operator>
+              <portSpacing port="source_condition" spacing="0"/>
+              <portSpacing port="source_input 1" spacing="0"/>
+              <portSpacing port="sink_input 1" spacing="0"/>
+            </process>
+            <description align="center" color="transparent" colored="false" width="126">macro defined error process name</description>
+          </operator>
+          <operator activated="true" breakpoints="after" class="utility:create_exampleset" compatibility="10.4.003" expanded="true" height="68" name="Create ExampleSet (2)" width="90" x="380" y="34">
+            <parameter key="generator_type" value="attribute functions"/>
+            <parameter key="number_of_examples" value="1"/>
+            <parameter key="use_stepsize" value="false"/>
+            <list key="function_descriptions">
+              <parameter key="model_id" value="parse(%{model_id})"/>
+              <parameter key="time_stamp" value="date_now()"/>
+              <parameter key="error_subprocess" value="cut(%{block},0,min(length(%{block}),495))"/>
+              <parameter key="error_category" value="if(contains(lower(%{error}),lower(&quot;database&quot;)),&quot;Database&quot;,&#10;if(contains(lower(%{error}),lower(&quot;failed with: HTTP code 401&quot;))&#10;||contains(lower(%{error}),lower(&quot;HTTP code 503&quot;))&#10;||contains(lower(%{error}),lower(&quot;Failed to lookup data item&quot;))&#10;||contains(lower(%{error}),lower(&quot;data set contains columns of different lengths&quot;))&#10;||contains(lower(%{error}),lower(&quot;operator failed to establish communication with the PI Web API&quot;))&#10;||contains(lower(%{error}),lower(&quot;pi data lagging:&quot;))&#10;,&quot;PI&quot;,&quot;Pipeline&quot;))"/>
+              <parameter key="error_detail" value="cut(%{error},0,min(length(%{error}),995))"/>
+              <parameter key="error_process_name" value="%{error_process_name}"/>
+            </list>
+            <parameter key="add_id_attribute" value="false"/>
+            <list key="numeric_series_configuration"/>
+            <list key="date_series_configuration"/>
+            <list key="date_series_configuration (interval)"/>
+            <parameter key="date_format" value="yyyy-MM-dd HH:mm:ss"/>
+            <parameter key="time_zone" value="SYSTEM"/>
+            <parameter key="input_csv_text" value="block,error&#10;%{block},%{error}"/>
+            <parameter key="column_separator" value=","/>
+            <parameter key="parse_all_as_nominal" value="false"/>
+            <parameter key="decimal_point_character" value="."/>
+            <parameter key="trim_attribute_names" value="true"/>
+          </operator>
+          <operator activated="true" class="jdbc_connectors:write_database" compatibility="10.4.003" expanded="true" height="82" name="Write Database" width="90" x="514" y="34">
+            <parameter key="define_connection" value="repository"/>
+            <parameter key="connection_entry" value="%{connection_sql_eo}"/>
+            <parameter key="database_system" value="MySQL"/>
+            <parameter key="use_default_schema" value="true"/>
+            <parameter key="table_name" value="error_log"/>
+            <parameter key="overwrite_mode" value="append"/>
+            <parameter key="set_default_varchar_length" value="false"/>
+            <parameter key="default_varchar_length" value="128"/>
+            <parameter key="add_generated_primary_keys" value="false"/>
+            <parameter key="db_key_attribute_name" value="generated_primary_key"/>
+            <parameter key="batch_size" value="100"/>
+          </operator>
+          <connect from_op="Create ExampleSet (2)" from_port="output" to_op="Write Database" to_port="input"/>
+          <portSpacing port="source_in 1" spacing="0"/>
+          <portSpacing port="sink_out 1" spacing="0"/>
+          <portSpacing port="sink_out 2" spacing="0"/>
+        </process>
+      </operator>
+      <connect from_op="Handle Exception" from_port="out 1" to_port="result 1"/>
+      <portSpacing port="source_input 1" spacing="0"/>
+      <portSpacing port="sink_result 1" spacing="0"/>
+      <portSpacing port="sink_result 2" spacing="0"/>
+      <description align="center" color="red" colored="true" height="398" resized="true" width="250" x="22" y="138">Trigger service&lt;br&gt;&lt;br&gt;&lt;br&gt;Author:&lt;br&gt;Naveen kumar&lt;br&gt;Karthik Sanagapalli&lt;br&gt;Akshay Hasabe&lt;br&gt;&lt;br&gt;Overview:This Pipeline is a composite of check_for_new_run, Execute_Energy_Optimization and update_database blocks. It examines the last run time of a particular case and the associated frequency to establish the next consecutive run time. It gathers output from Energy_Optimization pipeline, as applicable, and then records all required information in the database output tables&lt;br&gt;</description>
+      <description align="center" color="green" colored="true" height="392" resized="true" width="332" x="272" y="140"/>
+    </process>
+  </operator>
+</process>

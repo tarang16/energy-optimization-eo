@@ -1,0 +1,497 @@
+@use '../../../config/scss/variables' as *;
+
+// Custom Sidebar
+.nestedsidemenu_top {
+  background-color: $primary_white;
+  padding: 1.5vmin 0 0 0;
+  @include sidebar_boxshadow;
+  position: relative;
+
+  ul {
+    z-index: 1000;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    li {
+      padding: 0 1.5vmin;
+      margin-bottom: 1.5vmin;
+
+      a,
+      button {
+        color: $primary_gray;
+        position: relative;
+        background-color: $primary_blue_bg;
+        border-radius: 0.6vmin;
+        padding: 0.9vmin;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        // height: 4.6vmin;
+        cursor: pointer;
+
+        &.removeExtraPaddingHeathCheckIcon {
+          padding: 0.7vmin;
+        }
+
+        img {
+          width: 2vmin;
+          height: 2vmin;
+        }
+      }
+
+      ul {
+        position: absolute;
+        height: 100%;
+        top: 0;
+        left: 5000px;
+        opacity: 0;
+        width: 100%;
+        visibility: hidden;
+        box-shadow:
+          0px 0px 1px 0px $primary_gray_4,
+          5px 0 5px -4px $primary_gray_4;
+        -webkit-transition:
+          opacity 0.2s,
+          visibility 0s 0.2s,
+          left 0s 0.2s;
+        transition:
+          opacity 0.2s,
+          visibility 0s 0.2s,
+          left 0s 0.2s;
+
+        li {
+          padding: 0 1.5vmin;
+
+          a:only-child:after {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+
+  .bottom_link {
+    margin-top: 1.5vmin;
+
+    li {
+      a,
+      .navItem,
+      button {
+        position: relative;
+        background-color: $primary_blue_bg;
+        border-radius: 0.6vmin;
+        padding: 0.9vmin;
+        color: $primary_gray;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+      }
+
+      &.dropdownSubMenu {
+        display: flex;
+        flex-direction: column;
+
+        .dropdownSubMenu_left {
+          width: 80%;
+          border-radius: 0.6vmin 0 0 0.6vmin;
+        }
+
+        .dropdownSubMenu_right {
+          width: 3vmin;
+          border-left: 1px solid $primary_white;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 0 0.6vmin 0.6vmin 0;
+
+          img {
+            width: 1.5vmin;
+            height: 1.5vmin;
+          }
+
+          &.activeNavItem {
+            img {
+              transform: rotate(-180deg);
+            }
+          }
+        }
+
+        .hoverEffects:hover {
+          a {
+            background-color: $primary_blue_hover !important;
+            color: $primary_white;
+
+            img {
+              filter: brightness(0) invert(1);
+            }
+
+            span {
+              background-color: transparent !important;
+              color: $primary_white !important;
+            }
+          }
+
+          .dropdownSubMenu_right {
+            background-color: $primary_blue_hover !important;
+
+            img {
+              filter: brightness(0) invert(1);
+            }
+          }
+        }
+
+        .activeNavItem {
+          .navItemArrowIcon {
+            transform: rotate(-180deg);
+          }
+        }
+
+        .dropdownSubMenuContainer {
+          // padding-top: 1.2vmin;
+          padding-left: 2vmin;
+          position: relative;
+
+          // max-height: 18vmin;
+          // overflow-y: auto;
+          // padding-right: .5vmin;
+          &::-webkit-scrollbar-track {
+            background: transparent;
+          }
+
+          &::-webkit-scrollbar-track-piece:start {
+            background: transparent !important;
+            margin-top: 1vmin !important;
+          }
+
+          // &::before {
+          //   content: "";
+          //   position: absolute;
+          //   left: 1vmin;
+          //   height: calc(100%);
+          //   width: 0.1vmin;
+          //   top: 0;
+          //   background-color: $primary_gray_2;
+          // }
+
+          .dropdownSubMenuItem {
+            position: relative;
+            margin-top: 1vmin;
+            margin-bottom: 0;
+            background-color: $primary_blue_bg;
+            transition: 0.3s ease-in-out;
+            border-radius: 0.6vmin;
+            cursor: pointer;
+
+            a {
+              padding: 0.9vmin;
+              line-height: 1.2vmin;
+
+              .items {
+                display: inline-block;
+                margin-top: 0.3vmin;
+              }
+
+              &:hover {
+                background-color: $primary_blue_hover;
+                color: $primary_white;
+
+                img {
+                  filter: none !important;
+                }
+
+                .items {
+                  color: $primary_white;
+                }
+              }
+            }
+
+            &::before {
+              content: '';
+              position: absolute;
+              height: 0.1vmin;
+              width: 1vmin;
+              background-color: $primary_gray_2;
+              top: 50%;
+              right: 100%;
+              transform: translateY(-50%);
+            }
+
+            &::after {
+              content: '';
+              position: absolute;
+              height: calc(100% + 1vmin);
+              width: 1px;
+              background-color: $primary_gray_2;
+              left: -1vmin;
+              top: -1vmin;
+            }
+
+            &:last-child {
+              &::after {
+                height: calc(50% + 1vmin);
+              }
+            }
+          }
+        }
+      }
+
+      .navItemArrowIcon {
+        width: 1.5vmin;
+        height: 1.5vmin;
+      }
+
+      &:hover {
+        .navItemArrowIcon {
+          // filter: brightness(0) invert(1);
+        }
+
+        .navItem {
+          background-color: $primary_blue;
+          color: $primary_white;
+          cursor: pointer;
+
+          .navItemIcon {
+            filter: brightness(0) invert(1);
+          }
+
+          .navItemLabel {
+            color: $primary_white;
+          }
+        }
+      }
+    }
+  }
+}
+
+.nestedsidemenu_top > ul > li:hover > a {
+  background-color: $primary_blue_hover;
+}
+
+.nestedsidemenu_top > ul > li:hover > a > span {
+  color: $primary_white !important;
+}
+
+.nestedsidemenu_top > ul > li:hover > a > img {
+  filter: brightness(0) invert(1);
+}
+
+.nestedsidemenu_top ul li:hover > ul {
+  @include sidebar_boxshadow;
+  visibility: visible;
+  left: 100%;
+  padding-top: 1.5vmin;
+  opacity: 1;
+  -webkit-transition: opacity 0.5s;
+  transition: opacity 0.3s;
+  background-color: $primary_white;
+
+  li:hover > ul {
+    background-color: $primary_white;
+    @include sidebar_boxshadow;
+  }
+}
+
+.nestedsidemenu_top ul li ul li ul {
+  top: 0;
+  left: 100%;
+}
+
+.nestedsidemenu_top ul ul li:hover > a {
+  background: $primary_blue_hover;
+  color: $primary_white;
+
+  span {
+    color: $primary_white;
+  }
+}
+
+.nestedsidemenu_top ul ul li:hover > a::after {
+  filter: brightness(0) invert(1);
+}
+
+.nestedsidemenu_top ul ul li:hover > ul {
+  left: 100%;
+}
+
+.nestedsidemenu_top ul li ul li a,
+.nestedsidemenu_top ul li ul li button {
+  color: $primary_gray;
+  position: relative;
+  background-color: $primary_blue_bg;
+  border-radius: 0.6vmin;
+  padding: 0.9vmin 2vmin 0.9vmin 0.9vmin;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  min-height: 4.2vmin;
+  cursor: pointer;
+
+  &.active {
+    &::after {
+      filter: brightness(0) invert(1);
+    }
+  }
+}
+
+.nestedsidemenu_top ul li > a:only-child {
+  padding-right: 10px;
+}
+
+.nestedsidemenu_top ul li ul li > a:after {
+  content: '';
+  background-image: url('../../../assets/sabic_new_icons/arrow_right_angel_bracket.svg');
+  height: 1.5vmin;
+  width: 1.5vmin;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 100% 100%;
+  position: absolute;
+  top: 50%;
+  right: 0.9vmin;
+  transform: translateY(-50%);
+}
+
+.affiliateMenu {
+  border-top: 1px solid $primary_gray_4;
+}
+
+.tooltip_container {
+  z-index: 9999;
+  text-overflow: wrap;
+  text-align: left;
+
+  ul {
+    list-style-type: none;
+  }
+
+  min-width: 60px;
+  max-width: 300px;
+
+  span,
+  p {
+    font-size: 1.2vmin;
+    font-family: 'sabic_text_regular', serif;
+    font-weight: 500;
+    text-align: left;
+    text-overflow: wrap;
+    word-wrap: break-word;
+    color: $primary_white;
+  }
+}
+
+.bottomIcon {
+  width: 3.5vmin;
+  height: 3.5vmin;
+  border: 1px solid transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50% !important;
+
+  &:hover {
+    background-color: $primary_blue_hover;
+
+    img {
+      filter: brightness(0) invert(1);
+    }
+  }
+}
+
+.paramName {
+  padding: 0 1.5vmin;
+  margin-top: 1.5vmin;
+  margin-bottom: 1vmin;
+}
+
+.plantLi {
+  &:has(:global(.active)) {
+    & > a {
+      color: $primary_white !important;
+      background-color: $primary_blue !important;
+
+      &::after {
+        filter: brightness(0) invert(1);
+      }
+    }
+  }
+}
+
+.admin_link {
+  li {
+    a {
+      transition: 0.03s ease-in-out;
+
+      &:hover {
+        background-color: $primary_blue_hover;
+
+        span {
+          color: $primary_white;
+        }
+
+        img {
+          filter: brightness(0) invert(1);
+        }
+      }
+    }
+  }
+}
+
+a {
+  line-height: 1.25 !important;
+}
+
+.noPadding {
+  padding: 0 !important;
+}
+
+.sidebarOverflowPlants {
+  height: calc(100% - 32vmin);
+  overflow-y: auto;
+  position: relative;
+}
+
+.customTopSpace {
+  margin-top: 0.3vmin;
+}
+
+.marginTopForNestedLi {
+  margin-top: 0.3vmin;
+}
+
+.downloadTooltipContainer {
+  width: 15vmin;
+
+  button {
+    background-color: transparent !important;
+    border: none;
+    border-bottom: 1px solid $primary_gray_3;
+
+    &:hover,
+    &:active {
+      background-color: $primary_blue !important;
+      color: $primary_white !important;
+    }
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+}
+
+.capture-overlay {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  padding: 1vmin;
+  background-color: red;
+  color: #fff;
+  font-size: 1.4rem;
+  z-index: 9999;
+}
+
+.sidebarHealthCheckModal {
+  :global(.modal-dialog.modal-xl) {
+    max-width: 90vw !important;
+  }
+}

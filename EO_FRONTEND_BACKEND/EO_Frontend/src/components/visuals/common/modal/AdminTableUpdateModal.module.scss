@@ -1,0 +1,91 @@
+@use 'config/scss/variables' as *;
+@use 'src/config/scss/typography' as *;
+
+.AdminTblUpdateModalContainer {
+  :global(.react-draggable) {
+    height: auto !important;
+  }
+}
+
+.topContent {
+  .topContent__item {
+    display: flex;
+    margin-bottom: 1vmin;
+    align-items: center;
+    gap: 2vmin;
+
+    &__left {
+      width: 35%;
+      display: flex;
+      justify-content: space-between;
+      font-size: 1.6vmin;
+      font-weight: 600;
+    }
+
+    &__right {
+      width: calc(65%);
+
+      .valueText {
+        font-size: 1.6vmin;
+        font-weight: 500;
+      }
+
+      .singleSelectContainer {
+        display: block;
+        height: 4vmin;
+      }
+
+      .searchBarContainer {
+        display: block;
+        height: 4vmin;
+
+        :global(.react-select__control) {
+          border-radius: 0.4vmin !important;
+        }
+
+        :global(.react-select__menu-list) {
+          min-height: 2vmin;
+          max-height: 12vmin;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: space-between;
+        }
+
+        :global(.react-select__control--is--focused) {
+          box-shadow: none;
+          border: 1px solid $primary_gray_2 !important;
+        }
+      }
+    }
+  }
+}
+
+.btnContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5vmin;
+
+  button {
+    display: inline-block;
+    width: 14vmin;
+    border-radius: 0.4vmin;
+    color: $primary_white;
+    padding: 0.8vmin 0.6vmin 0.8vmin 0.6vmin;
+    text-align: center;
+    font-size: 1.4vmin;
+    font-weight: 400;
+    text-transform: uppercase;
+
+    &.UpdateBtn {
+      background-color: $primary_blue;
+      border: none;
+    }
+
+    &.cancelBtn {
+      background-color: $primary_gray_2;
+      border: none;
+    }
+  }
+}

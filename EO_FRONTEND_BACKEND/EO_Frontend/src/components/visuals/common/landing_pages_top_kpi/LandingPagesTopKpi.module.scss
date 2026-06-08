@@ -1,0 +1,67 @@
+@use 'config/scss/variables' as *;
+
+.container {
+  // padding: 0 10px;
+  gap: 1.8vmin;
+}
+
+.textDiv {
+  width: 100%;
+}
+
+.box {
+  position: relative;
+  margin-top: 0;
+  padding: 0.5% 1%;
+  background-color: $primary_blue_bg;
+  border-radius: 6px;
+  transition: 0.3s ease-in-out;
+
+  .imgDiv {
+    .topImg {
+      width: 6vmin;
+      margin: 0;
+      padding: 0;
+      cursor: initial;
+    }
+  }
+
+  .contentDiv {
+    width: 80%;
+  }
+
+  &.active {
+    background-color: $primary_blue;
+
+    .white_text_hover {
+      color: $primary_white;
+    }
+  }
+
+  p {
+    display: flex;
+    margin: 0;
+    padding: 0;
+
+    span {
+      margin-right: 2px;
+    }
+  }
+
+  .box_top_content {
+    // margin-bottom: 5px;
+  }
+}
+
+.hoverable:hover {
+  background-color: $primary_blue_hover;
+  cursor: pointer;
+
+  .white_text_hover {
+    color: $primary_white;
+  }
+}
+
+.unittext {
+  margin-bottom: 1.2px;
+}

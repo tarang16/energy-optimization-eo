@@ -1,0 +1,278 @@
+tag_name,kind,blr_scope,blr_unit,priority_minlp,hierarchy_element_path,hierarchy_leaf_element,hierarchy_attribute_name,pi_sensor,pi_status,depends_on_pi_sensors,n_pi_sensors,formula,refs
+Total_BLR_HPS_Generation,inferred,boiler,,1,,,,,,UN.UO.71FI1101.PV; UN.UO.71FI1201.PV; UN.UO.71FI1301.PV; UN.UO.71FI1401.PV; UN.UO.71FI1501A.PV,5,([BLR_1_HPS_Gen]+[BLR_2_HPS_Gen]+[BLR_3_HPS_Gen]+[BLR_4_HPS_Gen]+[BLR_5_HPS_Gen]),BLR_1_HPS_Gen; BLR_2_HPS_Gen; BLR_3_HPS_Gen; BLR_4_HPS_Gen; BLR_5_HPS_Gen
+Total_Boilers_Running,inferred,boiler,,1,,,,,,UN.UO.71FI1101.PV; UN.UO.71FI1201.PV; UN.UO.71FI1301.PV; UN.UO.71FI1401.PV; UN.UO.71FI1501A.PV,5,[BLR_1_Status]+[BLR_2_Status]+[BLR_3_Status]+[BLR_4_Status]+[BLR_5_Status],BLR_1_Status; BLR_2_Status; BLR_3_Status; BLR_4_Status; BLR_5_Status
+VHP_BFW_Drives_Running,inferred,boiler,,1,,,,,,,0,[VHP_BFW_B_Turb_Status]+[VHP_BFW_C_Turb_Status]+[VHP_BFW_A_Motor_Status],VHP_BFW_A_Motor_Status; VHP_BFW_B_Turb_Status; VHP_BFW_C_Turb_Status
+VHP_BFW_Turbines_Running,inferred,boiler,,1,,,,,,,0,[VHP_BFW_B_Turb_Status]+[VHP_BFW_C_Turb_Status],VHP_BFW_B_Turb_Status; VHP_BFW_C_Turb_Status
+VHP_BFW_to_ETH,inferred,boiler,,1,,,,,,,0,"if([ETH_Plant_Status]==0,0,([VHP_BFW_FROM_U_O]+[VHP_DESPHTR_BFW_FROM_U_O]))",ETH_Plant_Status; VHP_BFW_FROM_U_O; VHP_DESPHTR_BFW_FROM_U_O
+BLR_1_HPS_Gen,inferred,boiler,BLR_1,1,,,,,,UN.UO.71FI1101.PV,1,"if([BLR_1_HPS_Gen_raw]<0,0,[BLR_1_HPS_Gen_raw]/1000)",BLR_1_HPS_Gen_raw
+FD_Fan_BLR_1_Steam,inferred,boiler,BLR_1,1,,,,,,,0,"if([FD_Fan_BLR_1_Steam_raw]<500,0,[FD_Fan_BLR_1_Steam_raw]/1000)",FD_Fan_BLR_1_Steam_raw
+Fuel_BLR_1,inferred,boiler,BLR_1,1,,,,,,UN.UO.71FC1104.PV; UN.UO.71FI1101.PV,2,"if((([Boielr_A_Fuel_Gas_Flow]-[Fuel_BLR_1_raw])/[Boielr_A_Fuel_Gas_Flow]*100 > 2) || (([Boielr_A_Fuel_Gas_Flow]-[Fuel_BLR_1_raw])/[Boielr_A_Fuel_Gas_Flow]*100 < (-2)),[Fuel_BLR_1_raw],[Boielr_A_Fuel_Gas_Flow])*[BLR_1_Status]/1000 ",BLR_1_Status; Boielr_A_Fuel_Gas_Flow; Fuel_BLR_1_raw
+Spec_En_Cons_BLR_1,inferred,boiler,BLR_1,1,,,,,,UN.UO.71FC1104.PV; UN.UO.71FI1101.PV,2,"if([BLR_1_HPS_Gen]==0,0,[Fuel_BLR_1]*[LHV]/[BLR_1_HPS_Gen])",BLR_1_HPS_Gen; Fuel_BLR_1; LHV
+VHP_BFW_A_Motor_Power,inferred,boiler,BLR_1,1,,,,,,,0,1.73*[Voltage_LP]*[VHP_BFW_A_AMPS]*[VHP_BFW_A_Motor_Status]*[power_factor]/1000/1000,VHP_BFW_A_AMPS; VHP_BFW_A_Motor_Status; Voltage_LP; power_factor
+VHP_BFW_A_Motor_Status,inferred,boiler,BLR_1,1,,,,,,,0,"if(([VHP_BFW_A_AMPS])>150||([VHP_BFW_A_Discharge_flow]>150000)||([VHP_BFW_A_Vibration]>2),1,0)",VHP_BFW_A_AMPS; VHP_BFW_A_Discharge_flow; VHP_BFW_A_Vibration
+BFW_B_Turb_Steam,inferred,boiler,BLR_2,1,,,,,,,0,"if([BFW_B_Turb_Steam_raw]<100,0,[BFW_B_Turb_Steam_raw]/1000)",BFW_B_Turb_Steam_raw
+BFW_B_Turb_Steam_Imbalance,inferred,boiler,BLR_2,1,,,,,,UN.UO.71FI1101.PV; UN.UO.71FI1201.PV; UN.UO.71FI1301.PV; UN.UO.71FI1401.PV; UN.UO.71FI1501A.PV,5,[BFW_B_Turb_Steam_cons]-[BFW_B_Turb_Steam_Regression],BFW_B_Turb_Steam_Regression; BFW_B_Turb_Steam_cons
+BFW_B_Turb_Steam_Regression,inferred,boiler,BLR_2,1,,,,,,UN.UO.71FI1101.PV; UN.UO.71FI1201.PV; UN.UO.71FI1301.PV; UN.UO.71FI1401.PV; UN.UO.71FI1501A.PV,5,((-0.0233*([BFW_Flow_Consumption]/[BFW_Drives_Running])^2+26.665*([BFW_Flow_Consumption]/[BFW_Drives_Running])+10505)/1000),BFW_Drives_Running; BFW_Flow_Consumption
+BFW_B_Turb_Steam_cons,inferred,boiler,BLR_2,1,,,,,,UN.UO.71FI1101.PV; UN.UO.71FI1201.PV; UN.UO.71FI1301.PV; UN.UO.71FI1401.PV; UN.UO.71FI1501A.PV,5,"if([BFW_B_Turb_Status]==1,[BFW_B_Turb_Steam],[BFW_B_Turb_Steam_Regression])",BFW_B_Turb_Status; BFW_B_Turb_Steam; BFW_B_Turb_Steam_Regression
+BLR_2_HPS_Gen,inferred,boiler,BLR_2,1,,,,,,UN.UO.71FI1201.PV,1,"if([BLR_2_HPS_Gen_raw]<0,0,[BLR_2_HPS_Gen_raw]/1000)",BLR_2_HPS_Gen_raw
+FD_Fan_BLR_2_Steam,inferred,boiler,BLR_2,1,,,,,,,0,"if([FD_Fan_BLR_2_Steam_raw]<500,0,[FD_Fan_BLR_2_Steam_raw]/1000)",FD_Fan_BLR_2_Steam_raw
+Fuel_BLR_2,inferred,boiler,BLR_2,1,,,,,,UN.UO.71FI1201.PV,1,"if((([Boielr_B_Fuel_Gas_Flow]-[Fuel_BLR_2_raw])/[Boielr_B_Fuel_Gas_Flow]*100 > 2) ||(([Boielr_B_Fuel_Gas_Flow]-[Fuel_BLR_2_raw])/[Boielr_B_Fuel_Gas_Flow]*100 < (-2)),[Fuel_BLR_2_raw],[Boielr_B_Fuel_Gas_Flow])*[BLR_2_Status]/1000",BLR_2_Status; Boielr_B_Fuel_Gas_Flow; Fuel_BLR_2_raw
+Spec_En_Cons_BLR_2,inferred,boiler,BLR_2,1,,,,,,UN.UO.71FI1201.PV,1,"if([BLR_2_HPS_Gen]==0,0,[Fuel_BLR_2]*[LHV]/[BLR_2_HPS_Gen])",BLR_2_HPS_Gen; Fuel_BLR_2; LHV
+VHP_BFW_B_Turb_Status,inferred,boiler,BLR_2,1,,,,,,,0,"if((([VHP_BFW_B_Turb_Steam_raw]/1000))>16||([VHP_BFW_B_Discharge_flow]>150000),1,0)",VHP_BFW_B_Discharge_flow; VHP_BFW_B_Turb_Steam_raw
+VHP_BFW_B_Turb_Steam,inferred,boiler,BLR_2,1,,,,,,,0,"if([VHP_BFW_B_Turb_Steam_raw]<100,0,[VHP_BFW_B_Turb_Steam_raw]/1000)",VHP_BFW_B_Turb_Steam_raw
+BFW_C_Turb_Steam,inferred,boiler,BLR_3,1,,,,,,,0,"if([BFW_C_Turb_Steam_raw]<100,0,[BFW_C_Turb_Steam_raw]/1000)",BFW_C_Turb_Steam_raw
+BFW_C_Turb_Steam_Imbalance,inferred,boiler,BLR_3,1,,,,,,UN.UO.71FI1101.PV; UN.UO.71FI1201.PV; UN.UO.71FI1301.PV; UN.UO.71FI1401.PV; UN.UO.71FI1501A.PV,5,[BFW_C_Turb_Steam_cons]-[BFW_C_Turb_Steam_Regression],BFW_C_Turb_Steam_Regression; BFW_C_Turb_Steam_cons
+BFW_C_Turb_Steam_Regression,inferred,boiler,BLR_3,1,,,,,,UN.UO.71FI1101.PV; UN.UO.71FI1201.PV; UN.UO.71FI1301.PV; UN.UO.71FI1401.PV; UN.UO.71FI1501A.PV,5,((-0.0233*([BFW_Flow_Consumption]/[BFW_Drives_Running])^2+26.665*([BFW_Flow_Consumption]/[BFW_Drives_Running])+10505)/1000),BFW_Drives_Running; BFW_Flow_Consumption
+BFW_C_Turb_Steam_cons,inferred,boiler,BLR_3,1,,,,,,UN.UO.71FI1101.PV; UN.UO.71FI1201.PV; UN.UO.71FI1301.PV; UN.UO.71FI1401.PV; UN.UO.71FI1501A.PV,5,"if([BFW_C_Turb_Status]==1,[BFW_C_Turb_Steam],[BFW_C_Turb_Steam_Regression])",BFW_C_Turb_Status; BFW_C_Turb_Steam; BFW_C_Turb_Steam_Regression
+BLR_3_HPS_Gen,inferred,boiler,BLR_3,1,,,,,,UN.UO.71FI1301.PV,1,"if([BLR_3_HPS_Gen_raw]<0,0,[BLR_3_HPS_Gen_raw]/1000)",BLR_3_HPS_Gen_raw
+FD_Fan_BLR_3_Steam,inferred,boiler,BLR_3,1,,,,,,,0,"if([FD_Fan_BLR_3_Steam_raw]<500,0,[FD_Fan_BLR_3_Steam_raw]/1000)",FD_Fan_BLR_3_Steam_raw
+Fuel_BLR_3,inferred,boiler,BLR_3,1,,,,,,UN.UO.71FC1304.PV; UN.UO.71FI1301.PV,2,"if((([Boielr_C_Fuel_Gas_Flow]-[Fuel_BLR_3_raw])/[Boielr_C_Fuel_Gas_Flow]*100 > 2 )||(([Boielr_C_Fuel_Gas_Flow]-[Fuel_BLR_3_raw])/[Boielr_C_Fuel_Gas_Flow]*100 < (-2)),[Fuel_BLR_3_raw],[Boielr_C_Fuel_Gas_Flow])*[BLR_3_Status]/1000",BLR_3_Status; Boielr_C_Fuel_Gas_Flow; Fuel_BLR_3_raw
+Spec_En_Cons_BLR_3,inferred,boiler,BLR_3,1,,,,,,UN.UO.71FC1304.PV; UN.UO.71FI1301.PV,2,"if([BLR_3_HPS_Gen]==0,0,[Fuel_BLR_3]*[LHV]/[BLR_3_HPS_Gen])",BLR_3_HPS_Gen; Fuel_BLR_3; LHV
+VHP_BFW_C_Turb_Status,inferred,boiler,BLR_3,1,,,,,,,0,"if((([VHP_BFW_C_Turb_Steam_raw]/1000))>16||([VHP_BFW_C_Discharge_flow]>150000),1,0)",VHP_BFW_C_Discharge_flow; VHP_BFW_C_Turb_Steam_raw
+VHP_BFW_C_Turb_Steam,inferred,boiler,BLR_3,1,,,,,,,0,"if([VHP_BFW_C_Turb_Steam_raw]<100,0,[VHP_BFW_C_Turb_Steam_raw]/1000)",VHP_BFW_C_Turb_Steam_raw
+BLR_4_HPS_Gen,inferred,boiler,BLR_4,1,,,,,,UN.UO.71FI1401.PV,1,"if([BLR_4_HPS_Gen_raw]<0,0,[BLR_4_HPS_Gen_raw]/1000)",BLR_4_HPS_Gen_raw
+FD_Fan_BLR_4_Steam,inferred,boiler,BLR_4,1,,,,,,,0,"if([FD_Fan_BLR_4_Steam_raw]<500,0,[FD_Fan_BLR_4_Steam_raw]/1000)",FD_Fan_BLR_4_Steam_raw
+Fuel_BLR_4,inferred,boiler,BLR_4,1,,,,,,UN.UO.71FC1404.PV; UN.UO.71FI1401.PV,2,"if((([Boielr_D_Fuel_Gas_Flow]-[Fuel_BLR_4_raw])/[Boielr_D_Fuel_Gas_Flow]*100 > 2) ||(([Boielr_D_Fuel_Gas_Flow]-[Fuel_BLR_4_raw])/[Boielr_D_Fuel_Gas_Flow]*100 < (-2)),[Fuel_BLR_4_raw],[Boielr_D_Fuel_Gas_Flow])*[BLR_4_Status]/1000",BLR_4_Status; Boielr_D_Fuel_Gas_Flow; Fuel_BLR_4_raw
+Spec_En_Cons_BLR_4,inferred,boiler,BLR_4,1,,,,,,UN.UO.71FC1404.PV; UN.UO.71FI1401.PV,2,"if([BLR_4_HPS_Gen]==0,0,[Fuel_BLR_4]*[LHV]/[BLR_4_HPS_Gen])",BLR_4_HPS_Gen; Fuel_BLR_4; LHV
+BFW_E_Turb_Steam,inferred,boiler,BLR_5,1,,,,,,,0,"if([BFW_E_Turb_Steam_raw]<100,0,[BFW_E_Turb_Steam_raw]/1000)",BFW_E_Turb_Steam_raw
+BFW_E_Turb_Steam_Imbalance,inferred,boiler,BLR_5,1,,,,,,UN.UO.71FI1101.PV; UN.UO.71FI1201.PV; UN.UO.71FI1301.PV; UN.UO.71FI1401.PV; UN.UO.71FI1501A.PV,5,[BFW_E_Turb_Steam_cons]-[BFW_E_Turb_Steam_Regression],BFW_E_Turb_Steam_Regression; BFW_E_Turb_Steam_cons
+BFW_E_Turb_Steam_Regression,inferred,boiler,BLR_5,1,,,,,,UN.UO.71FI1101.PV; UN.UO.71FI1201.PV; UN.UO.71FI1301.PV; UN.UO.71FI1401.PV; UN.UO.71FI1501A.PV,5,((-0.0233*([BFW_Flow_Consumption]/[BFW_Drives_Running])^2+26.665*([BFW_Flow_Consumption]/[BFW_Drives_Running])+10505)/1000),BFW_Drives_Running; BFW_Flow_Consumption
+BFW_E_Turb_Steam_cons,inferred,boiler,BLR_5,1,,,,,,UN.UO.71FI1101.PV; UN.UO.71FI1201.PV; UN.UO.71FI1301.PV; UN.UO.71FI1401.PV; UN.UO.71FI1501A.PV,5,"if([BFW_E_Turb_Status]==1,[BFW_E_Turb_Steam],[BFW_E_Turb_Steam_Regression])",BFW_E_Turb_Status; BFW_E_Turb_Steam; BFW_E_Turb_Steam_Regression
+BLR_5_HPS_Gen,inferred,boiler,BLR_5,1,,,,,,UN.UO.71FI1501A.PV,1,"if([BLR_5_HPS_Gen_raw]<0,0,[BLR_5_HPS_Gen_raw]/1000)",BLR_5_HPS_Gen_raw
+FD_Fan_BLR_5_Steam,inferred,boiler,BLR_5,1,,,,,,,0,"if([FD_Fan_BLR_5_Steam_raw]<500,0,[FD_Fan_BLR_5_Steam_raw]/1000)",FD_Fan_BLR_5_Steam_raw
+Fuel_BLR_5,inferred,boiler,BLR_5,1,,,,,,UN.UO.71FC1504.PV; UN.UO.71FI1501A.PV,2,"if(((([Boielr_E_Fuel_Gas_Flow]/1.295)-[Fuel_BLR_5_raw])/([Boielr_E_Fuel_Gas_Flow]/1.295)*100 > 2) ||((([Boielr_E_Fuel_Gas_Flow]/1.295)-[Fuel_BLR_5_raw])/([Boielr_E_Fuel_Gas_Flow]/1.295)*100 < (-2)),[Fuel_BLR_5_raw],[Boielr_E_Fuel_Gas_Flow]/1.295)*[BLR_5_Status]/1000",BLR_5_Status; Boielr_E_Fuel_Gas_Flow; Fuel_BLR_5_raw
+Spec_En_Cons_BLR_5,inferred,boiler,BLR_5,1,,,,,,UN.UO.71FC1504.PV; UN.UO.71FI1501A.PV,2,"if([BLR_5_HPS_Gen]==0,0,[Fuel_BLR_5]*[LHV]/[BLR_5_HPS_Gen])",BLR_5_HPS_Gen; Fuel_BLR_5; LHV
+BLR_1_HPS_Gen_raw,raw_pi,boiler,BLR_1,1,Steam Network 1 > HP-2 Steam HeaderA > HP-2 Steam GeneratorA > HP-2 Fuel Fired BoilerA,HP-2 Fuel Fired BoilerA,Steam Generation Flow,UN.UO.71FI1101.PV,covered,UN.UO.71FI1101.PV,1,,
+BOILER_A_CBD,raw_pi,boiler,BLR_1,1,,HP Boiler Blowdown SystemA,CBD,,needs_new_row,,0,,
+BOILER_A_STACK_TEMPERATURE,raw_pi,boiler,BLR_1,1,Steam Network 1 > HP-2 Steam HeaderA > HP-2 Steam GeneratorA > HP-2 Fuel Fired BoilerA,HP-2 Fuel Fired BoilerA,Stack Temperature,UN.UO.71TI1107.PV,covered,UN.UO.71TI1107.PV,1,,
+Boielr_A_Fuel_Gas_Flow,raw_pi,boiler,BLR_1,1,Steam Network 1 > HP-2 Steam HeaderA > HP-2 Steam GeneratorA > HP-2 Fuel Fired BoilerA,HP-2 Fuel Fired BoilerA,Fuel Gas Flow,UN.UO.71FC1104.PV,covered,UN.UO.71FC1104.PV,1,,
+FD_Fan_BLR_1_Steam_raw,raw_pi,boiler,BLR_1,1,Steam Network 1 > HP-2 Steam HeaderA > HP-2 Steam GeneratorA > HP-2 Fuel Fired BoilerA > HP Boiler Combustion SystemA > HP Boiler FD FanA,HP Boiler FD FanA,Inlet Steam Flow,,blank_in_hierarchy,,0,,
+Fuel_BLR_1_raw,raw_pi,boiler,BLR_1,1,Steam Network 1 > HP-2 Steam HeaderA > HP-2 Steam GeneratorA > HP-2 Fuel Fired BoilerA,HP-2 Fuel Fired BoilerA,Fuel Gas Flow,UN.UO.71FC1104.PV,covered,UN.UO.71FC1104.PV,1,,
+BFW_B_Turb_Steam_raw,raw_pi,boiler,BLR_2,1,,HP Boiler BFW PumpB,Driver Steam Flow,,needs_new_row,,0,,
+BLR_2_HPS_Gen_raw,raw_pi,boiler,BLR_2,1,Steam Network 1 > HP-2 Steam HeaderA > HP-2 Steam GeneratorA > HP-2 Fuel Fired BoilerB,HP-2 Fuel Fired BoilerB,Steam Generation Flow,UN.UO.71FI1201.PV,covered,UN.UO.71FI1201.PV,1,,
+BOILER_B_CBD,raw_pi,boiler,BLR_2,1,,HP Boiler Blowdown SystemB,CBD,,needs_new_row,,0,,
+BOILER_B_STACK_TEMPERATURE,raw_pi,boiler,BLR_2,1,Steam Network 1 > HP-2 Steam HeaderA > HP-2 Steam GeneratorA > HP-2 Fuel Fired BoilerB,HP-2 Fuel Fired BoilerB,Stack Temperature,UN.UO.71TI1207.PV,covered,UN.UO.71TI1207.PV,1,,
+Boielr_B_Fuel_Gas_Flow,raw_pi,boiler,BLR_2,1,Steam Network 1 > HP-2 Steam HeaderA > HP-2 Steam GeneratorA > HP-2 Fuel Fired BoilerB,HP-2 Fuel Fired BoilerB,Fuel Gas Flow,,blank_in_hierarchy,,0,,
+FD_Fan_BLR_2_Steam_raw,raw_pi,boiler,BLR_2,1,,HP Boiler FD FanB,Inlet Steam Flow,,needs_new_row,,0,,
+Fuel_BLR_2_raw,raw_pi,boiler,BLR_2,1,Steam Network 1 > HP-2 Steam HeaderA > HP-2 Steam GeneratorA > HP-2 Fuel Fired BoilerB,HP-2 Fuel Fired BoilerB,Fuel Gas Flow,,blank_in_hierarchy,,0,,
+VHP_BFW_B_Turb_Steam_raw,raw_pi,boiler,BLR_2,1,,HP Boiler BFW PumpB,Driver Steam Flow,,needs_new_row,,0,,
+BFW_C_Turb_Steam_raw,raw_pi,boiler,BLR_3,1,,HP Boiler BFW PumpC,Driver Steam Flow,,needs_new_row,,0,,
+BLR_3_HPS_Gen_raw,raw_pi,boiler,BLR_3,1,Steam Network 1 > HP-2 Steam HeaderA > HP-2 Steam GeneratorA > HP-2 Fuel Fired BoilerC,HP-2 Fuel Fired BoilerC,Steam Generation Flow,UN.UO.71FI1301.PV,covered,UN.UO.71FI1301.PV,1,,
+BOILER_C_CBD,raw_pi,boiler,BLR_3,1,,HP Boiler Blowdown SystemC,CBD,,needs_new_row,,0,,
+BOILER_C_STACK_TEMPERATURE,raw_pi,boiler,BLR_3,1,Steam Network 1 > HP-2 Steam HeaderA > HP-2 Steam GeneratorA > HP-2 Fuel Fired BoilerC,HP-2 Fuel Fired BoilerC,Stack Temperature,UN.UO.71TI1307.PV,covered,UN.UO.71TI1307.PV,1,,
+Boielr_C_Fuel_Gas_Flow,raw_pi,boiler,BLR_3,1,Steam Network 1 > HP-2 Steam HeaderA > HP-2 Steam GeneratorA > HP-2 Fuel Fired BoilerC,HP-2 Fuel Fired BoilerC,Fuel Gas Flow,UN.UO.71FC1304.PV,covered,UN.UO.71FC1304.PV,1,,
+FD_Fan_BLR_3_Steam_raw,raw_pi,boiler,BLR_3,1,,HP Boiler FD FanC,Inlet Steam Flow,,needs_new_row,,0,,
+Fuel_BLR_3_raw,raw_pi,boiler,BLR_3,1,Steam Network 1 > HP-2 Steam HeaderA > HP-2 Steam GeneratorA > HP-2 Fuel Fired BoilerC,HP-2 Fuel Fired BoilerC,Fuel Gas Flow,UN.UO.71FC1304.PV,covered,UN.UO.71FC1304.PV,1,,
+VHP_BFW_C_Turb_Steam_raw,raw_pi,boiler,BLR_3,1,,HP Boiler BFW PumpC,Driver Steam Flow,,needs_new_row,,0,,
+BLR_4_HPS_Gen_raw,raw_pi,boiler,BLR_4,1,Steam Network 1 > HP-2 Steam HeaderA > HP-2 Steam GeneratorA > HP-2 Fuel Fired BoilerD,HP-2 Fuel Fired BoilerD,Steam Generation Flow,UN.UO.71FI1401.PV,covered,UN.UO.71FI1401.PV,1,,
+BOILER_D_CBD,raw_pi,boiler,BLR_4,1,,HP Boiler Blowdown SystemD,CBD,,needs_new_row,,0,,
+BOILER_D_STACK_TEMPERATURE,raw_pi,boiler,BLR_4,1,Steam Network 1 > HP-2 Steam HeaderA > HP-2 Steam GeneratorA > HP-2 Fuel Fired BoilerD,HP-2 Fuel Fired BoilerD,Stack Temperature,UN.UO.71TI1407.PV,covered,UN.UO.71TI1407.PV,1,,
+Boielr_D_Fuel_Gas_Flow,raw_pi,boiler,BLR_4,1,Steam Network 1 > HP-2 Steam HeaderA > HP-2 Steam GeneratorA > HP-2 Fuel Fired BoilerD,HP-2 Fuel Fired BoilerD,Fuel Gas Flow,UN.UO.71FC1404.PV,covered,UN.UO.71FC1404.PV,1,,
+FD_Fan_BLR_4_Steam_raw,raw_pi,boiler,BLR_4,1,,HP Boiler FD FanD,Inlet Steam Flow,,needs_new_row,,0,,
+Fuel_BLR_4_raw,raw_pi,boiler,BLR_4,1,Steam Network 1 > HP-2 Steam HeaderA > HP-2 Steam GeneratorA > HP-2 Fuel Fired BoilerD,HP-2 Fuel Fired BoilerD,Fuel Gas Flow,UN.UO.71FC1404.PV,covered,UN.UO.71FC1404.PV,1,,
+BFW_E_Turb_Steam_raw,raw_pi,boiler,BLR_5,1,,HP Boiler BFW PumpE,Driver Steam Flow,,needs_new_row,,0,,
+BLR_5_HPS_Gen_raw,raw_pi,boiler,BLR_5,1,Steam Network 1 > HP-2 Steam HeaderA > HP-2 Steam GeneratorA > HP-2 Fuel Fired BoilerE,HP-2 Fuel Fired BoilerE,Steam Generation Flow,UN.UO.71FI1501A.PV,covered,UN.UO.71FI1501A.PV,1,,
+BOILER_E_CBD,raw_pi,boiler,BLR_5,1,,HP Boiler Blowdown SystemE,CBD,,needs_new_row,,0,,
+BOILER_E_STACK_TEMPERATURE,raw_pi,boiler,BLR_5,1,Steam Network 1 > HP-2 Steam HeaderA > HP-2 Steam GeneratorA > HP-2 Fuel Fired BoilerE,HP-2 Fuel Fired BoilerE,Stack Temperature,UN.UO.71TI1507.PV,covered,UN.UO.71TI1507.PV,1,,
+Boielr_E_Fuel_Gas_Flow,raw_pi,boiler,BLR_5,1,Steam Network 1 > HP-2 Steam HeaderA > HP-2 Steam GeneratorA > HP-2 Fuel Fired BoilerE,HP-2 Fuel Fired BoilerE,Fuel Gas Flow,UN.UO.71FC1504.PV,covered,UN.UO.71FC1504.PV,1,,
+FD_Fan_BLR_5_Steam_raw,raw_pi,boiler,BLR_5,1,,HP Boiler FD FanE,Inlet Steam Flow,,needs_new_row,,0,,
+Fuel_BLR_5_raw,raw_pi,boiler,BLR_5,1,Steam Network 1 > HP-2 Steam HeaderA > HP-2 Steam GeneratorA > HP-2 Fuel Fired BoilerE,HP-2 Fuel Fired BoilerE,Fuel Gas Flow,UN.UO.71FC1504.PV,covered,UN.UO.71FC1504.PV,1,,
+Air_Compressor_Turbine_A_Steam,inferred,system,,1,,,,,,,0,"if([Air_Compressor_Turbine_A_Steam_raw]<100,0,[Air_Compressor_Turbine_A_Steam_raw]/1000)",Air_Compressor_Turbine_A_Steam_raw
+Air_Compressor_Turbine_D_Steam,inferred,system,,1,,,,,,,0,"if([Air_Compressor_Turbine_D_Steam_raw]<100,0,[Air_Compressor_Turbine_D_Steam_raw]/1000)",Air_Compressor_Turbine_D_Steam_raw
+BFW_Drives_Running,inferred,system,,1,,,,,,,0,[BFW_A_Motor_Status]+[BFW_B_Turb_Status]+[BFW_C_Turb_Status]+[BFW_D_Motor_Status]+[BFW_E_Turb_Status]+[BFW_F_Motor_Status],BFW_A_Motor_Status; BFW_B_Turb_Status; BFW_C_Turb_Status; BFW_D_Motor_Status; BFW_E_Turb_Status; BFW_F_Motor_Status
+BFW_F_Motor_Power,inferred,system,,1,,,,,,,0,[BFW_F_Motor_Status]*800/1000,BFW_F_Motor_Status
+BFW_F_Motor_Power_Imbalance,inferred,system,,1,,,,,,UN.UO.71FI1101.PV; UN.UO.71FI1201.PV; UN.UO.71FI1301.PV; UN.UO.71FI1401.PV; UN.UO.71FI1501A.PV,5,[BFW_F_Motor_Power_cons]-[BFW_F_Motor_Power_Regression],BFW_F_Motor_Power_Regression; BFW_F_Motor_Power_cons
+BFW_F_Motor_Power_Regression,inferred,system,,1,,,,,,UN.UO.71FI1101.PV; UN.UO.71FI1201.PV; UN.UO.71FI1301.PV; UN.UO.71FI1401.PV; UN.UO.71FI1501A.PV,5,((-0.0016*([BFW_Flow_Consumption]/[BFW_Drives_Running])^2+1.8045*([BFW_Flow_Consumption]/[BFW_Drives_Running])+401.61)/1000)/0.95,BFW_Drives_Running; BFW_Flow_Consumption
+BFW_F_Motor_Power_cons,inferred,system,,1,,,,,,UN.UO.71FI1101.PV; UN.UO.71FI1201.PV; UN.UO.71FI1301.PV; UN.UO.71FI1401.PV; UN.UO.71FI1501A.PV,5,"if([BFW_F_Motor_Status]==1,[BFW_F_Motor_Power],[BFW_F_Motor_Power_Regression])",BFW_F_Motor_Power; BFW_F_Motor_Power_Regression; BFW_F_Motor_Status
+BFW_F_Motor_Status,inferred,system,,1,,,,,,,0,"if(([PM7103F_CWP_MTR_BEARING])>50,1,0)",PM7103F_CWP_MTR_BEARING
+BFW_Flow_Consumption,inferred,system,,1,,,,,,UN.UO.71FI1101.PV; UN.UO.71FI1201.PV; UN.UO.71FI1301.PV; UN.UO.71FI1401.PV; UN.UO.71FI1501A.PV,5,[BFW_to_EOEG_1]+[BFW_to_EOEG_2]+[BFW_to_EOEG_3]+[BFW_TO_LAO]+[DSP_BFW_TO_ETH]+[DSP_BFW_TO_EG1]+[DSP_BFW_TO_EG2]+[DSP_BFW_TO_EG3]+[DSP_BFW_TO_CAUSTIC_DILUTION]+[Total_BLR_HPS_Generation]/.99,BFW_TO_LAO; BFW_to_EOEG_1; BFW_to_EOEG_2; BFW_to_EOEG_3; DSP_BFW_TO_CAUSTIC_DILUTION; DSP_BFW_TO_EG1; DSP_BFW_TO_EG2; DSP_BFW_TO_EG3; DSP_BFW_TO_ETH; Total_BLR_HPS_Generation
+BFW_Imbalance,inferred,system,,1,,,,,,UN.ETH.17PC7032.MV; UN.UO.71FI1101.PV; UN.UO.71FI1201.PV; UN.UO.71FI1301.PV; UN.UO.71FI1401.PV; UN.UO.71FI1501A.PV,6,[Total_BFW_Generated]-[Total_BFW_Consumption],Total_BFW_Consumption; Total_BFW_Generated
+BFW_Motors_Running,inferred,system,,1,,,,,,,0,[BFW_A_Motor_Status]+[BFW_D_Motor_Status]+[BFW_F_Motor_Status],BFW_A_Motor_Status; BFW_D_Motor_Status; BFW_F_Motor_Status
+BFW_TO_LAO,inferred,system,,1,,,,,,,0,"if([LAO_Plant_Status]==0,0,[BFW_TO_LAO_raw]/1000)",BFW_TO_LAO_raw; LAO_Plant_Status
+BFW_Turbines_Running,inferred,system,,1,,,,,,,0,[BFW_B_Turb_Status]+[BFW_C_Turb_Status]+[BFW_E_Turb_Status],BFW_B_Turb_Status; BFW_C_Turb_Status; BFW_E_Turb_Status
+BFW_to_Boilers,inferred,system,,1,,,,,,UN.UO.71FI1101.PV; UN.UO.71FI1201.PV; UN.UO.71FI1301.PV; UN.UO.71FI1401.PV; UN.UO.71FI1501A.PV,5,[Total_BLR_HPS_Generation]/.99,Total_BLR_HPS_Generation
+BFW_to_EOEG_1,inferred,system,,1,,,,,,,0,"if([EOEG1_Plant_Status]==0,0,[BFW_to_EOEG_1_raw])",BFW_to_EOEG_1_raw; EOEG1_Plant_Status
+BFW_to_EOEG_2,inferred,system,,1,,,,,,,0,"if([EOEG2_Plant_Status]==0,0,[BFW_to_EOEG_2_raw])",BFW_to_EOEG_2_raw; EOEG2_Plant_Status
+BFW_to_EOEG_3,inferred,system,,1,,,,,,,0,"if([EOEG3_Plant_Status]==0,0,[BFW_to_EOEG_3_raw])",BFW_to_EOEG_3_raw; EOEG3_Plant_Status
+BFW_to_HP_to_MP_Letdown_Flow_In_PV0007A_UO,inferred,system,,1,,,,,,,0,0.11*[HP_to_MP_Letdown_HPS_Flow_In_PV0007A_UO],HP_to_MP_Letdown_HPS_Flow_In_PV0007A_UO
+BFW_to_HP_to_MP_Letdown_Flow_In_PV0007B_UO,inferred,system,,1,,,,,,,0,0.11*[HP_to_MP_Letdown_HPS_Flow_In_PV0007B_UO],HP_to_MP_Letdown_HPS_Flow_In_PV0007B_UO
+Boiler_CBD,inferred,system,,1,,,,,,,0,([BOILER_A_CBD]+[BOILER_B_CBD]+[BOILER_C_CBD]+[BOILER_D_CBD]+[BOILER_E_CBD])/1000,BOILER_A_CBD; BOILER_B_CBD; BOILER_C_CBD; BOILER_D_CBD; BOILER_E_CBD
+CBD_energy_saving_BLR1,inferred,system,,1,,,,,,,0,0,
+CBD_energy_saving_BLR2,inferred,system,,1,,,,,,,0,0,
+CBD_energy_saving_BLR3,inferred,system,,1,,,,,,,0,0,
+CBD_energy_saving_BLR4,inferred,system,,1,,,,,,,0,0,
+CBD_energy_saving_BLR5,inferred,system,,1,,,,,,,0,0,
+Condensate_From_P_7106_to_Deaerator_Header,inferred,system,,1,,,,,,,0,[LP_Steam_Dumping_Valve_PC0024A_Steam_flow_out_UO]+[Boiler_CBD]+[Condensate_from_Traps],Boiler_CBD; Condensate_from_Traps; LP_Steam_Dumping_Valve_PC0024A_Steam_flow_out_UO
+Condensate_Recovery_Ratio_ETH,inferred,system,,1,,,,,,UN.ETH.17PC7032.MV,1,"if([ETH_Plant_Status]==0,0,min(0.8,([ETH_CLEAN_COND_TO_U_O]+[ETH_suspect_COND_TO_U_O_corrected])/([ETH_HPS_Demand]+[ETH_LPS_Demand]+[VHP_BFW_to_ETH]+[DSP_BFW_TO_ETH])))",DSP_BFW_TO_ETH; ETH_CLEAN_COND_TO_U_O; ETH_HPS_Demand; ETH_LPS_Demand; ETH_Plant_Status; ETH_suspect_COND_TO_U_O_corrected; VHP_BFW_to_ETH
+Condensate_from_Traps,inferred,system,,1,,,,,,,0,5,
+DMW_Makeup,inferred,system,,1,,,,,,,0,([DMW_MAKEUP_Near_Clean_Condensate_Header]+[DMW_MAKEUP_Near_Suspect_Condensate_Header])/1000,DMW_MAKEUP_Near_Clean_Condensate_Header; DMW_MAKEUP_Near_Suspect_Condensate_Header
+DMW_Turbine_A_Steam,inferred,system,,1,,,,,,,0,"if([DMW_Turbine_A_Steam_raw]<100,0,[DMW_Turbine_A_Steam_raw]/1000)",DMW_Turbine_A_Steam_raw
+DMW_Turbine_C_Steam,inferred,system,,1,,,,,,,0,"if([DMW_Turbine_C_Steam_raw]<100,0,[DMW_Turbine_C_Steam_raw]/1000)",DMW_Turbine_C_Steam_raw
+DSP_BFW_TO_CAUSTIC_DILUTION,inferred,system,,1,,,,,,,0,[DSP_BFW_TO_CAUSTIC_DILUTION_raw]/1000,DSP_BFW_TO_CAUSTIC_DILUTION_raw
+DSP_BFW_TO_EG1,inferred,system,,1,,,,,,,0,"if([EOEG1_Plant_Status]==0,0,[DSP_BFW_TO_EG1_raw])",DSP_BFW_TO_EG1_raw; EOEG1_Plant_Status
+DSP_BFW_TO_EG2,inferred,system,,1,,,,,,,0,"if([EOEG2_Plant_Status]==0,0,[DSP_BFW_TO_EG2_raw])",DSP_BFW_TO_EG2_raw; EOEG2_Plant_Status
+DSP_BFW_TO_EG3,inferred,system,,1,,,,,,,0,"if([EOEG3_Plant_Status]==0,0,[DSP_BFW_TO_EG3_raw])",DSP_BFW_TO_EG3_raw; EOEG3_Plant_Status
+DSP_BFW_TO_ETH,inferred,system,,1,,,,,,,0,"if([ETH_Plant_Status]==0,0,[DSP_BFW_TO_ETH_raw])",DSP_BFW_TO_ETH_raw; ETH_Plant_Status
+Deaerator_A_LPS_Vent,inferred,system,,1,,,,,,,0,[Deaerator_A_LPS_raw]*0.02/1000,Deaerator_A_LPS_raw
+Deaerator_B_LPS_Vent,inferred,system,,1,,,,,,,0,[Deaerator_B_LPS_raw]*0.02/1000,Deaerator_B_LPS_raw
+EG1_CLEAN_COND_TO_U_O,inferred,system,,1,,,,,,,0,"if([EOEG1_Plant_Status]==0,0,[EG1_CLEAN_COND_TO_U_O_raw])",EG1_CLEAN_COND_TO_U_O_raw; EOEG1_Plant_Status
+EG1_EOE,inferred,system,,1,,,,,,,0,"(max(0,[EG1_MEG_production_flow]*0.71)+max(0,[EG1_DEG_production_flow]*0.83)+max(0,([EG1_TEG_production_flow]/1000*0.88))+max(0,([EG1_HEG_production_flow]/1000*0.91)))",EG1_DEG_production_flow; EG1_HEG_production_flow; EG1_MEG_production_flow; EG1_TEG_production_flow
+EG1_suspect_COND_TO_U_O,inferred,system,,1,,,,,,,0,"if([EOEG1_Plant_Status]==0,0,[EG1_suspect_COND_TO_U_O_raw])",EG1_suspect_COND_TO_U_O_raw; EOEG1_Plant_Status
+EG1_suspect_COND_TO_U_O_corrected,inferred,system,,1,,,,,,,0,"if([EOEG1_Plant_Status]==0,0,[EG1_suspect_COND_TO_U_O]*[Polished_Condenstae_to_Deaerator]/([ETH_suspect_COND_TO_U_O]+[EG1_suspect_COND_TO_U_O]+[EG2_suspect_COND_TO_U_O]+[EG3_suspect_COND_TO_U_O]))",EG1_suspect_COND_TO_U_O; EG2_suspect_COND_TO_U_O; EG3_suspect_COND_TO_U_O; EOEG1_Plant_Status; ETH_suspect_COND_TO_U_O; Polished_Condenstae_to_Deaerator
+EG2_CLEAN_COND_TO_U_O,inferred,system,,1,,,,,,,0,"if([EOEG2_Plant_Status]==0,0,[EG2_CLEAN_COND_TO_U_O_raw])",EG2_CLEAN_COND_TO_U_O_raw; EOEG2_Plant_Status
+EG2_EOE,inferred,system,,1,,,,,,,0,"(max(0,[EG2_MEG_production_flow]*0.71)+max(0,[EG2_DEG_production_flow]*0.83)+max(0,([EG2_TEG_production_flow]/1000*0.88))+max(0,([EG2_HEG_production_flow]/1000*0.91)))",EG2_DEG_production_flow; EG2_HEG_production_flow; EG2_MEG_production_flow; EG2_TEG_production_flow
+EG2_suspect_COND_TO_U_O,inferred,system,,1,,,,,,,0,"if([EOEG2_Plant_Status]==0,0,[EG2_suspect_COND_TO_U_O_raw])",EG2_suspect_COND_TO_U_O_raw; EOEG2_Plant_Status
+EG2_suspect_COND_TO_U_O_corrected,inferred,system,,1,,,,,,,0,"if([EOEG2_Plant_Status]==0,0,[EG2_suspect_COND_TO_U_O]*[Polished_Condenstae_to_Deaerator]/([ETH_suspect_COND_TO_U_O]+[EG1_suspect_COND_TO_U_O]+[EG2_suspect_COND_TO_U_O]+[EG3_suspect_COND_TO_U_O]))",EG1_suspect_COND_TO_U_O; EG2_suspect_COND_TO_U_O; EG3_suspect_COND_TO_U_O; EOEG2_Plant_Status; ETH_suspect_COND_TO_U_O; Polished_Condenstae_to_Deaerator
+EG3_CLEAN_COND_TO_U_O,inferred,system,,1,,,,,,,0,"if([EOEG3_Plant_Status]==0,0,[EG3_CLEAN_COND_TO_U_O_raw])",EG3_CLEAN_COND_TO_U_O_raw; EOEG3_Plant_Status
+EG3_EOE,inferred,system,,1,,,,,,,0,"(max(0,[EG3_MEG_production_flow]*0.71)+max(0,[EG3_DEG_production_flow]*0.83)+max(0,([EG3_TEG_production_flow]/1000*0.88))+max(0,([EG3_HEG_production_flow]/1000*0.91)))",EG3_DEG_production_flow; EG3_HEG_production_flow; EG3_MEG_production_flow; EG3_TEG_production_flow
+EG3_suspect_COND_TO_U_O,inferred,system,,1,,,,,,,0,"if([EOEG3_Plant_Status]==0,0,[EG3_suspect_COND_TO_U_O_raw])",EG3_suspect_COND_TO_U_O_raw; EOEG3_Plant_Status
+EG3_suspect_COND_TO_U_O_corrected,inferred,system,,1,,,,,,,0,"if([EOEG3_Plant_Status]==0,0,[EG3_suspect_COND_TO_U_O]*[Polished_Condenstae_to_Deaerator]/([ETH_suspect_COND_TO_U_O]+[EG1_suspect_COND_TO_U_O]+[EG2_suspect_COND_TO_U_O]+[EG3_suspect_COND_TO_U_O]))",EG1_suspect_COND_TO_U_O; EG2_suspect_COND_TO_U_O; EG3_suspect_COND_TO_U_O; EOEG3_Plant_Status; ETH_suspect_COND_TO_U_O; Polished_Condenstae_to_Deaerator
+EOEG1_Plant_Status,inferred,system,,1,,,,,,,0,"if(if(missing([EG1_EOE]),0,[EG1_EOE])>30,1,0)",EG1_EOE
+EOEG2_Plant_Status,inferred,system,,1,,,,,,,0,"if(if(missing([EG2_EOE]),0,[EG2_EOE])>30,1,0)",EG2_EOE
+EOEG3_Plant_Status,inferred,system,,1,,,,,,,0,"if(if(missing([EG3_EOE]),0,[EG3_EOE])>30,1,0)",EG3_EOE
+EOEG_1_MPS_Demand,inferred,system,,1,,,,,,,0,"if([EOEG1_Plant_Status]==0,0,[EOEG_1_MPS_Demand_raw])",EOEG1_Plant_Status; EOEG_1_MPS_Demand_raw
+EOEG_2_MPS_Demand,inferred,system,,1,,,,,,,0,"if([EOEG2_Plant_Status]==0,0,[EOEG_2_MPS_Demand_raw])",EOEG2_Plant_Status; EOEG_2_MPS_Demand_raw
+EOEG_3_MPS_Demand,inferred,system,,1,,,,,,,0,"if([EOEG3_Plant_Status]==0,0,[EOEG_3_MPS_Demand_raw])",EOEG3_Plant_Status; EOEG_3_MPS_Demand_raw
+ETH_CLEAN_COND_TO_U_O,inferred,system,,1,,,,,,,0,"if([ETH_Plant_Status]==0,0,[ETH_CLEAN_COND_TO_U_O_raw])",ETH_CLEAN_COND_TO_U_O_raw; ETH_Plant_Status
+ETH_HPS_Demand,inferred,system,,1,,,,,,UN.ETH.17PC7032.MV,1,"if([ETH_Plant_Status]==0,0,max(ETH_HPS_Demand_old,(if(([Ethylene_HP_Consumption_Calculated]-[Ethylene_HP_Generation_Calculated])<0,0,[Ethylene_HP_Consumption_Calculated]-[Ethylene_HP_Generation_Calculated]))))",ETH_Plant_Status; Ethylene_HP_Consumption_Calculated; Ethylene_HP_Generation_Calculated
+ETH_LPS_Demand,inferred,system,,1,,,,,,,0,"if([ETH_Plant_Status]==0,0,[ETH_LPS_Demand_raw])",ETH_LPS_Demand_raw; ETH_Plant_Status
+ETH_Plant_Status,inferred,system,,1,,,,,,,0,"if(if(missing([Total_Ethylene_Production_ETH_Plant]),0,[Total_Ethylene_Production_ETH_Plant])>100,1,0)",Total_Ethylene_Production_ETH_Plant
+ETH_suspect_COND_TO_U_O,inferred,system,,1,,,,,,,0,"if([ETH_Plant_Status]==0,0,[ETH_suspect_COND_TO_U_O_raw])",ETH_Plant_Status; ETH_suspect_COND_TO_U_O_raw
+ETH_suspect_COND_TO_U_O_corrected,inferred,system,,1,,,,,,,0,"if([ETH_Plant_Status]==0,0,[ETH_suspect_COND_TO_U_O]*[Polished_Condenstae_to_Deaerator]/([ETH_suspect_COND_TO_U_O]+[EG1_suspect_COND_TO_U_O]+[EG2_suspect_COND_TO_U_O]+[EG3_suspect_COND_TO_U_O]))",EG1_suspect_COND_TO_U_O; EG2_suspect_COND_TO_U_O; EG3_suspect_COND_TO_U_O; ETH_Plant_Status; ETH_suspect_COND_TO_U_O; Polished_Condenstae_to_Deaerator
+Eth_HP_to_CGC_lube_oil_pump_turbine_flow,inferred,system,,1,,,,,,,0,4,
+Eth_HP_to_E_1103_flow,inferred,system,,1,,,,,,,0,5.9,
+Eth_HP_to_PT_1650_flow,inferred,system,,1,,,,,,,0,4,
+Ethylene_HP_Consumption_Calculated,inferred,system,,1,,,,,,UN.ETH.17PC7032.MV,1,[HP_to_LP_Let_Down_Valve_HC7262_HP_Steam_flow_in_ETH]+[Quench_water_pump_turbine_Inlet_steam_flow]+[Eth_HP_to_CGC_lube_oil_pump_turbine_flow]+[Eth_HP_to_E_1103_flow]+[HP_to_LP_Let_Down_Valve_PC7026_LP_Steam_flow_out_ETH]+[Regeneration_Gas_Heater_Steam]+[Eth_HP_to_PT_1650_flow]+[C2R_turbine_Inlet_steam_flow]+[C3R_turbine_Inlet_steam_flow]+[HP_Steam_Vent_Valve_PC7027_Steam_Flow_Out_ETH],C2R_turbine_Inlet_steam_flow; C3R_turbine_Inlet_steam_flow; Eth_HP_to_CGC_lube_oil_pump_turbine_flow; Eth_HP_to_E_1103_flow; Eth_HP_to_PT_1650_flow; HP_Steam_Vent_Valve_PC7027_Steam_Flow_Out_ETH; HP_to_LP_Let_Down_Valve_HC7262_HP_Steam_flow_in_ETH; HP_to_LP_Let_Down_Valve_PC7026_LP_Steam_flow_out_ETH; Quench_water_pump_turbine_Inlet_steam_flow; Regeneration_Gas_Heater_Steam
+Ethylene_HP_Generation_Calculated,inferred,system,,1,,,,,,UN.ETH.17PC7032.MV,1,[HP_Steam_from_CGC_Extraction]+[VHP_to_HP_Let_Down_Valve_PX7024A_HP_Steam_flow_out_ETH]+[VHP_to_HP_Let_Down_Valve_PX7024B_HP_Steam_flow_out_ETH],HP_Steam_from_CGC_Extraction; VHP_to_HP_Let_Down_Valve_PX7024A_HP_Steam_flow_out_ETH; VHP_to_HP_Let_Down_Valve_PX7024B_HP_Steam_flow_out_ETH
+FUEL_GAS_From_UO_to_ETH,inferred,system,,1,,,,,,UN.ETH.11FI1029AA.PV,1,"if([ETH_Plant_Status]==0,0,round([FUEL_GAS_From_UO_to_ETH_raw],3))",ETH_Plant_Status; FUEL_GAS_From_UO_to_ETH_raw
+FUEL_GAS_From_UO_to_LAO,inferred,system,,1,,,,,,,0,"if([LAO_Plant_Status]==0,0,round((([FUEL_GAS_From_UO_to_LAO_A]+[FUEL_GAS_From_UO_to_LAO_B])/1000),3))",FUEL_GAS_From_UO_to_LAO_A; FUEL_GAS_From_UO_to_LAO_B; LAO_Plant_Status
+HP_Steam_Vent_Valve_PC7027_Steam_Flow_Out_ETH,inferred,system,,1,,,,,,UN.ETH.17PC7032.MV,1,2.059*([HP_Steam_Vent_Valve_PC7027_Opening_ETH]),HP_Steam_Vent_Valve_PC7027_Opening_ETH
+HP_to_LP_Let_Down_Valve_HC7262_HP_Steam_flow_in_ETH,inferred,system,,1,,,,,,,0,0.102*([HP_to_LP_Let_Down_Valve_Opening_HC7262_ETH]),HP_to_LP_Let_Down_Valve_Opening_HC7262_ETH
+HP_to_LP_Let_Down_Valve_PC7026_LP_Steam_flow_out_ETH,inferred,system,,1,,,,,,,0,1.401*([HP_to_LP_Let_Down_Valve_Opening_PC7026_ETH]),HP_to_LP_Let_Down_Valve_Opening_PC7026_ETH
+HP_to_MP_Letdown_HPS_Flow_In_PV0007A_UO,inferred,system,,1,,,,,,,0,(-0.0078*([HP_to_MP_Letdown_Valve_Opening_PV0007A_UO])^2+2.86*([HP_to_MP_Letdown_Valve_Opening_PV0007A_UO])),HP_to_MP_Letdown_Valve_Opening_PV0007A_UO
+HP_to_MP_Letdown_HPS_Flow_In_PV0007B_UO,inferred,system,,1,,,,,,,0,(-0.0078*([HP_to_MP_Letdown_Valve_Opening_PV0007B_UO])^2+2.86*([HP_to_MP_Letdown_Valve_Opening_PV0007B_UO])),HP_to_MP_Letdown_Valve_Opening_PV0007B_UO
+LAO_Load,inferred,system,,1,,,,,,,0,"if(missing([LAO_Load_raw]),0,[LAO_Load_raw])/1000",LAO_Load_raw
+LAO_Plant_Status,inferred,system,,1,,,,,,,0,"if(if(missing([LAO_Load]),0,[LAO_Load])<5,0,1)",LAO_Load
+LPS_from_Drives,inferred,system,,1,,,,,,,0,[BFW_E_Turb_Steam]+[BFW_B_Turb_Steam]+ [BFW_C_Turb_Steam]+ [VHP_BFW_B_Turb_Steam]+ [VHP_BFW_C_Turb_Steam]+ [CW_Turbine_A_Steam]+ [CW_Turbine_B_Steam]+ [CW_Turbine_G_Steam]+ [Air_Compressor_Turbine_A_Steam]+ [Air_Compressor_Turbine_D_Steam]+ [DMW_Turbine_A_Steam]+ [DMW_Turbine_C_Steam]+ [FD_Fan_BLR_1_Steam]+[FD_Fan_BLR_2_Steam]+ [FD_Fan_BLR_3_Steam]+ [FD_Fan_BLR_4_Steam]+ [FD_Fan_BLR_5_Steam],Air_Compressor_Turbine_A_Steam; Air_Compressor_Turbine_D_Steam; BFW_B_Turb_Steam; BFW_C_Turb_Steam; BFW_E_Turb_Steam; CW_Turbine_A_Steam; CW_Turbine_B_Steam; CW_Turbine_G_Steam; DMW_Turbine_A_Steam; DMW_Turbine_C_Steam; FD_Fan_BLR_1_Steam; FD_Fan_BLR_2_Steam; FD_Fan_BLR_3_Steam; FD_Fan_BLR_4_Steam; FD_Fan_BLR_5_Steam; VHP_BFW_B_Turb_Steam; VHP_BFW_C_Turb_Steam
+LP_Steam_Dumping_Valve_PC0024A_Steam_flow_out_UO,inferred,system,,1,,,,,,,0,0.724*[LP_Steam_Dumping_Valve_PC0024A_Opening_UO],LP_Steam_Dumping_Valve_PC0024A_Opening_UO
+LP_Steam_Generation,inferred,system,,1,,,,,,UN.UO.71FI1101.PV; UN.UO.71FI1201.PV; UN.UO.71FI1301.PV; UN.UO.71FI1401.PV; UN.UO.71FI1501A.PV,5,[LPS_from_Drives]+[MP_to_LP_Letdown_LPS_Flow_Out_PV013A_UO]+[MP_to_LP_Letdown_LPS_Flow_Out_PV013B_UO]+[MP_to_LP_Letdown_LPS_Flow_Out_PV31_UO]+[MP_to_LP_Letdown_LPS_Flow_Out_PV32_UO]+(([Total_BLR_HPS_Generation])*0.01*0.21),LPS_from_Drives; MP_to_LP_Letdown_LPS_Flow_Out_PV013A_UO; MP_to_LP_Letdown_LPS_Flow_Out_PV013B_UO; MP_to_LP_Letdown_LPS_Flow_Out_PV31_UO; MP_to_LP_Letdown_LPS_Flow_Out_PV32_UO; Total_BLR_HPS_Generation
+MP_Steam_Consumption,inferred,system,,1,,,,,,,0,([EOEG_1_MPS_Demand]+[EOEG_2_MPS_Demand]+[EOEG_3_MPS_Demand])+([DMW_Turbine_A_Steam_raw]+[DMW_Turbine_C_Steam_raw])/1000+[MP_to_LP_Letdown_MPS_Flow_In_PV013A_UO]+[MP_to_LP_Letdown_MPS_Flow_In_PV013B_UO]+[MP_to_LP_Letdown_LPS_Flow_Out_PV31_UO]+[MP_to_LP_Letdown_LPS_Flow_Out_PV32_UO],DMW_Turbine_A_Steam_raw; DMW_Turbine_C_Steam_raw; EOEG_1_MPS_Demand; EOEG_2_MPS_Demand; EOEG_3_MPS_Demand; MP_to_LP_Letdown_LPS_Flow_Out_PV31_UO; MP_to_LP_Letdown_LPS_Flow_Out_PV32_UO; MP_to_LP_Letdown_MPS_Flow_In_PV013A_UO; MP_to_LP_Letdown_MPS_Flow_In_PV013B_UO
+MP_Steam_Generation,inferred,system,,1,,,,,,,0,"if(abs(0.0395*[UO_HP_MP_Desuperheater1_opening]*[UO_HP_MP_Desuperheater1_opening] + 0.0228*[UO_HP_MP_Desuperheater1_opening]-[MP_Steam_Consumption])>10,[MP_Steam_Consumption]+10,0.0395*[UO_HP_MP_Desuperheater1_opening]*[UO_HP_MP_Desuperheater1_opening] + 0.0228*[UO_HP_MP_Desuperheater1_opening])",MP_Steam_Consumption; UO_HP_MP_Desuperheater1_opening
+MP_to_LP_Letdown_LPS_Flow_Out_PV013A_UO,inferred,system,,1,,,,,,,0,(0.0039*([MP_to_LP_Letdown_Valve_Opening_PV013A_UO])^2+0.047*([MP_to_LP_Letdown_Valve_Opening_PV013A_UO])),MP_to_LP_Letdown_Valve_Opening_PV013A_UO
+MP_to_LP_Letdown_LPS_Flow_Out_PV013B_UO,inferred,system,,1,,,,,,,0,(0.0039*([MP_to_LP_Letdown_Valve_Opening_PV013B_UO])^2+0.047*([MP_to_LP_Letdown_Valve_Opening_PV013B_UO])),MP_to_LP_Letdown_Valve_Opening_PV013B_UO
+MP_to_LP_Letdown_LPS_Flow_Out_PV31_UO,inferred,system,,1,,,,,,,0,0.677*([MP_to_LP_Letdown_Valve_Opening_PV31_UO]),MP_to_LP_Letdown_Valve_Opening_PV31_UO
+MP_to_LP_Letdown_LPS_Flow_Out_PV32_UO,inferred,system,,1,,,,,,,0,0.677*([MP_to_LP_Letdown_Valve_Opening_PV32_UO]),MP_to_LP_Letdown_Valve_Opening_PV32_UO
+MP_to_LP_Letdown_MPS_Flow_In_PV013A_UO,inferred,system,,1,,,,,,,0,(0.0039*([MP_to_LP_Letdown_Valve_Opening_PV013A_UO])^2+0.047*([MP_to_LP_Letdown_Valve_Opening_PV013A_UO])),MP_to_LP_Letdown_Valve_Opening_PV013A_UO
+MP_to_LP_Letdown_MPS_Flow_In_PV013B_UO,inferred,system,,1,,,,,,,0,(0.0039*([MP_to_LP_Letdown_Valve_Opening_PV013B_UO])^2+0.047*([MP_to_LP_Letdown_Valve_Opening_PV013B_UO])),MP_to_LP_Letdown_Valve_Opening_PV013B_UO
+Regeneration_Gas_Heater_Steam,inferred,system,,1,,,,,,,0,"if([Regeneration_Gas_Heater_Level]>5,12.7,0)",Regeneration_Gas_Heater_Level
+Return_Condensate,inferred,system,,1,,,,,,UN.ETH.17PC7032.MV,1,([ETH_CLEAN_COND_TO_U_O]+[ETH_suspect_COND_TO_U_O_corrected])*[Condensate_Recovery_Ratio_ETH]+[EG1_CLEAN_COND_TO_U_O]+[EG2_CLEAN_COND_TO_U_O]+[EG3_CLEAN_COND_TO_U_O]+[EG1_suspect_COND_TO_U_O_corrected]+[EG2_suspect_COND_TO_U_O_corrected]+[EG3_suspect_COND_TO_U_O_corrected],Condensate_Recovery_Ratio_ETH; EG1_CLEAN_COND_TO_U_O; EG1_suspect_COND_TO_U_O_corrected; EG2_CLEAN_COND_TO_U_O; EG2_suspect_COND_TO_U_O_corrected; EG3_CLEAN_COND_TO_U_O; EG3_suspect_COND_TO_U_O_corrected; ETH_CLEAN_COND_TO_U_O; ETH_suspect_COND_TO_U_O_corrected
+Steam_Generation_from_Boilers,inferred,system,,1,,,,,,UN.UO.71FI1101.PV; UN.UO.71FI1201.PV; UN.UO.71FI1301.PV; UN.UO.71FI1401.PV; UN.UO.71FI1501A.PV,5,([BLR_1_HPS_Gen]*[BLR_1_Status]+[BLR_2_HPS_Gen]*[BLR_2_Status]+[BLR_3_HPS_Gen]*[BLR_3_Status]+[BLR_4_HPS_Gen]*[BLR_4_Status]+[BLR_5_HPS_Gen]*[BLR_5_Status]),BLR_1_HPS_Gen; BLR_1_Status; BLR_2_HPS_Gen; BLR_2_Status; BLR_3_HPS_Gen; BLR_3_Status; BLR_4_HPS_Gen; BLR_4_Status; BLR_5_HPS_Gen; BLR_5_Status
+Total_BFW_Consumption,inferred,system,,1,,,,,,UN.UO.71FI1101.PV; UN.UO.71FI1201.PV; UN.UO.71FI1301.PV; UN.UO.71FI1401.PV; UN.UO.71FI1501A.PV,5,[VHP_BFW_FROM_U_O]+[VHP_DESPHTR_BFW_FROM_U_O]+[BFW_to_EOEG_1]+[BFW_to_EOEG_2]+[BFW_to_EOEG_3]+[BFW_TO_LAO]+[DSP_BFW_TO_ETH]+[DSP_BFW_TO_EG1]+[DSP_BFW_TO_EG2]+[DSP_BFW_TO_EG3]+[DSP_BFW_TO_CAUSTIC_DILUTION]+[Total_BLR_HPS_Generation]/.99+[Deaerator_A_LPS_Vent]+[Deaerator_B_LPS_Vent],BFW_TO_LAO; BFW_to_EOEG_1; BFW_to_EOEG_2; BFW_to_EOEG_3; DSP_BFW_TO_CAUSTIC_DILUTION; DSP_BFW_TO_EG1; DSP_BFW_TO_EG2; DSP_BFW_TO_EG3; DSP_BFW_TO_ETH; Deaerator_A_LPS_Vent; Deaerator_B_LPS_Vent; Total_BLR_HPS_Generation; VHP_BFW_FROM_U_O; VHP_DESPHTR_BFW_FROM_U_O
+Total_BFW_Generated,inferred,system,,1,,,,,,UN.ETH.17PC7032.MV,1,[Return_Condensate]+[DMW_Makeup]+([Deaerator_A_LPS_raw]+[Deaerator_B_LPS_raw])/1000+[Condensate_From_P_7106_to_Deaerator_Header],Condensate_From_P_7106_to_Deaerator_Header; DMW_Makeup; Deaerator_A_LPS_raw; Deaerator_B_LPS_raw; Return_Condensate
+Total_Fuel_for_Boilers,inferred,system,,1,,,,,,UN.UO.71FC1104.PV; UN.UO.71FC1304.PV; UN.UO.71FC1404.PV; UN.UO.71FC1504.PV; UN.UO.71FI1101.PV; UN.UO.71FI1201.PV; UN.UO.71FI1301.PV; UN.UO.71FI1401.PV; UN.UO.71FI1501A.PV,9,([Fuel_BLR_1]+[Fuel_BLR_2]+[Fuel_BLR_3]+[Fuel_BLR_4]+[Fuel_BLR_5]),Fuel_BLR_1; Fuel_BLR_2; Fuel_BLR_3; Fuel_BLR_4; Fuel_BLR_5
+VHP_to_HP_Let_Down_Valve_PX7024A_HP_Steam_flow_out_ETH,inferred,system,,1,,,,,,UN.ETH.17PC7032.MV,1,5.33*([VHP_to_HP_Let_Down_Valve_Opening_PX7024A_ETH]),VHP_to_HP_Let_Down_Valve_Opening_PX7024A_ETH
+VHP_to_HP_Let_Down_Valve_PX7024B_HP_Steam_flow_out_ETH,inferred,system,,1,,,,,,,0,1.324*([VHP_to_HP_Let_Down_Valve_Opening_PX7024B_ETH]),VHP_to_HP_Let_Down_Valve_Opening_PX7024B_ETH
+Voltage_LP,inferred,system,,1,,,,,,,0,4000,
+power_factor,inferred,system,,1,,,,,,,0,0.9,
+BFW_A_Motor_Power,inferred,system,BLR_1,1,,,,,,,0,1.73*[Voltage_LP]*[BFW_A_AMPS]*[BFW_A_Motor_Status]*[power_factor]/1000/1000,BFW_A_AMPS; BFW_A_Motor_Status; Voltage_LP; power_factor
+BFW_A_Motor_Power_Imbalance,inferred,system,BLR_1,1,,,,,,UN.UO.71FI1101.PV; UN.UO.71FI1201.PV; UN.UO.71FI1301.PV; UN.UO.71FI1401.PV; UN.UO.71FI1501A.PV,5,[BFW_A_Motor_Power_cons]-[BFW_A_Motor_Power_Regression],BFW_A_Motor_Power_Regression; BFW_A_Motor_Power_cons
+BFW_A_Motor_Power_Regression,inferred,system,BLR_1,1,,,,,,UN.UO.71FI1101.PV; UN.UO.71FI1201.PV; UN.UO.71FI1301.PV; UN.UO.71FI1401.PV; UN.UO.71FI1501A.PV,5,((-0.0016*([BFW_Flow_Consumption]/[BFW_Drives_Running])^2+1.8045*([BFW_Flow_Consumption]/[BFW_Drives_Running])+401.61)/1000)/0.95,BFW_Drives_Running; BFW_Flow_Consumption
+BFW_A_Motor_Power_cons,inferred,system,BLR_1,1,,,,,,UN.UO.71FI1101.PV; UN.UO.71FI1201.PV; UN.UO.71FI1301.PV; UN.UO.71FI1401.PV; UN.UO.71FI1501A.PV,5,"if([BFW_A_Motor_Status]==1,[BFW_A_Motor_Power],[BFW_A_Motor_Power_Regression])",BFW_A_Motor_Power; BFW_A_Motor_Power_Regression; BFW_A_Motor_Status
+BFW_A_Motor_Status,inferred,system,BLR_1,1,,,,,,,0,"if(([BFW_A_AMPS]>60)||([BFW_A_Vibrations]>10)||([BFW_A_Bearing_temp]>60),1,0)",BFW_A_AMPS; BFW_A_Bearing_temp; BFW_A_Vibrations
+BLR_1_Status,inferred,system,BLR_1,1,,,,,,UN.UO.71FI1101.PV,1,"if([BLR_1_HPS_Gen]>=50,1,0)",BLR_1_HPS_Gen
+BFW_B_Turb_Status,inferred,system,BLR_2,1,,,,,,,0,"if(([BFW_B_Turb_Steam_raw]/1000)>8,1,0)",BFW_B_Turb_Steam_raw
+BLR_2_Status,inferred,system,BLR_2,1,,,,,,UN.UO.71FI1201.PV,1,"if([BLR_2_HPS_Gen]>=50,1,0)",BLR_2_HPS_Gen
+BFW_C_Turb_Status,inferred,system,BLR_3,1,,,,,,,0,"if(([BFW_C_Turb_Steam_raw]/1000)>8,1,0)",BFW_C_Turb_Steam_raw
+BLR_3_Status,inferred,system,BLR_3,1,,,,,,UN.UO.71FI1301.PV,1,"if([BLR_3_HPS_Gen]>=50,1,0)",BLR_3_HPS_Gen
+BFW_D_Motor_Power,inferred,system,BLR_4,1,,,,,,,0,1.73*[Voltage_LP]*[BFW_D_AMPS]*[BFW_D_Motor_Status]*[power_factor]/1000/1000,BFW_D_AMPS; BFW_D_Motor_Status; Voltage_LP; power_factor
+BFW_D_Motor_Power_Imbalance,inferred,system,BLR_4,1,,,,,,UN.UO.71FI1101.PV; UN.UO.71FI1201.PV; UN.UO.71FI1301.PV; UN.UO.71FI1401.PV; UN.UO.71FI1501A.PV,5,[BFW_D_Motor_Power_cons]-[BFW_D_Motor_Power_Regression],BFW_D_Motor_Power_Regression; BFW_D_Motor_Power_cons
+BFW_D_Motor_Power_Regression,inferred,system,BLR_4,1,,,,,,UN.UO.71FI1101.PV; UN.UO.71FI1201.PV; UN.UO.71FI1301.PV; UN.UO.71FI1401.PV; UN.UO.71FI1501A.PV,5,((-0.0016*([BFW_Flow_Consumption]/[BFW_Drives_Running])^2+1.8045*([BFW_Flow_Consumption]/[BFW_Drives_Running])+401.61)/1000)/0.95,BFW_Drives_Running; BFW_Flow_Consumption
+BFW_D_Motor_Power_cons,inferred,system,BLR_4,1,,,,,,UN.UO.71FI1101.PV; UN.UO.71FI1201.PV; UN.UO.71FI1301.PV; UN.UO.71FI1401.PV; UN.UO.71FI1501A.PV,5,"if([BFW_D_Motor_Status]==1,[BFW_D_Motor_Power],[BFW_D_Motor_Power_Regression])",BFW_D_Motor_Power; BFW_D_Motor_Power_Regression; BFW_D_Motor_Status
+BFW_D_Motor_Status,inferred,system,BLR_4,1,,,,,,,0,"if(([BFW_D_AMPS]>60)||([BFW_D_Vibrations]>10)||([BFW_D_Bearing_temp]>60),1,0)",BFW_D_AMPS; BFW_D_Bearing_temp; BFW_D_Vibrations
+BLR_4_Status,inferred,system,BLR_4,1,,,,,,UN.UO.71FI1401.PV,1,"if([BLR_4_HPS_Gen]>=50,1,0)",BLR_4_HPS_Gen
+BFW_E_Turb_Status,inferred,system,BLR_5,1,,,,,,,0,"if(([BFW_E_Turb_Steam_raw]/1000)>8,1,0)",BFW_E_Turb_Steam_raw
+BLR_5_Status,inferred,system,BLR_5,1,,,,,,UN.UO.71FI1501A.PV,1,"if([BLR_5_HPS_Gen]>=50,1,0)",BLR_5_HPS_Gen
+Air_Compressor_Turbine_A_Steam_raw,raw_pi,system,,1,,,,,unmapped,,0,,
+Air_Compressor_Turbine_D_Steam_raw,raw_pi,system,,1,,,,,unmapped,,0,,
+BFW_TO_LAO_raw,raw_pi,system,,1,,,BFW Flow,,system_no_hier_match,,0,,
+BFW_to_EOEG_1_raw,raw_pi,system,,1,,,BFW Flow,,system_no_hier_match,,0,,
+BFW_to_EOEG_2_raw,raw_pi,system,,1,,,BFW Flow,,system_no_hier_match,,0,,
+BFW_to_EOEG_3_raw,raw_pi,system,,1,,,BFW Flow,,system_no_hier_match,,0,,
+C2R_turbine_Inlet_steam_flow,raw_pi,system,,1,,,,,unmapped,,0,,
+C3R_turbine_Inlet_steam_flow,raw_pi,system,,1,,,,,unmapped,,0,,
+CW_Turbine_A_Steam,raw_pi,system,,1,,,,,unmapped,,0,,
+CW_Turbine_B_Steam,raw_pi,system,,1,,,,,unmapped,,0,,
+CW_Turbine_G_Steam,raw_pi,system,,1,,,,,unmapped,,0,,
+DMW_MAKEUP_Near_Clean_Condensate_Header,raw_pi,system,,1,,,,,unmapped,,0,,
+DMW_MAKEUP_Near_Suspect_Condensate_Header,raw_pi,system,,1,,,,,unmapped,,0,,
+DMW_Turbine_A_Steam_raw,raw_pi,system,,1,,,,,unmapped,,0,,
+DMW_Turbine_C_Steam_raw,raw_pi,system,,1,,,,,unmapped,,0,,
+DSP_BFW_TO_CAUSTIC_DILUTION_raw,raw_pi,system,,1,,,Desuperheater BFW Flow,,system_no_hier_match,,0,,
+DSP_BFW_TO_EG1_raw,raw_pi,system,,1,,,Desuperheater BFW Flow,,system_no_hier_match,,0,,
+DSP_BFW_TO_EG2_raw,raw_pi,system,,1,,,Desuperheater BFW Flow,,system_no_hier_match,,0,,
+DSP_BFW_TO_EG3_raw,raw_pi,system,,1,,,Desuperheater BFW Flow,,system_no_hier_match,,0,,
+DSP_BFW_TO_ETH_raw,raw_pi,system,,1,,,Desuperheater BFW Flow,,system_no_hier_match,,0,,
+Deaerator_A_LPS_raw,raw_pi,system,,1,,,,,unmapped,,0,,
+Deaerator_B_LPS_raw,raw_pi,system,,1,,,,,unmapped,,0,,
+EG1_CLEAN_COND_TO_U_O_raw,raw_pi,system,,1,,,,,unmapped,,0,,
+EG1_DEG_production_flow,raw_pi,system,,1,,,,,unmapped,,0,,
+EG1_HEG_production_flow,raw_pi,system,,1,,,,,unmapped,,0,,
+EG1_MEG_production_flow,raw_pi,system,,1,,,,,unmapped,,0,,
+EG1_TEG_production_flow,raw_pi,system,,1,,,,,unmapped,,0,,
+EG1_suspect_COND_TO_U_O_raw,raw_pi,system,,1,,,,,unmapped,,0,,
+EG2_CLEAN_COND_TO_U_O_raw,raw_pi,system,,1,,,,,unmapped,,0,,
+EG2_DEG_production_flow,raw_pi,system,,1,,,,,unmapped,,0,,
+EG2_HEG_production_flow,raw_pi,system,,1,,,,,unmapped,,0,,
+EG2_MEG_production_flow,raw_pi,system,,1,,,,,unmapped,,0,,
+EG2_TEG_production_flow,raw_pi,system,,1,,,,,unmapped,,0,,
+EG2_suspect_COND_TO_U_O_raw,raw_pi,system,,1,,,,,unmapped,,0,,
+EG3_CLEAN_COND_TO_U_O_raw,raw_pi,system,,1,,,,,unmapped,,0,,
+EG3_DEG_production_flow,raw_pi,system,,1,,,,,unmapped,,0,,
+EG3_HEG_production_flow,raw_pi,system,,1,,,,,unmapped,,0,,
+EG3_MEG_production_flow,raw_pi,system,,1,,,,,unmapped,,0,,
+EG3_TEG_production_flow,raw_pi,system,,1,,,,,unmapped,,0,,
+EG3_suspect_COND_TO_U_O_raw,raw_pi,system,,1,,,,,unmapped,,0,,
+EOEG_1_MPS_Demand_raw,raw_pi,system,,1,,,MPS Demand,,system_no_hier_match,,0,,
+EOEG_2_MPS_Demand_raw,raw_pi,system,,1,,,MPS Demand,,system_no_hier_match,,0,,
+EOEG_3_MPS_Demand_raw,raw_pi,system,,1,,,MPS Demand,,system_no_hier_match,,0,,
+ETH_CLEAN_COND_TO_U_O_raw,raw_pi,system,,1,,,,,unmapped,,0,,
+ETH_LPS_Demand_raw,raw_pi,system,,1,,,LPS Demand,,system_no_hier_match,,0,,
+ETH_suspect_COND_TO_U_O_raw,raw_pi,system,,1,,,,,unmapped,,0,,
+FUEL_GAS_From_UO_to_ETH_raw,raw_pi,system,,1,Steam Network 1 > VHP Steam HeaderA > VHP Steam GeneratorA > VHP Waste Heat BoilerA,VHP Waste Heat BoilerA,Fuel Gas Flow,UN.ETH.11FI1029AA.PV,system_match_first,UN.ETH.11FI1029AA.PV,1,,
+FUEL_GAS_From_UO_to_LAO_A,raw_pi,system,,1,,,,,unmapped,,0,,
+FUEL_GAS_From_UO_to_LAO_B,raw_pi,system,,1,,,,,unmapped,,0,,
+HP_Steam_Vent_Valve_PC7027_Opening_ETH,raw_pi,system,,1,Steam Network 1 > VHP Steam HeaderA > VHP Steam ConsumersA > VHP Steam VentA,VHP Steam VentA,Vent Valve Opening,UN.ETH.17PC7032.MV,system_match_first,UN.ETH.17PC7032.MV,1,,
+HP_Steam_from_CGC_Extraction,raw_pi,system,,1,,,,,unmapped,,0,,
+HP_to_LP_Let_Down_Valve_Opening_HC7262_ETH,raw_pi,system,,1,,,,,unmapped,,0,,
+HP_to_LP_Let_Down_Valve_Opening_PC7026_ETH,raw_pi,system,,1,,,,,unmapped,,0,,
+HP_to_MP_Letdown_Valve_Opening_PV0007A_UO,raw_pi,system,,1,,,,,unmapped,,0,,
+HP_to_MP_Letdown_Valve_Opening_PV0007B_UO,raw_pi,system,,1,,,,,unmapped,,0,,
+LAO_Load_raw,raw_pi,system,,1,,,,,unmapped,,0,,
+LP_Steam_Dumping_Valve_PC0024A_Opening_UO,raw_pi,system,,1,,,,,unmapped,,0,,
+MP_to_LP_Letdown_Valve_Opening_PV013A_UO,raw_pi,system,,1,,,,,unmapped,,0,,
+MP_to_LP_Letdown_Valve_Opening_PV013B_UO,raw_pi,system,,1,,,,,unmapped,,0,,
+MP_to_LP_Letdown_Valve_Opening_PV31_UO,raw_pi,system,,1,,,,,unmapped,,0,,
+MP_to_LP_Letdown_Valve_Opening_PV32_UO,raw_pi,system,,1,,,,,unmapped,,0,,
+PM7103F_CWP_MTR_BEARING,raw_pi,system,,1,,,,,unmapped,,0,,
+Polished_Condenstae_to_Deaerator,raw_pi,system,,1,,,,,unmapped,,0,,
+Quench_water_pump_turbine_Inlet_steam_flow,raw_pi,system,,1,,,,,unmapped,,0,,
+Regeneration_Gas_Heater_Level,raw_pi,system,,1,,,,,unmapped,,0,,
+Total_Ethylene_Production_ETH_Plant,raw_pi,system,,1,,,Production Flow,,system_no_hier_match,,0,,
+UO_HP_MP_Desuperheater1_opening,raw_pi,system,,1,,,,,unmapped,,0,,
+VHP_BFW_FROM_U_O,raw_pi,system,,1,,,BFW Flow,,system_no_hier_match,,0,,
+VHP_DESPHTR_BFW_FROM_U_O,raw_pi,system,,1,,,Desuperheater BFW Flow,,system_no_hier_match,,0,,
+VHP_Steam_Pressure,raw_pi,system,,1,Steam Network 1 > VHP Steam HeaderA,VHP Steam HeaderA,Steam Pressure,UN.ETH.17PC7032.PV,system_match_first,UN.ETH.17PC7032.PV,1,,
+VHP_to_HP_Let_Down_Valve_Opening_PX7024A_ETH,raw_pi,system,,1,Steam Network 1 > VHP Steam HeaderA > VHP Steam ConsumersA > VHP Steam VentA,VHP Steam VentA,Vent Valve Opening,UN.ETH.17PC7032.MV,system_match_first,UN.ETH.17PC7032.MV,1,,
+VHP_to_HP_Let_Down_Valve_Opening_PX7024B_ETH,raw_pi,system,,1,,,,,unmapped,,0,,
+BFW_A_AMPS,raw_pi,system,BLR_1,1,,,,,unmapped,,0,,
+BFW_A_Bearing_temp,raw_pi,system,BLR_1,1,,,,,unmapped,,0,,
+BFW_A_Vibrations,raw_pi,system,BLR_1,1,,,,,unmapped,,0,,
+VHP_BFW_A_AMPS,raw_pi,system,BLR_1,1,Steam Network 1 > HP-2 Steam HeaderA > HP-2 Steam GeneratorA > HP-2 Fuel Fired BoilerA > HP Boiler BFW SystemA > HP Boiler BFW PumpA,HP Boiler BFW PumpA,Motor Current,,blank_in_hierarchy,,0,,
+VHP_BFW_A_Discharge_flow,raw_pi,system,BLR_1,1,Steam Network 1 > HP-2 Steam HeaderA > HP-2 Steam GeneratorA > HP-2 Fuel Fired BoilerA > HP Boiler BFW SystemA > HP Boiler BFW PumpA,HP Boiler BFW PumpA,Discharge Flow,,blank_in_hierarchy,,0,,
+VHP_BFW_A_Vibration,raw_pi,system,BLR_1,2,Steam Network 1 > HP-2 Steam HeaderA > HP-2 Steam GeneratorA > HP-2 Fuel Fired BoilerA > HP Boiler BFW SystemA > HP Boiler BFW PumpA,HP Boiler BFW PumpA,Vibration,,blank_in_hierarchy,,0,,
+VHP_BFW_B_Discharge_flow,raw_pi,system,BLR_2,1,,HP Boiler BFW PumpB,Discharge Flow,,needs_new_row,,0,,
+VHP_BFW_C_Discharge_flow,raw_pi,system,BLR_3,1,,HP Boiler BFW PumpC,Discharge Flow,,needs_new_row,,0,,
+BFW_D_AMPS,raw_pi,system,BLR_4,1,,,,,unmapped,,0,,
+BFW_D_Bearing_temp,raw_pi,system,BLR_4,1,,,,,unmapped,,0,,
+BFW_D_Vibrations,raw_pi,system,BLR_4,1,,,,,unmapped,,0,,
+LHV,raw_pi,constant,,1,,,,,unmapped,,0,,

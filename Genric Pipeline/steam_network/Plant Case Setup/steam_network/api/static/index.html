@@ -1,0 +1,1678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Steam Network Editor</title>
+<script src="https://unpkg.com/cytoscape@3.28.1/dist/cytoscape.min.js"></script>
+<script src="https://unpkg.com/cytoscape-edgehandles@4.0.1/cytoscape-edgehandles.js"></script>
+<script src="https://unpkg.com/konva@9.3.6/konva.min.js"></script>
+<script src="https://unpkg.com/cytoscape-undo-redo@1.3.3/cytoscape-undo-redo.js"></script>
+<script src="https://unpkg.com/cytoscape-edge-editing@1.4.0/cytoscape-edge-editing.js"></script>
+<style>
+  :root {
+    --bg-0:#0b0f15; --bg-1:#111826; --bg-2:#1a2333; --bg-3:#243044;
+    --line:#2a3650; --text:#e6ebf3; --mute:#9aa6b8; --accent:#3b82f6;
+    --good:#22c55e; --warn:#f59e0b; --bad:#ef4444;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font:13px/1.4 -apple-system,Segoe UI,Roboto,sans-serif;
+       background:var(--bg-0);color:var(--text);height:100vh;overflow:hidden}
+  .app{display:grid;grid-template-columns:300px 1fr 320px;height:100vh}
+  .panel{background:var(--bg-1);border-right:1px solid var(--line);
+         display:flex;flex-direction:column;overflow:hidden}
+  .panel.right{border-right:none;border-left:1px solid var(--line)}
+  .panel h2{margin:0;padding:14px 16px;font-size:13px;font-weight:600;
+            color:var(--text);background:var(--bg-2);
+            border-bottom:1px solid var(--line);letter-spacing:.3px}
+  .panel-body{flex:1;overflow-y:auto;padding:14px 16px}
+  #cy{background:var(--bg-0)}
+  .pal{display:flex;flex-direction:column;gap:6px}
+  .pal button{background:var(--bg-2);color:var(--text);border:1px solid var(--line);
+              padding:8px 10px;border-radius:6px;cursor:pointer;text-align:left;
+              font-size:12px}
+  .pal button:hover{background:var(--bg-3);border-color:var(--accent)}
+  .pal button .t{display:block;color:var(--mute);font-size:11px;margin-top:2px}
+  .form{display:grid;grid-template-columns:auto 1fr;gap:6px 8px;font-size:12px;align-items:center}
+  .form label{color:var(--mute);text-align:right;padding-right:4px}
+  .form input,.form select{background:var(--bg-2);color:var(--text);
+                           border:1px solid var(--line);border-radius:4px;
+                           padding:5px 7px;font-size:12px;width:100%}
+  .form input:focus,.form select:focus{outline:none;border-color:var(--accent)}
+  .row{display:flex;gap:6px;margin-top:8px}
+  .btn{background:var(--accent);color:white;border:none;padding:7px 12px;
+       border-radius:5px;cursor:pointer;font-size:12px;font-weight:600}
+  .btn:hover{filter:brightness(1.1)}
+  .btn.ghost{background:transparent;border:1px solid var(--line);color:var(--text)}
+  .btn.danger{background:var(--bad)}
+  .toolbar{padding:10px 12px;background:var(--bg-2);border-bottom:1px solid var(--line);
+           display:flex;gap:6px;align-items:center}
+  .toolbar .sep{flex:1}
+  .pill{padding:3px 8px;border-radius:99px;font-size:11px;
+        background:var(--bg-3);color:var(--mute)}
+  .pill.ok{background:rgba(34,197,94,.15);color:var(--good)}
+  .pill.warn{background:rgba(245,158,11,.15);color:var(--warn)}
+  .pill.bad{background:rgba(239,68,68,.15);color:var(--bad)}
+  .log{font-family:ui-monospace,Menlo,monospace;font-size:11px;
+       background:var(--bg-0);border:1px solid var(--line);
+       border-radius:4px;padding:8px;color:var(--mute);
+       max-height:160px;overflow-y:auto;white-space:pre-wrap}
+  .kv{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:12px;
+       margin-bottom:10px}
+  .kv .k{color:var(--mute)}
+  .kv .v{color:var(--text);font-family:ui-monospace,Menlo,monospace}
+  hr{border:none;border-top:1px solid var(--line);margin:12px 0}
+  .section{margin-bottom:14px}
+  .section .h{color:var(--mute);text-transform:uppercase;letter-spacing:.6px;
+              font-size:10px;margin-bottom:6px}
+  .empty{color:var(--mute);text-align:center;padding:20px 10px;font-size:12px}
+  .inv-group{margin-bottom:8px}
+  .inv-group-head{display:flex;align-items:center;gap:6px;
+                  font-size:11px;color:var(--mute);
+                  text-transform:uppercase;letter-spacing:.5px;
+                  padding:4px 0;border-bottom:1px solid var(--line);
+                  margin-bottom:4px}
+  .inv-group-head .inv-count{margin-left:auto;background:var(--bg-3);
+                              padding:1px 6px;border-radius:99px;font-size:10px}
+  .inv-dot{width:8px;height:8px;border-radius:99px;display:inline-block}
+  .inv-list{display:flex;flex-direction:column;gap:2px}
+  .inv-row{display:flex;justify-content:space-between;align-items:center;
+           padding:4px 6px;border-radius:4px;cursor:pointer;
+           font-size:12px;transition:background .12s}
+  .inv-row:hover{background:var(--bg-3)}
+  .inv-row .inv-name{color:var(--text);overflow:hidden;text-overflow:ellipsis;
+                     white-space:nowrap;max-width:200px}
+  .inv-row .inv-lvl{color:var(--mute);font-family:ui-monospace,Menlo,monospace;
+                    font-size:10px}
+  /* Modal */
+  .modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.55);
+                  display:none;align-items:center;justify-content:center;z-index:50}
+  .modal-backdrop.show{display:flex}
+  .modal{background:var(--bg-1);border:1px solid var(--line);border-radius:8px;
+         min-width:380px;max-width:480px;max-height:80vh;overflow:hidden;
+         display:flex;flex-direction:column;box-shadow:0 10px 40px rgba(0,0,0,.5)}
+  .modal-head{padding:14px 16px;background:var(--bg-2);border-bottom:1px solid var(--line);
+              display:flex;align-items:center;gap:8px;font-weight:600}
+  .modal-head .x{margin-left:auto;cursor:pointer;color:var(--mute);font-size:18px;
+                 padding:0 4px;border-radius:4px}
+  .modal-head .x:hover{background:var(--bg-3);color:var(--text)}
+  .modal-body{padding:16px;overflow-y:auto}
+  .modal-foot{padding:10px 16px;background:var(--bg-2);border-top:1px solid var(--line);
+              display:flex;gap:8px;justify-content:flex-end}
+  .pal button.active{background:var(--bg-3);border-color:var(--accent)}
+  .pal button[draggable]{cursor:grab}
+  .pal button[draggable]:active{cursor:grabbing}
+  /* Drop hint */
+  #cy.drop-target{outline:2px dashed var(--accent);outline-offset:-6px}
+  /* Edge-handles styling — small blue handle on hover */
+  .eh-handle{background-color:var(--accent)!important}
+  .eh-ghost-edge,.eh-preview{background-color:var(--accent)!important;
+                              line-color:var(--accent)!important;
+                              target-arrow-color:var(--accent)!important;}
+  /* Connect-port popover */
+  .popover{position:fixed;z-index:60;background:var(--bg-1);
+           border:1px solid var(--line);border-radius:8px;
+           box-shadow:0 8px 28px rgba(0,0,0,.5);
+           min-width:280px;padding:12px}
+  .popover h3{margin:0 0 8px;font-size:12px;color:var(--mute);
+              text-transform:uppercase;letter-spacing:.6px}
+  .popover .row{justify-content:flex-end}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- LEFT — palette + create form -->
+  <aside class="panel">
+    <h2>Component palette</h2>
+    <div class="panel-body">
+      <div class="section">
+        <div class="h">Add component</div>
+        <div class="pal" id="palette"></div>
+      </div>
+
+    </div>
+  </aside>
+
+  <!-- CENTER — graph -->
+  <main class="panel" style="border-right:1px solid var(--line)">
+    <div class="toolbar">
+      <button class="btn" id="btnSolve">▶ Solve</button>
+      <button class="btn ghost" id="btnConnectMode" title="Click source then target to draw an edge">🔗 Connect</button>
+      <button class="btn ghost" id="btnAutoSolve" title="Re-solve automatically on every change">⚡ Auto-solve: ON</button>
+      <button class="btn ghost" id="btnLayout">Re-layout</button>
+      <button class="btn ghost" id="btnDemo">Load demo</button>
+      <button class="btn ghost" id="btnSave" title="Name and download this network as JSON">💾 Save</button>
+      <button class="btn ghost" id="btnExport" title="Export current network to JSON">Export JSON</button>
+      <button class="btn ghost" id="btnImport">Import JSON</button>
+      <button class="btn ghost" id="btnBulk" title="Update parameters from CSV (Excel)">Bulk Update (CSV)</button>
+      <input type="file" id="importFile" accept=".json" style="display:none"/>
+      <input type="file" id="bulkFile" accept=".csv" style="display:none"/>
+      <span style="width:1px;height:20px;background:var(--line);margin:0 2px"></span>
+      <button class="btn ghost" id="btnReportExcel" title="Download live Excel report (auto-updated after each Solve)" style="font-size:11px">📊 Excel</button>
+      <button class="btn ghost" id="btnReportWord" title="Download live Word report (auto-updated after each Solve)" style="font-size:11px">📄 Word</button>
+      <span class="sep"></span>
+      <span id="reportStatus" class="pill" style="display:none;font-size:10px;cursor:pointer" title="Reports auto-update after every Solve"></span>
+      <span id="status" class="pill">idle</span>
+      <button class="btn danger" id="btnReset">Reset</button>
+    </div>
+    <div id="savedBar" style="display:none;padding:6px 12px;background:var(--bg-2);
+                              border-bottom:1px solid var(--line);font-size:11px;
+                              color:var(--mute);display:flex;gap:10px;align-items:center">
+      <span style="text-transform:uppercase;letter-spacing:.6px">Last saved</span>
+      <span id="savedName" style="color:var(--text);font-family:ui-monospace,Menlo,monospace"></span>
+      <span id="savedAt"></span>
+      <span style="flex:1"></span>
+      <button class="btn ghost" id="btnReimportLast"
+              style="padding:2px 8px;font-size:11px"
+              title="Re-import the last saved file (browser will open the file picker)">↺ Reimport</button>
+      <button class="btn ghost" id="btnClearSaved"
+              style="padding:2px 8px;font-size:11px">Clear</button>
+    </div>
+    <div id="cy" style="flex:1"></div>
+  </main>
+
+  <!-- RIGHT — inventory + inspector + connect + log -->
+  <aside class="panel right">
+    <h2>Network</h2>
+    <div class="panel-body">
+      <div class="section">
+        <div class="h">Inventory <span id="invCount" style="float:right;color:var(--text)">0/0</span></div>
+        <div id="inventory" class="empty">Add components to populate.</div>
+      </div>
+
+      <hr/>
+
+      <div class="section">
+        <div class="h">Inspector</div>
+        <div id="inspector" class="empty">Click a node or edge.</div>
+      </div>
+
+      <hr/>
+
+      <div class="section">
+        <div class="h">Connect</div>
+        <div class="form">
+          <label>From port</label><input id="fromPort" placeholder="e.g. out" />
+          <label>To port</label><input id="toPort" placeholder="e.g. in" />
+        </div>
+        <div class="row">
+          <button class="btn" id="btnConnect">Connect selected →</button>
+        </div>
+        <div style="font-size:11px;color:var(--mute);margin-top:6px">
+          Click source node, ctrl-click target node, then Connect.
+        </div>
+      </div>
+
+      <hr/>
+
+      <div class="section">
+        <div class="h">Log</div>
+        <div id="log" class="log"></div>
+      </div>
+    </div>
+  </aside>
+</div>
+
+<!-- Component-creation modal -->
+<div class="modal-backdrop" id="modalBackdrop">
+  <div class="modal" role="dialog" aria-modal="true">
+    <div class="modal-head">
+      <span id="modalTitle">Configure component</span>
+      <span class="x" id="modalClose" title="Close">×</span>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+    <div class="modal-foot">
+      <button class="btn ghost" id="modalCancel">Cancel</button>
+      <button class="btn" id="modalAdd">+ Add</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const API = "/api/v1";
+let cy;
+let selected = [];   // [from, to] component ids in selection order
+
+const HEADERS = ["VHP","HP","MP","LP","LLP","LLP1"];
+
+const TYPES = [
+  {t:"header",       title:"Steam Header",     hint:"Constant-pressure manifold"},
+  {t:"source",       title:"Boiler / HRSG",    hint:"Steam producer"},
+  {t:"consumer",     title:"Steam Consumer",   hint:"Process heat user"},
+  {t:"prds",         title:"PRDS",             hint:"Pressure-reducing & desuperheating"},
+  {t:"turbine",      title:"Turbine",          hint:"Backpressure / extraction / condensing"},
+  {t:"condenser",    title:"Condenser",        hint:"Surface condenser"},
+  {t:"valve",        title:"Valve",            hint:"Throttling letdown"},
+  {t:"deaerator",    title:"Deaerator",        hint:"Cond + makeup mixer"},
+  {t:"flash_drum",   title:"Flash Drum",       hint:"HP cond → LP vapor + liq"},
+  {t:"vent",         title:"Atm. Vent",        hint:"Excess-steam sink"},
+  {t:"makeup_water", title:"Makeup Water",     hint:"Cold water source"},
+  {t:"pump",         title:"BFW Pump",         hint:"Liquid pressurizer"},
+  {t:"attemperator", title:"Attemperator",     hint:"Inline desuperheater"},
+  {t:"condensate_return", title:"Condensate Return", hint:"Collector"},
+];
+
+const FORM_FIELDS = {
+  header:[
+    ["level","select",{options:HEADERS,default:"HP"}],
+    ["pressure_bar","number",{step:0.1,default:42}],
+    ["temperature_c","number",{step:1,default:400}],
+    ["diameter_mm","number",{step:1,default:"", label:"Diameter (mm)"}],
+    ["length_m","number",{step:0.1,default:"", label:"Length (m)"}],
+  ],
+  source:[
+    ["name","text",{default:"HRSG"}],
+    ["header_level","select",{options:HEADERS,default:"VHP"}],
+    ["capacity_tph","number",{default:300}],
+    ["min_load_tph","number",{default:50}],
+    ["pressure_bar","number",{default:105}],
+    ["temperature_c","number",{default:510}],
+    ["efficiency","number",{step:0.01,default:0.88}],
+    ["fuel_lhv_kj_kg","number",{default:46500}],
+    ["fuel_cost_per_kg","number",{step:0.01,default:0.40}],
+  ],
+  consumer:[
+    ["name","text",{default:"Process"}],
+    ["header_level","select",{options:HEADERS,default:"MP"}],
+    ["demand_tph","number",{default:50, label:"demand (t/h)"}],
+    ["return_fraction","number",{step:0.05,default:0.8}],
+    ["return_temperature_c","number",{default:90}],
+  ],
+  prds:[
+    ["name","text",{default:"PRDS"}],
+    ["from_level","select",{options:HEADERS,default:"HP"}],
+    ["to_level","select",{options:HEADERS,default:"MP"}],
+    ["max_capacity_tph","number",{default:60, label:"max capacity (t/h)"}],
+    ["desuperheat_water_temp_c","number",{default:110}],
+  ],
+  turbine:[
+    ["name","text",{default:"ST-1"}],
+    ["mode","select",{options:["backpressure","condensing","extraction_backpressure","extraction_condensing"],default:"extraction_condensing",
+      onChange:"turbineModeChanged"}],
+    ["inlet_level","select",{options:HEADERS,default:"VHP"}],
+    ["exhaust_level","select",{options:["",...HEADERS],default:"",
+      group:"bp", label:"exhaust level (backpressure)"}],
+    ["extraction_levels_csv","text",{default:"HP,MP",label:"extraction levels (csv)",
+      group:"extr"}],
+    ["extraction_flows_csv","text",{default:"70,50",label:"extraction flows t/h (csv)",
+      group:"extr"}],
+    ["inlet_flow_tph","number",{default:150, label:"inlet flow (t/h)"}],
+    ["isentropic_efficiency","number",{step:0.01,default:0.78}],
+    ["mechanical_efficiency","number",{step:0.01,default:0.98}],
+    ["generator_efficiency","number",{step:0.01,default:0.97}],
+    ["condenser_pressure_bar","number",{step:0.01,default:0.10,
+      group:"cond", label:"condenser pressure (bar)"}],
+  ],
+  condenser:[
+    ["name","text",{default:"Condenser"}],
+    ["pressure_bar","number",{step:0.01,default:0.10}],
+    ["cooling_water_temp_c","number",{default:30}],
+    ["capacity_tph","number",{default:80}],
+  ],
+  valve:[
+    ["name","text",{default:"Valve"}],
+    ["from_level","select",{options:HEADERS,default:"HP"}],
+    ["to_level","select",{options:HEADERS,default:"MP"}],
+    ["max_flow_tph","number",{default:50}],
+    ["actual_flow_tph","number",{default:"",label:"actual flow t/h (PI tag)"}],
+  ],
+  deaerator:[
+    ["name","text",{default:"Deaerator"}],
+    ["pressure_bar","number",{step:0.05,default:1.2}],
+    ["capacity_tph","number",{default:200}],
+    ["vent_fraction","number",{step:0.001,default:0.005}],
+  ],
+  flash_drum:[
+    ["name","text",{default:"Flash Drum"}],
+    ["upstream_pressure_bar","number",{default:18}],
+    ["flash_pressure_bar","number",{default:4.5}],
+    ["capacity_tph","number",{default:60}],
+  ],
+  vent:[
+    ["name","text",{default:"Vent"}],
+    ["header_level","select",{options:HEADERS,default:"LP"}],
+    ["max_flow_tph","number",{default:20}],
+  ],
+  makeup_water:[
+    ["name","text",{default:"Makeup Water"}],
+    ["pressure_bar","number",{default:1.2}],
+    ["temperature_c","number",{default:25}],
+    ["flow_tph","number",{default:30}],
+  ],
+  pump:[
+    ["name","text",{default:"BFW Pump"}],
+    ["suction_pressure_bar","number",{default:1.2}],
+    ["discharge_pressure_bar","number",{default:110}],
+    ["flow_tph","number",{default:200}],
+    ["efficiency","number",{step:0.01,default:0.72}],
+  ],
+  attemperator:[
+    ["name","text",{default:"Attemperator"}],
+    ["header_level","select",{options:HEADERS,default:"HP"}],
+    ["target_temperature_c","number",{default:380}],
+    ["spray_water_temp_c","number",{default:110}],
+    ["max_flow_tph","number",{default:150}],
+  ],
+  condensate_return:[
+    ["name","text",{default:"Condensate Return"}],
+    ["return_pressure_bar","number",{default:2.0}],
+  ],
+};
+
+const COLOR = {
+  header:"#3b82f6", source:"#22c55e", consumer:"#f59e0b",
+  prds:"#a855f7", turbine:"#ef4444", condenser:"#06b6d4",
+  valve:"#64748b", deaerator:"#14b8a6", flash_drum:"#8b5cf6",
+  vent:"#71717a", makeup_water:"#0ea5e9", pump:"#facc15",
+  attemperator:"#ec4899", condensate_return:"#94a3b8",
+};
+
+// ---- helpers --------------------------------------------------------
+const log = (msg, kind="info") => {
+  const el = document.getElementById("log");
+  const t = new Date().toLocaleTimeString();
+  el.textContent = `[${t}] ${msg}\n` + el.textContent;
+};
+const setStatus = (txt, cls="") => {
+  const el = document.getElementById("status");
+  el.textContent = txt;
+  el.className = "pill " + cls;
+};
+async function api(path, opts={}) {
+  const r = await fetch(API + path, {
+    headers:{"Content-Type":"application/json"},
+    ...opts
+  });
+  const data = await r.json().catch(()=>null);
+  if (!r.ok) throw new Error((data && (data.detail||data.message)) || r.statusText);
+  return data;
+}
+
+// ---- palette --------------------------------------------------------
+let activeType = null;
+let pendingPlacement = null;   // {type, position} while modal is open after a drop
+
+function buildPalette() {
+  const host = document.getElementById("palette");
+  TYPES.forEach(({t,title,hint}) => {
+    const b = document.createElement("button");
+    b.innerHTML = `${title}<span class="t">${hint}</span>`;
+    b.dataset.t = t;
+    b.draggable = true;
+    b.onclick = () => openModal(t, b);
+    b.addEventListener("dragstart", (ev) => {
+      ev.dataTransfer.setData("application/x-snwk-type", t);
+      ev.dataTransfer.effectAllowed = "copy";
+    });
+    host.appendChild(b);
+  });
+}
+
+// Convert a client (mouse) coordinate to cytoscape model space
+function clientToModel(clientX, clientY) {
+  const rect = cy.container().getBoundingClientRect();
+  const x = (clientX - rect.left - cy.pan().x) / cy.zoom();
+  const y = (clientY - rect.top  - cy.pan().y) / cy.zoom();
+  return { x, y };
+}
+
+function setupCanvasDropTarget() {
+  const cyEl = document.getElementById("cy");
+  cyEl.addEventListener("dragover", (ev) => {
+    if (ev.dataTransfer.types.includes("application/x-snwk-type")) {
+      ev.preventDefault();
+      ev.dataTransfer.dropEffect = "copy";
+      cyEl.classList.add("drop-target");
+    }
+  });
+  cyEl.addEventListener("dragleave", () => cyEl.classList.remove("drop-target"));
+  cyEl.addEventListener("drop", (ev) => {
+    cyEl.classList.remove("drop-target");
+    const t = ev.dataTransfer.getData("application/x-snwk-type");
+    if (!t) return;
+    ev.preventDefault();
+    pendingPlacement = { type: t, position: clientToModel(ev.clientX, ev.clientY) };
+    openModal(t);
+  });
+}
+
+// ---- modal-driven form ---------------------------------------------
+let editingId = null;   // when set, modal updates this component instead of creating
+
+function valForPreset(k, presetSpec) {
+  if (!presetSpec) return undefined;
+  if (k === "extraction_levels_csv")
+    return (presetSpec.extraction_levels || []).join(",");
+  if (k === "extraction_flows_csv")
+    return (presetSpec.extraction_flows_tph || []).join(",");
+  return presetSpec[k];
+}
+
+function openModal(type, paletteBtn, presetSpec, opts) {
+  opts = opts || {};
+  activeType = type;
+  editingId = opts.editingId || null;
+  document.querySelectorAll("#palette button").forEach(el => el.classList.remove("active"));
+  if (paletteBtn) paletteBtn.classList.add("active");
+
+  const meta = TYPES.find(x => x.t === type);
+  document.getElementById("modalTitle").textContent =
+    (editingId ? "Edit: " : "Configure: ") + (meta ? meta.title : type);
+  document.getElementById("modalAdd").textContent = editingId ? "💾 Save" : "+ Add";
+
+  const fields = FORM_FIELDS[type] || [];
+  document.getElementById("modalBody").innerHTML = `
+    <div class="form" id="frm">
+      ${fields.map(([k,kind,opts])=>{
+        const lab = (opts && opts.label) || k;
+        const preset = valForPreset(k, presetSpec);
+        const val = preset !== undefined && preset !== null ? preset : (opts.default ?? "");
+        if (kind === "select")
+          return `<label>${lab}</label>
+            <select data-k="${k}">${opts.options.map(o=>`<option ${o===val?"selected":""} value="${o}">${o||"(none)"}</option>`).join("")}</select>`;
+        return `<label>${lab}</label>
+          <input data-k="${k}" type="${kind}" ${opts.step?`step="${opts.step}"`:""}
+                 value="${val}"/>`;
+      }).join("")}
+    </div>
+    <div style="font-size:11px;color:var(--mute);margin-top:8px">
+      Press <b>Enter</b> to ${editingId ? "save" : "add"}, <b>Esc</b> to cancel.
+    </div>`;
+  document.getElementById("modalBackdrop").classList.add("show");
+  setTimeout(() => {
+    const first = document.querySelector("#modalBody [data-k]");
+    if (first) first.focus();
+  }, 30);
+}
+
+function closeModal() {
+  document.getElementById("modalBackdrop").classList.remove("show");
+  document.querySelectorAll("#palette button").forEach(el => el.classList.remove("active"));
+  activeType = null;
+}
+
+// Map of node id → preset position {x,y}, used so the industrial layout
+// doesn't override a user-placed (drag-dropped or dragged) node.
+const userPlacements = new Map();
+// Map of edge id → {d:[segment-distances], w:[segment-weights]} so user-shaped
+// connector lines survive refresh/re-layout cycles.
+const edgeBends = new Map();
+
+async function submitForm() {
+  if (!activeType) return;
+  const type = activeType;
+  const inputs = document.querySelectorAll("#modalBody [data-k]");
+  const spec = {};
+  inputs.forEach(el => {
+    let v = el.value;
+    if (v === "") return;
+    if (el.dataset.k === "extraction_levels_csv") {
+      spec.extraction_levels = v.split(",").map(s=>s.trim()).filter(Boolean);
+      return;
+    }
+    if (el.dataset.k === "extraction_flows_csv") {
+      spec.extraction_flows_tph = v.split(",").map(s=>parseFloat(s.trim())).filter(x=>!Number.isNaN(x));
+      return;
+    }
+    if (el.type === "number") v = parseFloat(v);
+    spec[el.dataset.k] = v;
+  });
+  if (type === "turbine") {
+    if (spec.exhaust_level === "" || spec.exhaust_level === undefined) spec.exhaust_level = null;
+  }
+  try {
+    if (editingId) {
+      const res = await api("/components/" + encodeURIComponent(editingId), {
+        method:"PATCH",
+        body: JSON.stringify({type, spec}),
+      });
+      log(`Updated ${editingId}` +
+          (res.dropped_edges?.length ? ` (dropped ${res.dropped_edges.length} edges)` : ""));
+    } else {
+      const res = await api("/components", {
+        method:"POST",
+        body: JSON.stringify({type, spec}),
+      });
+      log(`Added ${type} → ${res.id}`);
+      if (pendingPlacement && pendingPlacement.type === type) {
+        userPlacements.set(res.id, pendingPlacement.position);
+      }
+    }
+    pendingPlacement = null;
+    closeModal();
+    await refreshGraph();
+    triggerAutoSolve();
+  } catch (e) { log("ERR " + e.message, "err"); }
+}
+
+// modal wiring
+document.getElementById("modalAdd").onclick = submitForm;
+document.getElementById("modalCancel").onclick = closeModal;
+document.getElementById("modalClose").onclick = closeModal;
+document.getElementById("modalBackdrop").addEventListener("click", e => {
+  if (e.target.id === "modalBackdrop") closeModal();
+});
+document.addEventListener("keydown", e => {
+  if (!document.getElementById("modalBackdrop").classList.contains("show")) return;
+  if (e.key === "Escape") closeModal();
+  else if (e.key === "Enter" && e.target.tagName !== "TEXTAREA") {
+    e.preventDefault();
+    submitForm();
+  }
+});
+
+// ---- graph ----------------------------------------------------------
+function initCy() {
+  cy = cytoscape({
+    container: document.getElementById("cy"),
+    elements: [],
+    style: [
+      { selector:"node", style: {
+        "background-color": "data(fill)",
+        "label":"data(label)", "color":"#e6ebf3",
+        "font-size":11, "text-valign":"top", "text-margin-y":-8,
+        "text-outline-color":"#0b0f15","text-outline-width":2,
+        "border-width":1.5,"border-color":"#1a2333",
+        "width":44,"height":44,
+        "shape":"round-rectangle",
+        "text-wrap":"wrap", "text-max-width": 140,
+      }},
+      // Header row — long horizontal bar, label centered inside.
+      { selector:"node[type='header']", style: {
+        "shape":"round-rectangle",
+        "width":"data(barWidth)","height":"data(barHeight)",
+        "background-opacity":0.92,
+        "border-width":2, "border-color":"rgba(255,255,255,0.18)",
+        "label":"data(label)",
+        "text-valign":"center","text-halign":"center","text-margin-y":0,
+        "color":"#fff","font-size":13,"font-weight":"bold",
+        "text-outline-color":"rgba(0,0,0,0.6)","text-outline-width":2,
+        "text-wrap":"wrap","text-max-width":"data(barWidth)",
+      }},
+      { selector:"node[type='source']", style:{
+        "shape":"round-rectangle","width":58,"height":34,
+      }},
+      { selector:"node[type='turbine']", style:{
+        "shape":"polygon",
+        "shape-polygon-points": "-0.6 -1  0.6 -1  1 -0.2  1 0.2  0.6 1  -0.6 1  -1 0.2  -1 -0.2",
+        "width":52,"height":56,
+        "border-width":2,"border-color":"#b91c1c",
+      }},
+      { selector:"node[type='condenser']", style:{
+        "shape":"ellipse","width":54,"height":34,
+      }},
+      { selector:"node[type='consumer']", style:{
+        "shape":"round-rectangle","width":52,"height":32,
+      }},
+      { selector:"node[type='deaerator']", style:{
+        "shape":"round-rectangle","width":58,"height":30,
+      }},
+      { selector:"node:selected", style:{
+        "border-width":3,"border-color":"#3b82f6",
+      }},
+      { selector:"edge", style:{
+        // Default = taxi (orthogonal). Right-click an edge to add bend points;
+        // the edge-editing extension switches that edge to `segments` automatically.
+        "curve-style":"taxi",
+        "taxi-direction":"vertical",
+        "taxi-turn":20,
+        "taxi-turn-min-distance":10,
+        "edge-distances":"intersection",
+        "target-arrow-shape":"triangle",
+        "target-arrow-color":"data(stroke)",
+        "line-color":"data(stroke)",
+        "width":1.8,
+        "label":"data(label)","font-size":9,"color":"#9aa6b8",
+        "text-background-color":"#0b0f15","text-background-opacity":0.7,
+        "text-background-padding":2,
+        "text-rotation":"autorotate","text-margin-y":-4,
+      }},
+      // Once a user adds bend points, the edge gains `hasBends=true` and we
+      // switch it to `segments` so the bends are honoured.
+      { selector:"edge[hasBends]", style:{
+        "curve-style":"segments",
+        "segment-distances": ele => (ele.data("segDistances") || []).join(" "),
+        "segment-weights":   ele => (ele.data("segWeights")   || []).join(" "),
+      }},
+      { selector:"edge[isCondensate]", style:{
+        "line-color":"#475569","target-arrow-color":"#475569",
+        "line-style":"dashed",
+      }},
+      { selector:"edge[isCondensingExhaust]", style:{
+        "line-color":"#06b6d4","target-arrow-color":"#06b6d4",
+        "line-style":"dashed", "width":2.5,
+        "target-arrow-shape":"diamond",
+      }},
+      { selector:"edge:selected", style:{
+        "line-color":"#3b82f6","target-arrow-color":"#3b82f6","width":3,
+      }},
+      // ----- edgehandles handle / ghosts -----
+      { selector:".eh-handle", style:{
+        "background-color":"#3b82f6",
+        "width":14,"height":14,
+        "shape":"ellipse",
+        "overlay-opacity":0,
+        "border-width":2,"border-color":"#fff",
+        "z-index":99,
+      }},
+      { selector:".eh-hover", style:{ "background-color":"#3b82f6" }},
+      { selector:".eh-source", style:{
+        "border-width":3,"border-color":"#3b82f6",
+      }},
+      { selector:".eh-target", style:{
+        "border-width":3,"border-color":"#22c55e",
+      }},
+      { selector:".eh-preview, .eh-ghost-edge", style:{
+        "background-color":"#3b82f6",
+        "line-color":"#3b82f6",
+        "target-arrow-color":"#3b82f6",
+        "source-arrow-color":"#3b82f6",
+      }},
+      { selector:".eh-ghost-edge.eh-preview-active", style:{ "opacity": 0 }},
+      // node hover indicator when in connect-mode
+      { selector:"node.cm-hover", style:{
+        "border-width":3,"border-color":"#3b82f6",
+      }},
+    ],
+    layout:{ name:"preset" },
+  });
+
+  cy.on("select","node,edge", e => {
+    if (e.target.isNode()) {
+      selected.push(e.target.id());
+      if (selected.length > 2) selected.shift();
+    }
+    showInspector(e.target);
+  });
+  cy.on("unselect","node,edge", () => {
+    if (cy.$("node:selected, edge:selected").length === 0)
+      document.getElementById("inspector").innerHTML = "Click a node or edge.";
+  });
+
+  // Capture user-driven node drags so subsequent re-layouts respect them.
+  cy.on("dragfree", "node", (ev) => {
+    const n = ev.target;
+    userPlacements.set(n.id(), { x: n.position("x"), y: n.position("y") });
+  });
+
+  // ---- edge-handles: drag-to-connect (Aspen-style ghost arrow) -----
+  if (cy.edgehandles) {
+    const eh = cy.edgehandles({
+      hoverDelay: 80,
+      snap: true,
+      noEdgeEventsInDraw: true,
+      canConnect: (src, tgt) => !src.same(tgt) && tgt.data("type") !== "source"
+                                                 && src.data("type") !== "consumer",
+      edgeParams: () => ({ data: { tempEdge: true } }),
+    });
+    cy.on("ehcomplete", (_e, src, tgt, addedEdge) => {
+      // Remove the visual ghost; we'll re-render via refreshGraph after API call.
+      addedEdge.remove();
+      openConnectPopover(src.id(), tgt.id());
+    });
+  }
+
+  // ---- Edge bend-point editing (right-click to add, drag to reshape) -
+  if (typeof cy.edgeEditing === "function") {
+    if (cy.undoRedo) cy.undoRedo({}, true);
+    cy.edgeEditing({
+      bendPositionsFunction: function (edge) {
+        const w = edge.data("segWeights")   || [];
+        const d = edge.data("segDistances") || [];
+        return w.map((wi, i) => ({ weight: wi, distance: d[i] || 0 }));
+      },
+      bendShape: "circle",
+      bendShapeColor: "#3b82f6",
+      bendRadius: 6,
+      addBendMenuItemTitle: "+ Add bend point",
+      removeBendMenuItemTitle: "× Remove bend point",
+      removeAllBendsMenuItemTitle: "× Remove all bends",
+      enableMultipleAnchorRemovalOption: true,
+      enableCreateAnchorOnDrag: true,
+      validateEdge: () => "valid",
+    });
+
+    // Persist bend changes so they survive refreshGraph(); also flip the
+    // `hasBends` flag so the per-edge `segments` style applies.
+    const persistBends = () => {
+      cy.edges().forEach(e => {
+        const w = e.data("segWeights")   || [];
+        const d = e.data("segDistances") || [];
+        edgeBends.set(e.id(), { d: [...d], w: [...w] });
+        e.data("hasBends", w.length > 0 ? true : undefined);
+      });
+    };
+    cy.on("free", "edge", persistBends);
+    cy.on("data", "edge", persistBends);
+    // edge-editing also fires its own events on add/remove
+    cy.on("cyedgeediting.changeBendPoints", persistBends);
+  }
+}
+
+async function refreshGraph() {
+  const data = await api("/topology");
+  const isCondensate = (e) =>
+    e.from_port.includes("condensate") || e.to_port.includes("condensate") ||
+    e.from_port === "bfw_out" || e.to_port === "bfw" || e.to_port === "makeup_in";
+  const isCondensingExhaust = (e) => {
+    const src = nodeIx[e.from];
+    return src && src.type === "turbine" && e.from_port === "exhaust" &&
+           (nodeIx[e.to]?.type === "condenser" || !src.ports?.find(p=>p.name==="exhaust")?.header_level);
+  };
+
+  // index nodes for edge color lookup
+  const nodeIx = Object.fromEntries(data.nodes.map(n => [n.id, n]));
+  const LEVEL_COLOR = {
+    VHP:"#ef4444", HP:"#f97316", MP:"#f59e0b",
+    LP:"#22c55e", LLP:"#06b6d4", LLP1:"#3b82f6",
+  };
+  const edgeStroke = (e) => {
+    if (isCondensate(e)) return "#475569";
+    const src = nodeIx[e.from];
+    const port = (src?.ports||[]).find(p => p.name === e.from_port);
+    const lvl = port?.header_level;
+    return LEVEL_COLOR[lvl] || "#64748b";
+  };
+
+  const elements = [
+    ...data.nodes.map(n => {
+      const lvl = (n.ports||[]).find(p=>p.header_level)?.header_level;
+      return {
+        group:"nodes",
+        data:{
+          id:n.id, label:headerLabel(n), type:n.type, raw:n,
+          barWidth: n.type === "header" ? 1100 : 44,
+          barHeight: n.type === "header" ? (headerTotals[(n.ports||[])[0]?.header_level] ? 46 : 30) : 44,
+          fill: n.type === "header" ? (LEVEL_COLOR[lvl] || COLOR.header) : (COLOR[n.type] || "#888"),
+        },
+      };
+    }),
+    ...data.edges.map(e => {
+      const eid = e.key+"::"+e.from+"::"+e.to;
+      const saved = edgeBends.get(eid) || { d: [], w: [] };
+      const has = (saved.w && saved.w.length > 0) ? true : undefined;
+      return {
+        group:"edges",
+        data:{
+          id:eid,
+          source:e.from, target:e.to,
+          label:`${e.from_port}→${e.to_port}` + (e.pressure_bar?` @${e.pressure_bar.toFixed(1)}b`:""),
+          raw:e,
+          isCondensate: isCondensate(e) || undefined,
+          isCondensingExhaust: isCondensingExhaust(e) || undefined,
+          stroke: edgeStroke(e),
+          segDistances: saved.d,
+          segWeights:   saved.w,
+          hasBends:     has,
+        }
+      };
+    }),
+  ];
+  cy.elements().remove();
+  cy.add(elements);
+  applyIndustrialLayout(data);
+  renderInventory(data);
+
+  // Show a helpful overlay hint while the canvas is empty/disconnected.
+  let hint = document.getElementById("emptyHint");
+  if (!hint) {
+    hint = document.createElement("div");
+    hint.id = "emptyHint";
+    hint.style.cssText = `
+      position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+      pointer-events:none;text-align:center;color:var(--mute);
+      font-size:12px;line-height:1.6;max-width:520px;
+      background:rgba(11,15,21,.85);border:1px dashed var(--line);
+      padding:14px 22px;border-radius:8px;z-index:5;
+    `;
+    document.getElementById("cy").parentElement.appendChild(hint);
+  }
+  if (data.nodes.length === 0) {
+    hint.innerHTML = `<b>Empty canvas.</b><br/>Drag a component from the palette
+      onto the canvas, or click <i>Load demo</i> in the toolbar.`;
+    hint.style.display = "block";
+  } else if (data.edges.length === 0) {
+    hint.innerHTML = `<b>${data.nodes.length} components, no connections yet.</b><br/>
+      Click <b>🔗 Connect</b> in the toolbar, then click a source node followed by a target node.<br/>
+      Or hover a node and drag the small blue handle onto another node.`;
+    hint.style.display = "block";
+  } else {
+    hint.style.display = "none";
+  }
+}
+
+// ---------- Inventory panel -----------------------------------------
+function renderInventory(data) {
+  const host = document.getElementById("inventory");
+  const counter = document.getElementById("invCount");
+  counter.textContent = `${data.nodes.length} nodes / ${data.edges.length} edges`;
+
+  if (data.nodes.length === 0) {
+    host.classList.add("empty");
+    host.innerHTML = "Add components to populate.";
+    return;
+  }
+  host.classList.remove("empty");
+  // group by type
+  const groups = {};
+  for (const n of data.nodes) (groups[n.type] = groups[n.type] || []).push(n);
+  const order = ["source","header","turbine","prds","valve","attemperator","consumer",
+                 "vent","condenser","flash_drum","deaerator","pump","makeup_water",
+                 "condensate_return"];
+  const sortedTypes = Object.keys(groups).sort(
+    (a,b)=>(order.indexOf(a)<0?99:order.indexOf(a)) - (order.indexOf(b)<0?99:order.indexOf(b))
+  );
+  let html = "";
+  for (const t of sortedTypes) {
+    const items = groups[t];
+    html += `<div class="inv-group">
+      <div class="inv-group-head">
+        <span class="inv-dot" style="background:${COLOR[t]||"#888"}"></span>
+        <span>${t}</span>
+        <span class="inv-count">${items.length}</span>
+      </div>
+      <div class="inv-list">
+        ${items.map(n => {
+          const lvl = (n.ports||[]).find(p=>p.header_level)?.header_level || "";
+          return `<div class="inv-row" data-id="${n.id}" title="${n.id}">
+            <span class="inv-name">${n.name}</span>
+            <span class="inv-lvl">${lvl}</span>
+          </div>`;
+        }).join("")}
+      </div>
+    </div>`;
+  }
+  host.innerHTML = html;
+  host.querySelectorAll(".inv-row").forEach(row => {
+    row.onclick = () => {
+      const id = row.dataset.id;
+      const node = cy.getElementById(id);
+      if (!node) return;
+      cy.elements().unselect();
+      node.select();
+      cy.center(node);
+      showInspector(node);
+    };
+  });
+}
+
+// Per-header balance totals (populated by annotateGraph after solve)
+const headerTotals = {};  // { headerLevel: { gen: tph, dem: tph } }
+
+function headerLabel(n) {
+  if (n.type === "header") {
+    const lvl = n.ports?.[0]?.header_level || "??";
+    const p = n.ports?.[0]?.nominal_pressure_bar;
+    let label = `${n.name} [${lvl}]  ·  ${p ? p.toFixed(1) + " bar" : ""}`;
+    const totals = headerTotals[lvl];
+    if (totals) {
+      label += `\nGen: ${totals.gen.toFixed(1)} t/h  |  Dem: ${totals.dem.toFixed(1)} t/h`;
+    }
+    return label;
+  }
+  return n.name;
+}
+
+// ---------- Industrial layout (Aspen-Utilities-style) ----------------
+// Headers laid out as horizontal rows in pressure order (high → low).
+// Sources sit above VHP; consumers float just under their header on the right.
+// PRDS / Valves / Attemperators sit between the two rows they bridge.
+// Turbines span the rows from inlet → exhaust, to the left.
+// Condensers / deaerators / makeup / pumps occupy a "utilities" band at the
+// bottom of the canvas.
+const HEADER_RANK = {VHP:0, HP:1, MP:2, LP:3, LLP:4, LLP1:5};
+const ROW_GAP = 220;          // vertical distance between header rows
+const ROW_X0  = 120;           // left margin
+const ROW_W   = 1200;          // header bar width
+const COL_W   = 180;           // column slot for non-header components
+
+function applyIndustrialLayout(data) {
+  const nodes = data.nodes;
+  const headerByLevel = {};
+  const presentLevels = [];
+  for (const n of nodes) {
+    if (n.type === "header") {
+      const lvl = n.ports?.[0]?.header_level;
+      if (lvl) {
+        headerByLevel[lvl] = n.id;
+        if (!presentLevels.includes(lvl)) presentLevels.push(lvl);
+      }
+    }
+  }
+  presentLevels.sort((a,b)=>(HEADER_RANK[a]??99)-(HEADER_RANK[b]??99));
+  const yOf = {};
+  presentLevels.forEach((lvl,i) => { yOf[lvl] = 80 + i*ROW_GAP; });
+  const yTopBand = 30;                                  // sources/turbines tops
+  const yUtilBand = 80 + presentLevels.length*ROW_GAP + 60;  // utilities band
+  const xCenter = ROW_X0 + ROW_W/2;
+
+  // Slot counters per band/level so multiple items don't overlap.
+  const slot = {};
+  const nextX = (band, side="left") => {
+    slot[band] = (slot[band] || 0) + 1;
+    if (side === "right")
+      return ROW_X0 + ROW_W - slot[band]*COL_W;
+    return ROW_X0 + slot[band]*COL_W;
+  };
+
+  const positions = {};
+
+  // Header rows.
+  for (const lvl of presentLevels) {
+    positions[headerByLevel[lvl]] = { x: xCenter, y: yOf[lvl] };
+  }
+
+  for (const n of nodes) {
+    if (n.type === "header") continue;
+    const t = n.type;
+    const spec = n.metadata || {};
+    let pos = null;
+
+    if (t === "source") {
+      const lvl = portLevel(n, "out") || presentLevels[0];
+      pos = { x: nextX("source"), y: yTopBand };
+    } else if (t === "turbine") {
+      const inLvl = portLevel(n, "in") || presentLevels[0];
+      const exhaustLvl = portLevel(n, "exhaust");
+      const yIn  = yOf[inLvl] ?? yOf[presentLevels[0]];
+      const yOut = exhaustLvl ? (yOf[exhaustLvl] ?? yUtilBand) : yUtilBand;
+      pos = { x: nextX("turbine"), y: (yIn + yOut)/2 };
+    } else if (t === "prds" || t === "valve") {
+      const fromLvl = portLevel(n, "in");
+      const toLvl   = portLevel(n, "out");
+      const yA = yOf[fromLvl] ?? yTopBand;
+      const yB = yOf[toLvl]   ?? yUtilBand;
+      pos = { x: nextX("between_"+fromLvl+"_"+toLvl), y: (yA + yB)/2 };
+    } else if (t === "attemperator") {
+      const lvl = portLevel(n, "in");
+      pos = { x: nextX("att_"+lvl, "right"), y: (yOf[lvl] ?? yTopBand) - 36 };
+    } else if (t === "consumer") {
+      const lvl = portLevel(n, "in");
+      pos = { x: nextX("cons_"+lvl, "right"), y: (yOf[lvl] ?? yUtilBand) + 50 };
+    } else if (t === "vent") {
+      const lvl = portLevel(n, "in");
+      pos = { x: nextX("vent_"+lvl, "right"), y: (yOf[lvl] ?? yUtilBand) - 50 };
+    } else if (t === "condenser") {
+      pos = { x: nextX("cond"), y: yUtilBand };
+    } else if (t === "flash_drum") {
+      pos = { x: nextX("flash"), y: yUtilBand - 40 };
+    } else if (t === "deaerator") {
+      pos = { x: nextX("da"), y: yUtilBand + 50 };
+    } else if (t === "condensate_return") {
+      pos = { x: nextX("cond_ret"), y: yUtilBand + 50 };
+    } else if (t === "makeup_water") {
+      pos = { x: nextX("makeup"), y: yUtilBand + 90 };
+    } else if (t === "pump") {
+      pos = { x: nextX("pump"), y: yUtilBand + 90 };
+    } else {
+      pos = { x: nextX("misc"), y: yUtilBand + 130 };
+    }
+    positions[n.id] = pos;
+  }
+
+  // user-placed (dragged-from-palette or moved) nodes always win
+  cy.nodes().positions(n => userPlacements.get(n.id()) || positions[n.id()] || { x: 0, y: 0 });
+  cy.fit(undefined, 30);
+}
+
+function portLevel(node, portName) {
+  const p = (node.ports||[]).find(p => p.name === portName);
+  return p && p.header_level;
+}
+
+function showInspector(target) {
+  const host = document.getElementById("inspector");
+  host.classList.remove("empty");
+  if (target.isNode()) {
+    const d = target.data("raw");
+    const meta = (d.metadata && d.metadata.spec) || {};
+    let extraKv = "";
+    if (d.type === "header") {
+      if (meta.diameter_mm) extraKv += `<span class="k">diameter</span><span class="v">${meta.diameter_mm} mm</span>`;
+      if (meta.length_m)    extraKv += `<span class="k">length</span><span class="v">${meta.length_m} m</span>`;
+    }
+    const ports = (d.ports||[]).map(p =>
+      `<div class="kv"><span class="k">${p.name}</span><span class="v">${p.direction}${p.nominal_pressure_bar?` · ${p.nominal_pressure_bar} bar`:""}</span></div>`
+    ).join("");
+    host.innerHTML = `
+      <div class="kv">
+        <span class="k">id</span><span class="v">${d.id}</span>
+        <span class="k">type</span><span class="v">${d.type}</span>
+        <span class="k">name</span><span class="v">${d.name}</span>
+        ${extraKv}
+      </div>
+      <div class="h" style="color:var(--mute);font-size:10px;text-transform:uppercase;margin-top:8px">Ports</div>
+      ${ports || '<div class="empty">no ports</div>'}
+      <div class="row" style="margin-top:8px">
+        <button class="btn" onclick="editNode('${d.id}')">✎ Edit</button>
+        <button class="btn danger" onclick="deleteNode('${d.id}')">Delete</button>
+      </div>
+    `;
+  } else {
+    const d = target.data("raw");
+    host.innerHTML = `
+      <div class="kv">
+        <span class="k">from</span><span class="v">${d.from}.${d.from_port}</span>
+        <span class="k">to</span><span class="v">${d.to}.${d.to_port}</span>
+        <span class="k">P</span><span class="v">${d.pressure_bar??"—"} bar</span>
+      </div>
+      <div class="row" style="margin-top:8px">
+        <button class="btn danger" onclick="deleteEdge('${d.from}','${d.to}','${d.key}')">Delete edge</button>
+      </div>
+    `;
+  }
+}
+
+window.deleteNode = async (id) => {
+  try { await api("/components/"+id, {method:"DELETE"}); log("Deleted "+id);
+        await refreshGraph(); triggerAutoSolve(); }
+  catch (e) { log("ERR "+e.message); }
+};
+window.deleteEdge = async (from,to,key) => {
+  try {
+    await api(`/connections?from_id=${encodeURIComponent(from)}&to_id=${encodeURIComponent(to)}&key=${encodeURIComponent(key)}`,
+              {method:"DELETE"});
+    log(`Disconnected ${from} -/-> ${to}`);
+    await refreshGraph();
+    triggerAutoSolve();
+  } catch (e) { log("ERR "+e.message); }
+};
+window.editNode = async (id) => {
+  try {
+    const node = cy.getElementById(id);
+    if (!node) return;
+    const raw = node.data("raw");
+    const presetSpec = (raw.metadata && raw.metadata.spec) || null;
+    if (!presetSpec) {
+      log("Cannot edit: spec not embedded (re-create or load fresh).");
+      return;
+    }
+    openModal(raw.type, null, presetSpec, { editingId: id });
+  } catch (e) { log("ERR "+e.message); }
+};
+
+// ---- Auto-solve --------------------------------------------------
+let autoSolveOn = true;
+let autoSolveTimer = null;
+const asBtn = document.getElementById("btnAutoSolve");
+
+function setAutoSolve(on) {
+  autoSolveOn = on;
+  asBtn.textContent = "⚡ Auto-solve: " + (on ? "ON" : "OFF");
+  asBtn.style.background = on ? "var(--bg-3)" : "";
+  asBtn.style.borderColor = on ? "var(--accent)" : "";
+}
+asBtn.onclick = () => setAutoSolve(!autoSolveOn);
+
+function triggerAutoSolve() {
+  if (!autoSolveOn) return;
+  clearTimeout(autoSolveTimer);
+  autoSolveTimer = setTimeout(runLiveSolve, 350);
+}
+
+async function ensureBackendSynced() {
+  // If backend is empty but canvas has nodes, auto-restore from canvas data.
+  const top = await api("/topology").catch(()=>({nodes:[],edges:[]}));
+  const canvasCount = cy.nodes().filter(n => n.data("raw")).length;
+  if (top.nodes.length === 0 && canvasCount > 0) {
+    log("Backend empty — auto-restoring from canvas...");
+    setStatus("restoring...", "warn");
+    const recovered = extractTopologyFromCanvas();
+    try {
+      const r = await api("/import", { method:"POST", body: JSON.stringify(recovered) });
+      log(`Restored ${r.nodes_added}n / ${r.edges_added}e to backend.`);
+      return await api("/topology").catch(()=>({nodes:[],edges:[]}));
+    } catch (e) {
+      log("Auto-restore failed: " + e.message);
+      return top;
+    }
+  }
+  return top;
+}
+
+async function runLiveSolve() {
+  // Skip if there's nothing meaningful to solve.
+  const top = await ensureBackendSynced();
+  if (top.nodes.length < 2 || top.edges.length === 0) {
+    setStatus(`incomplete · ${top.nodes.length}n/${top.edges.length}e`, "warn");
+    return;
+  }
+  setStatus("solving...");
+  try {
+    const r = await api("/solve", {method:"POST"});
+    const cls = r.status === "ok" ? "ok" : (r.status === "infeasible" ? "bad" : "warn");
+    const m_res = r.residual_mass_tph != null ? r.residual_mass_tph.toExponential(2) : "∞";
+    const e_res = r.residual_energy_kw != null ? r.residual_energy_kw.toExponential(2) : "∞";
+    setStatus(`${r.status} · ${r.iterations}it · m=${m_res} t/h · E=${e_res} kW`, cls);
+    if (r.messages && r.messages.length) r.messages.forEach(m => log("Solve: " + m, r.status === "ok" ? "info" : "warn"));
+    annotateGraph(r.component_states);
+  } catch (e) {
+    setStatus("error", "bad");
+    log("Auto-solve ERR " + e.message);
+  }
+}
+
+// ---------- Connect popover (port chooser after drag-to-connect) ----
+function nodePorts(nid) {
+  const n = cy.getElementById(nid);
+  return (n && n.data("raw") && n.data("raw").ports) || [];
+}
+
+function suggestPorts(srcId, tgtId) {
+  const src = nodePorts(srcId), tgt = nodePorts(tgtId);
+  // Pick first OUTLET / BIDIRECTIONAL port on src; first INLET / BIDIRECTIONAL on tgt.
+  const fromCandidates = src.filter(p => p.direction !== "inlet");
+  const toCandidates   = tgt.filter(p => p.direction !== "outlet");
+  // Prefer "out" / "in" / "extraction_*" ordering
+  const rank = (n) => n === "out" ? 0 : n === "in" ? 0
+    : n.startsWith("extraction_") ? 1 : 2;
+  fromCandidates.sort((a,b) => rank(a.name) - rank(b.name));
+  toCandidates.sort((a,b)   => rank(a.name) - rank(b.name));
+  return {
+    from: (fromCandidates[0] || {}).name || "",
+    to:   (toCandidates[0]   || {}).name || "",
+  };
+}
+
+function openConnectPopover(srcId, tgtId) {
+  // remove any old popover
+  document.querySelectorAll(".popover").forEach(el => el.remove());
+
+  const src = cy.getElementById(srcId), tgt = cy.getElementById(tgtId);
+  const sName = src.data("raw").name, tName = tgt.data("raw").name;
+  const sPorts = nodePorts(srcId).filter(p => p.direction !== "inlet");
+  const tPorts = nodePorts(tgtId).filter(p => p.direction !== "outlet");
+  const sug = suggestPorts(srcId, tgtId);
+
+  const pop = document.createElement("div");
+  pop.className = "popover";
+  pop.innerHTML = `
+    <h3>Connect ${sName} → ${tName}</h3>
+    <div class="form" style="grid-template-columns:auto 1fr">
+      <label>From port</label>
+      <select id="popFrom">
+        ${sPorts.map(p =>
+          `<option value="${p.name}" ${p.name===sug.from?"selected":""}>${p.name} (${p.direction})</option>`
+        ).join("")}
+      </select>
+      <label>To port</label>
+      <select id="popTo">
+        ${tPorts.map(p =>
+          `<option value="${p.name}" ${p.name===sug.to?"selected":""}>${p.name} (${p.direction})</option>`
+        ).join("")}
+      </select>
+    </div>
+    <div class="row" style="margin-top:10px;justify-content:flex-end;gap:6px">
+      <button class="btn ghost" id="popCancel">Cancel</button>
+      <button class="btn" id="popOk">Connect</button>
+    </div>`;
+  document.body.appendChild(pop);
+
+  // Position near target node midpoint
+  const r = src.renderedBoundingBox(), r2 = tgt.renderedBoundingBox();
+  const midX = (r.x1 + r2.x2) / 2;
+  const midY = (r.y1 + r2.y2) / 2;
+  const cyR = cy.container().getBoundingClientRect();
+  pop.style.left = Math.min(window.innerWidth - 320, cyR.left + midX + 20) + "px";
+  pop.style.top  = Math.min(window.innerHeight - 200, cyR.top  + midY) + "px";
+
+  pop.querySelector("#popCancel").onclick = () => pop.remove();
+  pop.querySelector("#popOk").onclick = async () => {
+    const fromPort = pop.querySelector("#popFrom").value;
+    const toPort   = pop.querySelector("#popTo").value;
+    pop.remove();
+    try {
+      await api("/connections", {
+        method:"POST",
+        body: JSON.stringify({ from_id: srcId, to_id: tgtId, port: `${fromPort}:${toPort}` }),
+      });
+      log(`Connected ${sName}.${fromPort} → ${tName}.${toPort}`);
+      await refreshGraph();
+      triggerAutoSolve();
+    } catch (e) { log("Connect ERR "+e.message); }
+  };
+}
+
+// ---- connect / solve ------------------------------------------------
+document.getElementById("btnConnect").onclick = async () => {
+  if (selected.length < 2) { log("Select two nodes first (click + ctrl-click)."); return; }
+  const [from_id, to_id] = selected;
+  // Use typed value if user filled the field, else suggest a port.
+  const sug = suggestPorts(from_id, to_id);
+  const fp = (document.getElementById("fromPort").value || sug.from || "out").trim();
+  const tp = (document.getElementById("toPort").value   || sug.to   || "in").trim();
+  try {
+    await api("/connections", {
+      method:"POST",
+      body: JSON.stringify({from_id, to_id, port:`${fp}:${tp}`}),
+    });
+    log(`Connected ${from_id}.${fp} → ${to_id}.${tp}`);
+    selected = [];
+    await refreshGraph();
+    triggerAutoSolve();
+  } catch (e) { log("ERR "+e.message); }
+};
+
+// ---- Connect mode: click source, click target, popover -----------
+let connectMode = false;
+let connectSource = null;
+const cmBtn = document.getElementById("btnConnectMode");
+
+function setConnectMode(on) {
+  connectMode = on;
+  connectSource = null;
+  cmBtn.classList.toggle("active", on);
+  cmBtn.style.background = on ? "var(--accent)" : "";
+  cmBtn.style.color      = on ? "#fff" : "";
+  cy.container().style.cursor = on ? "crosshair" : "";
+  cy.nodes().removeClass("cm-hover");
+  if (on) log("Connect mode ON — click source, then target. Esc to cancel.");
+  else    log("Connect mode OFF.");
+}
+
+cmBtn.onclick = () => setConnectMode(!connectMode);
+
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape" && connectMode) setConnectMode(false);
+});
+
+// Hijack node clicks while in connect mode.
+function attachConnectHandlers() {
+  cy.on("tap", "node", (ev) => {
+    if (!connectMode) return;
+    ev.preventDefault?.();
+    const n = ev.target;
+    if (!connectSource) {
+      connectSource = n.id();
+      n.addClass("cm-hover");
+      log("source = " + n.data("raw").name + " — now click target");
+    } else if (n.id() === connectSource) {
+      // clicked same node — deselect
+      n.removeClass("cm-hover");
+      connectSource = null;
+      log("source cleared.");
+    } else {
+      const src = connectSource;
+      const tgt = n.id();
+      cy.nodes().removeClass("cm-hover");
+      connectSource = null;
+      setConnectMode(false);
+      openConnectPopover(src, tgt);
+    }
+  });
+  // Click on empty canvas while in connect mode → cancel
+  cy.on("tap", (ev) => {
+    if (connectMode && ev.target === cy) setConnectMode(false);
+  });
+}
+
+document.getElementById("btnSolve").onclick = async () => {
+  await ensureBackendSynced();
+  setStatus("solving...");
+  try {
+    const r = await api("/solve", {method:"POST"});
+    const cls = r.status === "ok" ? "ok" : (r.status === "infeasible" ? "bad" : "warn");
+    const m_res = r.residual_mass_tph != null ? r.residual_mass_tph.toExponential(2) : "∞";
+    const e_res = r.residual_energy_kw != null ? r.residual_energy_kw.toExponential(2) : "∞";
+    setStatus(`${r.status} · ${r.iterations} it · m=${m_res} t/h`, cls);
+    log(`Solve: ${r.status} | iters=${r.iterations} | mass_res=${m_res} t/h | E_res=${e_res} kW`);
+    annotateGraph(r.component_states);
+    r.messages.forEach(m=>log("  "+m));
+  } catch (e) { setStatus("error","bad"); log("ERR "+e.message); }
+};
+
+function annotateGraph(states) {
+  const map = Object.fromEntries(states.map(s=>[s.id,s]));
+
+  // ---- Compute per-header Gen/Dem from ACTUAL EDGES (not port labels) ----
+  // This is robust to cases where a component's spec inlet_level differs
+  // from the header it's actually connected to.
+  for (const k of Object.keys(headerTotals)) delete headerTotals[k];
+
+  // Index: which nodes are headers, and what level each header is.
+  const headerLevelById = {};
+  cy.nodes().forEach(n => {
+    if (n.data("type") === "header") {
+      const raw = n.data("raw");
+      const lvl = (raw.ports||[])[0]?.header_level;
+      if (lvl) headerLevelById[n.id()] = lvl;
+    }
+  });
+  // Init totals for all present headers.
+  for (const lvl of Object.values(headerLevelById)) {
+    headerTotals[lvl] = headerTotals[lvl] || {gen:0, dem:0};
+  }
+
+  // Walk every edge. If one end is a header, compute flow contribution.
+  cy.edges().forEach(e => {
+    const srcId = e.data("source");
+    const tgtId = e.data("target");
+    const raw = e.data("raw");
+    if (!raw) return;
+
+    const srcState = map[srcId];
+    const tgtState = map[tgtId];
+
+    // ── EDGE INTO A HEADER → Generation for that header ──
+    const tgtLvl = headerLevelById[tgtId];
+    if (tgtLvl && srcState) {
+      let flow = 0;
+      const fromPort = raw.from_port;
+      // Robust flow detection: check extraction states, then outlet, then inlet
+      if (fromPort.startsWith("extraction_") && srcState.extraction_states) {
+        flow = srcState.extraction_states[fromPort]?.mass_flow_tph || 0;
+      } else {
+        flow = srcState.outlet?.mass_flow_tph || srcState.inlet?.mass_flow_tph || 0;
+      }
+      if (flow > 0) headerTotals[tgtLvl].gen += flow;
+    }
+
+    // ── EDGE FROM A HEADER → Demand on that header ──
+    const srcLvl = headerLevelById[srcId];
+    if (srcLvl && tgtState) {
+      let flow = tgtState.inlet?.mass_flow_tph || tgtState.outlet?.mass_flow_tph || 0;
+      if (flow > 0) headerTotals[srcLvl].dem += flow;
+    }
+  });
+
+  // Update all node labels
+  cy.nodes().forEach(n => {
+    const s = map[n.id()];
+    const raw = n.data("raw");
+    if (raw.type === "header") {
+      const lvl = (raw.ports||[])[0]?.header_level;
+      n.data("label", headerLabel(raw));
+      n.data("barHeight", headerTotals[lvl] ? 46 : 30);
+      return;
+    }
+    if (!s) return;
+    let extra = "";
+    if (s.outlet) extra = `\n${s.outlet.mass_flow_tph.toFixed(1)} t/h`;
+    else if (s.inlet) extra = `\n${s.inlet.mass_flow_tph.toFixed(1)} t/h`;
+    if (s.power_kw) extra += ` ${(s.power_kw/1000).toFixed(2)} MW`;
+    n.data("label", raw.name + extra);
+  });
+}
+
+document.getElementById("btnReset").onclick = async () => {
+  if (!confirm("Wipe the entire network?")) return;
+  await api("/reset", {method:"POST"});
+  userPlacements.clear();
+  edgeBends.clear();
+  log("Reset.");
+  setStatus("idle");
+  await refreshGraph();
+};
+
+document.getElementById("btnLayout").onclick = () => refreshGraph();
+
+// ---------- Save / Export / Last-saved tracking ---------------------
+const LS_KEY = "snwk_last_saved";   // {name, savedAt, nodes, edges}
+
+function loadLastSaved() {
+  try { return JSON.parse(localStorage.getItem(LS_KEY) || "null"); }
+  catch { return null; }
+}
+function rememberSaved(meta) {
+  localStorage.setItem(LS_KEY, JSON.stringify(meta));
+  renderSavedBar();
+}
+function clearSaved() {
+  localStorage.removeItem(LS_KEY);
+  renderSavedBar();
+}
+function renderSavedBar() {
+  const bar = document.getElementById("savedBar");
+  const meta = loadLastSaved();
+  if (!meta) { bar.style.display = "none"; return; }
+  bar.style.display = "flex";
+  document.getElementById("savedName").textContent = meta.name;
+  const dt = new Date(meta.savedAt);
+  document.getElementById("savedAt").textContent =
+    `· ${dt.toLocaleString()}  (${meta.nodes}n / ${meta.edges}e)`;
+}
+
+function downloadJSON(data, fname) {
+  const blob = new Blob([JSON.stringify(data,null,2)], {type:"application/json"});
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = fname;
+  a.click();
+  setTimeout(()=>URL.revokeObjectURL(a.href), 5000);
+}
+
+// Extract topology from client-side Cytoscape data (fallback when backend
+// has lost state due to server restart but UI still shows the old graph).
+function extractTopologyFromCanvas() {
+  const nodes = [];
+  const edges = [];
+  cy.nodes().forEach(n => {
+    const raw = n.data("raw");
+    if (raw) nodes.push(raw);
+  });
+  cy.edges().forEach(e => {
+    const raw = e.data("raw");
+    if (raw) edges.push(raw);
+  });
+  return { nodes, edges, metadata: { recovered_from_canvas: true } };
+}
+
+// Get topology — prefers backend, falls back to canvas data if backend empty but canvas not.
+async function getTopologyForExport() {
+  const backendData = await api("/topology");
+  const canvasCount = cy.nodes().filter(n => n.data("type") !== undefined).length;
+  if (backendData.nodes.length > 0) return backendData;
+  if (canvasCount === 0) return backendData;  // genuinely empty
+  // Backend lost state (server restart) but canvas still has elements.
+  log("Backend state lost (server restart?). Recovering from canvas...");
+  const recovered = extractTopologyFromCanvas();
+  // Auto-reimport recovered topology to restore backend state
+  try {
+    const r = await api("/import", { method:"POST", body: JSON.stringify(recovered) });
+    log(`Auto-restored: ${r.nodes_added} nodes / ${r.edges_added} edges`);
+    setStatus(`restored ${r.nodes_added}n/${r.edges_added}e`, "warn");
+    // Now re-fetch from the backend which has the fully restored data
+    return await api("/topology");
+  } catch (e) {
+    log("Auto-restore failed: " + e.message + " — exporting canvas snapshot.");
+    return recovered;
+  }
+}
+
+function timestamp() {
+  return new Date().toISOString().replace(/[:.]/g,"-").slice(0,19);
+}
+
+function sanitizeName(name) {
+  return (name || "").trim().replace(/[\\/:*?"<>|]/g, "_").slice(0, 80);
+}
+
+// "Save" button — opens a small dialog that asks for a network name.
+document.getElementById("btnSave").onclick = async () => {
+  const data = await getTopologyForExport();
+  if (!data.nodes.length) {
+    if (!confirm("Network is empty. Save anyway?")) return;
+  }
+  const last = loadLastSaved();
+  const suggested = (last && last.baseName) || "steam-network";
+  const name = prompt("Name for this network file:", suggested);
+  if (name === null) return;
+  const base = sanitizeName(name) || "steam-network";
+  const fname = `${base}_${timestamp()}.json`;
+  // embed metadata so the file self-describes
+  data.metadata = Object.assign({}, data.metadata, {
+    name: base,
+    saved_at: new Date().toISOString(),
+  });
+  downloadJSON(data, fname);
+  log(`Saved ${data.nodes.length}n/${data.edges.length}e → ${fname}`);
+  rememberSaved({
+    name: fname,
+    baseName: base,
+    savedAt: Date.now(),
+    nodes: data.nodes.length,
+    edges: data.edges.length,
+  });
+};
+
+// "Export JSON" — quick one-click timestamped export (still records last-saved).
+document.getElementById("btnExport").onclick = async () => {
+  const data = await getTopologyForExport();
+  if (!data.nodes.length) {
+    if (!confirm("Network is empty. Export anyway?")) return;
+  }
+  const fname = `steam-network_${timestamp()}.json`;
+  downloadJSON(data, fname);
+  log(`Exported ${data.nodes.length} nodes / ${data.edges.length} edges → ${fname}`);
+  rememberSaved({
+    name: fname,
+    baseName: "steam-network",
+    savedAt: Date.now(),
+    nodes: data.nodes.length,
+    edges: data.edges.length,
+  });
+};
+
+// "↺ Reimport" — open the file picker (browser security blocks auto-loading
+// from a saved path, but the filename hint helps the user pick the right one)
+document.getElementById("btnReimportLast").onclick = () => {
+  const meta = loadLastSaved();
+  if (meta) log(`Pick "${meta.name}" in the file dialog.`);
+  document.getElementById("importFile").click();
+};
+document.getElementById("btnClearSaved").onclick = () => {
+  if (!confirm("Forget the last saved file?")) return;
+  clearSaved();
+  log("Cleared last-saved record.");
+};
+
+document.getElementById("btnImport").onclick = () =>
+  document.getElementById("importFile").click();
+
+document.getElementById("importFile").onchange = async (ev) => {
+  const f = ev.target.files[0];
+  if (!f) return;
+  try {
+    const text = await f.text();
+    const data = JSON.parse(text);
+    if (!Array.isArray(data.nodes) || !Array.isArray(data.edges))
+      throw new Error("Bad file: expected {nodes:[], edges:[]}");
+    if (!confirm(`Import ${data.nodes.length} nodes / ${data.edges.length} edges?\nThis replaces the current network.`)) return;
+    const r = await api("/import", { method:"POST", body: JSON.stringify(data) });
+    log(`Imported: ${r.nodes_added} nodes / ${r.edges_added} edges  (from ${f.name})`);
+    rememberSaved({
+      name: f.name,
+      baseName: f.name.replace(/_\d{4}-\d{2}-\d{2}T.*$/, "").replace(/\.json$/i, ""),
+      savedAt: Date.now(),
+      nodes: r.nodes_added,
+      edges: r.edges_added,
+    });
+    await refreshGraph();
+    triggerAutoSolve();
+  } catch (e) { log("Import ERR " + e.message); }
+  ev.target.value = "";   // allow re-import same file
+};
+
+document.getElementById("btnBulk").onclick = () =>
+  document.getElementById("bulkFile").click();
+
+document.getElementById("bulkFile").onchange = async (ev) => {
+  const f = ev.target.files[0];
+  if (!f) return;
+  try {
+    const formData = new FormData();
+    formData.append("file", f);
+    setStatus("updating from csv...");
+    const r = await fetch(API + "/bulk/upload-csv", { method:"POST", body: formData }).then(x=>x.json());
+    if (r.errors && r.errors.length) {
+      r.errors.forEach(e => log("CSV ERR: " + e, "warn"));
+      alert(`CSV Update finished with ${r.errors.length} errors. Check log.`);
+    }
+    log(`CSV Update: ${r.updated_parameters} parameters updated.`);
+    setStatus(`csv updated (${r.updated_parameters} items)`, "ok");
+    await refreshGraph();
+    triggerAutoSolve();
+  } catch (e) { log("CSV Import ERR " + e.message); }
+  ev.target.value = "";
+};
+
+document.getElementById("btnDemo").onclick = async () => {
+  setStatus("loading demo…");
+  try {
+    await api("/demo/refinery", {method:"POST"});
+    log("Demo refinery network loaded.");
+    await refreshGraph();
+    setStatus("ready");
+    triggerAutoSolve();
+  } catch (e) { setStatus("error","bad"); log("ERR "+e.message); }
+};
+
+// ---- Reports (auto-generated Word + Excel) -------------------------
+document.getElementById("btnReportExcel").onclick = () => {
+  window.open(API + "/reports/excel", "_blank");
+};
+document.getElementById("btnReportWord").onclick = () => {
+  window.open(API + "/reports/word", "_blank");
+};
+
+async function checkReportStatus() {
+  try {
+    const r = await api("/reports/status");
+    const pill = document.getElementById("reportStatus");
+    if (r.excel || r.word) {
+      const ts = r.excel ? new Date(r.excel.modified).toLocaleTimeString() : "";
+      pill.textContent = `Reports @ ${ts}`;
+      pill.className = "pill ok";
+      pill.style.display = "";
+    } else {
+      pill.style.display = "none";
+    }
+  } catch {
+    // silently ignore — reports endpoint may not exist on older backends
+  }
+}
+
+// Patch runLiveSolve to refresh report status after auto-solve
+const _origRunLiveSolve = runLiveSolve;
+runLiveSolve = async function() {
+  await _origRunLiveSolve();
+  checkReportStatus();
+};
+
+// Also patch the manual solve button
+const _origSolveClick = document.getElementById("btnSolve").onclick;
+document.getElementById("btnSolve").onclick = async function() {
+  await _origSolveClick();
+  checkReportStatus();
+};
+
+// ---- boot -----------------------------------------------------------
+buildPalette();
+initCy();
+setupCanvasDropTarget();
+attachConnectHandlers();
+renderSavedBar();
+
+// On boot: check if backend lost state (server restart) and auto-restore from
+// the last saved file in localStorage.
+(async function boot() {
+  try {
+    await refreshGraph();
+    // After refresh, check if backend has data
+    const topo = await api("/topology").catch(() => ({nodes:[],edges:[]}));
+    if (topo.nodes.length === 0) {
+      // Backend is empty. Check localStorage for last saved topology.
+      const lsMeta = loadLastSaved();
+      if (lsMeta && lsMeta.nodes > 0) {
+        log(`Backend empty but last save had ${lsMeta.nodes}n. Use 'Reimport' or 'Import JSON' to restore.`);
+        setStatus(`backend empty — reimport last save`, "warn");
+      }
+    }
+  } catch (e) {
+    log("Boot ERR " + e.message);
+  }
+  checkReportStatus();
+})();
+</script>
+</body>
+</html>

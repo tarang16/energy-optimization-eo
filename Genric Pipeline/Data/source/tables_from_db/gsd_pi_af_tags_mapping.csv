@@ -1,0 +1,13 @@
+﻿gsd_pi_af_tags_mapping_id,gsd_pi_af_tag_id,category,gsd_kpi_name,active,gsd_dqs_plant_key
+1,3865,Reconciled,Energy_Consumption,1,UNITED-CO2
+2,3866,Reconciled,Energy_Consumption,1,UNITED-EG1
+3,3867,Reconciled,Energy_Consumption,1,UNITED-EG2
+4,3868,Reconciled,Energy_Consumption,1,UNITED-EG3
+5,3869,Reconciled,Energy_Consumption,1,UNITED-ETH
+6,3870,Reconciled,Energy_Consumption,1,UNITED-LAO
+7,3871,Reconciled,SUS_Production_Total,1,UNITED-CO2
+8,3872,Reconciled,SUS_Production_Total,1,UNITED-EG1
+9,3873,Reconciled,SUS_Production_Total,1,UNITED-EG2
+10,3874,Reconciled,SUS_Production_Total,1,UNITED-EG3
+11,3875,Reconciled,SUS_Production_Total,1,UNITED-ETH
+12,3876,Reconciled,SUS_Production_Total,1,UNITED-LAO

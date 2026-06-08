@@ -1,0 +1,148 @@
+@use 'src/config/scss/_variables' as *;
+
+.card_container {
+  background-color: $primary_white;
+  padding: 0 1.3vmin;
+  margin: 1vmin;
+  box-shadow: 0px 0px 5px 1px $primary_gray_4;
+  height: calc(100% - 2vmin);
+  overflow: hidden;
+
+  &.shadow_none {
+    box-shadow: none;
+  }
+
+  .card_header {
+    border-bottom: 1px solid $primary_gray_4;
+    height: 5vmin;
+    display: flex;
+    align-items: center;
+    gap: 1vmin;
+
+    .leftContainer {
+      min-width: fit-content;
+      max-width: 15vmin;
+
+      .card_header__title {
+        text-transform: uppercase;
+        padding-top: 3px;
+      }
+    }
+
+    .rightContainer {
+      display: flex;
+      align-items: center;
+      gap: 1vmin;
+      width: 100%;
+
+      .searchWrapper {
+        gap: 0.5vmin;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        position: relative;
+        width: calc(100% - 20vmin);
+
+        .innerSearchWrapper {
+          gap: 0.5vmin;
+        }
+
+        .searcbarContainer {
+          height: 3vmin;
+          width: calc(100% - 2.2vmin);
+          display: flex;
+          align-items: center;
+          overflow: hidden;
+          transition: width 0.3s ease;
+
+          &.hidden {
+            width: 0;
+          }
+
+          &.visible {
+            width: 100%;
+            max-width: 20vmin;
+          }
+
+          .search_input {
+            width: 100%;
+            outline: none;
+            border: 1px solid $primary_gray_3;
+            height: 100%;
+            padding: 0.4vmin 2.5vmin 0.3vmin 1vmin;
+            position: relative;
+            font-size: 1.4vmin;
+            border-radius: 0.3vmin;
+            transition: width 0.3s ease;
+
+            &::-webkit-search-cancel-button {
+              position: absolute;
+              right: 0;
+              top: 50%;
+              transform: translateY(-50%);
+              cursor: pointer;
+              background-image: url('../../../../assets/sabic_icons/common/gray_cross.svg');
+              -webkit-appearance: none;
+              height: 1.8vmin;
+              width: 1.8vmin;
+              background-size: cover;
+              background-repeat: no-repeat;
+            }
+
+            &:focus {
+              &::placeholder {
+                color: transparent;
+              }
+            }
+
+            &::-webkit-input-placeholder {
+              font-weight: normal;
+              color: $primary_gray_2;
+            }
+          }
+        }
+
+        .searchIconContainer {
+          height: 2.2vmin;
+          display: flex;
+          align-items: center;
+          padding: 0;
+          gap: 0.5vmin;
+
+          .searchIconButton {
+            padding: 0;
+            background-color: transparent;
+            border: none;
+            width: 2vmin;
+            height: 2vmin;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            .toggleIcon {
+              width: 100%;
+              height: 100%;
+            }
+          }
+        }
+      }
+
+      .multiSelectContainer {
+        display: flex;
+        align-items: center;
+        height: 3vmin;
+
+        :global(.customWidthheckboxDropdown) {
+          min-width: unset;
+          width: 20vmin;
+        }
+      }
+    }
+  }
+
+  .card_body {
+    height: calc(100% - 5vmin);
+    padding: 1vmin 0 0.5vmin 0;
+    scrollbar-width: none;
+  }
+}

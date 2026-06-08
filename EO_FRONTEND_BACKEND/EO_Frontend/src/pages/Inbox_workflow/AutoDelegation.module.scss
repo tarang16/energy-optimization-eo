@@ -1,0 +1,286 @@
+@use '../../config/scss/variables' as *;
+@use '../../config/scss/typography.scss' as *;
+
+.autoDelegateBtn {
+  padding: 0.3vmin 2vmin 0 2vmin;
+  border: none;
+  background-color: $primary_blue;
+  color: $primary_white;
+  display: flex;
+  align-items: center;
+  border-radius: 0.3vmin;
+  font-weight: 500;
+  height: 100%;
+  text-transform: uppercase;
+}
+
+.autoDelegationContainer {
+  .autoDelegationContainerSpan {
+    line-height: 1.2;
+    display: flex;
+    margin-bottom: 1vmin;
+  }
+
+  .autoDelegateBtnTableContainer {
+    height: 100%;
+    padding-top: 3px;
+
+    .autodelegationTable {
+      border-top: 0.3vmin solid $primary_blue_bg;
+      height: calc(100% - 9vmin);
+      overflow-y: auto;
+
+      &::-webkit-scrollbar-track {
+        background: transparent;
+      }
+
+      &::-webkit-scrollbar-track-piece:start {
+        background-color: transparent !important;
+        margin-top: 5.5vmin !important;
+      }
+    }
+  }
+
+  .table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0px;
+
+    thead {
+      height: 5.5vmin;
+      width: 100%;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+
+      tr {
+        th {
+          position: relative;
+          padding: 0.5vmin;
+          background-color: $primary_blue_bg;
+          color: $primary_gray;
+          font-size: 1.2vmin;
+          font-family: 'sabic_text_bold', serif;
+          text-align: center;
+          text-transform: uppercase;
+
+          .tooltipContainer {
+            line-height: 2vmin;
+            opacity: 3;
+          }
+
+          .tooltip {
+            --bs-tooltip-opacity: 4;
+            line-height: normal;
+
+            .tooltip-inner {
+              line-height: 1;
+            }
+          }
+
+          .infoIcon {
+            margin-left: 1vmin;
+            width: 1.5vmin;
+          }
+
+          &:first-child {
+            border-radius: 3px 0px 0px 3px;
+          }
+
+          &:last-child {
+            border-radius: 0px 3px 3px 0px;
+          }
+
+          &:not(:last-child) {
+            &::after {
+              content: '';
+              position: absolute;
+              height: 47%;
+              width: 1px;
+              background-color: $primary_gray_3;
+              top: 50%;
+              right: 0;
+              transform: translateY(-50%);
+            }
+          }
+        }
+      }
+    }
+
+    tbody {
+      overflow-y: auto;
+      height: calc(100% - 5.5vmin);
+
+      tr {
+        td:first-child {
+          text-align: left;
+
+          .loaderContainer {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            justify-content: center;
+            height: 100%;
+            width: 100%;
+          }
+        }
+
+        td {
+          text-align: left;
+          padding: 1vmin 0.5vmin;
+          font-size: 1.3vmin;
+          line-height: 1.2;
+          color: $primary_gray;
+          font-family: 'sabic_text_regular', serif;
+          background-color: $primary_white;
+          position: relative;
+          vertical-align: middle;
+          border-bottom: 1px solid #e6e7e8;
+          height: 5.5vmin;
+          text-transform: uppercase;
+
+          .react-datepicker-wrapper {
+            display: block;
+          }
+        }
+      }
+    }
+  }
+
+  .autoDelegationBtnContainer {
+    height: 3.5vmin;
+    margin-top: 3.5vmin;
+    gap: 2vmin;
+
+    .submitBtn {
+      border: 1px solid $primary_blue;
+      display: inline-block;
+      height: 3.5vmin;
+      color: $primary_white;
+      width: 10vmin;
+      padding-top: 0.3vmin;
+      background-color: $primary_blue;
+      text-transform: uppercase;
+      border-radius: 0.3vmin;
+
+      &:disabled {
+        background-color: $primary_gray_2;
+        border: 1px solid $primary_gray_2;
+        cursor: not-allowed;
+      }
+
+      &.disabled {
+        background-color: $primary_gray_2;
+        border: 1px solid $primary_gray_2;
+        cursor: not-allowed;
+      }
+    }
+
+    .cancelBtn {
+      border: 1px solid $primary_blue;
+      display: inline-block;
+      height: 3.5vmin;
+      color: $primary_blue;
+      width: 10vmin;
+      padding-top: 0.3vmin;
+      background-color: $primary_blue_bg;
+      text-transform: uppercase;
+      border-radius: 0.3vmin;
+
+      &.disabled {
+        background-color: $primary_gray_4;
+        border: 1px solid $primary_gray_3;
+        color: $primary_gray_2;
+      }
+    }
+  }
+
+  .InputContainer {
+    width: 100%;
+    height: 4.5vmin;
+    min-height: 4.5vmin;
+    padding: 0;
+    resize: none;
+    box-sizing: border-box;
+    box-shadow: none;
+    outline: none;
+    border-radius: 0.3vmin;
+    border: 1px solid $primary_gray_3;
+
+    &:focus {
+      border: 1px solid $primary_gray_3;
+    }
+
+    span {
+      color: $primary_gray_3;
+    }
+  }
+}
+
+.autoDelegationSubmitContainer {
+  .btnContainer {
+    height: 3.5vmin;
+    gap: 1.5vmin;
+    margin: 2vmin 0 1.5vmin 0;
+
+    button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 0.3vmin;
+    }
+
+    .saveBtn {
+      border: 1px solid $primary_blue;
+      display: inline-block;
+      height: 3.5vmin;
+      color: $primary_white;
+      width: 10vmin;
+      padding-top: 0.3vmin;
+      background-color: $primary_blue;
+      text-transform: uppercase;
+      border-radius: 0.3vmin;
+
+      &.disabled {
+        background-color: $primary_gray_2;
+        border: 1px solid $primary_gray_2;
+        cursor: not-allowed;
+      }
+    }
+
+    .cancelBtn {
+      border: 1px solid $primary_blue;
+      display: inline-block;
+      height: 3.5vmin;
+      color: $primary_blue;
+      width: 10vmin;
+      padding-top: 0.3vmin;
+      background-color: $primary_blue_bg;
+      text-transform: uppercase;
+      border-radius: 0.3vmin;
+
+      &.disabled {
+        background-color: $primary_gray_4;
+        border: 1px solid $primary_gray_3;
+        color: $primary_gray_2;
+      }
+    }
+  }
+}
+
+.DatePickerContainer {
+  :global(.react-datepicker-wrapper) {
+    width: 100%;
+    display: block;
+  }
+}
+
+.autoDelegationModalContainer {
+  :global(.modal-dialog) {
+    max-width: 125vmin !important;
+  }
+}
+
+.highlightColor {
+  color: $primary_blue;
+}

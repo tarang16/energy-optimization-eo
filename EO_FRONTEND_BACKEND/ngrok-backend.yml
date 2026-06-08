@@ -1,0 +1,9 @@
+version: "2"
+update_channel: stable
+authtoken: 382zCLjBvun87KZdqCulUEqxyrQ_4PG7tYKko7rBvxKeqUYn6
+
+tunnels:
+  eo-backend:
+    proto: http
+    addr: 8001
+    hostname: thigmotropic-zella-dimensionally.ngrok-free.dev

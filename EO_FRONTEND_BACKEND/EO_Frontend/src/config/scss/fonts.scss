@@ -1,0 +1,113 @@
+@use './variables' as *;
+
+@font-face {
+  font-family: 'sabic_text_regular';
+  src:
+    url('../../assets/sabic_webfonts/sabictypefacetext_rg-webfont.woff2')
+      format('woff2'),
+    url('../../assets/sabic_webfonts/sabictypefacetext_rg-webfont.woff')
+      format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'sabic_text_light';
+  src:
+    url('../../assets/sabic_webfonts/sabictypefacetext_lt-webfont.woff2')
+      format('woff2'),
+    url('../../assets/sabic_webfonts/sabictypefacetext_lt-webfont.woff')
+      format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'sabic_text_bold';
+  src:
+    url('../../assets/sabic_webfonts/sabictypefacetext_bd-webfont.woff2')
+      format('woff2'),
+    url('../../assets/sabic_webfonts/sabictypefacetext_bd-webfont.woff')
+      format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'sabic_headline_regular';
+  src:
+    url('../../assets/sabic_webfonts/sabictypefaceheadline_rg-webfont.woff2')
+      format('woff2'),
+    url('../../assets/sabic_webfonts/sabictypefaceheadline_rg-webfont.woff')
+      format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'sabic_headline_light';
+  src:
+    url('../../assets/sabic_webfonts/sabictypefaceheadline_lt-webfont.woff2')
+      format('woff2'),
+    url('../../assets/sabic_webfonts/sabictypefaceheadline_lt-webfont.woff')
+      format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'sabic_headline_bold';
+  src:
+    url('../../assets/sabic_webfonts/sabictypefaceheadline_bd-webfont.woff2')
+      format('woff2'),
+    url('../../assets/sabic_webfonts/sabictypefaceheadline_bd-webfont.woff')
+      format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+// icons
+@font-face {
+  font-family: '#{$icomoon-font-family}';
+  src: url('#{$icomoon-font-path}/#{$icomoon-font-family}.eot?ri1jqr');
+  src:
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.eot?ri1jqr#iefix')
+      format('embedded-opentype'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.ttf?ri1jqr')
+      format('truetype'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.woff?ri1jqr')
+      format('woff'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.svg?ri1jqr##{$icomoon-font-family}')
+      format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^='icon-'],
+[class*=' icon-'] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: '#{$icomoon-font-family}' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-trend {
+  &:before {
+    content: $icon-trend;
+  }
+}

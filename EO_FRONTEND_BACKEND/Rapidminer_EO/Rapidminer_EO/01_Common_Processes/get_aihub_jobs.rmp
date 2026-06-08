@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?><process version="10.4.003">
+  <context>
+    <input/>
+    <output/>
+    <macros/>
+  </context>
+  <operator activated="true" class="process" compatibility="10.4.003" expanded="true" name="Process">
+    <parameter key="logverbosity" value="init"/>
+    <parameter key="random_seed" value="2001"/>
+    <parameter key="send_mail" value="never"/>
+    <parameter key="notification_email" value=""/>
+    <parameter key="process_duration_for_mail" value="30"/>
+    <parameter key="encoding" value="SYSTEM"/>
+    <process expanded="true">
+      <operator activated="true" class="web:crud_get" compatibility="10.0.002" expanded="true" height="82" name="GET Jobs (4)" width="90" x="246" y="85">
+        <parameter key="request_url" value="%{request_url}"/>
+        <list key="request_headers">
+          <parameter key="Authorization" value="Bearer %{token}"/>
+          <parameter key="ContentType" value="application/json"/>
+        </list>
+        <parameter key="response_body_type" value="json"/>
+        <parameter key="inject_connection_secret" value="false"/>
+        <parameter key="fail_on_endpoint_error" value="true"/>
+        <description align="center" color="transparent" colored="false" width="126">Input:&lt;br/&gt;1. Request_url&lt;br/&gt;2. token</description>
+      </operator>
+      <operator activated="true" class="text:json_to_data" compatibility="10.0.000" expanded="true" height="82" name="JSON To Data (9)" width="90" x="380" y="85">
+        <parameter key="ignore_arrays" value="false"/>
+        <parameter key="limit_attributes" value="false"/>
+        <parameter key="skip_invalid_documents" value="false"/>
+        <parameter key="guess_data_types" value="true"/>
+        <parameter key="keep_missing_attributes" value="false"/>
+        <parameter key="missing_values_aliases" value=", null, NaN, missing"/>
+        <description align="center" color="transparent" colored="false" width="126">converts json to data</description>
+      </operator>
+      <operator activated="true" class="numerical_to_polynominal" compatibility="10.4.003" expanded="true" height="82" name="Numerical to Polynominal (4)" width="90" x="514" y="85">
+        <parameter key="attribute_filter_type" value="single"/>
+        <parameter key="attribute" value="totalElements"/>
+        <parameter key="attributes" value=""/>
+        <parameter key="use_except_expression" value="false"/>
+        <parameter key="value_type" value="numeric"/>
+        <parameter key="use_value_type_exception" value="false"/>
+        <parameter key="except_value_type" value="real"/>
+        <parameter key="block_type" value="value_series"/>
+        <parameter key="use_block_type_exception" value="false"/>
+        <parameter key="except_block_type" value="value_series_end"/>
+        <parameter key="invert_selection" value="true"/>
+        <parameter key="include_special_attributes" value="false"/>
+      </operator>
+      <operator activated="true" class="filter_examples" compatibility="10.4.003" expanded="true" height="103" name="Filter Examples (15)" width="90" x="648" y="85">
+        <parameter key="parameter_expression" value=""/>
+        <parameter key="condition_class" value="custom_filters"/>
+        <parameter key="invert_filter" value="false"/>
+        <list key="filters_list">
+          <parameter key="filters_entry_key" value="totalElements.gt.0"/>
+        </list>
+        <parameter key="filters_logic_and" value="true"/>
+        <parameter key="filters_check_metadata" value="true"/>
+        <description align="center" color="transparent" colored="false" width="126">totalElements&amp;gt;0</description>
+      </operator>
+      <operator activated="true" class="branch" compatibility="10.4.003" expanded="true" height="82" name="Branch (13)" width="90" x="782" y="85">
+        <parameter key="condition_type" value="min_examples"/>
+        <parameter key="condition_value" value="1"/>
+        <parameter key="expression" value=""/>
+        <parameter key="io_object" value="ANOVAMatrix"/>
+        <parameter key="return_inner_output" value="true"/>
+        <process expanded="true">
+          <operator activated="true" class="subprocess" compatibility="10.4.003" expanded="true" height="82" name="processing (15)" width="90" x="112" y="34">
+            <process expanded="true">
+              <operator activated="true" class="transpose" compatibility="10.4.003" expanded="true" height="82" name="Transpose (9)" width="90" x="45" y="34"/>
+              <operator activated="true" class="set_role" compatibility="10.4.003" expanded="true" height="82" name="Set Role (9)" width="90" x="179" y="34">
+                <parameter key="attribute_name" value="id"/>
+                <parameter key="target_role" value="regular"/>
+                <list key="set_additional_roles"/>
+              </operator>
+              <operator activated="true" class="split" compatibility="10.4.003" expanded="true" height="82" name="Split (11)" width="90" x="313" y="34">
+                <parameter key="attribute_filter_type" value="single"/>
+                <parameter key="attribute" value="id"/>
+                <parameter key="attributes" value=""/>
+                <parameter key="use_except_expression" value="false"/>
+                <parameter key="value_type" value="nominal"/>
+                <parameter key="use_value_type_exception" value="false"/>
+                <parameter key="except_value_type" value="file_path"/>
+                <parameter key="block_type" value="single_value"/>
+                <parameter key="use_block_type_exception" value="false"/>
+                <parameter key="except_block_type" value="single_value"/>
+                <parameter key="invert_selection" value="false"/>
+                <parameter key="include_special_attributes" value="false"/>
+                <parameter key="split_pattern" value="]."/>
+                <parameter key="split_mode" value="ordered_split"/>
+              </operator>
+              <operator activated="true" class="filter_examples" compatibility="10.4.003" expanded="true" height="103" name="Filter Examples (23)" width="90" x="447" y="34">
+                <parameter key="parameter_expression" value=""/>
+                <parameter key="condition_class" value="custom_filters"/>
+                <parameter key="invert_filter" value="false"/>
+                <list key="filters_list">
+                  <parameter key="filters_entry_key" value="id_2.contains.ownerId"/>
+                  <parameter key="filters_entry_key" value="id_2.contains.queueName"/>
+                  <parameter key="filters_entry_key" value="id_2.contains.location"/>
+                  <parameter key="filters_entry_key" value="id_2.contains.state"/>
+                  <parameter key="filters_entry_key" value="id_2.equals.id"/>
+                  <parameter key="filters_entry_key" value="id_2.equals.reportError"/>
+                  <parameter key="filters_entry_key" value="id_2.equals.createdAt"/>
+                  <parameter key="filters_entry_key" value="id_2.equals.startedAt"/>
+                  <parameter key="filters_entry_key" value="id_2.equals.endedAt"/>
+                </list>
+                <parameter key="filters_logic_and" value="false"/>
+                <parameter key="filters_check_metadata" value="true"/>
+              </operator>
+              <operator activated="true" class="blending:pivot" compatibility="10.4.003" expanded="true" height="103" name="Pivot (9)" width="90" x="581" y="34">
+                <parameter key="group_by_attributes" value="id_1"/>
+                <parameter key="column_grouping_attribute" value="id_2"/>
+                <list key="aggregation_attributes">
+                  <parameter key="att_1" value="first"/>
+                </list>
+                <parameter key="use_default_aggregation" value="false"/>
+                <parameter key="default_aggregation_function" value="first"/>
+              </operator>
+              <operator activated="true" class="rename_by_replacing" compatibility="10.4.003" expanded="true" height="82" name="Rename by Replacing (9)" width="90" x="715" y="34">
+                <parameter key="attribute_filter_type" value="all"/>
+                <parameter key="attribute" value=""/>
+                <parameter key="attributes" value=""/>
+                <parameter key="use_except_expression" value="false"/>
+                <parameter key="value_type" value="attribute_value"/>
+                <parameter key="use_value_type_exception" value="false"/>
+                <parameter key="except_value_type" value="time"/>
+                <parameter key="block_type" value="attribute_block"/>
+                <parameter key="use_block_type_exception" value="false"/>
+                <parameter key="except_block_type" value="value_matrix_row_start"/>
+                <parameter key="invert_selection" value="false"/>
+                <parameter key="include_special_attributes" value="false"/>
+                <parameter key="replace_what" value="first\((.*)\)_(.*)"/>
+                <parameter key="replace_by" value="$2"/>
+              </operator>
+              <operator activated="true" class="subprocess" compatibility="10.4.003" expanded="true" height="82" name="Dates (6)" width="90" x="849" y="34">
+                <process expanded="true">
+                  <operator activated="true" class="generate_attributes" compatibility="10.4.003" expanded="true" height="82" name="Generate Attributes (19)" width="90" x="45" y="34">
+                    <list key="function_descriptions">
+                      <parameter key="createdAt" value="rint(parse([createdAt])*1)"/>
+                    </list>
+                    <parameter key="keep_all" value="true"/>
+                  </operator>
+                  <operator activated="true" class="numerical_to_date" compatibility="10.4.003" expanded="true" height="82" name="Numerical to Date (25)" width="90" x="179" y="34">
+                    <parameter key="attribute_name" value="createdAt"/>
+                    <parameter key="keep_old_attribute" value="false"/>
+                    <parameter key="time_offset" value="0"/>
+                  </operator>
+                  <operator activated="true" class="handle_exception" compatibility="10.4.003" expanded="true" height="82" name="Handle Exception (3)" width="90" x="313" y="34">
+                    <parameter key="add_details_to_log" value="false"/>
+                    <process expanded="true">
+                      <operator activated="true" class="generate_attributes" compatibility="10.4.003" expanded="true" height="82" name="Generate Attributes (103)" width="90" x="179" y="34">
+                        <list key="function_descriptions">
+                          <parameter key="endedAt" value="rint(parse([endedAt])*1)"/>
+                        </list>
+                        <parameter key="keep_all" value="true"/>
+                      </operator>
+                      <operator activated="true" class="numerical_to_date" compatibility="10.4.003" expanded="true" height="82" name="Numerical to Date (79)" width="90" x="313" y="34">
+                        <parameter key="attribute_name" value="endedAt"/>
+                        <parameter key="keep_old_attribute" value="false"/>
+                        <parameter key="time_offset" value="0"/>
+                      </operator>
+                      <connect from_port="in 1" to_op="Generate Attributes (103)" to_port="example set input"/>
+                      <connect from_op="Generate Attributes (103)" from_port="example set output" to_op="Numerical to Date (79)" to_port="example set input"/>
+                      <connect from_op="Numerical to Date (79)" from_port="example set output" to_port="out 1"/>
+                      <portSpacing port="source_in 1" spacing="0"/>
+                      <portSpacing port="source_in 2" spacing="0"/>
+                      <portSpacing port="sink_out 1" spacing="0"/>
+                      <portSpacing port="sink_out 2" spacing="0"/>
+                    </process>
+                    <process expanded="true">
+                      <connect from_port="in 1" to_port="out 1"/>
+                      <portSpacing port="source_in 1" spacing="0"/>
+                      <portSpacing port="source_in 2" spacing="0"/>
+                      <portSpacing port="sink_out 1" spacing="0"/>
+                      <portSpacing port="sink_out 2" spacing="0"/>
+                    </process>
+                  </operator>
+                  <operator activated="true" class="handle_exception" compatibility="10.4.003" expanded="true" height="82" name="Handle Exception (7)" width="90" x="447" y="34">
+                    <parameter key="add_details_to_log" value="false"/>
+                    <process expanded="true">
+                      <operator activated="true" class="generate_attributes" compatibility="10.4.003" expanded="true" height="82" name="Generate Attributes (105)" width="90" x="179" y="34">
+                        <list key="function_descriptions">
+                          <parameter key="startedAt" value="rint(parse([startedAt])*1)"/>
+                        </list>
+                        <parameter key="keep_all" value="true"/>
+                      </operator>
+                      <operator activated="true" class="numerical_to_date" compatibility="10.4.003" expanded="true" height="82" name="Numerical to Date (81)" width="90" x="313" y="34">
+                        <parameter key="attribute_name" value="startedAt"/>
+                        <parameter key="keep_old_attribute" value="false"/>
+                        <parameter key="time_offset" value="0"/>
+                      </operator>
+                      <connect from_port="in 1" to_op="Generate Attributes (105)" to_port="example set input"/>
+                      <connect from_op="Generate Attributes (105)" from_port="example set output" to_op="Numerical to Date (81)" to_port="example set input"/>
+                      <connect from_op="Numerical to Date (81)" from_port="example set output" to_port="out 1"/>
+                      <portSpacing port="source_in 1" spacing="0"/>
+                      <portSpacing port="source_in 2" spacing="0"/>
+                      <portSpacing port="sink_out 1" spacing="0"/>
+                      <portSpacing port="sink_out 2" spacing="0"/>
+                    </process>
+                    <process expanded="true">
+                      <connect from_port="in 1" to_port="out 1"/>
+                      <portSpacing port="source_in 1" spacing="0"/>
+                      <portSpacing port="source_in 2" spacing="0"/>
+                      <portSpacing port="sink_out 1" spacing="0"/>
+                      <portSpacing port="sink_out 2" spacing="0"/>
+                    </process>
+                  </operator>
+                  <operator activated="true" class="select_attributes" compatibility="10.4.003" expanded="true" height="82" name="Select Attributes (17)" width="90" x="581" y="34">
+                    <parameter key="attribute_filter_type" value="subset"/>
+                    <parameter key="attribute" value=""/>
+                    <parameter key="attributes" value="endedAt|id|location|ownerId|queueName|startedAt|state|createdAt"/>
+                    <parameter key="use_except_expression" value="false"/>
+                    <parameter key="value_type" value="attribute_value"/>
+                    <parameter key="use_value_type_exception" value="false"/>
+                    <parameter key="except_value_type" value="time"/>
+                    <parameter key="block_type" value="attribute_block"/>
+                    <parameter key="use_block_type_exception" value="false"/>
+                    <parameter key="except_block_type" value="value_matrix_row_start"/>
+                    <parameter key="invert_selection" value="false"/>
+                    <parameter key="include_special_attributes" value="false"/>
+                  </operator>
+                  <connect from_port="in 1" to_op="Generate Attributes (19)" to_port="example set input"/>
+                  <connect from_op="Generate Attributes (19)" from_port="example set output" to_op="Numerical to Date (25)" to_port="example set input"/>
+                  <connect from_op="Numerical to Date (25)" from_port="example set output" to_op="Handle Exception (3)" to_port="in 1"/>
+                  <connect from_op="Handle Exception (3)" from_port="out 1" to_op="Handle Exception (7)" to_port="in 1"/>
+                  <connect from_op="Handle Exception (7)" from_port="out 1" to_op="Select Attributes (17)" to_port="example set input"/>
+                  <connect from_op="Select Attributes (17)" from_port="example set output" to_port="out 1"/>
+                  <portSpacing port="source_in 1" spacing="0"/>
+                  <portSpacing port="source_in 2" spacing="0"/>
+                  <portSpacing port="sink_out 1" spacing="0"/>
+                  <portSpacing port="sink_out 2" spacing="0"/>
+                </process>
+              </operator>
+              <connect from_port="in 1" to_op="Transpose (9)" to_port="example set input"/>
+              <connect from_op="Transpose (9)" from_port="example set output" to_op="Set Role (9)" to_port="example set input"/>
+              <connect from_op="Set Role (9)" from_port="example set output" to_op="Split (11)" to_port="example set input"/>
+              <connect from_op="Split (11)" from_port="example set output" to_op="Filter Examples (23)" to_port="example set input"/>
+              <connect from_op="Filter Examples (23)" from_port="example set output" to_op="Pivot (9)" to_port="input"/>
+              <connect from_op="Pivot (9)" from_port="output" to_op="Rename by Replacing (9)" to_port="example set input"/>
+              <connect from_op="Rename by Replacing (9)" from_port="example set output" to_op="Dates (6)" to_port="in 1"/>
+              <connect from_op="Dates (6)" from_port="out 1" to_port="out 1"/>
+              <portSpacing port="source_in 1" spacing="0"/>
+              <portSpacing port="source_in 2" spacing="0"/>
+              <portSpacing port="sink_out 1" spacing="0"/>
+              <portSpacing port="sink_out 2" spacing="0"/>
+            </process>
+          </operator>
+          <connect from_port="condition" to_op="processing (15)" to_port="in 1"/>
+          <connect from_op="processing (15)" from_port="out 1" to_port="input 1"/>
+          <portSpacing port="source_condition" spacing="0"/>
+          <portSpacing port="source_input 1" spacing="0"/>
+          <portSpacing port="sink_input 1" spacing="0"/>
+          <portSpacing port="sink_input 2" spacing="0"/>
+        </process>
+        <process expanded="true">
+          <portSpacing port="source_condition" spacing="0"/>
+          <portSpacing port="source_input 1" spacing="0"/>
+          <portSpacing port="sink_input 1" spacing="0"/>
+          <portSpacing port="sink_input 2" spacing="0"/>
+        </process>
+        <description align="center" color="transparent" colored="false" width="126">if min example = 1&lt;br/&gt;&lt;br/&gt;Preprocess the data to get the jobs in dedicated format</description>
+      </operator>
+      <connect from_op="GET Jobs (4)" from_port="response" to_op="JSON To Data (9)" to_port="documents 1"/>
+      <connect from_op="JSON To Data (9)" from_port="example set" to_op="Numerical to Polynominal (4)" to_port="example set input"/>
+      <connect from_op="Numerical to Polynominal (4)" from_port="example set output" to_op="Filter Examples (15)" to_port="example set input"/>
+      <connect from_op="Filter Examples (15)" from_port="example set output" to_op="Branch (13)" to_port="condition"/>
+      <connect from_op="Branch (13)" from_port="input 1" to_port="result 1"/>
+      <portSpacing port="source_input 1" spacing="0"/>
+      <portSpacing port="sink_result 1" spacing="0"/>
+      <portSpacing port="sink_result 2" spacing="0"/>
+      <description align="center" color="blue" colored="true" height="645" resized="false" width="208" x="29" y="10">Get request common process&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;Author&lt;br&gt;Karthik Venkata&lt;br&gt;Naveen Kumar&lt;br&gt;Akshay Hasabe&lt;br&gt;&lt;br&gt;This process takes request url and get the jobs which is running/pending .&lt;br&gt;&lt;br&gt;</description>
+      <description align="center" color="green" colored="true" height="645" resized="true" width="675" x="241" y="10">MAIN</description>
+    </process>
+  </operator>
+</process>

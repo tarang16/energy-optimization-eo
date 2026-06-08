@@ -1,0 +1,40 @@
+@use '../../../config/scss/variables' as *;
+
+.cal_red {
+  color: $primary_orange !important;
+}
+
+.cal_blue {
+  color: $primary_blue !important;
+}
+
+.cal_yellow {
+  color: $primary_yellow !important;
+}
+
+.cal_disabled {
+  color: $primary_gray_5;
+}
+
+.cal_display_icon {
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  display: inline-block;
+
+  img {
+    width: 2.5vmin;
+    height: 2.5vmin;
+    cursor: pointer;
+  }
+}
+
+.modalButton {
+  width: 14vmin;
+  border-radius: 0.3vmin;
+  color: $primary_white;
+  padding: 0.8vmin 0.5vmin 0.5vmin 0.5vmin;
+  text-transform: uppercase;
+  background-color: $primary_blue;
+  border: none;
+}

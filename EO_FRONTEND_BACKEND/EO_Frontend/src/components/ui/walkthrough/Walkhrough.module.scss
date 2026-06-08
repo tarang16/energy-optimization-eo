@@ -1,0 +1,46 @@
+@use 'config/scss/variables' as *;
+
+.skipBtn {
+  background-color: $primary_white;
+  color: $primary_gray;
+  border: 1px solid $primary_white;
+  padding: 0.7vmin 1vmin 0.4vmin 1vmin;
+  border-radius: 0.3vmin;
+  height: 3.5vmin;
+}
+
+.initializingWalkthroughOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $primary_shadow_card_darker;
+  z-index: 9999999999;
+}
+
+.yellowRoundIcon {
+  width: 1.5vmin;
+  height: 1.5vmin;
+  background-color: $primary_yellow;
+  border-radius: 50%;
+}
+
+.orangeRoundIcon {
+  width: 1.5vmin;
+  height: 1.5vmin;
+  background-color: $primary_orange;
+  border-radius: 50%;
+}
+
+.walkthroughLoaderContainer {
+  :global(.centerPositionLoader) {
+    img {
+      width: 3.5vmin !important;
+      height: 3.5vmin !important;
+    }
+  }
+}

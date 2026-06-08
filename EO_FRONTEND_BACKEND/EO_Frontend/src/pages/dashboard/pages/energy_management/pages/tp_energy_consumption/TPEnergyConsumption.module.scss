@@ -1,0 +1,31 @@
+// @use "config/scss/variables"  as *;
+
+// .TPEnergyConsuptionContainer {
+//     @include boxShadow_kpi;
+//     padding: 1vmin;
+//     border-radius: .8vmin;
+
+//     &__tabButton {
+//         height: 3.5vmin;
+//         display: flex;
+//         gap: 1.5vmin;
+
+//         button {
+//             padding-top: .3vmin;
+//             width: 15vmin;
+//             height: 100%;
+//             border: none;
+//             border-radius: 1vmin;
+//             background-color: $primary_blue_bg;
+
+//             &.btnActive {
+//                 background-color: $primary_blue;
+//                 color: $primary_white;
+//             }
+//         }
+//     }
+
+//     &__tabContent {
+//         height: calc(100% - 3.5vmin);
+//     }
+// }

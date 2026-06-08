@@ -1,0 +1,57 @@
+@use 'src/config/scss/_variables' as *;
+
+.alertStatusChartContainer {
+  border: 1px solid $primary_gray_4;
+  border-radius: 0.3vmin;
+  padding: 0 1.5vmin;
+
+  .headerContainer {
+    height: 5vmin;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1vmin 0;
+    border-bottom: 1px solid $primary_gray_4;
+
+    .dropdownContainer {
+      width: 20vmin;
+      max-width: 20vmin;
+    }
+  }
+
+  .chartColntainer {
+    height: calc(100% - 5vmin);
+    display: flex;
+    gap: 1vmin;
+
+    .chartDivider {
+      width: 1px;
+      background-color: $primary_gray_3;
+    }
+  }
+}
+
+.expandButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.6vmin 0.9vmin;
+  width: 4vmin;
+  border-radius: 0.3vmin;
+  outline: none;
+  border: 1px solid $primary_gray_3;
+  background-color: $primary_white;
+
+  i {
+    color: $primary_gray;
+  }
+
+  &:hover {
+    background-color: $primary_blue_hover;
+    border-color: $primary_blue;
+
+    i {
+      color: $primary_white;
+    }
+  }
+}

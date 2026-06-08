@@ -1,0 +1,112 @@
+.boilerCompoOff {
+  min-height: 10vmin;
+}
+
+.boilerCompoOff .s {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.boilerCompoOff .label {
+  margin-bottom: 10px;
+}
+
+.boilerCompoOff .textWrapper {
+  left: 0;
+  letter-spacing: 0;
+  line-height: normal;
+  text-align: center;
+  top: -1px;
+}
+
+.boilerCompoOff .boilerOff {
+  background-color: transparent;
+  border-radius: 10px;
+  height: 100px;
+  overflow: hidden;
+  position: relative;
+  width: 100px;
+}
+
+.boilerCompoOff .boiler {
+  background-image: url('../../../../assets/sabic_icons/network_icons/turbineComoOff.svg');
+  background-size: 100% 100%;
+  height: 42px;
+  left: 16px;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 42px;
+}
+
+.boilerCompoOff .div {
+  left: 17px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 11px;
+}
+
+.boilerCompoOff .key {
+  margin-top: 10px;
+}
+
+.boilerCompo {
+  min-height: 10vmin;
+}
+
+.boilerCompo .s {
+  align-items: center;
+  display: inline-flex;
+  flex-direction: column;
+  gap: 2px;
+  justify-content: center;
+  position: relative;
+}
+
+.boilerCompo .label {
+  margin-bottom: 10px;
+}
+
+.boilerCompo .boilerOn {
+  background-color: transparent;
+  border-radius: 10px;
+  height: 100px;
+  overflow: hidden;
+  position: relative;
+  width: 100px;
+}
+
+.boilerCompoOff .boilerOff img {
+  height: 100% !important;
+}
+
+.boilerCompo .boilerOn img {
+  height: 100% !important;
+}
+
+.boilerCompo .boiler {
+  background-image: url('../../../../assets/sabic_icons/network_icons/turbineCompoOn.svg');
+  background-size: 100% 100%;
+  height: 42px;
+  left: 16px;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 42px;
+}
+
+.boilerCompo .div {
+  color: #2ba402;
+  left: 17px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 11px;
+}
+
+.boilerCompo .key {
+  margin-top: 10px;
+}

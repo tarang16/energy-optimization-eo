@@ -1,0 +1,4135 @@
+{
+  "source_file": "plant_network_studio_2026-05-26.xlsx",
+  "total_elements": 131,
+  "elements": [
+    {
+      "element_path": "United > Air Network > Utility Unit [UTI] > Air Generators > UTI Instrument Air CompressorA",
+      "short_name": "UTI Instrument Air CompressorA",
+      "network": "Air Network",
+      "plant": "Utility Unit [UTI]",
+      "group": "Air Generators",
+      "element_type": "UTI Instrument Air Compressor",
+      "instance": "A",
+      "pi_tag_base": "UTIL.UTI.IAC-101",
+      "status_tag": "Air_Compressor_Turbine_A_Status",
+      "status_formula": "if(([Air_Compressor_Turbine_A_Steam_raw]/1000)>12.5||([Air_Compressor_Turbine_A_RPM])>1750,1,0)",
+      "pi_dependencies": [
+        {
+          "logical": "Air_Compressor_Turbine_A_RPM",
+          "pi_name": "UN.UO.72SI2001.PV"
+        },
+        {
+          "logical": "Air_Compressor_Turbine_A_Steam_raw",
+          "pi_name": "UN.UO.72FI2007.PV"
+        }
+      ],
+      "attributes": [
+        "Suction Flow",
+        "Suction Pressure",
+        "Suction Temperature",
+        "Discharge Pressure",
+        "Discharge Temperature",
+        "Driver Power",
+        "Polytropic Efficiency"
+      ]
+    },
+    {
+      "element_path": "United > Air Network > Utility Unit [UTI] > Air Generators > UTI Instrument Air CompressorB",
+      "short_name": "UTI Instrument Air CompressorB",
+      "network": "Air Network",
+      "plant": "Utility Unit [UTI]",
+      "group": "Air Generators",
+      "element_type": "UTI Instrument Air Compressor",
+      "instance": "B",
+      "pi_tag_base": "UTIL.UTI.IAC-102",
+      "status_tag": "Air_Compressor_Motor_B_Status",
+      "status_formula": "if([Air_Compressor_B_Discharge_Pressure]>4,1,0)",
+      "pi_dependencies": [
+        {
+          "logical": "Air_Compressor_B_Discharge_Pressure",
+          "pi_name": "UN.UO.72PC2009.PV"
+        }
+      ],
+      "attributes": [
+        "Suction Flow",
+        "Suction Pressure",
+        "Suction Temperature",
+        "Discharge Pressure",
+        "Discharge Temperature",
+        "Driver Power",
+        "Polytropic Efficiency"
+      ]
+    },
+    {
+      "element_path": "United > Air Network > Utility Unit [UTI] > Air Generators > UTI Instrument Air CompressorC",
+      "short_name": "UTI Instrument Air CompressorC",
+      "network": "Air Network",
+      "plant": "Utility Unit [UTI]",
+      "group": "Air Generators",
+      "element_type": "UTI Instrument Air Compressor",
+      "instance": "C",
+      "pi_tag_base": "UTIL.UTI.IAC-103",
+      "status_tag": "Air_Compressor_Motor_C_Status",
+      "status_formula": "if([Air_Compressor_C_Discharge_Pressure]>4,1,0)",
+      "pi_dependencies": [
+        {
+          "logical": "Air_Compressor_C_Discharge_Pressure",
+          "pi_name": "UN.UO.72PC2015.PV"
+        }
+      ],
+      "attributes": [
+        "Suction Flow",
+        "Suction Pressure",
+        "Suction Temperature",
+        "Discharge Pressure",
+        "Discharge Temperature",
+        "Driver Power",
+        "Polytropic Efficiency"
+      ]
+    },
+    {
+      "element_path": "United > Air Network > Utility Unit [UTI] > Air Consumers > OLF Air Consumer (PCV/Inst.)A",
+      "short_name": "OLF Air Consumer (PCV/Inst.)A",
+      "network": "Air Network",
+      "plant": "Utility Unit [UTI]",
+      "group": "Air Consumers",
+      "element_type": "OLF Air Consumer (PCV/Inst.)",
+      "instance": "A",
+      "pi_tag_base": "UTIL.UTI.AU-101",
+      "status_tag": "ETH_Plant_Status",
+      "status_formula": "if(if(missing([Total_Ethylene_Production_ETH_Plant]),0,[Total_Ethylene_Production_ETH_Plant])>100,1,0)",
+      "pi_dependencies": [
+        {
+          "logical": "Total_Ethylene_Production_ETH_Plant",
+          "pi_name": "UN.ETH.CURRPRODRATE.CPV"
+        }
+      ],
+      "attributes": [
+        "Demand Flow",
+        "Supply Pressure",
+        "Critical Service"
+      ]
+    },
+    {
+      "element_path": "United > Air Network > Utility Unit [UTI] > Air Consumers > EG1 Air Consumer (PCV/Inst.)A",
+      "short_name": "EG1 Air Consumer (PCV/Inst.)A",
+      "network": "Air Network",
+      "plant": "Utility Unit [UTI]",
+      "group": "Air Consumers",
+      "element_type": "EG1 Air Consumer (PCV/Inst.)",
+      "instance": "A",
+      "pi_tag_base": "UTIL.UTI.AU-101",
+      "status_tag": "EOEG1_Plant_Status",
+      "status_formula": "if(if(missing([EG1_EOE]),0,[EG1_EOE])>30,1,0)",
+      "pi_dependencies": [
+        {
+          "logical": "EG1_DEG_production_flow",
+          "pi_name": "UN.EG1.27FC7301.PV"
+        },
+        {
+          "logical": "EG1_HEG_production_flow",
+          "pi_name": "UN.EG1.27FC7406.PV"
+        },
+        {
+          "logical": "EG1_MEG_production_flow",
+          "pi_name": "UN.EG1.26FC6415.PV"
+        },
+        {
+          "logical": "EG1_TEG_production_flow",
+          "pi_name": "UN.EG1.27FC7501.PV"
+        }
+      ],
+      "attributes": [
+        "Demand Flow",
+        "Supply Pressure",
+        "Critical Service"
+      ]
+    },
+    {
+      "element_path": "United > Air Network > Utility Unit [UTI] > Air Consumers > EG2 Air Consumer (PCV/Inst.)A",
+      "short_name": "EG2 Air Consumer (PCV/Inst.)A",
+      "network": "Air Network",
+      "plant": "Utility Unit [UTI]",
+      "group": "Air Consumers",
+      "element_type": "EG2 Air Consumer (PCV/Inst.)",
+      "instance": "A",
+      "pi_tag_base": "UTIL.UTI.AU-101",
+      "status_tag": "EOEG2_Plant_Status",
+      "status_formula": "if(if(missing([EG2_EOE]),0,[EG2_EOE])>30,1,0)",
+      "pi_dependencies": [
+        {
+          "logical": "EG2_DEG_production_flow",
+          "pi_name": "UN.EG2.47FC7301.PV"
+        },
+        {
+          "logical": "EG2_HEG_production_flow",
+          "pi_name": "UN.EG2.47FC7406.PV"
+        },
+        {
+          "logical": "EG2_MEG_production_flow",
+          "pi_name": "UN.EG2.46FC6415.PV"
+        },
+        {
+          "logical": "EG2_TEG_production_flow",
+          "pi_name": "UN.EG2.47FC7501.PV"
+        }
+      ],
+      "attributes": [
+        "Demand Flow",
+        "Supply Pressure",
+        "Critical Service"
+      ]
+    },
+    {
+      "element_path": "United > Air Network > Utility Unit [UTI] > Air Consumers > EG3 Air Consumer (PCV/Inst.)A",
+      "short_name": "EG3 Air Consumer (PCV/Inst.)A",
+      "network": "Air Network",
+      "plant": "Utility Unit [UTI]",
+      "group": "Air Consumers",
+      "element_type": "EG3 Air Consumer (PCV/Inst.)",
+      "instance": "A",
+      "pi_tag_base": "UTIL.UTI.AU-101",
+      "status_tag": "EOEG3_Plant_Status",
+      "status_formula": "if(if(missing([EG3_EOE]),0,[EG3_EOE])>30,1,0)",
+      "pi_dependencies": [
+        {
+          "logical": "EG3_DEG_production_flow",
+          "pi_name": "UN.EG3.67FC7301.PV"
+        },
+        {
+          "logical": "EG3_HEG_production_flow",
+          "pi_name": "UN.EG3.67FC7421.PV"
+        },
+        {
+          "logical": "EG3_MEG_production_flow",
+          "pi_name": "UN.EG3.66FC6415.PV"
+        },
+        {
+          "logical": "EG3_TEG_production_flow",
+          "pi_name": "UN.EG3.67FC7501.PV"
+        }
+      ],
+      "attributes": [
+        "Demand Flow",
+        "Supply Pressure",
+        "Critical Service"
+      ]
+    },
+    {
+      "element_path": "United > Air Network > Utility Unit [UTI] > Air Consumers > CO2 Air Consumer (PCV/Inst.)A",
+      "short_name": "CO2 Air Consumer (PCV/Inst.)A",
+      "network": "Air Network",
+      "plant": "Utility Unit [UTI]",
+      "group": "Air Consumers",
+      "element_type": "CO2 Air Consumer (PCV/Inst.)",
+      "instance": "A",
+      "pi_tag_base": "UTIL.UTI.AU-101",
+      "status_tag": "CO2_Plant_Status",
+      "status_formula": "if([CO2_Load]<20,0,1)",
+      "pi_dependencies": [
+        {
+          "logical": "CO2_Load_raw",
+          "pi_name": "UN.UO.50FI0253_HS"
+        }
+      ],
+      "attributes": [
+        "Demand Flow",
+        "Supply Pressure",
+        "Critical Service"
+      ]
+    },
+    {
+      "element_path": "United > Fuel Network > Utility Unit [UTI] > Fuel Sources > UTI Fuel Import To ComplexA",
+      "short_name": "UTI Fuel Import To ComplexA",
+      "network": "Fuel Network",
+      "plant": "Utility Unit [UTI]",
+      "group": "Fuel Sources",
+      "element_type": "UTI Fuel Import To Complex",
+      "instance": "A",
+      "pi_tag_base": "UTIL.UTI.FIN-101",
+      "status_tag": "UO_Plant_Status",
+      "status_formula": "1",
+      "pi_dependencies": [],
+      "attributes": [
+        "Imported Flow",
+        "Inlet Pressure",
+        "Inlet Temperature",
+        "LHV",
+        "Composition"
+      ]
+    },
+    {
+      "element_path": "United > Fuel Network > Utility Unit [UTI] > Fuel Consumers > Utility Unit Specific BoilerA",
+      "short_name": "Utility Unit Specific BoilerA",
+      "network": "Fuel Network",
+      "plant": "Utility Unit [UTI]",
+      "group": "Fuel Consumers",
+      "element_type": "Utility Unit Specific Boiler",
+      "instance": "A",
+      "pi_tag_base": "UTIL.UTI.BLR-101",
+      "status_tag": "Boiler_A_Status",
+      "status_formula": "[BLR_1_Status]",
+      "pi_dependencies": [
+        {
+          "logical": "BLR_1_HPS_Gen_raw",
+          "pi_name": "UN.UO.71FI1101.PV"
+        }
+      ],
+      "attributes": [
+        "Fuel Flow",
+        "Steam Output",
+        "Boiler Efficiency",
+        "Excess O2"
+      ]
+    },
+    {
+      "element_path": "United > Fuel Network > Utility Unit [UTI] > Fuel Consumers > Utility Unit Specific BoilerB",
+      "short_name": "Utility Unit Specific BoilerB",
+      "network": "Fuel Network",
+      "plant": "Utility Unit [UTI]",
+      "group": "Fuel Consumers",
+      "element_type": "Utility Unit Specific Boiler",
+      "instance": "B",
+      "pi_tag_base": "UTIL.UTI.BLR-102",
+      "status_tag": "Boiler_B_Status",
+      "status_formula": "[BLR_2_Status]",
+      "pi_dependencies": [
+        {
+          "logical": "BLR_2_HPS_Gen_raw",
+          "pi_name": "UN.UO.71FI1201.PV"
+        }
+      ],
+      "attributes": [
+        "Fuel Flow",
+        "Steam Output",
+        "Boiler Efficiency",
+        "Excess O2"
+      ]
+    },
+    {
+      "element_path": "United > Fuel Network > Utility Unit [UTI] > Fuel Consumers > Utility Unit Specific BoilerC",
+      "short_name": "Utility Unit Specific BoilerC",
+      "network": "Fuel Network",
+      "plant": "Utility Unit [UTI]",
+      "group": "Fuel Consumers",
+      "element_type": "Utility Unit Specific Boiler",
+      "instance": "C",
+      "pi_tag_base": "UTIL.UTI.BLR-103",
+      "status_tag": "Boiler_C_Status",
+      "status_formula": "[BLR_3_Status]",
+      "pi_dependencies": [
+        {
+          "logical": "BLR_3_HPS_Gen_raw",
+          "pi_name": "UN.UO.71FI1301.PV"
+        }
+      ],
+      "attributes": [
+        "Fuel Flow",
+        "Steam Output",
+        "Boiler Efficiency",
+        "Excess O2"
+      ]
+    },
+    {
+      "element_path": "United > Fuel Network > Utility Unit [UTI] > Fuel Consumers > Utility Unit Specific BoilerD",
+      "short_name": "Utility Unit Specific BoilerD",
+      "network": "Fuel Network",
+      "plant": "Utility Unit [UTI]",
+      "group": "Fuel Consumers",
+      "element_type": "Utility Unit Specific Boiler",
+      "instance": "D",
+      "pi_tag_base": "UTIL.UTI.BLR-104",
+      "status_tag": "Boiler_D_Status",
+      "status_formula": "[BLR_4_Status]",
+      "pi_dependencies": [
+        {
+          "logical": "BLR_4_HPS_Gen_raw",
+          "pi_name": "UN.UO.71FI1401.PV"
+        }
+      ],
+      "attributes": [
+        "Fuel Flow",
+        "Steam Output",
+        "Boiler Efficiency",
+        "Excess O2"
+      ]
+    },
+    {
+      "element_path": "United > Fuel Network > Utility Unit [UTI] > Fuel Consumers > Utility Unit Specific BoilerE",
+      "short_name": "Utility Unit Specific BoilerE",
+      "network": "Fuel Network",
+      "plant": "Utility Unit [UTI]",
+      "group": "Fuel Consumers",
+      "element_type": "Utility Unit Specific Boiler",
+      "instance": "E",
+      "pi_tag_base": "UTIL.UTI.BLR-105",
+      "status_tag": "Boiler_E_Status",
+      "status_formula": "[BLR_5_Status]",
+      "pi_dependencies": [
+        {
+          "logical": "BLR_5_HPS_Gen_raw",
+          "pi_name": "UN.UO.71FI1501A.PV"
+        }
+      ],
+      "attributes": [
+        "Fuel Flow",
+        "Steam Output",
+        "Boiler Efficiency",
+        "Excess O2"
+      ]
+    },
+    {
+      "element_path": "United > Specific Energy Consumers > OLF [OLF] > Fuel Energy > OLF FurnaceA",
+      "short_name": "OLF FurnaceA",
+      "network": "Specific Energy Consumers",
+      "plant": "OLF [OLF]",
+      "group": "Fuel Energy",
+      "element_type": "OLF Furnace",
+      "instance": "A",
+      "pi_tag_base": "OLF.OLF.FRN-101",
+      "status_tag": "Furnace_1_Status",
+      "status_formula": "if([Furnace_1_Status_PIAF]==1,1,0)",
+      "pi_dependencies": [
+        {
+          "logical": "Decoke_Air_Pressure_Furnace_A",
+          "pi_name": "UN.ETH.11PI1045A.PV"
+        },
+        {
+          "logical": "Furnace_A_COT",
+          "pi_name": "UN.ETH.11TC1000A.PV"
+        },
+        {
+          "logical": "Mixed_Feed_MOV_Opening_Furnace_A",
+          "pi_name": "UN.ETH.11HC1085A.MV"
+        },
+        {
+          "logical": "Pass1_Decoke_Air_Flow_Furnace_A",
+          "pi_name": "UN.ETH.11FC1161A.PV"
+        },
+        {
+          "logical": "Pass1_Mixed_Feed_Pressure_Furnace_A",
+          "pi_name": "UN.ETH.11PI1586AA.PV"
+        },
+        {
+          "logical": "Pass2_Decoke_Air_Flow_Furnace_A",
+          "pi_name": "UN.ETH.11FC1261A.PV"
+        },
+        {
+          "logical": "Pass2_Mixed_Feed_Pressure_Furnace_A",
+          "pi_name": "UN.ETH.11PI1586AB.PV"
+        },
+        {
+          "logical": "Pass3_Decoke_Air_Flow_Furnace_A",
+          "pi_name": "UN.ETH.11FC1361A.PV"
+        },
+        {
+          "logical": "Pass3_Mixed_Feed_Pressure_Furnace_A",
+          "pi_name": "UN.ETH.11PI1586AC.PV"
+        },
+        {
+          "logical": "Pass4_Decoke_Air_Flow_Furnace_A",
+          "pi_name": "UN.ETH.11FC1461A.PV"
+        },
+        {
+          "logical": "Pass4_Mixed_Feed_Pressure_Furnace_A",
+          "pi_name": "UN.ETH.11PI1586AD.PV"
+        },
+        {
+          "logical": "Pass5_Decoke_Air_Flow_Furnace_A",
+          "pi_name": "UN.ETH.11FC1561A.PV"
+        },
+        {
+          "logical": "Pass5_Mixed_Feed_Pressure_Furnace_A",
+          "pi_name": "UN.ETH.11PI1586AE.PV"
+        },
+        {
+          "logical": "Pass6_Decoke_Air_Flow_Furnace_A",
+          "pi_name": "UN.ETH.11FC1661A.PV"
+        },
+        {
+          "logical": "Pass6_Mixed_Feed_Pressure_Furnace_A",
+          "pi_name": "UN.ETH.11PI1586AF.PV"
+        },
+        {
+          "logical": "Pass7_Decoke_Air_Flow_Furnace_A",
+          "pi_name": "UN.ETH.11FC1761A.PV"
+        },
+        {
+          "logical": "Pass7_Mixed_Feed_Pressure_Furnace_A",
+          "pi_name": "UN.ETH.11PI1586AG.PV"
+        },
+        {
+          "logical": "Pass8_Decoke_Air_Flow_Furnace_A",
+          "pi_name": "UN.ETH.11FC1861A.PV"
+        },
+        {
+          "logical": "Pass8_Mixed_Feed_Pressure_Furnace_A",
+          "pi_name": "UN.ETH.11PI1586AH.PV"
+        },
+        {
+          "logical": "TQE_Outlet_Pressure_Furnace_A",
+          "pi_name": "UN.ETH.11PI1051A.PV"
+        }
+      ],
+      "attributes": [
+        "Fuel Flow",
+        "Duty",
+        "Stack Temperature",
+        "Efficiency"
+      ]
+    },
+    {
+      "element_path": "United > Specific Energy Consumers > OLF [OLF] > Fuel Energy > OLF FurnaceB",
+      "short_name": "OLF FurnaceB",
+      "network": "Specific Energy Consumers",
+      "plant": "OLF [OLF]",
+      "group": "Fuel Energy",
+      "element_type": "OLF Furnace",
+      "instance": "B",
+      "pi_tag_base": "OLF.OLF.FRN-102",
+      "status_tag": "Furnace_2_Status",
+      "status_formula": "if([Furnace_2_Status_PIAF]==1,1,0)",
+      "pi_dependencies": [
+        {
+          "logical": "Decoke_Air_Pressure_Furnace_B",
+          "pi_name": "UN.ETH.11PI1045B.PV"
+        },
+        {
+          "logical": "Furnace_B_COT",
+          "pi_name": "UN.ETH.11TC1000B.PV"
+        },
+        {
+          "logical": "Mixed_Feed_MOV_Opening_Furnace_B",
+          "pi_name": "UN.ETH.11HC1085B.MV"
+        },
+        {
+          "logical": "Pass1_Decoke_Air_Flow_Furnace_B",
+          "pi_name": "UN.ETH.11FC1161B.PV"
+        },
+        {
+          "logical": "Pass1_Mixed_Feed_Pressure_Furnace_B",
+          "pi_name": "UN.ETH.11PI1586BA.PV"
+        },
+        {
+          "logical": "Pass2_Decoke_Air_Flow_Furnace_B",
+          "pi_name": "UN.ETH.11FC1261B.PV"
+        },
+        {
+          "logical": "Pass2_Mixed_Feed_Pressure_Furnace_B",
+          "pi_name": "UN.ETH.11PI1586BB.PV"
+        },
+        {
+          "logical": "Pass3_Decoke_Air_Flow_Furnace_B",
+          "pi_name": "UN.ETH.11FC1361B.PV"
+        },
+        {
+          "logical": "Pass3_Mixed_Feed_Pressure_Furnace_B",
+          "pi_name": "UN.ETH.11PI1586BC.PV"
+        },
+        {
+          "logical": "Pass4_Decoke_Air_Flow_Furnace_B",
+          "pi_name": "UN.ETH.11FC1461B.PV"
+        },
+        {
+          "logical": "Pass4_Mixed_Feed_Pressure_Furnace_B",
+          "pi_name": "UN.ETH.11PI1586BD.PV"
+        },
+        {
+          "logical": "Pass5_Decoke_Air_Flow_Furnace_B",
+          "pi_name": "UN.ETH.11FC1561B.PV"
+        },
+        {
+          "logical": "Pass5_Mixed_Feed_Pressure_Furnace_B",
+          "pi_name": "UN.ETH.11PI1586BE.PV"
+        },
+        {
+          "logical": "Pass6_Decoke_Air_Flow_Furnace_B",
+          "pi_name": "UN.ETH.11FC1661B.PV"
+        },
+        {
+          "logical": "Pass6_Mixed_Feed_Pressure_Furnace_B",
+          "pi_name": "UN.ETH.11PI1586BF.PV"
+        },
+        {
+          "logical": "Pass7_Decoke_Air_Flow_Furnace_B",
+          "pi_name": "UN.ETH.11FC1761B.PV"
+        },
+        {
+          "logical": "Pass7_Mixed_Feed_Pressure_Furnace_B",
+          "pi_name": "UN.ETH.11PI1586BG.PV"
+        },
+        {
+          "logical": "Pass8_Decoke_Air_Flow_Furnace_B",
+          "pi_name": "UN.ETH.11FC1861B.PV"
+        },
+        {
+          "logical": "Pass8_Mixed_Feed_Pressure_Furnace_B",
+          "pi_name": "UN.ETH.11PI1586BH.PV"
+        },
+        {
+          "logical": "TQE_Outlet_Pressure_Furnace_B",
+          "pi_name": "UN.ETH.11PI1051B.PV"
+        }
+      ],
+      "attributes": [
+        "Fuel Flow",
+        "Duty",
+        "Stack Temperature",
+        "Efficiency"
+      ]
+    },
+    {
+      "element_path": "United > Specific Energy Consumers > OLF [OLF] > Fuel Energy > OLF FurnaceC",
+      "short_name": "OLF FurnaceC",
+      "network": "Specific Energy Consumers",
+      "plant": "OLF [OLF]",
+      "group": "Fuel Energy",
+      "element_type": "OLF Furnace",
+      "instance": "C",
+      "pi_tag_base": "OLF.OLF.FRN-103",
+      "status_tag": "Furnace_3_Status",
+      "status_formula": "if([Furnace_3_Status_PIAF]==1,1,0)",
+      "pi_dependencies": [
+        {
+          "logical": "Decoke_Air_Pressure_Furnace_C",
+          "pi_name": "UN.ETH.11PI1045C.PV"
+        },
+        {
+          "logical": "Furnace_C_COT",
+          "pi_name": "UN.ETH.11TC1000C.PV"
+        },
+        {
+          "logical": "Mixed_Feed_MOV_Opening_Furnace_C",
+          "pi_name": "UN.ETH.11HC1085C.MV"
+        },
+        {
+          "logical": "Pass1_Decoke_Air_Flow_Furnace_C",
+          "pi_name": "UN.ETH.11FC1161C.PV"
+        },
+        {
+          "logical": "Pass1_Mixed_Feed_Pressure_Furnace_C",
+          "pi_name": "UN.ETH.11PI1586CA.PV"
+        },
+        {
+          "logical": "Pass2_Decoke_Air_Flow_Furnace_C",
+          "pi_name": "UN.ETH.11FC1261C.PV"
+        },
+        {
+          "logical": "Pass2_Mixed_Feed_Pressure_Furnace_C",
+          "pi_name": "UN.ETH.11PI1586CB.PV"
+        },
+        {
+          "logical": "Pass3_Decoke_Air_Flow_Furnace_C",
+          "pi_name": "UN.ETH.11FC1361C.PV"
+        },
+        {
+          "logical": "Pass3_Mixed_Feed_Pressure_Furnace_C",
+          "pi_name": "UN.ETH.11PI1586CC.PV"
+        },
+        {
+          "logical": "Pass4_Decoke_Air_Flow_Furnace_C",
+          "pi_name": "UN.ETH.11FC1461C.PV"
+        },
+        {
+          "logical": "Pass4_Mixed_Feed_Pressure_Furnace_C",
+          "pi_name": "UN.ETH.11PI1586CD.PV"
+        },
+        {
+          "logical": "Pass5_Decoke_Air_Flow_Furnace_C",
+          "pi_name": "UN.ETH.11FC1561C.PV"
+        },
+        {
+          "logical": "Pass5_Mixed_Feed_Pressure_Furnace_C",
+          "pi_name": "UN.ETH.11PI1586CE.PV"
+        },
+        {
+          "logical": "Pass6_Decoke_Air_Flow_Furnace_C",
+          "pi_name": "UN.ETH.11FC1661C.PV"
+        },
+        {
+          "logical": "Pass6_Mixed_Feed_Pressure_Furnace_C",
+          "pi_name": "UN.ETH.11PI1586CF.PV"
+        },
+        {
+          "logical": "Pass7_Decoke_Air_Flow_Furnace_C",
+          "pi_name": "UN.ETH.11FC1761C.PV"
+        },
+        {
+          "logical": "Pass7_Mixed_Feed_Pressure_Furnace_C",
+          "pi_name": "UN.ETH.11PI1586CG.PV"
+        },
+        {
+          "logical": "Pass8_Decoke_Air_Flow_Furnace_C",
+          "pi_name": "UN.ETH.11FC1861C.PV"
+        },
+        {
+          "logical": "Pass8_Mixed_Feed_Pressure_Furnace_C",
+          "pi_name": "UN.ETH.11PI1586CH.PV"
+        },
+        {
+          "logical": "TQE_Outlet_Pressure_Furnace_C",
+          "pi_name": "UN.ETH.11PI1051C.PV"
+        }
+      ],
+      "attributes": [
+        "Fuel Flow",
+        "Duty",
+        "Stack Temperature",
+        "Efficiency"
+      ]
+    },
+    {
+      "element_path": "United > Specific Energy Consumers > OLF [OLF] > Fuel Energy > OLF FurnaceD",
+      "short_name": "OLF FurnaceD",
+      "network": "Specific Energy Consumers",
+      "plant": "OLF [OLF]",
+      "group": "Fuel Energy",
+      "element_type": "OLF Furnace",
+      "instance": "D",
+      "pi_tag_base": "OLF.OLF.FRN-104",
+      "status_tag": "Furnace_4_Status",
+      "status_formula": "if([Furnace_4_Status_PIAF]==1,1,0)",
+      "pi_dependencies": [
+        {
+          "logical": "Decoke_Air_Pressure_Furnace_D",
+          "pi_name": "UN.ETH.11PI1045D.PV"
+        },
+        {
+          "logical": "Furnace_D_COT",
+          "pi_name": "UN.ETH.11TC1000D.PV"
+        },
+        {
+          "logical": "Mixed_Feed_MOV_Opening_Furnace_D",
+          "pi_name": "UN.ETH.11HC1085D.MV"
+        },
+        {
+          "logical": "Pass1_Decoke_Air_Flow_Furnace_D",
+          "pi_name": "UN.ETH.11FC1161D.PV"
+        },
+        {
+          "logical": "Pass1_Mixed_Feed_Pressure_Furnace_D",
+          "pi_name": "UN.ETH.11PI1586DA.PV"
+        },
+        {
+          "logical": "Pass2_Decoke_Air_Flow_Furnace_D",
+          "pi_name": "UN.ETH.11FC1261D.PV"
+        },
+        {
+          "logical": "Pass2_Mixed_Feed_Pressure_Furnace_D",
+          "pi_name": "UN.ETH.11PI1586DB.PV"
+        },
+        {
+          "logical": "Pass3_Decoke_Air_Flow_Furnace_D",
+          "pi_name": "UN.ETH.11FC1361D.PV"
+        },
+        {
+          "logical": "Pass3_Mixed_Feed_Pressure_Furnace_D",
+          "pi_name": "UN.ETH.11PI1586DC.PV"
+        },
+        {
+          "logical": "Pass4_Decoke_Air_Flow_Furnace_D",
+          "pi_name": "UN.ETH.11FC1461D.PV"
+        },
+        {
+          "logical": "Pass4_Mixed_Feed_Pressure_Furnace_D",
+          "pi_name": "UN.ETH.11PI1586DD.PV"
+        },
+        {
+          "logical": "Pass5_Decoke_Air_Flow_Furnace_D",
+          "pi_name": "UN.ETH.11FC1561D.PV"
+        },
+        {
+          "logical": "Pass5_Mixed_Feed_Pressure_Furnace_D",
+          "pi_name": "UN.ETH.11PI1586DE.PV"
+        },
+        {
+          "logical": "Pass6_Decoke_Air_Flow_Furnace_D",
+          "pi_name": "UN.ETH.11FC1661D.PV"
+        },
+        {
+          "logical": "Pass6_Mixed_Feed_Pressure_Furnace_D",
+          "pi_name": "UN.ETH.11PI1586DF.PV"
+        },
+        {
+          "logical": "Pass7_Decoke_Air_Flow_Furnace_D",
+          "pi_name": "UN.ETH.11FC1761D.PV"
+        },
+        {
+          "logical": "Pass7_Mixed_Feed_Pressure_Furnace_D",
+          "pi_name": "UN.ETH.11PI1586DG.PV"
+        },
+        {
+          "logical": "Pass8_Decoke_Air_Flow_Furnace_D",
+          "pi_name": "UN.ETH.11FC1861D.PV"
+        },
+        {
+          "logical": "Pass8_Mixed_Feed_Pressure_Furnace_D",
+          "pi_name": "UN.ETH.11PI1586DH.PV"
+        },
+        {
+          "logical": "TQE_Outlet_Pressure_Furnace_D",
+          "pi_name": "UN.ETH.11PI1051D.PV"
+        }
+      ],
+      "attributes": [
+        "Fuel Flow",
+        "Duty",
+        "Stack Temperature",
+        "Efficiency"
+      ]
+    },
+    {
+      "element_path": "United > Specific Energy Consumers > OLF [OLF] > Fuel Energy > OLF FurnaceE",
+      "short_name": "OLF FurnaceE",
+      "network": "Specific Energy Consumers",
+      "plant": "OLF [OLF]",
+      "group": "Fuel Energy",
+      "element_type": "OLF Furnace",
+      "instance": "E",
+      "pi_tag_base": "OLF.OLF.FRN-105",
+      "status_tag": "Furnace_5_Status",
+      "status_formula": "if([Furnace_5_Status_PIAF]==1,1,0)",
+      "pi_dependencies": [
+        {
+          "logical": "Decoke_Air_Pressure_Furnace_E",
+          "pi_name": "UN.ETH.11PI1045E.PV"
+        },
+        {
+          "logical": "Furnace_E_COT",
+          "pi_name": "UN.ETH.11TC1000E.PV"
+        },
+        {
+          "logical": "Mixed_Feed_MOV_Opening_Furnace_E",
+          "pi_name": "UN.ETH.11HC1085E.MV"
+        },
+        {
+          "logical": "Pass1_Decoke_Air_Flow_Furnace_E",
+          "pi_name": "UN.ETH.11FC1161E.PV"
+        },
+        {
+          "logical": "Pass1_Mixed_Feed_Pressure_Furnace_E",
+          "pi_name": "UN.ETH.11PI1586EA.PV"
+        },
+        {
+          "logical": "Pass2_Decoke_Air_Flow_Furnace_E",
+          "pi_name": "UN.ETH.11FC1261E.PV"
+        },
+        {
+          "logical": "Pass2_Mixed_Feed_Pressure_Furnace_E",
+          "pi_name": "UN.ETH.11PI1586EB.PV"
+        },
+        {
+          "logical": "Pass3_Decoke_Air_Flow_Furnace_E",
+          "pi_name": "UN.ETH.11FC1361E.PV"
+        },
+        {
+          "logical": "Pass3_Mixed_Feed_Pressure_Furnace_E",
+          "pi_name": "UN.ETH.11PI1586EC.PV"
+        },
+        {
+          "logical": "Pass4_Decoke_Air_Flow_Furnace_E",
+          "pi_name": "UN.ETH.11FC1461E.PV"
+        },
+        {
+          "logical": "Pass4_Mixed_Feed_Pressure_Furnace_E",
+          "pi_name": "UN.ETH.11PI1586ED.PV"
+        },
+        {
+          "logical": "Pass5_Decoke_Air_Flow_Furnace_E",
+          "pi_name": "UN.ETH.11FC1561E.PV"
+        },
+        {
+          "logical": "Pass5_Mixed_Feed_Pressure_Furnace_E",
+          "pi_name": "UN.ETH.11PI1586EE.PV"
+        },
+        {
+          "logical": "Pass6_Decoke_Air_Flow_Furnace_E",
+          "pi_name": "UN.ETH.11FC1661E.PV"
+        },
+        {
+          "logical": "Pass6_Mixed_Feed_Pressure_Furnace_E",
+          "pi_name": "UN.ETH.11PI1586EF.PV"
+        },
+        {
+          "logical": "Pass7_Decoke_Air_Flow_Furnace_E",
+          "pi_name": "UN.ETH.11FC1761E.PV"
+        },
+        {
+          "logical": "Pass7_Mixed_Feed_Pressure_Furnace_E",
+          "pi_name": "UN.ETH.11PI1586EG.PV"
+        },
+        {
+          "logical": "Pass8_Decoke_Air_Flow_Furnace_E",
+          "pi_name": "UN.ETH.11FC1861E.PV"
+        },
+        {
+          "logical": "Pass8_Mixed_Feed_Pressure_Furnace_E",
+          "pi_name": "UN.ETH.11PI1586EH.PV"
+        },
+        {
+          "logical": "TQE_Outlet_Pressure_Furnace_E",
+          "pi_name": "UN.ETH.11PI1051E.PV"
+        }
+      ],
+      "attributes": [
+        "Fuel Flow",
+        "Duty",
+        "Stack Temperature",
+        "Efficiency"
+      ]
+    },
+    {
+      "element_path": "United > Specific Energy Consumers > OLF [OLF] > Fuel Energy > OLF FurnaceF",
+      "short_name": "OLF FurnaceF",
+      "network": "Specific Energy Consumers",
+      "plant": "OLF [OLF]",
+      "group": "Fuel Energy",
+      "element_type": "OLF Furnace",
+      "instance": "F",
+      "pi_tag_base": "OLF.OLF.FRN-106",
+      "status_tag": "Furnace_6_Status",
+      "status_formula": "if([Furnace_6_Status_PIAF]==1,1,0)",
+      "pi_dependencies": [
+        {
+          "logical": "Decoke_Air_Pressure_Furnace_F",
+          "pi_name": "UN.ETH.11PI1045F.PV"
+        },
+        {
+          "logical": "Furnace_F_COT",
+          "pi_name": "UN.ETH.11TC1000F.PV"
+        },
+        {
+          "logical": "Mixed_Feed_MOV_Opening_Furnace_F",
+          "pi_name": "UN.ETH.11HC1085F.MV"
+        },
+        {
+          "logical": "Pass1_Decoke_Air_Flow_Furnace_F",
+          "pi_name": "UN.ETH.11FC1161F.PV"
+        },
+        {
+          "logical": "Pass1_Mixed_Feed_Pressure_Furnace_F",
+          "pi_name": "UN.ETH.11PI1586FA.PV"
+        },
+        {
+          "logical": "Pass2_Decoke_Air_Flow_Furnace_F",
+          "pi_name": "UN.ETH.11FC1261F.PV"
+        },
+        {
+          "logical": "Pass2_Mixed_Feed_Pressure_Furnace_F",
+          "pi_name": "UN.ETH.11PI1586FB.PV"
+        },
+        {
+          "logical": "Pass3_Decoke_Air_Flow_Furnace_F",
+          "pi_name": "UN.ETH.11FC1361F.PV"
+        },
+        {
+          "logical": "Pass3_Mixed_Feed_Pressure_Furnace_F",
+          "pi_name": "UN.ETH.11PI1586FC.PV"
+        },
+        {
+          "logical": "Pass4_Decoke_Air_Flow_Furnace_F",
+          "pi_name": "UN.ETH.11FC1461F.PV"
+        },
+        {
+          "logical": "Pass4_Mixed_Feed_Pressure_Furnace_F",
+          "pi_name": "UN.ETH.11PI1586FD.PV"
+        },
+        {
+          "logical": "Pass5_Decoke_Air_Flow_Furnace_F",
+          "pi_name": "UN.ETH.11FC1561F.PV"
+        },
+        {
+          "logical": "Pass5_Mixed_Feed_Pressure_Furnace_F",
+          "pi_name": "UN.ETH.11PI1586FE.PV"
+        },
+        {
+          "logical": "Pass6_Decoke_Air_Flow_Furnace_F",
+          "pi_name": "UN.ETH.11FC1661F.PV"
+        },
+        {
+          "logical": "Pass6_Mixed_Feed_Pressure_Furnace_F",
+          "pi_name": "UN.ETH.11PI1586FF.PV"
+        },
+        {
+          "logical": "Pass7_Decoke_Air_Flow_Furnace_F",
+          "pi_name": "UN.ETH.11FC1761F.PV"
+        },
+        {
+          "logical": "Pass7_Mixed_Feed_Pressure_Furnace_F",
+          "pi_name": "UN.ETH.11PI1586FG.PV"
+        },
+        {
+          "logical": "Pass8_Decoke_Air_Flow_Furnace_F",
+          "pi_name": "UN.ETH.11FC1861F.PV"
+        },
+        {
+          "logical": "Pass8_Mixed_Feed_Pressure_Furnace_F",
+          "pi_name": "UN.ETH.11PI1586FH.PV"
+        },
+        {
+          "logical": "TQE_Outlet_Pressure_Furnace_F",
+          "pi_name": "UN.ETH.11PI1051F.PV"
+        }
+      ],
+      "attributes": [
+        "Fuel Flow",
+        "Duty",
+        "Stack Temperature",
+        "Efficiency"
+      ]
+    },
+    {
+      "element_path": "United > Specific Energy Consumers > OLF [OLF] > Fuel Energy > OLF FurnaceG",
+      "short_name": "OLF FurnaceG",
+      "network": "Specific Energy Consumers",
+      "plant": "OLF [OLF]",
+      "group": "Fuel Energy",
+      "element_type": "OLF Furnace",
+      "instance": "G",
+      "pi_tag_base": "OLF.OLF.FRN-107",
+      "status_tag": "Furnace_7_Status",
+      "status_formula": "if([Furnace_7_Status_PIAF]==1,1,0)",
+      "pi_dependencies": [
+        {
+          "logical": "Decoke_Air_Pressure_Furnace_G",
+          "pi_name": "UN.ETH.11PI1045G.PV"
+        },
+        {
+          "logical": "Furnace_G_COT",
+          "pi_name": "UN.ETH.11TC1000G.PV"
+        },
+        {
+          "logical": "Mixed_Feed_MOV_Opening_Furnace_G",
+          "pi_name": "UN.ETH.11HC1085G.MV"
+        },
+        {
+          "logical": "Pass1_Decoke_Air_Flow_Furnace_G",
+          "pi_name": "UN.ETH.11FC1161G.PV"
+        },
+        {
+          "logical": "Pass1_Mixed_Feed_Pressure_Furnace_G",
+          "pi_name": "UN.ETH.11PI1586GA.PV"
+        },
+        {
+          "logical": "Pass2_Decoke_Air_Flow_Furnace_G",
+          "pi_name": "UN.ETH.11FC1261G.PV"
+        },
+        {
+          "logical": "Pass2_Mixed_Feed_Pressure_Furnace_G",
+          "pi_name": "UN.ETH.11PI1586GB.PV"
+        },
+        {
+          "logical": "Pass3_Decoke_Air_Flow_Furnace_G",
+          "pi_name": "UN.ETH.11FC1361G.PV"
+        },
+        {
+          "logical": "Pass3_Mixed_Feed_Pressure_Furnace_G",
+          "pi_name": "UN.ETH.11PI1586GC.PV"
+        },
+        {
+          "logical": "Pass4_Decoke_Air_Flow_Furnace_G",
+          "pi_name": "UN.ETH.11FC1461G.PV"
+        },
+        {
+          "logical": "Pass4_Mixed_Feed_Pressure_Furnace_G",
+          "pi_name": "UN.ETH.11PI1586GD.PV"
+        },
+        {
+          "logical": "Pass5_Decoke_Air_Flow_Furnace_G",
+          "pi_name": "UN.ETH.11FC1561G.PV"
+        },
+        {
+          "logical": "Pass5_Mixed_Feed_Pressure_Furnace_G",
+          "pi_name": "UN.ETH.11PI1586GE.PV"
+        },
+        {
+          "logical": "Pass6_Decoke_Air_Flow_Furnace_G",
+          "pi_name": "UN.ETH.11FC1661G.PV"
+        },
+        {
+          "logical": "Pass6_Mixed_Feed_Pressure_Furnace_G",
+          "pi_name": "UN.ETH.11PI1586GF.PV"
+        },
+        {
+          "logical": "Pass7_Decoke_Air_Flow_Furnace_G",
+          "pi_name": "UN.ETH.11FC1761G.PV"
+        },
+        {
+          "logical": "Pass7_Mixed_Feed_Pressure_Furnace_G",
+          "pi_name": "UN.ETH.11PI1586GG.PV"
+        },
+        {
+          "logical": "Pass8_Decoke_Air_Flow_Furnace_G",
+          "pi_name": "UN.ETH.11FC1861G.PV"
+        },
+        {
+          "logical": "Pass8_Mixed_Feed_Pressure_Furnace_G",
+          "pi_name": "UN.ETH.11PI1586GH.PV"
+        },
+        {
+          "logical": "TQE_Outlet_Pressure_Furnace_G",
+          "pi_name": "UN.ETH.11PI1051G.PV"
+        }
+      ],
+      "attributes": [
+        "Fuel Flow",
+        "Duty",
+        "Stack Temperature",
+        "Efficiency"
+      ]
+    },
+    {
+      "element_path": "United > Specific Energy Consumers > OLF [OLF] > Fuel Energy > OLF FurnaceH",
+      "short_name": "OLF FurnaceH",
+      "network": "Specific Energy Consumers",
+      "plant": "OLF [OLF]",
+      "group": "Fuel Energy",
+      "element_type": "OLF Furnace",
+      "instance": "H",
+      "pi_tag_base": "OLF.OLF.FRN-108",
+      "status_tag": "Furnace_8_Status",
+      "status_formula": "if([Furnace_8_Status_PIAF]==1,1,0)",
+      "pi_dependencies": [
+        {
+          "logical": "Decoke_Air_Pressure_Furnace_H",
+          "pi_name": "UN.ETH.11PI1045H.PV"
+        },
+        {
+          "logical": "Furnace_H_COT",
+          "pi_name": "UN.ETH.11TC1000H.PV"
+        },
+        {
+          "logical": "Mixed_Feed_MOV_Opening_Furnace_H",
+          "pi_name": "UN.ETH.11HC1085H.MV"
+        },
+        {
+          "logical": "Pass1_Decoke_Air_Flow_Furnace_H",
+          "pi_name": "UN.ETH.11FC1161H.PV"
+        },
+        {
+          "logical": "Pass1_Mixed_Feed_Pressure_Furnace_H",
+          "pi_name": "UN.ETH.11PI1586HA.PV"
+        },
+        {
+          "logical": "Pass2_Decoke_Air_Flow_Furnace_H",
+          "pi_name": "UN.ETH.11FC1261H.PV"
+        },
+        {
+          "logical": "Pass2_Mixed_Feed_Pressure_Furnace_H",
+          "pi_name": "UN.ETH.11PI1586HB.PV"
+        },
+        {
+          "logical": "Pass3_Decoke_Air_Flow_Furnace_H",
+          "pi_name": "UN.ETH.11FC1361H.PV"
+        },
+        {
+          "logical": "Pass3_Mixed_Feed_Pressure_Furnace_H",
+          "pi_name": "UN.ETH.11PI1586HC.PV"
+        },
+        {
+          "logical": "Pass4_Decoke_Air_Flow_Furnace_H",
+          "pi_name": "UN.ETH.11FC1461H.PV"
+        },
+        {
+          "logical": "Pass4_Mixed_Feed_Pressure_Furnace_H",
+          "pi_name": "UN.ETH.11PI1586HD.PV"
+        },
+        {
+          "logical": "Pass5_Decoke_Air_Flow_Furnace_H",
+          "pi_name": "UN.ETH.11FC1561H.PV"
+        },
+        {
+          "logical": "Pass5_Mixed_Feed_Pressure_Furnace_H",
+          "pi_name": "UN.ETH.11PI1586HE.PV"
+        },
+        {
+          "logical": "Pass6_Decoke_Air_Flow_Furnace_H",
+          "pi_name": "UN.ETH.11FC1661H.PV"
+        },
+        {
+          "logical": "Pass6_Mixed_Feed_Pressure_Furnace_H",
+          "pi_name": "UN.ETH.11PI1586HF.PV"
+        },
+        {
+          "logical": "Pass7_Decoke_Air_Flow_Furnace_H",
+          "pi_name": "UN.ETH.11FC1761H.PV"
+        },
+        {
+          "logical": "Pass7_Mixed_Feed_Pressure_Furnace_H",
+          "pi_name": "UN.ETH.11PI1586HG.PV"
+        },
+        {
+          "logical": "Pass8_Decoke_Air_Flow_Furnace_H",
+          "pi_name": "UN.ETH.11FC1861H.PV"
+        },
+        {
+          "logical": "Pass8_Mixed_Feed_Pressure_Furnace_H",
+          "pi_name": "UN.ETH.11PI1586HH.PV"
+        },
+        {
+          "logical": "TQE_Outlet_Pressure_Furnace_H",
+          "pi_name": "UN.ETH.11PI1051H.PV"
+        }
+      ],
+      "attributes": [
+        "Fuel Flow",
+        "Duty",
+        "Stack Temperature",
+        "Efficiency"
+      ]
+    },
+    {
+      "element_path": "United > Specific Energy Consumers > OLF [OLF] > Fuel Energy > OLF FurnaceI",
+      "short_name": "OLF FurnaceI",
+      "network": "Specific Energy Consumers",
+      "plant": "OLF [OLF]",
+      "group": "Fuel Energy",
+      "element_type": "OLF Furnace",
+      "instance": "I",
+      "pi_tag_base": "OLF.OLF.FRN-109",
+      "status_tag": "Furnace_9_Status",
+      "status_formula": "if([Furnace_9_Status_PIAF]==1,1,0)",
+      "pi_dependencies": [
+        {
+          "logical": "Decoke_Air_Pressure_Furnace_J",
+          "pi_name": "UN.ETH.11PI1045J.PV"
+        },
+        {
+          "logical": "Furnace_J_COT",
+          "pi_name": "UN.ETH.11TC1000J.PV"
+        },
+        {
+          "logical": "Mixed_Feed_MOV_Opening_Furnace_J",
+          "pi_name": "UN.ETH.11HC1085J.MV"
+        },
+        {
+          "logical": "Pass1_Decoke_Air_Flow_Furnace_J",
+          "pi_name": "UN.ETH.11FC1161J.PV"
+        },
+        {
+          "logical": "Pass1_Mixed_Feed_Pressure_Furnace_J",
+          "pi_name": "UN.ETH.11PI1586JA.PV"
+        },
+        {
+          "logical": "Pass2_Decoke_Air_Flow_Furnace_J",
+          "pi_name": "UN.ETH.11FC1261J.PV"
+        },
+        {
+          "logical": "Pass2_Mixed_Feed_Pressure_Furnace_J",
+          "pi_name": "UN.ETH.11PI1586JB.PV"
+        },
+        {
+          "logical": "Pass3_Decoke_Air_Flow_Furnace_J",
+          "pi_name": "UN.ETH.11FC1361J.PV"
+        },
+        {
+          "logical": "Pass3_Mixed_Feed_Pressure_Furnace_J",
+          "pi_name": "UN.ETH.11PI1586JC.PV"
+        },
+        {
+          "logical": "Pass4_Decoke_Air_Flow_Furnace_J",
+          "pi_name": "UN.ETH.11FC1461J.PV"
+        },
+        {
+          "logical": "Pass4_Mixed_Feed_Pressure_Furnace_J",
+          "pi_name": "UN.ETH.11PI1586JD.PV"
+        },
+        {
+          "logical": "Pass5_Decoke_Air_Flow_Furnace_J",
+          "pi_name": "UN.ETH.11FC1561J.PV"
+        },
+        {
+          "logical": "Pass5_Mixed_Feed_Pressure_Furnace_J",
+          "pi_name": "UN.ETH.11PI1586JE.PV"
+        },
+        {
+          "logical": "Pass6_Decoke_Air_Flow_Furnace_J",
+          "pi_name": "UN.ETH.11FC1661J.PV"
+        },
+        {
+          "logical": "Pass6_Mixed_Feed_Pressure_Furnace_J",
+          "pi_name": "UN.ETH.11PI1586JF.PV"
+        },
+        {
+          "logical": "Pass7_Decoke_Air_Flow_Furnace_J",
+          "pi_name": "UN.ETH.11FC1761J.PV"
+        },
+        {
+          "logical": "Pass7_Mixed_Feed_Pressure_Furnace_J",
+          "pi_name": "UN.ETH.11PI1586JG.PV"
+        },
+        {
+          "logical": "Pass8_Decoke_Air_Flow_Furnace_J",
+          "pi_name": "UN.ETH.11FC1861J.PV"
+        },
+        {
+          "logical": "TQE_Outlet_Pressure_Furnace_J",
+          "pi_name": "UN.ETH.11PI1051J.PV"
+        }
+      ],
+      "attributes": [
+        "Fuel Flow",
+        "Duty",
+        "Stack Temperature",
+        "Efficiency"
+      ]
+    },
+    {
+      "element_path": "United > Specific Energy Consumers > OLF [OLF] > Steam Energy > OLF TurbineA",
+      "short_name": "OLF TurbineA",
+      "network": "Specific Energy Consumers",
+      "plant": "OLF [OLF]",
+      "group": "Steam Energy",
+      "element_type": "OLF Turbine",
+      "instance": "A",
+      "pi_tag_base": "OLF.OLF.TBN-101",
+      "status_tag": "CW_Turbine_A_Status",
+      "status_formula": "if(([CW_Turbine_A_Steam])>16||([CW_Turbine_A_RPM])>2100,1,0)",
+      "pi_dependencies": [
+        {
+          "logical": "CW_Turbine_A_RPM",
+          "pi_name": "UN.UO.78SI8001.PV"
+        },
+        {
+          "logical": "CW_Turbine_A_Steam",
+          "pi_name": "UN.UO.78FI8085.PV"
+        }
+      ],
+      "attributes": [
+        "Inlet Steam Flow",
+        "Inlet Pressure",
+        "Outlet Pressure",
+        "Shaft Power",
+        "Isentropic Efficiency"
+      ]
+    },
+    {
+      "element_path": "United > Specific Energy Consumers > OLF [OLF] > Steam Energy > OLF TurbineB",
+      "short_name": "OLF TurbineB",
+      "network": "Specific Energy Consumers",
+      "plant": "OLF [OLF]",
+      "group": "Steam Energy",
+      "element_type": "OLF Turbine",
+      "instance": "B",
+      "pi_tag_base": "OLF.OLF.TBN-102",
+      "status_tag": "CW_Turbine_B_Status",
+      "status_formula": "if(([CW_Turbine_B_Steam])>16||([CW_Turbine_B_RPM])>2100,1,0)",
+      "pi_dependencies": [
+        {
+          "logical": "CW_Turbine_B_RPM",
+          "pi_name": "UN.UO.78SI8003.PV"
+        },
+        {
+          "logical": "CW_Turbine_B_Steam",
+          "pi_name": "UN.UO.78FI8086.PV"
+        }
+      ],
+      "attributes": [
+        "Inlet Steam Flow",
+        "Inlet Pressure",
+        "Outlet Pressure",
+        "Shaft Power",
+        "Isentropic Efficiency"
+      ]
+    },
+    {
+      "element_path": "United > Specific Energy Consumers > OLF [OLF] > Steam Energy > OLF TurbineC",
+      "short_name": "OLF TurbineC",
+      "network": "Specific Energy Consumers",
+      "plant": "OLF [OLF]",
+      "group": "Steam Energy",
+      "element_type": "OLF Turbine",
+      "instance": "C",
+      "pi_tag_base": "OLF.OLF.TBN-103",
+      "status_tag": "CW_Turbine_G_Status",
+      "status_formula": "if(([CW_Turbine_G_Steam])>16||([CW_Turbine_G_RPM])>2100,1,0)",
+      "pi_dependencies": [
+        {
+          "logical": "CW_Turbine_G_RPM",
+          "pi_name": "UN.UO.78SI8600.PV"
+        },
+        {
+          "logical": "CW_Turbine_G_Steam",
+          "pi_name": "UN.UO.78FI8623.PV"
+        }
+      ],
+      "attributes": [
+        "Inlet Steam Flow",
+        "Inlet Pressure",
+        "Outlet Pressure",
+        "Shaft Power",
+        "Isentropic Efficiency"
+      ]
+    },
+    {
+      "element_path": "United > Specific Energy Consumers > OLF [OLF] > Steam Energy > OLF Steam ExchangerA",
+      "short_name": "OLF Steam ExchangerA",
+      "network": "Specific Energy Consumers",
+      "plant": "OLF [OLF]",
+      "group": "Steam Energy",
+      "element_type": "OLF Steam Exchanger",
+      "instance": "A",
+      "pi_tag_base": "OLF.OLF.SHX-101",
+      "status_tag": "E_1102_Status",
+      "status_formula": "if([Ethane_feed_saturator_inlet_steam_flow]>10,1,0)",
+      "pi_dependencies": [
+        {
+          "logical": "Ethane_feed_saturator_inlet_steam_flow",
+          "pi_name": "UN.ETH.11FC1021.PV"
+        }
+      ],
+      "attributes": [
+        "Steam Flow",
+        "Steam Pressure",
+        "Duty",
+        "LMTD"
+      ]
+    },
+    {
+      "element_path": "United > Specific Energy Consumers > EG1 [EG1] > Electric Energy > EG1 CompressorA",
+      "short_name": "EG1 CompressorA",
+      "network": "Specific Energy Consumers",
+      "plant": "EG1 [EG1]",
+      "group": "Electric Energy",
+      "element_type": "EG1 Compressor",
+      "instance": "A",
+      "pi_tag_base": "EG1.EG1.COMP-101",
+      "status_tag": "KM_2115_Status",
+      "status_formula": "if([KM_2115_Flow]>700,1,0)",
+      "pi_dependencies": [
+        {
+          "logical": "KM_2115_Flow",
+          "pi_name": "UN.EG1.21FI1780.PV"
+        }
+      ],
+      "attributes": [
+        "Driver Power",
+        "Suction Flow",
+        "Suction Pressure",
+        "Discharge Pressure",
+        "Polytropic Efficiency"
+      ]
+    },
+    {
+      "element_path": "United > Specific Energy Consumers > EG1 [EG1] > Steam Energy > EG1 ReboilerA",
+      "short_name": "EG1 ReboilerA",
+      "network": "Specific Energy Consumers",
+      "plant": "EG1 [EG1]",
+      "group": "Steam Energy",
+      "element_type": "EG1 Reboiler",
+      "instance": "A",
+      "pi_tag_base": "EG1.EG1.REB-101",
+      "status_tag": "EG1_Stripping_status",
+      "status_formula": "if([EG1_EOE]>40,1,0)",
+      "pi_dependencies": [
+        {
+          "logical": "EG1_DEG_production_flow",
+          "pi_name": "UN.EG1.27FC7301.PV"
+        },
+        {
+          "logical": "EG1_HEG_production_flow",
+          "pi_name": "UN.EG1.27FC7406.PV"
+        },
+        {
+          "logical": "EG1_MEG_production_flow",
+          "pi_name": "UN.EG1.26FC6415.PV"
+        },
+        {
+          "logical": "EG1_TEG_production_flow",
+          "pi_name": "UN.EG1.27FC7501.PV"
+        }
+      ],
+      "attributes": [
+        "Steam Flow",
+        "Steam Pressure",
+        "Duty",
+        "Column ID"
+      ]
+    },
+    {
+      "element_path": "United > Specific Energy Consumers > EG1 [EG1] > Steam Energy > EG1 ReboilerB",
+      "short_name": "EG1 ReboilerB",
+      "network": "Specific Energy Consumers",
+      "plant": "EG1 [EG1]",
+      "group": "Steam Energy",
+      "element_type": "EG1 Reboiler",
+      "instance": "B",
+      "pi_tag_base": "EG1.EG1.REB-102",
+      "status_tag": "EG1_Stripping_status",
+      "status_formula": "if([EG1_EOE]>40,1,0)",
+      "pi_dependencies": [
+        {
+          "logical": "EG1_DEG_production_flow",
+          "pi_name": "UN.EG1.27FC7301.PV"
+        },
+        {
+          "logical": "EG1_HEG_production_flow",
+          "pi_name": "UN.EG1.27FC7406.PV"
+        },
+        {
+          "logical": "EG1_MEG_production_flow",
+          "pi_name": "UN.EG1.26FC6415.PV"
+        },
+        {
+          "logical": "EG1_TEG_production_flow",
+          "pi_name": "UN.EG1.27FC7501.PV"
+        }
+      ],
+      "attributes": [
+        "Steam Flow",
+        "Steam Pressure",
+        "Duty",
+        "Column ID"
+      ]
+    },
+    {
+      "element_path": "United > Specific Energy Consumers > EG1 [EG1] > Steam Energy > EG1 ReboilerC",
+      "short_name": "EG1 ReboilerC",
+      "network": "Specific Energy Consumers",
+      "plant": "EG1 [EG1]",
+      "group": "Steam Energy",
+      "element_type": "EG1 Reboiler",
+      "instance": "C",
+      "pi_tag_base": "EG1.EG1.REB-103",
+      "status_tag": "EG1_Stripping_status",
+      "status_formula": "if([EG1_EOE]>40,1,0)",
+      "pi_dependencies": [
+        {
+          "logical": "EG1_DEG_production_flow",
+          "pi_name": "UN.EG1.27FC7301.PV"
+        },
+        {
+          "logical": "EG1_HEG_production_flow",
+          "pi_name": "UN.EG1.27FC7406.PV"
+        },
+        {
+          "logical": "EG1_MEG_production_flow",
+          "pi_name": "UN.EG1.26FC6415.PV"
+        },
+        {
+          "logical": "EG1_TEG_production_flow",
+          "pi_name": "UN.EG1.27FC7501.PV"
+        }
+      ],
+      "attributes": [
+        "Steam Flow",
+        "Steam Pressure",
+        "Duty",
+        "Column ID"
+      ]
+    },
+    {
+      "element_path": "United > Specific Energy Consumers > EG1 [EG1] > Steam Energy > EG1 Live Steam InjectionA",
+      "short_name": "EG1 Live Steam InjectionA",
+      "network": "Specific Energy Consumers",
+      "plant": "EG1 [EG1]",
+      "group": "Steam Energy",
+      "element_type": "EG1 Live Steam Injection",
+      "instance": "A",
+      "pi_tag_base": "EG1.EG1.LSI-101",
+      "status_tag": "EG1_Stripping_status",
+      "status_formula": "if([EG1_EOE]>40,1,0)",
+      "pi_dependencies": [
+        {
+          "logical": "EG1_DEG_production_flow",
+          "pi_name": "UN.EG1.27FC7301.PV"
+        },
+        {
+          "logical": "EG1_HEG_production_flow",
+          "pi_name": "UN.EG1.27FC7406.PV"
+        },
+        {
+          "logical": "EG1_MEG_production_flow",
+          "pi_name": "UN.EG1.26FC6415.PV"
+        },
+        {
+          "logical": "EG1_TEG_production_flow",
+          "pi_name": "UN.EG1.27FC7501.PV"
+        }
+      ],
+      "attributes": [
+        "Steam Flow",
+        "Steam Pressure",
+        "Steam Temperature",
+        "Column ID"
+      ]
+    },
+    {
+      "element_path": "United > Specific Energy Consumers > EG1 [EG1] > Steam Energy > EG1 Live Steam InjectionB",
+      "short_name": "EG1 Live Steam InjectionB",
+      "network": "Specific Energy Consumers",
+      "plant": "EG1 [EG1]",
+      "group": "Steam Energy",
+      "element_type": "EG1 Live Steam Injection",
+      "instance": "B",
+      "pi_tag_base": "EG1.EG1.LSI-102",
+      "status_tag": "EG1_Stripping_status",
+      "status_formula": "if([EG1_EOE]>40,1,0)",
+      "pi_dependencies": [
+        {
+          "logical": "EG1_DEG_production_flow",
+          "pi_name": "UN.EG1.27FC7301.PV"
+        },
+        {
+          "logical": "EG1_HEG_production_flow",
+          "pi_name": "UN.EG1.27FC7406.PV"
+        },
+        {
+          "logical": "EG1_MEG_production_flow",
+          "pi_name": "UN.EG1.26FC6415.PV"
+        },
+        {
+          "logical": "EG1_TEG_production_flow",
+          "pi_name": "UN.EG1.27FC7501.PV"
+        }
+      ],
+      "attributes": [
+        "Steam Flow",
+        "Steam Pressure",
+        "Steam Temperature",
+        "Column ID"
+      ]
+    },
+    {
+      "element_path": "United > Specific Energy Consumers > EG1 [EG1] > Steam Energy > EG1 Steam ExchangerA",
+      "short_name": "EG1 Steam ExchangerA",
+      "network": "Specific Energy Consumers",
+      "plant": "EG1 [EG1]",
+      "group": "Steam Energy",
+      "element_type": "EG1 Steam Exchanger",
+      "instance": "A",
+      "pi_tag_base": "EG1.EG1.SHX-101",
+      "status_tag": "E_2531_Status",
+      "status_formula": "if([EG1_EOE]>40,1,0)",
+      "pi_dependencies": [
+        {
+          "logical": "EG1_DEG_production_flow",
+          "pi_name": "UN.EG1.27FC7301.PV"
+        },
+        {
+          "logical": "EG1_HEG_production_flow",
+          "pi_name": "UN.EG1.27FC7406.PV"
+        },
+        {
+          "logical": "EG1_MEG_production_flow",
+          "pi_name": "UN.EG1.26FC6415.PV"
+        },
+        {
+          "logical": "EG1_TEG_production_flow",
+          "pi_name": "UN.EG1.27FC7501.PV"
+        }
+      ],
+      "attributes": [
+        "Steam Flow",
+        "Steam Pressure",
+        "Duty",
+        "LMTD"
+      ]
+    },
+    {
+      "element_path": "United > Specific Energy Consumers > EG2 [EG2] > Electric Energy > EG2 CompressorA",
+      "short_name": "EG2 CompressorA",
+      "network": "Specific Energy Consumers",
+      "plant": "EG2 [EG2]",
+      "group": "Electric Energy",
+      "element_type": "EG2 Compressor",
+      "instance": "A",
+      "pi_tag_base": "EG2.EG2.COMP-101",
+      "status_tag": "KM_4115_Status",
+      "status_formula": "if([KM_4115_Flow]>700,1,0)",
+      "pi_dependencies": [
+        {
+          "logical": "KM_4115_Flow",
+          "pi_name": "UN.EG2.41FI1780.PV"
+        }
+      ],
+      "attributes": [
+        "Driver Power",
+        "Suction Flow",
+        "Suction Pressure",
+        "Discharge Pressure",
+        "Polytropic Efficiency"
+      ]
+    },
+    {
+      "element_path": "United > Specific Energy Consumers > EG2 [EG2] > Steam Energy > EG2 Live Steam InjectionA",
+      "short_name": "EG2 Live Steam InjectionA",
+      "network": "Specific Energy Consumers",
+      "plant": "EG2 [EG2]",
+      "group": "Steam Energy",
+      "element_type": "EG2 Live Steam Injection",
+      "instance": "A",
+      "pi_tag_base": "EG2.EG2.LSI-101",
+      "status_tag": "EG2_Stripping_status",
+      "status_formula": "if([EG2_EOE]>40,1,0)",
+      "pi_dependencies": [
+        {
+          "logical": "EG2_DEG_production_flow",
+          "pi_name": "UN.EG2.47FC7301.PV"
+        },
+        {
+          "logical": "EG2_HEG_production_flow",
+          "pi_name": "UN.EG2.47FC7406.PV"
+        },
+        {
+          "logical": "EG2_MEG_production_flow",
+          "pi_name": "UN.EG2.46FC6415.PV"
+        },
+        {
+          "logical": "EG2_TEG_production_flow",
+          "pi_name": "UN.EG2.47FC7501.PV"
+        }
+      ],
+      "attributes": [
+        "Steam Flow",
+        "Steam Pressure",
+        "Steam Temperature",
+        "Column ID"
+      ]
+    },
+    {
+      "element_path": "United > Specific Energy Consumers > EG2 [EG2] > Steam Energy > EG2 Live Steam InjectionB",
+      "short_name": "EG2 Live Steam InjectionB",
+      "network": "Specific Energy Consumers",
+      "plant": "EG2 [EG2]",
+      "group": "Steam Energy",
+      "element_type": "EG2 Live Steam Injection",
+      "instance": "B",
+      "pi_tag_base": "EG2.EG2.LSI-102",
+      "status_tag": "EG2_Stripping_status",
+      "status_formula": "if([EG2_EOE]>40,1,0)",
+      "pi_dependencies": [
+        {
+          "logical": "EG2_DEG_production_flow",
+          "pi_name": "UN.EG2.47FC7301.PV"
+        },
+        {
+          "logical": "EG2_HEG_production_flow",
+          "pi_name": "UN.EG2.47FC7406.PV"
+        },
+        {
+          "logical": "EG2_MEG_production_flow",
+          "pi_name": "UN.EG2.46FC6415.PV"
+        },
+        {
+          "logical": "EG2_TEG_production_flow",
+          "pi_name": "UN.EG2.47FC7501.PV"
+        }
+      ],
+      "attributes": [
+        "Steam Flow",
+        "Steam Pressure",
+        "Steam Temperature",
+        "Column ID"
+      ]
+    },
+    {
+      "element_path": "United > Specific Energy Consumers > EG2 [EG2] > Steam Energy > EG2 ReboilerA",
+      "short_name": "EG2 ReboilerA",
+      "network": "Specific Energy Consumers",
+      "plant": "EG2 [EG2]",
+      "group": "Steam Energy",
+      "element_type": "EG2 Reboiler",
+      "instance": "A",
+      "pi_tag_base": "EG2.EG2.REB-101",
+      "status_tag": "EG2_Stripping_status",
+      "status_formula": "if([EG2_EOE]>40,1,0)",
+      "pi_dependencies": [
+        {
+          "logical": "EG2_DEG_production_flow",
+          "pi_name": "UN.EG2.47FC7301.PV"
+        },
+        {
+          "logical": "EG2_HEG_production_flow",
+          "pi_name": "UN.EG2.47FC7406.PV"
+        },
+        {
+          "logical": "EG2_MEG_production_flow",
+          "pi_name": "UN.EG2.46FC6415.PV"
+        },
+        {
+          "logical": "EG2_TEG_production_flow",
+          "pi_name": "UN.EG2.47FC7501.PV"
+        }
+      ],
+      "attributes": [
+        "Steam Flow",
+        "Steam Pressure",
+        "Duty",
+        "Column ID"
+      ]
+    },
+    {
+      "element_path": "United > Specific Energy Consumers > EG2 [EG2] > Steam Energy > EG2 ReboilerB",
+      "short_name": "EG2 ReboilerB",
+      "network": "Specific Energy Consumers",
+      "plant": "EG2 [EG2]",
+      "group": "Steam Energy",
+      "element_type": "EG2 Reboiler",
+      "instance": "B",
+      "pi_tag_base": "EG2.EG2.REB-102",
+      "status_tag": "EG2_Stripping_status",
+      "status_formula": "if([EG2_EOE]>40,1,0)",
+      "pi_dependencies": [
+        {
+          "logical": "EG2_DEG_production_flow",
+          "pi_name": "UN.EG2.47FC7301.PV"
+        },
+        {
+          "logical": "EG2_HEG_production_flow",
+          "pi_name": "UN.EG2.47FC7406.PV"
+        },
+        {
+          "logical": "EG2_MEG_production_flow",
+          "pi_name": "UN.EG2.46FC6415.PV"
+        },
+        {
+          "logical": "EG2_TEG_production_flow",
+          "pi_name": "UN.EG2.47FC7501.PV"
+        }
+      ],
+      "attributes": [
+        "Steam Flow",
+        "Steam Pressure",
+        "Duty",
+        "Column ID"
+      ]
+    },
+    {
+      "element_path": "United > Specific Energy Consumers > EG2 [EG2] > Steam Energy > EG2 ReboilerC",
+      "short_name": "EG2 ReboilerC",
+      "network": "Specific Energy Consumers",
+      "plant": "EG2 [EG2]",
+      "group": "Steam Energy",
+      "element_type": "EG2 Reboiler",
+      "instance": "C",
+      "pi_tag_base": "EG2.EG2.REB-103",
+      "status_tag": "EG2_Stripping_status",
+      "status_formula": "if([EG2_EOE]>40,1,0)",
+      "pi_dependencies": [
+        {
+          "logical": "EG2_DEG_production_flow",
+          "pi_name": "UN.EG2.47FC7301.PV"
+        },
+        {
+          "logical": "EG2_HEG_production_flow",
+          "pi_name": "UN.EG2.47FC7406.PV"
+        },
+        {
+          "logical": "EG2_MEG_production_flow",
+          "pi_name": "UN.EG2.46FC6415.PV"
+        },
+        {
+          "logical": "EG2_TEG_production_flow",
+          "pi_name": "UN.EG2.47FC7501.PV"
+        }
+      ],
+      "attributes": [
+        "Steam Flow",
+        "Steam Pressure",
+        "Duty",
+        "Column ID"
+      ]
+    },
+    {
+      "element_path": "United > Specific Energy Consumers > EG2 [EG2] > Steam Energy > EG2 Steam ExchangerA",
+      "short_name": "EG2 Steam ExchangerA",
+      "network": "Specific Energy Consumers",
+      "plant": "EG2 [EG2]",
+      "group": "Steam Energy",
+      "element_type": "EG2 Steam Exchanger",
+      "instance": "A",
+      "pi_tag_base": "EG2.EG2.SHX-101",
+      "status_tag": "E_4531_Status",
+      "status_formula": "if([EG2_EOE]>40,1,0)",
+      "pi_dependencies": [
+        {
+          "logical": "EG2_DEG_production_flow",
+          "pi_name": "UN.EG2.47FC7301.PV"
+        },
+        {
+          "logical": "EG2_HEG_production_flow",
+          "pi_name": "UN.EG2.47FC7406.PV"
+        },
+        {
+          "logical": "EG2_MEG_production_flow",
+          "pi_name": "UN.EG2.46FC6415.PV"
+        },
+        {
+          "logical": "EG2_TEG_production_flow",
+          "pi_name": "UN.EG2.47FC7501.PV"
+        }
+      ],
+      "attributes": [
+        "Steam Flow",
+        "Steam Pressure",
+        "Duty",
+        "LMTD"
+      ]
+    },
+    {
+      "element_path": "United > Specific Energy Consumers > EG3 [EG3] > Electric Energy > EG3 CompressorA",
+      "short_name": "EG3 CompressorA",
+      "network": "Specific Energy Consumers",
+      "plant": "EG3 [EG3]",
+      "group": "Electric Energy",
+      "element_type": "EG3 Compressor",
+      "instance": "A",
+      "pi_tag_base": "EG3.EG3.COMP-101",
+      "status_tag": "KM_6115_Status",
+      "status_formula": "if([Process_flow_of_KM_6115]>700,1,0)",
+      "pi_dependencies": [
+        {
+          "logical": "Process_flow_of_KM_6115",
+          "pi_name": "un.eg3.61fi1611A.pv"
+        }
+      ],
+      "attributes": [
+        "Driver Power",
+        "Suction Flow",
+        "Suction Pressure",
+        "Discharge Pressure",
+        "Polytropic Efficiency"
+      ]
+    },
+    {
+      "element_path": "United > Specific Energy Consumers > EG3 [EG3] > Steam Energy > EG3 ReboilerA",
+      "short_name": "EG3 ReboilerA",
+      "network": "Specific Energy Consumers",
+      "plant": "EG3 [EG3]",
+      "group": "Steam Energy",
+      "element_type": "EG3 Reboiler",
+      "instance": "A",
+      "pi_tag_base": "EG3.EG3.REB-101",
+      "status_tag": "EOEG3_Plant_Status",
+      "status_formula": "if(if(missing([EG3_EOE]),0,[EG3_EOE])>30,1,0)",
+      "pi_dependencies": [
+        {
+          "logical": "EG3_DEG_production_flow",
+          "pi_name": "UN.EG3.67FC7301.PV"
+        },
+        {
+          "logical": "EG3_HEG_production_flow",
+          "pi_name": "UN.EG3.67FC7421.PV"
+        },
+        {
+          "logical": "EG3_MEG_production_flow",
+          "pi_name": "UN.EG3.66FC6415.PV"
+        },
+        {
+          "logical": "EG3_TEG_production_flow",
+          "pi_name": "UN.EG3.67FC7501.PV"
+        }
+      ],
+      "attributes": [
+        "Steam Flow",
+        "Steam Pressure",
+        "Duty",
+        "Column ID"
+      ]
+    },
+    {
+      "element_path": "United > Specific Energy Consumers > EG3 [EG3] > Steam Energy > EG3 ReboilerB",
+      "short_name": "EG3 ReboilerB",
+      "network": "Specific Energy Consumers",
+      "plant": "EG3 [EG3]",
+      "group": "Steam Energy",
+      "element_type": "EG3 Reboiler",
+      "instance": "B",
+      "pi_tag_base": "EG3.EG3.REB-102",
+      "status_tag": "EOEG3_Plant_Status",
+      "status_formula": "if(if(missing([EG3_EOE]),0,[EG3_EOE])>30,1,0)",
+      "pi_dependencies": [
+        {
+          "logical": "EG3_DEG_production_flow",
+          "pi_name": "UN.EG3.67FC7301.PV"
+        },
+        {
+          "logical": "EG3_HEG_production_flow",
+          "pi_name": "UN.EG3.67FC7421.PV"
+        },
+        {
+          "logical": "EG3_MEG_production_flow",
+          "pi_name": "UN.EG3.66FC6415.PV"
+        },
+        {
+          "logical": "EG3_TEG_production_flow",
+          "pi_name": "UN.EG3.67FC7501.PV"
+        }
+      ],
+      "attributes": [
+        "Steam Flow",
+        "Steam Pressure",
+        "Duty",
+        "Column ID"
+      ]
+    },
+    {
+      "element_path": "United > Specific Energy Consumers > EG3 [EG3] > Steam Energy > EG3 ReboilerC",
+      "short_name": "EG3 ReboilerC",
+      "network": "Specific Energy Consumers",
+      "plant": "EG3 [EG3]",
+      "group": "Steam Energy",
+      "element_type": "EG3 Reboiler",
+      "instance": "C",
+      "pi_tag_base": "EG3.EG3.REB-103",
+      "status_tag": "EOEG3_Plant_Status",
+      "status_formula": "if(if(missing([EG3_EOE]),0,[EG3_EOE])>30,1,0)",
+      "pi_dependencies": [
+        {
+          "logical": "EG3_DEG_production_flow",
+          "pi_name": "UN.EG3.67FC7301.PV"
+        },
+        {
+          "logical": "EG3_HEG_production_flow",
+          "pi_name": "UN.EG3.67FC7421.PV"
+        },
+        {
+          "logical": "EG3_MEG_production_flow",
+          "pi_name": "UN.EG3.66FC6415.PV"
+        },
+        {
+          "logical": "EG3_TEG_production_flow",
+          "pi_name": "UN.EG3.67FC7501.PV"
+        }
+      ],
+      "attributes": [
+        "Steam Flow",
+        "Steam Pressure",
+        "Duty",
+        "Column ID"
+      ]
+    },
+    {
+      "element_path": "United > Specific Energy Consumers > LAO [LAO] > Fuel Energy > LAO Feed PreheaterA",
+      "short_name": "LAO Feed PreheaterA",
+      "network": "Specific Energy Consumers",
+      "plant": "LAO [LAO]",
+      "group": "Fuel Energy",
+      "element_type": "LAO Feed Preheater",
+      "instance": "A",
+      "pi_tag_base": "LAO.LAO.FPH-101",
+      "status_tag": "LAO_Plant_Status",
+      "status_formula": "if(if(missing([LAO_Load]),0,[LAO_Load])<5,0,1)",
+      "pi_dependencies": [
+        {
+          "logical": "LAO_Load_raw",
+          "pi_name": "UN.LAO.31FI1014A.PV"
+        }
+      ],
+      "attributes": [
+        "Fuel Flow",
+        "Duty",
+        "Outlet Temperature",
+        "Efficiency"
+      ]
+    },
+    {
+      "element_path": "United > Specific Energy Consumers > Utility Unit [UTI] > Fuel Energy > UTI BoilerA",
+      "short_name": "UTI BoilerA",
+      "network": "Specific Energy Consumers",
+      "plant": "Utility Unit [UTI]",
+      "group": "Fuel Energy",
+      "element_type": "UTI Boiler",
+      "instance": "A",
+      "pi_tag_base": "UTIL.UTI.BLR-101",
+      "status_tag": "Boiler_A_Status",
+      "status_formula": "[BLR_1_Status]",
+      "pi_dependencies": [
+        {
+          "logical": "BLR_1_HPS_Gen_raw",
+          "pi_name": "UN.UO.71FI1101.PV"
+        }
+      ],
+      "attributes": [
+        "Fuel Flow",
+        "Steam Output",
+        "Boiler Efficiency",
+        "Excess O2"
+      ]
+    },
+    {
+      "element_path": "United > Specific Energy Consumers > Utility Unit [UTI] > Fuel Energy > UTI BoilerB",
+      "short_name": "UTI BoilerB",
+      "network": "Specific Energy Consumers",
+      "plant": "Utility Unit [UTI]",
+      "group": "Fuel Energy",
+      "element_type": "UTI Boiler",
+      "instance": "B",
+      "pi_tag_base": "UTIL.UTI.BLR-102",
+      "status_tag": "Boiler_B_Status",
+      "status_formula": "[BLR_2_Status]",
+      "pi_dependencies": [
+        {
+          "logical": "BLR_2_HPS_Gen_raw",
+          "pi_name": "UN.UO.71FI1201.PV"
+        }
+      ],
+      "attributes": [
+        "Fuel Flow",
+        "Steam Output",
+        "Boiler Efficiency",
+        "Excess O2"
+      ]
+    },
+    {
+      "element_path": "United > Specific Energy Consumers > Utility Unit [UTI] > Fuel Energy > UTI BoilerC",
+      "short_name": "UTI BoilerC",
+      "network": "Specific Energy Consumers",
+      "plant": "Utility Unit [UTI]",
+      "group": "Fuel Energy",
+      "element_type": "UTI Boiler",
+      "instance": "C",
+      "pi_tag_base": "UTIL.UTI.BLR-103",
+      "status_tag": "Boiler_C_Status",
+      "status_formula": "[BLR_3_Status]",
+      "pi_dependencies": [
+        {
+          "logical": "BLR_3_HPS_Gen_raw",
+          "pi_name": "UN.UO.71FI1301.PV"
+        }
+      ],
+      "attributes": [
+        "Fuel Flow",
+        "Steam Output",
+        "Boiler Efficiency",
+        "Excess O2"
+      ]
+    },
+    {
+      "element_path": "United > Specific Energy Consumers > Utility Unit [UTI] > Fuel Energy > UTI BoilerD",
+      "short_name": "UTI BoilerD",
+      "network": "Specific Energy Consumers",
+      "plant": "Utility Unit [UTI]",
+      "group": "Fuel Energy",
+      "element_type": "UTI Boiler",
+      "instance": "D",
+      "pi_tag_base": "UTIL.UTI.BLR-104",
+      "status_tag": "Boiler_D_Status",
+      "status_formula": "[BLR_4_Status]",
+      "pi_dependencies": [
+        {
+          "logical": "BLR_4_HPS_Gen_raw",
+          "pi_name": "UN.UO.71FI1401.PV"
+        }
+      ],
+      "attributes": [
+        "Fuel Flow",
+        "Steam Output",
+        "Boiler Efficiency",
+        "Excess O2"
+      ]
+    },
+    {
+      "element_path": "United > Specific Energy Consumers > Utility Unit [UTI] > Fuel Energy > UTI BoilerE",
+      "short_name": "UTI BoilerE",
+      "network": "Specific Energy Consumers",
+      "plant": "Utility Unit [UTI]",
+      "group": "Fuel Energy",
+      "element_type": "UTI Boiler",
+      "instance": "E",
+      "pi_tag_base": "UTIL.UTI.BLR-105",
+      "status_tag": "Boiler_E_Status",
+      "status_formula": "[BLR_5_Status]",
+      "pi_dependencies": [
+        {
+          "logical": "BLR_5_HPS_Gen_raw",
+          "pi_name": "UN.UO.71FI1501A.PV"
+        }
+      ],
+      "attributes": [
+        "Fuel Flow",
+        "Steam Output",
+        "Boiler Efficiency",
+        "Excess O2"
+      ]
+    },
+    {
+      "element_path": "United > Specific Energy Consumers > Utility Unit [UTI] > Electric Energy > UTI PumpA",
+      "short_name": "UTI PumpA",
+      "network": "Specific Energy Consumers",
+      "plant": "Utility Unit [UTI]",
+      "group": "Electric Energy",
+      "element_type": "UTI Pump",
+      "instance": "A",
+      "pi_tag_base": "UTIL.UTI.PMP-101",
+      "status_tag": "BFW_A_Motor_Status",
+      "status_formula": "if(([BFW_A_AMPS]>60)||([BFW_A_Vibrations]>10)||([BFW_A_Bearing_temp]>60),1,0)",
+      "pi_dependencies": [
+        {
+          "logical": "BFW_A_AMPS",
+          "pi_name": "UN.UO.71II1001.PV"
+        },
+        {
+          "logical": "BFW_A_Bearing_temp",
+          "pi_name": "UN.UO.71TI1016A.PV"
+        },
+        {
+          "logical": "BFW_A_Vibrations",
+          "pi_name": "UN.UO.71VI1002A.PV"
+        }
+      ],
+      "attributes": [
+        "Driver Power",
+        "Flow",
+        "Differential Head",
+        "Efficiency"
+      ]
+    },
+    {
+      "element_path": "United > Specific Energy Consumers > Utility Unit [UTI] > Electric Energy > UTI PumpB",
+      "short_name": "UTI PumpB",
+      "network": "Specific Energy Consumers",
+      "plant": "Utility Unit [UTI]",
+      "group": "Electric Energy",
+      "element_type": "UTI Pump",
+      "instance": "B",
+      "pi_tag_base": "UTIL.UTI.PMP-102",
+      "status_tag": "BFW_B_Turb_Status",
+      "status_formula": "if(([BFW_B_Turb_Steam_raw]/1000)>8,1,0)",
+      "pi_dependencies": [
+        {
+          "logical": "BFW_B_Turb_Steam_raw",
+          "pi_name": "UN.UO.71FI1812.PV"
+        }
+      ],
+      "attributes": [
+        "Driver Power",
+        "Flow",
+        "Differential Head",
+        "Efficiency"
+      ]
+    },
+    {
+      "element_path": "United > Specific Energy Consumers > Utility Unit [UTI] > Electric Energy > UTI PumpC",
+      "short_name": "UTI PumpC",
+      "network": "Specific Energy Consumers",
+      "plant": "Utility Unit [UTI]",
+      "group": "Electric Energy",
+      "element_type": "UTI Pump",
+      "instance": "C",
+      "pi_tag_base": "UTIL.UTI.PMP-103",
+      "status_tag": "BFW_C_Turb_Status",
+      "status_formula": "if(([BFW_C_Turb_Steam_raw]/1000)>8,1,0)",
+      "pi_dependencies": [
+        {
+          "logical": "BFW_C_Turb_Steam_raw",
+          "pi_name": "UN.UO.71FI1813.PV"
+        }
+      ],
+      "attributes": [
+        "Driver Power",
+        "Flow",
+        "Differential Head",
+        "Efficiency"
+      ]
+    },
+    {
+      "element_path": "United > Specific Energy Consumers > Utility Unit [UTI] > Electric Energy > UTI PumpD",
+      "short_name": "UTI PumpD",
+      "network": "Specific Energy Consumers",
+      "plant": "Utility Unit [UTI]",
+      "group": "Electric Energy",
+      "element_type": "UTI Pump",
+      "instance": "D",
+      "pi_tag_base": "UTIL.UTI.PMP-104",
+      "status_tag": "BFW_D_Motor_Status",
+      "status_formula": "if(([BFW_D_AMPS]>60)||([BFW_D_Vibrations]>10)||([BFW_D_Bearing_temp]>60),1,0)",
+      "pi_dependencies": [
+        {
+          "logical": "BFW_D_AMPS",
+          "pi_name": "UN.UO.71II1002.PV"
+        },
+        {
+          "logical": "BFW_D_Bearing_temp",
+          "pi_name": "UN.UO.71TI1020A.PV"
+        },
+        {
+          "logical": "BFW_D_Vibrations",
+          "pi_name": "UN.UO.71VI1006A.PV"
+        }
+      ],
+      "attributes": [
+        "Driver Power",
+        "Flow",
+        "Differential Head",
+        "Efficiency"
+      ]
+    },
+    {
+      "element_path": "United > Specific Energy Consumers > Utility Unit [UTI] > Electric Energy > UTI CompressorA",
+      "short_name": "UTI CompressorA",
+      "network": "Specific Energy Consumers",
+      "plant": "Utility Unit [UTI]",
+      "group": "Electric Energy",
+      "element_type": "UTI Compressor",
+      "instance": "A",
+      "pi_tag_base": "UTIL.UTI.COMP-101",
+      "status_tag": "Air_Compressor_Motor_B_Status",
+      "status_formula": "if([Air_Compressor_B_Discharge_Pressure]>4,1,0)",
+      "pi_dependencies": [
+        {
+          "logical": "Air_Compressor_B_Discharge_Pressure",
+          "pi_name": "UN.UO.72PC2009.PV"
+        }
+      ],
+      "attributes": [
+        "Driver Power",
+        "Suction Flow",
+        "Suction Pressure",
+        "Discharge Pressure",
+        "Polytropic Efficiency"
+      ]
+    },
+    {
+      "element_path": "United > Specific Energy Consumers > Utility Unit [UTI] > Electric Energy > UTI CompressorB",
+      "short_name": "UTI CompressorB",
+      "network": "Specific Energy Consumers",
+      "plant": "Utility Unit [UTI]",
+      "group": "Electric Energy",
+      "element_type": "UTI Compressor",
+      "instance": "B",
+      "pi_tag_base": "UTIL.UTI.COMP-102",
+      "status_tag": "Air_Compressor_Motor_C_Status",
+      "status_formula": "if([Air_Compressor_C_Discharge_Pressure]>4,1,0)",
+      "pi_dependencies": [
+        {
+          "logical": "Air_Compressor_C_Discharge_Pressure",
+          "pi_name": "UN.UO.72PC2015.PV"
+        }
+      ],
+      "attributes": [
+        "Driver Power",
+        "Suction Flow",
+        "Suction Pressure",
+        "Discharge Pressure",
+        "Polytropic Efficiency"
+      ]
+    },
+    {
+      "element_path": "United > Specific Energy Consumers > Utility Unit [UTI] > Steam Energy > UTI TurbineA",
+      "short_name": "UTI TurbineA",
+      "network": "Specific Energy Consumers",
+      "plant": "Utility Unit [UTI]",
+      "group": "Steam Energy",
+      "element_type": "UTI Turbine",
+      "instance": "A",
+      "pi_tag_base": "UTIL.UTI.TBN-101",
+      "status_tag": "CW_Turbine_A_Status",
+      "status_formula": "if(([CW_Turbine_A_Steam])>16||([CW_Turbine_A_RPM])>2100,1,0)",
+      "pi_dependencies": [
+        {
+          "logical": "CW_Turbine_A_RPM",
+          "pi_name": "UN.UO.78SI8001.PV"
+        },
+        {
+          "logical": "CW_Turbine_A_Steam",
+          "pi_name": "UN.UO.78FI8085.PV"
+        }
+      ],
+      "attributes": [
+        "Inlet Steam Flow",
+        "Inlet Pressure",
+        "Outlet Pressure",
+        "Shaft Power",
+        "Isentropic Efficiency"
+      ]
+    },
+    {
+      "element_path": "United > Specific Energy Consumers > Utility Unit [UTI] > Steam Energy > UTI TurbineB",
+      "short_name": "UTI TurbineB",
+      "network": "Specific Energy Consumers",
+      "plant": "Utility Unit [UTI]",
+      "group": "Steam Energy",
+      "element_type": "UTI Turbine",
+      "instance": "B",
+      "pi_tag_base": "UTIL.UTI.TBN-102",
+      "status_tag": "CW_Turbine_B_Status",
+      "status_formula": "if(([CW_Turbine_B_Steam])>16||([CW_Turbine_B_RPM])>2100,1,0)",
+      "pi_dependencies": [
+        {
+          "logical": "CW_Turbine_B_RPM",
+          "pi_name": "UN.UO.78SI8003.PV"
+        },
+        {
+          "logical": "CW_Turbine_B_Steam",
+          "pi_name": "UN.UO.78FI8086.PV"
+        }
+      ],
+      "attributes": [
+        "Inlet Steam Flow",
+        "Inlet Pressure",
+        "Outlet Pressure",
+        "Shaft Power",
+        "Isentropic Efficiency"
+      ]
+    },
+    {
+      "element_path": "United > Specific Energy Consumers > Utility Unit [UTI] > Steam Energy > UTI TurbineC",
+      "short_name": "UTI TurbineC",
+      "network": "Specific Energy Consumers",
+      "plant": "Utility Unit [UTI]",
+      "group": "Steam Energy",
+      "element_type": "UTI Turbine",
+      "instance": "C",
+      "pi_tag_base": "UTIL.UTI.TBN-103",
+      "status_tag": "BFW_B_Turb_Status",
+      "status_formula": "if(([BFW_B_Turb_Steam_raw]/1000)>8,1,0)",
+      "pi_dependencies": [
+        {
+          "logical": "BFW_B_Turb_Steam_raw",
+          "pi_name": "UN.UO.71FI1812.PV"
+        }
+      ],
+      "attributes": [
+        "Inlet Steam Flow",
+        "Inlet Pressure",
+        "Outlet Pressure",
+        "Shaft Power",
+        "Isentropic Efficiency"
+      ]
+    },
+    {
+      "element_path": "United > Specific Energy Consumers > Utility Unit [UTI] > Steam Energy > UTI TurbineD",
+      "short_name": "UTI TurbineD",
+      "network": "Specific Energy Consumers",
+      "plant": "Utility Unit [UTI]",
+      "group": "Steam Energy",
+      "element_type": "UTI Turbine",
+      "instance": "D",
+      "pi_tag_base": "UTIL.UTI.TBN-104",
+      "status_tag": "Air_Compressor_Turbine_A_Status",
+      "status_formula": "if(([Air_Compressor_Turbine_A_Steam_raw]/1000)>12.5||([Air_Compressor_Turbine_A_RPM])>1750,1,0)",
+      "pi_dependencies": [
+        {
+          "logical": "Air_Compressor_Turbine_A_RPM",
+          "pi_name": "UN.UO.72SI2001.PV"
+        },
+        {
+          "logical": "Air_Compressor_Turbine_A_Steam_raw",
+          "pi_name": "UN.UO.72FI2007.PV"
+        }
+      ],
+      "attributes": [
+        "Inlet Steam Flow",
+        "Inlet Pressure",
+        "Outlet Pressure",
+        "Shaft Power",
+        "Isentropic Efficiency"
+      ]
+    },
+    {
+      "element_path": "United > Specific Energy Consumers > Utility Unit [UTI] > Steam Energy > UTI TurbineE",
+      "short_name": "UTI TurbineE",
+      "network": "Specific Energy Consumers",
+      "plant": "Utility Unit [UTI]",
+      "group": "Steam Energy",
+      "element_type": "UTI Turbine",
+      "instance": "E",
+      "pi_tag_base": "UTIL.UTI.TBN-105",
+      "status_tag": "BFW_C_Turb_Status",
+      "status_formula": "if(([BFW_C_Turb_Steam_raw]/1000)>8,1,0)",
+      "pi_dependencies": [
+        {
+          "logical": "BFW_C_Turb_Steam_raw",
+          "pi_name": "UN.UO.71FI1813.PV"
+        }
+      ],
+      "attributes": [
+        "Inlet Steam Flow",
+        "Inlet Pressure",
+        "Outlet Pressure",
+        "Shaft Power",
+        "Isentropic Efficiency"
+      ]
+    },
+    {
+      "element_path": "United > Specific Energy Consumers > Utility Unit [UTI] > Steam Energy > UTI TurbineF",
+      "short_name": "UTI TurbineF",
+      "network": "Specific Energy Consumers",
+      "plant": "Utility Unit [UTI]",
+      "group": "Steam Energy",
+      "element_type": "UTI Turbine",
+      "instance": "F",
+      "pi_tag_base": "UTIL.UTI.TBN-106",
+      "status_tag": "Air_Compressor_Turbine_D_Status",
+      "status_formula": "if(([Air_Compressor_Turbine_D_Steam_raw]/1000)>12.5||([Air_Compressor_Turbine_D_RPM])>1750,1,0)",
+      "pi_dependencies": [
+        {
+          "logical": "Air_Compressor_Turbine_D_RPM",
+          "pi_name": "UN.UO.72SI2002.PV"
+        },
+        {
+          "logical": "Air_Compressor_Turbine_D_Steam_raw",
+          "pi_name": "UN.UO.72FI2008.PV"
+        }
+      ],
+      "attributes": [
+        "Inlet Steam Flow",
+        "Inlet Pressure",
+        "Outlet Pressure",
+        "Shaft Power",
+        "Isentropic Efficiency"
+      ]
+    },
+    {
+      "element_path": "United > Specific Energy Consumers > Utility Unit [UTI] > Steam Energy > UTI TurbineG",
+      "short_name": "UTI TurbineG",
+      "network": "Specific Energy Consumers",
+      "plant": "Utility Unit [UTI]",
+      "group": "Steam Energy",
+      "element_type": "UTI Turbine",
+      "instance": "G",
+      "pi_tag_base": "UTIL.UTI.TBN-107",
+      "status_tag": "CW_Turbine_G_Status",
+      "status_formula": "if(([CW_Turbine_G_Steam])>16||([CW_Turbine_G_RPM])>2100,1,0)",
+      "pi_dependencies": [
+        {
+          "logical": "CW_Turbine_G_RPM",
+          "pi_name": "UN.UO.78SI8600.PV"
+        },
+        {
+          "logical": "CW_Turbine_G_Steam",
+          "pi_name": "UN.UO.78FI8623.PV"
+        }
+      ],
+      "attributes": [
+        "Inlet Steam Flow",
+        "Inlet Pressure",
+        "Outlet Pressure",
+        "Shaft Power",
+        "Isentropic Efficiency"
+      ]
+    },
+    {
+      "element_path": "United > Specific Energy Consumers > Utility Unit [UTI] > Steam Energy > UTI TurbineH",
+      "short_name": "UTI TurbineH",
+      "network": "Specific Energy Consumers",
+      "plant": "Utility Unit [UTI]",
+      "group": "Steam Energy",
+      "element_type": "UTI Turbine",
+      "instance": "H",
+      "pi_tag_base": "UTIL.UTI.TBN-108",
+      "status_tag": "BFW_E_Turb_Status",
+      "status_formula": "if(([BFW_E_Turb_Steam_raw]/1000)>8,1,0)",
+      "pi_dependencies": [
+        {
+          "logical": "BFW_E_Turb_Steam_raw",
+          "pi_name": "UN.UO.71FI1604.PV"
+        }
+      ],
+      "attributes": [
+        "Inlet Steam Flow",
+        "Inlet Pressure",
+        "Outlet Pressure",
+        "Shaft Power",
+        "Isentropic Efficiency"
+      ]
+    },
+    {
+      "element_path": "United > Specific Energy Consumers > Utility Unit [UTI] > Steam Energy > UTI TurbineI",
+      "short_name": "UTI TurbineI",
+      "network": "Specific Energy Consumers",
+      "plant": "Utility Unit [UTI]",
+      "group": "Steam Energy",
+      "element_type": "UTI Turbine",
+      "instance": "I",
+      "pi_tag_base": "UTIL.UTI.TBN-109",
+      "status_tag": "DMW_Turbine_A_Status",
+      "status_formula": "if(([DMW_Turbine_A_Steam_raw]/1000)>2.500||([DMW_Turbine_A_RPM]>900),1,0)",
+      "pi_dependencies": [
+        {
+          "logical": "DMW_Turbine_A_RPM",
+          "pi_name": "UN.UO.73SI3001.PV"
+        },
+        {
+          "logical": "DMW_Turbine_A_Steam_raw",
+          "pi_name": "UN.UO.73FI3025.PV"
+        }
+      ],
+      "attributes": [
+        "Inlet Steam Flow",
+        "Inlet Pressure",
+        "Outlet Pressure",
+        "Shaft Power",
+        "Isentropic Efficiency"
+      ]
+    },
+    {
+      "element_path": "United > Specific Energy Consumers > Utility Unit [UTI] > Steam Energy > UTI TurbineJ",
+      "short_name": "UTI TurbineJ",
+      "network": "Specific Energy Consumers",
+      "plant": "Utility Unit [UTI]",
+      "group": "Steam Energy",
+      "element_type": "UTI Turbine",
+      "instance": "J",
+      "pi_tag_base": "UTIL.UTI.TBN-110",
+      "status_tag": "DMW_Turbine_C_Status",
+      "status_formula": "if(([DMW_Turbine_C_Steam_raw]/1000)>2.500||([DMW_Turbine_C_RPM]>900),1,0)",
+      "pi_dependencies": [
+        {
+          "logical": "DMW_Turbine_C_RPM",
+          "pi_name": "UN.UO.73SI3002.PV"
+        },
+        {
+          "logical": "DMW_Turbine_C_Steam_raw",
+          "pi_name": "UN.UO.73FI3026.PV"
+        }
+      ],
+      "attributes": [
+        "Inlet Steam Flow",
+        "Inlet Pressure",
+        "Outlet Pressure",
+        "Shaft Power",
+        "Isentropic Efficiency"
+      ]
+    },
+    {
+      "element_path": "United > Specific Energy Consumers > Utility Unit [UTI] > Steam Energy > UTI Live Steam InjectionA",
+      "short_name": "UTI Live Steam InjectionA",
+      "network": "Specific Energy Consumers",
+      "plant": "Utility Unit [UTI]",
+      "group": "Steam Energy",
+      "element_type": "UTI Live Steam Injection",
+      "instance": "A",
+      "pi_tag_base": "UTIL.UTI.LSI-101",
+      "status_tag": "UO_Plant_Status",
+      "status_formula": "1",
+      "pi_dependencies": [],
+      "attributes": [
+        "Steam Flow",
+        "Steam Pressure",
+        "Steam Temperature",
+        "Column ID"
+      ]
+    },
+    {
+      "element_path": "United > Specific Energy Consumers > Utility Unit [UTI] > Steam Energy > UTI Live Steam InjectionB",
+      "short_name": "UTI Live Steam InjectionB",
+      "network": "Specific Energy Consumers",
+      "plant": "Utility Unit [UTI]",
+      "group": "Steam Energy",
+      "element_type": "UTI Live Steam Injection",
+      "instance": "B",
+      "pi_tag_base": "UTIL.UTI.LSI-102",
+      "status_tag": "UO_Plant_Status",
+      "status_formula": "1",
+      "pi_dependencies": [],
+      "attributes": [
+        "Steam Flow",
+        "Steam Pressure",
+        "Steam Temperature",
+        "Column ID"
+      ]
+    },
+    {
+      "element_path": "United > Specific Energy Consumers > CO2 [CO2] > Electric Energy > CO2 CompressorA",
+      "short_name": "CO2 CompressorA",
+      "network": "Specific Energy Consumers",
+      "plant": "CO2 [CO2]",
+      "group": "Electric Energy",
+      "element_type": "CO2 Compressor",
+      "instance": "A",
+      "pi_tag_base": "CO2.CO2.COMP-101",
+      "status_tag": "PK_5020_status",
+      "status_formula": "if([Process_flow_of_PK_5020]>10000,1,0)",
+      "pi_dependencies": [
+        {
+          "logical": "Process_flow_of_PK_5020",
+          "pi_name": "UN.UO.50FI0115.PV"
+        }
+      ],
+      "attributes": [
+        "Driver Power",
+        "Suction Flow",
+        "Suction Pressure",
+        "Discharge Pressure",
+        "Polytropic Efficiency"
+      ]
+    },
+    {
+      "element_path": "United > Specific Energy Consumers > CO2 [CO2] > Electric Energy > CO2 CompressorB",
+      "short_name": "CO2 CompressorB",
+      "network": "Specific Energy Consumers",
+      "plant": "CO2 [CO2]",
+      "group": "Electric Energy",
+      "element_type": "CO2 Compressor",
+      "instance": "B",
+      "pi_tag_base": "CO2.CO2.COMP-102",
+      "status_tag": "PK_5070_status",
+      "status_formula": "if([K_5071_Dis_Flow]>10000,1,0)",
+      "pi_dependencies": [
+        {
+          "logical": "K_5071_Dis_Flow",
+          "pi_name": "UN.UO.50FI0921.PV"
+        }
+      ],
+      "attributes": [
+        "Driver Power",
+        "Suction Flow",
+        "Suction Pressure",
+        "Discharge Pressure",
+        "Polytropic Efficiency"
+      ]
+    },
+    {
+      "element_path": "United > Steam Network > Utility Unit [UTI] > Steam Distribution (Headers/PRDS) > UTI VHP Steam Header (100-110 KG/CM2A)A",
+      "short_name": "UTI VHP Steam Header (100-110 KG/CM2A)A",
+      "network": "Steam Network",
+      "plant": "Utility Unit [UTI]",
+      "group": "Steam Distribution (Headers/PRDS)",
+      "element_type": "UTI VHP Steam Header (100-110 KG/CM2A)",
+      "instance": "A",
+      "pi_tag_base": "UTIL.UTI.VHP-101",
+      "status_tag": "UO_Plant_Status",
+      "status_formula": "1",
+      "pi_dependencies": [],
+      "attributes": [
+        "Header Pressure",
+        "Header Temperature",
+        "Header Flow",
+        "Superheat"
+      ]
+    },
+    {
+      "element_path": "United > Steam Network > Utility Unit [UTI] > Steam Distribution (Headers/PRDS) > UTI HP-2 Steam Header (40-45 KG/CM2A)A",
+      "short_name": "UTI HP-2 Steam Header (40-45 KG/CM2A)A",
+      "network": "Steam Network",
+      "plant": "Utility Unit [UTI]",
+      "group": "Steam Distribution (Headers/PRDS)",
+      "element_type": "UTI HP-2 Steam Header (40-45 KG/CM2A)",
+      "instance": "A",
+      "pi_tag_base": "UTIL.UTI.HP2-101",
+      "status_tag": "UO_Plant_Status",
+      "status_formula": "1",
+      "pi_dependencies": [],
+      "attributes": [
+        "Header Pressure",
+        "Header Temperature",
+        "Header Flow",
+        "Superheat"
+      ]
+    },
+    {
+      "element_path": "United > Steam Network > Utility Unit [UTI] > Steam Distribution (Headers/PRDS) > UTI HP-1 Steam Header (30-35 KG/CM2A)A",
+      "short_name": "UTI HP-1 Steam Header (30-35 KG/CM2A)A",
+      "network": "Steam Network",
+      "plant": "Utility Unit [UTI]",
+      "group": "Steam Distribution (Headers/PRDS)",
+      "element_type": "UTI HP-1 Steam Header (30-35 KG/CM2A)",
+      "instance": "A",
+      "pi_tag_base": "UTIL.UTI.HP1-101",
+      "status_tag": "UO_Plant_Status",
+      "status_formula": "1",
+      "pi_dependencies": [],
+      "attributes": [
+        "Header Pressure",
+        "Header Temperature",
+        "Header Flow",
+        "Superheat"
+      ]
+    },
+    {
+      "element_path": "United > Steam Network > Utility Unit [UTI] > Steam Distribution (Headers/PRDS) > UTI MP-2 Steam Header (20-25 KG/CM2A)A",
+      "short_name": "UTI MP-2 Steam Header (20-25 KG/CM2A)A",
+      "network": "Steam Network",
+      "plant": "Utility Unit [UTI]",
+      "group": "Steam Distribution (Headers/PRDS)",
+      "element_type": "UTI MP-2 Steam Header (20-25 KG/CM2A)",
+      "instance": "A",
+      "pi_tag_base": "UTIL.UTI.MP2-101",
+      "status_tag": "UO_Plant_Status",
+      "status_formula": "1",
+      "pi_dependencies": [],
+      "attributes": [
+        "Header Pressure",
+        "Header Temperature",
+        "Header Flow",
+        "Superheat"
+      ]
+    },
+    {
+      "element_path": "United > Steam Network > Utility Unit [UTI] > Steam Distribution (Headers/PRDS) > UTI MP-1 Steam Header (12-15 KG/CM2A)A",
+      "short_name": "UTI MP-1 Steam Header (12-15 KG/CM2A)A",
+      "network": "Steam Network",
+      "plant": "Utility Unit [UTI]",
+      "group": "Steam Distribution (Headers/PRDS)",
+      "element_type": "UTI MP-1 Steam Header (12-15 KG/CM2A)",
+      "instance": "A",
+      "pi_tag_base": "UTIL.UTI.MP1-101",
+      "status_tag": "UO_Plant_Status",
+      "status_formula": "1",
+      "pi_dependencies": [],
+      "attributes": [
+        "Header Pressure",
+        "Header Temperature",
+        "Header Flow",
+        "Superheat"
+      ]
+    },
+    {
+      "element_path": "United > Steam Network > Utility Unit [UTI] > Steam Distribution (Headers/PRDS) > UTI LP-1 Steam Header (5-7 KG/CM2A)A",
+      "short_name": "UTI LP-1 Steam Header (5-7 KG/CM2A)A",
+      "network": "Steam Network",
+      "plant": "Utility Unit [UTI]",
+      "group": "Steam Distribution (Headers/PRDS)",
+      "element_type": "UTI LP-1 Steam Header (5-7 KG/CM2A)",
+      "instance": "A",
+      "pi_tag_base": "UTIL.UTI.LP1-101",
+      "status_tag": "UO_Plant_Status",
+      "status_formula": "1",
+      "pi_dependencies": [],
+      "attributes": [
+        "Header Pressure",
+        "Header Temperature",
+        "Header Flow"
+      ]
+    },
+    {
+      "element_path": "United > Steam Network > Utility Unit [UTI] > Steam Distribution (Headers/PRDS) > UTI LP-2 Steam Header (2-3 KG/CM2A)A",
+      "short_name": "UTI LP-2 Steam Header (2-3 KG/CM2A)A",
+      "network": "Steam Network",
+      "plant": "Utility Unit [UTI]",
+      "group": "Steam Distribution (Headers/PRDS)",
+      "element_type": "UTI LP-2 Steam Header (2-3 KG/CM2A)",
+      "instance": "A",
+      "pi_tag_base": "UTIL.UTI.LP2-101",
+      "status_tag": "UO_Plant_Status",
+      "status_formula": "1",
+      "pi_dependencies": [],
+      "attributes": [
+        "Header Pressure",
+        "Header Temperature",
+        "Header Flow"
+      ]
+    },
+    {
+      "element_path": "United > Steam Network > Utility Unit [UTI] > Steam Distribution (Headers/PRDS) > UTI Condensate HeaderA",
+      "short_name": "UTI Condensate HeaderA",
+      "network": "Steam Network",
+      "plant": "Utility Unit [UTI]",
+      "group": "Steam Distribution (Headers/PRDS)",
+      "element_type": "UTI Condensate Header",
+      "instance": "A",
+      "pi_tag_base": "UTIL.UTI.CON-101",
+      "status_tag": "UO_Plant_Status",
+      "status_formula": "1",
+      "pi_dependencies": [],
+      "attributes": [
+        "Pressure",
+        "Temperature",
+        "Flow",
+        "Conductivity"
+      ]
+    },
+    {
+      "element_path": "United > Steam Network > Utility Unit [UTI] > Steam Generators & Turbines > UTI HP-2 Fuel Fired BoilerA",
+      "short_name": "UTI HP-2 Fuel Fired BoilerA",
+      "network": "Steam Network",
+      "plant": "Utility Unit [UTI]",
+      "group": "Steam Generators & Turbines",
+      "element_type": "UTI HP-2 Fuel Fired Boiler",
+      "instance": "A",
+      "pi_tag_base": "UTIL.UTI.FUE-101",
+      "status_tag": "Boiler_A_Status",
+      "status_formula": "[BLR_1_Status]",
+      "pi_dependencies": [
+        {
+          "logical": "BLR_1_HPS_Gen_raw",
+          "pi_name": "UN.UO.71FI1101.PV"
+        }
+      ],
+      "attributes": [
+        "Steam Output",
+        "Steam Pressure",
+        "Steam Temperature",
+        "Fuel Flow",
+        "Boiler Efficiency",
+        "Excess O2"
+      ]
+    },
+    {
+      "element_path": "United > Steam Network > Utility Unit [UTI] > Steam Generators & Turbines > UTI HP-2 Fuel Fired BoilerB",
+      "short_name": "UTI HP-2 Fuel Fired BoilerB",
+      "network": "Steam Network",
+      "plant": "Utility Unit [UTI]",
+      "group": "Steam Generators & Turbines",
+      "element_type": "UTI HP-2 Fuel Fired Boiler",
+      "instance": "B",
+      "pi_tag_base": "UTIL.UTI.FUE-102",
+      "status_tag": "Boiler_B_Status",
+      "status_formula": "[BLR_2_Status]",
+      "pi_dependencies": [
+        {
+          "logical": "BLR_2_HPS_Gen_raw",
+          "pi_name": "UN.UO.71FI1201.PV"
+        }
+      ],
+      "attributes": [
+        "Steam Output",
+        "Steam Pressure",
+        "Steam Temperature",
+        "Fuel Flow",
+        "Boiler Efficiency",
+        "Excess O2"
+      ]
+    },
+    {
+      "element_path": "United > Steam Network > Utility Unit [UTI] > Steam Generators & Turbines > UTI HP-2 Fuel Fired BoilerC",
+      "short_name": "UTI HP-2 Fuel Fired BoilerC",
+      "network": "Steam Network",
+      "plant": "Utility Unit [UTI]",
+      "group": "Steam Generators & Turbines",
+      "element_type": "UTI HP-2 Fuel Fired Boiler",
+      "instance": "C",
+      "pi_tag_base": "UTIL.UTI.FUE-103",
+      "status_tag": "Boiler_C_Status",
+      "status_formula": "[BLR_3_Status]",
+      "pi_dependencies": [
+        {
+          "logical": "BLR_3_HPS_Gen_raw",
+          "pi_name": "UN.UO.71FI1301.PV"
+        }
+      ],
+      "attributes": [
+        "Steam Output",
+        "Steam Pressure",
+        "Steam Temperature",
+        "Fuel Flow",
+        "Boiler Efficiency",
+        "Excess O2"
+      ]
+    },
+    {
+      "element_path": "United > Steam Network > Utility Unit [UTI] > Steam Generators & Turbines > UTI HP-2 Fuel Fired BoilerD",
+      "short_name": "UTI HP-2 Fuel Fired BoilerD",
+      "network": "Steam Network",
+      "plant": "Utility Unit [UTI]",
+      "group": "Steam Generators & Turbines",
+      "element_type": "UTI HP-2 Fuel Fired Boiler",
+      "instance": "D",
+      "pi_tag_base": "UTIL.UTI.FUE-104",
+      "status_tag": "Boiler_D_Status",
+      "status_formula": "[BLR_4_Status]",
+      "pi_dependencies": [
+        {
+          "logical": "BLR_4_HPS_Gen_raw",
+          "pi_name": "UN.UO.71FI1401.PV"
+        }
+      ],
+      "attributes": [
+        "Steam Output",
+        "Steam Pressure",
+        "Steam Temperature",
+        "Fuel Flow",
+        "Boiler Efficiency",
+        "Excess O2"
+      ]
+    },
+    {
+      "element_path": "United > Steam Network > Utility Unit [UTI] > Steam Generators & Turbines > UTI HP-2 Fuel Fired BoilerE",
+      "short_name": "UTI HP-2 Fuel Fired BoilerE",
+      "network": "Steam Network",
+      "plant": "Utility Unit [UTI]",
+      "group": "Steam Generators & Turbines",
+      "element_type": "UTI HP-2 Fuel Fired Boiler",
+      "instance": "E",
+      "pi_tag_base": "UTIL.UTI.FUE-105",
+      "status_tag": "Boiler_E_Status",
+      "status_formula": "[BLR_5_Status]",
+      "pi_dependencies": [
+        {
+          "logical": "BLR_5_HPS_Gen_raw",
+          "pi_name": "UN.UO.71FI1501A.PV"
+        }
+      ],
+      "attributes": [
+        "Steam Output",
+        "Steam Pressure",
+        "Steam Temperature",
+        "Fuel Flow",
+        "Boiler Efficiency",
+        "Excess O2"
+      ]
+    },
+    {
+      "element_path": "United > Steam Network > Utility Unit [UTI] > Steam Generators & Turbines > UTI VHP Waste Heat BoilerA",
+      "short_name": "UTI VHP Waste Heat BoilerA",
+      "network": "Steam Network",
+      "plant": "Utility Unit [UTI]",
+      "group": "Steam Generators & Turbines",
+      "element_type": "UTI VHP Waste Heat Boiler",
+      "instance": "A",
+      "pi_tag_base": "UTIL.UTI.WAS-101",
+      "status_tag": "ETH_Plant_Status",
+      "status_formula": "if(if(missing([Total_Ethylene_Production_ETH_Plant]),0,[Total_Ethylene_Production_ETH_Plant])>100,1,0)",
+      "pi_dependencies": [
+        {
+          "logical": "Total_Ethylene_Production_ETH_Plant",
+          "pi_name": "UN.ETH.CURRPRODRATE.CPV"
+        }
+      ],
+      "attributes": [
+        "Steam Output",
+        "Steam Pressure",
+        "Steam Temperature",
+        "Process Gas Inlet Temperature",
+        "Process Gas Outlet Temperature"
+      ]
+    },
+    {
+      "element_path": "United > Steam Network > Utility Unit [UTI] > Steam Generators & Turbines > UTI VHP Waste Heat BoilerB",
+      "short_name": "UTI VHP Waste Heat BoilerB",
+      "network": "Steam Network",
+      "plant": "Utility Unit [UTI]",
+      "group": "Steam Generators & Turbines",
+      "element_type": "UTI VHP Waste Heat Boiler",
+      "instance": "B",
+      "pi_tag_base": "UTIL.UTI.WAS-102",
+      "status_tag": "ETH_Plant_Status",
+      "status_formula": "if(if(missing([Total_Ethylene_Production_ETH_Plant]),0,[Total_Ethylene_Production_ETH_Plant])>100,1,0)",
+      "pi_dependencies": [
+        {
+          "logical": "Total_Ethylene_Production_ETH_Plant",
+          "pi_name": "UN.ETH.CURRPRODRATE.CPV"
+        }
+      ],
+      "attributes": [
+        "Steam Output",
+        "Steam Pressure",
+        "Steam Temperature",
+        "Process Gas Inlet Temperature",
+        "Process Gas Outlet Temperature"
+      ]
+    },
+    {
+      "element_path": "United > Steam Network > Utility Unit [UTI] > Steam Generators & Turbines > UTI VHP Waste Heat BoilerC",
+      "short_name": "UTI VHP Waste Heat BoilerC",
+      "network": "Steam Network",
+      "plant": "Utility Unit [UTI]",
+      "group": "Steam Generators & Turbines",
+      "element_type": "UTI VHP Waste Heat Boiler",
+      "instance": "C",
+      "pi_tag_base": "UTIL.UTI.WAS-103",
+      "status_tag": "ETH_Plant_Status",
+      "status_formula": "if(if(missing([Total_Ethylene_Production_ETH_Plant]),0,[Total_Ethylene_Production_ETH_Plant])>100,1,0)",
+      "pi_dependencies": [
+        {
+          "logical": "Total_Ethylene_Production_ETH_Plant",
+          "pi_name": "UN.ETH.CURRPRODRATE.CPV"
+        }
+      ],
+      "attributes": [
+        "Steam Output",
+        "Steam Pressure",
+        "Steam Temperature",
+        "Process Gas Inlet Temperature",
+        "Process Gas Outlet Temperature"
+      ]
+    },
+    {
+      "element_path": "United > Steam Network > Utility Unit [UTI] > Steam Generators & Turbines > UTI VHP Waste Heat BoilerD",
+      "short_name": "UTI VHP Waste Heat BoilerD",
+      "network": "Steam Network",
+      "plant": "Utility Unit [UTI]",
+      "group": "Steam Generators & Turbines",
+      "element_type": "UTI VHP Waste Heat Boiler",
+      "instance": "D",
+      "pi_tag_base": "UTIL.UTI.WAS-104",
+      "status_tag": "ETH_Plant_Status",
+      "status_formula": "if(if(missing([Total_Ethylene_Production_ETH_Plant]),0,[Total_Ethylene_Production_ETH_Plant])>100,1,0)",
+      "pi_dependencies": [
+        {
+          "logical": "Total_Ethylene_Production_ETH_Plant",
+          "pi_name": "UN.ETH.CURRPRODRATE.CPV"
+        }
+      ],
+      "attributes": [
+        "Steam Output",
+        "Steam Pressure",
+        "Steam Temperature",
+        "Process Gas Inlet Temperature",
+        "Process Gas Outlet Temperature"
+      ]
+    },
+    {
+      "element_path": "United > Steam Network > Utility Unit [UTI] > Steam Generators & Turbines > UTI VHP Waste Heat BoilerE",
+      "short_name": "UTI VHP Waste Heat BoilerE",
+      "network": "Steam Network",
+      "plant": "Utility Unit [UTI]",
+      "group": "Steam Generators & Turbines",
+      "element_type": "UTI VHP Waste Heat Boiler",
+      "instance": "E",
+      "pi_tag_base": "UTIL.UTI.WAS-105",
+      "status_tag": "ETH_Plant_Status",
+      "status_formula": "if(if(missing([Total_Ethylene_Production_ETH_Plant]),0,[Total_Ethylene_Production_ETH_Plant])>100,1,0)",
+      "pi_dependencies": [
+        {
+          "logical": "Total_Ethylene_Production_ETH_Plant",
+          "pi_name": "UN.ETH.CURRPRODRATE.CPV"
+        }
+      ],
+      "attributes": [
+        "Steam Output",
+        "Steam Pressure",
+        "Steam Temperature",
+        "Process Gas Inlet Temperature",
+        "Process Gas Outlet Temperature"
+      ]
+    },
+    {
+      "element_path": "United > Steam Network > Utility Unit [UTI] > Steam Generators & Turbines > UTI VHP Waste Heat BoilerF",
+      "short_name": "UTI VHP Waste Heat BoilerF",
+      "network": "Steam Network",
+      "plant": "Utility Unit [UTI]",
+      "group": "Steam Generators & Turbines",
+      "element_type": "UTI VHP Waste Heat Boiler",
+      "instance": "F",
+      "pi_tag_base": "UTIL.UTI.WAS-106",
+      "status_tag": "ETH_Plant_Status",
+      "status_formula": "if(if(missing([Total_Ethylene_Production_ETH_Plant]),0,[Total_Ethylene_Production_ETH_Plant])>100,1,0)",
+      "pi_dependencies": [
+        {
+          "logical": "Total_Ethylene_Production_ETH_Plant",
+          "pi_name": "UN.ETH.CURRPRODRATE.CPV"
+        }
+      ],
+      "attributes": [
+        "Steam Output",
+        "Steam Pressure",
+        "Steam Temperature",
+        "Process Gas Inlet Temperature",
+        "Process Gas Outlet Temperature"
+      ]
+    },
+    {
+      "element_path": "United > Steam Network > Utility Unit [UTI] > Steam Generators & Turbines > UTI VHP Waste Heat BoilerG",
+      "short_name": "UTI VHP Waste Heat BoilerG",
+      "network": "Steam Network",
+      "plant": "Utility Unit [UTI]",
+      "group": "Steam Generators & Turbines",
+      "element_type": "UTI VHP Waste Heat Boiler",
+      "instance": "G",
+      "pi_tag_base": "UTIL.UTI.WAS-107",
+      "status_tag": "ETH_Plant_Status",
+      "status_formula": "if(if(missing([Total_Ethylene_Production_ETH_Plant]),0,[Total_Ethylene_Production_ETH_Plant])>100,1,0)",
+      "pi_dependencies": [
+        {
+          "logical": "Total_Ethylene_Production_ETH_Plant",
+          "pi_name": "UN.ETH.CURRPRODRATE.CPV"
+        }
+      ],
+      "attributes": [
+        "Steam Output",
+        "Steam Pressure",
+        "Steam Temperature",
+        "Process Gas Inlet Temperature",
+        "Process Gas Outlet Temperature"
+      ]
+    },
+    {
+      "element_path": "United > Steam Network > Utility Unit [UTI] > Steam Generators & Turbines > UTI VHP Waste Heat BoilerH",
+      "short_name": "UTI VHP Waste Heat BoilerH",
+      "network": "Steam Network",
+      "plant": "Utility Unit [UTI]",
+      "group": "Steam Generators & Turbines",
+      "element_type": "UTI VHP Waste Heat Boiler",
+      "instance": "H",
+      "pi_tag_base": "UTIL.UTI.WAS-108",
+      "status_tag": "ETH_Plant_Status",
+      "status_formula": "if(if(missing([Total_Ethylene_Production_ETH_Plant]),0,[Total_Ethylene_Production_ETH_Plant])>100,1,0)",
+      "pi_dependencies": [
+        {
+          "logical": "Total_Ethylene_Production_ETH_Plant",
+          "pi_name": "UN.ETH.CURRPRODRATE.CPV"
+        }
+      ],
+      "attributes": [
+        "Steam Output",
+        "Steam Pressure",
+        "Steam Temperature",
+        "Process Gas Inlet Temperature",
+        "Process Gas Outlet Temperature"
+      ]
+    },
+    {
+      "element_path": "United > Steam Network > Utility Unit [UTI] > Steam Generators & Turbines > UTI VHP Waste Heat BoilerI",
+      "short_name": "UTI VHP Waste Heat BoilerI",
+      "network": "Steam Network",
+      "plant": "Utility Unit [UTI]",
+      "group": "Steam Generators & Turbines",
+      "element_type": "UTI VHP Waste Heat Boiler",
+      "instance": "I",
+      "pi_tag_base": "UTIL.UTI.WAS-109",
+      "status_tag": "ETH_Plant_Status",
+      "status_formula": "if(if(missing([Total_Ethylene_Production_ETH_Plant]),0,[Total_Ethylene_Production_ETH_Plant])>100,1,0)",
+      "pi_dependencies": [
+        {
+          "logical": "Total_Ethylene_Production_ETH_Plant",
+          "pi_name": "UN.ETH.CURRPRODRATE.CPV"
+        }
+      ],
+      "attributes": [
+        "Steam Output",
+        "Steam Pressure",
+        "Steam Temperature",
+        "Process Gas Inlet Temperature",
+        "Process Gas Outlet Temperature"
+      ]
+    },
+    {
+      "element_path": "United > Steam Network > Utility Unit [UTI] > Steam Consumers > UTI HP-2 Steam ExportA",
+      "short_name": "UTI HP-2 Steam ExportA",
+      "network": "Steam Network",
+      "plant": "Utility Unit [UTI]",
+      "group": "Steam Consumers",
+      "element_type": "UTI HP-2 Steam Export",
+      "instance": "A",
+      "pi_tag_base": "UTIL.UTI.STE-101",
+      "status_tag": "UO_Plant_Status",
+      "status_formula": "1",
+      "pi_dependencies": [],
+      "attributes": [
+        "Export Flow",
+        "Export Pressure",
+        "Export Temperature"
+      ]
+    },
+    {
+      "element_path": "United > Steam Network > Utility Unit [UTI] > Steam Consumers > UTI HP-2 Steam ExportB",
+      "short_name": "UTI HP-2 Steam ExportB",
+      "network": "Steam Network",
+      "plant": "Utility Unit [UTI]",
+      "group": "Steam Consumers",
+      "element_type": "UTI HP-2 Steam Export",
+      "instance": "B",
+      "pi_tag_base": "UTIL.UTI.STE-102",
+      "status_tag": "UO_Plant_Status",
+      "status_formula": "1",
+      "pi_dependencies": [],
+      "attributes": [
+        "Export Flow",
+        "Export Pressure",
+        "Export Temperature"
+      ]
+    },
+    {
+      "element_path": "United > Steam Network > Utility Unit [UTI] > Steam Consumers > UTI HP-2 Steam ExportC",
+      "short_name": "UTI HP-2 Steam ExportC",
+      "network": "Steam Network",
+      "plant": "Utility Unit [UTI]",
+      "group": "Steam Consumers",
+      "element_type": "UTI HP-2 Steam Export",
+      "instance": "C",
+      "pi_tag_base": "UTIL.UTI.STE-103",
+      "status_tag": "UO_Plant_Status",
+      "status_formula": "1",
+      "pi_dependencies": [],
+      "attributes": [
+        "Export Flow",
+        "Export Pressure",
+        "Export Temperature"
+      ]
+    },
+    {
+      "element_path": "United > Steam Network > Utility Unit [UTI] > Steam Consumers > UTI HP-2 Steam ExportD",
+      "short_name": "UTI HP-2 Steam ExportD",
+      "network": "Steam Network",
+      "plant": "Utility Unit [UTI]",
+      "group": "Steam Consumers",
+      "element_type": "UTI HP-2 Steam Export",
+      "instance": "D",
+      "pi_tag_base": "UTIL.UTI.STE-104",
+      "status_tag": "UO_Plant_Status",
+      "status_formula": "1",
+      "pi_dependencies": [],
+      "attributes": [
+        "Export Flow",
+        "Export Pressure",
+        "Export Temperature"
+      ]
+    },
+    {
+      "element_path": "United > Steam Network > Utility Unit [UTI] > Steam Consumers > UTI MP-2 Steam ExportE",
+      "short_name": "UTI MP-2 Steam ExportE",
+      "network": "Steam Network",
+      "plant": "Utility Unit [UTI]",
+      "group": "Steam Consumers",
+      "element_type": "UTI MP-2 Steam Export",
+      "instance": "E",
+      "pi_tag_base": "UTIL.UTI.STE-105",
+      "status_tag": "UO_Plant_Status",
+      "status_formula": "1",
+      "pi_dependencies": [],
+      "attributes": [
+        "Export Flow",
+        "Export Pressure",
+        "Export Temperature"
+      ]
+    },
+    {
+      "element_path": "United > Steam Network > Utility Unit [UTI] > Steam Consumers > UTI MP-2 Steam ExportF",
+      "short_name": "UTI MP-2 Steam ExportF",
+      "network": "Steam Network",
+      "plant": "Utility Unit [UTI]",
+      "group": "Steam Consumers",
+      "element_type": "UTI MP-2 Steam Export",
+      "instance": "F",
+      "pi_tag_base": "UTIL.UTI.STE-106",
+      "status_tag": "UO_Plant_Status",
+      "status_formula": "1",
+      "pi_dependencies": [],
+      "attributes": [
+        "Export Flow",
+        "Export Pressure",
+        "Export Temperature"
+      ]
+    },
+    {
+      "element_path": "United > Steam Network > Utility Unit [UTI] > Steam Consumers > UTI MP-2 Steam ExportG",
+      "short_name": "UTI MP-2 Steam ExportG",
+      "network": "Steam Network",
+      "plant": "Utility Unit [UTI]",
+      "group": "Steam Consumers",
+      "element_type": "UTI MP-2 Steam Export",
+      "instance": "G",
+      "pi_tag_base": "UTIL.UTI.STE-107",
+      "status_tag": "UO_Plant_Status",
+      "status_formula": "1",
+      "pi_dependencies": [],
+      "attributes": [
+        "Export Flow",
+        "Export Pressure",
+        "Export Temperature"
+      ]
+    },
+    {
+      "element_path": "United > Steam Network > Utility Unit [UTI] > Steam Consumers > UTI VHP Steam VentA",
+      "short_name": "UTI VHP Steam VentA",
+      "network": "Steam Network",
+      "plant": "Utility Unit [UTI]",
+      "group": "Steam Consumers",
+      "element_type": "UTI VHP Steam Vent",
+      "instance": "A",
+      "pi_tag_base": "UTIL.UTI.STE-101",
+      "status_tag": "UO_Plant_Status",
+      "status_formula": "1",
+      "pi_dependencies": [],
+      "attributes": [
+        "Vent Flow",
+        "Vent Pressure"
+      ]
+    },
+    {
+      "element_path": "United > Steam Network > Utility Unit [UTI] > Steam Consumers > UTI HP-2 Steam VentB",
+      "short_name": "UTI HP-2 Steam VentB",
+      "network": "Steam Network",
+      "plant": "Utility Unit [UTI]",
+      "group": "Steam Consumers",
+      "element_type": "UTI HP-2 Steam Vent",
+      "instance": "B",
+      "pi_tag_base": "UTIL.UTI.STE-102",
+      "status_tag": "UO_Plant_Status",
+      "status_formula": "1",
+      "pi_dependencies": [],
+      "attributes": [
+        "Vent Flow",
+        "Vent Pressure"
+      ]
+    },
+    {
+      "element_path": "United > Steam Network > Utility Unit [UTI] > Steam Consumers > UTI LP-1 Steam VentC",
+      "short_name": "UTI LP-1 Steam VentC",
+      "network": "Steam Network",
+      "plant": "Utility Unit [UTI]",
+      "group": "Steam Consumers",
+      "element_type": "UTI LP-1 Steam Vent",
+      "instance": "C",
+      "pi_tag_base": "UTIL.UTI.STE-103",
+      "status_tag": "UO_Plant_Status",
+      "status_formula": "1",
+      "pi_dependencies": [],
+      "attributes": [
+        "Vent Flow",
+        "Vent Pressure"
+      ]
+    },
+    {
+      "element_path": "United > Steam Network > Utility Unit [UTI] > Steam Consumers > UTI LP-1 DeaeratorA",
+      "short_name": "UTI LP-1 DeaeratorA",
+      "network": "Steam Network",
+      "plant": "Utility Unit [UTI]",
+      "group": "Steam Consumers",
+      "element_type": "UTI LP-1 Deaerator",
+      "instance": "A",
+      "pi_tag_base": "UTIL.UTI.DEA-101",
+      "status_tag": "V_7101A_Status",
+      "status_formula": "if(([Deaerator_A_LPS])>10,if([Total_Flow_to_Deareator_A]>10000,1,0),0)",
+      "pi_dependencies": [
+        {
+          "logical": "Deaerator_A_LPS_raw",
+          "pi_name": "UN.UO.71FI1002.PV"
+        },
+        {
+          "logical": "Total_Flow_to_Deareator_A",
+          "pi_name": "UN.UO.71FI1096.PV"
+        }
+      ],
+      "attributes": [
+        "BFW Out Flow",
+        "BFW Out Temperature",
+        "Deaerator Pressure",
+        "LP Steam Flow",
+        "Vent Flow",
+        "O2 in BFW"
+      ]
+    },
+    {
+      "element_path": "United > Steam Network > Utility Unit [UTI] > Steam Consumers > UTI LP-1 DeaeratorB",
+      "short_name": "UTI LP-1 DeaeratorB",
+      "network": "Steam Network",
+      "plant": "Utility Unit [UTI]",
+      "group": "Steam Consumers",
+      "element_type": "UTI LP-1 Deaerator",
+      "instance": "B",
+      "pi_tag_base": "UTIL.UTI.DEA-102",
+      "status_tag": "V_7101B_Status",
+      "status_formula": "if(([Deaerator_B_LPS])>10,if([Total_Flow_to_Deareator_B]>10000,1,0),0)",
+      "pi_dependencies": [
+        {
+          "logical": "Deaerator_B_LPS_raw",
+          "pi_name": "UN.UO.71FI1004.PV"
+        },
+        {
+          "logical": "Total_Flow_to_Deareator_B",
+          "pi_name": "UN.UO.71FI1097.PV"
+        }
+      ],
+      "attributes": [
+        "BFW Out Flow",
+        "BFW Out Temperature",
+        "Deaerator Pressure",
+        "LP Steam Flow",
+        "Vent Flow",
+        "O2 in BFW"
+      ]
+    },
+    {
+      "element_path": "United > Steam Network > Utility Unit [UTI] > Steam Generators & Turbines > UTI HP-2 Backpressure TurbineA",
+      "short_name": "UTI HP-2 Backpressure TurbineA",
+      "network": "Steam Network",
+      "plant": "Utility Unit [UTI]",
+      "group": "Steam Generators & Turbines",
+      "element_type": "UTI HP-2 Backpressure Turbine",
+      "instance": "A",
+      "pi_tag_base": "UTIL.UTI.BAC-101",
+      "status_tag": "CW_Turbine_A_Status",
+      "status_formula": "if(([CW_Turbine_A_Steam])>16||([CW_Turbine_A_RPM])>2100,1,0)",
+      "pi_dependencies": [
+        {
+          "logical": "CW_Turbine_A_RPM",
+          "pi_name": "UN.UO.78SI8001.PV"
+        },
+        {
+          "logical": "CW_Turbine_A_Steam",
+          "pi_name": "UN.UO.78FI8085.PV"
+        }
+      ],
+      "attributes": [
+        "Inlet Steam Flow",
+        "Inlet Pressure",
+        "Inlet Temperature",
+        "Exhaust Pressure",
+        "Exhaust Temperature",
+        "Exhaust Flow",
+        "Shaft Power",
+        "Isentropic Efficiency"
+      ]
+    },
+    {
+      "element_path": "United > Steam Network > Utility Unit [UTI] > Steam Generators & Turbines > UTI HP-2 Backpressure TurbineB",
+      "short_name": "UTI HP-2 Backpressure TurbineB",
+      "network": "Steam Network",
+      "plant": "Utility Unit [UTI]",
+      "group": "Steam Generators & Turbines",
+      "element_type": "UTI HP-2 Backpressure Turbine",
+      "instance": "B",
+      "pi_tag_base": "UTIL.UTI.BAC-102",
+      "status_tag": "CW_Turbine_B_Status",
+      "status_formula": "if(([CW_Turbine_B_Steam])>16||([CW_Turbine_B_RPM])>2100,1,0)",
+      "pi_dependencies": [
+        {
+          "logical": "CW_Turbine_B_RPM",
+          "pi_name": "UN.UO.78SI8003.PV"
+        },
+        {
+          "logical": "CW_Turbine_B_Steam",
+          "pi_name": "UN.UO.78FI8086.PV"
+        }
+      ],
+      "attributes": [
+        "Inlet Steam Flow",
+        "Inlet Pressure",
+        "Inlet Temperature",
+        "Exhaust Pressure",
+        "Exhaust Temperature",
+        "Exhaust Flow",
+        "Shaft Power",
+        "Isentropic Efficiency"
+      ]
+    },
+    {
+      "element_path": "United > Steam Network > Utility Unit [UTI] > Steam Generators & Turbines > UTI HP-2 Backpressure TurbineC",
+      "short_name": "UTI HP-2 Backpressure TurbineC",
+      "network": "Steam Network",
+      "plant": "Utility Unit [UTI]",
+      "group": "Steam Generators & Turbines",
+      "element_type": "UTI HP-2 Backpressure Turbine",
+      "instance": "C",
+      "pi_tag_base": "UTIL.UTI.BAC-103",
+      "status_tag": "BFW_B_Turb_Status",
+      "status_formula": "if(([BFW_B_Turb_Steam_raw]/1000)>8,1,0)",
+      "pi_dependencies": [
+        {
+          "logical": "BFW_B_Turb_Steam_raw",
+          "pi_name": "UN.UO.71FI1812.PV"
+        }
+      ],
+      "attributes": [
+        "Inlet Steam Flow",
+        "Inlet Pressure",
+        "Inlet Temperature",
+        "Exhaust Pressure",
+        "Exhaust Temperature",
+        "Exhaust Flow",
+        "Shaft Power",
+        "Isentropic Efficiency"
+      ]
+    },
+    {
+      "element_path": "United > Steam Network > Utility Unit [UTI] > Steam Generators & Turbines > UTI HP-2 Backpressure TurbineD",
+      "short_name": "UTI HP-2 Backpressure TurbineD",
+      "network": "Steam Network",
+      "plant": "Utility Unit [UTI]",
+      "group": "Steam Generators & Turbines",
+      "element_type": "UTI HP-2 Backpressure Turbine",
+      "instance": "D",
+      "pi_tag_base": "UTIL.UTI.BAC-104",
+      "status_tag": "Air_Compressor_Turbine_A_Status",
+      "status_formula": "if(([Air_Compressor_Turbine_A_Steam_raw]/1000)>12.5||([Air_Compressor_Turbine_A_RPM])>1750,1,0)",
+      "pi_dependencies": [
+        {
+          "logical": "Air_Compressor_Turbine_A_RPM",
+          "pi_name": "UN.UO.72SI2001.PV"
+        },
+        {
+          "logical": "Air_Compressor_Turbine_A_Steam_raw",
+          "pi_name": "UN.UO.72FI2007.PV"
+        }
+      ],
+      "attributes": [
+        "Inlet Steam Flow",
+        "Inlet Pressure",
+        "Inlet Temperature",
+        "Exhaust Pressure",
+        "Exhaust Temperature",
+        "Exhaust Flow",
+        "Shaft Power",
+        "Isentropic Efficiency"
+      ]
+    },
+    {
+      "element_path": "United > Steam Network > Utility Unit [UTI] > Steam Generators & Turbines > UTI HP-2 Backpressure TurbineE",
+      "short_name": "UTI HP-2 Backpressure TurbineE",
+      "network": "Steam Network",
+      "plant": "Utility Unit [UTI]",
+      "group": "Steam Generators & Turbines",
+      "element_type": "UTI HP-2 Backpressure Turbine",
+      "instance": "E",
+      "pi_tag_base": "UTIL.UTI.BAC-105",
+      "status_tag": "BFW_C_Turb_Status",
+      "status_formula": "if(([BFW_C_Turb_Steam_raw]/1000)>8,1,0)",
+      "pi_dependencies": [
+        {
+          "logical": "BFW_C_Turb_Steam_raw",
+          "pi_name": "UN.UO.71FI1813.PV"
+        }
+      ],
+      "attributes": [
+        "Inlet Steam Flow",
+        "Inlet Pressure",
+        "Inlet Temperature",
+        "Exhaust Pressure",
+        "Exhaust Temperature",
+        "Exhaust Flow",
+        "Shaft Power",
+        "Isentropic Efficiency"
+      ]
+    },
+    {
+      "element_path": "United > Steam Network > Utility Unit [UTI] > Steam Generators & Turbines > UTI HP-2 Backpressure TurbineF",
+      "short_name": "UTI HP-2 Backpressure TurbineF",
+      "network": "Steam Network",
+      "plant": "Utility Unit [UTI]",
+      "group": "Steam Generators & Turbines",
+      "element_type": "UTI HP-2 Backpressure Turbine",
+      "instance": "F",
+      "pi_tag_base": "UTIL.UTI.BAC-106",
+      "status_tag": "Air_Compressor_Turbine_D_Status",
+      "status_formula": "if(([Air_Compressor_Turbine_D_Steam_raw]/1000)>12.5||([Air_Compressor_Turbine_D_RPM])>1750,1,0)",
+      "pi_dependencies": [
+        {
+          "logical": "Air_Compressor_Turbine_D_RPM",
+          "pi_name": "UN.UO.72SI2002.PV"
+        },
+        {
+          "logical": "Air_Compressor_Turbine_D_Steam_raw",
+          "pi_name": "UN.UO.72FI2008.PV"
+        }
+      ],
+      "attributes": [
+        "Inlet Steam Flow",
+        "Inlet Pressure",
+        "Inlet Temperature",
+        "Exhaust Pressure",
+        "Exhaust Temperature",
+        "Exhaust Flow",
+        "Shaft Power",
+        "Isentropic Efficiency"
+      ]
+    },
+    {
+      "element_path": "United > Steam Network > Utility Unit [UTI] > Steam Generators & Turbines > UTI HP-2 Backpressure TurbineG",
+      "short_name": "UTI HP-2 Backpressure TurbineG",
+      "network": "Steam Network",
+      "plant": "Utility Unit [UTI]",
+      "group": "Steam Generators & Turbines",
+      "element_type": "UTI HP-2 Backpressure Turbine",
+      "instance": "G",
+      "pi_tag_base": "UTIL.UTI.BAC-107",
+      "status_tag": "CW_Turbine_G_Status",
+      "status_formula": "if(([CW_Turbine_G_Steam])>16||([CW_Turbine_G_RPM])>2100,1,0)",
+      "pi_dependencies": [
+        {
+          "logical": "CW_Turbine_G_RPM",
+          "pi_name": "UN.UO.78SI8600.PV"
+        },
+        {
+          "logical": "CW_Turbine_G_Steam",
+          "pi_name": "UN.UO.78FI8623.PV"
+        }
+      ],
+      "attributes": [
+        "Inlet Steam Flow",
+        "Inlet Pressure",
+        "Inlet Temperature",
+        "Exhaust Pressure",
+        "Exhaust Temperature",
+        "Exhaust Flow",
+        "Shaft Power",
+        "Isentropic Efficiency"
+      ]
+    },
+    {
+      "element_path": "United > Steam Network > Utility Unit [UTI] > Steam Generators & Turbines > UTI HP-2 Backpressure TurbineH",
+      "short_name": "UTI HP-2 Backpressure TurbineH",
+      "network": "Steam Network",
+      "plant": "Utility Unit [UTI]",
+      "group": "Steam Generators & Turbines",
+      "element_type": "UTI HP-2 Backpressure Turbine",
+      "instance": "H",
+      "pi_tag_base": "UTIL.UTI.BAC-108",
+      "status_tag": "BFW_E_Turb_Status",
+      "status_formula": "if(([BFW_E_Turb_Steam_raw]/1000)>8,1,0)",
+      "pi_dependencies": [
+        {
+          "logical": "BFW_E_Turb_Steam_raw",
+          "pi_name": "UN.UO.71FI1604.PV"
+        }
+      ],
+      "attributes": [
+        "Inlet Steam Flow",
+        "Inlet Pressure",
+        "Inlet Temperature",
+        "Exhaust Pressure",
+        "Exhaust Temperature",
+        "Exhaust Flow",
+        "Shaft Power",
+        "Isentropic Efficiency"
+      ]
+    },
+    {
+      "element_path": "United > Steam Network > Utility Unit [UTI] > Steam Generators & Turbines > UTI HP-2 Backpressure TurbineI",
+      "short_name": "UTI HP-2 Backpressure TurbineI",
+      "network": "Steam Network",
+      "plant": "Utility Unit [UTI]",
+      "group": "Steam Generators & Turbines",
+      "element_type": "UTI HP-2 Backpressure Turbine",
+      "instance": "I",
+      "pi_tag_base": "UTIL.UTI.BAC-109",
+      "status_tag": "DMW_Turbine_A_Status",
+      "status_formula": "if(([DMW_Turbine_A_Steam_raw]/1000)>2.500||([DMW_Turbine_A_RPM]>900),1,0)",
+      "pi_dependencies": [
+        {
+          "logical": "DMW_Turbine_A_RPM",
+          "pi_name": "UN.UO.73SI3001.PV"
+        },
+        {
+          "logical": "DMW_Turbine_A_Steam_raw",
+          "pi_name": "UN.UO.73FI3025.PV"
+        }
+      ],
+      "attributes": [
+        "Inlet Steam Flow",
+        "Inlet Pressure",
+        "Inlet Temperature",
+        "Exhaust Pressure",
+        "Exhaust Temperature",
+        "Exhaust Flow",
+        "Shaft Power",
+        "Isentropic Efficiency"
+      ]
+    },
+    {
+      "element_path": "United > Steam Network > Utility Unit [UTI] > Steam Generators & Turbines > UTI HP-2 Backpressure TurbineJ",
+      "short_name": "UTI HP-2 Backpressure TurbineJ",
+      "network": "Steam Network",
+      "plant": "Utility Unit [UTI]",
+      "group": "Steam Generators & Turbines",
+      "element_type": "UTI HP-2 Backpressure Turbine",
+      "instance": "J",
+      "pi_tag_base": "UTIL.UTI.BAC-110",
+      "status_tag": "DMW_Turbine_C_Status",
+      "status_formula": "if(([DMW_Turbine_C_Steam_raw]/1000)>2.500||([DMW_Turbine_C_RPM]>900),1,0)",
+      "pi_dependencies": [
+        {
+          "logical": "DMW_Turbine_C_RPM",
+          "pi_name": "UN.UO.73SI3002.PV"
+        },
+        {
+          "logical": "DMW_Turbine_C_Steam_raw",
+          "pi_name": "UN.UO.73FI3026.PV"
+        }
+      ],
+      "attributes": [
+        "Inlet Steam Flow",
+        "Inlet Pressure",
+        "Inlet Temperature",
+        "Exhaust Pressure",
+        "Exhaust Temperature",
+        "Exhaust Flow",
+        "Shaft Power",
+        "Isentropic Efficiency"
+      ]
+    },
+    {
+      "element_path": "United > Steam Network > Utility Unit [UTI] > Steam Generators & Turbines > UTI HP-2 Backpressure TurbineK",
+      "short_name": "UTI HP-2 Backpressure TurbineK",
+      "network": "Steam Network",
+      "plant": "Utility Unit [UTI]",
+      "group": "Steam Generators & Turbines",
+      "element_type": "UTI HP-2 Backpressure Turbine",
+      "instance": "K",
+      "pi_tag_base": "UTIL.UTI.BAC-111",
+      "status_tag": "VHP_BFW_A_Motor_Status",
+      "status_formula": "if(([VHP_BFW_A_AMPS])>150||([VHP_BFW_A_Discharge_flow]>150000)||([VHP_BFW_A_Vibration]>2),1,0)",
+      "pi_dependencies": [
+        {
+          "logical": "VHP_BFW_A_AMPS",
+          "pi_name": "UN.UO.71II1003.PV"
+        },
+        {
+          "logical": "VHP_BFW_A_Discharge_flow",
+          "pi_name": "UN.UO.71FC1027.PV"
+        },
+        {
+          "logical": "VHP_BFW_A_Vibration",
+          "pi_name": "UN.UO.71VI1012A.PV"
+        }
+      ],
+      "attributes": [
+        "Inlet Steam Flow",
+        "Inlet Pressure",
+        "Inlet Temperature",
+        "Exhaust Pressure",
+        "Exhaust Temperature",
+        "Exhaust Flow",
+        "Shaft Power",
+        "Isentropic Efficiency"
+      ]
+    },
+    {
+      "element_path": "United > Steam Network > Utility Unit [UTI] > Steam Generators & Turbines > UTI HP-2 Backpressure TurbineL",
+      "short_name": "UTI HP-2 Backpressure TurbineL",
+      "network": "Steam Network",
+      "plant": "Utility Unit [UTI]",
+      "group": "Steam Generators & Turbines",
+      "element_type": "UTI HP-2 Backpressure Turbine",
+      "instance": "L",
+      "pi_tag_base": "UTIL.UTI.BAC-112",
+      "status_tag": "VHP_BFW_B_Turb_Status",
+      "status_formula": "if((([VHP_BFW_B_Turb_Steam_raw]/1000))>16||([VHP_BFW_B_Discharge_flow]>150000),1,0)",
+      "pi_dependencies": [
+        {
+          "logical": "VHP_BFW_B_Discharge_flow",
+          "pi_name": "UN.UO.71FC1029.PV"
+        },
+        {
+          "logical": "VHP_BFW_B_Turb_Steam_raw",
+          "pi_name": "UN.UO.71FI1814.PV"
+        }
+      ],
+      "attributes": [
+        "Inlet Steam Flow",
+        "Inlet Pressure",
+        "Inlet Temperature",
+        "Exhaust Pressure",
+        "Exhaust Temperature",
+        "Exhaust Flow",
+        "Shaft Power",
+        "Isentropic Efficiency"
+      ]
+    },
+    {
+      "element_path": "United > Steam Network > Utility Unit [UTI] > Steam Generators & Turbines > UTI HP-2 Backpressure TurbineM",
+      "short_name": "UTI HP-2 Backpressure TurbineM",
+      "network": "Steam Network",
+      "plant": "Utility Unit [UTI]",
+      "group": "Steam Generators & Turbines",
+      "element_type": "UTI HP-2 Backpressure Turbine",
+      "instance": "M",
+      "pi_tag_base": "UTIL.UTI.BAC-113",
+      "status_tag": "VHP_BFW_C_Turb_Status",
+      "status_formula": "if((([VHP_BFW_C_Turb_Steam_raw]/1000))>16||([VHP_BFW_C_Discharge_flow]>150000),1,0)",
+      "pi_dependencies": [
+        {
+          "logical": "VHP_BFW_C_Discharge_flow",
+          "pi_name": "UN.UO.71FC1031.PV"
+        },
+        {
+          "logical": "VHP_BFW_C_Turb_Steam_raw",
+          "pi_name": "UN.UO.71FI1815.PV"
+        }
+      ],
+      "attributes": [
+        "Inlet Steam Flow",
+        "Inlet Pressure",
+        "Inlet Temperature",
+        "Exhaust Pressure",
+        "Exhaust Temperature",
+        "Exhaust Flow",
+        "Shaft Power",
+        "Isentropic Efficiency"
+      ]
+    },
+    {
+      "element_path": "United > Steam Network > Utility Unit [UTI] > Steam Generators & Turbines > UTI HP-2 Backpressure TurbineN",
+      "short_name": "UTI HP-2 Backpressure TurbineN",
+      "network": "Steam Network",
+      "plant": "Utility Unit [UTI]",
+      "group": "Steam Generators & Turbines",
+      "element_type": "UTI HP-2 Backpressure Turbine",
+      "instance": "N",
+      "pi_tag_base": "UTIL.UTI.BAC-114",
+      "status_tag": "FDF_A_Motor_Status",
+      "status_formula": "if(([FDF_A_AMPS])>25,1,0)",
+      "pi_dependencies": [
+        {
+          "logical": "FDF_A_AMPS",
+          "pi_name": "UN.UO.71II1101A.PV"
+        }
+      ],
+      "attributes": [
+        "Inlet Steam Flow",
+        "Inlet Pressure",
+        "Inlet Temperature",
+        "Exhaust Pressure",
+        "Exhaust Temperature",
+        "Exhaust Flow",
+        "Shaft Power",
+        "Isentropic Efficiency"
+      ]
+    },
+    {
+      "element_path": "United > Steam Network > Utility Unit [UTI] > Steam Generators & Turbines > UTI HP-2 Backpressure TurbineO",
+      "short_name": "UTI HP-2 Backpressure TurbineO",
+      "network": "Steam Network",
+      "plant": "Utility Unit [UTI]",
+      "group": "Steam Generators & Turbines",
+      "element_type": "UTI HP-2 Backpressure Turbine",
+      "instance": "O",
+      "pi_tag_base": "UTIL.UTI.BAC-115",
+      "status_tag": "FDF_B_Motor_Status",
+      "status_formula": "if(([FDF_B_AMPS])>25,1,0)",
+      "pi_dependencies": [
+        {
+          "logical": "FDF_B_AMPS",
+          "pi_name": "UN.UO.71II1201A.PV"
+        }
+      ],
+      "attributes": [
+        "Inlet Steam Flow",
+        "Inlet Pressure",
+        "Inlet Temperature",
+        "Exhaust Pressure",
+        "Exhaust Temperature",
+        "Exhaust Flow",
+        "Shaft Power",
+        "Isentropic Efficiency"
+      ]
+    },
+    {
+      "element_path": "United > Steam Network > Utility Unit [UTI] > Steam Generators & Turbines > UTI MP-2 Backpressure TurbineP",
+      "short_name": "UTI MP-2 Backpressure TurbineP",
+      "network": "Steam Network",
+      "plant": "Utility Unit [UTI]",
+      "group": "Steam Generators & Turbines",
+      "element_type": "UTI MP-2 Backpressure Turbine",
+      "instance": "P",
+      "pi_tag_base": "UTIL.UTI.BAC-116",
+      "status_tag": "BFW_F_Motor_Status",
+      "status_formula": "if(([PM7103F_CWP_MTR_BEARING])>50,1,0)",
+      "pi_dependencies": [
+        {
+          "logical": "PM7103F_CWP_MTR_BEARING",
+          "pi_name": "UN.UO.71TI1861.PV"
+        }
+      ],
+      "attributes": [
+        "Inlet Steam Flow",
+        "Inlet Pressure",
+        "Inlet Temperature",
+        "Exhaust Pressure",
+        "Exhaust Temperature",
+        "Exhaust Flow",
+        "Shaft Power",
+        "Isentropic Efficiency"
+      ]
+    },
+    {
+      "element_path": "United > Steam Network > Utility Unit [UTI] > Steam Generators & Turbines > UTI MP-2 Backpressure TurbineQ",
+      "short_name": "UTI MP-2 Backpressure TurbineQ",
+      "network": "Steam Network",
+      "plant": "Utility Unit [UTI]",
+      "group": "Steam Generators & Turbines",
+      "element_type": "UTI MP-2 Backpressure Turbine",
+      "instance": "Q",
+      "pi_tag_base": "UTIL.UTI.BAC-117",
+      "status_tag": "UO_Plant_Status",
+      "status_formula": "1",
+      "pi_dependencies": [],
+      "attributes": [
+        "Inlet Steam Flow",
+        "Inlet Pressure",
+        "Inlet Temperature",
+        "Exhaust Pressure",
+        "Exhaust Temperature",
+        "Exhaust Flow",
+        "Shaft Power",
+        "Isentropic Efficiency"
+      ]
+    },
+    {
+      "element_path": "United > Steam Network > Utility Unit [UTI] > Steam Generators & Turbines > UTI VHP Extraction-Condensing TurbineA",
+      "short_name": "UTI VHP Extraction-Condensing TurbineA",
+      "network": "Steam Network",
+      "plant": "Utility Unit [UTI]",
+      "group": "Steam Generators & Turbines",
+      "element_type": "UTI VHP Extraction-Condensing Turbine",
+      "instance": "A",
+      "pi_tag_base": "UTIL.UTI.EXT-101",
+      "status_tag": "KT_1200_Status",
+      "status_formula": "if([CGC_turbine_Inlet_steam_flow]>100,1,0)",
+      "pi_dependencies": [
+        {
+          "logical": "CGC_turbine_Inlet_steam_flow",
+          "pi_name": "UN.ETH.12FI2157.PV"
+        }
+      ],
+      "attributes": [
+        "Inlet Steam Flow",
+        "Inlet Pressure",
+        "Inlet Temperature",
+        "Extraction Pressure",
+        "Extraction Flow",
+        "Condenser Pressure",
+        "Shaft Power",
+        "Isentropic Efficiency"
+      ]
+    },
+    {
+      "element_path": "United > Steam Network > Utility Unit [UTI] > Steam Consumers > UTI LP-1 Steam ExchangerA",
+      "short_name": "UTI LP-1 Steam ExchangerA",
+      "network": "Steam Network",
+      "plant": "Utility Unit [UTI]",
+      "group": "Steam Consumers",
+      "element_type": "UTI LP-1 Steam Exchanger",
+      "instance": "A",
+      "pi_tag_base": "UTIL.UTI.SHX-101",
+      "status_tag": "UO_Plant_Status",
+      "status_formula": "1",
+      "pi_dependencies": [],
+      "attributes": [
+        "Steam Flow",
+        "Steam Pressure",
+        "Duty",
+        "LMTD",
+        "Condensate Return Temperature"
+      ]
+    },
+    {
+      "element_path": "United > Steam Network > Utility Unit [UTI] > Steam Distribution (Headers/PRDS) > UTI VHP Letdown Station (PRDS)A",
+      "short_name": "UTI VHP Letdown Station (PRDS)A",
+      "network": "Steam Network",
+      "plant": "Utility Unit [UTI]",
+      "group": "Steam Distribution (Headers/PRDS)",
+      "element_type": "UTI VHP Letdown Station (PRDS)",
+      "instance": "A",
+      "pi_tag_base": "UTIL.UTI.LET-101",
+      "status_tag": "UO_Plant_Status",
+      "status_formula": "1",
+      "pi_dependencies": [],
+      "attributes": [
+        "Inlet Pressure",
+        "Outlet Pressure",
+        "Flow",
+        "Inlet Temperature",
+        "Outlet Temperature",
+        "Valve Opening",
+        "Spray Water Flow"
+      ]
+    },
+    {
+      "element_path": "United > Steam Network > Utility Unit [UTI] > Steam Distribution (Headers/PRDS) > UTI VHP Letdown Station (PRDS)B",
+      "short_name": "UTI VHP Letdown Station (PRDS)B",
+      "network": "Steam Network",
+      "plant": "Utility Unit [UTI]",
+      "group": "Steam Distribution (Headers/PRDS)",
+      "element_type": "UTI VHP Letdown Station (PRDS)",
+      "instance": "B",
+      "pi_tag_base": "UTIL.UTI.LET-102",
+      "status_tag": "UO_Plant_Status",
+      "status_formula": "1",
+      "pi_dependencies": [],
+      "attributes": [
+        "Inlet Pressure",
+        "Outlet Pressure",
+        "Flow",
+        "Inlet Temperature",
+        "Outlet Temperature",
+        "Valve Opening",
+        "Spray Water Flow"
+      ]
+    },
+    {
+      "element_path": "United > Steam Network > Utility Unit [UTI] > Steam Distribution (Headers/PRDS) > UTI HP-2 Letdown Station (PRDS)C",
+      "short_name": "UTI HP-2 Letdown Station (PRDS)C",
+      "network": "Steam Network",
+      "plant": "Utility Unit [UTI]",
+      "group": "Steam Distribution (Headers/PRDS)",
+      "element_type": "UTI HP-2 Letdown Station (PRDS)",
+      "instance": "C",
+      "pi_tag_base": "UTIL.UTI.LET-103",
+      "status_tag": "UO_Plant_Status",
+      "status_formula": "1",
+      "pi_dependencies": [],
+      "attributes": [
+        "Inlet Pressure",
+        "Outlet Pressure",
+        "Flow",
+        "Inlet Temperature",
+        "Outlet Temperature",
+        "Valve Opening",
+        "Spray Water Flow"
+      ]
+    },
+    {
+      "element_path": "United > Steam Network > Utility Unit [UTI] > Steam Distribution (Headers/PRDS) > UTI MP-2 Letdown Station (PRDS)D",
+      "short_name": "UTI MP-2 Letdown Station (PRDS)D",
+      "network": "Steam Network",
+      "plant": "Utility Unit [UTI]",
+      "group": "Steam Distribution (Headers/PRDS)",
+      "element_type": "UTI MP-2 Letdown Station (PRDS)",
+      "instance": "D",
+      "pi_tag_base": "UTIL.UTI.LET-104",
+      "status_tag": "UO_Plant_Status",
+      "status_formula": "1",
+      "pi_dependencies": [],
+      "attributes": [
+        "Inlet Pressure",
+        "Outlet Pressure",
+        "Flow",
+        "Inlet Temperature",
+        "Outlet Temperature",
+        "Valve Opening",
+        "Spray Water Flow"
+      ]
+    },
+    {
+      "element_path": "United > Steam Network > Utility Unit [UTI] > Steam Distribution (Headers/PRDS) > UTI MP-2 Letdown Station (PRDS)E",
+      "short_name": "UTI MP-2 Letdown Station (PRDS)E",
+      "network": "Steam Network",
+      "plant": "Utility Unit [UTI]",
+      "group": "Steam Distribution (Headers/PRDS)",
+      "element_type": "UTI MP-2 Letdown Station (PRDS)",
+      "instance": "E",
+      "pi_tag_base": "UTIL.UTI.LET-105",
+      "status_tag": "UO_Plant_Status",
+      "status_formula": "1",
+      "pi_dependencies": [],
+      "attributes": [
+        "Inlet Pressure",
+        "Outlet Pressure",
+        "Flow",
+        "Inlet Temperature",
+        "Outlet Temperature",
+        "Valve Opening",
+        "Spray Water Flow"
+      ]
+    },
+    {
+      "element_path": "United > Steam Network > Utility Unit [UTI] > Steam Distribution (Headers/PRDS) > UTI MP-2 Letdown Station (PRDS)F",
+      "short_name": "UTI MP-2 Letdown Station (PRDS)F",
+      "network": "Steam Network",
+      "plant": "Utility Unit [UTI]",
+      "group": "Steam Distribution (Headers/PRDS)",
+      "element_type": "UTI MP-2 Letdown Station (PRDS)",
+      "instance": "F",
+      "pi_tag_base": "UTIL.UTI.LET-106",
+      "status_tag": "UO_Plant_Status",
+      "status_formula": "1",
+      "pi_dependencies": [],
+      "attributes": [
+        "Inlet Pressure",
+        "Outlet Pressure",
+        "Flow",
+        "Inlet Temperature",
+        "Outlet Temperature",
+        "Valve Opening",
+        "Spray Water Flow"
+      ]
+    },
+    {
+      "element_path": "United > Steam Network > Utility Unit [UTI] > Steam Distribution (Headers/PRDS) > UTI MP-2 Letdown Station (PRDS)G",
+      "short_name": "UTI MP-2 Letdown Station (PRDS)G",
+      "network": "Steam Network",
+      "plant": "Utility Unit [UTI]",
+      "group": "Steam Distribution (Headers/PRDS)",
+      "element_type": "UTI MP-2 Letdown Station (PRDS)",
+      "instance": "G",
+      "pi_tag_base": "UTIL.UTI.LET-107",
+      "status_tag": "UO_Plant_Status",
+      "status_formula": "1",
+      "pi_dependencies": [],
+      "attributes": [
+        "Inlet Pressure",
+        "Outlet Pressure",
+        "Flow",
+        "Inlet Temperature",
+        "Outlet Temperature",
+        "Valve Opening",
+        "Spray Water Flow"
+      ]
+    }
+  ]
+}

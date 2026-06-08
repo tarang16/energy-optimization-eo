@@ -1,0 +1,112 @@
+.tankCylindricalCompoOff {
+  min-height: 10vmin;
+}
+
+.tankCylindricalCompoOff .s {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.tankCylindricalCompoOff .label {
+  margin-bottom: 0;
+}
+
+.tankCylindricalCompoOff .textWrapper {
+  left: 0;
+  letter-spacing: 0;
+  line-height: normal;
+  text-align: center;
+  top: -1px;
+}
+
+.tankCylindricalCompoOff .tankCylindricalOff {
+  background-color: transparent;
+  border-radius: 10px;
+  height: 100px;
+  overflow: hidden;
+  position: relative;
+  width: 100px;
+}
+
+.tankCylindricalCompoOff .tankCylindricalOff img {
+  height: 100% !important;
+}
+
+.tankCylindricalCompoOff .tank-cylindrical {
+  background-size: 100% 100%;
+  height: 42px;
+  left: 16px;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 42px;
+}
+
+.tankCylindricalCompoOff .div {
+  color: #303030;
+  left: 17px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 11px;
+}
+
+.tankCylindricalCompoOff .key {
+  margin-top: 10px;
+}
+
+.tankCylindricalCompo {
+  min-height: 10vmin;
+}
+
+.tankCylindricalCompo .s {
+  align-items: center;
+  display: inline-flex;
+  flex-direction: column;
+  gap: 2px;
+  justify-content: center;
+  position: relative;
+}
+
+.tankCylindricalCompo .label {
+  margin-bottom: 0;
+}
+
+.tankCylindricalCompo .tankCylindricalOn {
+  background-color: transparent;
+  border-radius: 10px;
+  height: 100px;
+  overflow: hidden;
+  position: relative;
+  width: 100px;
+}
+
+.tankCylindricalCompo .tankCylindricalOn img {
+  height: 100% !important;
+}
+
+.tankCylindricalCompo .tank-cylindrical {
+  background-size: 100% 100%;
+  height: 42px;
+  left: 16px;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 42px;
+}
+
+.tankCylindricalCompo .div {
+  color: #2ba402;
+  text-transform: uppercase;
+  left: 17px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 11px;
+}
+
+.tankCylindricalCompo .key {
+  margin-top: 10px;
+}

@@ -1,0 +1,6 @@
+﻿constraint_category_id,category,description,active
+1,Header Mass Balance,"Header balances for HP, MP, LP, BFW etc..",1
+2,Drives selection,"Total running drives of BFW, VHP_BFW, Air_Compressors, Cooling_Water etc..",1
+3,Process Energy Balance,Enthalpy balanceof the stream where phase is getting changed,1
+4,Process Mass Balance,Mass balance of the stream where phase is getting changed,1
+5,Variable limits,"Variables in limits ",1

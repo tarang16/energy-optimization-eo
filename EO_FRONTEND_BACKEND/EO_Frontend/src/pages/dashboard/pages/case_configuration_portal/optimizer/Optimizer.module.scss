@@ -1,0 +1,526 @@
+@use 'config/scss/variables' as *;
+
+.optimizerTabContainer {
+  width: 100%;
+  height: 100%;
+  padding: 0 0.5vmin 0.5vmin 0.5vmin;
+
+  &__Bottom {
+    height: calc(100%);
+
+    .optimizerTabContainer__Top {
+      height: 3.5vmin;
+      margin: 0 0 1vmin 0;
+
+      .leftTopContainer {
+        width: calc(100% - 14vmin);
+
+        :global(.form-control) {
+          padding: 0 1vmin !important;
+          min-width: 25vmin !important;
+          max-width: 25vmin !important;
+          border-radius: 0.3vmin;
+          border: 1px solid $primary_gray_3;
+
+          &:focus {
+            border: 1px solid $primary_blue;
+          }
+        }
+
+        :global(.searchLabelText) {
+          width: unset !important;
+          min-width: fit-content !important;
+          margin-right: 0.5vmin;
+        }
+
+        :global(.dropdownLabelText) {
+          width: unset !important;
+          min-width: fit-content !important;
+          margin-right: 0.5vmin;
+        }
+
+        .variablesTab {
+          height: 100%;
+        }
+
+        .parameterTab {
+          height: 100%;
+          display: flex;
+          gap: 2vmin;
+          align-items: center;
+
+          :global(.customSelectBoxFooterTimezone) {
+            height: 100%;
+            min-width: 25vmin !important;
+            max-width: 25vmin !important;
+          }
+
+          :global(.react-select-modifyDetails__control) {
+            min-height: unset;
+            height: inherit;
+            font-size: 1.2vmin;
+          }
+
+          :global(
+            .react-select-modifyDetails__control.react-select-modifyDetails__control--is-focused
+          ) {
+            border: 1px solid $primary_blue !important;
+          }
+
+          :global(.react-select-modifyDetails__indicators) {
+            height: 100%;
+          }
+
+          :global(
+            .react-select-modifyDetails__value-container.react-select-modifyDetails__value-container--has-value
+          ) {
+            height: 100%;
+            padding: 0 1vmin;
+          }
+
+          :global(.react-select-modifyDetails__input-container) {
+            height: 100%;
+            max-height: 4vmin;
+            margin: 0;
+            padding: 0;
+          }
+
+          :global(.react-select-modifyDetails__single-value) {
+            margin-top: 0.3vmin;
+          }
+
+          :global(.react-select-modifyDetails__menu) {
+            z-index: 60;
+          }
+
+          :global(
+            .react-select-modifyDetails__indicator.react-select-modifyDetails__dropdown-indicator
+          ),
+          :global(
+            .react-select-modifyDetails__indicator.react-select-modifyDetails__clear-indicator
+          ) {
+            padding: 1vmin;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            svg {
+              width: 2vmin;
+              filter: brightness(0) saturate(100%) invert(64%) sepia(4%)
+                saturate(240%) hue-rotate(177deg) brightness(92%) contrast(92%);
+            }
+          }
+        }
+      }
+
+      .btnWrapperContainer {
+        width: 12vmin;
+
+        .addNewBtn {
+          background-color: $primary_blue;
+          border: none;
+          border-radius: 0.3vmin;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 0.8vmin;
+          width: 100%;
+
+          img {
+            width: 1.3vmin;
+            height: 1.3vmin;
+          }
+        }
+      }
+    }
+
+    .TableContainer {
+      width: 100%;
+      height: calc(100% - 9vmin);
+
+      table {
+        tbody {
+          tr {
+            td {
+              word-break: break-word;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.maximizeMinimizeBtn {
+  height: 3.5vmin;
+  background-color: transparent;
+  border: 1px solid $primary_gray_3;
+  border-radius: 0.3vmin;
+  display: flex;
+  align-items: center;
+  padding: 0 1vmin;
+
+  .sortIcon {
+    width: 1.3vmin;
+    height: 1.3vmin;
+    margin-right: 0.8vmin;
+  }
+}
+
+.editBtnImage {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2vmin;
+  height: 2vmin;
+
+  img {
+    @include blue_filter_icon_important;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.infoBtnImage {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2vmin;
+  height: 2vmin;
+
+  img {
+    @include blue_filter_icon_important;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.labelWithFormulaBox {
+  label {
+    width: unset !important;
+    min-width: 12vmin !important;
+    margin-right: 0.5vmin;
+  }
+
+  :global(.formulaBoxGlobalContainer) {
+    flex-grow: 1;
+  }
+
+  :global(.textareaFormulaBoxContainer) {
+    font-size: 1.2vmin;
+    border-radius: 0.3vmin;
+  }
+}
+
+.newBoundField {
+  input {
+    border-radius: 0.3vmin;
+  }
+
+  .separator {
+    height: auto;
+    background-color: $primary_gray_3;
+    width: 0.3vmin;
+    align-self: stretch;
+  }
+}
+
+:global(.card_body) {
+  padding: 0;
+}
+
+.boundField {
+  height: 3.5vmin;
+  display: flex;
+  align-items: center;
+  margin: 1vmin 0;
+
+  label {
+    width: unset !important;
+    min-width: 12vmin !important;
+    margin-right: 0.5vmin;
+  }
+
+  .switchEdit {
+    label {
+      width: 5vmin !important;
+      min-width: unset !important;
+      margin-right: 0;
+    }
+  }
+
+  :global(.extraClassLabel) {
+    width: 5vmin !important;
+    min-width: 5vmin !important;
+  }
+
+  img {
+    width: 1.5vmin;
+    height: 1.5vmin;
+    cursor: pointer;
+  }
+
+  .maximizeMinimizeBtn {
+    height: 100%;
+    background-color: transparent;
+    border: 1px solid $primary_gray_3;
+    border-radius: 0.3vmin;
+    display: flex;
+    align-items: center;
+    padding: 0 1vmin;
+
+    .sortIcon {
+      width: 1.3vmin;
+      height: 1.3vmin;
+      margin-right: 0.8vmin;
+    }
+  }
+
+  .sortButton {
+    height: 100%;
+    width: 5vmin;
+    border: none;
+    outline: none;
+
+    background: none;
+
+    img {
+      filter: unset;
+    }
+  }
+
+  :global(.formulaBoxGlobalContainer) {
+    flex-grow: 1;
+  }
+
+  :global(.form-control) {
+    padding: 0 1vmin;
+    flex-grow: 1;
+    border-radius: 0.3vmin;
+    border: 1px solid $primary_gray_3;
+
+    &:focus {
+      border: 1px solid $primary_blue;
+    }
+  }
+
+  :global(.customSelectBoxFooterTimezone) {
+    word-wrap: break-word;
+    height: 100%;
+    flex-grow: 1;
+  }
+
+  :global(.react-select-modifyDetails__control) {
+    min-height: unset;
+    height: inherit;
+    font-size: 1.2vmin;
+  }
+
+  :global(
+    .react-select-modifyDetails__control.react-select-modifyDetails__control--is-focused
+  ) {
+    border: 1px solid $primary_blue !important;
+  }
+
+  :global(.react-select-modifyDetails__indicators) {
+    height: 100%;
+  }
+
+  :global(
+    .react-select-modifyDetails__value-container.react-select-modifyDetails__value-container--has-value
+  ) {
+    height: 100%;
+    padding: 0 1vmin;
+  }
+
+  :global(.react-select-modifyDetails__input-container) {
+    height: 100%;
+    max-height: 4vmin;
+    margin: 0;
+    padding: 0;
+  }
+
+  :global(.react-select-modifyDetails__single-value) {
+    margin-top: 0.3vmin;
+  }
+
+  :global(.react-select-modifyDetails__menu) {
+    z-index: 60;
+  }
+
+  :global(
+    .react-select-modifyDetails__indicator.react-select-modifyDetails__dropdown-indicator
+  ),
+  :global(
+    .react-select-modifyDetails__indicator.react-select-modifyDetails__clear-indicator
+  ) {
+    padding: 1vmin;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    svg {
+      width: 2vmin;
+      filter: brightness(0) saturate(100%) invert(64%) sepia(4%) saturate(240%)
+        hue-rotate(177deg) brightness(92%) contrast(92%);
+    }
+  }
+}
+
+.boundFieldBtnContainer {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  gap: 2vmin;
+  margin-top: 3vmin;
+  height: 3.5vmin;
+
+  button {
+    border: none;
+    height: 100%;
+    width: 14vmin;
+    border-radius: 0.3vmin;
+
+    &.saveBtn {
+      background-color: $primary_blue;
+      color: $primary_white;
+    }
+
+    &:disabled {
+      pointer-events: inherit;
+      cursor: not-allowed;
+      opacity: 0.65;
+    }
+
+    &.cancelBtn {
+      background-color: $primary_gray_2;
+      color: $primary_white;
+    }
+
+    &.deleteBtn {
+      background-color: $primary_orange;
+      color: $primary_white;
+    }
+  }
+}
+
+.parameterInfoModal {
+  &__item {
+    margin-bottom: 2vmin;
+
+    .labelText {
+      width: 12vmin;
+    }
+  }
+}
+
+.TableContainer.load {
+  img {
+    filter: unset;
+  }
+}
+
+.singleCardEdit {
+  h1 {
+    font-weight: 700;
+  }
+
+  img {
+    width: 1.5vmin;
+    height: 1.5vmin;
+    cursor: pointer;
+  }
+
+  :global(.card_body) {
+    padding: 1vmin 0 !important;
+    margin: 0 !important;
+  }
+}
+
+.ccpTagsTooltip {
+  z-index: 9;
+  width: 40vmin;
+
+  :global(.tooltip-inner) {
+    max-width: 100% !important;
+  }
+}
+
+.newBoundFieldTop {
+  .setMinHeightTextBox {
+    min-height: 3.5vmin;
+    max-height: 3.5vmin;
+    padding: 0.5vmin 1vmin !important;
+  }
+}
+
+:global(.minHeightTextArea) {
+  min-height: unset !important;
+  height: 3.5vmin;
+  padding: 0.5vmin 1vmin !important;
+}
+
+.boxShadowContainer {
+  @include boxShadow_card;
+  padding: 1.3vmin 1.3vmin;
+
+  .boundField {
+    height: unset;
+
+    &.boundFieldCustomHeightContainer {
+      height: 3.5vmin;
+      padding-right: 0.5rem;
+
+      :global(.dropdownLabelText) {
+        width: unset !important;
+        min-width: unset !important;
+        margin-right: 2vmin !important;
+      }
+    }
+
+    .CustomDropdownHeight {
+      height: 3.5vmin;
+    }
+  }
+}
+
+.optimizerModalScrollContainer {
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+// ade by me
+.costPerUnitContainer {
+  padding: 0.5vmin;
+  height: 100%;
+
+  &__tabButton {
+    height: 3.5vmin;
+    display: flex;
+    gap: 1.5vmin;
+
+    button {
+      padding-top: 0.3vmin;
+      width: auto;
+      height: 100%;
+      border: none;
+      border-radius: 1vmin;
+      background-color: $primary_blue_bg;
+
+      &.btnActive {
+        background-color: $primary_blue;
+        color: $primary_white;
+      }
+    }
+  }
+
+  &__tabContent {
+    height: calc(100% - 3.5vmin);
+  }
+}

@@ -1,0 +1,218 @@
+@use 'config/scss/variables' as *;
+
+.container {
+  .chartDiv {
+    height: calc(100% - 4.5vmin - 1.4vmin);
+  }
+
+  .timeDiv {
+    height: 4vmin;
+    position: relative;
+    margin: 0.7vmin 0 0 0;
+
+    .mixMaxPositionContainer {
+      position: absolute;
+      left: 0;
+      display: flex;
+      align-items: center;
+
+      .divider {
+        margin: 0 1vmin;
+      }
+
+      .primaryBlueButton {
+        background-color: $primary_blue;
+        display: flex;
+        align-items: center;
+        height: 100%;
+        border: none;
+        padding: 0 2vmin;
+        border-radius: 0.3vmin;
+        // margin-left: 1.5vmin;
+
+        span {
+          color: $primary_white;
+        }
+
+        &:disabled {
+          background-color: $primary_gray_4;
+
+          span {
+            color: $primary_gray_2;
+          }
+        }
+      }
+
+      :global(.form-control) {
+        height: 100%;
+        border-radius: 0.3vmin;
+        padding: 0.5vmin 0.5vmin 0.2vmin 0.5vmin;
+        width: 8vmin;
+
+        &:focus {
+          border: 1px solid $primary_gray_4;
+        }
+
+        &:disabled {
+          background-color: $primary_gray_4;
+        }
+      }
+    }
+
+    button.btns {
+      height: calc(100%);
+      border: 1px solid $primary_gray_3;
+      outline: none;
+      background-color: $primary_white;
+      border-radius: 0.3vmin;
+      width: 4vmin;
+      cursor: pointer;
+      padding: 0.5vmin !important;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .customMargin {
+        margin-top: 0.45vmin;
+      }
+
+      .spanText {
+        margin-top: 0.45vmin;
+      }
+
+      img {
+        width: 2.5vmin;
+        height: 2.5vmin;
+        filter: brightness(1) invert(0);
+      }
+
+      &:hover {
+        background-color: $primary_blue_hover;
+        border-color: $primary_blue_hover;
+        color: $primary_white;
+
+        .customMargin {
+          color: $primary_white;
+        }
+
+        .spanText {
+          color: $primary_white;
+        }
+
+        img {
+          filter: brightness(0) invert(1);
+        }
+      }
+
+      &.active {
+        background-color: $primary_blue;
+        border-color: $primary_blue;
+        color: $primary_white;
+
+        .customMargin {
+          color: $primary_white;
+        }
+
+        .spanText {
+          color: $primary_white;
+        }
+
+        img {
+          filter: brightness(0) invert(1);
+        }
+      }
+    }
+
+    .rightAlignmentBtn {
+      position: absolute;
+      z-index: 6;
+      right: 0;
+    }
+
+    .textStartContainer {
+      position: absolute;
+      z-index: 6;
+      left: 0;
+    }
+  }
+}
+
+.popupClass {
+  z-index: 999;
+}
+
+.fullScreenClass {
+  position: absolute;
+  top: 20 !important;
+  left: 20 !important;
+  width: 900px !important;
+  height: 600px !important;
+}
+
+.datePickerOuterContainer {
+  width: 110px;
+}
+
+:global(.customResponsiveWidth) {
+  :global(.modal-dialog.modal-xl) {
+    max-width: 80vw;
+  }
+}
+
+.contentFitWidth {
+  :global(.modal-dialog.modal-xl) {
+    width: fit-content !important;
+    margin: 0 auto !important;
+  }
+
+  :global(.inputStyle) {
+    border: 1px solid $primary_gray_3;
+    color: $primary_gray;
+    border-radius: 0.4vmin;
+    display: inline-block;
+    width: 75%;
+    height: 4vmin;
+    padding: 0 2vmin;
+
+    &:focus {
+      border: 1px solid $primary_gray_3;
+      outline: none;
+    }
+  }
+
+  :global(.searchBtnModal) {
+    display: inline-block;
+    height: 4vmin;
+    width: 25%;
+    font-size: 1.4vmin;
+    text-transform: uppercase;
+    font-weight: 600;
+    background-color: $primary_blue !important;
+    color: $primary_white !important;
+    border-radius: 0.4vmin;
+    border: 1px solid $primary_blue;
+  }
+}
+
+.trendIconBtn {
+  padding: 1.2vmin !important;
+}
+
+.LineChartOdsContainer {
+  &__yellow {
+    border: 1px solid $primary_yellow_bg;
+    background-color: $primary_yellow_bg;
+    border-radius: 0.3vmin;
+
+    .labelText {
+      min-width: fit-content;
+    }
+  }
+}
+
+.ScrollableChart {
+  max-height: 80vh;
+  overflow-y: auto;
+  width: 100%;
+  height: 100%;
+}

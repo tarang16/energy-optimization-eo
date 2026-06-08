@@ -1,0 +1,28 @@
+@use '../../../variables' as *;
+
+.bottomContent,
+.topNav {
+  padding-bottom: 0;
+  // border: 1px solid red;
+}
+
+.topNav {
+  height: 12%;
+}
+
+.bottomContent {
+  padding: 0px;
+  margin: 0px;
+  height: calc(100% - 12%);
+  overflow: hidden;
+
+  .top {
+    margin-top: 15px;
+    height: 10%;
+  }
+
+  .bottom {
+    height: calc(100% - 10% - 35px);
+    margin-top: 15px;
+  }
+}

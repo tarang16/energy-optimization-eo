@@ -1,0 +1,18 @@
+@use '../../../config/scss/variables' as *;
+
+.reset_button_icon {
+  // background-image: url("../../../assets/sabic_new_icons/reset_icon.svg");
+  // width: 45px;
+  // height: 35px;
+  // background-repeat: no-repeat;
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  display: inline-block;
+
+  img {
+    width: 2.5vmin;
+    height: 2.5vmin;
+    cursor: pointer;
+  }
+}

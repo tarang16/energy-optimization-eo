@@ -1,0 +1,43 @@
+@use '../../../../config/scss/variables' as *;
+
+.tblContainer {
+  height: 100%;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 4vmin;
+    background-color: $primary_blue_bg;
+    right: 0;
+    top: 0;
+  }
+
+  div:nth-child(1) {
+    div:nth-child(1) {
+      // height: 90% !important;
+      // height: 100% !important;
+      padding: 0;
+      margin: 0;
+    }
+
+    div:nth-child(2) {
+      padding: 0;
+      height: 10% !important;
+
+      div {
+        height: 100%;
+        overflow: hidden;
+      }
+    }
+  }
+}
+
+.sugggestionImage {
+  width: 2.2vmin;
+}
+
+.fullWidthSuggestionContent {
+  width: calc(100% - 2.5vmin);
+}

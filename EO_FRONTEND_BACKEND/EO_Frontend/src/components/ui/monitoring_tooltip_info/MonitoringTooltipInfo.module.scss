@@ -1,0 +1,17 @@
+@use '../../../config/scss/variables' as *;
+
+.monitoringhTooltipContainer {
+  max-height: 40vmin;
+  overflow-y: auto;
+
+  :global(.customFontsBold) {
+    span {
+      font-size: 1.2vmin !important;
+    }
+
+    sub,
+    sup {
+      color: $primary_gray !important;
+    }
+  }
+}

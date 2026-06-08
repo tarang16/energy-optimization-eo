@@ -1,0 +1,178 @@
+@use 'config/scss/variables' as *;
+
+.container {
+  gap: 1.8vmin;
+}
+
+.textDiv {
+  width: 100%;
+}
+
+.box {
+  position: relative;
+  margin-top: 0;
+  padding: 0.5% 1%;
+  background-color: $primary_blue_bg;
+  border-radius: 6px;
+  transition: 0.3s ease-in-out;
+  text-decoration: none;
+
+  .imgDiv {
+    .topImg {
+      min-width: 4.5vmin;
+      max-width: 4.5vmin;
+      margin: 0;
+      padding: 0;
+      cursor: initial;
+      filter: unset;
+    }
+  }
+
+  .topTileImgDiv {
+    .topImg {
+      min-width: 2vmin;
+      max-width: 2vmin;
+      margin: 0;
+      padding: 0;
+      cursor: initial;
+      display: block;
+      position: absolute;
+      top: 0.4vmin;
+      right: 0.4vmin;
+      visibility: hidden;
+      filter: brightness(0) invert(1);
+    }
+  }
+
+  .contentDiv {
+    width: 80%;
+  }
+
+  &.active {
+    background-color: $primary_blue;
+
+    .white_text_hover {
+      color: $primary_white !important;
+    }
+  }
+
+  p {
+    display: flex;
+    margin: 0;
+    padding: 0;
+
+    span {
+      margin-right: 2px;
+    }
+  }
+
+  .box_top_content {
+    // margin-bottom: 5px;
+  }
+}
+
+.dynamicDateBox {
+  &_top {
+    padding-bottom: 0.36vmin;
+
+    .title {
+      span {
+        display: inline-block;
+        margin-bottom: 0.3vmin;
+      }
+    }
+  }
+
+  &_bottom {
+    padding-top: 0.36vmin;
+
+    .customBottomMargin {
+      margin-bottom: 0.3vmin;
+    }
+
+    &_left {
+      width: 40%;
+    }
+
+    &_right {
+      width: 60%;
+    }
+  }
+}
+
+.hoverable {
+  .color_primary_blue {
+    color: $primary-blue;
+  }
+
+  .color_primary_orange {
+    color: $primary-orange;
+  }
+
+  .color_primary_gray {
+    color: $primary-gray;
+  }
+}
+
+.hoverable:hover {
+  background-color: $primary_blue_hover;
+  cursor: pointer;
+
+  .white_text_hover {
+    color: $primary_white !important;
+  }
+
+  .topTileImgDiv {
+    .topImg {
+      visibility: visible;
+    }
+  }
+}
+
+.unittext {
+  margin-bottom: 1.2px;
+}
+
+.reconciled_text {
+  background-color: $primary_gray_4;
+  border-radius: 0 0 2vmin 2vmin;
+  display: block;
+  align-items: center;
+  justify-content: center;
+  padding-top: 0.3vmin;
+  height: 2vmin;
+  position: absolute;
+  bottom: -1.8vmin;
+  width: calc(100% - 5px);
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.activeTile {
+  color: $primary_white !important;
+}
+
+.ToolTipContainer {
+  --bs-tooltip-bg: $primary_white;
+  --bs-tooltip-color: $primary_black;
+  background-color: $primary_white;
+  opacity: 1.2;
+  --bs-tooltip-opacity: 5 !important;
+  @include boxShadow_kpi;
+  z-index: 99999;
+  color: $primary_black;
+  padding: 0.1vmin;
+  border-radius: 0.7vmin;
+  position: relative;
+
+  :global(.tooltip-inner) {
+    background-color: $primary_white !important;
+    color: $primary_black;
+    min-width: fit-content;
+    padding: 1vmin;
+  }
+
+  :global(.tooltip-arrow::before) {
+    border-bottom-color: $primary_white !important;
+  }
+}

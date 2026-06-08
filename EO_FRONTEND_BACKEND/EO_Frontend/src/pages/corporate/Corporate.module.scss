@@ -1,0 +1,173 @@
+@use 'config/scss/variables' as *;
+
+.parent {
+  height: 100%;
+  width: 100%;
+  padding: 0 2vmin;
+  overflow: hidden;
+
+  .topKpi {
+    // padding: 0px;
+    height: 12vmin;
+    margin: 0 0 0 0;
+    width: 100%;
+  }
+
+  .content {
+    margin-top: 2vmin;
+    height: calc(100% - 16vmin);
+    padding: 0;
+    gap: 2vmin;
+
+    .bigMap,
+    .smallMap {
+      border-radius: 8px;
+      // margin: 10px;
+      // height: calc(100% - 2vmin);
+      background-color: $primary_white;
+      padding: 1%;
+      @include boxShadow_card;
+
+      .header {
+        height: 15%;
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+      }
+
+      .imageContainer {
+        height: 85%;
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        background-position: center center;
+        position: relative;
+
+        .regionLinksBelow {
+          position: absolute;
+          z-index: 9;
+
+          .regionLinksText {
+            // font-size: 2vmin;
+            width: 3.2rem;
+            height: 3.2rem;
+            border: none;
+            // opacity: 0.6;
+            box-shadow:
+              0px 0px 0px 6px $primary_blue_20,
+              0px 0px 0px 12px $primary_blue_40,
+              0px 0px 0px 18px $primary_blue_60;
+            text-decoration: none;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: 0.3s ease-in-out;
+            opacity: 1 !important;
+
+            &:hover {
+              color: $primary_yellow;
+              box-shadow:
+                0px 0px 0px 6px $primary_yellow_20,
+                0px 0px 0px 12px $primary_yellow_40,
+                0px 0px 0px 18px $primary_yellow_60;
+            }
+          }
+
+          .regionText {
+            position: relative;
+            background-color: $primary_white;
+            margin-top: 18px;
+            color: $primary_gray;
+            box-shadow: 0px 0px 4px $primary_gray_2;
+            padding: 5px 10px;
+            border-radius: 3px;
+          }
+        }
+      }
+    }
+
+    .bigMap {
+      width: 70%;
+    }
+
+    .smallMap {
+      width: 30%;
+
+      .imageContainer {
+        background-size: 90% 80%;
+        background-position: center center;
+      }
+    }
+  }
+}
+
+.tooltipContainer {
+  // text-align: center;
+  min-width: 340px;
+  max-width: 340px;
+  overflow: hidden;
+
+  .top {
+    text-align: center;
+    border-bottom: 1px solid $primary_white;
+    margin: 0px;
+    padding: 0px;
+
+    p {
+      text-align: center;
+      margin: 0px;
+      padding: 0px;
+      color: $primary_white;
+    }
+  }
+
+  .bottom {
+    .box {
+      .box_item {
+        display: flex;
+        align-items: start;
+        justify-content: start;
+        margin-bottom: 10px;
+
+        .left {
+          display: flex;
+          align-items: start;
+          justify-content: start;
+          margin-right: 10px;
+
+          img {
+            filter: brightness(0) invert(1);
+            width: 3vmin;
+          }
+        }
+
+        .right {
+          display: flex;
+          flex-direction: column;
+          align-items: start;
+          justify-content: start;
+
+          p {
+            display: inline;
+            padding: 0;
+            margin: 0;
+            color: $primary_white;
+          }
+        }
+      }
+    }
+  }
+}
+
+.activeRegion {
+  border: 40px solid $primary_yellow !important;
+}
+
+.subText {
+  color: $primary_white;
+}
+
+.imgStyle {
+  width: 100%;
+  height: 100%;
+}

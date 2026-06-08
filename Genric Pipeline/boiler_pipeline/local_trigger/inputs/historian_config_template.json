@@ -1,0 +1,14 @@
+{
+  "_comment": "Copy this file to historian_config.json and fill in your details. DO NOT commit historian_config.json to source control.",
+
+  "host": "http://192.168.9.249:8000",
+
+  "auth_type": "none",
+
+  "username": "",
+  "password": "",
+
+  "token": "",
+
+  "verify_ssl": true
+}

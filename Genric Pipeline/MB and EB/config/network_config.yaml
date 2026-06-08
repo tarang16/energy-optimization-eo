@@ -1,0 +1,474 @@
+name: Utility Plant Steam Network — VHP/HP/MP/LP/LLP
+
+# ---------------------------------------------------------------------------
+# Headers (steam pressure levels + water rails).
+#
+# Header levels can be added or removed at runtime via:
+#     network.add_header(SteamNode(...))
+#     network.remove_header("LLP")             # fails if elements reference it
+#     network.remove_header("LLP", force=True) # also removes referencing elements
+#
+# `rank` orders rows in reports (lower rank = higher pressure). Topology is
+# free-form: an element can connect any two headers regardless of rank.
+# ---------------------------------------------------------------------------
+headers:
+  - name: VHP
+    pressure_bar: 110.0
+    temperature_c: 510.0
+    rank: 1
+    description: Very-high-pressure superheated steam
+  - name: HP
+    pressure_bar: 42.0
+    temperature_c: 400.0
+    rank: 2
+    description: High-pressure header
+  - name: MP
+    pressure_bar: 16.0
+    temperature_c: 280.0
+    rank: 3
+    description: Medium-pressure header
+  - name: LP
+    pressure_bar: 4.5
+    temperature_c: 180.0
+    rank: 4
+    description: Low-pressure header
+  - name: LLP
+    pressure_bar: 1.4
+    temperature_c: 115.0
+    rank: 5
+    description: Very-low-pressure / utility steam header
+  - name: BFW
+    pressure_bar: 8.0
+    temperature_c: 110.0
+    rank: 9
+    description: Boiler feed-water rail (water side; no steam decision vars)
+  - name: CONDENSATE
+    pressure_bar: 3.0
+    temperature_c: 90.0
+    rank: 10
+    description: Condensate return rail
+
+# ---------------------------------------------------------------------------
+# Elements. Every blueprint category has a dedicated `kind` alias:
+#
+#   Generators (deliver steam to a header):
+#     generator             — generic; use `subtype` to tag fuel_fired_boiler /
+#                             hrsg / waste_heat_boiler / reactor_steam_drum /
+#                             cbd_flash_drum
+#
+#   Consumers (draw steam):
+#     cooler, heater, process_heater, reboiler, saturator, evaporator_effect,
+#     tracing_system, decoke_steam, deaerator, dump_condenser, surface_condenser
+#
+#   Header-to-header transfers:
+#     letdown / prv         — steam from a higher header to a lower one,
+#                             optional desuperheater water dose
+#     backpressure_turbine  — turbine exhausting to a lower header
+#     extraction_turbine    — turbine with one extraction tap + exhaust
+#     condensing_turbine    — exhaust to surface condenser (mass leaves system)
+#
+#   Boundary:
+#     import / export       — steam crossing the system boundary
+#     vent                  — atmospheric vent (slack on a header)
+#     desuperheater         — inline DSH dose into a header line
+#
+# `subtype` is a free-form blueprint classification used for grouping in
+# reports; it does not affect the solver.
+# ---------------------------------------------------------------------------
+elements:
+
+  # =========================================================================
+  # VHP GENERATION
+  # =========================================================================
+  - name: VHP_FuelFired_Boiler_1
+    kind: generator
+    subtype: fuel_fired_boiler
+    header: VHP
+    flow_tph: 180.0
+  - name: VHP_FuelFired_Boiler_2
+    kind: generator
+    subtype: fuel_fired_boiler
+    header: VHP
+    flow_tph: 160.0
+  - name: VHP_HRSG
+    kind: generator
+    subtype: heat_recovery_steam_generator
+    header: VHP
+    flow_tph: 120.0
+  - name: VHP_WasteHeat_Boiler
+    kind: generator
+    subtype: waste_heat_boiler
+    header: VHP
+    flow_tph: 70.0
+  - name: VHP_Reactor_SteamDrum
+    kind: generator
+    subtype: reactor_steam_drum
+    header: VHP
+    flow_tph: 40.0
+
+  # =========================================================================
+  # HP GENERATION
+  # =========================================================================
+  - name: HP_FuelFired_Boiler
+    kind: generator
+    subtype: fuel_fired_boiler
+    header: HP
+    flow_tph: 80.0
+  - name: HP_HRSG
+    kind: generator
+    subtype: heat_recovery_steam_generator
+    header: HP
+    flow_tph: 90.0
+  - name: HP_WasteHeat_Boiler
+    kind: generator
+    subtype: waste_heat_boiler
+    header: HP
+    flow_tph: 50.0
+  - name: HP_Reactor_SteamDrum
+    kind: generator
+    subtype: reactor_steam_drum
+    header: HP
+    flow_tph: 30.0
+
+  # =========================================================================
+  # MP GENERATION
+  # =========================================================================
+  - name: MP_FuelFired_Boiler
+    kind: generator
+    subtype: fuel_fired_boiler
+    header: MP
+    flow_tph: 40.0
+  - name: MP_HRSG
+    kind: generator
+    subtype: heat_recovery_steam_generator
+    header: MP
+    flow_tph: 30.0
+  - name: MP_WasteHeat_Boiler
+    kind: generator
+    subtype: waste_heat_boiler
+    header: MP
+    flow_tph: 25.0
+
+  # =========================================================================
+  # LP GENERATION
+  # =========================================================================
+  - name: LP_FuelFired_Boiler
+    kind: generator
+    subtype: fuel_fired_boiler
+    header: LP
+    flow_tph: 20.0
+  - name: LP_HRSG
+    kind: generator
+    subtype: heat_recovery_steam_generator
+    header: LP
+    flow_tph: 15.0
+  - name: LP_WasteHeat_Boiler
+    kind: generator
+    subtype: waste_heat_boiler
+    header: LP
+    flow_tph: 10.0
+
+  # =========================================================================
+  # LLP GENERATION (typically flash steam from continuous blowdown)
+  # =========================================================================
+  - name: CBD_Flash_Drum
+    kind: generator
+    subtype: cbd_flash_drum
+    header: LLP
+    flow_tph: 6.0
+
+  # =========================================================================
+  # CONSUMERS — HP HEADER
+  # =========================================================================
+  - name: HP_Cooler
+    kind: cooler
+    source_header: HP
+    flow_tph: 35.0
+  - name: HP_Heater
+    kind: heater
+    source_header: HP
+    flow_tph: 50.0
+    return_fraction: 0.7
+    return_header: CONDENSATE
+    return_temperature_c: 95.0
+  - name: HP_Reactor_Heating
+    kind: process_heater
+    source_header: HP
+    flow_tph: 70.0
+  - name: HP_Process_Tracing
+    kind: tracing_system
+    source_header: HP
+    flow_tph: 25.0
+
+  # =========================================================================
+  # CONSUMERS — MP HEADER
+  # =========================================================================
+  - name: MP_Cooler
+    kind: cooler
+    source_header: MP
+    flow_tph: 20.0
+  - name: MP_Heater
+    kind: heater
+    source_header: MP
+    flow_tph: 30.0
+    return_fraction: 0.7
+    return_header: CONDENSATE
+  - name: MP_Stripper_Reboiler
+    kind: reboiler
+    source_header: MP
+    flow_tph: 80.0
+    return_fraction: 0.6
+    return_header: CONDENSATE
+    return_temperature_c: 95.0
+  - name: MP_Saturator
+    kind: saturator
+    source_header: MP
+    flow_tph: 15.0
+  - name: MP_Decoke_Steam
+    kind: decoke_steam
+    source_header: MP
+    flow_tph: 18.0
+    enabled: false                # only on during decoking
+  - name: MP_Evaporator_Effect_1
+    kind: evaporator_effect
+    source_header: MP
+    flow_tph: 22.0
+
+  # =========================================================================
+  # CONSUMERS — LP HEADER
+  # =========================================================================
+  - name: LP_Cooler
+    kind: cooler
+    source_header: LP
+    flow_tph: 12.0
+  - name: LP_Heater
+    kind: heater
+    source_header: LP
+    flow_tph: 18.0
+    return_fraction: 0.7
+    return_header: CONDENSATE
+  - name: LP_Evaporator_Effect_2
+    kind: evaporator_effect
+    source_header: LP
+    flow_tph: 14.0
+  - name: LP_Deaerator
+    kind: deaerator
+    source_header: LP
+    flow_tph: 35.0
+    return_fraction: 1.0          # all returns as deaerated water to BFW
+    return_header: BFW
+    return_temperature_c: 105.0
+
+  # =========================================================================
+  # CONSUMERS — LLP HEADER
+  # =========================================================================
+  - name: LLP_Process_Heater
+    kind: process_heater
+    source_header: LLP
+    flow_tph: 12.0
+  - name: LLP_Reboiler
+    kind: reboiler
+    source_header: LLP
+    flow_tph: 14.0
+    return_fraction: 0.5
+    return_header: CONDENSATE
+  - name: LLP_Tracing_System
+    kind: tracing_system
+    source_header: LLP
+    flow_tph: 8.0
+  - name: LLP_Dump_Condenser
+    kind: dump_condenser
+    source_header: LLP
+    flow_tph: 6.0
+
+  # =========================================================================
+  # TURBINES
+  # =========================================================================
+  - name: VHP_BackPressure_to_HP
+    kind: backpressure_turbine
+    inlet_header: VHP
+    outlet_header: HP
+    inlet_flow_tph: 120.0
+    isentropic_efficiency: 0.78
+  - name: VHP_Extraction_HP_LP
+    kind: extraction_turbine
+    inlet_header: VHP
+    outlet_header: LP
+    extraction_header: HP
+    inlet_flow_tph: 80.0
+    extraction_flow_tph: 30.0
+    isentropic_efficiency: 0.75
+  - name: VHP_Condensing_Turbine
+    kind: condensing_turbine
+    subtype: condensing_turbine
+    inlet_header: VHP
+    inlet_flow_tph: 50.0
+    condenser_pressure_bar: 0.1
+    isentropic_efficiency: 0.80
+    condensate_return_header: CONDENSATE
+
+  - name: HP_BackPressure_to_MP
+    kind: backpressure_turbine
+    inlet_header: HP
+    outlet_header: MP
+    inlet_flow_tph: 60.0
+    isentropic_efficiency: 0.74
+  - name: HP_Extraction_MP_LLP
+    kind: extraction_turbine
+    inlet_header: HP
+    outlet_header: LLP
+    extraction_header: MP
+    inlet_flow_tph: 35.0
+    extraction_flow_tph: 18.0
+    isentropic_efficiency: 0.72
+
+  - name: MP_BackPressure_to_LP
+    kind: backpressure_turbine
+    inlet_header: MP
+    outlet_header: LP
+    inlet_flow_tph: 25.0
+    isentropic_efficiency: 0.70
+
+  - name: LP_BackPressure_to_LLP
+    kind: backpressure_turbine
+    inlet_header: LP
+    outlet_header: LLP
+    inlet_flow_tph: 12.0
+    isentropic_efficiency: 0.66
+
+  # =========================================================================
+  # LETDOWNS / PRVs (with optional desuperheater water from BFW)
+  # =========================================================================
+  - name: VHP_to_HP_PRV
+    kind: letdown
+    from_header: VHP
+    to_header: HP
+    flow_tph: 0.0
+    dsh_water_tph: 0.0
+    dsh_water_header: BFW
+  - name: VHP_to_MP_PRV
+    kind: letdown
+    from_header: VHP
+    to_header: MP
+    flow_tph: 0.0
+    dsh_water_header: BFW
+  - name: VHP_to_LP_PRV
+    kind: letdown
+    from_header: VHP
+    to_header: LP
+    flow_tph: 0.0
+    dsh_water_header: BFW
+  - name: VHP_to_LLP_PRV
+    kind: letdown
+    from_header: VHP
+    to_header: LLP
+    flow_tph: 0.0
+    dsh_water_header: BFW
+
+  - name: HP_to_MP_PRV
+    kind: letdown
+    from_header: HP
+    to_header: MP
+    flow_tph: 0.0
+    dsh_water_header: BFW
+  - name: HP_to_LP_PRV
+    kind: letdown
+    from_header: HP
+    to_header: LP
+    flow_tph: 0.0
+    dsh_water_header: BFW
+  - name: HP_to_LLP_PRV
+    kind: letdown
+    from_header: HP
+    to_header: LLP
+    flow_tph: 0.0
+    dsh_water_header: BFW
+
+  - name: MP_to_LP_PRV
+    kind: letdown
+    from_header: MP
+    to_header: LP
+    flow_tph: 0.0
+    dsh_water_header: BFW
+  - name: MP_to_LLP_PRV
+    kind: letdown
+    from_header: MP
+    to_header: LLP
+    flow_tph: 0.0
+    dsh_water_header: BFW
+
+  - name: LP_to_LLP_PRV
+    kind: letdown
+    from_header: LP
+    to_header: LLP
+    flow_tph: 0.0
+    dsh_water_header: BFW
+
+  # =========================================================================
+  # IMPORTS / EXPORTS — boundary crossings
+  # =========================================================================
+  - name: VHP_Steam_Import
+    kind: import
+    header: VHP
+    flow_tph: 0.0
+  - name: HP_Steam_Import
+    kind: import
+    header: HP
+    flow_tph: 0.0
+  - name: MP_Steam_Import
+    kind: import
+    header: MP
+    flow_tph: 0.0
+  - name: LP_Steam_Import
+    kind: import
+    header: LP
+    flow_tph: 0.0
+  - name: LLP_Steam_Import
+    kind: import
+    header: LLP
+    flow_tph: 0.0
+
+  - name: VHP_Steam_Export
+    kind: export
+    header: VHP
+    flow_tph: 0.0
+  - name: HP_Steam_Export
+    kind: export
+    header: HP
+    flow_tph: 0.0
+  - name: MP_Steam_Export
+    kind: export
+    header: MP
+    flow_tph: 0.0
+  - name: LP_Steam_Export
+    kind: export
+    header: LP
+    flow_tph: 0.0
+  - name: LLP_Steam_Export
+    kind: export
+    header: LLP
+    flow_tph: 0.0
+
+  # =========================================================================
+  # VENTS — slack on every steam header
+  # =========================================================================
+  - name: VHP_Vent
+    kind: vent
+    header: VHP
+    flow_tph: 0.0
+  - name: HP_Vent
+    kind: vent
+    header: HP
+    flow_tph: 0.0
+  - name: MP_Vent
+    kind: vent
+    header: MP
+    flow_tph: 0.0
+  - name: LP_Vent
+    kind: vent
+    header: LP
+    flow_tph: 0.0
+  - name: LLP_Vent
+    kind: vent
+    header: LLP
+    flow_tph: 0.0

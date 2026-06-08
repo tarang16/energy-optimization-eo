@@ -1,0 +1,176 @@
+@use 'config/scss/variables' as *;
+
+.modelSkipContainer {
+  width: 100%;
+  overflow-y: auto;
+  position: relative;
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-track-piece:start {
+    background: transparent !important;
+    margin-top: 5vmin !important;
+  }
+}
+
+.modelSkipTable {
+  width: 100%;
+  text-transform: uppercase;
+
+  thead {
+    height: 5vmin;
+
+    th {
+      height: 5vmin;
+      background-color: $primary_blue_bg;
+      position: sticky;
+      top: 0;
+      z-index: 9;
+
+      &:last-child {
+        border-right: 0;
+      }
+    }
+
+    th :first-child {
+      border-right: 1px solid $primary_gray_2;
+    }
+  }
+
+  tbody {
+    height: calc(100% - 5vmin);
+
+    tr {
+      td {
+        position: relative;
+
+        &.sticky_cell {
+          vertical-align: top;
+
+          span {
+            position: sticky;
+            top: 7vmin;
+          }
+        }
+      }
+    }
+  }
+
+  .noDataTextContainer {
+    height: calc(100% - 5vmin);
+  }
+
+  .subHeader {
+    background-color: $primary_blue_bg;
+  }
+
+  tr.subHeader th:first-child {
+    background-color: $primary_white;
+  }
+
+  tr.subRows {
+    td {
+      &:first-child {
+        border-bottom: none;
+      }
+
+      border-bottom: 1px solid $primary_gray_3;
+    }
+  }
+
+  .imgCellPlusImg {
+    cursor: pointer;
+  }
+}
+
+.border_right_gray {
+  border-right: 1px solid $primary_gray_3;
+}
+
+.border_right_blue {
+  border-right: 1px solid $primary_blue;
+  padding: 0;
+  margin: 0;
+  width: 0px;
+}
+
+.imgCellPlusImg {
+  img {
+    width: 2vmin;
+
+    &.active {
+      content: url('../../../../assets/sabic_icons/table/table_minus_icon.svg');
+    }
+
+    &.inactive {
+      content: url('../../../../assets/sabic_icons/table/table_plus_icon.svg');
+    }
+  }
+}
+
+.parent {
+  overflow: hidden;
+  height: 100%;
+
+  .top {
+    height: 0.5px;
+  }
+
+  .bottom {
+    height: 100%;
+    overflow: hidden;
+
+    .contentContainerLeft,
+    .contentContainerRight {
+      padding: 0;
+      border: 1px solid $primary_gray_3;
+      border-radius: 4px;
+      height: 100%;
+      @include boxShadow_card;
+      overflow: hidden;
+    }
+
+    .contentContainerLeft {
+      width: 100%;
+      border-radius: 0px 0.5vmin 0.5vmin 0.5vmin;
+
+      // margin-right: 10px;
+      .datePickerContainer {
+        padding: 1vmin 0;
+        gap: 1.5vmin;
+      }
+    }
+
+    .contentContainerRight {
+      border-radius: 4px;
+      width: 25%;
+
+      .rightTop {
+        height: 10%;
+      }
+
+      .rightBottom {
+        height: 90%;
+      }
+    }
+  }
+}
+
+.disabledFont {
+  pointer-events: none;
+}
+
+.hidden {
+  display: none;
+}
+
+.ModalIcon {
+  .ModalIconImg {
+    img {
+      width: 2.6vmin;
+      height: 2.6vmin;
+    }
+  }
+}

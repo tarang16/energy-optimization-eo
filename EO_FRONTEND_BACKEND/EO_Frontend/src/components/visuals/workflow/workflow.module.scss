@@ -1,0 +1,452 @@
+@use 'src/config/scss/_variables' as *;
+@use 'stage_one/stage_one.module.scss' as *;
+@use 'stage_two/stage_two.module.scss' as *;
+
+.btnContainer {
+  height: 3vmin;
+  margin-top: 1vmin;
+}
+
+.WorkflowDropdownContainer {
+  height: 7vmin;
+  padding: 1.5vmin 0;
+}
+
+.messageBackground {
+  border: 1px solid $primary_gray_4;
+  background-color: $primary_blue_bg;
+  border-radius: 1vmin;
+  height: 6vmin;
+  margin-top: 2vmin;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: inherit;
+}
+
+.workflowclosed {
+  height: 100%;
+  border: 1px solid $primary_orange;
+  border-radius: 0.3vmin;
+  background-color: $primary_orange;
+  display: inline-block;
+  color: $primary_white;
+  padding-top: 0.8vmin;
+  min-width: 15vmin;
+  max-width: 15vmin;
+}
+
+.dateContainer {
+  display: flex;
+  gap: 0.8vmin;
+  margin-bottom: 0.7vmin;
+
+  &__item {
+    display: flex;
+    gap: 0.4vmin;
+    align-items: center;
+
+    .labelText {
+      min-width: 7vmin;
+    }
+  }
+}
+
+.dateTimePickerContainer {
+  height: 3.5vmin;
+
+  :global(.react-datepicker__input-container) {
+    // border: 1px solid $primary_gray_3;
+  }
+
+  :global(
+    .react-datepicker-wrapper > .react-datepicker__input-container > input
+  ) {
+    padding: 0.5vmin 1vmin 0.2vmin 1vmin;
+    text-align: left;
+    border: 0 !important;
+    border-right: 0.5vmin solid transparent !important;
+    border-radius: 0.3vmin;
+    background: url('../../../assets/sabic_new_icons/calendar_icon.svg')
+      no-repeat right;
+    background-size: 2vmin;
+  }
+
+  :global(
+    .react-datepicker-wrapper > .react-datepicker__input-container > input:focus
+  ) {
+    border: 0 !important;
+    border-right: 0.5vmin solid transparent !important;
+  }
+
+  :global(
+    .react-datepicker-wrapper
+      > .react-datepicker__input-container
+      > input:focus-visible
+  ) {
+    border: 0 !important;
+    border-right: 0.5vmin solid transparent !important;
+  }
+
+  :global(.react-datepicker-wrapper) {
+    position: relative;
+  }
+}
+
+.checkBoxContainer {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  width: 2vmin;
+  height: 2vmin;
+
+  input[type='checkbox'] {
+    border: 1px solid $primary_blue !important;
+    border-radius: 0.3vmin !important;
+  }
+}
+
+.input_container {
+  width: 100%;
+  margin-right: 0.5rem;
+}
+
+.button_margin {
+  margin-top: 1.2rem;
+}
+
+.deleteButton {
+  background-color: $primary_gray_4;
+  border: 1px solid $primary_gray_4;
+  height: 3.3vmin;
+  padding: 0.3rem;
+  margin-top: 1.5rem;
+}
+
+.addButton {
+  background-color: $primary_gray_4;
+  border: 1px solid $primary_gray_4;
+  height: 3.3vmin;
+  padding: 0.5rem 0.5rem 0.3rem 0.5rem;
+  color: $primary_blue;
+  margin-left: 0.3rem;
+  margin-top: 1.5rem;
+}
+
+.acceptButton {
+  background-color: transparent;
+  border: 1px solid $primary_blue;
+  justify-content: center;
+  align-items: center;
+  gap: 0.7vmin;
+  cursor: pointer;
+  height: 100%;
+  padding: 0.2vmin;
+  border-radius: 0.3vmin;
+  min-width: 12vmin;
+  max-width: 12vmin;
+
+  .radioAccept {
+    width: 1.8vmin;
+    height: 1.8vmin;
+    border: 1px solid $primary_blue;
+    margin-right: 0.6vmin;
+
+    &:focus {
+      box-shadow: none;
+    }
+
+    &:checked {
+      background-color: $primary_blue !important;
+      border-color: $primary_blue !important;
+    }
+  }
+
+  .acceptSpan {
+    color: $primary_blue;
+    margin-top: 0.3vmin;
+  }
+}
+
+.forwardButton {
+  background-color: red;
+  background-color: transparent;
+  border: 1px solid $primary_blue;
+  justify-content: center;
+  align-items: center;
+  gap: 0.7vmin;
+  cursor: pointer;
+  height: 100%;
+  padding: 0.2vmin;
+  border-radius: 0.3vmin;
+  min-width: 45vmin;
+  max-width: 45vmin;
+
+  .radioAccept {
+    width: 1.8vmin;
+    height: 1.8vmin;
+    border: 1px solid $primary_blue;
+    margin-right: 0.6vmin;
+
+    &:focus {
+      box-shadow: none;
+    }
+
+    &:checked {
+      background-color: $primary_blue !important;
+      border-color: $primary_blue !important;
+    }
+  }
+
+  .acceptSpan {
+    color: $primary_blue;
+    margin-top: 0.3vmin;
+  }
+}
+
+.targetButton {
+  background-color: transparent;
+  border: 1px solid $primary_blue;
+  justify-content: center;
+  align-items: center;
+  gap: 0.7vmin;
+  cursor: pointer;
+  height: 100%;
+  padding: 0.2vmin 1.3vmin;
+  border-radius: 0.3vmin;
+
+  .radioAccept {
+    width: 1.8vmin;
+    height: 1.8vmin;
+    border: 1px solid $primary_blue;
+    margin-right: 0.6vmin;
+
+    &:focus {
+      box-shadow: none;
+    }
+
+    &:checked {
+      background-color: $primary_blue !important;
+      border-color: $primary_blue !important;
+    }
+  }
+
+  .acceptSpan {
+    color: $primary_blue;
+    margin-top: 0.3vmin;
+  }
+}
+
+.rejectButton {
+  background-color: transparent;
+  border: 1px solid $primary_orange;
+  justify-content: center;
+  align-items: center;
+  gap: 0.7vmin;
+  cursor: pointer;
+  height: 100%;
+  padding: 0.2vmin;
+  border-radius: 0.3vmin;
+  min-width: 12vmin;
+  max-width: 12vmin;
+
+  .radioReject {
+    width: 1.8vmin;
+    height: 1.8vmin;
+    border: 1px solid $primary_orange;
+    margin-right: 0.6vmin;
+
+    &:focus {
+      box-shadow: none;
+    }
+
+    &:checked {
+      background-color: $primary_orange !important;
+      border-color: $primary_orange !important;
+    }
+  }
+
+  .rejectSpan {
+    color: $primary_orange;
+    margin-left: 0.4vmin;
+    margin-top: 0.3vmin;
+  }
+}
+
+.workflowClosed {
+  border-radius: 1.3vmin;
+  font-size: x-small;
+  padding: 10px;
+}
+
+.alertDataTableMain {
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    z-index: 12;
+    background-color: $primary_blue_bg;
+    height: 4.9vmin;
+    width: 4px;
+    top: 0;
+    right: 0;
+  }
+}
+
+.modelSkipContainer {
+  width: 100%;
+  overflow-y: auto;
+  position: relative;
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-track-piece:start {
+    background: transparent !important;
+    margin-top: 5vmin !important;
+  }
+}
+
+.modelSkipTable {
+  width: 100%;
+  text-transform: uppercase;
+
+  thead {
+    height: 5vmin;
+
+    th {
+      height: 5vmin;
+      background-color: $primary_blue_bg;
+      position: sticky;
+      top: 0;
+      z-index: 9;
+    }
+
+    th :first-child {
+      border-right: 1px solid $primary_gray_2;
+    }
+  }
+
+  tbody {
+    height: calc(100% - 5vmin);
+
+    & > tr {
+      &:last-child {
+        td {
+          border-bottom: 1px solid $primary_gray_3;
+        }
+      }
+    }
+  }
+
+  .noDataTextContainer {
+    height: calc(100% - 10vmin);
+    width: calc(100% - 4vmin);
+  }
+
+  .subHeader {
+    background-color: $primary_blue_bg;
+    border-bottom: 1px solid $primary_gray_3;
+  }
+
+  tr.subHeader th:first-child {
+    background-color: $primary_white;
+  }
+
+  tr.subHeader > th:nth-child(-n + 3) {
+    text-align: left !important;
+  }
+
+  tr.subRows > td:nth-child(-n + 3) {
+    text-align: left !important;
+  }
+
+  .subRows {
+    border-bottom: 1px solid $primary_gray_3;
+  }
+
+  .imgCellPlusImg {
+    cursor: pointer;
+  }
+}
+
+.border_right_gray {
+  border-right: 1px solid $primary_gray_3;
+}
+
+.border_right_blue {
+  border-right: 1px solid $primary_gray_3;
+}
+
+.imgCellPlusImg {
+  img {
+    width: 2vmin;
+
+    &.active {
+      content: url('../../../assets/sabic_icons/table/table_minus_icon.svg');
+    }
+
+    &.inactive {
+      content: url('../../../assets/sabic_icons/table/table_plus_icon.svg');
+    }
+  }
+}
+
+.parent {
+  overflow: hidden;
+  height: 100%;
+
+  .top {
+    height: 0.5px;
+  }
+
+  .bottom {
+    height: 100%;
+    overflow: hidden;
+
+    .contentContainerLeft,
+    .contentContainerRight {
+      padding: 0;
+      border: 1px solid $primary_gray_3;
+      border-radius: 4px;
+      height: 100%;
+      @include boxShadow_card;
+      overflow: hidden;
+    }
+
+    .contentContainerLeft {
+      width: 100%;
+      border-radius: 0px 0.5vmin 0.5vmin 0.5vmin;
+
+      // margin-right: 10px;
+      .datePickerContainer {
+        padding: 1vmin 0;
+        gap: 1.5vmin;
+      }
+    }
+
+    .contentContainerRight {
+      border-radius: 4px;
+      width: 25%;
+
+      .rightTop {
+        height: 10%;
+      }
+
+      .rightBottom {
+        height: 90%;
+      }
+    }
+  }
+}
+
+.disabledFont {
+  color: $primary_gray_3;
+  pointer-events: none;
+}
+
+.imgDiv {
+  margin-bottom: 0.5vmin;
+}

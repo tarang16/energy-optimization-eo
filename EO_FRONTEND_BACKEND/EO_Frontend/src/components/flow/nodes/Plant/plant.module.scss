@@ -1,0 +1,118 @@
+.plantCompoOff {
+  min-height: 10vmin;
+}
+
+.plantCompoOff .s {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.plantCompoOff .label {
+  min-height: 2vmin;
+}
+
+.plantCompoOff .textWrapper {
+  left: 0;
+  letter-spacing: 0;
+  line-height: normal;
+  text-align: center;
+  top: -1px;
+}
+
+.plantCompoOff .plantOff {
+  background-color: transparent;
+  border-radius: 10px;
+  height: 100px;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.plantCompoOff .plant {
+  background-size: 100% 100%;
+  height: 42px;
+  left: 16px;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 42px;
+}
+
+.plantCompoOff .div {
+  color: #303030;
+  font-family: 'sabic_text_regular', serif;
+  font-size: 14px;
+  font-weight: 400;
+  left: 17px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 11px;
+}
+
+.plantCompoOff .key {
+  min-height: 2vmin;
+  position: relative;
+}
+
+.plantCompo {
+  min-height: 10vmin;
+}
+
+.plantCompo .s {
+  align-items: center;
+  display: inline-flex;
+  flex-direction: column;
+  gap: 2px;
+  justify-content: center;
+  position: relative;
+}
+
+.plantCompo .label {
+  min-height: 2vmin;
+}
+
+.plantCompo .plantOn {
+  background-color: transparent;
+  border-radius: 10px;
+  height: 100px;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.plantCompoOff .plantOff img {
+  height: 100% !important;
+}
+
+.plantCompo .plantOn img {
+  height: 100% !important;
+}
+
+.plantCompo .plant {
+  background-size: 100% 100%;
+  height: 42px;
+  left: 16px;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 42px;
+}
+
+.plantCompo .div {
+  color: #2ba402;
+  font-family: 'sabic_text_regular', serif;
+  font-size: 14px;
+  font-weight: 400;
+  left: 17px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 11px;
+}
+
+.plantCompo .key {
+  min-height: 2vmin;
+}

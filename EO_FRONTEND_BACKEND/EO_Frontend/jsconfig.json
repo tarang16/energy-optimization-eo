@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "jsx": "react-jsx",
+    "baseUrl": "./",
+    "paths": {
+       "@/*": ["src/*"], 
+       "src/*":["src/*"],
+        "components/*": ["src/components/*"],
+        "assets/*": ["src/assets/*"],
+        "atoms/*": ["src/atoms/*"],
+        "config/*": ["src/config/*"],
+        "layout/*": ["src/layout/*"],
+        "libs/*": ["src/libs/*"],
+        "logger/*": ["src/logger/*"],
+        "models/*": ["src/models/*"],
+        "pages/*": ["src/pages/*"],
+        "routes/*": ["src/routes/*"],
+        "services/*": ["src/services/*"],
+        "utills/*": ["src/utills/*"],
+    },
+    "checkJs": true,
+    "module": "esnext",
+    "moduleResolution": "bundler"
+  },
+  "include": ["src"],
+  "exclude": ["node_modules"]
+}

@@ -1,0 +1,95 @@
+{
+  "boiler_minlp_targets": 83,
+  "inferred_formulas_required_total": 158,
+  "inferred_formulas_required_boiler_related": 43,
+  "raw_leaves_total": 119,
+  "raw_leaves_boiler_related": 26,
+  "raw_leaves_in_master_pi_data": 119,
+  "raw_leaves_mapped_to_hierarchy_blr_unit": 0,
+  "raw_leaves_mapped_with_pi_in_hierarchy": 0,
+  "raw_leaves_mapped_but_pi_blank": 0,
+  "raw_leaves_unmapped": 114,
+  "depth_distribution_of_inferred_required": {
+    "0": 77,
+    "1": 38,
+    "2": 34,
+    "3": 9
+  },
+  "samples": {
+    "inferred_required_top10_shallowest": [
+      {
+        "inferred_tag": "BFW_B_Turb_Steam",
+        "formula": "if([BFW_B_Turb_Steam_raw]<100,0,[BFW_B_Turb_Steam_raw]/1000)",
+        "min_depth_from_minlp_target": 0
+      },
+      {
+        "inferred_tag": "BFW_B_Turb_Steam_Imbalance",
+        "formula": "[BFW_B_Turb_Steam_cons]-[BFW_B_Turb_Steam_Regression]",
+        "min_depth_from_minlp_target": 0
+      },
+      {
+        "inferred_tag": "BFW_C_Turb_Steam",
+        "formula": "if([BFW_C_Turb_Steam_raw]<100,0,[BFW_C_Turb_Steam_raw]/1000)",
+        "min_depth_from_minlp_target": 0
+      },
+      {
+        "inferred_tag": "BFW_C_Turb_Steam_Imbalance",
+        "formula": "[BFW_C_Turb_Steam_cons]-[BFW_C_Turb_Steam_Regression]",
+        "min_depth_from_minlp_target": 0
+      },
+      {
+        "inferred_tag": "BFW_E_Turb_Steam",
+        "formula": "if([BFW_E_Turb_Steam_raw]<100,0,[BFW_E_Turb_Steam_raw]/1000)",
+        "min_depth_from_minlp_target": 0
+      },
+      {
+        "inferred_tag": "BFW_E_Turb_Steam_Imbalance",
+        "formula": "[BFW_E_Turb_Steam_cons]-[BFW_E_Turb_Steam_Regression]",
+        "min_depth_from_minlp_target": 0
+      },
+      {
+        "inferred_tag": "BLR_1_HPS_Gen",
+        "formula": "if([BLR_1_HPS_Gen_raw]<0,0,[BLR_1_HPS_Gen_raw]/1000)",
+        "min_depth_from_minlp_target": 0
+      },
+      {
+        "inferred_tag": "BLR_2_HPS_Gen",
+        "formula": "if([BLR_2_HPS_Gen_raw]<0,0,[BLR_2_HPS_Gen_raw]/1000)",
+        "min_depth_from_minlp_target": 0
+      },
+      {
+        "inferred_tag": "BLR_3_HPS_Gen",
+        "formula": "if([BLR_3_HPS_Gen_raw]<0,0,[BLR_3_HPS_Gen_raw]/1000)",
+        "min_depth_from_minlp_target": 0
+      },
+      {
+        "inferred_tag": "BLR_4_HPS_Gen",
+        "formula": "if([BLR_4_HPS_Gen_raw]<0,0,[BLR_4_HPS_Gen_raw]/1000)",
+        "min_depth_from_minlp_target": 0
+      }
+    ],
+    "raw_leaves_blr_mapped_top10": [],
+    "raw_leaves_unmapped_top20": [
+      "BFW_B_Turb_Steam_raw",
+      "BFW_C_Turb_Steam_raw",
+      "BFW_E_Turb_Steam_raw",
+      "BLR_1_HPS_Gen_raw",
+      "BLR_2_HPS_Gen_raw",
+      "BLR_3_HPS_Gen_raw",
+      "BLR_4_HPS_Gen_raw",
+      "BLR_5_HPS_Gen_raw",
+      "FD_Fan_BLR_1_Steam_raw",
+      "FD_Fan_BLR_2_Steam_raw",
+      "FD_Fan_BLR_3_Steam_raw",
+      "FD_Fan_BLR_4_Steam_raw",
+      "FD_Fan_BLR_5_Steam_raw",
+      "Fuel_BLR_1_raw",
+      "Fuel_BLR_2_raw",
+      "Fuel_BLR_3_raw",
+      "Fuel_BLR_4_raw",
+      "Fuel_BLR_5_raw",
+      "VHP_BFW_A_AMPS",
+      "VHP_BFW_A_Discharge_flow"
+    ]
+  }
+}

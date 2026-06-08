@@ -1,0 +1,13 @@
+pandas
+polars
+pyarrow
+numpy
+pint
+openpyxl
+
+# For source="historian" (PI Web API)
+requests>=2.31
+
+# Optional auth backends (install whichever matches your PI server)
+# pip install requests-kerberos   # for auth_type="kerberos"
+# pip install requests-ntlm       # for auth_type="ntlm"

@@ -1,0 +1,9 @@
+version: "2"
+update_channel: stable
+authtoken: 3CdCuPVJwPlaXjvAmslXV3HxQvz_7oDTbvRrYErfVD4PfihgU
+
+tunnels:
+  eo-frontend:
+    proto: http
+    addr: 3000
+    hostname: edition-unpleased-confiding.ngrok-free.dev

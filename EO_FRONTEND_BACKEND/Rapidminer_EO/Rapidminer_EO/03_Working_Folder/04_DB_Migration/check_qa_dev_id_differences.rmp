@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?><process version="10.4.003">
+  <context>
+    <input/>
+    <output/>
+    <macros/>
+  </context>
+  <operator activated="true" class="process" compatibility="10.4.003" expanded="true" name="Process">
+    <parameter key="logverbosity" value="init"/>
+    <parameter key="random_seed" value="2001"/>
+    <parameter key="send_mail" value="never"/>
+    <parameter key="notification_email" value=""/>
+    <parameter key="process_duration_for_mail" value="30"/>
+    <parameter key="encoding" value="SYSTEM"/>
+    <process expanded="true">
+      <operator activated="true" class="retrieve" compatibility="10.4.003" expanded="true" height="68" name="Retrieve MSSQL_EO_2024" width="90" x="112" y="34">
+        <parameter key="repository_entry" value="//ing_manufacturing_eo_2024_dev_ing/Connections/MSSQL_EO_2024"/>
+      </operator>
+      <operator activated="true" class="retrieve" compatibility="10.4.003" expanded="true" height="68" name="Retrieve MSSQL_EO_2024 (2)" width="90" x="112" y="187">
+        <parameter key="repository_entry" value="//ing_manufacturing_eo_2024_qa/Connections/MSSQL_EO_2024"/>
+      </operator>
+      <operator activated="true" class="jdbc_connectors:read_database" compatibility="10.4.003" expanded="true" height="82" name="Read Database (3)" width="90" x="246" y="187">
+        <parameter key="define_connection" value="repository"/>
+        <parameter key="database_system" value="MySQL"/>
+        <parameter key="define_query" value="query"/>
+        <parameter key="query" value="SELECT *&#10;FROM &quot;dbo&quot;.&quot;equipment_availability&quot;&#10;&#10;SELECT *&#10;FROM &quot;dbo&quot;.&quot;equipment_availability_history&quot;&#10;where equipment_availability_id in (359,&#10;360,&#10;363)"/>
+        <parameter key="use_default_schema" value="true"/>
+        <parameter key="prepare_statement" value="false"/>
+        <enumeration key="parameters"/>
+        <parameter key="data_management" value="auto"/>
+      </operator>
+      <operator activated="true" class="read_excel" compatibility="10.4.003" expanded="true" height="68" name="Read Excel" width="90" x="112" y="340">
+        <parameter key="excel_file" value="\\sabic.com\SABICFS\Citrix_UPM\30780864\My Documents\AltairRapidMiner\AI Studio\Projects\ing_manufacturing_eo_2024_dev_ing\04_Working_Folder\02_Miscellaneous\04_DB_Migration\input to migration process.xlsx"/>
+        <parameter key="sheet_selection" value="sheet number"/>
+        <parameter key="sheet_number" value="1"/>
+        <parameter key="imported_cell_range" value="A1"/>
+        <parameter key="encoding" value="SYSTEM"/>
+        <parameter key="use_header_row" value="true"/>
+        <parameter key="header_row" value="1"/>
+        <parameter key="first_row_as_names" value="true"/>
+        <list key="annotations"/>
+        <parameter key="date_format" value=""/>
+        <parameter key="time_zone" value="SYSTEM"/>
+        <parameter key="locale" value="English (United States)"/>
+        <parameter key="read_all_values_as_polynominal" value="false"/>
+        <list key="data_set_meta_data_information">
+          <parameter key="0" value="table_name.true.polynominal.attribute"/>
+          <parameter key="1" value="Read_db_selector.true.integer.attribute"/>
+          <parameter key="2" value="update_column.true.polynominal.attribute"/>
+          <parameter key="3" value="Identity_Exists.true.integer.attribute"/>
+          <parameter key="4" value="table_order.true.integer.attribute"/>
+          <parameter key="5" value="is_active.true.integer.attribute"/>
+          <parameter key="6" value="Truncate_True.true.integer.attribute"/>
+        </list>
+        <parameter key="read_not_matching_values_as_missings" value="false"/>
+      </operator>
+      <operator activated="true" class="extract_macro" compatibility="10.4.003" expanded="true" height="68" name="Extract Macro" width="90" x="246" y="340">
+        <parameter key="macro" value="nEX"/>
+        <parameter key="macro_type" value="number_of_examples"/>
+        <parameter key="statistics" value="average"/>
+        <parameter key="attribute_name" value=""/>
+        <list key="additional_macros"/>
+      </operator>
+      <operator activated="true" class="concurrency:loop" compatibility="10.4.003" expanded="true" height="124" name="Loop" width="90" x="514" y="136">
+        <parameter key="number_of_iterations" value="%{nEX}"/>
+        <parameter key="iteration_macro" value="iteration"/>
+        <parameter key="reuse_results" value="false"/>
+        <parameter key="enable_parallel_execution" value="true"/>
+        <process expanded="true">
+          <operator activated="true" class="extract_macro" compatibility="10.4.003" expanded="true" height="68" name="Extract Macro (2)" width="90" x="246" y="34">
+            <parameter key="macro" value="table_name"/>
+            <parameter key="macro_type" value="data_value"/>
+            <parameter key="statistics" value="average"/>
+            <parameter key="attribute_name" value="table_name"/>
+            <parameter key="example_index" value="%{iteration}"/>
+            <list key="additional_macros">
+              <parameter key="update_column" value="update_column"/>
+            </list>
+          </operator>
+          <operator activated="true" class="jdbc_connectors:read_database" compatibility="10.4.003" expanded="true" height="82" name="Read Database" width="90" x="246" y="136">
+            <parameter key="define_connection" value="repository"/>
+            <parameter key="database_system" value="MySQL"/>
+            <parameter key="define_query" value="query"/>
+            <parameter key="query" value="select %{update_column} from %{table_name}"/>
+            <parameter key="use_default_schema" value="true"/>
+            <parameter key="prepare_statement" value="false"/>
+            <enumeration key="parameters"/>
+            <parameter key="data_management" value="auto"/>
+          </operator>
+          <operator activated="true" class="blending:set_role" compatibility="10.4.003" expanded="true" height="82" name="Set Role" width="90" x="380" y="136">
+            <list key="set_roles">
+              <parameter key="%{update_column}" value="id"/>
+            </list>
+          </operator>
+          <operator activated="true" class="jdbc_connectors:read_database" compatibility="10.4.003" expanded="true" height="82" name="Read Database (2)" width="90" x="246" y="238">
+            <parameter key="define_connection" value="repository"/>
+            <parameter key="database_system" value="MySQL"/>
+            <parameter key="define_query" value="query"/>
+            <parameter key="query" value="select %{update_column} from %{table_name}"/>
+            <parameter key="use_default_schema" value="true"/>
+            <parameter key="prepare_statement" value="false"/>
+            <enumeration key="parameters"/>
+            <parameter key="data_management" value="auto"/>
+          </operator>
+          <operator activated="true" class="blending:set_role" compatibility="10.4.003" expanded="true" height="82" name="Set Role (2)" width="90" x="380" y="238">
+            <list key="set_roles">
+              <parameter key="%{update_column}" value="id"/>
+            </list>
+          </operator>
+          <operator activated="true" class="set_minus" compatibility="10.4.003" expanded="true" height="82" name="Set Minus" width="90" x="581" y="187"/>
+          <operator activated="true" class="branch" compatibility="10.4.003" expanded="true" height="82" name="Branch" width="90" x="782" y="136">
+            <parameter key="condition_type" value="min_examples"/>
+            <parameter key="condition_value" value="1"/>
+            <parameter key="expression" value=""/>
+            <parameter key="io_object" value="ANOVAMatrix"/>
+            <parameter key="return_inner_output" value="true"/>
+            <process expanded="true">
+              <connect from_port="condition" to_port="input 1"/>
+              <portSpacing port="source_condition" spacing="0"/>
+              <portSpacing port="source_input 1" spacing="0"/>
+              <portSpacing port="sink_input 1" spacing="0"/>
+              <portSpacing port="sink_input 2" spacing="0"/>
+            </process>
+            <process expanded="true">
+              <portSpacing port="source_condition" spacing="0"/>
+              <portSpacing port="source_input 1" spacing="0"/>
+              <portSpacing port="sink_input 1" spacing="0"/>
+              <portSpacing port="sink_input 2" spacing="0"/>
+            </process>
+          </operator>
+          <operator activated="false" class="blending:generate_columns" compatibility="10.4.003" expanded="true" height="82" name="Generate Attributes" width="90" x="715" y="289">
+            <list key="function_descriptions">
+              <parameter key="xyz" value="1"/>
+            </list>
+            <parameter key="keep_all_columns" value="true"/>
+            <parameter key="default_time_zone" value="Asia/Riyadh"/>
+          </operator>
+          <connect from_port="input 1" to_op="Extract Macro (2)" to_port="example set"/>
+          <connect from_port="input 2" to_op="Read Database" to_port="connection"/>
+          <connect from_port="input 3" to_op="Read Database (2)" to_port="connection"/>
+          <connect from_op="Extract Macro (2)" from_port="example set" to_port="output 1"/>
+          <connect from_op="Read Database" from_port="output" to_op="Set Role" to_port="example set input"/>
+          <connect from_op="Set Role" from_port="example set output" to_op="Set Minus" to_port="subtrahend"/>
+          <connect from_op="Read Database (2)" from_port="output" to_op="Set Role (2)" to_port="example set input"/>
+          <connect from_op="Set Role (2)" from_port="example set output" to_op="Set Minus" to_port="example set input"/>
+          <connect from_op="Set Minus" from_port="example set output" to_op="Branch" to_port="condition"/>
+          <connect from_op="Branch" from_port="input 1" to_port="output 2"/>
+          <portSpacing port="source_input 1" spacing="0"/>
+          <portSpacing port="source_input 2" spacing="0"/>
+          <portSpacing port="source_input 3" spacing="0"/>
+          <portSpacing port="source_input 4" spacing="0"/>
+          <portSpacing port="sink_output 1" spacing="0"/>
+          <portSpacing port="sink_output 2" spacing="0"/>
+          <portSpacing port="sink_output 3" spacing="0"/>
+        </process>
+      </operator>
+      <connect from_op="Retrieve MSSQL_EO_2024" from_port="output" to_op="Loop" to_port="input 2"/>
+      <connect from_op="Retrieve MSSQL_EO_2024 (2)" from_port="output" to_op="Read Database (3)" to_port="connection"/>
+      <connect from_op="Read Database (3)" from_port="output" to_op="Loop" to_port="input 3"/>
+      <connect from_op="Read Excel" from_port="output" to_op="Extract Macro" to_port="example set"/>
+      <connect from_op="Extract Macro" from_port="example set" to_op="Loop" to_port="input 1"/>
+      <connect from_op="Loop" from_port="output 2" to_port="result 1"/>
+      <portSpacing port="source_input 1" spacing="0"/>
+      <portSpacing port="sink_result 1" spacing="0"/>
+      <portSpacing port="sink_result 2" spacing="0"/>
+    </process>
+  </operator>
+</process>

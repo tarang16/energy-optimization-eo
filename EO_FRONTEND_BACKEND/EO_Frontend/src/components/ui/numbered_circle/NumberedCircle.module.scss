@@ -1,0 +1,58 @@
+@use '../../../config/scss/variables' as *;
+
+.regionLinks {
+  position: absolute;
+  top: 40%;
+  left: 61%;
+  width: 5vmin;
+  height: 5vmin;
+  border: none;
+  transition: 0.3s;
+  box-shadow:
+    0px 0px 0px 0.8vmin $primary_blue_20,
+    0px 0px 0px 1.6vmin $primary_blue_40,
+    0px 0px 0px 2.4vmin $primary_blue_60;
+
+  &:hover {
+    color: $primary_yellow;
+    box-shadow:
+      0px 0px 0px 0.8vmin $primary_yellow_20,
+      0px 0px 0px 1.6vmin $primary_yellow_40,
+      0px 0px 0px 2.4vmin $primary_yellow_60;
+  }
+
+  border-radius: 50%;
+}
+
+.subRegionLinks {
+  position: absolute;
+  top: 40%;
+  left: 61%;
+  width: 5vmin;
+  height: 5vmin;
+  border: none;
+  transition: 0.3s;
+  color: $primary_yellow !important;
+  box-shadow:
+    0px 0px 0px 0.8vmin $primary_yellow_20,
+    0px 0px 0px 1.6vmin $primary_yellow_40,
+    0px 0px 0px 2.4vmin $primary_yellow_60;
+
+  &:hover {
+    color: $primary_yellow;
+    box-shadow:
+      0px 0px 0px 0.8vmin $primary_yellow_20,
+      0px 0px 0px 1.6vmin $primary_yellow_40,
+      0px 0px 0px 2.4vmin $primary_yellow_60;
+  }
+
+  border-radius: 50%;
+}
+
+.activeRegion {
+  color: $primary_yellow !important;
+  box-shadow:
+    0px 0px 0px 0.8vmin $primary_yellow_20,
+    0px 0px 0px 1.6vmin $primary_yellow_40,
+    0px 0px 0px 2.4vmin $primary_yellow_60;
+}

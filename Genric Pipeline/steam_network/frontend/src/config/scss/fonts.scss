@@ -1,0 +1,59 @@
+@font-face {
+  font-family: 'sabic_text_regular';
+  src:
+    url('../../assets/sabic_webfonts/sabictypefacetext_rg-webfont.woff2') format('woff2'),
+    url('../../assets/sabic_webfonts/sabictypefacetext_rg-webfont.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'sabic_text_light';
+  src:
+    url('../../assets/sabic_webfonts/sabictypefacetext_lt-webfont.woff2') format('woff2'),
+    url('../../assets/sabic_webfonts/sabictypefacetext_lt-webfont.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'sabic_text_bold';
+  src:
+    url('../../assets/sabic_webfonts/sabictypefacetext_bd-webfont.woff2') format('woff2'),
+    url('../../assets/sabic_webfonts/sabictypefacetext_bd-webfont.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'sabic_headline_regular';
+  src:
+    url('../../assets/sabic_webfonts/sabictypefaceheadline_rg-webfont.woff2') format('woff2'),
+    url('../../assets/sabic_webfonts/sabictypefaceheadline_rg-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'sabic_headline_light';
+  src:
+    url('../../assets/sabic_webfonts/sabictypefaceheadline_lt-webfont.woff2') format('woff2'),
+    url('../../assets/sabic_webfonts/sabictypefaceheadline_lt-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'sabic_headline_bold';
+  src:
+    url('../../assets/sabic_webfonts/sabictypefaceheadline_bd-webfont.woff2') format('woff2'),
+    url('../../assets/sabic_webfonts/sabictypefaceheadline_bd-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}

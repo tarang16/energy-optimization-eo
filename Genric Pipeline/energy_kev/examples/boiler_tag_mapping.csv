@@ -1,0 +1,113 @@
+asset_name,boiler_input_field,pi_tag,uom,description,section
+HOUSE,total_steam_demand_t_h,UTIL.HOUSE.STEAM_DEMAND,t/h,Total house steam demand setpoint,House Level
+HOUSE,total_max_fuel_consumption_gj_h,UTIL.HOUSE.MAX_FUEL_GJH,GJ/h,Maximum house fuel consumption limit,House Level
+BLR-1,steam_flow_t_h,BLR1.MS.FLOW,t/h,Main steam flow,Steam Side
+BLR-1,steam_pressure_bar,BLR1.MS.PRESS,bar,Main steam pressure,Steam Side
+BLR-1,steam_temperature_c,BLR1.MS.TEMP,°C,Main steam temperature,Steam Side
+BLR-1,feedwater_flow_t_h,BLR1.FW.FLOW,t/h,Feedwater flow to boiler drum,Steam Side
+BLR-1,feedwater_temperature_c,BLR1.FW.TEMP,°C,Feedwater temperature at drum inlet,Steam Side
+BLR-1,fuel_flow_nm3_h,BLR1.FUEL.FLOW,Nm³/h,Fuel gas volumetric flow,Fuel
+BLR-1,fuel_ch4_mol_pct,BLR1.FUEL.CH4,mol%,Methane mole fraction in fuel gas,Fuel Composition
+BLR-1,fuel_c2h6_mol_pct,BLR1.FUEL.C2H6,mol%,Ethane mole fraction in fuel gas,Fuel Composition
+BLR-1,fuel_c3h8_mol_pct,BLR1.FUEL.C3H8,mol%,Propane mole fraction in fuel gas,Fuel Composition
+BLR-1,fuel_c4h10_mol_pct,BLR1.FUEL.C4H10,mol%,n-Butane mole fraction in fuel gas,Fuel Composition
+BLR-1,fuel_h2_mol_pct,BLR1.FUEL.H2,mol%,Hydrogen mole fraction in fuel gas,Fuel Composition
+BLR-1,fuel_co_mol_pct,BLR1.FUEL.CO,mol%,Carbon Monoxide mole fraction in fuel gas,Fuel Composition
+BLR-1,fuel_co2_mol_pct,BLR1.FUEL.CO2,mol%,Carbon Dioxide mole fraction in fuel gas,Fuel Composition
+BLR-1,fuel_n2_mol_pct,BLR1.FUEL.N2,mol%,Nitrogen mole fraction in fuel gas,Fuel Composition
+BLR-1,flue_o2_pct,BLR1.STACK.O2,vol%,Flue gas O2 concentration (dry basis),Flue Gas
+BLR-1,stack_temperature_c,BLR1.STACK.TEMP,°C,Stack / flue gas exit temperature,Flue Gas
+BLR-1,ambient_t_c,SITE.AMB.TEMP,°C,Ambient air temperature,Environment
+BLR-1,radiation_loss_pct,BLR1.RADIATION_LOSS_PCT,%,Shell radiation and unaccounted loss allowance,Losses
+BLR-1,cbd_flow_m3_h,BLR1.CBD.FLOW,m³/h,Continuous blowdown flow,Blowdown
+BLR-1,attemperator_spray_t_h,BLR1.DESP.SPRAY_FLOW,t/h,Attemperator spray water flow,Desuperheater
+BLR-1,co2_emission_factor_kg_per_gj,BLR1.CO2_FACTOR,kg/GJ,CO2 emission factor for fuel type,Emissions
+BLR-1,eco_fw_inlet_t_c,BLR1.ECO.FW_IN_TEMP,°C,Economizer feedwater inlet temperature,Economizer
+BLR-1,eco_fw_outlet_t_c,BLR1.ECO.FW_OUT_TEMP,°C,Economizer feedwater outlet temperature,Economizer
+BLR-1,eco_fw_cp_kj_kg_k,BLR1.ECO.FW_CP,kJ/kg·K,Feedwater specific heat in economizer,Economizer
+BLR-1,eco_flue_inlet_t_c,BLR1.ECO.FLUE_IN_TEMP,°C,Economizer flue gas inlet temperature,Economizer
+BLR-1,eco_flue_outlet_t_c,BLR1.ECO.FLUE_OUT_TEMP,°C,Economizer flue gas outlet temperature,Economizer
+BLR-1,eco_design_ua_kw_k,BLR1.ECO.DESIGN_UA,kW/K,Economizer design UA (heat transfer coefficient),Economizer
+BLR-1,sh1_steam_pressure_bar,BLR1.SH1.STEAM_PRESS,bar,Superheater 1 steam pressure,Superheater 1
+BLR-1,sh1_steam_inlet_t_c,BLR1.SH1.STEAM_IN_TEMP,°C,Superheater 1 steam inlet temperature,Superheater 1
+BLR-1,sh1_steam_outlet_t_c,BLR1.SH1.STEAM_OUT_TEMP,°C,Superheater 1 steam outlet temperature,Superheater 1
+BLR-1,sh1_steam_flow_t_h,BLR1.SH1.STEAM_FLOW,t/h,Steam flow through Superheater 1,Superheater 1
+BLR-1,sh1_flue_inlet_t_c,BLR1.SH1.FLUE_IN_TEMP,°C,Superheater 1 flue gas inlet temperature,Superheater 1
+BLR-1,sh1_flue_outlet_t_c,BLR1.SH1.FLUE_OUT_TEMP,°C,Superheater 1 flue gas outlet temperature,Superheater 1
+BLR-1,sh1_design_ua_kw_k,BLR1.SH1.DESIGN_UA,kW/K,Superheater 1 design UA,Superheater 1
+BLR-1,sh2_steam_pressure_bar,BLR1.SH2.STEAM_PRESS,bar,Superheater 2 steam pressure,Superheater 2
+BLR-1,sh2_steam_inlet_t_c,BLR1.SH2.STEAM_IN_TEMP,°C,Superheater 2 steam inlet temperature,Superheater 2
+BLR-1,sh2_steam_outlet_t_c,BLR1.SH2.STEAM_OUT_TEMP,°C,Superheater 2 steam outlet temperature,Superheater 2
+BLR-1,sh2_steam_flow_t_h,BLR1.SH2.STEAM_FLOW,t/h,Steam flow through Superheater 2,Superheater 2
+BLR-1,sh2_flue_inlet_t_c,BLR1.SH2.FLUE_IN_TEMP,°C,Superheater 2 flue gas inlet temperature,Superheater 2
+BLR-1,sh2_flue_outlet_t_c,BLR1.SH2.FLUE_OUT_TEMP,°C,Superheater 2 flue gas outlet temperature,Superheater 2
+BLR-1,sh2_design_ua_kw_k,BLR1.SH2.DESIGN_UA,kW/K,Superheater 2 design UA,Superheater 2
+BLR-1,desuperheater_water_t_c,BLR1.DESP.WATER_TEMP,°C,Attemperator spray water temperature,Desuperheater
+BLR-1,desuperheater_steam_inlet_t_c,BLR1.DESP.STM_IN_TEMP,°C,Desuperheater steam inlet temperature,Desuperheater
+BLR-1,desuperheater_steam_outlet_t_c,BLR1.DESP.STM_OUT_TEMP,°C,Desuperheater steam outlet temperature,Desuperheater
+BLR-1,aph_air_inlet_t_c,BLR1.APH.AIR_IN_TEMP,°C,Air preheater combustion air inlet temperature,Air Preheater
+BLR-1,aph_air_outlet_t_c,BLR1.APH.AIR_OUT_TEMP,°C,Air preheater combustion air outlet temperature,Air Preheater
+BLR-1,aph_air_flow_nm3_h,BLR1.APH.AIR_FLOW,Nm³/h,Combustion air volumetric flow,Air Preheater
+BLR-1,aph_air_cp_kj_kg_k,BLR1.APH.AIR_CP,kJ/kg·K,Air specific heat capacity,Air Preheater
+BLR-1,aph_air_density_kg_nm3,BLR1.APH.AIR_DENSITY,kg/Nm³,Air density at standard conditions,Air Preheater
+BLR-1,min_steam_flow_t_h,BLR1.LIMIT.MIN_STEAM,t/h,Minimum allowable steam flow (constraint),Constraints
+BLR-1,max_steam_flow_t_h,BLR1.LIMIT.MAX_STEAM,t/h,Maximum allowable steam flow (constraint),Constraints
+BLR-1,max_fuel_flow_nm3_h,BLR1.LIMIT.MAX_FUEL,Nm³/h,Maximum allowable fuel flow (constraint),Constraints
+BLR-1,mass_balance_threshold_pct,BLR1.THRESH.MASS_BAL,%,Mass balance deviation alarm threshold,Validation
+BLR-1,energy_balance_threshold_pct,BLR1.THRESH.ENERGY_BAL,%,Energy balance deviation alarm threshold,Validation
+BLR-1,use_direct_efficiency,BLR1.CONFIG.USE_DIRECT_EFF,flag,Flag: 1.0 = use direct efficiency method,Config
+BLR-2,steam_flow_t_h,BLR2.MS.FLOW,t/h,Main steam flow,Steam Side
+BLR-2,steam_pressure_bar,BLR2.MS.PRESS,bar,Main steam pressure,Steam Side
+BLR-2,steam_temperature_c,BLR2.MS.TEMP,°C,Main steam temperature,Steam Side
+BLR-2,feedwater_flow_t_h,BLR2.FW.FLOW,t/h,Feedwater flow to boiler drum,Steam Side
+BLR-2,feedwater_temperature_c,BLR2.FW.TEMP,°C,Feedwater temperature at drum inlet,Steam Side
+BLR-2,fuel_flow_nm3_h,BLR2.FUEL.FLOW,Nm³/h,Fuel gas volumetric flow,Fuel
+BLR-2,fuel_ch4_mol_pct,BLR2.FUEL.CH4,mol%,Methane mole fraction in fuel gas,Fuel Composition
+BLR-2,fuel_c2h6_mol_pct,BLR2.FUEL.C2H6,mol%,Ethane mole fraction in fuel gas,Fuel Composition
+BLR-2,fuel_c3h8_mol_pct,BLR2.FUEL.C3H8,mol%,Propane mole fraction in fuel gas,Fuel Composition
+BLR-2,fuel_c4h10_mol_pct,BLR2.FUEL.C4H10,mol%,n-Butane mole fraction in fuel gas,Fuel Composition
+BLR-2,fuel_h2_mol_pct,BLR2.FUEL.H2,mol%,Hydrogen mole fraction in fuel gas,Fuel Composition
+BLR-2,fuel_co_mol_pct,BLR2.FUEL.CO,mol%,Carbon Monoxide mole fraction in fuel gas,Fuel Composition
+BLR-2,fuel_co2_mol_pct,BLR2.FUEL.CO2,mol%,Carbon Dioxide mole fraction in fuel gas,Fuel Composition
+BLR-2,fuel_n2_mol_pct,BLR2.FUEL.N2,mol%,Nitrogen mole fraction in fuel gas,Fuel Composition
+BLR-2,flue_o2_pct,BLR2.STACK.O2,vol%,Flue gas O2 concentration (dry basis),Flue Gas
+BLR-2,stack_temperature_c,BLR2.STACK.TEMP,°C,Stack / flue gas exit temperature,Flue Gas
+BLR-2,ambient_t_c,SITE.AMB.TEMP,°C,Ambient air temperature,Environment
+BLR-2,radiation_loss_pct,BLR2.RADIATION_LOSS_PCT,%,Shell radiation and unaccounted loss allowance,Losses
+BLR-2,cbd_flow_m3_h,BLR2.CBD.FLOW,m³/h,Continuous blowdown flow,Blowdown
+BLR-2,attemperator_spray_t_h,BLR2.DESP.SPRAY_FLOW,t/h,Attemperator spray water flow,Desuperheater
+BLR-2,co2_emission_factor_kg_per_gj,BLR2.CO2_FACTOR,kg/GJ,CO2 emission factor for fuel type,Emissions
+BLR-2,eco_fw_inlet_t_c,BLR2.ECO.FW_IN_TEMP,°C,Economizer feedwater inlet temperature,Economizer
+BLR-2,eco_fw_outlet_t_c,BLR2.ECO.FW_OUT_TEMP,°C,Economizer feedwater outlet temperature,Economizer
+BLR-2,eco_fw_cp_kj_kg_k,BLR2.ECO.FW_CP,kJ/kg·K,Feedwater specific heat in economizer,Economizer
+BLR-2,eco_flue_inlet_t_c,BLR2.ECO.FLUE_IN_TEMP,°C,Economizer flue gas inlet temperature,Economizer
+BLR-2,eco_flue_outlet_t_c,BLR2.ECO.FLUE_OUT_TEMP,°C,Economizer flue gas outlet temperature,Economizer
+BLR-2,eco_design_ua_kw_k,BLR2.ECO.DESIGN_UA,kW/K,Economizer design UA,Economizer
+BLR-2,sh1_steam_pressure_bar,BLR2.SH1.STEAM_PRESS,bar,Superheater 1 steam pressure,Superheater 1
+BLR-2,sh1_steam_inlet_t_c,BLR2.SH1.STEAM_IN_TEMP,°C,Superheater 1 steam inlet temperature,Superheater 1
+BLR-2,sh1_steam_outlet_t_c,BLR2.SH1.STEAM_OUT_TEMP,°C,Superheater 1 steam outlet temperature,Superheater 1
+BLR-2,sh1_steam_flow_t_h,BLR2.SH1.STEAM_FLOW,t/h,Steam flow through Superheater 1,Superheater 1
+BLR-2,sh1_flue_inlet_t_c,BLR2.SH1.FLUE_IN_TEMP,°C,Superheater 1 flue gas inlet temperature,Superheater 1
+BLR-2,sh1_flue_outlet_t_c,BLR2.SH1.FLUE_OUT_TEMP,°C,Superheater 1 flue gas outlet temperature,Superheater 1
+BLR-2,sh1_design_ua_kw_k,BLR2.SH1.DESIGN_UA,kW/K,Superheater 1 design UA,Superheater 1
+BLR-2,sh2_steam_pressure_bar,BLR2.SH2.STEAM_PRESS,bar,Superheater 2 steam pressure,Superheater 2
+BLR-2,sh2_steam_inlet_t_c,BLR2.SH2.STEAM_IN_TEMP,°C,Superheater 2 steam inlet temperature,Superheater 2
+BLR-2,sh2_steam_outlet_t_c,BLR2.SH2.STEAM_OUT_TEMP,°C,Superheater 2 steam outlet temperature,Superheater 2
+BLR-2,sh2_steam_flow_t_h,BLR2.SH2.STEAM_FLOW,t/h,Steam flow through Superheater 2,Superheater 2
+BLR-2,sh2_flue_inlet_t_c,BLR2.SH2.FLUE_IN_TEMP,°C,Superheater 2 flue gas inlet temperature,Superheater 2
+BLR-2,sh2_flue_outlet_t_c,BLR2.SH2.FLUE_OUT_TEMP,°C,Superheater 2 flue gas outlet temperature,Superheater 2
+BLR-2,sh2_design_ua_kw_k,BLR2.SH2.DESIGN_UA,kW/K,Superheater 2 design UA,Superheater 2
+BLR-2,desuperheater_water_t_c,BLR2.DESP.WATER_TEMP,°C,Attemperator spray water temperature,Desuperheater
+BLR-2,desuperheater_steam_inlet_t_c,BLR2.DESP.STM_IN_TEMP,°C,Desuperheater steam inlet temperature,Desuperheater
+BLR-2,desuperheater_steam_outlet_t_c,BLR2.DESP.STM_OUT_TEMP,°C,Desuperheater steam outlet temperature,Desuperheater
+BLR-2,aph_air_inlet_t_c,BLR2.APH.AIR_IN_TEMP,°C,Air preheater combustion air inlet temperature,Air Preheater
+BLR-2,aph_air_outlet_t_c,BLR2.APH.AIR_OUT_TEMP,°C,Air preheater combustion air outlet temperature,Air Preheater
+BLR-2,aph_air_flow_nm3_h,BLR2.APH.AIR_FLOW,Nm³/h,Combustion air volumetric flow,Air Preheater
+BLR-2,aph_air_cp_kj_kg_k,BLR2.APH.AIR_CP,kJ/kg·K,Air specific heat capacity,Air Preheater
+BLR-2,aph_air_density_kg_nm3,BLR2.APH.AIR_DENSITY,kg/Nm³,Air density at standard conditions,Air Preheater
+BLR-2,min_steam_flow_t_h,BLR2.LIMIT.MIN_STEAM,t/h,Minimum allowable steam flow (constraint),Constraints
+BLR-2,max_steam_flow_t_h,BLR2.LIMIT.MAX_STEAM,t/h,Maximum allowable steam flow (constraint),Constraints
+BLR-2,max_fuel_flow_nm3_h,BLR2.LIMIT.MAX_FUEL,Nm³/h,Maximum allowable fuel flow (constraint),Constraints
+BLR-2,mass_balance_threshold_pct,BLR2.THRESH.MASS_BAL,%,Mass balance deviation alarm threshold,Validation
+BLR-2,energy_balance_threshold_pct,BLR2.THRESH.ENERGY_BAL,%,Energy balance deviation alarm threshold,Validation
+BLR-2,use_direct_efficiency,BLR2.CONFIG.USE_DIRECT_EFF,flag,Flag: 1.0 = use direct efficiency method,Config

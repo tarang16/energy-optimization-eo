@@ -1,0 +1,107 @@
+{
+"name": "Test System",
+                  "id": "ab65d903-464c-465f-bab6-7ecb270ae44f",
+                  "level": "System",
+                  "children": [
+                    {
+                      "name": "FurnaceB",
+                      "id": "68fadd62-8e82-4037-93de-78c6c0735184",
+                      "level": "Furnace",
+                      "children": [
+                        {
+                          "name": "CellA",
+                          "id": "90b64a78-61cf-4964-9e37-b45f7cee8b77",
+                          "level": "Cell",
+                          "children": [
+                            {
+                              "name": "PassC",
+                              "id": "20bd3686-d3dd-446e-8ff0-afe961395e4e",
+                              "level": "Pass",
+                              "children": [
+                                {
+                                  "name": "CoilA",
+                                  "id": "bee07b64-67f6-426c-8eab-091dc5ce1280",
+                                  "level": "Coil"
+                                }
+                              ]
+                            },
+                            {
+                              "name": "PassA",
+                              "id": "18724df3-19fd-453b-ba37-d32c6141adef",
+                              "level": "Pass",
+                              "children": [
+                                {
+                                  "name": "CoilA",
+                                  "id": "9a27fb8e-9493-48ee-807e-990ca652258e",
+                                  "level": "Coil"
+                                }
+                              ]
+                            },
+                            {
+                              "name": "PassB",
+                              "id": "755017c5-b7e4-4b73-92c8-4698ed0d2c91",
+                              "level": "Pass",
+                              "children": [
+                                {
+                                  "name": "CoilA",
+                                  "id": "fe36d1bf-cadf-424f-a665-0a3ba546c6b3",
+                                  "level": "Coil"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "name": "FurnaceA",
+                      "id": "f5b1509b-eaa9-452d-8898-eaf6beb6f376",
+                      "level": "Furnace",
+                      "children": [
+                        {
+                          "name": "CellA",
+                          "id": "c16bd00c-6d4c-47f3-bcdc-92ed4e336fa8",
+                          "level": "Cell",
+                          "children": [
+                            {
+                              "name": "PassA",
+                              "id": "49b0b5c7-5b2b-4f73-9983-7c787f324221",
+                              "level": "Pass",
+                              "children": [
+                                {
+                                  "name": "CoilA",
+                                  "id": "13eda532-d2f3-41db-b35a-244856dc7688",
+                                  "level": "Coil"
+                                }
+                              ]
+                            },
+                            {
+                              "name": "PassB",
+                              "id": "a1c0c05a-5173-4f28-b8e4-1dd98b0a6103",
+                              "level": "Pass",
+                              "children": [
+                                {
+                                  "name": "CoilA",
+                                  "id": "b646a3b2-bc21-452c-bd0e-858b3a83b5bb",
+                                  "level": "Coil"
+                                }
+                              ]
+                            },
+                            {
+                              "name": "PassC",
+                              "id": "f0b876d8-0ca7-4fd3-b25b-2e536da33ee8",
+                              "level": "Pass",
+                              "children": [
+                                {
+                                  "name": "CoilA",
+                                  "id": "e17f99d5-1ea7-488b-a166-5ff97f56baae",
+                                  "level": "Coil"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+}

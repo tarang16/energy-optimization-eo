@@ -1,0 +1,507 @@
+[Heading 1] Advanced Computational Architecture for Dynamic Steam Network Material and Energy Balancing
+[Heading 2] Introduction to Industrial Steam Network Modeling
+[normal] The optimization, operational management, and thermodynamic modeling of industrial steam distribution networks represent a highly complex computational challenge within the domain of process engineering. Steam provides heat at a constant temperature, and because steam condenses at a constant temperature, it is universally recognized as the most widely used heat-carrying medium in the process industry. Consequently, delivering the best outcomes for chemical processing, refinery operations, and power generation requires a whole-system approach to steam generation, distribution, and end-use.1 As energy and equipment costs continually increase, efficient energy systems become exponentially more important in the overall economics of process plants, necessitating advanced modeling techniques capable of dynamically capturing system behavior.3
+[normal] Traditionally, engineers have relied on static spreadsheet models or specialized software tools, such as the Steam System Assessment Tool (SSAT) provided by the United States Department of Energy, to model simple one-, two-, or three-header systems.4 While such tools perform automatic mass and energy balancing on steam systems, they impose strict limitations on the network topology, often restricting analyses to a predefined number of headers or severely limiting the number of turbines operating between pressure levels. For instance, traditional tools often mandate hardcoded structures, such as a high-pressure (HP), medium-pressure (MP), and low-pressure (LP) tier, rendering them incapable of modeling complex facilities with five or six distinct pressure tiers.4 Furthermore, these legacy tools lack the programmatic flexibility to instantly recalculate balances when equipment is dynamically added, removed, or altered during transient operational shifts.
+[normal] The formulation presented herein establishes a modular, object-oriented computational framework developed natively in Python. This framework is specifically designed to process real-time mass and energy balances across completely dynamic steam networks without any hardcoded pressure levels or structural limitations. It integrates high-speed thermodynamic property calculation backends, specifically the International Association for the Properties of Water and Steam Industrial Formulation 1997 (IAPWS-IF97), to rigorously enforce the fundamental laws of thermodynamics at every node in the network.6 The system also introduces linear programming optimization techniques designed to minimize steam venting and maximize overall turbine extraction efficiency, thereby transitioning the operational management of the steam network from passive observation to active, cost-minimizing control.2
+[Heading 2] Thermodynamic Fundamentals and the IAPWS-IF97 Standard
+[normal] To construct a robust and mathematically sound steam network simulator, the precise definitions of the system state must be established utilizing fundamental conservation laws. The primary variables of interest in any thermofluid system include mass flow rate, pressure, temperature, specific enthalpy, specific entropy, and steam quality.7
+[normal] Steam and water properties are of critical importance in the power industry, dictating the energy transfer capabilities of the fluid medium.6 The standard for water properties is maintained by the International Association for the Properties of Water and Steam (IAPWS). The most recent formulation for scientific thermodynamic properties is the Helmholtz formulation in IAPWS-95, which utilizes the Helmholtz free energy equations based on temperature and density as the primary state variables.6 While highly accurate, the IAPWS-95 formulation introduces a significant computational burden when applied to process engineering models where pressure and enthalpy are the known variables—a highly common scenario when modeling pressure-reducing valves (PRVs) and letdown stations. Inputs where neither temperature nor density are explicitly given require iterative solvers that can be substantially slower.6
+[normal] Realizing the profound need for fast numerical computation of water properties in industrial control systems, the IAPWS created a dedicated committee to develop a faster formulation. In 1997, the IAPWS released the "IAPWS Industrial Formulation 1997 for the Thermodynamic Properties of Water and Steam," widely known as IAPWS-IF97.6 This formulation replaced older standards and is inherently pressure-based, utilizing fundamental equations for the Gibbs free energy and its mathematical derivatives.6 While IAPWS-IF97 is marginally less accurate than the IAPWS-95 scientific formulation, it maintains an uncertainty of less than one percent for all properties (and within 0.1 percent in many common operational areas) except very near the critical point.6 Crucially, the IF97 formulation allows for the ultra-fast calculation of reverse functions, such as determining temperature from known pressure and enthalpy (), making it the optimal choice for real-time mass and energy balancing algorithms.6 The native iapws Python library and the CoolProp library successfully implement these standards and serve as the computational bedrock of the proposed system.6
+[Heading 2] Mathematical Formulation of the Steam Network
+[normal] The topological structure of a process steam network consists of multiple headers, which act as nodes, connected by various pieces of equipment, which act as directed edges or flows.12 The accurate simulation of this network requires the rigorous application of the conservation of mass and the conservation of energy at each individual node.5
+[Heading 3] Conservation of Mass
+[normal] For any given steam header , operating at a nominal pressure , the steady-state mass balance dictates that the total sum of all incoming mass flows must exactly equal the total sum of all outgoing mass flows, accounting for any potential accumulation. Because industrial steam networks operate continuously, the assumption of steady-state conditions is applied, meaning the accumulation term is universally set to zero.5 The mass balance is formulated as follows:
+[normal] In this equation,  represents the mass flow rate, universally quantified in metric tonnes per hour (TPH) for industrial-scale deployment. The term  denotes all primary steam generators directly feeding header , while  denotes all process consumers drawing directly from header . Letdown stations and turbines represent interconnected fluid flow moving from a higher-pressure header  into the current header , or from the current header  cascading down to a lower-pressure header . Venting, denoted as , occurs dynamically if the total supply entering the header drastically exceeds the total demand, and the lower-level headers cannot safely absorb the excess mass flow without exceeding their own pressure constraints.
+[Heading 3] Conservation of Energy
+[normal] The first law of thermodynamics, when applied to an open control volume such as a steam distribution header, requires the strict balancing of thermal energy. In most process engineering cases, the changes in kinetic and potential energy of the fluid flow entering and exiting the steam network are considered negligible and are therefore omitted from the energy balance equation.15 The steady-flow energy balance for each header is thus expressed entirely through the specific enthalpy  of the thermodynamic fluid 9:
+[normal] Assuming the steam headers are properly insulated, the heat losses to the ambient environment () approach zero. Consequently, the specific enthalpy of the completely mixed steam within the header, denoted as , is calculated as the mass-weighted average of all incoming fluid streams:
+[normal] Once the specific mixed enthalpy  and the nominal header pressure  are determined through mass and energy aggregation, the precise operational temperature , specific entropy , and steam quality  of the header can be resolved using the IAPWS-IF97 reverse calculation functions.6
+[Heading 3] Equipment Modeling Constraints and Thermodynamic Behaviors
+[normal] Different classes of equipment interact with the thermodynamic properties of the network in highly specific ways. The computational model must encapsulate these unique physical behaviors into mathematical constraints that the solver can process.
+[Heading 2] Object-Oriented System Architecture and Data Model
+[normal] To achieve the objective of building a generic, scalable, and dynamically updatable steam network model, an object-oriented programming (OOP) approach is strictly required.13 By treating steam headers, generators, and consumers as discrete, encapsulated objects, the network can be completely reconstructed or updated on the fly when variables change, fulfilling the requirement for a real-time dynamic update engine.18 Object-oriented programming in Python helps structure code by grouping related data and behaviors into objects, simplifying the modeling of real-world concepts and enabling the construction of systems that are profoundly reusable and scalable.16
+[Heading 3] Data Model Blueprint and Ingestion
+[normal] To bridge the gap between field-level process engineering data and the Python computational engine, a standardized input structure is utilized. The blueprint relies on tabular data, commonly ingested via Excel spreadsheets using Pandas DataFrames, a standard practice for complex engineering calculations in Python.19 This tabular data is mapped into object attributes during the instantiation phase.
+[Heading 3] Class Hierarchies and Encapsulation Patterns
+[normal] The fundamental base of the application is built on encapsulation, inheritance, and abstraction paradigms.16 The system design includes the specific classes requested: SteamNode, Generator, Consumer, and SteamNetwork.
+[normal] ThermodynamicState Utility: A static utility class wrapping the iapws library. It provides rapid state calculations with robust error handling. It takes known inputs and instantiates an IAPWS97 object to calculate all missing thermodynamic parameters.7
+[normal] Equipment Abstract Base Class: Contains common attributes (name, flow, pressure, enthalpy) and base methods for updating states.
+[normal] Generator Class: Inherits from Equipment. Represents boilers or heat recovery steam generators (HRSGs). It acts purely as a source of mass and energy.
+[normal] Consumer Class: Inherits from Equipment. Represents process heaters, heat exchangers, or reboilers. It acts purely as a sink for mass and energy.
+[normal] SteamNode Class: Represents the physical steam header. It acts as the central hub for mass and energy aggregation. It maintains lists of connected Generator and Consumer instances and computes the total inflow, total outflow, and the resulting mass-weighted mixed enthalpy.9
+[normal] SteamNetwork Class: The supreme orchestration layer. It manages the topological sorting of headers from highest pressure to lowest, iteratively solving the mass balance cascaded down the physical hierarchy.5 It houses the dynamic update engine, recalculating the entire graph whenever a child object is modified.
+[Heading 2] Python Implementation of the Backend Engine
+[normal] The backend Python implementation focuses on strict modularity, utilizing pandas for data manipulation, numpy for numerical arrays, and iapws for thermodynamic property calculations.7 The code structure is detailed comprehensively in the subsequent modules to ensure full reproducibility and deployment readiness.
+[Heading 3] Module 1: Thermodynamic Utilities
+[normal] The thermodynamic properties must be computed safely. If a user provides pressure and temperature, the enthalpy is calculated. If the steam is saturated, temperature and pressure are not independent, meaning steam quality () must be utilized to resolve the state.7
+[normal] Python
+[normal] from iapws import IAPWS97
+import pandas as pd
+import numpy as np
+
+class ThermoCalc:
+    """Static utility class for managing IAPWS-IF97 thermodynamic calculations."""
+    
+    @staticmethod
+    def get_properties(P_bar, T_C=None, h_kJkg=None, x=None):
+        """
+        Calculates fluid properties. Pressure is converted from bar to MPa for the IAPWS library.
+        Automatically resolves state based on available parameters.
+        """
+        P_mpa = P_bar / 10.0
+        T_k = T_C + 273.15 if T_C is not None else None
+        
+        try:
+            if T_k is not None:
+                state = IAPWS97(P=P_mpa, T=T_k)
+            elif h_kJkg is not None:
+                state = IAPWS97(P=P_mpa, h=h_kJkg)
+            elif x is not None:
+                state = IAPWS97(P=P_mpa, x=x)
+            else:
+                raise ValueError("Insufficient thermodynamic properties provided to resolve state.")
+                
+            return {
+                'P_bar': state.P * 10,
+                'T_C': state.T - 273.15,
+                'h_kJkg': state.h,
+                's_kJkgK': state.s,
+                'x': state.x if hasattr(state, 'x') else 1.0
+            }
+        except Exception as e:
+            raise ValueError(f"Thermodynamic state calculation failed at {P_bar} bar: {e}")
+
+[Heading 3] Module 2: Equipment Subclasses
+[normal] The equipment models use inheritance to differentiate their behaviors within the network while sharing core attributes.16
+[normal] Python
+[normal] class Equipment:
+    """Abstract base class for all steam network components."""
+    def __init__(self, name, flow, pressure, temperature=None, enthalpy=None):
+        self.name = name
+        self.flow = flow
+        self.pressure = pressure
+        
+        # Dynamic Enthalpy Resolution
+        if enthalpy is None and temperature is not None:
+            props = ThermoCalc.get_properties(P_bar=pressure, T_C=temperature)
+            self.enthalpy = props['h_kJkg']
+        elif enthalpy is not None:
+            self.enthalpy = enthalpy
+        else:
+            self.enthalpy = 0.0 # Will be resolved by the header if acting as a consumer
+            
+    def update_flow(self, new_flow):
+        """Method to dynamically update mass flow rates."""
+        self.flow = new_flow
+
+class Generator(Equipment):
+    """Represents a steam source (e.g., Boiler). Adds mass to the system."""
+    def __init__(self, name, flow, pressure, temperature=None, enthalpy=None):
+        super().__init__(name, flow, pressure, temperature, enthalpy)
+        self.type = 'Generator'
+
+class Consumer(Equipment):
+    """Represents a process sink. Draws mass from the system."""
+    def __init__(self, name, flow, pressure):
+        # Consumers draw at header conditions, hence temperature/enthalpy are resolved dynamically later
+        super().__init__(name, flow, pressure, temperature=None, enthalpy=None)
+        self.type = 'Consumer'
+
+class TransferEquipment(Equipment):
+    """Represents equipment bridging two headers: PRVs, Letdowns, and Turbines."""
+    def __init__(self, name, flow, source_node, dest_node, is_turbine=False, isentropic_eff=0.85):
+        self.name = name
+        self.source = source_node
+        self.dest = dest_node
+        self.is_turbine = is_turbine
+        self.eff = isentropic_eff
+        self.flow = flow
+        self.enthalpy = 0.0 # Calculated during network solve
+        self.power_generated_kW = 0.0
+        
+    def calculate_transfer_state(self):
+        """Calculates the thermodynamic state drop across the transfer equipment."""
+        if self.source.mixed_enthalpy == 0:
+            return # Await source node resolution
+            
+        h_in = self.source.mixed_enthalpy
+        p_in = self.source.nominal_pressure
+        p_out = self.dest.nominal_pressure
+        
+        if self.is_turbine:
+            # Isentropic Expansion Calculation
+            props_in = ThermoCalc.get_properties(P_bar=p_in, h_kJkg=h_in)
+            s_in = props_in['s_kJkgK']
+            
+            # Ideal enthalpy at exit pressure and inlet entropy
+            state_out_ideal = IAPWS97(P=p_out/10.0, s=s_in)
+            h_out_ideal = state_out_ideal.h
+            
+            # Actual enthalpy based on isentropic efficiency
+            self.enthalpy = h_in - self.eff * (h_in - h_out_ideal)
+            # Power = mass flow (kg/s) * enthalpy drop (kJ/kg) = kW
+            self.power_generated_kW = self.flow * (1000.0/3600.0) * (h_in - self.enthalpy)
+        else:
+            # PRV - Isenthalpic Expansion (Enthalpy remains constant)
+            self.enthalpy = h_in
+            self.power_generated_kW = 0.0
+
+[Heading 3] Module 3: Steam Node and Network Orchestration
+[normal] The SteamNode encapsulates the logic for balancing mass and energy. The SteamNetwork manages the continuous recalculation loops, ensuring that any modification dynamically ripples through the entire physical topology.16
+[normal] Python
+[normal] class SteamNode:
+    """Represents a specific steam header pressure level."""
+    def __init__(self, name, nominal_pressure):
+        self.name = name
+        self.nominal_pressure = nominal_pressure # bar absolute
+        
+        # Object storage
+        self.generators = {}
+        self.consumers = {}
+        self.inflows = {}   # TransferEquipment flowing IN
+        self.outflows = {}  # TransferEquipment flowing OUT
+        
+        # State variables
+        self.total_generation = 0.0
+        self.total_consumption = 0.0
+        self.net_balance = 0.0
+        self.mixed_enthalpy = 0.0
+        self.mixed_temperature = 0.0
+
+    def add_generator(self, gen):
+        self.generators[gen.name] = gen
+        
+    def remove_generator(self, gen_name):
+        if gen_name in self.generators:
+            del self.generators[gen_name]
+            
+    def add_consumer(self, cons):
+        self.consumers[cons.name] = cons
+        
+    def remove_consumer(self, cons_name):
+        if cons_name in self.consumers:
+            del self.consumers[cons_name]
+            
+    def calculate_balance(self):
+        """Performs precise mass and energy balancing for the node."""
+        # Calculate Mass Inflow
+        mass_in = sum(g.flow for g in self.generators.values()) + \
+                  sum(i.flow for i in self.inflows.values())
+                  
+        # Calculate Energy Inflow (Sigma m_in * h_in)
+        energy_in = sum(g.flow * g.enthalpy for g in self.generators.values()) + \
+                    sum(i.flow * i.enthalpy for i in self.inflows.values())
+                    
+        # Calculate Mass Outflow 
+        mass_out = sum(c.flow for c in self.consumers.values()) + \
+                   sum(o.flow for o in self.outflows.values())
+        
+        self.total_generation = mass_in
+        self.total_consumption = mass_out
+        self.net_balance = mass_in - mass_out
+        
+        # Determine Header Mixed State
+        if mass_in > 0:
+            self.mixed_enthalpy = energy_in / mass_in
+            props = ThermoCalc.get_properties(P_bar=self.nominal_pressure, h_kJkg=self.mixed_enthalpy)
+            self.mixed_temperature = props
+            
+            # Sync consumer enthalpies to the new mixed header enthalpy
+            for cons in self.consumers.values():
+                cons.enthalpy = self.mixed_enthalpy
+        else:
+            self.mixed_enthalpy = 0.0
+            self.mixed_temperature = 0.0
+
+class SteamNetwork:
+    """Global orchestration engine for the entire plant network."""
+    def __init__(self):
+        self.nodes = {}
+        
+    def add_node(self, name, pressure):
+        self.nodes[name] = SteamNode(name, pressure)
+        
+    def add_transfer_equipment(self, transfer_eq):
+        """Links two nodes together via PRV or Turbine."""
+        transfer_eq.source.outflows[transfer_eq.name] = transfer_eq
+        transfer_eq.dest.inflows[transfer_eq.name] = transfer_eq
+        
+    def get_sorted_nodes(self):
+        """Sorts headers descending by pressure for top-down cascading resolution."""
+        return sorted(self.nodes.values(), key=lambda x: x.nominal_pressure, reverse=True)
+        
+    def dynamic_update_engine(self):
+        """
+        The core calculation engine. Solves the network from top to bottom.
+        This method is called instantly whenever any equipment is added, removed, or modified.
+        """
+        sorted_nodes = self.get_sorted_nodes()
+        
+        for i, node in enumerate(sorted_nodes):
+            # Resolve thermodynamic properties of incoming transfer streams first
+            for inflow in node.inflows.values():
+                inflow.calculate_transfer_state()
+                
+            # Perform node-level mass and energy balance
+            node.calculate_balance()
+            
+            # Header Interaction Logic: Cascade deficit to lower headers via auto-letdown
+            if node.net_balance > 0 and i < len(sorted_nodes) - 1:
+                # Surplus exists in the current node, send to the next adjacent lower node
+                next_node = sorted_nodes[i+1]
+                letdown_flow = node.net_balance
+                
+                # Check if an auto-balancing PRV already exists, update or create it
+                prv_name = f"Auto_PRV_{node.name}_to_{next_node.name}"
+                if prv_name in node.outflows:
+                    node.outflows[prv_name].update_flow(letdown_flow)
+                else:
+                    prv = TransferEquipment(prv_name, letdown_flow, node, next_node)
+                    self.add_transfer_equipment(prv)
+                
+                # Recalculate current node to reflect the newly opened outflow
+                node.calculate_balance()
+                
+            elif node.net_balance < 0:
+                # Deficit implies the header lacks sufficient steam.
+                # In physical reality, header pressure drops. In our steady-state model, we flag the imbalance.
+                pass 
+                
+    def api_add_generator(self, header_name, gen_name, flow, pressure, temp):
+        """Public API method to add equipment and trigger instant recomputation."""
+        node = self.nodes.get(header_name)
+        if node:
+            gen = Generator(gen_name, flow, pressure, temperature=temp)
+            node.add_generator(gen)
+            self.dynamic_update_engine() # Instant recompute
+            
+    def api_remove_consumer(self, header_name, cons_name):
+        """Public API method to remove equipment and trigger instant recomputation."""
+        node = self.nodes.get(header_name)
+        if node:
+            node.remove_consumer(cons_name)
+            self.dynamic_update_engine() # Instant recompute
+
+[Heading 2] Equipment Interaction and Cascading Letdown Logic
+[normal] A critical functional requirement of the proposed system is the dynamic support for header interaction logic, specifically the proper handling of Pressure Reducing Valves (PRVs), turbine extractions, letdown stations, and steam vents.
+[normal] In real-world industrial steam plants, steam is predominantly generated at the highest pressure tier (e.g., HP Header) to maximize the thermodynamic availability (exergy) of the fluid. Process units at lower pressure tiers (MP and LP) draw steam as needed. If a turbine extracting from HP to MP fails, or if an MP consumer unexpectedly shuts down, the mass flow topologies shift violently.
+[normal] The dynamic_update_engine() method natively handles this phenomenon through top-down cascading. By sorting the nodes by pressure in descending order, the engine calculates the HP header first. If the total HP generation exceeds HP consumption and existing HP-to-MP turbine extraction flows, the HP node registers a positive net_balance. The engine automatically detects this and instantiates (or updates) an Auto_PRV object, transferring the exact surplus mass from the HP node to the MP node. This guarantees that mass is conserved globally, mimicking the mechanical action of physical letdown pressure control valves opening to maintain header setpoints. Any remaining surplus that reaches the final, lowest-pressure header is classified as pure system venting to the atmosphere, representing a total thermodynamic and economic loss.
+[Heading 2] Advanced Network Optimization: Minimizing Venting via Linear Programming
+[normal] Operational optimization is paramount in high-energy steam systems. A frequent computational problem is identifying the exact optimal load distribution among multiple parallel boilers and back-pressure turbines that simultaneously minimizes overall operational cost and strictly reduces atmospheric steam venting to zero.8
+[normal] While Mixed-Integer Nonlinear Programming (MINLP) formulations allow a highly accurate representation of nonlinear system behavior, they typically require significantly higher computational effort and may suffer from severe convergence issues, failing to identify a global optimum in real-time.21 Conversely, Linear Programming (LP) and Mixed-Integer Linear Programming (MILP) represent the industry state of the art due to their rapid computational times and highly reliable convergence.21 To achieve the goal of minimizing steam venting dynamically, an LP formulation is implemented.
+[Heading 3] Objective Function Formulation
+[normal] The primary optimization objective is to minimize the total cost of venting and auxiliary boiler firing. By attaching a massive penalty coefficient to steam venting and a specific financial cost coefficient to boiler generation, a linear objective function is mathematically derived.2
+[normal] Where  is the unit cost of generating steam at boiler , and  is an artificially high penalty cost of venting steam to ensure the solver avoids it unless physically impossible given system constraints. The constraints applied to this objective function are the mass balance equations established in previous sections.
+[Heading 3] Python Optimization Implementation via SciPy
+[normal] Using the scipy.optimize.linprog module, the mass balance equations are formulated into the standard mathematical matrix format .19 This algorithm is seamlessly integrated into the Python backend.
+[normal] Python
+[normal] from scipy.optimize import linprog
+
+class NetworkOptimizer:
+    """Class dedicated to optimizing load distributions to eliminate venting."""
+    
+    @staticmethod
+    def optimize_load_distribution(fixed_demands_dict, boiler_limits_dict):
+        """
+        Formulates a linear program to minimize boiler load while satisfying fixed demands.
+        Decision variables (x):
+        """
+        # Objective function coefficients (c matrix)
+        # High cost for boilers, extreme penalty for venting, zero cost for passive PRVs
+        c = [45.0, 50.0, 0.0, 0.0, 1000.0] 
+        
+        # Equality Constraints (A_eq * x = b_eq)
+        # Represents the mass balance topology: Inflow - Outflow = Demand
+        # Row 0: HP Header Balance: Boiler1 + Boiler2 - PRV_HP_MP = HP_Demand
+        # Row 1: MP Header Balance: PRV_HP_MP - PRV_MP_LP = MP_Demand
+        # Row 2: LP Header Balance: PRV_MP_LP - Vent_LP = LP_Demand
+        
+        A_eq = [1.0,  1.0, -1.0,  0.0,  0.0],  
+            [0.0,  0.0,  1.0, -1.0,  0.0],  
+            [0.0,  0.0,  0.0,  1.0, -1.0]
+        
+        b_eq = [
+            fixed_demands_dict.get('HP', 0), 
+            fixed_demands_dict.get('MP', 0), 
+            fixed_demands_dict.get('LP', 0)
+        ]
+        
+        # Bounds for each decision variable (min, max) defining equipment capacity
+        bounds =
+        
+        # Execute the optimization using the high-performance 'highs' interior-point solver
+        res = linprog(c, A_eq=A_eq, b_eq=b_eq, bounds=bounds, method='highs')
+        
+        if res.success:
+            return {
+                "Optimized_Boiler1_TPH": round(res.x, 2),
+                "Optimized_Boiler2_TPH": round(res.x, 2),
+                "Optimized_PRV_HP_MP_TPH": round(res.x, 2),
+                "Optimized_Venting_TPH": round(res.x, 2),
+                "Total_Objective_Cost": round(res.fun, 2)
+            }
+        else:
+            raise ValueError("Optimization failed to converge. Constraints may be physically impossible.")
+
+[normal] By integrating this mathematical optimization routine, the framework continuously evaluates the precise minimal generation required, vastly increasing plant profitability and substantially minimizing greenhouse gas emissions through systematically reduced fuel burn.8
+[Heading 2] Output Generation and Dashboard Integration Logic
+[normal] Although the front-end graphical user interface (GUI) development is excluded from the current backend scope, the computational model is strictly required to prepare the exact data structures necessary to drive modern visualization libraries, specifically Plotly and Streamlit.24 At any given time, the system must cleanly output total generation, total consumption, net balance, and an energy balance check both per header and for the overall plant.
+[Heading 3] KPI Extraction and Structuring
+[normal] To populate interactive dashboard components, specialized functions extract real-time system metrics directly from the solved object graph.
+[normal] Python
+[normal] def generate_dashboard_kpis(network):
+    """
+    Extracts structured metrics for Streamlit KPI cards and Plotly Sankey diagrams.
+    """
+    plant_total_gen = sum(node.total_generation for node in network.nodes.values() if node.total_generation > 0)
+    plant_total_cons = sum(node.total_consumption for node in network.nodes.values())
+    
+    # Generate Plant-Level KPIs
+    plant_kpis = {
+        "Total_Steam_Generated_TPH": round(plant_total_gen, 2),
+        "Total_Steam_Consumed_TPH": round(plant_total_cons, 2),
+        "Total_Loss_Vent_Imbalance_TPH": round(plant_total_gen - plant_total_cons, 2)
+    }
+    
+    # Generate Header-Level KPIs
+    header_kpis =
+    for name, node in network.nodes.items():
+        # Energy balance check: Sigma(m_in * h_in) - Sigma(m_out * h_out)
+        energy_in = sum(g.flow * g.enthalpy for g in node.generators.values()) + \
+                    sum(i.flow * i.enthalpy for i in node.inflows.values())
+        energy_out = sum(c.flow * node.mixed_enthalpy for c in node.consumers.values()) + \
+                     sum(o.flow * node.mixed_enthalpy for o in node.outflows.values())
+        energy_imbalance = energy_in - energy_out
+        
+        header_kpis.append({
+            "Header": name,
+            "Generation_TPH": round(node.total_generation, 2),
+            "Consumption_TPH": round(node.total_consumption, 2),
+            "Surplus_Deficit_TPH": round(node.net_balance, 2),
+            "Energy_Balance_Check_MW": round(energy_imbalance * (1000/3600), 4) # Convert kJ/h to kW to MW
+        })
+        
+    # Generate Plotly Sankey Links for Network Visualization
+    sankey_data = {"sources":, "targets":, "values":}
+    for node in network.nodes.values():
+        for out in node.outflows.values():
+            sankey_data["sources"].append(node.name)
+            sankey_data["targets"].append(out.dest.name)
+            sankey_data["values"].append(out.flow)
+            
+    return {"plant_kpis": plant_kpis, "header_kpis": header_kpis, "sankey_data": sankey_data}
+
+[normal] The output of generate_dashboard_kpis provides everything necessary to instantly render interactive web components. Sankey flow diagrams are heavily utilized in process engineering to track mass conservation through interconnected nodes visually, and the provided dictionaries map perfectly to plotly.graph_objects.Sankey inputs.26
+[Heading 2] Example Dataset and Blueprint Configuration
+[normal] The architecture is designed to ingest standard industrial blueprints. Below is an example of the tabular dataset format required to initialize a complex, multi-header plant configuration dynamically. Note that the headers are not hardcoded; the system will detect 100_Bar_HP, 40_Bar_MP, and 5_Bar_LP organically.
+[normal] Note: Enthalpy is intentionally left blank to trigger the system's dynamic iapws lookup based on pressure and temperature parameters.
+[Heading 2] Standard Operating Procedure (SOP) and Deployment Strategy
+[normal] To facilitate seamless industrial-scale deployment, the system operations must be standardized. Process engineers mapping out a facility must adhere to defined protocols to assure the dynamic engine compiles the directed acyclic graph accurately.
+[Heading 3] Directory Structure and Contextual Pipeline Coding
+[normal] To maintain codebase hygiene and modularity, the following exact directory pathing is strictly enforced.
+[normal] During the initial data gathering phase, field engineers often physically trace steam lines. To align with safety and identification protocols, it should be noted that under standard color-coding conventions such as the Indian Standard IS 2379:1990, high-pressure steam pipes are physically identified by an Aluminium ground color, while process water is marked with Sea Green, and plant air with Sky Blue.27 Ensuring the accurate mapping of these physical lines to the blueprint dataset prevents topological errors in the initial model construction.
+[Heading 3] Configuration File Generation
+[normal] A robust implementation requires externalized configurations to prevent deep-level hardcoding. The /config/system_config.json file dictates the global thermodynamic standards and system constraints, fulfilling the requirement to provide step-by-step inputs.
+[normal] JSON
+[normal] {
+  "system_settings": {
+    "thermodynamic_backend": "iapws-if97",
+    "ambient_temperature_C": 25.0,
+    "unit_system": "metric",
+    "mass_flow_units": "TPH",
+    "pressure_units": "bar_absolute"
+  },
+  "equipment_defaults": {
+    "turbine_isentropic_efficiency": 0.85,
+    "pump_efficiency": 0.75,
+    "prv_heat_loss_factor": 0.0
+  },
+  "optimization_parameters": {
+    "solver": "highs",
+    "venting_penalty_cost": 1000.0,
+    "boiler_marginal_cost_per_TPH": 45.0,
+    "max_solver_iterations": 1000
+  }
+}
+
+[Heading 3] Step-by-Step Operator Workflow (SOP)
+[normal] Configuration and Data Ingestion: The lead process engineer updates the /data/blueprint.xlsx file with the latest process telemetry, design parameters, or proposed "what-if" scenarios. Each piece of equipment must clearly state its Header_Level connection. For transfer equipment traversing two distinct headers (e.g., Turbines and PRVs), both Source_Header and Dest_Header columns must be explicitly defined.
+[normal] System Initialization: The Python application boot sequence reads the system_config.json file, applying the designated parameters to initialize the ThermoCalc and IAPWS97 wrapper parameters.
+[normal] Graph Construction: The application executes an internal build_network() method, parsing the Pandas DataFrame. The base headers are uniquely instantiated first. Subsequently, the generation and consumption objects are instantiated and attached to their respective parent nodes.
+[normal] Topological Traversal and Balance: The network executes the dynamic_update_engine(). It solves mass and energy balances iteratively, cascading flows from high-pressure states to low-pressure states, autonomously determining the precise thermodynamic conditions of PRVs and mixed-header enthalpies.
+[normal] Dynamic Interactivity: Through the intended dashboard interface, operators can simulate the removal of a consumer (e.g., simulating a reactor shutdown). The API calls api_remove_consumer(), instantly triggering the update engine. The model will likely detect a sudden high-pressure surplus and autonomously route the excess steam down the pressure hierarchy until it vents, mathematically demonstrating the exact system impact of the shutdown.
+[normal] Optimization Protocol Execution: If the system displays that it is over-pressurized or venting excessively, the operator triggers the optimize_load_distribution() function. The SciPy Linear Programming solver evaluates the structural matrix and overrides manual boiler setpoints to find the economic optimum that nullifies the venting loss.8
+[normal] Results Compilation: The plant-level and header-level KPI dictionaries, along with the Sankey plotting parameters, are continuously broadcast to the /dashboards/ module for visual rendering, providing decision-makers with a complete, holistic view of the thermodynamic network.
+[Heading 2] Conclusion
+[normal] The architecture detailed in this report establishes a highly resilient, entirely generic Python-based computational framework for industrial steam networks. By leveraging Object-Oriented Programming (OOP) and strictly adhering to the IAPWS-IF97 thermodynamic standards, the constraints of static, hardcoded legacy modeling systems are entirely bypassed.4 The object-graph cascading solver inherently supports any configuration of headers, turbines, and generators without requiring code modification. Furthermore, by framing the mass balance constraints within a highly efficient linear programming model, the system evolves from a passive diagnostic tool into an active, intelligent optimization engine. It is capable of generating significant operational cost savings by automatically identifying exact load distributions that minimize atmospheric steam venting and maximize turbine power generation.20 This rigorous amalgamation of advanced thermodynamic principles, contemporary software engineering patterns, and mathematical optimization guarantees high-fidelity, real-time simulations perfectly suited for immediate industrial-scale deployment.
+[Heading 4] Works cited
+[normal] Steam System Basics and Energy Efficiency - CEDengineering.com, accessed May 5, 2026, https://www.cedengineering.com/userfiles/D06-004%20-%20Steam%20System%20Basics%20and%20Energy%20Efficiency%20-%20US.pdf
+[normal] Design and Optimization of Steam Distribution Systems for Steam Power Plants, accessed May 5, 2026, https://pubs.acs.org/doi/10.1021/ie102059n
+[normal] APPLICATION OF LINEAR PROGRAMMING IN ENERGY MANAGEMENT, accessed May 5, 2026, http://www.sjm06.com/SJM%20ISSN1452-4864/4_2_2009_November_137-282/4_2_227-238.pdf
+[normal] U.S. Department of Energy Steam System Assessment Tool User ..., accessed May 5, 2026, https://www1.eere.energy.gov/manufacturing/tech_assistance/pdfs/ssat_user_manual.pdf
+[normal] INDUSTRIAL STEAM SYSTEMS ASSESSMENT AND OPTIMIZATION MANUAL FOR - UNIDO, accessed May 5, 2026, https://www.unido.org/sites/default/files/2017-11/SSO-Manual-Print-FINAL-20161109-One-Page-V2.pdf
+[normal] IF97 Steam/Water Properties — CoolProp 7.2.0 documentation, accessed May 5, 2026, https://coolprop.org/fluid_properties/IF97.html
+[normal] iapws · PyPI, accessed May 5, 2026, https://pypi.org/project/iapws/1.0.5/
+[normal] Minimize the use of fossil fuels and lower your carbon footprint, improve the energy efficiency of your steam network - Valmet, accessed May 5, 2026, https://www.valmet.com/automation/energy/applications/process-optimization/steam-network-optimization/
+[normal] Modelling, simulation and optimization perspectives of an industrial ..., accessed May 5, 2026, https://publications.lib.chalmers.se/records/fulltext/235160/235160.pdf
+[normal] PART I PROBLEM FORMULATION, accessed May 5, 2026, http://www2.peq.coppe.ufrj.br/Pessoal/Professores/Arge/COQ897/trabalhos/Leitura_Edgar_Himmelblau.pdf
+[normal] (PDF) Development of a Portable Steam Table Application Integrating IAPWS-IF97 and CoolProp for Thermodynamic Analysis - ResearchGate, accessed May 5, 2026, https://www.researchgate.net/publication/399665064_Development_of_a_Portable_Steam_Table_Application_Integrating_IAPWS-IF97_and_CoolProp_for_Thermodynamic_Analysis
+[normal] Optimization of District Heating Network Parameters in Steady-State Operation - arXiv, accessed May 5, 2026, https://arxiv.org/html/2404.18868v1
+[normal] Network Simulator Python Projects, accessed May 5, 2026, https://networksimulationtools.com/network-simulator-in-python/
+[normal] Mass Balance Equations in Python | PDF | Diffusion - Scribd, accessed May 5, 2026, https://www.scribd.com/document/935028565/WEEK-2-Lecture-2025
+[normal] Energy Balance Equation from a steam turbine - Physics Stack Exchange, accessed May 5, 2026, https://physics.stackexchange.com/questions/580063/energy-balance-equation-from-a-steam-turbine
+[normal] Object-Oriented Programming (OOP) in Python, accessed May 5, 2026, https://realpython.com/python3-object-oriented-programming/
+[normal] Mastering OOP in Python with Real-World Examples | by Vamsikd - Medium, accessed May 5, 2026, https://medium.com/@vamsikd219/object-oriented-programming-in-python-25de0ef9fd7c
+[normal] An Introduction to Design Patterns in Python - Coursera, accessed May 5, 2026, https://www.coursera.org/articles/design-patterns-in-python
+[normal] Steady State Mass balance modelling using Python or Excel (Iterative calculations) - Reddit, accessed May 5, 2026, https://www.reddit.com/r/ChemicalEngineering/comments/1icxi8c/steady_state_mass_balance_modelling_using_python/
+[normal] (PDF) Optimal Operations and Resilient Investments in Steam Networks - ResearchGate, accessed May 5, 2026, https://www.researchgate.net/publication/291386600_Optimal_Operations_and_Resilient_Investments_in_Steam_Networks
+[normal] Operational Optimization of Steam Turbine Systems for Time Series in Hourly Resolution: A Systematic Comparison of Linear, Quadratic and Nonlinear Approaches - MDPI, accessed May 5, 2026, https://www.mdpi.com/1996-1073/19/3/589
+[normal] Operational Optimization of Steam Turbine Systems for Time Series in Hourly Resolution: A Systematic Comparison of Linear, Quadratic and Nonlinear Approaches - ResearchGate, accessed May 5, 2026, https://www.researchgate.net/publication/400077260_Operational_Optimization_of_Steam_Turbine_Systems_for_Time_Series_in_Hourly_Resolution_A_Systematic_Comparison_of_Linear_Quadratic_and_Nonlinear_Approaches
+[normal] Solve Optimization Problems: Exploring Linear Programming with Python | by ChenDataBytes | Medium, accessed May 5, 2026, https://medium.com/@chenycy/solve-optimization-problems-exploring-linear-programming-with-python-a299bcc9bdb8
+[normal] Building an Interactive Sales Dashboard with Streamlit - YouTube, accessed May 5, 2026, https://www.youtube.com/watch?v=z4XcAzk3mbw
+[normal] Streamlit Dashboard. In a previous episode, Tackling… | by Aryan Sinanan | Medium, accessed May 5, 2026, https://medium.com/@aryan.sinanan/streamlit-dashboard-cfd917d095fa
+[normal] Introduction to Minimum Cost Flow Optimization in Python - Towards Data Science, accessed May 5, 2026, https://towardsdatascience.com/introduction-to-minimum-cost-flow-optimization-in-python/
+[normal] IS 2379: Pipeline Colour Coding Standard | PDF | Pipe (Fluid Conveyance) - Scribd, accessed May 5, 2026, https://www.scribd.com/document/360638584/119767799-IS-2379-PIPE-LINE-IDENTIFICATION-CODE-pdf
+[normal] Pipe marking - Wikipedia, accessed May 5, 2026, https://en.wikipedia.org/wiki/Pipe_marking
+[normal] Colour-Coded Pipe Systems: Understanding Industry Standards - Dewa Polymers, accessed May 5, 2026, https://dewapolymers.com/colour-coded-pipe-systems-industry-standards/
+
+=====TABLES=====
+
+--- TABLE 0: rows=6 cols=3 ---
+R0: ['Equipment Classification', 'Thermodynamic Behavior and Physical Mechanism', 'Mathematical Constraint Profile']
+R1: ['Boiler / Steam Generator', 'Acts as the primary source node. Adds both mass and highly energized fluid to the network.', ', ,  are user-defined. Specific enthalpy is computed as .']
+R2: ['Process Consumer', 'Acts as a sink node. Removes mass and energy from the network to drive chemical or mechanical processes.', 'is defined by process demand. The enthalpy of the steam drawn is exactly equal to the header mixed enthalpy .']
+R3: ['Pressure Reducing Valve (PRV)', 'Forces the fluid through a stricture, causing a massive pressure drop. The process is modeled as an isenthalpic expansio', '. . Temperature  is calculated via .']
+R4: ['Steam Turbine', 'Extracts mechanical work by expanding steam through turbine blades. Modeled as an isentropic expansion, modified by an i', '. Mechanical work generated is calculated as .']
+R5: ['Desuperheater / Attemperator', 'Injects atomized cooling water directly into superheated steam to rapidly lower its temperature to a target setpoint, pr', '. Mass of water required is computed iteratively.']
+
+--- TABLE 1: rows=10 cols=3 ---
+R0: ['Input Column Name', 'Expected Data Type', 'Engineering Description and System Utilization']
+R1: ['Equipment_Name', 'String', 'A unique alphanumeric identifier for the unit (e.g., Boiler_01, Turbine_HP_MP).']
+R2: ['Equipment_Type', 'String', 'Classification mechanism. Must be one of: Generator, Consumer, Turbine, PRV.']
+R3: ['Header_Level', 'String', 'The nominal pressure identifier. The system dynamically generates nodes based on unique strings found here (e.g., HP_Hea']
+R4: ['Steam_Flow_TPH', 'Float', 'The mass flow rate traversing the equipment, measured in metric tonnes per hour.']
+R5: ['Pressure_bar', 'Float', 'The nominal operating pressure of the equipment in bar absolute.']
+R6: ['Temperature_C', 'Float', 'The operating temperature in degrees Celsius.']
+R7: ['Enthalpy_kJ_kg', 'Float', 'Specific enthalpy. This field is optional. If left blank or null, the system automatically computes it using the IAPWS-I']
+R8: ['Source_Header', 'String', 'Required exclusively for interconnected transfer equipment (Turbines, PRVs) to define the origin node.']
+R9: ['Dest_Header', 'String', 'Required exclusively for interconnected transfer equipment to define the receiving sink node.']
+
+--- TABLE 2: rows=9 cols=9 ---
+R0: ['Equipment Name', 'Equipment Type', 'Header Level', 'Steam Flow (TPH)', 'Pressure (bar)', 'Temperature (°C)', 'Enthalpy (kJ/kg)', 'Source Header', 'Dest Header']
+R1: ['Main_Boiler_A', 'Generator', '100_Bar_HP', '150.0', '100.0', '500.0', '', '', '']
+R2: ['Main_Boiler_B', 'Generator', '100_Bar_HP', '100.0', '100.0', '500.0', '', '', '']
+R3: ['Process_Heater_1', 'Consumer', '100_Bar_HP', '30.0', '100.0', '', '', '', '']
+R4: ['Turbine_HP_MP', 'Turbine', '', '150.0', '', '', '', '100_Bar_HP', '40_Bar_MP']
+R5: ['PRV_HP_MP', 'PRV', '', '20.0', '', '', '', '100_Bar_HP', '40_Bar_MP']
+R6: ['Process_Reactor_A', 'Consumer', '40_Bar_MP', '90.0', '40.0', '', '', '', '']
+R7: ['Turbine_MP_LP', 'Turbine', '', '50.0', '', '', '', '40_Bar_MP', '5_Bar_LP']
+R8: ['Heating_HVAC', 'Consumer', '5_Bar_LP', '80.0', '5.0', '', '', '', '']
+
+--- TABLE 3: rows=6 cols=3 ---
+R0: ['Directory Path', 'File Extension', 'Operational Purpose within System Architecture']
+R1: ['/config/', '.json / .yaml', 'Stores fixed operational parameters (turbine efficiencies, thermodynamic environments, solver limits).']
+R2: ['/data/', '.xlsx / .csv', 'Houses the raw process blueprint containing the master equipment lists.']
+R3: ['/src/', '.py', 'Contains the core computational modules (network.py, thermo.py, optimize.py, models.py).']
+R4: ['/logs/', '.txt', 'Records automated event logging for solver convergence status and IAPWS calculation errors.']
+R5: ['/dashboards/', '.py', 'Contains the Streamlit application code representing the front-end entry points.']

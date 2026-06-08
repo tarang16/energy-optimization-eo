@@ -1,0 +1,417 @@
+<?xml version="1.0" encoding="UTF-8"?><process version="10.4.003">
+  <context>
+    <input/>
+    <output/>
+    <macros/>
+  </context>
+  <operator activated="true" class="process" compatibility="10.4.003" expanded="true" name="Process">
+    <parameter key="logverbosity" value="init"/>
+    <parameter key="random_seed" value="2001"/>
+    <parameter key="send_mail" value="never"/>
+    <parameter key="notification_email" value=""/>
+    <parameter key="process_duration_for_mail" value="30"/>
+    <parameter key="encoding" value="SYSTEM"/>
+    <process expanded="true">
+      <operator activated="true" class="subprocess" compatibility="10.4.003" expanded="true" height="187" name="Main" width="90" x="514" y="85">
+        <process expanded="true">
+          <operator activated="true" class="multiply" compatibility="10.4.003" expanded="true" height="82" name="actual_Data" width="90" x="45" y="34"/>
+          <operator activated="true" class="multiply" compatibility="10.4.003" expanded="true" height="82" name="vairables" width="90" x="45" y="136"/>
+          <operator activated="true" class="multiply" compatibility="10.4.003" expanded="true" height="82" name="constrants" width="90" x="45" y="238"/>
+          <operator activated="true" class="multiply" compatibility="10.4.003" expanded="true" height="82" name="objective (4)" width="90" x="45" y="340"/>
+          <operator activated="true" class="multiply" compatibility="10.4.003" expanded="true" height="103" name="model_tag" width="90" x="45" y="442"/>
+          <operator activated="true" class="multiply" compatibility="10.4.003" expanded="true" height="82" name="model_status (3)" width="90" x="45" y="595"/>
+          <operator activated="true" class="blending:set_role" compatibility="10.4.003" expanded="true" height="82" name="Set Role" width="90" x="179" y="136">
+            <list key="set_roles">
+              <parameter key="tag_name" value="id"/>
+            </list>
+          </operator>
+          <operator activated="true" class="subprocess" compatibility="10.4.003" expanded="true" height="124" name="extract tags from expr" width="90" x="179" y="289">
+            <process expanded="true">
+              <operator activated="true" class="append" compatibility="10.4.003" expanded="true" height="103" name="Append" width="90" x="313" y="34">
+                <parameter key="data_management" value="auto"/>
+                <parameter key="merge_type" value="all"/>
+              </operator>
+              <operator activated="true" class="extract_macro" compatibility="10.4.003" expanded="true" height="68" name="Extract Macro (9)" width="90" x="447" y="34">
+                <parameter key="macro" value="noe"/>
+                <parameter key="macro_type" value="number_of_examples"/>
+                <parameter key="statistics" value="average"/>
+                <parameter key="attribute_name" value=""/>
+                <list key="additional_macros"/>
+                <description align="center" color="transparent" colored="false" width="126">extract &lt;br/&gt;num of examples</description>
+              </operator>
+              <operator activated="true" class="concurrency:loop" compatibility="10.4.003" expanded="true" height="103" name="Loop (2)" width="90" x="581" y="34">
+                <parameter key="number_of_iterations" value="%{noe}"/>
+                <parameter key="iteration_macro" value="iteration"/>
+                <parameter key="reuse_results" value="false"/>
+                <parameter key="enable_parallel_execution" value="true"/>
+                <process expanded="true">
+                  <operator activated="true" class="extract_macro" compatibility="10.4.003" expanded="true" height="68" name="Extract Macro (10)" width="90" x="313" y="34">
+                    <parameter key="macro" value="expr"/>
+                    <parameter key="macro_type" value="data_value"/>
+                    <parameter key="statistics" value="average"/>
+                    <parameter key="attribute_name" value="expr"/>
+                    <parameter key="example_index" value="%{iteration}"/>
+                    <list key="additional_macros"/>
+                    <description align="center" color="transparent" colored="false" width="126">extract&lt;br/&gt;expr</description>
+                  </operator>
+                  <operator activated="true" class="text:create_document" compatibility="10.0.000" expanded="true" height="68" name="Create Document (2)" origin="GENERATED_TUTORIAL" width="90" x="246" y="187">
+                    <parameter key="text" value="%{expr}"/>
+                    <parameter key="add label" value="false"/>
+                    <parameter key="label_type" value="nominal"/>
+                    <description align="center" color="transparent" colored="false" width="126">expression</description>
+                  </operator>
+                  <operator activated="true" class="text:process_documents" compatibility="10.0.000" expanded="false" height="103" name="Process Documents (2)" origin="GENERATED_TUTORIAL" width="90" x="380" y="187">
+                    <parameter key="create_word_vector" value="true"/>
+                    <parameter key="vector_creation" value="TF-IDF"/>
+                    <parameter key="add_meta_information" value="true"/>
+                    <parameter key="keep_text" value="false"/>
+                    <parameter key="prune_method" value="none"/>
+                    <parameter key="prune_below_percent" value="3.0"/>
+                    <parameter key="prune_above_percent" value="30.0"/>
+                    <parameter key="prune_below_rank" value="0.05"/>
+                    <parameter key="prune_above_rank" value="0.95"/>
+                    <parameter key="datamanagement" value="double_sparse_array"/>
+                    <parameter key="data_management" value="auto"/>
+                    <process expanded="true">
+                      <operator activated="true" class="text:tokenize" compatibility="10.0.000" expanded="true" height="68" name="Tokenize (2)" origin="GENERATED_TUTORIAL" width="90" x="112" y="34">
+                        <parameter key="mode" value="regular expression"/>
+                        <parameter key="characters" value=".:"/>
+                        <parameter key="expression" value="[^a-zA-Z0-9_]"/>
+                        <parameter key="language" value="English"/>
+                        <parameter key="max_token_length" value="3"/>
+                      </operator>
+                      <connect from_port="document" to_op="Tokenize (2)" to_port="document"/>
+                      <connect from_op="Tokenize (2)" from_port="document" to_port="document 1"/>
+                      <portSpacing port="source_document" spacing="0"/>
+                      <portSpacing port="sink_document 1" spacing="0"/>
+                      <portSpacing port="sink_document 2" spacing="0"/>
+                    </process>
+                    <description align="center" color="transparent" colored="false" width="126">extract&lt;br/&gt;tokens&lt;br/&gt;from expression</description>
+                  </operator>
+                  <operator activated="true" class="subprocess" compatibility="10.4.003" expanded="true" height="82" name="Subprocess (14)" width="90" x="514" y="187">
+                    <process expanded="true">
+                      <operator activated="true" class="transpose" compatibility="10.4.003" expanded="true" height="82" name="Transpose (2)" width="90" x="45" y="34"/>
+                      <operator activated="true" class="blending:set_role" compatibility="10.4.003" expanded="true" height="82" name="Set Role (7)" width="90" x="179" y="34">
+                        <list key="set_roles">
+                          <parameter key="id" value="regular"/>
+                        </list>
+                      </operator>
+                      <operator activated="true" class="blending:select_attributes" compatibility="10.4.003" expanded="true" height="82" name="Select Attributes (70)" width="90" x="313" y="34">
+                        <parameter key="type" value="include attributes"/>
+                        <parameter key="attribute_filter_type" value="one attribute"/>
+                        <parameter key="select_attribute" value="id"/>
+                        <parameter key="select_subset" value=""/>
+                        <parameter key="also_apply_to_special_attributes_(id,_label..)" value="false"/>
+                      </operator>
+                      <operator activated="true" class="blending:rename" compatibility="10.4.003" expanded="true" height="82" name="Rename" width="90" x="447" y="34">
+                        <list key="rename attributes">
+                          <parameter key="id" value="tag_name"/>
+                        </list>
+                        <parameter key="from_attribute" value=""/>
+                        <parameter key="to_attribute" value=""/>
+                      </operator>
+                      <connect from_port="in 1" to_op="Transpose (2)" to_port="example set input"/>
+                      <connect from_op="Transpose (2)" from_port="example set output" to_op="Set Role (7)" to_port="example set input"/>
+                      <connect from_op="Set Role (7)" from_port="example set output" to_op="Select Attributes (70)" to_port="example set input"/>
+                      <connect from_op="Select Attributes (70)" from_port="example set output" to_op="Rename" to_port="example set input"/>
+                      <connect from_op="Rename" from_port="example set output" to_port="out 1"/>
+                      <portSpacing port="source_in 1" spacing="0"/>
+                      <portSpacing port="source_in 2" spacing="0"/>
+                      <portSpacing port="sink_out 1" spacing="0"/>
+                      <portSpacing port="sink_out 2" spacing="0"/>
+                    </process>
+                    <description align="center" color="transparent" colored="false" width="126">preprocess tokens in list format</description>
+                  </operator>
+                  <connect from_port="input 1" to_op="Extract Macro (10)" to_port="example set"/>
+                  <connect from_op="Extract Macro (10)" from_port="example set" to_port="output 1"/>
+                  <connect from_op="Create Document (2)" from_port="output" to_op="Process Documents (2)" to_port="documents 1"/>
+                  <connect from_op="Process Documents (2)" from_port="example set" to_op="Subprocess (14)" to_port="in 1"/>
+                  <connect from_op="Subprocess (14)" from_port="out 1" to_port="output 2"/>
+                  <portSpacing port="source_input 1" spacing="0"/>
+                  <portSpacing port="source_input 2" spacing="0"/>
+                  <portSpacing port="sink_output 1" spacing="0"/>
+                  <portSpacing port="sink_output 2" spacing="0"/>
+                  <portSpacing port="sink_output 3" spacing="0"/>
+                </process>
+                <description align="center" color="transparent" colored="false" width="126">extract tags from expresion</description>
+              </operator>
+              <operator activated="true" class="append" compatibility="10.4.003" expanded="true" height="82" name="Append (17)" width="90" x="715" y="34">
+                <parameter key="data_management" value="auto"/>
+                <parameter key="merge_type" value="all"/>
+              </operator>
+              <operator activated="true" class="remove_duplicates" compatibility="10.4.003" expanded="true" height="103" name="Remove Duplicates" width="90" x="849" y="34">
+                <parameter key="attribute_filter_type" value="all"/>
+                <parameter key="attribute" value=""/>
+                <parameter key="attributes" value=""/>
+                <parameter key="use_except_expression" value="false"/>
+                <parameter key="value_type" value="attribute_value"/>
+                <parameter key="use_value_type_exception" value="false"/>
+                <parameter key="except_value_type" value="time"/>
+                <parameter key="block_type" value="attribute_block"/>
+                <parameter key="use_block_type_exception" value="false"/>
+                <parameter key="except_block_type" value="value_matrix_row_start"/>
+                <parameter key="invert_selection" value="false"/>
+                <parameter key="include_special_attributes" value="false"/>
+                <parameter key="treat_missing_values_as_duplicates" value="true"/>
+                <description align="center" color="transparent" colored="false" width="126">all</description>
+              </operator>
+              <operator activated="true" class="multiply" compatibility="10.4.003" expanded="true" height="82" name="model_tag (3)" width="90" x="45" y="238"/>
+              <operator activated="true" class="multiply" compatibility="10.4.003" expanded="true" height="82" name="model_tag (4)" width="90" x="849" y="238"/>
+              <operator activated="true" class="concurrency:join" compatibility="10.4.003" expanded="true" height="82" name="Join" width="90" x="983" y="34">
+                <parameter key="remove_double_attributes" value="true"/>
+                <parameter key="join_type" value="inner"/>
+                <parameter key="use_id_attribute_as_key" value="false"/>
+                <list key="key_attributes">
+                  <parameter key="tag_name" value="tag_name"/>
+                </list>
+                <parameter key="keep_both_join_attributes" value="false"/>
+                <description align="center" color="transparent" colored="false" width="126">inner&lt;br/&gt;tag_name</description>
+              </operator>
+              <operator activated="true" class="blending:select_attributes" compatibility="10.4.003" expanded="true" height="82" name="Select Attributes (76)" width="90" x="1117" y="34">
+                <parameter key="type" value="include attributes"/>
+                <parameter key="attribute_filter_type" value="one attribute"/>
+                <parameter key="select_attribute" value="tag_name"/>
+                <parameter key="select_subset" value=""/>
+                <parameter key="also_apply_to_special_attributes_(id,_label..)" value="false"/>
+              </operator>
+              <operator activated="true" class="blending:set_role" compatibility="10.4.003" expanded="true" height="82" name="Set Role (8)" width="90" x="1251" y="34">
+                <list key="set_roles">
+                  <parameter key="tag_name" value="id"/>
+                </list>
+              </operator>
+              <connect from_port="in 1" to_op="Append" to_port="example set 1"/>
+              <connect from_port="in 2" to_op="Append" to_port="example set 2"/>
+              <connect from_port="in 3" to_op="model_tag (3)" to_port="input"/>
+              <connect from_op="Append" from_port="merged set" to_op="Extract Macro (9)" to_port="example set"/>
+              <connect from_op="Extract Macro (9)" from_port="example set" to_op="Loop (2)" to_port="input 1"/>
+              <connect from_op="Loop (2)" from_port="output 2" to_op="Append (17)" to_port="example set 1"/>
+              <connect from_op="Append (17)" from_port="merged set" to_op="Remove Duplicates" to_port="example set input"/>
+              <connect from_op="Remove Duplicates" from_port="example set output" to_op="Join" to_port="left"/>
+              <connect from_op="model_tag (3)" from_port="output 1" to_op="model_tag (4)" to_port="input"/>
+              <connect from_op="model_tag (4)" from_port="output 1" to_op="Join" to_port="right"/>
+              <connect from_op="Join" from_port="join" to_op="Select Attributes (76)" to_port="example set input"/>
+              <connect from_op="Select Attributes (76)" from_port="example set output" to_op="Set Role (8)" to_port="example set input"/>
+              <connect from_op="Set Role (8)" from_port="example set output" to_port="out 1"/>
+              <portSpacing port="source_in 1" spacing="0"/>
+              <portSpacing port="source_in 2" spacing="0"/>
+              <portSpacing port="source_in 3" spacing="0"/>
+              <portSpacing port="source_in 4" spacing="0"/>
+              <portSpacing port="sink_out 1" spacing="0"/>
+              <portSpacing port="sink_out 2" spacing="0"/>
+            </process>
+            <description align="center" color="transparent" colored="false" width="126">extract the tags from formula expression</description>
+          </operator>
+          <operator activated="true" class="set_minus" compatibility="10.4.003" expanded="true" height="82" name="Set Minus" width="90" x="313" y="136">
+            <description align="center" color="transparent" colored="false" width="126">substract variables</description>
+          </operator>
+          <operator activated="true" class="subprocess" compatibility="10.4.003" expanded="true" height="82" name="parameter" width="90" x="313" y="493">
+            <process expanded="true">
+              <operator activated="true" class="parse_numbers" compatibility="10.4.003" expanded="true" height="82" name="Parse Numbers (4)" width="90" x="179" y="34">
+                <parameter key="attribute_filter_type" value="single"/>
+                <parameter key="attribute" value="flag_parameter"/>
+                <parameter key="attributes" value=""/>
+                <parameter key="use_except_expression" value="false"/>
+                <parameter key="value_type" value="nominal"/>
+                <parameter key="use_value_type_exception" value="false"/>
+                <parameter key="except_value_type" value="file_path"/>
+                <parameter key="block_type" value="single_value"/>
+                <parameter key="use_block_type_exception" value="false"/>
+                <parameter key="except_block_type" value="single_value"/>
+                <parameter key="invert_selection" value="false"/>
+                <parameter key="include_special_attributes" value="false"/>
+                <parameter key="decimal_character" value="."/>
+                <parameter key="grouped_digits" value="false"/>
+                <parameter key="grouping_character" value=","/>
+                <parameter key="infinity_representation" value=""/>
+                <parameter key="unparsable_value_handling" value="replace with missing values"/>
+              </operator>
+              <operator activated="true" class="filter_examples" compatibility="10.4.003" expanded="true" height="103" name="Filter Examples" width="90" x="313" y="34">
+                <parameter key="parameter_expression" value=""/>
+                <parameter key="condition_class" value="custom_filters"/>
+                <parameter key="invert_filter" value="false"/>
+                <list key="filters_list">
+                  <parameter key="filters_entry_key" value="flag_parameter.eq.1"/>
+                </list>
+                <parameter key="filters_logic_and" value="true"/>
+                <parameter key="filters_check_metadata" value="true"/>
+                <description align="center" color="transparent" colored="false" width="126">flag_parameter = 1</description>
+              </operator>
+              <operator activated="true" class="blending:select_attributes" compatibility="10.4.003" expanded="true" height="82" name="Select Attributes (67)" width="90" x="447" y="34">
+                <parameter key="type" value="include attributes"/>
+                <parameter key="attribute_filter_type" value="a subset"/>
+                <parameter key="select_attribute" value="tag_name"/>
+                <parameter key="select_subset" value="␞model_id␞tag_name"/>
+                <parameter key="also_apply_to_special_attributes_(id,_label..)" value="false"/>
+              </operator>
+              <connect from_port="in 1" to_op="Parse Numbers (4)" to_port="example set input"/>
+              <connect from_op="Parse Numbers (4)" from_port="example set output" to_op="Filter Examples" to_port="example set input"/>
+              <connect from_op="Filter Examples" from_port="example set output" to_op="Select Attributes (67)" to_port="example set input"/>
+              <connect from_op="Select Attributes (67)" from_port="example set output" to_port="out 1"/>
+              <portSpacing port="source_in 1" spacing="0"/>
+              <portSpacing port="source_in 2" spacing="0"/>
+              <portSpacing port="sink_out 1" spacing="0"/>
+              <portSpacing port="sink_out 2" spacing="0"/>
+            </process>
+            <description align="center" color="transparent" colored="false" width="126">filter tags which are parameter assigned</description>
+          </operator>
+          <operator activated="true" class="concurrency:join" compatibility="10.4.003" expanded="true" height="82" name="Join (14)" width="90" x="447" y="136">
+            <parameter key="remove_double_attributes" value="true"/>
+            <parameter key="join_type" value="outer"/>
+            <parameter key="use_id_attribute_as_key" value="false"/>
+            <list key="key_attributes">
+              <parameter key="tag_name" value="tag_name"/>
+            </list>
+            <parameter key="keep_both_join_attributes" value="false"/>
+            <description align="center" color="transparent" colored="false" width="126">append with parameters</description>
+          </operator>
+          <operator activated="true" class="subprocess" compatibility="10.4.003" expanded="true" height="82" name="model_status" width="90" x="447" y="595">
+            <process expanded="true">
+              <operator activated="true" class="filter_examples" compatibility="10.4.003" expanded="true" height="103" name="Filter Examples (34)" width="90" x="179" y="34">
+                <parameter key="parameter_expression" value=""/>
+                <parameter key="condition_class" value="custom_filters"/>
+                <parameter key="invert_filter" value="false"/>
+                <list key="filters_list">
+                  <parameter key="filters_entry_key" value="model_status.does_not_equal.off"/>
+                </list>
+                <parameter key="filters_logic_and" value="true"/>
+                <parameter key="filters_check_metadata" value="true"/>
+                <description align="center" color="transparent" colored="false" width="126">model_status&lt;br/&gt;not equal to off</description>
+              </operator>
+              <operator activated="true" class="blending:select_attributes" compatibility="10.4.003" expanded="true" height="82" name="Select Attributes (106)" width="90" x="313" y="34">
+                <parameter key="type" value="include attributes"/>
+                <parameter key="attribute_filter_type" value="a subset"/>
+                <parameter key="select_attribute" value=""/>
+                <parameter key="select_subset" value="Timestamp"/>
+                <parameter key="also_apply_to_special_attributes_(id,_label..)" value="false"/>
+              </operator>
+              <connect from_port="in 1" to_op="Filter Examples (34)" to_port="example set input"/>
+              <connect from_op="Filter Examples (34)" from_port="example set output" to_op="Select Attributes (106)" to_port="example set input"/>
+              <connect from_op="Select Attributes (106)" from_port="example set output" to_port="out 1"/>
+              <portSpacing port="source_in 1" spacing="0"/>
+              <portSpacing port="source_in 2" spacing="0"/>
+              <portSpacing port="sink_out 1" spacing="0"/>
+              <portSpacing port="sink_out 2" spacing="0"/>
+            </process>
+            <description align="center" color="transparent" colored="false" width="126">timestamps where model_Status is not OFF</description>
+          </operator>
+          <operator activated="true" class="cartesian_product" compatibility="10.4.003" expanded="true" height="82" name="Cartesian" width="90" x="581" y="136">
+            <parameter key="remove_double_attributes" value="true"/>
+          </operator>
+          <operator activated="true" class="concurrency:join" compatibility="10.4.003" expanded="true" height="82" name="Join (19)" width="90" x="715" y="34">
+            <parameter key="remove_double_attributes" value="true"/>
+            <parameter key="join_type" value="left"/>
+            <parameter key="use_id_attribute_as_key" value="false"/>
+            <list key="key_attributes">
+              <parameter key="tag_name" value="tag_name"/>
+              <parameter key="Timestamp" value="Timestamp"/>
+            </list>
+            <parameter key="keep_both_join_attributes" value="false"/>
+            <description align="center" color="transparent" colored="false" width="126">LEFT&lt;br/&gt;tag_name&lt;br/&gt;Timestamp</description>
+          </operator>
+          <operator activated="true" class="blending:select_attributes" compatibility="10.4.003" expanded="true" height="82" name="Select Attributes (107)" width="90" x="849" y="34">
+            <parameter key="type" value="include attributes"/>
+            <parameter key="attribute_filter_type" value="a subset"/>
+            <parameter key="select_attribute" value=""/>
+            <parameter key="select_subset" value="tag_name␞value␞Timestamp"/>
+            <parameter key="also_apply_to_special_attributes_(id,_label..)" value="false"/>
+          </operator>
+          <operator activated="true" class="parse_numbers" compatibility="10.4.003" expanded="true" height="82" name="Parse Numbers (18)" width="90" x="983" y="34">
+            <parameter key="attribute_filter_type" value="all"/>
+            <parameter key="attribute" value=""/>
+            <parameter key="attributes" value=""/>
+            <parameter key="use_except_expression" value="false"/>
+            <parameter key="value_type" value="nominal"/>
+            <parameter key="use_value_type_exception" value="false"/>
+            <parameter key="except_value_type" value="file_path"/>
+            <parameter key="block_type" value="single_value"/>
+            <parameter key="use_block_type_exception" value="false"/>
+            <parameter key="except_block_type" value="single_value"/>
+            <parameter key="invert_selection" value="false"/>
+            <parameter key="include_special_attributes" value="false"/>
+            <parameter key="decimal_character" value="."/>
+            <parameter key="grouped_digits" value="false"/>
+            <parameter key="grouping_character" value=","/>
+            <parameter key="infinity_representation" value=""/>
+            <parameter key="unparsable_value_handling" value="skip attribute"/>
+          </operator>
+          <operator activated="true" class="date_to_nominal" compatibility="10.4.003" expanded="true" height="82" name="Date to Nominal" width="90" x="1117" y="34">
+            <parameter key="attribute_name" value="Timestamp"/>
+            <parameter key="date_format" value="yyyy-MM-dd HH:mm:ss"/>
+            <parameter key="time_zone" value="Asia/Riyadh"/>
+            <parameter key="locale" value="English (United States)"/>
+            <parameter key="keep_old_attribute" value="false"/>
+          </operator>
+          <operator activated="true" class="remove_duplicates" compatibility="10.4.003" expanded="true" height="103" name="Remove Duplicates (2)" width="90" x="1251" y="34">
+            <parameter key="attribute_filter_type" value="subset"/>
+            <parameter key="attribute" value=""/>
+            <parameter key="attributes" value="tag_name|Timestamp"/>
+            <parameter key="use_except_expression" value="false"/>
+            <parameter key="value_type" value="attribute_value"/>
+            <parameter key="use_value_type_exception" value="false"/>
+            <parameter key="except_value_type" value="time"/>
+            <parameter key="block_type" value="attribute_block"/>
+            <parameter key="use_block_type_exception" value="false"/>
+            <parameter key="except_block_type" value="value_matrix_row_start"/>
+            <parameter key="invert_selection" value="false"/>
+            <parameter key="include_special_attributes" value="false"/>
+            <parameter key="treat_missing_values_as_duplicates" value="false"/>
+          </operator>
+          <connect from_port="in 1" to_op="actual_Data" to_port="input"/>
+          <connect from_port="in 2" to_op="vairables" to_port="input"/>
+          <connect from_port="in 3" to_op="constrants" to_port="input"/>
+          <connect from_port="in 4" to_op="objective (4)" to_port="input"/>
+          <connect from_port="in 5" to_op="model_tag" to_port="input"/>
+          <connect from_port="in 6" to_op="model_status (3)" to_port="input"/>
+          <connect from_op="actual_Data" from_port="output 1" to_op="Join (19)" to_port="right"/>
+          <connect from_op="vairables" from_port="output 1" to_op="Set Role" to_port="example set input"/>
+          <connect from_op="constrants" from_port="output 1" to_op="extract tags from expr" to_port="in 1"/>
+          <connect from_op="objective (4)" from_port="output 1" to_op="extract tags from expr" to_port="in 2"/>
+          <connect from_op="model_tag" from_port="output 1" to_op="extract tags from expr" to_port="in 3"/>
+          <connect from_op="model_tag" from_port="output 2" to_op="parameter" to_port="in 1"/>
+          <connect from_op="model_status (3)" from_port="output 1" to_op="model_status" to_port="in 1"/>
+          <connect from_op="Set Role" from_port="example set output" to_op="Set Minus" to_port="subtrahend"/>
+          <connect from_op="extract tags from expr" from_port="out 1" to_op="Set Minus" to_port="example set input"/>
+          <connect from_op="Set Minus" from_port="example set output" to_op="Join (14)" to_port="right"/>
+          <connect from_op="parameter" from_port="out 1" to_op="Join (14)" to_port="left"/>
+          <connect from_op="Join (14)" from_port="join" to_op="Cartesian" to_port="left"/>
+          <connect from_op="model_status" from_port="out 1" to_op="Cartesian" to_port="right"/>
+          <connect from_op="Cartesian" from_port="join" to_op="Join (19)" to_port="left"/>
+          <connect from_op="Join (19)" from_port="join" to_op="Select Attributes (107)" to_port="example set input"/>
+          <connect from_op="Select Attributes (107)" from_port="example set output" to_op="Parse Numbers (18)" to_port="example set input"/>
+          <connect from_op="Parse Numbers (18)" from_port="example set output" to_op="Date to Nominal" to_port="example set input"/>
+          <connect from_op="Date to Nominal" from_port="example set output" to_op="Remove Duplicates (2)" to_port="example set input"/>
+          <connect from_op="Remove Duplicates (2)" from_port="example set output" to_port="out 1"/>
+          <portSpacing port="source_in 1" spacing="0"/>
+          <portSpacing port="source_in 2" spacing="0"/>
+          <portSpacing port="source_in 3" spacing="0"/>
+          <portSpacing port="source_in 4" spacing="0"/>
+          <portSpacing port="source_in 5" spacing="0"/>
+          <portSpacing port="source_in 6" spacing="0"/>
+          <portSpacing port="source_in 7" spacing="0"/>
+          <portSpacing port="sink_out 1" spacing="0"/>
+          <portSpacing port="sink_out 2" spacing="0"/>
+        </process>
+        <description align="center" color="transparent" colored="false" width="126">extract parameters and adding new parameters</description>
+      </operator>
+      <connect from_port="input 1" to_op="Main" to_port="in 1"/>
+      <connect from_port="input 2" to_op="Main" to_port="in 2"/>
+      <connect from_port="input 3" to_op="Main" to_port="in 3"/>
+      <connect from_port="input 4" to_op="Main" to_port="in 4"/>
+      <connect from_port="input 5" to_op="Main" to_port="in 5"/>
+      <connect from_port="input 6" to_op="Main" to_port="in 6"/>
+      <connect from_op="Main" from_port="out 1" to_port="result 1"/>
+      <portSpacing port="source_input 1" spacing="0"/>
+      <portSpacing port="source_input 2" spacing="0"/>
+      <portSpacing port="source_input 3" spacing="0"/>
+      <portSpacing port="source_input 4" spacing="0"/>
+      <portSpacing port="source_input 5" spacing="0"/>
+      <portSpacing port="source_input 6" spacing="0"/>
+      <portSpacing port="source_input 7" spacing="0"/>
+      <portSpacing port="sink_result 1" spacing="0"/>
+      <portSpacing port="sink_result 2" spacing="0"/>
+      <description align="center" color="red" colored="true" height="611" resized="true" width="356" x="34" y="38">Prepare Optimizer Parameters&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;Author:&lt;br&gt;Author:&lt;br&gt;Akshay Hasabe&lt;br&gt;Naveen Kumar&lt;br&gt;Karthik Sanagapalli&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;Overview:&lt;br&gt;This block filters tags from the model_tag table with flag_parameter set to 1, identifying them as parameters. It then extracts all tags from constraint equations and removes those already marked as variables. The remaining tags are added to the parameter list to ensure a complete and accurate configuration for the Gekko optimizer.&lt;br&gt;&lt;br&gt;Inputs:&lt;br&gt;1: actual data&lt;br&gt;2:variables&lt;br&gt;3: consraints&lt;br&gt;4:objectives&lt;br&gt;5:model_tag&lt;br&gt;6:model status&lt;br/&gt;&lt;br/&gt;Output:&lt;br/&gt;1. Parameters&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;</description>
+      <description align="center" color="blue" colored="true" height="610" resized="true" width="319" x="396" y="38">Main</description>
+      <description align="center" color="transparent" colored="true" height="105" resized="false" width="180" x="486" y="380">O/P: Parameters</description>
+    </process>
+  </operator>
+</process>

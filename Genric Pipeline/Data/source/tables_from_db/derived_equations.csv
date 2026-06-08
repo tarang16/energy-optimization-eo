@@ -1,0 +1,215 @@
+﻿derived_equation_id,model_tag_id,formula_expression,active
+70,214,((2175.54628147543-1.32764297764643*(45.5)+2.71544961166282*(402))*0.239)+764*0,0
+71,186,(1-[FDF_A_Motor_Status])*[BLR_1_Status]*(([FD_Fan_BLR_1_Steam_raw]/1000)-([FD_Fan_BLR_1_Steam_reg]-((0.4255*[BLR_1_HPS_Gen]**2 - 32.667*[BLR_1_HPS_Gen] + 4378.1)/1000)))+(1-[BLR_1_Status])*(1-[FDF_A_Motor_Status])*[FD_Fan_BLR_1_Steam_warmup],1
+72,178,[Fuel_BLR_1] * [LHV] / [Spec_En_Cons_BLR_1]*[BLR_1_Status] + (1-[BLR_1_Status])*[BLR_1_HPS_Gen_warmup],1
+73,187,(1-[FDF_B_Motor_Status])*[BLR_2_Status]*(([FD_Fan_BLR_2_Steam_raw]/1000)-([FD_Fan_BLR_2_Steam_reg]-((0.4601*[BLR_2_HPS_Gen]**2 - 39.276*[BLR_2_HPS_Gen] + 4711.7)/1000)))+(1-[BLR_2_Status])*(1-[FDF_B_Motor_Status])*[FD_Fan_BLR_2_Steam_warmup],1
+74,179,[Fuel_BLR_2] * [LHV] / [Spec_En_Cons_BLR_2]*[BLR_2_Status]+ (1-[BLR_2_Status])*[BLR_2_HPS_Gen_warmup],1
+75,188,[BLR_3_Status]*(([FD_Fan_BLR_3_Steam_raw]/1000)-([FD_Fan_BLR_3_Steam_reg]-((0.4481*[BLR_3_HPS_Gen]**2 - 35.004*[BLR_3_HPS_Gen] + 4701.3)/1000))) + (1-[BLR_3_Status])*[FD_Fan_BLR_3_Steam_warmup],1
+76,180,[Fuel_BLR_3] * [LHV] / [Spec_En_Cons_BLR_3]*[BLR_3_Status]+ (1-[BLR_3_Status])*[BLR_3_HPS_Gen_warmup],1
+77,189,[BLR_4_Status]*(([FD_Fan_BLR_4_Steam_raw]/1000)-([FD_Fan_BLR_4_Steam_reg]-((0.4828*[BLR_4_HPS_Gen]**2 - 46.088*[BLR_4_HPS_Gen] + 5015.5)/1000)))+ (1-[BLR_4_Status])*[FD_Fan_BLR_4_Steam_warmup],1
+78,181,[Fuel_BLR_4] * [LHV] / [Spec_En_Cons_BLR_4]*[BLR_4_Status]+ (1-[BLR_4_Status])*[BLR_4_HPS_Gen_warmup],1
+79,190,[BLR_5_Status]*(([FD_Fan_BLR_5_Steam_raw]/1000)-([FD_Fan_BLR_5_Steam_reg]-((0.0843*[BLR_5_HPS_Gen]**2 + 9.2624*[BLR_5_HPS_Gen] + 4772.4)/1000)))+ (1-[BLR_5_Status])*[FD_Fan_BLR_5_Steam_warmup],1
+80,182,[Fuel_BLR_5] * [LHV] / [Spec_En_Cons_BLR_5]*[BLR_5_Status] + (1-[BLR_5_Status])*[BLR_5_HPS_Gen_warmup],1
+81,257,[BFW_A_Motor_Status]*([BFW_A_Motor_Power_cons]-[BFW_A_Motor_Power_Imbalance]),1
+82,183,[BFW_B_Turb_Status]*([BFW_B_Turb_Steam_cons]-[BFW_B_Turb_Steam_Imbalance]) + (1-[BFW_B_Turb_Status])*[BFW_B_Turb_Steam_warmup],1
+83,184,[BFW_C_Turb_Status]*([BFW_C_Turb_Steam_cons]-[BFW_C_Turb_Steam_Imbalance]) + (1-[BFW_C_Turb_Status])*[BFW_C_Turb_Steam_warmup],1
+84,258,[BFW_D_Motor_Status]*([BFW_D_Motor_Power_cons]-[BFW_D_Motor_Power_Imbalance]),1
+85,185,[BFW_E_Turb_Status]*([BFW_E_Turb_Steam_cons]-[BFW_E_Turb_Steam_Imbalance]) + (1-[BFW_E_Turb_Status])*[BFW_E_Turb_Steam_warmup],1
+86,259,[BFW_F_Motor_Status]*([BFW_F_Motor_Power_cons]-[BFW_F_Motor_Power_Imbalance]),1
+87,191,[VHP_BFW_B_Turb_Status]*([VHP_BFW_B_Turb_Steam_cons]) + (1-[VHP_BFW_B_Turb_Status])*[VHP_BFW_B_Turb_Steam_warmup],1
+88,192,[VHP_BFW_C_Turb_Status]*([VHP_BFW_C_Turb_Steam_cons]) + (1-[VHP_BFW_C_Turb_Status])*[VHP_BFW_C_Turb_Steam_warmup],1
+89,260,[VHP_BFW_A_Motor_Status]*([VHP_BFW_A_Motor_Power_cons]),1
+91,44,[CW_Turbine_B_Status]*([CW_Turbine_B_Steam_Imbalance]+38*0.90) +(1-[CW_Turbine_B_Status])*[CW_Turbine_B_Steam_warmup],1
+92,261,[CW_Motor_C_Status]*([CW_Motor_C_Power_Imbalance]+2.55*0.90),1
+93,262,[CW_Motor_D_Status]*([CW_Motor_D_Power_Imbalance]+2.55*0.90),1
+94,263,[CW_Motor_E_Status]*([CW_Motor_E_Power_Imbalance]+2.55*0.90),1
+95,264,[CW_Motor_F_Status]*([CW_Motor_F_Power_Imbalance]+2.55*0.90),1
+96,45,[CW_Turbine_G_Status]*([CW_Turbine_G_Steam_Imbalance]+38*0.90) +(1-[CW_Turbine_G_Status])*[CW_Turbine_G_Steam_warmup],1
+97,193,[Air_Compressor_Turbine_A_Status]*([act_Air_Compressor_Turbine_A_Status]*[Air_Compressor_Turbine_A_Steam_param]*(1-[Air_Compressor_Turbine_A_Steam_Imbalance])+(1-[act_Air_Compressor_Turbine_A_Status])*((14.691*([Air_compressor_A_Discharge_flow])*89.55 + 5079)/0.9/1000)) + (1-[Air_Compressor_Turbine_A_Status])*[Air_Compressor_Turbine_A_Steam_warmup],1
+98,194,[Air_Compressor_Turbine_D_Status]*([act_Air_Compressor_Turbine_D_Status]*[Air_Compressor_Turbine_D_Steam_param]*(1-[Air_Compressor_Turbine_D_Steam_Imbalance])+(1-[act_Air_Compressor_Turbine_D_Status])*((13.34*([Air_compressor_D_Discharge_flow])*92.96 + 4614.5)/0.9/1000)) +(1-[Air_Compressor_Turbine_D_Status])*[Air_Compressor_Turbine_D_Steam_warmup],1
+99,266,[Air_Compressor_Motor_C_Status]*([act_Air_Compressor_Motor_C_Status]*[Air_Compressor_Motor_C_Power_param]*(1-[Air_Compressor_Motor_C_Power_Imbalance])+(1-[act_Air_Compressor_Motor_C_Status])*((0.0896*([Air_compressor_C_Discharge_flow]))/0.9)),1
+100,265,[Air_Compressor_Motor_B_Status]*([act_Air_Compressor_Motor_B_Status]*[Air_Compressor_Motor_B_Power_param]*(1-[Air_Compressor_Motor_B_Power_Imbalance])+(1-[act_Air_Compressor_Motor_B_Status])*((0.0930*([Air_compressor_B_Discharge_flow]))/0.9)),1
+101,195,[DMW_Turbine_A_Status]*([DMW_Turbine_A_Steam_cons]-[DMW_Turbine_A_Steam_Imbalance])+(1-[DMW_Turbine_A_Status])*[DMW_Turbine_A_Steam_warmup],1
+102,267,[DMW_Pump_Motor_B_Status]*([DMW_Motor_B_Power_cons]-[DMW_Pump_Motor_B_Power_Imbalance]),1
+103,196,[DMW_Turbine_C_Status]*([DMW_Turbine_C_Steam_cons]-[DMW_Turbine_C_Steam_Imbalance])+(1-[DMW_Turbine_C_Status])*[DMW_Turbine_C_Steam_warmup],1
+104,229,[BLR_1_HPS_Gen]+[BLR_2_HPS_Gen]+[BLR_3_HPS_Gen]+[BLR_4_HPS_Gen]+[BLR_5_HPS_Gen],1
+105,319,2.059*([HP_Steam_Vent_valve_PV0012_Opening_UO]),0
+106,318,0.724*[LP_Steam_Dumping_Valve_PC0024A_Opening_UO],0
+107,274,([Deaerator_A_LPS]*0.02),0
+108,275,([Deaerator_B_LPS]*0.02),0
+109,63,[BLR_1_Status]+[BLR_2_Status]+[BLR_3_Status]+[BLR_4_Status]+[BLR_5_Status],1
+110,227,[Fuel_BLR_1]+[Fuel_BLR_2]+[Fuel_BLR_3]+[Fuel_BLR_4]+[Fuel_BLR_5],1
+111,269,[BFW_D_Motor_Power]+[BFW_F_Motor_Power]+[BFW_A_Motor_Power]+[VHP_BFW_A_Motor_Power]+[CW_Motor_C_Power]+[CW_Motor_D_Power]+[CW_Motor_E_Power]+[CW_Motor_F_Power]+[Air_Compressor_Motor_C_Power]+[Air_Compressor_Motor_B_Power]+[DMW_Motor_B_Power]+[FDF_A_Motor_Power]+[FDF_B_Motor_Power],1
+112,286,((-0.0078*([HP_to_MP_Letdown_Valve_Opening_PV0007A_UO])**2+2.86*([HP_to_MP_Letdown_Valve_Opening_PV0007A_UO]))),0
+113,287,((-0.0078*([HP_to_MP_Letdown_Valve_Opening_PV0007B_UO])**2+2.86*([HP_to_MP_Letdown_Valve_Opening_PV0007B_UO]))),0
+114,292,(0.0039*([MP_to_LP_Letdown_Valve_Opening_PV013A_UO])**2+0.047*([MP_to_LP_Letdown_Valve_Opening_PV013A_UO])),0
+115,293,(0.0039*([MP_to_LP_Letdown_Valve_Opening_PV013B_UO])**2+0.047*([MP_to_LP_Letdown_Valve_Opening_PV013B_UO])),0
+116,294,0.677*([MP_to_LP_Letdown_Valve_Opening_PV31_UO]),0
+117,295,0.677*([MP_to_LP_Letdown_Valve_Opening_PV32_UO]),0
+118,320,1.208*[LP_Steam_Vent_valve_PV0024B_Opening_UO],0
+119,281,[Total_Boilers_Running] +[BFW_Turbines_Running] +[VHP_BFW_B_Turb_Status] +[VHP_BFW_C_Turb_Status] +[CW_Turbine_A_Status] +[CW_Turbine_B_Status] +[CW_Turbine_G_Status] +[Air_Compressor_Turbine_A_Status] +[Air_Compressor_Turbine_D_Status] +[DMW_Turbine_A_Status] +[DMW_Turbine_C_Status]-[FDF_A_Motor_Status]-[FDF_B_Motor_Status],0
+120,358,[BFW_Drives_Running]+[VHP_BFW_Drives_Running]+[CW_Drives_Running]+[Air_Compressor_Drives_Running]+[DMW_Drives_Running]+[Total_Boilers_Running],0
+121,359,[Total_Drives_Running] -[Total_Steam_Turbines_Running],0
+122,276,[BFW_A_Motor_Status]+ [BFW_B_Turb_Status] + [BFW_C_Turb_Status] + [BFW_D_Motor_Status] + [BFW_E_Turb_Status] + [BFW_F_Motor_Status],1
+123,277,[VHP_BFW_B_Turb_Status]+[VHP_BFW_C_Turb_Status]+[VHP_BFW_A_Motor_Status],1
+124,278,[CW_Turbine_A_Status]+[CW_Turbine_B_Status]+[CW_Motor_C_Status]+[CW_Motor_D_Status]+[CW_Motor_E_Status]+[CW_Motor_F_Status]+[CW_Turbine_G_Status],1
+125,279,[Air_Compressor_Turbine_A_Status]+[Air_Compressor_Turbine_D_Status]+[Air_Compressor_Motor_C_Status]+[Air_Compressor_Motor_B_Status],1
+126,280,[DMW_Turbine_A_Status]+[DMW_Pump_Motor_B_Status]+[DMW_Turbine_C_Status],1
+128,328,[HP_to_MP_Letdown_MPS_Flow_Out_PV0007A_UO]+[HP_to_MP_Letdown_MPS_Flow_Out_PV0007B_UO],1
+131,331,([MP_to_LP_Letdown_LPS_Flow_Out_PV013A_UO]+[MP_to_LP_Letdown_LPS_Flow_Out_PV013B_UO]+[MP_to_LP_Letdown_LPS_Flow_Out_PV31_UO]+[MP_to_LP_Letdown_LPS_Flow_Out_PV32_UO])+[LPS_from_Drives]+([Total_BLR_HPS_Generation]*0.01*0.21),1
+132,351,[BFW_Imbalance]+[Total_BFW_Consumption],0
+133,356,[Total_BFW_Consumption] -([VHP_BFW_FROM_U_O]+[VHP_DESPHTR_BFW_FROM_U_O]+([Deaerator_LPS]*0.02)),1
+134,326,[ETH_HPS_Demand] +[EOEG_1_HPS_Demand]+[EOEG_2_HPS_Demand]+[EOEG_3_HPS_Demand]+ [BFW_E_Turb_Steam] + [BFW_B_Turb_Steam] + [BFW_C_Turb_Steam] + [VHP_BFW_B_Turb_Steam] + [VHP_BFW_C_Turb_Steam] + [CW_Turbine_A_Steam] + [CW_Turbine_B_Steam] + [CW_Turbine_G_Steam] + [Air_Compressor_Turbine_A_Steam] + [Air_Compressor_Turbine_D_Steam] + [FD_Fan_BLR_1_Steam] + [FD_Fan_BLR_2_Steam] + [FD_Fan_BLR_3_Steam] + [FD_Fan_BLR_4_Steam] + [FD_Fan_BLR_5_Steam] + [MP_Steam_Generation]*0.91+ [HP_Steam_Vent_valve_PV0012_Steam_flow_out_UO],1
+135,332,[ETH_LPS_Demand]+[EOEG_1_LPS_Demand]+[EOEG_2_LPS_Demand]+[EOEG_3_LPS_Demand]+[Deaerator_LPS]+[LP_Steam_Vent_valve_PV0024B_Steam_flow_out_UO]+[LP_Steam_Dumping_Valve_PC0024A_Steam_flow_out_UO] +[LAO_LP_Steam_Demand],1
+136,285,[BFW_E_Turb_Steam]+[BFW_B_Turb_Steam]+ [BFW_C_Turb_Steam]+ [VHP_BFW_B_Turb_Steam]+ [VHP_BFW_C_Turb_Steam]+ [CW_Turbine_A_Steam]+ [CW_Turbine_B_Steam]+ [CW_Turbine_G_Steam]+ [Air_Compressor_Turbine_A_Steam]+ [Air_Compressor_Turbine_D_Steam]+ [DMW_Turbine_A_Steam]+ [DMW_Turbine_C_Steam]+ [FD_Fan_BLR_1_Steam]+[FD_Fan_BLR_2_Steam]+ [FD_Fan_BLR_3_Steam]+ [FD_Fan_BLR_4_Steam]+ [FD_Fan_BLR_5_Steam],1
+137,329,[EOEG_1_MPS_Demand]+[EOEG_2_MPS_Demand]+[EOEG_3_MPS_Demand]+[DMW_Turbine_A_Steam]+ [DMW_Turbine_C_Steam]+ [MP_to_LP_Letdown_MPS_Flow_In_PV013A_UO]+ [MP_to_LP_Letdown_MPS_Flow_In_PV013B_UO]+ [MP_to_LP_Letdown_MPS_Flow_In_PV31_UO]+ [MP_to_LP_Letdown_MPS_Flow_In_PV32_UO],1
+138,296,[MP_to_LP_Letdown_MPS_Flow_In_PV013A_UO]+[BFW_to_MP_to_LP_Letdown_Flow_In],1
+139,297,[MP_to_LP_Letdown_MPS_Flow_In_PV013B_UO]+[BFW_to_MP_to_LP_Letdown_Flow_In],1
+140,298,[MP_to_LP_Letdown_MPS_Flow_In_PV31_UO]+[BFW_to_MP_to_LP_Letdown_Flow_In],1
+141,299,[MP_to_LP_Letdown_MPS_Flow_In_PV32_UO]+[BFW_to_MP_to_LP_Letdown_Flow_In],1
+142,417,[NATURAL_GAS_Import_CTM],0
+143,420,[Total_Fuel_Supply]  - [Total_Fuel_Consumption_without_Boilers] - [Total_Fuel_for_Boilers],0
+144,404,[Total_Power_Consumption_without_Drives] + [Total_Power_for_Drives],0
+145,419,[Total_Fuel_Consumption_without_Boilers] + [Total_Fuel_for_Boilers],0
+146,352,[VHP_BFW_FROM_U_O]+[VHP_DESPHTR_BFW_FROM_U_O]+[BFW_to_EOEG_1] + [BFW_to_EOEG_2] +[BFW_to_EOEG_3] + [BFW_TO_LAO] + [DSP_BFW_TO_ETH] +[DSP_BFW_TO_EG1] +[DSP_BFW_TO_EG2] +[DSP_BFW_TO_EG3] +[DSP_BFW_TO_CAUSTIC_DILUTION] + ([Total_BLR_HPS_Generation]/.99)+([Deaerator_LPS]*0.02),1
+147,202,[LP_Steam_Dumping_Valve_PC0024A_Steam_flow_out_UO]+[Boiler_CBD]+[Condensate_from_Traps],1
+150,43,[CW_Turbine_A_Status]*([CW_Turbine_A_Steam_Imbalance]+38*0.90) +(1-[CW_Turbine_A_Status])*[CW_Turbine_A_Steam_warmup],1
+152,4,test formula,0
+156,1,Test,0
+165,1468,((2175.54628147543-1.32764297764643*(45.5)+2.71544961166282*(402))*0.239)+764*0,1
+166,1440,[BLR_1_Status]*(0.0005*([BLR_1_HPS_Gen])**2-0.0559*([BLR_1_HPS_Gen])+5.5697),1
+167,1432,[Fuel_BLR_1] * [LHV] / [Spec_En_Cons_BLR_1]*[BLR_1_Status],1
+168,1441,[BLR_2_Status]*(0.0005*([BLR_2_HPS_Gen])**2-0.0559*([BLR_2_HPS_Gen])+5.5697),1
+169,1433,[Fuel_BLR_2] * [LHV] / [Spec_En_Cons_BLR_2]*[BLR_2_Status],1
+170,1442,[BLR_3_Status]*(0.0005*([BLR_3_HPS_Gen])**2-0.0559*([BLR_3_HPS_Gen])+5.5697),1
+171,1434,[Fuel_BLR_3] * [LHV] / [Spec_En_Cons_BLR_3]*[BLR_3_Status],1
+172,1443,[BLR_4_Status]*(0.0005*([BLR_4_HPS_Gen])**2-0.0559*([BLR_4_HPS_Gen])+5.5697),1
+173,1435,[Fuel_BLR_4] * [LHV] / [Spec_En_Cons_BLR_4]*[BLR_4_Status],1
+174,1444,[BLR_5_Status]*(0.0005*([BLR_5_HPS_Gen])**2-0.0559*([BLR_5_HPS_Gen])+5.5697),1
+175,1436,[Fuel_BLR_5] * [LHV] / [Spec_En_Cons_BLR_5]*[BLR_5_Status],1
+176,1511,[BFW_A_Motor_Status]*((0.2639*([BFW_Flow_Consumption]/[BFW_Drives_Running])+ 754.56))/1000,1
+177,1437,[BFW_B_Turb_Status]*((16.801*([BFW_Flow_Consumption]/[BFW_Drives_Running]) + 12184))/1000,1
+178,1438,[BFW_C_Turb_Status]*((16.801*([BFW_Flow_Consumption]/[BFW_Drives_Running])+ 12184))/1000,1
+179,1512,[BFW_D_Motor_Status]*((0.7238*([BFW_Flow_Consumption]/[BFW_Drives_Running]) + 650.69))/1000,1
+180,1439,[BFW_E_Turb_Status]*((16.801*([BFW_Flow_Consumption]/[BFW_Drives_Running])+ 12184))/1000,1
+181,1513,[BFW_F_Motor_Status]*((0.7238*([BFW_Flow_Consumption]/[BFW_Drives_Running]) + 650.69))/1000,1
+182,1445,[VHP_BFW_B_Turb_Status]*((46.438*([VHP_Flow_Demand]/[VHP_BFW_Drives_Running]) + 17543))/1000,1
+183,1446,[VHP_BFW_C_Turb_Status]*((46.438*([VHP_Flow_Demand]/[VHP_BFW_Drives_Running]) + 17543))/1000,1
+184,1514,[VHP_BFW_A_Motor_Status]*((2.8434*([VHP_Flow_Demand]/[VHP_BFW_Drives_Running]) + 859.32))/1000,1
+185,1275,[CW_Turbine_A_Status]*38*0.95,1
+186,1276,[CW_Turbine_B_Status]*38*0.95,1
+187,1515,[CW_Motor_C_Status]*2.55*0.95,1
+188,1516,[CW_Motor_D_Status]*2.55*0.95,1
+189,1517,[CW_Motor_E_Status]*2.55*0.95,1
+190,1518,[CW_Motor_F_Status]*2.55*0.95,1
+191,1277,[CW_Turbine_G_Status]*38*0.95,1
+192,1447,[Air_Compressor_Turbine_A_Status]*((1052.9*([Total_Air_Demand]/[Air_Compressor_Drives_Running]) + 11393))/1000,1
+193,1448,[Air_Compressor_Turbine_D_Status]*((1018*([Total_Air_Demand]/[Air_Compressor_Drives_Running]) + 11345))/1000,1
+194,1520,[Air_Compressor_Motor_C_Status]*((51.834*([Total_Air_Demand]/[Air_Compressor_Drives_Running]) + 589.24))/1000,1
+195,1519,[Air_Compressor_Motor_B_Status]*((49.843*([Total_Air_Demand]/[Air_Compressor_Drives_Running]) +664.52))/1000,1
+196,1449,[DMW_Turbine_A_Status]*6,1
+197,1521,[DMW_Pump_Motor_B_Status]*0.112,1
+198,1450,[DMW_Turbine_C_Status]*6,1
+199,1567,2.059*([HP_Steam_Vent_valve_PV0012_Opening_UO]),1
+200,1566,0.724*[LP_Steam_Dumping_Valve_PC0024A_Opening_UO],1
+201,1525,([Deaerator_A_LPS]*0.02),1
+202,1526,([Deaerator_B_LPS]*0.02),1
+203,1295,[BLR_1_Status]+[BLR_2_Status]+[BLR_3_Status]+[BLR_4_Status]+[BLR_5_Status],1
+204,1481,[Fuel_BLR_1]+[Fuel_BLR_2]+[Fuel_BLR_3]+[Fuel_BLR_4]+[Fuel_BLR_5],1
+205,1523,[BFW_D_Motor_Power]+[BFW_F_Motor_Power]+[BFW_A_Motor_Power]+[VHP_BFW_A_Motor_Power]+[CW_Motor_C_Power]+[CW_Motor_D_Power]+[CW_Motor_E_Power]+[CW_Motor_F_Power]+[Air_Compressor_Motor_C_Power]+[Air_Compressor_Motor_B_Power]+[DMW_Motor_B_Power],1
+206,1534,((-0.0078*([HP_to_MP_Letdown_Valve_Opening_PV0007A_UO])**2+2.86*([HP_to_MP_Letdown_Valve_Opening_PV0007A_UO]))),1
+207,1535,((-0.0078*([HP_to_MP_Letdown_Valve_Opening_PV0007B_UO])**2+2.86*([HP_to_MP_Letdown_Valve_Opening_PV0007B_UO]))),1
+208,1540,(0.0039*([MP_to_LP_Letdown_Valve_Opening_PV013A_UO])**2+0.047*([MP_to_LP_Letdown_Valve_Opening_PV013A_UO])),1
+209,1541,(0.0039*([MP_to_LP_Letdown_Valve_Opening_PV013B_UO])**2+0.047*([MP_to_LP_Letdown_Valve_Opening_PV013B_UO])),1
+210,1542,0.677*([MP_to_LP_Letdown_Valve_Opening_PV31_UO]),1
+211,1543,0.677*([MP_to_LP_Letdown_Valve_Opening_PV32_UO]),1
+212,1568,1.208*[LP_Steam_Vent_valve_PV0024B_Opening_UO],1
+213,1532,[BLR_1_Status]+[BLR_2_Status] +[BLR_3_Status] +[BLR_4_Status] +[BLR_5_Status] +[BFW_E_Turb_Status] +[BFW_B_Turb_Status] +[BFW_C_Turb_Status] +[VHP_BFW_B_Turb_Status] +[VHP_BFW_C_Turb_Status] +[CW_Turbine_A_Status] +[CW_Turbine_B_Status] +[CW_Turbine_G_Status] +[Air_Compressor_Turbine_A_Status] +[Air_Compressor_Turbine_D_Status] +[DMW_Turbine_A_Status] +[DMW_Turbine_C_Status],1
+214,1605,[BFW_Drives_Running]+[VHP_BFW_Drives_Running]+[CW_Drives_Running]+[Air_Compressor_Drives_Running]+[DMW_Drives_Running]+[BLR_1_Status]+[BLR_2_Status]+[BLR_3_Status]+[BLR_4_Status]+[BLR_5_Status],1
+215,1606,[Total_Drives_Running] -[Total_Steam_Turbines_Running],1
+216,1527,[BFW_A_Motor_Status]+ [BFW_B_Turb_Status] + [BFW_C_Turb_Status] + [BFW_D_Motor_Status] + [BFW_E_Turb_Status] + [BFW_F_Motor_Status],1
+217,1528,[VHP_BFW_B_Turb_Status]+[VHP_BFW_C_Turb_Status]+[VHP_BFW_A_Motor_Status],1
+218,1529,[CW_Turbine_A_Status]+[CW_Turbine_B_Status]+[CW_Motor_C_Status]+[CW_Motor_D_Status]+[CW_Motor_E_Status]+[CW_Motor_F_Status]+[CW_Turbine_G_Status],1
+219,1530,[Air_Compressor_Turbine_A_Status]+[Air_Compressor_Turbine_D_Status]+[Air_Compressor_Motor_C_Status]+[Air_Compressor_Motor_B_Status],1
+220,1531,[DMW_Turbine_A_Status]+[DMW_Pump_Motor_B_Status]+[DMW_Turbine_C_Status],1
+221,1603,[Total_BFW_Consumption]-[VHP_DESPHTR_BFW_FROM_U_O] - [VHP_BFW_FROM_U_O],1
+222,1533,[BFW_E_Turb_Steam]+[BFW_B_Turb_Steam]+ [BFW_C_Turb_Steam]+ [VHP_BFW_B_Turb_Steam]+ [VHP_BFW_C_Turb_Steam]+ [CW_Turbine_A_Steam]+ [CW_Turbine_B_Steam]+ [CW_Turbine_G_Steam]+ [Air_Compressor_Turbine_A_Steam]+ [Air_Compressor_Turbine_D_Steam]+ [DMW_Turbine_A_Steam]+ [DMW_Turbine_C_Steam]+ [FD_Fan_BLR_1_Steam]+[FD_Fan_BLR_2_Steam]+ [FD_Fan_BLR_3_Steam]+ [FD_Fan_BLR_4_Steam]+ [FD_Fan_BLR_5_Steam],1
+223,1544,[MP_to_LP_Letdown_MPS_Flow_In_PV013A_UO]+[BFW_to_MP_to_LP_Letdown_Flow_In],1
+224,1545,[MP_to_LP_Letdown_MPS_Flow_In_PV013B_UO]+[BFW_to_MP_to_LP_Letdown_Flow_In],1
+225,1546,[MP_to_LP_Letdown_MPS_Flow_In_PV31_UO]+[BFW_to_MP_to_LP_Letdown_Flow_In],1
+226,1547,[MP_to_LP_Letdown_MPS_Flow_In_PV32_UO]+[BFW_to_MP_to_LP_Letdown_Flow_In],1
+227,1635,[NATURAL_GAS_Import_CTM],1
+228,1638,[Total_Fuel_Supply]  - [Total_Fuel_Consumption_without_Boilers] - [Total_Fuel_for_Boilers],1
+229,1622,[Total_Power_Consumption_without_Drives] + [Total_Power_for_Drives],1
+230,1637,[Total_Fuel_Consumption_without_Boilers] + [Total_Fuel_for_Boilers],1
+231,1483,[BLR_1_HPS_Gen]+[BLR_2_HPS_Gen]+[BLR_3_HPS_Gen]+[BLR_4_HPS_Gen]+[BLR_5_HPS_Gen],1
+232,1573,[ETH_HPS_Demand] +[EOEG_1_HPS_Demand]+[EOEG_2_HPS_Demand]+[EOEG_3_HPS_Demand]+ [BFW_E_Turb_Steam] + [BFW_B_Turb_Steam] + [BFW_C_Turb_Steam] + [VHP_BFW_B_Turb_Steam] + [VHP_BFW_C_Turb_Steam] + [CW_Turbine_A_Steam] + [CW_Turbine_B_Steam] + [CW_Turbine_G_Steam] + [Air_Compressor_Turbine_A_Steam] + [Air_Compressor_Turbine_D_Steam] + [FD_Fan_BLR_1_Steam] + [FD_Fan_BLR_2_Steam] + [FD_Fan_BLR_3_Steam] + [FD_Fan_BLR_4_Steam] + [FD_Fan_BLR_5_Steam] + [HP_to_MP_Letdown_HPS_Flow_In_PV0007A_UO] +[HP_to_MP_Letdown_HPS_Flow_In_PV0007B_UO] + [HP_Steam_Vent_valve_PV0012_Steam_flow_out_UO],1
+233,1575,[HP_to_MP_Letdown_MPS_Flow_Out_PV0007A_UO]+[HP_to_MP_Letdown_MPS_Flow_Out_PV0007B_UO],1
+234,1576,[EOEG_1_MPS_Demand]+[EOEG_2_MPS_Demand]+[EOEG_3_MPS_Demand]+[DMW_Turbine_A_Steam]+ [DMW_Turbine_C_Steam]+ [MP_to_LP_Letdown_MPS_Flow_In_PV013A_UO]+ [MP_to_LP_Letdown_MPS_Flow_In_PV013B_UO]+ [MP_to_LP_Letdown_MPS_Flow_In_PV31_UO]+ [MP_to_LP_Letdown_MPS_Flow_In_PV32_UO],1
+235,1578,([MP_to_LP_Letdown_LPS_Flow_Out_PV013A_UO]+[MP_to_LP_Letdown_LPS_Flow_Out_PV013B_UO]+[MP_to_LP_Letdown_LPS_Flow_Out_PV31_UO]+[MP_to_LP_Letdown_LPS_Flow_Out_PV32_UO])+[LPS_from_Drives],1
+236,1579,[ETH_LPS_Demand]+[EOEG_1_LPS_Demand]+[EOEG_2_LPS_Demand]+[EOEG_3_LPS_Demand]+[Deaerator_A_LPS]+[Deaerator_B_LPS]+[LP_Steam_Vent_valve_PV0024B_Steam_flow_out_UO]+[LP_Steam_Dumping_Valve_PC0024A_Steam_flow_out_UO],1
+237,1599,[VHP_BFW_FROM_U_O]+[VHP_DESPHTR_BFW_FROM_U_O]+[BFW_to_EOEG_1] + [BFW_to_EOEG_2] +[BFW_to_EOEG_3] + [BFW_TO_LAO] + [DSP_BFW_TO_ETH] +[DSP_BFW_TO_EG1] +[DSP_BFW_TO_EG2] +[DSP_BFW_TO_EG3] +[DSP_BFW_TO_CAUSTIC_DILUTION] + [Total_BLR_HPS_Generation]/.99,1
+238,1456,[LP_Steam_Dumping_Valve_PC0024A_Steam_flow_out_UO]+[Boiler_CBD]+[Condensate_from_Traps],1
+239,1467,2+2,0
+240,1589,2+6,0
+241,1472,1+1+2,0
+243,355,(1-[Whatif_running])*[BFW_Imbalance] + [Whatif_running]*([act_BFW_Imbalance]*[Total_BFW_Consumption]/[act_Total_BFW_Consumption]),1
+244,782,[DMW_Imbalance] + [DMW_Makeup],1
+245,1136,[BFW_Drives_Running]-[BFW_Turbines_Running],1
+246,2917,[BLR_1_Status]*(0.0005*([BLR_1_HPS_Gen])**2-0.0559*([BLR_1_HPS_Gen])+5.5697),0
+247,23,[Fuel_BLR_1]*[LHV] / [Spec_En_Cons_BLR_1]*[BLR_1_Status],0
+248,2632,[BFW_A_Motor_Status]*([BFW_A_Motor_Power_Regression]-((-0.0016*([BFW_Flow_Consumption]/([BFW_Drives_Running]+(1-[BFW_A_Motor_Status])))**2+ 1.8045*([BFW_Flow_Consumption]/([BFW_Drives_Running]+(1-[BFW_A_Motor_Status]))) + 401.61)/1000)/0.95),1
+249,2633,[BFW_B_Turb_Status]*([BFW_B_Turb_Steam_Regression]-((-0.0233*([BFW_Flow_Consumption]/([BFW_Drives_Running]+(1-[BFW_B_Turb_Status])))**2 + 26.665*([BFW_Flow_Consumption]/([BFW_Drives_Running]+(1-[BFW_B_Turb_Status]))) + 10505)/1000)),1
+250,2634,[BFW_C_Turb_Status]*([BFW_C_Turb_Steam_Regression]-((-0.0233*([BFW_Flow_Consumption]/([BFW_Drives_Running]+(1-[BFW_C_Turb_Status])))**2 + 26.665*([BFW_Flow_Consumption]/([BFW_Drives_Running]+(1-[BFW_C_Turb_Status]))) + 10505)/1000)),1
+251,2635,[BFW_D_Motor_Status]*([BFW_D_Motor_Power_Regression]-((-0.0016*([BFW_Flow_Consumption]/([BFW_Drives_Running]+(1-[BFW_D_Motor_Status])))**2+ 1.8045*([BFW_Flow_Consumption]/([BFW_Drives_Running]+(1-[BFW_D_Motor_Status]))) + 401.61)/1000)/0.95),1
+252,2636,[BFW_E_Turb_Status]*([BFW_E_Turb_Steam_Regression]-((-0.0233*([BFW_Flow_Consumption]/([BFW_Drives_Running]+(1-[BFW_E_Turb_Status])))**2 + 26.665*([BFW_Flow_Consumption]/([BFW_Drives_Running]+(1-[BFW_E_Turb_Status]))) + 10505)/1000)),1
+253,2637,[BFW_F_Motor_Status]*([BFW_F_Motor_Power_Regression]-((-0.0016*([BFW_Flow_Consumption]/([BFW_Drives_Running]+(1-[BFW_F_Motor_Status])))**2+ 1.8045*([BFW_Flow_Consumption]/([BFW_Drives_Running]+(1-[BFW_F_Motor_Status]))) + 401.61)/1000)/0.95),1
+254,2623,[DMW_Turbine_A_Status]*([DMW_Turbine_A_Steam_Regression]-((-0.0023*([Total_DMW_Demand]/([DMW_Drives_Running]+(1-[DMW_Turbine_A_Status])))**2 + 5.4956*([Total_DMW_Demand]/([DMW_Drives_Running]+(1-[DMW_Turbine_A_Status]))) + 3330.4)/1000)/0.8),1
+255,2625,[DMW_Turbine_C_Status]*([DMW_Turbine_C_Steam_Regression]-((-0.0023*([Total_DMW_Demand]/([DMW_Drives_Running]+(1-[DMW_Turbine_C_Status])))**2 + 5.4956*([Total_DMW_Demand]/([DMW_Drives_Running]+(1-[DMW_Turbine_C_Status]))) + 3330.4)/1000)/0.8),1
+256,2624,[DMW_Pump_Motor_B_Status]*([DMW_Motor_B_Power_Regression]-(-8E-05*([Total_DMW_Demand]/([DMW_Drives_Running]+(1-[DMW_Pump_Motor_B_Status])))**2 + 0.1835*([Total_DMW_Demand]/([DMW_Drives_Running]+(1-[DMW_Pump_Motor_B_Status]))) + 36.904)/1000),1
+257,2790,([Air_compressor_A_Discharge_flow]- [AC_A_Flow_To_Header])*[Air_Compressor_Turbine_A_Status],0
+258,2791,([Air_compressor_B_Discharge_flow] - [AC_B_Flow_To_Header])*[Air_Compressor_Motor_B_Status],0
+259,2792,([Air_compressor_C_Discharge_flow] - [AC_C_Flow_To_Header])*[Air_Compressor_Motor_C_Status],0
+260,2793,([Air_compressor_D_Discharge_flow]- [AC_D_Flow_To_Header])*[Air_Compressor_Turbine_D_Status],0
+261,353,([AC_A_Flow_To_Header] * [Air_Compressor_Turbine_A_Status] + [AC_B_Flow_To_Header] * [Air_Compressor_Motor_B_Status] + [AC_C_Flow_To_Header] * [Air_Compressor_Motor_C_Status] + [AC_D_Flow_To_Header] * [Air_Compressor_Turbine_D_Status]),0
+262,3190,[Air_compressor_A_Discharge_flow]*[Air_Compressor_Turbine_A_Status]+[Air_compressor_B_Discharge_flow]*[Air_Compressor_Motor_B_Status]+[Air_compressor_C_Discharge_flow]*[Air_Compressor_Motor_C_Status]+[Air_compressor_D_Discharge_flow]*[Air_Compressor_Turbine_D_Status],1
+263,52,((8E-06*[BLR_1_HPS_Gen]**2 - 0.0017 *[BLR_1_HPS_Gen] +3.0167)*(1-[Spec_En_Cons_BLR_1_dev]))*[BLR_1_Status]+(1-[BLR_1_Status])*5,1
+264,53,((8E-06*[BLR_2_HPS_Gen]**2 - 0.0017 *[BLR_2_HPS_Gen] +3.0167)*(1-[Spec_En_Cons_BLR_2_dev]))*[BLR_2_Status]+(1-[BLR_2_Status])*5,1
+265,54,((8E-06*[BLR_3_HPS_Gen]**2 - 0.0017 *[BLR_3_HPS_Gen] +3.0167)*(1-[Spec_En_Cons_BLR_3_dev]))*[BLR_3_Status]+(1-[BLR_3_Status])*5,1
+266,55,((8E-06*[BLR_4_HPS_Gen]**2 - 0.0017 *[BLR_4_HPS_Gen] +3.0167)*(1-[Spec_En_Cons_BLR_4_dev]))*[BLR_4_Status]+(1-[BLR_4_Status])*5,1
+267,56,((8E-06*[BLR_5_HPS_Gen]**2 - 0.0017 *[BLR_5_HPS_Gen] +3.0167)*(1-[Spec_En_Cons_BLR_5_dev]))*[BLR_5_Status]+(1-[BLR_5_Status])*5,1
+268,784,[Fuel_BLR_1]*[BLR_1_Status],1
+269,785,[Fuel_BLR_2]*[BLR_2_Status],1
+270,786,[Fuel_BLR_3]*[BLR_3_Status],1
+271,787,[Fuel_BLR_4]*[BLR_4_Status],1
+272,788,[Fuel_BLR_5]*[BLR_5_Status],1
+273,3191,[total_air_generated]-[Total_Air_Demand],1
+275,2430,[MP_to_LP_Letdown_LPS_Flow_Out_PV013A_UO] + [MP_to_LP_Letdown_LPS_Flow_Out_PV013B_UO] + [MP_to_LP_Letdown_LPS_Flow_Out_PV31_UO] + [MP_to_LP_Letdown_LPS_Flow_Out_PV32_UO],1
+276,2616,[Air_Compressor_Turbine_A_Status]*([Air_Compressor_Turbine_A_Steam_Regression]-((14.691*([Air_compressor_A_Discharge_flow])*89.55 + 5079)/0.9/1000))/((14.691*([Air_compressor_A_Discharge_flow]+(1-[Air_Compressor_Turbine_A_Status]))*89.55 + 5079)/0.9/1000),1
+277,2617,[Air_Compressor_Turbine_D_Status]*([Air_Compressor_Turbine_D_Steam_Regression]-((13.34*([Air_compressor_D_Discharge_flow])*92.96 + 4614.5)/0.9/1000))/((13.34*([Air_compressor_D_Discharge_flow]+(1-[Air_Compressor_Turbine_D_Status]))*92.96 + 4614.5)/0.9/1000),1
+278,2618,[Air_Compressor_Motor_C_Status]*([Air_Compressor_Motor_C_Power_Regression]-((0.0896*([Air_compressor_C_Discharge_flow]))/0.9))/((0.0896*([Air_compressor_C_Discharge_flow]+(1-[Air_Compressor_Motor_C_Status])))/0.9),1
+279,2619,[Air_Compressor_Motor_B_Status]*([Air_Compressor_Motor_B_Power_Regression]-((0.0930*([Air_compressor_B_Discharge_flow]))/0.9))/((0.0930*([Air_compressor_B_Discharge_flow]+(1-[Air_Compressor_Motor_B_Status])))/0.9),1
+280,2778,Test+1,0
+281,161,[Air_Compressor_Turbine_A_Status]*[Air_compressor_A_Discharge_flow],0
+282,162,[Air_Compressor_Motor_B_Status]*[Air_compressor_B_Discharge_flow],0
+283,163,[Air_Compressor_Motor_C_Status]*[Air_compressor_C_Discharge_flow],0
+284,164,[Air_Compressor_Turbine_D_Status]*[Air_compressor_D_Discharge_flow],0
+285,1137,[BFW_B_Turb_Status]+[BFW_C_Turb_Status]+[BFW_E_Turb_Status],1
+286,255,[FDF_A_Motor_Status]*[BLR_1_Status]*(0.0067*[BLR_1_HPS_Gen]**2 + 0.225*[BLR_1_HPS_Gen] + 217.82)/1000,1
+287,256,[FDF_B_Motor_Status]*[BLR_2_Status]*(0.0067*[BLR_2_HPS_Gen]**2 + 0.225*[BLR_2_HPS_Gen] + 217.82)/1000,1
+288,5075,"m.min2(m.min2(m.min2(m.min2(([BLR_1_HPS_Gen]+(1-[BLR_1_Status])*150),([BLR_2_HPS_Gen]+(1-[BLR_2_Status])*150)),([BLR_3_HPS_Gen]+(1-[BLR_3_Status])*150)),([BLR_4_HPS_Gen]+(1-[BLR_4_Status])*150)),([BLR_5_HPS_Gen]+(1-[BLR_5_Status])*150))",1
+289,5076,"m.max2(m.max2(m.max2(m.max2([BLR_1_HPS_Gen],[BLR_2_HPS_Gen]),[BLR_3_HPS_Gen]),[BLR_4_HPS_Gen]),[BLR_5_HPS_Gen])",1
+290,330,(1-[Whatif_running])*[MP_Steam_Imbalance]+[Whatif_running]*([act_MP_Steam_Imbalance]*[MP_Steam_Consumption]/[act_MP_Steam_Consumption]),1
+291,333,(1-[Whatif_running])*[LP_Steam_Imbalance] + [Whatif_running]*([act_LP_Steam_Imbalance]*[LP_Steam_Consumption]/[act_LP_Steam_Consumption]),1
+292,2481,(1-[Whatif_running])*[DMW_Imbalance] + [Whatif_running]*([act_DMW_Imbalance]*[DMW_Makeup]/[act_DMW_Makeup]),1
+293,327,(1-[Whatif_running])*[HP_Steam_Imbalance] + [Whatif_running]*([act_HP_Steam_Imbalance]*[HP_Steam_Consumption]/[act_HP_Steam_Consumption]),1
+294,3329,[Whatif_running]*0.055*[Total_BFW_Consumption] + (1-[Whatif_running])*[Deaerator_LPS],1
+295,5216,"m.max2(103-[BFW_Flow_Consumption],0)",0
+296,1139,[VHP_BFW_B_Turb_Status]+[VHP_BFW_C_Turb_Status],1
+297,1140,[CW_Motor_C_Status]+[CW_Motor_D_Status]+[CW_Motor_E_Status]+[CW_Motor_F_Status],1
+298,1141,[CW_Turbine_A_Status]+[CW_Turbine_B_Status]+[CW_Turbine_G_Status],1
+299,1142,[Air_Compressor_Motor_B_Status]+[Air_Compressor_Motor_C_Status],1
+300,1143,[Air_Compressor_Turbine_A_Status]+[Air_Compressor_Turbine_D_Status],1
+301,1145,[DMW_Turbine_A_Status]+[DMW_Turbine_C_Status],1
+302,3581,Test Formula 2,0
+303,3,test,0

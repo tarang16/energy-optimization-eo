@@ -1,0 +1,30 @@
+@use 'config/scss/variables' as *;
+
+.trendPopupIcon {
+  cursor: pointer;
+  position: absolute;
+  bottom: 3vmin;
+  left: 3vmin;
+  width: 4vmin;
+  height: 4vmin;
+  padding: 0.8vmin;
+  border-radius: 50%;
+  background-color: $primary_blue_bg;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 0px 5px 0px $primary_shadow_card;
+  transition: 0.1s ease-in-out;
+
+  img {
+    filter: unset !important;
+  }
+
+  &:hover {
+    background-color: $primary_blue;
+
+    img {
+      filter: brightness(0) invert(1) !important;
+    }
+  }
+}

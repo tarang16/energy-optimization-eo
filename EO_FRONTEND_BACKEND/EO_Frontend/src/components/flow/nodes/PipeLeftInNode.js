@@ -1,0 +1,76 @@
+import { selectedNodeIdAtom } from 'atoms/NetworkAtom'
+import { useAtomValue } from 'jotai'
+import StaticFourHandles from '../handles/StaticFourHandles'
+import { NODE_COLORS, resources } from '../utils'
+import styles from './HeaderNode.module.scss'
+export const PipeLeftInNodeFieldConfig = {
+  fields: [
+    {
+      label: 'Template',
+      name: 'template',
+      type: 'select',
+      options: resources,
+    },
+    {
+      label: 'Width',
+      name: 'width',
+      type: 'number',
+      min: 1,
+    },
+  ],
+  showLinkModal: false,
+}
+export const PipeLeftInNodeConfig = {
+  name: 'Pipe Left In',
+  nodeType: 'pipe-left-in-node',
+  type: 'pipeLeftInNode',
+  position: {
+    x: 0,
+    y: 0,
+  },
+  data: {
+    width: 600,
+    template: 'Default',
+    label: 'Pipe Left In Node',
+  },
+}
+export function PipeLeftInNode({ data, id }) {
+  const { width, template } = data
+  const selectedId = useAtomValue(selectedNodeIdAtom)
+  const { bgColor, borderColor } = NODE_COLORS[template]
+  return (
+    <div
+      className={`${styles.HeaderNodeMainContainer}`}
+      data-static-id='PipeLeftInNode.js_div_0d0d41'
+    >
+      <div
+        className={`child2 ${styles.headerNodeContainer}`}
+        style={{
+          width: `${width}px`,
+          height: `6px`,
+          backgroundColor: bgColor,
+          borderColor: selectedId === id ? 'green' : borderColor,
+          borderWidth: '2px',
+          borderStyle: 'solid',
+          position: 'relative',
+          boxSizing: 'border-box',
+        }}
+        data-static-id='PipeLeftInNode.js_div_9ec643'
+      >
+        <StaticFourHandles
+          id={id}
+          showLeft
+          showRight
+          leftType={'target'}
+          rightType={'source'}
+          leftStyles={{
+            left: '-2px',
+          }}
+          rightStyles={{
+            right: '-2px',
+          }}
+        />
+      </div>
+    </div>
+  )
+}

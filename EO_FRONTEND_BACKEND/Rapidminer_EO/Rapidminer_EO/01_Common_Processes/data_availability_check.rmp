@@ -1,0 +1,762 @@
+<?xml version="1.0" encoding="UTF-8"?><process version="10.4.003">
+  <context>
+    <input/>
+    <output/>
+    <macros/>
+  </context>
+  <operator activated="true" class="process" compatibility="10.4.003" expanded="true" name="Process">
+    <parameter key="logverbosity" value="init"/>
+    <parameter key="random_seed" value="2001"/>
+    <parameter key="send_mail" value="never"/>
+    <parameter key="notification_email" value=""/>
+    <parameter key="process_duration_for_mail" value="30"/>
+    <parameter key="encoding" value="SYSTEM"/>
+    <process expanded="true">
+      <operator activated="true" class="subprocess" compatibility="10.4.003" expanded="true" height="82" name="initialization (2)" width="90" x="447" y="136">
+        <process expanded="true">
+          <operator activated="true" class="subprocess" compatibility="10.4.003" expanded="true" height="68" name="define_upstream_input (2)" width="90" x="112" y="85">
+            <process expanded="true">
+              <operator activated="true" class="branch" compatibility="10.4.003" expanded="true" height="82" name="upstream_macro (2)" width="90" x="648" y="34">
+                <parameter key="condition_type" value="macro_defined"/>
+                <parameter key="condition_value" value="case_id"/>
+                <parameter key="expression" value=""/>
+                <parameter key="io_object" value="ANOVAMatrix"/>
+                <parameter key="return_inner_output" value="true"/>
+                <process expanded="true">
+                  <operator activated="true" class="branch" compatibility="10.4.003" expanded="true" height="82" name="check case_id (2)" width="90" x="179" y="85">
+                    <parameter key="condition_type" value="macro_defined"/>
+                    <parameter key="condition_value" value="case_id"/>
+                    <parameter key="expression" value=""/>
+                    <parameter key="io_object" value="ANOVAMatrix"/>
+                    <parameter key="return_inner_output" value="true"/>
+                    <process expanded="true">
+                      <connect from_port="condition" to_port="input 1"/>
+                      <portSpacing port="source_condition" spacing="0"/>
+                      <portSpacing port="source_input 1" spacing="0"/>
+                      <portSpacing port="sink_input 1" spacing="0"/>
+                      <portSpacing port="sink_input 2" spacing="0"/>
+                    </process>
+                    <process expanded="true">
+                      <operator activated="true" class="throw_exception" compatibility="10.4.003" expanded="true" height="68" name="Throw Exception (3)" width="90" x="179" y="85">
+                        <parameter key="message" value="macro 'case_id' needs to be supplied to the function"/>
+                        <description align="center" color="transparent" colored="false" width="126">If not found then will throw exception</description>
+                      </operator>
+                      <portSpacing port="source_condition" spacing="0"/>
+                      <portSpacing port="source_input 1" spacing="0"/>
+                      <portSpacing port="sink_input 1" spacing="0"/>
+                      <portSpacing port="sink_input 2" spacing="0"/>
+                    </process>
+                    <description align="center" color="transparent" colored="false" width="126">It will check the case_id from db and if not found then it will throw exception</description>
+                  </operator>
+                  <portSpacing port="source_condition" spacing="0"/>
+                  <portSpacing port="source_input 1" spacing="0"/>
+                  <portSpacing port="sink_input 1" spacing="0"/>
+                </process>
+                <process expanded="true">
+                  <operator activated="true" class="branch" compatibility="10.4.003" expanded="true" height="82" name="check case_id (3)" width="90" x="112" y="289">
+                    <parameter key="condition_type" value="macro_defined"/>
+                    <parameter key="condition_value" value="case_id"/>
+                    <parameter key="expression" value=""/>
+                    <parameter key="io_object" value="ANOVAMatrix"/>
+                    <parameter key="return_inner_output" value="true"/>
+                    <process expanded="true">
+                      <connect from_port="condition" to_port="input 1"/>
+                      <portSpacing port="source_condition" spacing="0"/>
+                      <portSpacing port="source_input 1" spacing="0"/>
+                      <portSpacing port="sink_input 1" spacing="0"/>
+                      <portSpacing port="sink_input 2" spacing="0"/>
+                    </process>
+                    <process expanded="true">
+                      <operator activated="true" class="throw_exception" compatibility="10.4.003" expanded="true" height="68" name="Throw Exception (5)" width="90" x="179" y="85">
+                        <parameter key="message" value="macro 'case_id' needs to be supplied to the function"/>
+                        <description align="center" color="transparent" colored="false" width="126">If not found then will throw exception</description>
+                      </operator>
+                      <portSpacing port="source_condition" spacing="0"/>
+                      <portSpacing port="source_input 1" spacing="0"/>
+                      <portSpacing port="sink_input 1" spacing="0"/>
+                      <portSpacing port="sink_input 2" spacing="0"/>
+                    </process>
+                    <description align="center" color="transparent" colored="false" width="126">It will check the case_id from db and if not found then it will throw exception</description>
+                  </operator>
+                  <operator activated="true" class="branch" compatibility="10.4.003" expanded="true" height="82" name="check check_tags (3)" width="90" x="112" y="493">
+                    <parameter key="condition_type" value="macro_defined"/>
+                    <parameter key="condition_value" value="available_pi_time_tag"/>
+                    <parameter key="expression" value=""/>
+                    <parameter key="io_object" value="ANOVAMatrix"/>
+                    <parameter key="return_inner_output" value="true"/>
+                    <process expanded="true">
+                      <connect from_port="condition" to_port="input 1"/>
+                      <portSpacing port="source_condition" spacing="0"/>
+                      <portSpacing port="source_input 1" spacing="0"/>
+                      <portSpacing port="sink_input 1" spacing="0"/>
+                      <portSpacing port="sink_input 2" spacing="0"/>
+                    </process>
+                    <process expanded="true">
+                      <operator activated="true" class="throw_exception" compatibility="10.4.003" expanded="true" height="68" name="Throw Exception (6)" width="90" x="179" y="85">
+                        <parameter key="message" value="macro 'available_pi_time_tag' needs to be supplied to the function"/>
+                        <description align="center" color="transparent" colored="false" width="126">If not found then will throw exception</description>
+                      </operator>
+                      <portSpacing port="source_condition" spacing="0"/>
+                      <portSpacing port="source_input 1" spacing="0"/>
+                      <portSpacing port="sink_input 1" spacing="0"/>
+                      <portSpacing port="sink_input 2" spacing="0"/>
+                    </process>
+                    <description align="center" color="transparent" colored="false" width="126">It will check all the required tags and if not found then it will throw exception</description>
+                  </operator>
+                  <portSpacing port="source_condition" spacing="0"/>
+                  <portSpacing port="source_input 1" spacing="0"/>
+                  <portSpacing port="sink_input 1" spacing="0"/>
+                </process>
+                <description align="center" color="transparent" colored="false" width="126">To check if case_id and tags are available</description>
+              </operator>
+              <portSpacing port="source_in 1" spacing="0"/>
+              <portSpacing port="sink_out 1" spacing="0"/>
+            </process>
+            <description align="center" color="transparent" colored="false" width="126">CHECK IF UPSTREAM INPUTS&lt;br&gt;</description>
+          </operator>
+          <operator activated="true" class="subprocess" compatibility="10.4.003" expanded="true" height="68" name="prepare_input (2)" width="90" x="246" y="85">
+            <process expanded="true">
+              <operator activated="true" class="subprocess" compatibility="10.4.003" expanded="true" height="68" name="last_run_time and frequency" width="90" x="380" y="136">
+                <process expanded="true">
+                  <operator activated="true" class="jdbc_connectors:read_database" compatibility="10.4.003" expanded="true" height="82" name="Read Database (5)" width="90" x="246" y="340">
+                    <parameter key="define_connection" value="repository"/>
+                    <parameter key="connection_entry" value="%{connection_sql_eo}"/>
+                    <parameter key="database_system" value="MySQL"/>
+                    <parameter key="define_query" value="query"/>
+                    <parameter key="query" value="select TOP(1) last_run_time&#10;FROM run_info&#10;INNER JOIN model &#10;ON run_info.model_id=model.model_id&#10;WHERE model.case_id  = %{case_id}&#10;ORDER BY last_run_time desc"/>
+                    <parameter key="use_default_schema" value="true"/>
+                    <parameter key="prepare_statement" value="false"/>
+                    <enumeration key="parameters"/>
+                    <parameter key="data_management" value="auto"/>
+                    <description align="center" color="transparent" colored="false" width="126">From run_info table, it will check the run time for the specific case and will sort in descending so the first output is our last run time</description>
+                  </operator>
+                  <operator activated="true" class="extract_macro" compatibility="10.4.003" expanded="true" height="68" name="Last Run Time" width="90" x="514" y="340">
+                    <parameter key="macro" value="last_run_time"/>
+                    <parameter key="macro_type" value="data_value"/>
+                    <parameter key="statistics" value="average"/>
+                    <parameter key="attribute_name" value="last_run_time"/>
+                    <parameter key="example_index" value="1"/>
+                    <list key="additional_macros"/>
+                    <description align="center" color="transparent" colored="false" width="126">Output is our Last run time</description>
+                  </operator>
+                  <operator activated="true" class="jdbc_connectors:read_database" compatibility="10.4.003" expanded="true" height="82" name="Read Database (15)" width="90" x="246" y="646">
+                    <parameter key="define_connection" value="repository"/>
+                    <parameter key="connection_entry" value="%{connection_sql_eo}"/>
+                    <parameter key="database_system" value="MySQL"/>
+                    <parameter key="define_query" value="query"/>
+                    <parameter key="query" value="SELECT [frequency]&#10;from  case_info&#10;where case_id = %{case_id}"/>
+                    <parameter key="use_default_schema" value="true"/>
+                    <parameter key="table_name" value="peeo22_utd_eg_reo_xx_run_info"/>
+                    <parameter key="prepare_statement" value="false"/>
+                    <enumeration key="parameters"/>
+                    <parameter key="data_management" value="auto"/>
+                    <description align="center" color="transparent" colored="false" width="126">From case_information, we get the frequency for the specific case</description>
+                  </operator>
+                  <operator activated="true" class="extract_macro" compatibility="10.4.003" expanded="true" height="68" name="Get Frequency" width="90" x="514" y="646">
+                    <parameter key="macro" value="frequency"/>
+                    <parameter key="macro_type" value="data_value"/>
+                    <parameter key="statistics" value="average"/>
+                    <parameter key="attribute_name" value="frequency"/>
+                    <parameter key="example_index" value="1"/>
+                    <list key="additional_macros"/>
+                    <description align="center" color="transparent" colored="false" width="126">Output is our frequency</description>
+                  </operator>
+                  <connect from_op="Read Database (5)" from_port="output" to_op="Last Run Time" to_port="example set"/>
+                  <connect from_op="Read Database (15)" from_port="output" to_op="Get Frequency" to_port="example set"/>
+                  <portSpacing port="source_in 1" spacing="0"/>
+                  <portSpacing port="sink_out 1" spacing="0"/>
+                  <description align="center" color="yellow" colored="false" height="100" resized="false" width="195" x="331" y="238">INTERFACING LAYER&lt;br/&gt;layer which changes input data column names as per what is required by the process</description>
+                </process>
+                <description align="center" color="transparent" colored="false" width="126">Checking the last run time and checking the frequency intervals of the run</description>
+              </operator>
+              <portSpacing port="source_in 1" spacing="0"/>
+              <portSpacing port="sink_out 1" spacing="0"/>
+            </process>
+            <description align="center" color="transparent" colored="false" width="126">TRANFORM&lt;br&gt;input data into required format</description>
+          </operator>
+          <connect from_port="in 1" to_port="out 1"/>
+          <portSpacing port="source_in 1" spacing="0"/>
+          <portSpacing port="source_in 2" spacing="0"/>
+          <portSpacing port="sink_out 1" spacing="0"/>
+          <portSpacing port="sink_out 2" spacing="0"/>
+        </process>
+        <description align="center" color="transparent" colored="false" width="126">INITIALIZE&lt;br&gt;Process Parameters and all other process parameters</description>
+      </operator>
+      <operator activated="true" class="subprocess" compatibility="10.4.003" expanded="true" height="82" name="main (2)" width="90" x="715" y="136">
+        <process expanded="true">
+          <operator activated="true" class="subprocess" compatibility="10.4.003" expanded="true" height="82" name="get timestamps for all check_tags" width="90" x="246" y="187">
+            <process expanded="true">
+              <operator activated="true" class="extract_macro" compatibility="10.4.003" expanded="true" height="68" name="Extract Macro (12)" width="90" x="179" y="34">
+                <parameter key="macro" value="noe"/>
+                <parameter key="macro_type" value="number_of_examples"/>
+                <parameter key="statistics" value="average"/>
+                <parameter key="attribute_name" value=""/>
+                <list key="additional_macros"/>
+              </operator>
+              <operator activated="true" class="concurrency:loop" compatibility="10.4.003" expanded="true" height="103" name="Loop" width="90" x="313" y="136">
+                <parameter key="number_of_iterations" value="%{noe}"/>
+                <parameter key="iteration_macro" value="iteration"/>
+                <parameter key="reuse_results" value="false"/>
+                <parameter key="enable_parallel_execution" value="true"/>
+                <process expanded="true">
+                  <operator activated="true" class="extract_macro" compatibility="10.4.003" expanded="true" height="68" name="Extract Macro (13)" width="90" x="313" y="34">
+                    <parameter key="macro" value="root_path"/>
+                    <parameter key="macro_type" value="data_value"/>
+                    <parameter key="statistics" value="average"/>
+                    <parameter key="attribute_name" value="root_path"/>
+                    <parameter key="example_index" value="%{iteration}"/>
+                    <list key="additional_macros">
+                      <parameter key="pi_tag_name" value="pi_name"/>
+                    </list>
+                  </operator>
+                  <operator activated="true" class="pi_web_connector:current_values" compatibility="1.4.002" expanded="true" height="82" name="feature_getdata_pi" width="90" x="45" y="136">
+                    <parameter key="connection_entry" value="%{connection_pi}"/>
+                    <parameter key="root_path" value="%{root_path}"/>
+                    <parameter key="data_item" value="%{pi_tag_name}"/>
+                    <enumeration key="additional_data_items"/>
+                  </operator>
+                  <operator activated="true" class="blending:sort" compatibility="10.4.003" expanded="true" height="82" name="Sort time=descending" width="90" x="179" y="136">
+                    <list key="sort_by">
+                      <parameter key="Timestamp" value="descending"/>
+                    </list>
+                    <description align="center" color="transparent" colored="false" width="126">Sorting the data in descending order</description>
+                  </operator>
+                  <operator activated="true" class="filter_example_range" compatibility="10.4.003" expanded="true" height="82" name="Filter Top value" width="90" x="313" y="136">
+                    <parameter key="first_example" value="1"/>
+                    <parameter key="last_example" value="1"/>
+                    <parameter key="invert_filter" value="false"/>
+                    <description align="center" color="transparent" colored="false" width="126">Selecting the top value(1st value after sorting in descending) to get the latest data</description>
+                  </operator>
+                  <operator activated="true" class="blending:rename" compatibility="10.4.003" expanded="true" height="82" name="Rename" width="90" x="447" y="136">
+                    <list key="rename attributes">
+                      <parameter key="%{pi_tag_name}" value="value"/>
+                    </list>
+                    <parameter key="from_attribute" value=""/>
+                    <parameter key="to_attribute" value=""/>
+                    <description align="center" color="transparent" colored="false" width="126">%{pi_tag_name}&lt;br/&gt;to value</description>
+                  </operator>
+                  <operator activated="true" class="numerical_to_polynominal" compatibility="10.4.003" expanded="true" height="82" name="Numerical to Polynominal" width="90" x="581" y="136">
+                    <parameter key="attribute_filter_type" value="value_type"/>
+                    <parameter key="attribute" value=""/>
+                    <parameter key="attributes" value=""/>
+                    <parameter key="use_except_expression" value="false"/>
+                    <parameter key="value_type" value="real"/>
+                    <parameter key="use_value_type_exception" value="false"/>
+                    <parameter key="except_value_type" value="real"/>
+                    <parameter key="block_type" value="value_series"/>
+                    <parameter key="use_block_type_exception" value="false"/>
+                    <parameter key="except_block_type" value="value_series_end"/>
+                    <parameter key="invert_selection" value="false"/>
+                    <parameter key="include_special_attributes" value="false"/>
+                    <description align="center" color="transparent" colored="false" width="126">value_type: real</description>
+                  </operator>
+                  <operator activated="true" class="numerical_to_polynominal" compatibility="10.4.003" expanded="true" height="82" name="Numerical to Polynominal (7)" width="90" x="715" y="136">
+                    <parameter key="attribute_filter_type" value="value_type"/>
+                    <parameter key="attribute" value=""/>
+                    <parameter key="attributes" value=""/>
+                    <parameter key="use_except_expression" value="false"/>
+                    <parameter key="value_type" value="integer"/>
+                    <parameter key="use_value_type_exception" value="false"/>
+                    <parameter key="except_value_type" value="real"/>
+                    <parameter key="block_type" value="value_series"/>
+                    <parameter key="use_block_type_exception" value="false"/>
+                    <parameter key="except_block_type" value="value_series_end"/>
+                    <parameter key="invert_selection" value="false"/>
+                    <parameter key="include_special_attributes" value="false"/>
+                    <description align="center" color="transparent" colored="false" width="126">value_type: integer</description>
+                  </operator>
+                  <operator activated="true" class="numerical_to_polynominal" compatibility="10.4.003" expanded="true" height="82" name="Numerical to Polynominal (8)" width="90" x="849" y="136">
+                    <parameter key="attribute_filter_type" value="value_type"/>
+                    <parameter key="attribute" value=""/>
+                    <parameter key="attributes" value=""/>
+                    <parameter key="use_except_expression" value="false"/>
+                    <parameter key="value_type" value="numeric"/>
+                    <parameter key="use_value_type_exception" value="false"/>
+                    <parameter key="except_value_type" value="real"/>
+                    <parameter key="block_type" value="value_series"/>
+                    <parameter key="use_block_type_exception" value="false"/>
+                    <parameter key="except_block_type" value="value_series_end"/>
+                    <parameter key="invert_selection" value="false"/>
+                    <parameter key="include_special_attributes" value="false"/>
+                    <description align="center" color="transparent" colored="false" width="126">value_type: numeric</description>
+                  </operator>
+                  <operator activated="true" class="generate_attributes" compatibility="10.4.003" expanded="true" height="82" name="Generate Attributes (11)" width="90" x="983" y="136">
+                    <list key="function_descriptions">
+                      <parameter key="tag" value="%{pi_tag_name}"/>
+                    </list>
+                    <parameter key="keep_all" value="true"/>
+                    <description align="center" color="transparent" colored="false" width="126">tag: %{pi_tag_name}</description>
+                  </operator>
+                  <operator activated="true" class="select_attributes" compatibility="10.4.003" expanded="true" height="82" name="selection" width="90" x="1117" y="136">
+                    <parameter key="attribute_filter_type" value="subset"/>
+                    <parameter key="attribute" value="Timestamp"/>
+                    <parameter key="attributes" value="|tag|Timestamp|value"/>
+                    <parameter key="use_except_expression" value="false"/>
+                    <parameter key="value_type" value="attribute_value"/>
+                    <parameter key="use_value_type_exception" value="false"/>
+                    <parameter key="except_value_type" value="time"/>
+                    <parameter key="block_type" value="attribute_block"/>
+                    <parameter key="use_block_type_exception" value="false"/>
+                    <parameter key="except_block_type" value="value_matrix_row_start"/>
+                    <parameter key="invert_selection" value="false"/>
+                    <parameter key="include_special_attributes" value="false"/>
+                    <description align="center" color="transparent" colored="false" width="126">timestamp, tag,value</description>
+                  </operator>
+                  <connect from_port="input 1" to_op="Extract Macro (13)" to_port="example set"/>
+                  <connect from_op="Extract Macro (13)" from_port="example set" to_port="output 1"/>
+                  <connect from_op="feature_getdata_pi" from_port="out" to_op="Sort time=descending" to_port="example set input"/>
+                  <connect from_op="Sort time=descending" from_port="example set output" to_op="Filter Top value" to_port="example set input"/>
+                  <connect from_op="Filter Top value" from_port="example set output" to_op="Rename" to_port="example set input"/>
+                  <connect from_op="Rename" from_port="example set output" to_op="Numerical to Polynominal" to_port="example set input"/>
+                  <connect from_op="Numerical to Polynominal" from_port="example set output" to_op="Numerical to Polynominal (7)" to_port="example set input"/>
+                  <connect from_op="Numerical to Polynominal (7)" from_port="example set output" to_op="Numerical to Polynominal (8)" to_port="example set input"/>
+                  <connect from_op="Numerical to Polynominal (8)" from_port="example set output" to_op="Generate Attributes (11)" to_port="example set input"/>
+                  <connect from_op="Generate Attributes (11)" from_port="example set output" to_op="selection" to_port="example set input"/>
+                  <connect from_op="selection" from_port="example set output" to_port="output 2"/>
+                  <portSpacing port="source_input 1" spacing="0"/>
+                  <portSpacing port="source_input 2" spacing="0"/>
+                  <portSpacing port="sink_output 1" spacing="0"/>
+                  <portSpacing port="sink_output 2" spacing="0"/>
+                  <portSpacing port="sink_output 3" spacing="0"/>
+                </process>
+              </operator>
+              <operator activated="true" class="append" compatibility="9.9.002" expanded="true" height="82" name="Append" width="90" x="514" y="136">
+                <parameter key="data_management" value="auto"/>
+                <parameter key="merge_type" value="all"/>
+                <description align="center" color="transparent" colored="false" width="126">Append all the timestamps for all pi tag name</description>
+              </operator>
+              <operator activated="true" class="blending:sort" compatibility="10.4.003" expanded="true" height="82" name="Sort (2)" width="90" x="648" y="136">
+                <list key="sort_by">
+                  <parameter key="Timestamp" value="ascending"/>
+                </list>
+              </operator>
+              <connect from_port="in 1" to_op="Extract Macro (12)" to_port="example set"/>
+              <connect from_op="Extract Macro (12)" from_port="example set" to_op="Loop" to_port="input 1"/>
+              <connect from_op="Loop" from_port="output 2" to_op="Append" to_port="example set 1"/>
+              <connect from_op="Append" from_port="merged set" to_op="Sort (2)" to_port="example set input"/>
+              <connect from_op="Sort (2)" from_port="example set output" to_port="out 1"/>
+              <portSpacing port="source_in 1" spacing="0"/>
+              <portSpacing port="source_in 2" spacing="0"/>
+              <portSpacing port="sink_out 1" spacing="0"/>
+              <portSpacing port="sink_out 2" spacing="0"/>
+            </process>
+            <description align="center" color="transparent" colored="false" width="126">Calculating available pi time for the pi tag</description>
+          </operator>
+          <operator activated="true" class="subprocess" compatibility="10.4.003" expanded="true" height="82" name="need to run flag" width="90" x="380" y="187">
+            <process expanded="true">
+              <operator activated="true" class="aggregate" compatibility="10.4.003" expanded="true" height="82" name="Aggregate (min) Timestamp" width="90" x="45" y="34">
+                <parameter key="use_default_aggregation" value="false"/>
+                <parameter key="attribute_filter_type" value="all"/>
+                <parameter key="attribute" value=""/>
+                <parameter key="attributes" value=""/>
+                <parameter key="use_except_expression" value="false"/>
+                <parameter key="value_type" value="attribute_value"/>
+                <parameter key="use_value_type_exception" value="false"/>
+                <parameter key="except_value_type" value="time"/>
+                <parameter key="block_type" value="attribute_block"/>
+                <parameter key="use_block_type_exception" value="false"/>
+                <parameter key="except_block_type" value="value_matrix_row_start"/>
+                <parameter key="invert_selection" value="false"/>
+                <parameter key="include_special_attributes" value="false"/>
+                <parameter key="default_aggregation_function" value="average"/>
+                <list key="aggregation_attributes">
+                  <parameter key="Timestamp" value="minimum"/>
+                </list>
+                <parameter key="group_by_attributes" value=""/>
+                <parameter key="count_all_combinations" value="false"/>
+                <parameter key="only_distinct" value="false"/>
+                <parameter key="ignore_missings" value="true"/>
+                <description align="center" color="transparent" colored="false" width="126">Aggregating timestamp to minimum</description>
+              </operator>
+              <operator activated="true" class="extract_macro" compatibility="10.4.003" expanded="true" height="68" name="available_pi_time" width="90" x="179" y="34">
+                <parameter key="macro" value="available_pi_time"/>
+                <parameter key="macro_type" value="data_value"/>
+                <parameter key="statistics" value="min"/>
+                <parameter key="attribute_name" value="minimum(Timestamp)"/>
+                <parameter key="example_index" value="1"/>
+                <list key="additional_macros"/>
+                <description align="center" color="transparent" colored="false" width="126">Extracting available pi time for the pi tag</description>
+              </operator>
+              <operator activated="true" class="generate_attributes" compatibility="10.4.003" expanded="true" height="82" name="Generate Attributes (2)" width="90" x="179" y="238">
+                <list key="function_descriptions">
+                  <parameter key="flag_lag" value="if(&#13;&#10;&#9;date_diff(&#13;&#10;&#9;date_parse_custom(%{last_run_time},&quot;dd/MM/yyyy HH:mm:SS&quot;),&#13;&#10;&#9;&#9;[Timestamp]&#13;&#10;&#9;&#9;)/1000/60 &#13;&#10;&#9;&gt;= eval(%{frequency})&#13;&#10;,0,1)"/>
+                  <parameter key="flag_nan" value="if(missing([value]),1,0)"/>
+                </list>
+                <parameter key="keep_all" value="true"/>
+                <description align="center" color="transparent" colored="false" width="126">flag_nan &amp;amp;&lt;br/&gt;flag_lag&lt;br/&gt;for all tags</description>
+              </operator>
+              <operator activated="true" class="filter_examples" compatibility="10.4.003" expanded="true" height="103" name="Filter Examples (2)" width="90" x="313" y="238">
+                <parameter key="parameter_expression" value=""/>
+                <parameter key="condition_class" value="custom_filters"/>
+                <parameter key="invert_filter" value="false"/>
+                <list key="filters_list">
+                  <parameter key="filters_entry_key" value="flag_lag.ge.1"/>
+                </list>
+                <parameter key="filters_logic_and" value="true"/>
+                <parameter key="filters_check_metadata" value="false"/>
+                <description align="center" color="transparent" colored="false" width="126">flag_lag &amp;gt;=1</description>
+              </operator>
+              <operator activated="true" class="branch" compatibility="10.4.003" expanded="true" height="103" name="Branch (3)" width="90" x="447" y="238">
+                <parameter key="condition_type" value="min_examples"/>
+                <parameter key="condition_value" value="1"/>
+                <parameter key="expression" value=""/>
+                <parameter key="io_object" value="ANOVAMatrix"/>
+                <parameter key="return_inner_output" value="true"/>
+                <process expanded="true">
+                  <operator activated="true" class="utility:create_exampleset" compatibility="10.4.003" expanded="true" height="68" name="Create ExampleSet (2)" width="90" x="112" y="34">
+                    <parameter key="generator_type" value="attribute functions"/>
+                    <parameter key="number_of_examples" value="1"/>
+                    <parameter key="use_stepsize" value="false"/>
+                    <list key="function_descriptions">
+                      <parameter key="Error" value="&quot;PI Data Lagging: &quot;"/>
+                    </list>
+                    <parameter key="add_id_attribute" value="false"/>
+                    <list key="numeric_series_configuration"/>
+                    <list key="date_series_configuration"/>
+                    <list key="date_series_configuration (interval)"/>
+                    <parameter key="date_format" value="yyyy-MM-dd HH:mm:ss"/>
+                    <parameter key="time_zone" value="SYSTEM"/>
+                    <parameter key="column_separator" value=","/>
+                    <parameter key="parse_all_as_nominal" value="false"/>
+                    <parameter key="decimal_point_character" value="."/>
+                    <parameter key="trim_attribute_names" value="true"/>
+                    <description align="center" color="transparent" colored="false" width="126">prefix of log</description>
+                  </operator>
+                  <operator activated="true" class="concurrency:loop_values" compatibility="10.4.003" expanded="true" height="82" name="Loop Values" width="90" x="112" y="187">
+                    <parameter key="attribute" value="tag"/>
+                    <parameter key="iteration_macro" value="loop_value"/>
+                    <parameter key="reuse_results" value="false"/>
+                    <parameter key="enable_parallel_execution" value="true"/>
+                    <process expanded="true">
+                      <operator activated="true" class="filter_examples" compatibility="10.4.003" expanded="true" height="103" name="Filter Examples (4)" width="90" x="45" y="34">
+                        <parameter key="parameter_expression" value=""/>
+                        <parameter key="condition_class" value="custom_filters"/>
+                        <parameter key="invert_filter" value="false"/>
+                        <list key="filters_list">
+                          <parameter key="filters_entry_key" value="tag.equals.%{loop_value}"/>
+                        </list>
+                        <parameter key="filters_logic_and" value="true"/>
+                        <parameter key="filters_check_metadata" value="true"/>
+                        <description align="center" color="transparent" colored="false" width="126">tag equals %{loop_value}</description>
+                      </operator>
+                      <operator activated="true" class="extract_macro" compatibility="10.4.003" expanded="true" height="68" name="Extract Macro (3)" width="90" x="313" y="34">
+                        <parameter key="macro" value="current_timestamp"/>
+                        <parameter key="macro_type" value="data_value"/>
+                        <parameter key="statistics" value="average"/>
+                        <parameter key="attribute_name" value="Timestamp"/>
+                        <parameter key="example_index" value="1"/>
+                        <list key="additional_macros"/>
+                        <description align="center" color="transparent" colored="false" width="126">current_timestamp</description>
+                      </operator>
+                      <operator activated="true" class="utility:create_exampleset" compatibility="10.4.003" expanded="true" height="68" name="Create ExampleSet" width="90" x="514" y="34">
+                        <parameter key="generator_type" value="attribute functions"/>
+                        <parameter key="number_of_examples" value="1"/>
+                        <parameter key="use_stepsize" value="false"/>
+                        <list key="function_descriptions">
+                          <parameter key="Error" value="concat(%{loop_value},&quot; (LAG) &quot;,&quot;(&quot;, %{current_timestamp},&quot;);&quot;)"/>
+                        </list>
+                        <parameter key="add_id_attribute" value="false"/>
+                        <list key="numeric_series_configuration"/>
+                        <list key="date_series_configuration"/>
+                        <list key="date_series_configuration (interval)"/>
+                        <parameter key="date_format" value="yyyy-MM-dd HH:mm:ss"/>
+                        <parameter key="time_zone" value="SYSTEM"/>
+                        <parameter key="column_separator" value=","/>
+                        <parameter key="parse_all_as_nominal" value="false"/>
+                        <parameter key="decimal_point_character" value="."/>
+                        <parameter key="trim_attribute_names" value="true"/>
+                        <description align="center" color="transparent" colored="false" width="126">Error</description>
+                      </operator>
+                      <connect from_port="input 1" to_op="Filter Examples (4)" to_port="example set input"/>
+                      <connect from_op="Filter Examples (4)" from_port="example set output" to_op="Extract Macro (3)" to_port="example set"/>
+                      <connect from_op="Create ExampleSet" from_port="output" to_port="output 1"/>
+                      <portSpacing port="source_input 1" spacing="0"/>
+                      <portSpacing port="source_input 2" spacing="0"/>
+                      <portSpacing port="sink_output 1" spacing="0"/>
+                      <portSpacing port="sink_output 2" spacing="0"/>
+                    </process>
+                    <description align="center" color="transparent" colored="false" width="126">lagging logs</description>
+                  </operator>
+                  <operator activated="true" class="append" compatibility="10.4.003" expanded="true" height="103" name="Append (2)" width="90" x="246" y="85">
+                    <parameter key="data_management" value="auto"/>
+                    <parameter key="merge_type" value="all"/>
+                  </operator>
+                  <operator activated="true" class="transpose" compatibility="10.4.003" expanded="true" height="82" name="Transpose" width="90" x="380" y="85"/>
+                  <operator activated="true" class="generate_aggregation" compatibility="10.4.003" expanded="true" height="82" name="Generate Aggregation" width="90" x="514" y="85">
+                    <parameter key="attribute_name" value="PI_data_logging"/>
+                    <parameter key="attribute_filter_type" value="all"/>
+                    <parameter key="attribute" value=""/>
+                    <parameter key="attributes" value=""/>
+                    <parameter key="use_except_expression" value="false"/>
+                    <parameter key="value_type" value="attribute_value"/>
+                    <parameter key="use_value_type_exception" value="false"/>
+                    <parameter key="except_value_type" value="time"/>
+                    <parameter key="block_type" value="attribute_block"/>
+                    <parameter key="use_block_type_exception" value="false"/>
+                    <parameter key="except_block_type" value="value_matrix_row_start"/>
+                    <parameter key="invert_selection" value="false"/>
+                    <parameter key="include_special_attributes" value="false"/>
+                    <parameter key="aggregation_function" value="concatenation"/>
+                    <parameter key="concatenation_separator" value=" "/>
+                    <parameter key="keep_all" value="false"/>
+                    <parameter key="ignore_missings" value="true"/>
+                    <parameter key="ignore_missing_attributes" value="false"/>
+                    <description align="center" color="transparent" colored="false" width="126">PI_data_logging</description>
+                  </operator>
+                  <operator activated="true" class="extract_macro" compatibility="10.4.003" expanded="true" height="68" name="Extract Macro (4)" width="90" x="648" y="85">
+                    <parameter key="macro" value="error_ts_check"/>
+                    <parameter key="macro_type" value="data_value"/>
+                    <parameter key="statistics" value="average"/>
+                    <parameter key="attribute_name" value="PI_data_logging"/>
+                    <parameter key="example_index" value="1"/>
+                    <list key="additional_macros"/>
+                    <description align="center" color="transparent" colored="false" width="126">error_ts_check</description>
+                  </operator>
+                  <operator activated="true" class="generate_macro" compatibility="10.4.003" expanded="true" height="82" name="Generate Macro (3)" width="90" x="782" y="85">
+                    <list key="function_descriptions">
+                      <parameter key="pullpi_window_hour" value="replace(%{pullpi_window_hour},&quot;h&quot;,&quot;&quot;)"/>
+                      <parameter key="pullpi_window_hour" value="round(if(&#13;&#10;&#9;date_diff(&#13;&#10;&#9;&#9;date_parse_custom(%{last_run_time},&quot;dd/MM/yyyy HH:mm:SS&quot;), &#13;&#10;&#9;&#9;date_parse_custom(%{available_pi_time},&quot;dd/MM/yyyy HH:mm:SS&quot;)&#13;&#10;&#9;&#9;)/1000/60/60&#13;&#10;&#9;&gt;= (parse(%{pullpi_window_hour})+1)&#13;&#10;,parse(%{pullpi_window_hour}),floor((date_diff(&#13;&#10;&#9;&#9;date_parse_custom(%{last_run_time},&quot;dd/MM/yyyy HH:mm:SS&quot;), &#13;&#10;&#9;&#9;date_parse_custom(%{available_pi_time},&quot;dd/MM/yyyy HH:mm:SS&quot;)&#13;&#10;&#9;&#9;)/1000/60/60)-1)))"/>
+                      <parameter key="pullpi_window_hour" value="rint(min(parse(%{pullpi_window_hour}),parse(replace(%{max_pullpi_window_hour},&quot;h&quot;,&quot;&quot;))))"/>
+                      <parameter key="need_to_run_flag" value="0"/>
+                    </list>
+                    <description align="center" color="transparent" colored="false" width="126">Here we are calculating pullpi window hour value with some checks</description>
+                  </operator>
+                  <connect from_port="condition" to_op="Loop Values" to_port="input 1"/>
+                  <connect from_op="Create ExampleSet (2)" from_port="output" to_op="Append (2)" to_port="example set 1"/>
+                  <connect from_op="Loop Values" from_port="output 1" to_op="Append (2)" to_port="example set 2"/>
+                  <connect from_op="Append (2)" from_port="merged set" to_op="Transpose" to_port="example set input"/>
+                  <connect from_op="Transpose" from_port="example set output" to_op="Generate Aggregation" to_port="example set input"/>
+                  <connect from_op="Generate Aggregation" from_port="example set output" to_op="Extract Macro (4)" to_port="example set"/>
+                  <connect from_op="Extract Macro (4)" from_port="example set" to_op="Generate Macro (3)" to_port="through 1"/>
+                  <portSpacing port="source_condition" spacing="0"/>
+                  <portSpacing port="source_input 1" spacing="0"/>
+                  <portSpacing port="source_input 2" spacing="0"/>
+                  <portSpacing port="sink_input 1" spacing="0"/>
+                </process>
+                <process expanded="true">
+                  <operator activated="true" class="filter_examples" compatibility="10.4.003" expanded="true" height="103" name="Filter Examples" width="90" x="112" y="85">
+                    <parameter key="parameter_expression" value=""/>
+                    <parameter key="condition_class" value="custom_filters"/>
+                    <parameter key="invert_filter" value="false"/>
+                    <list key="filters_list">
+                      <parameter key="filters_entry_key" value="flag_nan.ge.1"/>
+                    </list>
+                    <parameter key="filters_logic_and" value="true"/>
+                    <parameter key="filters_check_metadata" value="false"/>
+                    <description align="center" color="transparent" colored="false" width="126">flag_nan &amp;gt;=1</description>
+                  </operator>
+                  <operator activated="true" class="branch" compatibility="10.4.003" expanded="true" height="82" name="Branch (4)" width="90" x="246" y="85">
+                    <parameter key="condition_type" value="min_examples"/>
+                    <parameter key="condition_value" value="1"/>
+                    <parameter key="expression" value=""/>
+                    <parameter key="io_object" value="ANOVAMatrix"/>
+                    <parameter key="return_inner_output" value="true"/>
+                    <process expanded="true">
+                      <operator activated="true" class="utility:create_exampleset" compatibility="10.4.003" expanded="true" height="68" name="Create ExampleSet (4)" width="90" x="45" y="34">
+                        <parameter key="generator_type" value="attribute functions"/>
+                        <parameter key="number_of_examples" value="1"/>
+                        <parameter key="use_stepsize" value="false"/>
+                        <list key="function_descriptions">
+                          <parameter key="Error" value="&quot;PI Data Lagging: &quot;"/>
+                        </list>
+                        <parameter key="add_id_attribute" value="false"/>
+                        <list key="numeric_series_configuration"/>
+                        <list key="date_series_configuration"/>
+                        <list key="date_series_configuration (interval)"/>
+                        <parameter key="date_format" value="yyyy-MM-dd HH:mm:ss"/>
+                        <parameter key="time_zone" value="SYSTEM"/>
+                        <parameter key="column_separator" value=","/>
+                        <parameter key="parse_all_as_nominal" value="false"/>
+                        <parameter key="decimal_point_character" value="."/>
+                        <parameter key="trim_attribute_names" value="true"/>
+                        <description align="center" color="transparent" colored="false" width="126">prefix of log</description>
+                      </operator>
+                      <operator activated="true" class="concurrency:loop_values" compatibility="10.4.003" expanded="true" height="82" name="Loop Values (2)" width="90" x="45" y="187">
+                        <parameter key="attribute" value="tag"/>
+                        <parameter key="iteration_macro" value="loop_value"/>
+                        <parameter key="reuse_results" value="false"/>
+                        <parameter key="enable_parallel_execution" value="true"/>
+                        <process expanded="true">
+                          <operator activated="true" class="filter_examples" compatibility="10.4.003" expanded="true" height="103" name="Filter Examples (5)" width="90" x="45" y="34">
+                            <parameter key="parameter_expression" value=""/>
+                            <parameter key="condition_class" value="custom_filters"/>
+                            <parameter key="invert_filter" value="false"/>
+                            <list key="filters_list">
+                              <parameter key="filters_entry_key" value="tag.equals.%{loop_value}"/>
+                            </list>
+                            <parameter key="filters_logic_and" value="true"/>
+                            <parameter key="filters_check_metadata" value="true"/>
+                            <description align="center" color="transparent" colored="false" width="126">tag equals %{loop_value}</description>
+                          </operator>
+                          <operator activated="true" class="extract_macro" compatibility="10.4.003" expanded="true" height="68" name="Extract Macro" width="90" x="313" y="34">
+                            <parameter key="macro" value="current_timestamp"/>
+                            <parameter key="macro_type" value="data_value"/>
+                            <parameter key="statistics" value="average"/>
+                            <parameter key="attribute_name" value="Timestamp"/>
+                            <parameter key="example_index" value="1"/>
+                            <list key="additional_macros"/>
+                            <description align="center" color="transparent" colored="false" width="126">current_timestamp</description>
+                          </operator>
+                          <operator activated="true" class="utility:create_exampleset" compatibility="10.4.003" expanded="true" height="68" name="Create ExampleSet (5)" width="90" x="514" y="34">
+                            <parameter key="generator_type" value="attribute functions"/>
+                            <parameter key="number_of_examples" value="1"/>
+                            <parameter key="use_stepsize" value="false"/>
+                            <list key="function_descriptions">
+                              <parameter key="Error" value="concat(%{loop_value},&quot; (NAN) &quot;,&quot;(&quot;, %{current_timestamp},&quot;);&quot;)"/>
+                            </list>
+                            <parameter key="add_id_attribute" value="false"/>
+                            <list key="numeric_series_configuration"/>
+                            <list key="date_series_configuration"/>
+                            <list key="date_series_configuration (interval)"/>
+                            <parameter key="date_format" value="yyyy-MM-dd HH:mm:ss"/>
+                            <parameter key="time_zone" value="SYSTEM"/>
+                            <parameter key="column_separator" value=","/>
+                            <parameter key="parse_all_as_nominal" value="false"/>
+                            <parameter key="decimal_point_character" value="."/>
+                            <parameter key="trim_attribute_names" value="true"/>
+                            <description align="center" color="transparent" colored="false" width="126">Error</description>
+                          </operator>
+                          <connect from_port="input 1" to_op="Filter Examples (5)" to_port="example set input"/>
+                          <connect from_op="Filter Examples (5)" from_port="example set output" to_op="Extract Macro" to_port="example set"/>
+                          <connect from_op="Create ExampleSet (5)" from_port="output" to_port="output 1"/>
+                          <portSpacing port="source_input 1" spacing="0"/>
+                          <portSpacing port="source_input 2" spacing="0"/>
+                          <portSpacing port="sink_output 1" spacing="0"/>
+                          <portSpacing port="sink_output 2" spacing="0"/>
+                        </process>
+                        <description align="center" color="transparent" colored="false" width="126">NAN logs</description>
+                      </operator>
+                      <operator activated="true" class="append" compatibility="10.4.003" expanded="true" height="103" name="Append (3)" width="90" x="179" y="85">
+                        <parameter key="data_management" value="auto"/>
+                        <parameter key="merge_type" value="all"/>
+                      </operator>
+                      <operator activated="true" class="transpose" compatibility="10.4.003" expanded="true" height="82" name="Transpose (2)" width="90" x="313" y="85"/>
+                      <operator activated="true" class="generate_aggregation" compatibility="10.4.003" expanded="true" height="82" name="Generate Aggregation (2)" width="90" x="447" y="85">
+                        <parameter key="attribute_name" value="PI_data_logging"/>
+                        <parameter key="attribute_filter_type" value="all"/>
+                        <parameter key="attribute" value=""/>
+                        <parameter key="attributes" value=""/>
+                        <parameter key="use_except_expression" value="false"/>
+                        <parameter key="value_type" value="attribute_value"/>
+                        <parameter key="use_value_type_exception" value="false"/>
+                        <parameter key="except_value_type" value="time"/>
+                        <parameter key="block_type" value="attribute_block"/>
+                        <parameter key="use_block_type_exception" value="false"/>
+                        <parameter key="except_block_type" value="value_matrix_row_start"/>
+                        <parameter key="invert_selection" value="false"/>
+                        <parameter key="include_special_attributes" value="false"/>
+                        <parameter key="aggregation_function" value="concatenation"/>
+                        <parameter key="concatenation_separator" value=" "/>
+                        <parameter key="keep_all" value="false"/>
+                        <parameter key="ignore_missings" value="true"/>
+                        <parameter key="ignore_missing_attributes" value="false"/>
+                        <description align="center" color="transparent" colored="false" width="126">PI_data_logging</description>
+                      </operator>
+                      <operator activated="true" class="extract_macro" compatibility="10.4.003" expanded="true" height="68" name="Extract Macro (5)" width="90" x="581" y="85">
+                        <parameter key="macro" value="error_ts_check"/>
+                        <parameter key="macro_type" value="data_value"/>
+                        <parameter key="statistics" value="average"/>
+                        <parameter key="attribute_name" value="PI_data_logging"/>
+                        <parameter key="example_index" value="1"/>
+                        <list key="additional_macros"/>
+                        <description align="center" color="transparent" colored="false" width="126">error_ts_check</description>
+                      </operator>
+                      <operator activated="true" class="generate_macro" compatibility="10.4.003" expanded="true" height="82" name="Generate Macro (2)" width="90" x="715" y="85">
+                        <list key="function_descriptions">
+                          <parameter key="pullpi_window_hour" value="replace(%{pullpi_window_hour},&quot;h&quot;,&quot;&quot;)"/>
+                          <parameter key="pullpi_window_hour" value="round(if(&#13;&#10;&#9;date_diff(&#13;&#10;&#9;&#9;date_parse_custom(%{last_run_time},&quot;dd/MM/yyyy HH:mm:SS&quot;), &#13;&#10;&#9;&#9;date_parse_custom(%{available_pi_time},&quot;dd/MM/yyyy HH:mm:SS&quot;)&#13;&#10;&#9;&#9;)/1000/60/60&#13;&#10;&#9;&gt;= (parse(%{pullpi_window_hour})+1)&#13;&#10;,parse(%{pullpi_window_hour}),floor((date_diff(&#13;&#10;&#9;&#9;date_parse_custom(%{last_run_time},&quot;dd/MM/yyyy HH:mm:SS&quot;), &#13;&#10;&#9;&#9;date_parse_custom(%{available_pi_time},&quot;dd/MM/yyyy HH:mm:SS&quot;)&#13;&#10;&#9;&#9;)/1000/60/60)-1)))"/>
+                          <parameter key="pullpi_window_hour" value="rint(min(parse(%{pullpi_window_hour}),parse(replace(%{max_pullpi_window_hour},&quot;h&quot;,&quot;&quot;))))"/>
+                          <parameter key="need_to_run_flag" value="0"/>
+                        </list>
+                        <description align="center" color="transparent" colored="false" width="126">Here we are calculating pullpi window hour value with some checks</description>
+                      </operator>
+                      <connect from_port="condition" to_op="Loop Values (2)" to_port="input 1"/>
+                      <connect from_op="Create ExampleSet (4)" from_port="output" to_op="Append (3)" to_port="example set 1"/>
+                      <connect from_op="Loop Values (2)" from_port="output 1" to_op="Append (3)" to_port="example set 2"/>
+                      <connect from_op="Append (3)" from_port="merged set" to_op="Transpose (2)" to_port="example set input"/>
+                      <connect from_op="Transpose (2)" from_port="example set output" to_op="Generate Aggregation (2)" to_port="example set input"/>
+                      <connect from_op="Generate Aggregation (2)" from_port="example set output" to_op="Extract Macro (5)" to_port="example set"/>
+                      <connect from_op="Extract Macro (5)" from_port="example set" to_op="Generate Macro (2)" to_port="through 1"/>
+                      <portSpacing port="source_condition" spacing="0"/>
+                      <portSpacing port="source_input 1" spacing="0"/>
+                      <portSpacing port="sink_input 1" spacing="0"/>
+                    </process>
+                    <process expanded="true">
+                      <operator activated="true" class="generate_macro" compatibility="10.4.003" expanded="true" height="68" name="Generate Macro" width="90" x="246" y="34">
+                        <list key="function_descriptions">
+                          <parameter key="pullpi_window_hour" value="replace(%{pullpi_window_hour},&quot;h&quot;,&quot;&quot;)"/>
+                          <parameter key="pullpi_window_hour" value="round(if(&#13;&#10;&#9;date_diff(&#13;&#10;&#9;&#9;date_parse_custom(%{last_run_time},&quot;dd/MM/yyyy HH:mm:SS&quot;), &#13;&#10;&#9;&#9;date_parse_custom(%{available_pi_time},&quot;dd/MM/yyyy HH:mm:SS&quot;)&#13;&#10;&#9;&#9;)/1000/60/60&#13;&#10;&#9;&gt;= (parse(%{pullpi_window_hour})+1)&#13;&#10;,parse(%{pullpi_window_hour}),floor((date_diff(&#13;&#10;&#9;&#9;date_parse_custom(%{last_run_time},&quot;dd/MM/yyyy HH:mm:SS&quot;), &#13;&#10;&#9;&#9;date_parse_custom(%{available_pi_time},&quot;dd/MM/yyyy HH:mm:SS&quot;)&#13;&#10;&#9;&#9;)/1000/60/60)-1)))"/>
+                          <parameter key="pullpi_window_hour" value="rint(min(parse(%{pullpi_window_hour}),parse(replace(%{max_pullpi_window_hour},&quot;h&quot;,&quot;&quot;))))"/>
+                          <parameter key="need_to_run_flag" value="if(&#10;&#9;date_diff(&#10;&#9;&#9;date_parse_custom(%{last_run_time},&quot;dd/MM/yyyy HH:mm:SS&quot;), &#10;&#9;&#9;date_parse_custom(%{available_pi_time},&quot;dd/MM/yyyy HH:mm:SS&quot;)&#10;&#9;&#9;)/1000/60 &#10;&gt;=eval(%{frequency})&#10;,1,0)"/>
+                          <parameter key="error_ts_check" value="&quot;NA&quot;"/>
+                        </list>
+                        <description align="center" color="transparent" colored="false" width="126">Here we are calculating pullpi window hour value with some checks</description>
+                      </operator>
+                      <portSpacing port="source_condition" spacing="0"/>
+                      <portSpacing port="source_input 1" spacing="0"/>
+                      <portSpacing port="sink_input 1" spacing="0"/>
+                    </process>
+                    <description align="center" color="transparent" colored="false" width="126">min_examples&lt;br/&gt;1</description>
+                  </operator>
+                  <connect from_port="input 1" to_op="Filter Examples" to_port="example set input"/>
+                  <connect from_op="Filter Examples" from_port="example set output" to_op="Branch (4)" to_port="condition"/>
+                  <portSpacing port="source_condition" spacing="0"/>
+                  <portSpacing port="source_input 1" spacing="0"/>
+                  <portSpacing port="source_input 2" spacing="0"/>
+                  <portSpacing port="sink_input 1" spacing="0"/>
+                </process>
+                <description align="center" color="transparent" colored="false" width="126">min_examples&lt;br/&gt;equals 1</description>
+              </operator>
+              <connect from_port="in 1" to_op="Aggregate (min) Timestamp" to_port="example set input"/>
+              <connect from_op="Aggregate (min) Timestamp" from_port="example set output" to_op="available_pi_time" to_port="example set"/>
+              <connect from_op="Aggregate (min) Timestamp" from_port="original" to_op="Generate Attributes (2)" to_port="example set input"/>
+              <connect from_op="Generate Attributes (2)" from_port="example set output" to_op="Filter Examples (2)" to_port="example set input"/>
+              <connect from_op="Filter Examples (2)" from_port="example set output" to_op="Branch (3)" to_port="condition"/>
+              <connect from_op="Filter Examples (2)" from_port="original" to_op="Branch (3)" to_port="input 1"/>
+              <portSpacing port="source_in 1" spacing="0"/>
+              <portSpacing port="source_in 2" spacing="0"/>
+              <portSpacing port="sink_out 1" spacing="0"/>
+            </process>
+          </operator>
+          <operator activated="true" class="utility:create_exampleset" compatibility="10.4.003" expanded="true" height="68" name="Create ExampleSet (6)" width="90" x="581" y="187">
+            <parameter key="generator_type" value="comma separated text"/>
+            <parameter key="number_of_examples" value="100"/>
+            <parameter key="use_stepsize" value="false"/>
+            <list key="function_descriptions"/>
+            <parameter key="add_id_attribute" value="false"/>
+            <list key="numeric_series_configuration"/>
+            <list key="date_series_configuration"/>
+            <list key="date_series_configuration (interval)"/>
+            <parameter key="date_format" value="yyyy-MM-dd HH:mm:ss"/>
+            <parameter key="time_zone" value="SYSTEM"/>
+            <parameter key="input_csv_text" value="macro_name, macro_value&#10;available_pi_time, %{available_pi_time}&#10;last_run_time, %{last_run_time}&#10;need_to_run_flag, %{need_to_run_flag}&#10;pullpi_window_hour, %{pullpi_window_hour}h&#10;frequency,%{frequency}&#10;ts_check_log,%{error_ts_check}"/>
+            <parameter key="column_separator" value=","/>
+            <parameter key="parse_all_as_nominal" value="false"/>
+            <parameter key="decimal_point_character" value="."/>
+            <parameter key="trim_attribute_names" value="true"/>
+            <description align="center" color="transparent" colored="false" width="126">Creating ExampleSet to show the results for available pi time tag, last run time, need to run flag, pullpi window hour, frequency and logs</description>
+          </operator>
+          <connect from_port="in 1" to_op="get timestamps for all check_tags" to_port="in 1"/>
+          <connect from_op="get timestamps for all check_tags" from_port="out 1" to_op="need to run flag" to_port="in 1"/>
+          <connect from_op="Create ExampleSet (6)" from_port="output" to_port="out 1"/>
+          <portSpacing port="source_in 1" spacing="0"/>
+          <portSpacing port="source_in 2" spacing="0"/>
+          <portSpacing port="sink_out 1" spacing="0"/>
+          <portSpacing port="sink_out 2" spacing="0"/>
+        </process>
+        <description align="center" color="transparent" colored="false" width="126">Calculating available pi time tag, last run time, need to run flag, pullpi window hour and frequency</description>
+      </operator>
+      <connect from_port="input 1" to_op="initialization (2)" to_port="in 1"/>
+      <connect from_op="initialization (2)" from_port="out 1" to_op="main (2)" to_port="in 1"/>
+      <connect from_op="main (2)" from_port="out 1" to_port="result 1"/>
+      <portSpacing port="source_input 1" spacing="0"/>
+      <portSpacing port="source_input 2" spacing="0"/>
+      <portSpacing port="sink_result 1" spacing="0"/>
+      <portSpacing port="sink_result 2" spacing="0"/>
+      <description align="center" color="blue" colored="true" height="613" resized="true" width="276" x="379" y="13">FE Initialization</description>
+      <description align="center" color="green" colored="true" height="607" resized="true" width="303" x="657" y="18">Main</description>
+      <description align="center" color="red" colored="true" height="612" resized="true" width="367" x="10" y="13">Data availability check&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;Author:&lt;br&gt;Akshay Hasabe&lt;br&gt;Naveen Kumar&lt;br&gt;Karthik Sanagapalli&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;Overview:&lt;br&gt;This process is a common process which reads the last run time of certain case along with latest data available in PI for that specific plant based on PI Tag provided in config file and determines the next possible new run time for which the trigger service would generate output.&lt;br&gt;Input macro&lt;br&gt;1. Connection sql&lt;br&gt;2. Connection pi&lt;br&gt;3. case_id&lt;br&gt;4. pullpi_window_hour&lt;br&gt;&lt;br&gt;Output:&lt;br&gt;Dataframe containing available_pi_time, last_run_time,&lt;br&gt;need_to_run_flag,&lt;br&gt;pullpi_window_hour, frequency</description>
+      <description align="center" color="transparent" colored="true" height="192" resized="false" width="126" x="696" y="372">example set with columns 'macro_name' &amp;amp; 'macro_value'.&lt;br&gt;Please run 'Set macro from example set' on this output to get the macros 'need_to_run_flag'</description>
+    </process>
+  </operator>
+</process>

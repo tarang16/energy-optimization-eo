@@ -1,0 +1,32 @@
+.labelNumberCompo {
+  min-height: 2vmin;
+}
+
+.labelNumberCompo .labelNumber {
+  align-items: flex-start;
+  display: inline-flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.labelNumberCompo .text {
+  align-items: center;
+  align-self: stretch;
+  border-radius: 5px 5px 0px 0px;
+  display: flex;
+  flex: 0 0 auto;
+  gap: 5px;
+  padding: 5px 10px;
+  position: relative;
+  width: 100%;
+}
+
+.labelNumberCompo .textWrapper {
+  color: rgba(77, 77, 77, 1);
+  text-transform: uppercase;
+}
+
+.labelNumberCompo .div {
+  color: rgba(0, 159, 224, 1);
+  text-transform: uppercase;
+}

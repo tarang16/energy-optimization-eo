@@ -1,0 +1,87 @@
+.labeltagParameterCompo {
+  min-height: 8vmin;
+}
+
+.labeltagParameterCompo .parameter {
+  align-items: center;
+  border-radius: 5px;
+  display: inline-flex;
+  flex-direction: column;
+  gap: 5px;
+  justify-content: center;
+  padding: 5px 0px;
+  position: relative;
+}
+
+.labeltagParameterCompo .tag {
+  min-height: 2vmin;
+}
+
+.labeltagParameterCompo .textWrapper {
+  color: rgba(77, 77, 77, 1);
+  text-align: center;
+}
+
+.labeltagParameterCompo .numbers {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  position: relative;
+}
+
+.labeltagParameterCompo .divWrapper {
+  min-height: 2vmin;
+}
+
+.labeltagParameterCompo .div {
+  color: #009fdf;
+}
+
+.actualRed {
+  color: #e45205;
+}
+
+.labeltagParameterCompo .divider {
+  background-image: url(https://c.animaapp.com/Ho7GXhwt/img/line-374.svg);
+  background-position: 50% 50%;
+  background-size: cover;
+  height: 18px;
+  position: relative;
+  width: 1px;
+}
+
+.labeltagParameterCompo .textWrapper2 {
+  color: #939598;
+}
+
+.unitTextContainer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: 100%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  .stopperContainer {
+    height: 2px;
+    width: 6px;
+    background-color: #e6e7e8;
+  }
+
+  .unitTextWrapper {
+    width: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px 0px;
+    border-radius: 7px;
+    background-color: #e6e7e8;
+  }
+
+  .unitText {
+    color: rgba(77, 77, 77, 1);
+  }
+}

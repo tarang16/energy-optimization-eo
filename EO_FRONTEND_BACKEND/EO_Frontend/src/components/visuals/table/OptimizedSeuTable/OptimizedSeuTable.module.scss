@@ -1,0 +1,199 @@
+@use 'src/config/scss/_variables' as *;
+
+.EMTableParentContainer {
+  overflow: hidden;
+
+  .legendContainer {
+    height: 3.5vmin;
+
+    .containerLengendText {
+      .customMargin {
+        margin-right: 0.5vmin;
+      }
+
+      .square {
+        width: 1.2vmin;
+        height: 1.2vmin;
+        border-radius: 0.2vmin;
+        display: inline-block;
+      }
+    }
+  }
+
+  .EnergyManagementTableContainer {
+    overflow-y: auto;
+    height: calc(100% - 4vmin);
+
+    .seuSeecHeaderDetails {
+      .categoryColumn {
+        span {
+          text-transform: none !important;
+        }
+      }
+    }
+
+    :global(.ag-header-group-cell) {
+      justify-content: center;
+      display: flex;
+    }
+
+    :global(.cell-style) {
+      white-space: normal;
+      word-break: break-word;
+      line-height: 1.1;
+      display: flex;
+      align-items: center;
+      padding-top: 0.5vmin;
+      padding-bottom: 0.5vmin;
+      justify-content: center;
+      background-color: inherit;
+    }
+
+    :global(.addBorder) {
+      border-bottom: 0.1vmin solid $primary_gray_4 !important;
+      border-right: 0.1vmin solid $primary_gray_4 !important;
+      border-left: 0.1vmin solid $primary_gray_4 !important;
+    }
+
+    :global(.bottomRowEMtable) {
+      background-color: $primary_blue_bg !important;
+
+      &:hover {
+        background-color: unset !important;
+      }
+
+      :global(.ag-cell) {
+        font-family: 'sabic_text_bold', serif !important;
+        border: none !important;
+
+        .categoryColumn {
+          justify-content: center;
+        }
+      }
+
+      :global(.hideContent) {
+        display: none;
+      }
+    }
+
+    :global(.bottomRowEMtable.ag-row:hover .ag-cell) {
+      background-color: unset !important;
+    }
+
+    :global(.custom-efficiency-header) {
+      .categoryColumn {
+        position: relative;
+      }
+
+      .openButton.headerOpenBtn {
+        position: absolute;
+        left: 2.5vmin;
+        right: 2.5vmin;
+        bottom: 3vmin;
+      }
+    }
+
+    .categoryColumn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1vmin;
+      height: 100%;
+      text-transform: uppercase;
+
+      .openButton {
+        background-color: transparent;
+        min-width: 1.5vmin;
+        max-width: 1.5vmin;
+        height: 1.5vmin;
+        border: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+
+        img {
+          width: 100%;
+          height: 100%;
+          filter: brightness(0) saturate(100%) invert(47%) sepia(87%)
+            saturate(1928%) hue-rotate(165deg) brightness(92%) contrast(101%);
+        }
+
+        &.headerOpenBtn {
+          min-width: 2.5vmin;
+          max-width: 2.5vmin;
+          height: 2.5vmin;
+
+          img {
+            filter: unset;
+
+            &:hover {
+              border: 1px solid $primary_blue;
+              border-radius: 3px;
+            }
+          }
+        }
+      }
+
+      .filterButton {
+        background-color: transparent;
+        min-width: 2vmin;
+        max-width: 2vmin;
+        height: 2vmin;
+        border: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+
+        img {
+          width: 100%;
+          height: 100%;
+          filter: brightness(0) saturate(100%) invert(47%) saturate(1928%)
+            hue-rotate(10deg) brightness(92%) contrast(10%);
+        }
+      }
+    }
+  }
+}
+
+.EMheaderdrodowContainer {
+  :global(.react-select-modifyDetails__value-container) {
+    display: none;
+  }
+
+  :global(.react-select-modifyDetails__indicator) {
+    padding: 0;
+
+    svg {
+      width: 2vmin;
+      filter: brightness(0) saturate(100%) invert(64%) sepia(4%) saturate(240%)
+        hue-rotate(177deg) brightness(92%) contrast(92%);
+    }
+  }
+
+  :global(.react-select-modifyDetails__control) {
+    min-height: unset;
+    background-color: transparent;
+    border: none !important;
+    cursor: pointer;
+  }
+}
+
+:global(
+  .EMtableCustomHeaderDropdownWidth.react-select-modifyDetails__menu-portal
+) {
+  z-index: 1090;
+}
+
+:global(.EMtableCustomHeaderDropdownWidth.react-select-modifyDetails__menu) {
+  width: 14vmin;
+  left: -2vmin;
+}
+
+:global(
+  .EMtableCustomHeaderDropdownWidth.react-select-modifyDetails__menu-list
+) {
+  overflow-x: hidden;
+  font-size: 1.2vmin;
+}

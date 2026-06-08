@@ -1,0 +1,182 @@
+@use 'config/scss/variables' as *;
+@use 'src/config/scss/typography' as *;
+@use 'src/config/scss/common' as *;
+
+.EO_alertParentContainer {
+  padding: 0 2vmin 1.4vmin 2vmin;
+  position: relative;
+  z-index: 0;
+
+  img {
+    filter: none !important;
+  }
+
+  //remove after use
+  .alertStatsContainerMain {
+    opacity: 1; //remove after use
+    user-select: none;
+    pointer-events: none;
+
+    .alertUnderProgressContainer {
+      color: $primary_black;
+    }
+
+    .alertStatisticsUnderProgressContainer {
+      user-select: none;
+      pointer-events: none;
+      background-image: url('../../../../assets/images/screenshotAlerts.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-color: $primary_gray_3;
+      width: auto;
+      height: auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1vmin;
+      z-index: 999;
+      filter: brightness(60%);
+
+      h1 {
+        position: relative;
+        z-index: 999;
+      }
+    }
+
+    .alertStaticsModelContainer {
+      position: absolute;
+      opacity: 0.4;
+      top: 0;
+    }
+  }
+
+  .container {
+    // overflow: hidden;
+    background-color: $primary_white;
+    border-radius: 0.6vmin;
+
+    .searchContainer {
+      height: 3.5vmin;
+      width: 25vmin;
+      padding: 0;
+      margin: 0 0 1.5vmin 0;
+
+      input {
+        display: inline-block;
+        height: 100%;
+        border: 1px solid $primary_gray_3;
+        border-radius: 0.3vmin;
+        padding: 0.6vmin 1vmin;
+
+        &:focus {
+          outline: none;
+          border-color: $primary_gray_3 !important;
+        }
+      }
+
+      button {
+        display: inline-block;
+        height: 100%;
+        min-width: 12vmin;
+        border-radius: 0.3vmin;
+        font-size: 1.6vmin;
+        padding: 0.6vmin 1vmin;
+        line-height: inherit;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 0.08vmin;
+
+        &.resetBtn {
+          background-color: $primary_gray_2;
+          border: 1px solid $primary_gray_2;
+        }
+
+        &.searchBtn {
+          background-color: $primary_blue;
+          border: 1px solid $primary_blue;
+        }
+      }
+    }
+
+    .resultsContainer {
+      height: calc(100% - 6vmin);
+
+      :global(.active) {
+        background-color: $primary_blue !important;
+      }
+
+      :global(.nav.nav-tabs) {
+        width: 100%;
+        height: calc(4.5vmin) !important;
+        display: flex;
+        justify-content: flex-start;
+        border-top-left-radius: 0.3vmin;
+
+        :global(.nav-item) {
+          padding: 0 !important;
+          position: relative;
+          height: 100%;
+          min-width: 25vmin !important;
+          width: unset !important;
+          filter: drop-shadow(0.01vmin -0vmin 0.25vmin rgba(0, 0, 0, 0.15));
+          // padding-top: 0.6vmin !important;
+          margin-right: -1.5vmin;
+          display: flex;
+
+          :global(.nav-link) {
+            height: 100%;
+            color: $primary_gray !important;
+            @include text12;
+            font-family: 'sabic_text_bold', serif;
+            padding: 0.25vmin 3vmin 0 3vmin;
+            clip-path: polygon(
+              2.5vmin 0%,
+              calc(100% - 2.5vmin) 0%,
+              100% 100%,
+              0% 100%
+            );
+            border-top-left-radius: 3.5vmin;
+            border-top-right-radius: 3.5vmin;
+            overflow: hidden;
+            background-color: $primary_blue_bg;
+            min-width: fit-content;
+            position: relative;
+          }
+
+          :global(.nav-link.active) {
+            color: $primary_white !important;
+          }
+        }
+
+        :global {
+          @for $i from 1 through 30 {
+            .nav-item:nth-child(#{$i}) {
+              z-index: #{31 - $i};
+            }
+          }
+        }
+
+        :global(.nav-item:has(.nav-link.active)) {
+          z-index: 50;
+        }
+      }
+
+      :global(.tab-content) {
+        height: calc(100% - 4.5vmin);
+        @include boxShadow_card;
+        border-radius: 0.3vmin;
+        border-top: 1px solid $primary_gray_4;
+
+        :global(.tab-pane) {
+          padding: 1vmin;
+          border-radius: 0.3vmin;
+        }
+
+        :global(.tab-pane.active) {
+          background-color: $primary_white !important;
+        }
+      }
+    }
+  }
+}

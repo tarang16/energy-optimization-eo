@@ -1,0 +1,55 @@
+@use 'config/scss/variables' as *;
+
+.container {
+  width: 100%;
+  min-height: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.header { height: 12.3%; }
+
+.headerDiv {
+  height: 0.4%;
+  background-image: linear-gradient(130deg, #0047bb 0%, $primary_blue 100%);
+}
+
+.content {
+  flex: 1;
+  width: 100%;
+  background-color: $primary_white;
+  overflow: hidden;
+
+  .sidebar { width: 19vmin; }
+
+  .main {
+    width: calc(100% - 19vmin);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+
+    .topContainer {
+      padding: 0.4vmin 2vmin 0.1vmin 2vmin;
+      height: 5vmin;
+    }
+
+    .bottomContainer {
+      flex: 1;
+      padding: 0;
+      overflow: auto;
+    }
+  }
+}
+
+.footerDiv {
+  height: 0.4%;
+  background-image: linear-gradient(130deg, $primary_yellow 0%, $primary_yellow_20 100%);
+}
+
+.footer {
+  height: calc(100% - 83% - 0.4% - 0.4% - 12.3%);
+  min-height: 4vmin;
+  width: 100%;
+  z-index: 999;
+}

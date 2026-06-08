@@ -1,0 +1,32 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(head -50)",
+      "Bash(python -c ' *)",
+      "Bash(mkdir -p /tmp/nb_extract)",
+      "Read(//tmp/**)",
+      "Bash(python -c \"import pandas as pd; xl = pd.ExcelFile\\('Data/source/feature_file_eo_v9_unified.xlsx'\\); print\\('\\\\n'.join\\(xl.sheet_names\\)\\)\")",
+      "Bash(python)",
+      "Bash(python _build_hierarchy_index.py)",
+      "Bash(python build_minlp_artifacts.py)",
+      "Bash(python _reconcile_boiler_pi_coverage.py)",
+      "Bash(python _classify_boiler_l2_leaves.py)",
+      "Bash(python _enumerate_boiler_minlp_inputs.py)",
+      "Bash(python _build_hierarchy_additions_full.py)",
+      "Bash(python _build_boiler_minlp_master_list.py)",
+      "Bash(python _build_boiler_minlp_master_list_v2.py)",
+      "Bash(python -)",
+      "Bash(python \"Data\\\\source\\\\_eval_boiler_peeo.py\")",
+      "Bash(python \"Data\\\\source\\\\_populate_inferred_sheet.py\")",
+      "Read(//c/Users/tnigam/Downloads/**)",
+      "Bash(python -c \"import openpyxl; wb = openpyxl.load_workbook\\('Steam_Network_1_all_attributes_Tags_REV1.xlsx'\\); print\\('Sheets:', wb.sheetnames\\)\")",
+      "Bash(python run_boiler_a.py)",
+      "Bash(python boiler_pipeline.py)",
+      "Bash(python -c \"import sys; sys.stdout.buffer.write\\(sys.stdin.buffer.read\\(\\)\\)\")",
+      "Bash(python boiler_complete.py)",
+      "Bash(python -c \"import json; d=json.load\\(open\\('output.json'\\)\\); print\\(json.dumps\\(d['A'], indent=2\\)\\)\")",
+      "Bash(python -c \"import json; print\\(json.dumps\\(json.load\\(open\\('output.json'\\)\\), indent=2\\)\\)\")",
+      "Bash(Move-Item \"C:\\\\Users\\\\tnigam\\\\Desktop\\\\Python EO\\\\Genric Pipeline\\\\energy_kev\\\\assets\\\\boiler.py\" \"C:\\\\Users\\\\tnigam\\\\Desktop\\\\Python EO\\\\Genric Pipeline\\\\energy_kev\\\\assets\\\\boiler_classic.py\" -ErrorAction Stop)"
+    ]
+  }
+}

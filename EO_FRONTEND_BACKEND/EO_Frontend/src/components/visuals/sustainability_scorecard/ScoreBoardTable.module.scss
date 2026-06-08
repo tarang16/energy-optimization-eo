@@ -1,0 +1,61 @@
+@use '../../../config/scss/variables' as *;
+
+.scoreboard_container {
+  border: 1px solid $primary_gray_4;
+  padding: 0 0 0 0;
+  border-radius: 0.5vmin;
+
+  &__header {
+    border-radius: 0.5vmin 0.5vmin 0 0;
+    background-color: $primary_blue_bg;
+    height: 4vmin;
+    display: flex;
+    padding-top: 0.6vmin;
+    padding-left: 1vmin;
+    padding-right: 1vmin;
+    align-items: center;
+
+    div {
+      text-align: center;
+      width: 30%;
+
+      &:first-child {
+        text-align: left;
+        width: 70%;
+      }
+    }
+  }
+
+  &__body {
+    height: calc(100% - 4vmin);
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .card_body_section {
+      padding: 0.5vmin 1vmin;
+
+      &:not(:last-child) {
+        border-bottom: 1px solid $primary_gray_4;
+      }
+
+      .body_left_content {
+        text-align: center;
+        margin-top: 0.4vmin;
+
+        width: 30%;
+
+        .titleText {
+          margin-bottom: 0vmin;
+          margin-top: 0.3vmin;
+        }
+
+        &:first-child {
+          width: 70%;
+          text-align: left;
+        }
+      }
+    }
+  }
+}

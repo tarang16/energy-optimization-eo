@@ -1,0 +1,83 @@
+{
+  "version": "2.0",
+  "description": "United Boiler-A efficiency chain (existing formulas).",
+  "attributes": [
+    {
+      "attribute_name": "BOILER_LOAD",
+      "hierarchy_level": "Boiler",
+      "formula": "STEAM_FLOW_RAW / RATED_STEAM_KGH * 100",
+      "data_type": "real",
+      "uom": "%"
+    },
+    {
+      "attribute_name": "HPS_GEN",
+      "hierarchy_level": "Boiler",
+      "formula": "if(STEAM_FLOW_RAW < 0, 0, STEAM_FLOW_RAW / 1000)",
+      "data_type": "real",
+      "uom": "T/HR"
+    },
+    {
+      "attribute_name": "STATUS",
+      "hierarchy_level": "Boiler",
+      "formula": "if((BOILER_LOAD > MIN_LOAD_PCT) && (DESUPERHEATER_OUTLET_TEMP > STEAM_TEMP_ON_THRESH) && (HP_STEAM_PRESSURE > STEAM_PRESS_ON_THRESH), 1, 0)",
+      "data_type": "real",
+      "uom": ""
+    },
+    {
+      "attribute_name": "FUEL_FLOW",
+      "hierarchy_level": "Boiler",
+      "formula": "FUEL_GAS_FLOW * STATUS / 1000",
+      "data_type": "real",
+      "uom": "T/HR"
+    },
+    {
+      "attribute_name": "SPEC_EN_CONS",
+      "hierarchy_level": "Boiler",
+      "formula": "if(HPS_GEN == 0, 0, FUEL_FLOW * plant.BOILER_LHV / HPS_GEN)",
+      "data_type": "real",
+      "uom": "KCAL/T"
+    },
+    {
+      "attribute_name": "SPEC_EN_CONS_OPT",
+      "hierarchy_level": "Boiler",
+      "formula": "(SEC_OPT_A * HPS_GEN ** 2 + SEC_OPT_B * HPS_GEN + SEC_OPT_C) * STATUS",
+      "data_type": "real",
+      "uom": "GJ/T"
+    },
+    {
+      "attribute_name": "SPEC_EN_CONS_DEV",
+      "hierarchy_level": "Boiler",
+      "formula": "if(STATUS == 0, 0, (SPEC_EN_CONS_OPT - SPEC_EN_CONS) / SPEC_EN_CONS_OPT)",
+      "data_type": "real",
+      "uom": "ratio"
+    },
+    {
+      "attribute_name": "FUEL_INPUT_GJ_H",
+      "hierarchy_level": "Boiler",
+      "formula": "FUEL_FLOW * plant.BOILER_LHV * 4.184 / 1000",
+      "data_type": "real",
+      "uom": "GJ/H"
+    },
+    {
+      "attribute_name": "USEFUL_HEAT_GJ_H",
+      "hierarchy_level": "Boiler",
+      "formula": "HPS_GEN * 2.8",
+      "data_type": "real",
+      "uom": "GJ/H"
+    },
+    {
+      "attribute_name": "EFFICIENCY_PCT",
+      "hierarchy_level": "Boiler",
+      "formula": "if(FUEL_INPUT_GJ_H == 0, 0, USEFUL_HEAT_GJ_H / FUEL_INPUT_GJ_H * 100)",
+      "data_type": "real",
+      "uom": "%"
+    },
+    {
+      "attribute_name": "CO2_T_PER_H",
+      "hierarchy_level": "Boiler",
+      "formula": "FUEL_INPUT_GJ_H * CO2_KG_PER_GJ / 1000",
+      "data_type": "real",
+      "uom": "T/H"
+    }
+  ]
+}

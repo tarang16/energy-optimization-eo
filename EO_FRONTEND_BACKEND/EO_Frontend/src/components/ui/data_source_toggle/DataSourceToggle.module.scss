@@ -1,0 +1,70 @@
+@use 'config/scss/variables' as *;
+
+.container {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8vmin;
+  padding: 0.4vmin 1vmin;
+  border: 1px solid $primary_gray_3;
+  border-radius: 999px;
+  background: $primary_white;
+  user-select: none;
+  height: 3vmin;
+  font-family: 'sabic_headline_light', serif;
+}
+
+.label {
+  font-size: 1.2vmin;
+  font-weight: bold;
+  letter-spacing: 0.05vmin;
+  color: $primary_gray_2;
+  transition: color 160ms ease-in-out;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.labelActive {
+  color: $primary_blue;
+}
+
+.labelActiveOrange {
+  color: $primary_orange;
+}
+
+.track {
+  position: relative;
+  width: 3.6vmin;
+  height: 1.8vmin;
+  border-radius: 999px;
+  background: $primary_gray_3;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: background-color 160ms ease-in-out;
+  flex-shrink: 0;
+
+  &:focus-visible {
+    outline: 0.2vmin solid $primary_blue;
+    outline-offset: 0.2vmin;
+  }
+}
+
+.trackOn {
+  background: $primary_orange;
+}
+
+.thumb {
+  position: absolute;
+  top: 0.2vmin;
+  left: 0.2vmin;
+  width: 1.4vmin;
+  height: 1.4vmin;
+  border-radius: 50%;
+  background: $primary_white;
+  box-shadow: 0 1px 2px $primary_shadow_card;
+  transition: transform 160ms ease-in-out;
+}
+
+.thumbOn {
+  transform: translateX(1.8vmin);
+}

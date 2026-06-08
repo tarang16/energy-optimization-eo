@@ -1,0 +1,38 @@
+@use 'config/scss/variables' as *;
+
+.formulaBoxContainer {
+  textarea {
+    padding-left: 1vmin;
+    border-radius: 0.3vmin;
+  }
+
+  .suggestion_list {
+    border: 1px solid $primary_gray_3;
+    padding: 1vmin;
+    list-style: none;
+    max-height: 20vmin;
+    overflow-y: auto;
+    position: absolute;
+    z-index: 1000;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    background: $primary_white;
+    @include boxShadow_card;
+  }
+
+  .suggestion_item {
+    padding: 0.9vmin 0.5vmin;
+    cursor: pointer;
+    word-wrap: break-word;
+
+    &:hover {
+      background-color: $primary_gray_5;
+    }
+  }
+}
+
+.formulaBoxContainerSpan.formulaBoxContainer {
+  display: flex;
+  flex-direction: column;
+}

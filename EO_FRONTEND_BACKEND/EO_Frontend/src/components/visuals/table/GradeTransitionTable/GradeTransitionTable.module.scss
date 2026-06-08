@@ -1,0 +1,81 @@
+@use 'config/scss/variables' as *;
+
+.VcAlertTableContainer {
+  .headerContainer {
+    height: 3.5vmin;
+    margin-bottom: 2vmin;
+
+    .signleSelectContainer {
+      width: 20vmin;
+
+      ul {
+        max-height: 15vmin;
+      }
+    }
+  }
+
+  .bottomContainer {
+    height: calc(100% - 5vmin);
+
+    table {
+      tbody {
+        tr {
+          td {
+            font-size: 1.3vmin;
+          }
+        }
+      }
+    }
+  }
+
+  .dropdowncontainer {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+
+    .dropdownHeight {
+      height: 3.5vmin;
+    }
+  }
+}
+
+.localSearchBar {
+  width: 30vmin;
+  display: flex;
+  align-items: center;
+
+  .imgLegendContainer {
+    width: 4vmin;
+
+    img {
+      width: 2vmin;
+      height: 2vmin;
+      filter: brightness(0) saturate(100%) invert(26%) sepia(42%) saturate(0%)
+        hue-rotate(218deg) brightness(87%) contrast(80%);
+    }
+  }
+
+  input {
+    width: 100%;
+    outline: none;
+    border: 1px solid $primary_gray_3;
+    height: 3.5vmin;
+    padding: 0.4vmin 0.9vmin 0.15vmin 0.9vmin;
+    position: relative;
+    font-size: 1.4vmin;
+    border-radius: 0.3vmin;
+
+    &:focus {
+      &::placeholder {
+        color: transparent;
+      }
+    }
+
+    &::-webkit-input-placeholder {
+      font-size: 1.4vmin;
+      text-transform: uppercase;
+      font-weight: normal;
+      color: $primary_gray_2;
+    }
+  }
+}

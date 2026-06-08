@@ -1,0 +1,136 @@
+@use 'config/scss/variables' as *;
+
+.wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.toolbar {
+  display: flex;
+  gap: 1vmin;
+  align-items: center;
+  padding: 1vmin 2vmin;
+  background: $primary_gray_5;
+  border-bottom: 1px solid $primary_gray_4;
+}
+
+.primaryBtn {
+  background: $primary_blue;
+  color: $primary_white;
+  border: none;
+  padding: 0.9vmin 1.6vmin;
+  font-size: 1.3vmin;
+  font-weight: 700;
+  text-transform: uppercase;
+  border-radius: 0.4vmin;
+  cursor: pointer;
+  &:hover { background: $primary_blue_hover; }
+  &:disabled { background: $primary_gray_3; cursor: not-allowed; }
+}
+
+.ghostBtn {
+  background: $primary_white;
+  border: 1px solid $primary_gray_3;
+  color: $primary_gray;
+  padding: 0.9vmin 1.6vmin;
+  font-size: 1.3vmin;
+  font-weight: 600;
+  text-transform: uppercase;
+  border-radius: 0.4vmin;
+  cursor: pointer;
+  &:hover { color: $primary_blue; border-color: $primary_blue; }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(36vmin, 1fr));
+  gap: 2vmin;
+  padding: 2vmin;
+}
+
+.card {
+  background: $primary_white;
+  border: 1px solid $primary_gray_4;
+  border-radius: 0.6vmin;
+  padding: 2vmin;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2vmin;
+  @include boxShadow_card;
+}
+
+.cardHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.badge {
+  font-size: 1vmin;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05vmin;
+  padding: 0.3vmin 0.7vmin;
+  border-radius: 1vmin;
+}
+
+.badgeReady {
+  background: rgba(7, 132, 78, 0.15);
+  color: $primary_green;
+}
+.badgeMissing {
+  background: rgba(228, 82, 5, 0.12);
+  color: $primary_orange;
+}
+
+.meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6vmin;
+
+  > div {
+    display: flex;
+    gap: 1vmin;
+    font-size: 1.2vmin;
+    color: $primary_gray;
+  }
+}
+
+.metaLabel {
+  width: 8vmin;
+  color: $primary_gray_2;
+  text-transform: uppercase;
+  font-size: 1vmin;
+  letter-spacing: 0.04vmin;
+}
+
+.path {
+  font-family: 'Cascadia Code', Consolas, monospace;
+  font-size: 1.1vmin;
+  color: $primary_gray_2;
+  word-break: break-all;
+}
+
+.downloadBtn {
+  align-self: flex-start;
+  margin-top: auto;
+  background: $primary_blue;
+  color: $primary_white !important;
+  padding: 0.8vmin 1.6vmin;
+  border-radius: 0.4vmin;
+  font-size: 1.2vmin;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04vmin;
+  text-decoration: none;
+
+  &:hover { background: $primary_blue_hover; color: $primary_white; }
+}
+
+.downloadDisabled {
+  background: $primary_gray_3;
+  cursor: not-allowed;
+  pointer-events: none;
+}

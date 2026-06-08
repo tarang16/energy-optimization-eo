@@ -1,0 +1,19 @@
+tag_name,formula_expression,active,source_flag
+FD_Fan_BLR_1_Steam,(1-[FDF_A_Motor_Status])*[BLR_1_Status]*(([FD_Fan_BLR_1_Steam_raw]/1000)-([FD_Fan_BLR_1_Steam_reg]-((0.4255*[BLR_1_HPS_Gen]**2 - 32.667*[BLR_1_HPS_Gen] + 4378.1)/1000)))+(1-[BLR_1_Status])*(1-[FDF_A_Motor_Status])*[FD_Fan_BLR_1_Steam_warmup],1,DB_ACTIVE
+BLR_1_HPS_Gen,[Fuel_BLR_1] * [LHV] / [Spec_En_Cons_BLR_1]*[BLR_1_Status] + (1-[BLR_1_Status])*[BLR_1_HPS_Gen_warmup],1,DB_ACTIVE
+FD_Fan_BLR_2_Steam,(1-[FDF_B_Motor_Status])*[BLR_2_Status]*(([FD_Fan_BLR_2_Steam_raw]/1000)-([FD_Fan_BLR_2_Steam_reg]-((0.4601*[BLR_2_HPS_Gen]**2 - 39.276*[BLR_2_HPS_Gen] + 4711.7)/1000)))+(1-[BLR_2_Status])*(1-[FDF_B_Motor_Status])*[FD_Fan_BLR_2_Steam_warmup],1,DB_ACTIVE
+BLR_2_HPS_Gen,[Fuel_BLR_2] * [LHV] / [Spec_En_Cons_BLR_2]*[BLR_2_Status]+ (1-[BLR_2_Status])*[BLR_2_HPS_Gen_warmup],1,DB_ACTIVE
+FD_Fan_BLR_3_Steam,[BLR_3_Status]*(([FD_Fan_BLR_3_Steam_raw]/1000)-([FD_Fan_BLR_3_Steam_reg]-((0.4481*[BLR_3_HPS_Gen]**2 - 35.004*[BLR_3_HPS_Gen] + 4701.3)/1000))) + (1-[BLR_3_Status])*[FD_Fan_BLR_3_Steam_warmup],1,DB_ACTIVE
+BLR_3_HPS_Gen,[Fuel_BLR_3] * [LHV] / [Spec_En_Cons_BLR_3]*[BLR_3_Status]+ (1-[BLR_3_Status])*[BLR_3_HPS_Gen_warmup],1,DB_ACTIVE
+FD_Fan_BLR_4_Steam,[BLR_4_Status]*(([FD_Fan_BLR_4_Steam_raw]/1000)-([FD_Fan_BLR_4_Steam_reg]-((0.4828*[BLR_4_HPS_Gen]**2 - 46.088*[BLR_4_HPS_Gen] + 5015.5)/1000)))+ (1-[BLR_4_Status])*[FD_Fan_BLR_4_Steam_warmup],1,DB_ACTIVE
+BLR_4_HPS_Gen,[Fuel_BLR_4] * [LHV] / [Spec_En_Cons_BLR_4]*[BLR_4_Status]+ (1-[BLR_4_Status])*[BLR_4_HPS_Gen_warmup],1,DB_ACTIVE
+FD_Fan_BLR_5_Steam,[BLR_5_Status]*(([FD_Fan_BLR_5_Steam_raw]/1000)-([FD_Fan_BLR_5_Steam_reg]-((0.0843*[BLR_5_HPS_Gen]**2 + 9.2624*[BLR_5_HPS_Gen] + 4772.4)/1000)))+ (1-[BLR_5_Status])*[FD_Fan_BLR_5_Steam_warmup],1,DB_ACTIVE
+BLR_5_HPS_Gen,[Fuel_BLR_5] * [LHV] / [Spec_En_Cons_BLR_5]*[BLR_5_Status] + (1-[BLR_5_Status])*[BLR_5_HPS_Gen_warmup],1,DB_ACTIVE
+Total_BLR_HPS_Generation,[BLR_1_HPS_Gen]+[BLR_2_HPS_Gen]+[BLR_3_HPS_Gen]+[BLR_4_HPS_Gen]+[BLR_5_HPS_Gen],1,DB_ACTIVE
+Total_Boilers_Running,[BLR_1_Status]+[BLR_2_Status]+[BLR_3_Status]+[BLR_4_Status]+[BLR_5_Status],1,DB_ACTIVE
+Total_Fuel_for_Boilers,[Fuel_BLR_1]+[Fuel_BLR_2]+[Fuel_BLR_3]+[Fuel_BLR_4]+[Fuel_BLR_5],1,DB_ACTIVE
+Fuel_BLR_1,[Fuel_BLR_1]*[BLR_1_Status],1,DB_ACTIVE
+Fuel_BLR_2,[Fuel_BLR_2]*[BLR_2_Status],1,DB_ACTIVE
+Fuel_BLR_3,[Fuel_BLR_3]*[BLR_3_Status],1,DB_ACTIVE
+Fuel_BLR_4,[Fuel_BLR_4]*[BLR_4_Status],1,DB_ACTIVE
+Fuel_BLR_5,[Fuel_BLR_5]*[BLR_5_Status],1,DB_ACTIVE

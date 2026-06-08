@@ -1,0 +1,260 @@
+{
+  "model_id": "reboiler_calc_v1",
+  "version": "v1",
+  "system_id": "reboiler_plant",
+  "feature_flag": "reboiler_calc",
+  "input_config_sheets": {
+    "instantiated_attrs": "intantiated_attributes",
+    "sensors_mapping": "Sensors_Mapping"
+  },
+  "output_schemas": {
+    "output_attribute_values": {
+      "mandatory": true,
+      "db_table": "output_attribute_values_table",
+      "natural_key": [
+        "run_id",
+        "timestamp",
+        "element_code",
+        "attribute"
+      ],
+      "partition_interval": "month",
+      "fields": [
+        {
+          "name": "model_id",
+          "type": "string",
+          "nullable": false
+        },
+        {
+          "name": "run_id",
+          "type": "string",
+          "nullable": false
+        },
+        {
+          "name": "timestamp",
+          "type": "datetime",
+          "nullable": false
+        },
+        {
+          "name": "element_code",
+          "type": "string",
+          "nullable": false
+        },
+        {
+          "name": "attribute",
+          "type": "string",
+          "nullable": false
+        },
+        {
+          "name": "value",
+          "type": "float",
+          "nullable": true
+        }
+      ],
+      "allowed_combinations": [
+        {
+          "attribute": "STATUS",
+          "element_code": "29709031-d18b-5a9d-9a71-8beb6f688155"
+        },
+        {
+          "attribute": "DUTY_FROM_PI_GJ_H",
+          "element_code": "29709031-d18b-5a9d-9a71-8beb6f688155"
+        },
+        {
+          "attribute": "DUTY_STEAM_CALC_GJ_H",
+          "element_code": "29709031-d18b-5a9d-9a71-8beb6f688155"
+        },
+        {
+          "attribute": "DUTY_PROCESS_GJ_H",
+          "element_code": "29709031-d18b-5a9d-9a71-8beb6f688155"
+        },
+        {
+          "attribute": "DUTY_DEVIATION_PCT",
+          "element_code": "29709031-d18b-5a9d-9a71-8beb6f688155"
+        },
+        {
+          "attribute": "APPROACH_DT_C",
+          "element_code": "29709031-d18b-5a9d-9a71-8beb6f688155"
+        },
+        {
+          "attribute": "SUBCOOL_C",
+          "element_code": "29709031-d18b-5a9d-9a71-8beb6f688155"
+        },
+        {
+          "attribute": "SEC_GJ_PER_T",
+          "element_code": "29709031-d18b-5a9d-9a71-8beb6f688155"
+        },
+        {
+          "attribute": "SPECIFIC_STEAM_T_PER_T",
+          "element_code": "29709031-d18b-5a9d-9a71-8beb6f688155"
+        },
+        {
+          "attribute": "DUTY_LOAD_PCT",
+          "element_code": "29709031-d18b-5a9d-9a71-8beb6f688155"
+        },
+        {
+          "attribute": "STEAM_FLOW_T_H",
+          "element_code": "29709031-d18b-5a9d-9a71-8beb6f688155"
+        },
+        {
+          "attribute": "STEAM_ENTHALPY_KJKG",
+          "element_code": "29709031-d18b-5a9d-9a71-8beb6f688155"
+        },
+        {
+          "attribute": "CONDENSATE_ENTHALPY_KJKG",
+          "element_code": "29709031-d18b-5a9d-9a71-8beb6f688155"
+        },
+        {
+          "attribute": "STATUS",
+          "element_code": "c584ec10-9109-5b98-ac69-1805a9000fb7"
+        },
+        {
+          "attribute": "DUTY_FROM_PI_GJ_H",
+          "element_code": "c584ec10-9109-5b98-ac69-1805a9000fb7"
+        },
+        {
+          "attribute": "DUTY_STEAM_CALC_GJ_H",
+          "element_code": "c584ec10-9109-5b98-ac69-1805a9000fb7"
+        },
+        {
+          "attribute": "DUTY_PROCESS_GJ_H",
+          "element_code": "c584ec10-9109-5b98-ac69-1805a9000fb7"
+        },
+        {
+          "attribute": "DUTY_DEVIATION_PCT",
+          "element_code": "c584ec10-9109-5b98-ac69-1805a9000fb7"
+        },
+        {
+          "attribute": "APPROACH_DT_C",
+          "element_code": "c584ec10-9109-5b98-ac69-1805a9000fb7"
+        },
+        {
+          "attribute": "SUBCOOL_C",
+          "element_code": "c584ec10-9109-5b98-ac69-1805a9000fb7"
+        },
+        {
+          "attribute": "SEC_GJ_PER_T",
+          "element_code": "c584ec10-9109-5b98-ac69-1805a9000fb7"
+        },
+        {
+          "attribute": "SPECIFIC_STEAM_T_PER_T",
+          "element_code": "c584ec10-9109-5b98-ac69-1805a9000fb7"
+        },
+        {
+          "attribute": "DUTY_LOAD_PCT",
+          "element_code": "c584ec10-9109-5b98-ac69-1805a9000fb7"
+        },
+        {
+          "attribute": "STEAM_FLOW_T_H",
+          "element_code": "c584ec10-9109-5b98-ac69-1805a9000fb7"
+        },
+        {
+          "attribute": "STEAM_ENTHALPY_KJKG",
+          "element_code": "c584ec10-9109-5b98-ac69-1805a9000fb7"
+        },
+        {
+          "attribute": "CONDENSATE_ENTHALPY_KJKG",
+          "element_code": "c584ec10-9109-5b98-ac69-1805a9000fb7"
+        },
+        {
+          "attribute": "STATUS",
+          "element_code": "d0a57487-5621-5409-8e04-77608b1077d4"
+        },
+        {
+          "attribute": "DUTY_FROM_PI_GJ_H",
+          "element_code": "d0a57487-5621-5409-8e04-77608b1077d4"
+        },
+        {
+          "attribute": "DUTY_STEAM_CALC_GJ_H",
+          "element_code": "d0a57487-5621-5409-8e04-77608b1077d4"
+        },
+        {
+          "attribute": "DUTY_PROCESS_GJ_H",
+          "element_code": "d0a57487-5621-5409-8e04-77608b1077d4"
+        },
+        {
+          "attribute": "DUTY_DEVIATION_PCT",
+          "element_code": "d0a57487-5621-5409-8e04-77608b1077d4"
+        },
+        {
+          "attribute": "APPROACH_DT_C",
+          "element_code": "d0a57487-5621-5409-8e04-77608b1077d4"
+        },
+        {
+          "attribute": "SUBCOOL_C",
+          "element_code": "d0a57487-5621-5409-8e04-77608b1077d4"
+        },
+        {
+          "attribute": "SEC_GJ_PER_T",
+          "element_code": "d0a57487-5621-5409-8e04-77608b1077d4"
+        },
+        {
+          "attribute": "SPECIFIC_STEAM_T_PER_T",
+          "element_code": "d0a57487-5621-5409-8e04-77608b1077d4"
+        },
+        {
+          "attribute": "DUTY_LOAD_PCT",
+          "element_code": "d0a57487-5621-5409-8e04-77608b1077d4"
+        },
+        {
+          "attribute": "STEAM_FLOW_T_H",
+          "element_code": "d0a57487-5621-5409-8e04-77608b1077d4"
+        },
+        {
+          "attribute": "STEAM_ENTHALPY_KJKG",
+          "element_code": "d0a57487-5621-5409-8e04-77608b1077d4"
+        },
+        {
+          "attribute": "CONDENSATE_ENTHALPY_KJKG",
+          "element_code": "d0a57487-5621-5409-8e04-77608b1077d4"
+        }
+      ]
+    },
+    "imputation_history": {
+      "mandatory": false,
+      "db_table": "imputation_history_table",
+      "natural_key": [
+        "run_id",
+        "timestamp",
+        "sensor"
+      ],
+      "partition_interval": "none",
+      "fields": [
+        {
+          "name": "model_id",
+          "type": "string",
+          "nullable": false
+        },
+        {
+          "name": "run_id",
+          "type": "string",
+          "nullable": false
+        },
+        {
+          "name": "timestamp",
+          "type": "datetime",
+          "nullable": false
+        },
+        {
+          "name": "sensor",
+          "type": "string",
+          "nullable": false
+        },
+        {
+          "name": "raw_value",
+          "type": "float",
+          "nullable": true
+        },
+        {
+          "name": "modified_value",
+          "type": "float",
+          "nullable": false
+        },
+        {
+          "name": "sip_policy",
+          "type": "string",
+          "nullable": false
+        }
+      ]
+    }
+  }
+}

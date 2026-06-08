@@ -1,0 +1,117 @@
+{
+  "A": {
+    "fuel_lhv_mj_per_nm3": 33.9836226752013,
+    "total_energy_supply_gj_h": 198.1860485611181,
+    "useful_heat_gj_h": 166.1460048642449,
+    "direct_efficiency_pct": 83.83335056655493,
+    "indirect_efficiency_pct": 94.11728585149594,
+    "stack_loss_pct": 5.3827141485040615,
+    "radiation_loss_pct": 0.5,
+    "excess_air_pct": 20.889709798297464,
+    "steam_to_fuel_ratio": 13.356460632106945,
+    "cbd_pct": 1.409646452811163,
+    "sec_gj_per_t_steam": 3.261997936396119,
+    "co2_t_per_h": 11.118237324278725,
+    "mass_balance_deviation_pct": 5.32389014260111,
+    "energy_balance_deviation_pct": 10.29048556820827,
+    "economizer_duty_gj_h": 34.56384443825503,
+    "sh1_duty_gj_h": 125.64359323435328,
+    "constraint_violations": [
+      "Mass balance deviation (5.32%) exceeds threshold (\u00b11.0%)",
+      "Energy balance deviation (10.29%) exceeds threshold (\u00b11.0%)"
+    ],
+    "ok": true
+  },
+  "B": {
+    "fuel_lhv_mj_per_nm3": 33.9836226752013,
+    "total_energy_supply_gj_h": 198.22849266132238,
+    "useful_heat_gj_h": 170.47571368920617,
+    "direct_efficiency_pct": 85.99960147024251,
+    "indirect_efficiency_pct": 94.16192921654869,
+    "stack_loss_pct": 5.338070783451319,
+    "radiation_loss_pct": 0.5,
+    "excess_air_pct": 21.159321281866667,
+    "steam_to_fuel_ratio": 13.793008433380589,
+    "cbd_pct": 1.4110611563303832,
+    "sec_gj_per_t_steam": 3.1587559182554923,
+    "co2_t_per_h": 11.120618438300186,
+    "mass_balance_deviation_pct": 2.3086987001514387,
+    "energy_balance_deviation_pct": 7.663520545742624,
+    "economizer_duty_gj_h": 34.49287395155083,
+    "sh1_duty_gj_h": 128.72222231176497,
+    "constraint_violations": [
+      "Mass balance deviation (2.31%) exceeds threshold (\u00b11.0%)",
+      "Energy balance deviation (7.66%) exceeds threshold (\u00b11.0%)"
+    ],
+    "ok": true
+  },
+  "C": {
+    "fuel_lhv_mj_per_nm3": 33.9836226752013,
+    "total_energy_supply_gj_h": 198.20367850928187,
+    "useful_heat_gj_h": 167.30534649943792,
+    "direct_efficiency_pct": 84.41081808257309,
+    "indirect_efficiency_pct": 94.13647351958372,
+    "stack_loss_pct": 5.363526480416276,
+    "radiation_loss_pct": 0.5,
+    "excess_air_pct": 19.891002566579107,
+    "steam_to_fuel_ratio": 13.44158037406964,
+    "cbd_pct": 1.4089339950245499,
+    "sec_gj_per_t_steam": 3.241341107741913,
+    "co2_t_per_h": 11.119226364370714,
+    "mass_balance_deviation_pct": 5.724929532823731,
+    "energy_balance_deviation_pct": 9.756365330119925,
+    "economizer_duty_gj_h": 34.52838853943887,
+    "sh1_duty_gj_h": 126.58095458792086,
+    "constraint_violations": [
+      "Mass balance deviation (5.72%) exceeds threshold (\u00b11.0%)",
+      "Energy balance deviation (9.76%) exceeds threshold (\u00b11.0%)"
+    ],
+    "ok": true
+  },
+  "D": {
+    "fuel_lhv_mj_per_nm3": 33.9836226752013,
+    "total_energy_supply_gj_h": 198.2031936857074,
+    "useful_heat_gj_h": 170.85238569885212,
+    "direct_efficiency_pct": 86.2006219585817,
+    "indirect_efficiency_pct": 94.05879255408739,
+    "stack_loss_pct": 5.4412074459126165,
+    "radiation_loss_pct": 0.5,
+    "excess_air_pct": 20.765948933227833,
+    "steam_to_fuel_ratio": 13.803901770819754,
+    "cbd_pct": 1.4071544253140083,
+    "sec_gj_per_t_steam": 3.15626318868694,
+    "co2_t_per_h": 11.119199165768185,
+    "mass_balance_deviation_pct": 1.8980808296886649,
+    "energy_balance_deviation_pct": 7.301397327795358,
+    "economizer_duty_gj_h": 34.52838853943887,
+    "sh1_duty_gj_h": 129.03035920368222,
+    "constraint_violations": [
+      "Mass balance deviation (1.90%) exceeds threshold (\u00b11.0%)",
+      "Energy balance deviation (7.30%) exceeds threshold (\u00b11.0%)"
+    ],
+    "ok": true
+  },
+  "E": {
+    "fuel_lhv_mj_per_nm3": 33.9836226752013,
+    "total_energy_supply_gj_h": 203.24011395096983,
+    "useful_heat_gj_h": 179.7190706264415,
+    "direct_efficiency_pct": 88.42696804913098,
+    "indirect_efficiency_pct": 94.63817533491931,
+    "stack_loss_pct": 4.86182466508069,
+    "radiation_loss_pct": 0.5,
+    "excess_air_pct": 10.889256070162581,
+    "steam_to_fuel_ratio": 14.093609336234733,
+    "cbd_pct": 1.5449725840517328,
+    "sec_gj_per_t_steam": 3.0913831922014046,
+    "co2_t_per_h": 11.401770392649407,
+    "mass_balance_deviation_pct": 1.2087084081787336,
+    "energy_balance_deviation_pct": 5.552293637384226,
+    "economizer_duty_gj_h": 34.52838853943887,
+    "sh1_duty_gj_h": 135.9341846225865,
+    "constraint_violations": [
+      "Mass balance deviation (1.21%) exceeds threshold (\u00b11.0%)",
+      "Energy balance deviation (5.55%) exceeds threshold (\u00b11.0%)"
+    ],
+    "ok": true
+  }
+}

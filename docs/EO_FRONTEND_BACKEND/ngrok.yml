@@ -1,0 +1,11 @@
+# This combined config is SUPERSEDED.
+#
+# Free ngrok requires one agent process per authtoken, so we now use two
+# separate config files, one per account:
+#
+#   ngrok-frontend.yml   (account 1, frontend tunnel on :3000)
+#   ngrok-backend.yml    (account 2, backend tunnel  on :8001)
+#
+# Start both with START_SHARE.ps1, or manually:
+#   ngrok start --config ngrok-frontend.yml eo-frontend
+#   ngrok start --config ngrok-backend.yml  eo-backend

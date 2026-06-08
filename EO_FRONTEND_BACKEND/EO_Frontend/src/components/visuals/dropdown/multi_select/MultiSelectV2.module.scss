@@ -1,0 +1,135 @@
+@use 'config/scss/variables' as *;
+
+.checkboxDropdown {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  border: 1px solid $primary_gray_3;
+  border-radius: 0.3vmin;
+  position: relative;
+  user-select: none;
+  min-width: 25vmin;
+  max-width: 25vmin;
+  word-wrap: break-word;
+  // z-index: 100000000;
+  cursor: pointer;
+  padding: 0.3vmin 1vmin;
+
+  p {
+    margin: 0px;
+    padding: 0px;
+  }
+}
+
+.dropPara {
+  white-space: nowrap;
+  margin-top: 2px !important;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 100%;
+}
+
+/* Reverse the CSS arrow when the dropdown is active */
+.checkboxDropdown.isActive .rotate_icon {
+  transform: rotate(180deg);
+}
+
+.checkboxDropdownList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: 110%;
+  /* align the dropdown right below the dropdown text */
+  border: none;
+  border-radius: 0.25rem;
+  left: 0px;
+  right: 0px;
+  display: none;
+  background-color: $primary_white;
+  box-shadow: 0px 0px 4px 0px $primary_gray_3;
+  height: 150px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  pointer-events: all;
+  z-index: 1000;
+}
+
+.invisible {
+  display: none !important;
+}
+
+.isActive .checkboxDropdownList {
+  display: inline-block;
+  pointer-events: auto;
+  /* make sure that the user still can select checkboxes */
+}
+
+.checkboxDropdownList li {
+  padding: 0.6vmin 1vmin;
+}
+
+.checkboxDropdownList li label {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  font-size: 1.4vmin;
+  cursor: pointer;
+}
+
+.checkboxDropdownList li:hover {
+  background-color: $primary_gray_4;
+  color: $primary_white;
+}
+
+// .checkboxDropdownList li:hover label{
+//     color: $primary_white;
+// }
+
+.option {
+  font-size: 1.4vmin;
+}
+
+.rotate_icon {
+  font-size: 1.5vmin !important;
+  color: $primary_gray_2;
+}
+
+.checkIconImg {
+  width: 2.2vmin;
+  filter: none !important;
+}
+
+.selectImageIcon {
+  width: 2vmin;
+  height: 2vmin;
+}
+
+span.dropDownTextMaxWidth {
+  max-width: 90%;
+}
+
+.multiSelectDropdown_custom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1vmin;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.flexCenterContainer {
+  display: 'flex';
+  align-items: 'center';
+  justify-content: 'center';
+}
+
+:global(.react-select-modifyDetails__menu) {
+  margin: 0 !important;
+}
+
+.getLabelValueText {
+  margin-top: 4px;
+  white-space: nowrap;
+}

@@ -1,0 +1,180 @@
+tag,formula,in_master_pi_data,ref_count,refs,boiler_unit,bucket,notes
+DMW_Makeup,([DMW_MAKEUP_Near_Clean_Condensate_Header]+[DMW_MAKEUP_Near_Suspect_Condensate_Header])/1000,True,2,DMW_MAKEUP_Near_Clean_Condensate_Header; DMW_MAKEUP_Near_Suspect_Condensate_Header,,composition_derived,"references composition tags: ['DMW_MAKEUP_Near_Clean_Condensate_Header', 'DMW_MAKEUP_Near_Suspect_Condensate_Header']"
+BFW_B_Turb_Steam_cons,"if([BFW_B_Turb_Status]==1,[BFW_B_Turb_Steam],[BFW_B_Turb_Steam_Regression])",True,3,BFW_B_Turb_Status; BFW_B_Turb_Steam; BFW_B_Turb_Steam_Regression,,inferred_chain,composite of 3 other L2 tags
+BFW_C_Turb_Steam_cons,"if([BFW_C_Turb_Status]==1,[BFW_C_Turb_Steam],[BFW_C_Turb_Steam_Regression])",True,3,BFW_C_Turb_Status; BFW_C_Turb_Steam; BFW_C_Turb_Steam_Regression,,inferred_chain,composite of 3 other L2 tags
+BFW_E_Turb_Steam_cons,"if([BFW_E_Turb_Status]==1,[BFW_E_Turb_Steam],[BFW_E_Turb_Steam_Regression])",True,3,BFW_E_Turb_Status; BFW_E_Turb_Steam; BFW_E_Turb_Steam_Regression,,inferred_chain,composite of 3 other L2 tags
+BFW_TO_LAO,"if([LAO_Plant_Status]==0,0,[BFW_TO_LAO_raw]/1000)",True,2,BFW_TO_LAO_raw; LAO_Plant_Status,,inferred_chain,composite of 2 other L2 tags
+BFW_to_EOEG_1,"if([EOEG1_Plant_Status]==0,0,[BFW_to_EOEG_1_raw])",True,2,BFW_to_EOEG_1_raw; EOEG1_Plant_Status,,inferred_chain,composite of 2 other L2 tags
+BFW_to_EOEG_2,"if([EOEG2_Plant_Status]==0,0,[BFW_to_EOEG_2_raw])",True,2,BFW_to_EOEG_2_raw; EOEG2_Plant_Status,,inferred_chain,composite of 2 other L2 tags
+BFW_to_EOEG_3,"if([EOEG3_Plant_Status]==0,0,[BFW_to_EOEG_3_raw])",True,2,BFW_to_EOEG_3_raw; EOEG3_Plant_Status,,inferred_chain,composite of 2 other L2 tags
+DSP_BFW_TO_CAUSTIC_DILUTION,[DSP_BFW_TO_CAUSTIC_DILUTION_raw]/1000,True,1,DSP_BFW_TO_CAUSTIC_DILUTION_raw,,inferred_chain,passthrough to DSP_BFW_TO_CAUSTIC_DILUTION_raw
+DSP_BFW_TO_EG1,"if([EOEG1_Plant_Status]==0,0,[DSP_BFW_TO_EG1_raw])",True,2,DSP_BFW_TO_EG1_raw; EOEG1_Plant_Status,,inferred_chain,composite of 2 other L2 tags
+DSP_BFW_TO_EG2,"if([EOEG2_Plant_Status]==0,0,[DSP_BFW_TO_EG2_raw])",True,2,DSP_BFW_TO_EG2_raw; EOEG2_Plant_Status,,inferred_chain,composite of 2 other L2 tags
+EOEG3_Plant_Status,"if(if(missing([EG3_EOE]),0,[EG3_EOE])>30,1,0)",True,1,EG3_EOE,,inferred_chain,composite of 2 other L2 tags
+FUEL_GAS_From_UO_to_LAO_Opt,20.571+(([H3831_steam_flow]/1000)*(-0.007))+([LAO_oxygen]*-0.00962)+([H3831_inlet_temp]*-0.04403),True,3,H3831_inlet_temp; H3831_steam_flow; LAO_oxygen,,inferred_chain,composite of 3 other L2 tags
+Furnace_1_Status_PIAF,"if([Furnace_A_COT]<500,0,if(([TQE_Outlet_Pressure_Furnace_A]>0.4 && [Mixed_Feed_MOV_Opening_Furnace_A]>5),1,if(([TQE_Outlet_Pressure_Furnace_A]<0.4 && [Decoke_Air_Pressure_Furnace_A]>[min_Convection_Inlet_Pressure_Furnace_A]+0.5 && [Furnace_A_COT]>820 && [Sum_Decoke_Flow_Furnace_A]>=0.5),2,if(([Furnace_A_COT]>860 && [Decoke_Air_Pressure_Furnace_A]>[min_Convection_Inlet_Pressure_Furnace_A]+0.5),2,3))))",True,6,Decoke_Air_Pressure_Furnace_A; Furnace_A_COT; Mixed_Feed_MOV_Opening_Furnace_A; Sum_Decoke_Flow_Furnace_A; TQE_Outlet_Pressure_Furnace_A; min_Convection_Inlet_Pressure_Furnace_A,,inferred_chain,composite of 11 other L2 tags
+Furnace_2_Status_PIAF,"if([Furnace_B_COT]<500,0,if(([TQE_Outlet_Pressure_Furnace_B]>0.4 && [Mixed_Feed_MOV_Opening_Furnace_B]>5),1,if(([TQE_Outlet_Pressure_Furnace_B]<0.4 && [Decoke_Air_Pressure_Furnace_B]>[min_Convection_Inlet_Pressure_Furnace_B]+0.5 && [Furnace_B_COT]>820 && [Sum_Decoke_Flow_Furnace_B]>=0.5),2,if(([Furnace_B_COT]>860 && [Decoke_Air_Pressure_Furnace_B]>[min_Convection_Inlet_Pressure_Furnace_B]+0.5),2,3))))",True,6,Decoke_Air_Pressure_Furnace_B; Furnace_B_COT; Mixed_Feed_MOV_Opening_Furnace_B; Sum_Decoke_Flow_Furnace_B; TQE_Outlet_Pressure_Furnace_B; min_Convection_Inlet_Pressure_Furnace_B,,inferred_chain,composite of 11 other L2 tags
+Furnace_3_Status_PIAF,"if([Furnace_C_COT]<500,0,if(([TQE_Outlet_Pressure_Furnace_C]>0.4 && [Mixed_Feed_MOV_Opening_Furnace_C]>5),1,if(([TQE_Outlet_Pressure_Furnace_C]<0.4 && [Decoke_Air_Pressure_Furnace_C]>[min_Convection_Inlet_Pressure_Furnace_C]+0.5 && [Furnace_C_COT]>820 && [Sum_Decoke_Flow_Furnace_C]>=0.5),2,if(([Furnace_C_COT]>860 && [Decoke_Air_Pressure_Furnace_C]>[min_Convection_Inlet_Pressure_Furnace_C]+0.5),2,3))))",True,6,Decoke_Air_Pressure_Furnace_C; Furnace_C_COT; Mixed_Feed_MOV_Opening_Furnace_C; Sum_Decoke_Flow_Furnace_C; TQE_Outlet_Pressure_Furnace_C; min_Convection_Inlet_Pressure_Furnace_C,,inferred_chain,composite of 11 other L2 tags
+Furnace_4_Status_PIAF,"if([Furnace_D_COT]<500,0,if(([TQE_Outlet_Pressure_Furnace_D]>0.4 && [Mixed_Feed_MOV_Opening_Furnace_D]>5),1,if(([TQE_Outlet_Pressure_Furnace_D]<0.4 && [Decoke_Air_Pressure_Furnace_D]>[min_Convection_Inlet_Pressure_Furnace_D]+0.5 && [Furnace_D_COT]>820 && [Sum_Decoke_Flow_Furnace_D]>=0.5),2,if(([Furnace_D_COT]>860 && [Decoke_Air_Pressure_Furnace_D]>[min_Convection_Inlet_Pressure_Furnace_D]+0.5),2,3))))",True,6,Decoke_Air_Pressure_Furnace_D; Furnace_D_COT; Mixed_Feed_MOV_Opening_Furnace_D; Sum_Decoke_Flow_Furnace_D; TQE_Outlet_Pressure_Furnace_D; min_Convection_Inlet_Pressure_Furnace_D,,inferred_chain,composite of 11 other L2 tags
+Furnace_5_Status_PIAF,"if([Furnace_E_COT]<500,0,if(([TQE_Outlet_Pressure_Furnace_E]>0.4 && [Mixed_Feed_MOV_Opening_Furnace_E]>5),1,if(([TQE_Outlet_Pressure_Furnace_E]<0.4 && [Decoke_Air_Pressure_Furnace_E]>[min_Convection_Inlet_Pressure_Furnace_E]+0.5 && [Furnace_E_COT]>820 && [Sum_Decoke_Flow_Furnace_E]>=0.5),2,if(([Furnace_E_COT]>860 && [Decoke_Air_Pressure_Furnace_E]>[min_Convection_Inlet_Pressure_Furnace_E]+0.5),2,3))))",True,6,Decoke_Air_Pressure_Furnace_E; Furnace_E_COT; Mixed_Feed_MOV_Opening_Furnace_E; Sum_Decoke_Flow_Furnace_E; TQE_Outlet_Pressure_Furnace_E; min_Convection_Inlet_Pressure_Furnace_E,,inferred_chain,composite of 11 other L2 tags
+Furnace_6_Status_PIAF,"if([Furnace_F_COT]<500,0,if(([TQE_Outlet_Pressure_Furnace_F]>0.4 && [Mixed_Feed_MOV_Opening_Furnace_F]>5),1,if(([TQE_Outlet_Pressure_Furnace_F]<0.4 && [Decoke_Air_Pressure_Furnace_F]>[min_Convection_Inlet_Pressure_Furnace_F]+0.5 && [Furnace_F_COT]>820 && [Sum_Decoke_Flow_Furnace_F]>=0.5),2,if(([Furnace_F_COT]>860 && [Decoke_Air_Pressure_Furnace_F]>[min_Convection_Inlet_Pressure_Furnace_F]+0.5),2,3))))",True,6,Decoke_Air_Pressure_Furnace_F; Furnace_F_COT; Mixed_Feed_MOV_Opening_Furnace_F; Sum_Decoke_Flow_Furnace_F; TQE_Outlet_Pressure_Furnace_F; min_Convection_Inlet_Pressure_Furnace_F,,inferred_chain,composite of 11 other L2 tags
+Furnace_7_Status_PIAF,"if([Furnace_G_COT]<500,0,if(([TQE_Outlet_Pressure_Furnace_G]>0.4 && [Mixed_Feed_MOV_Opening_Furnace_G]>5),1,if(([TQE_Outlet_Pressure_Furnace_G]<0.4 && [Decoke_Air_Pressure_Furnace_G]>[min_Convection_Inlet_Pressure_Furnace_G]+0.5 && [Furnace_G_COT]>820 && [Sum_Decoke_Flow_Furnace_G]>=0.5),2,if(([Furnace_G_COT]>860 && [Decoke_Air_Pressure_Furnace_G]>[min_Convection_Inlet_Pressure_Furnace_G]+0.5),2,3))))",True,6,Decoke_Air_Pressure_Furnace_G; Furnace_G_COT; Mixed_Feed_MOV_Opening_Furnace_G; Sum_Decoke_Flow_Furnace_G; TQE_Outlet_Pressure_Furnace_G; min_Convection_Inlet_Pressure_Furnace_G,,inferred_chain,composite of 11 other L2 tags
+Furnace_8_Status_PIAF,"if([Furnace_H_COT]<500,0,if(([TQE_Outlet_Pressure_Furnace_H]>0.4 && [Mixed_Feed_MOV_Opening_Furnace_H]>5),1,if(([TQE_Outlet_Pressure_Furnace_H]<0.4 && [Decoke_Air_Pressure_Furnace_H]>[min_Convection_Inlet_Pressure_Furnace_H]+0.5 && [Furnace_H_COT]>820 && [Sum_Decoke_Flow_Furnace_H]>=0.5),2,if(([Furnace_H_COT]>860 && [Decoke_Air_Pressure_Furnace_H]>[min_Convection_Inlet_Pressure_Furnace_H]+0.5),2,3))))",True,6,Decoke_Air_Pressure_Furnace_H; Furnace_H_COT; Mixed_Feed_MOV_Opening_Furnace_H; Sum_Decoke_Flow_Furnace_H; TQE_Outlet_Pressure_Furnace_H; min_Convection_Inlet_Pressure_Furnace_H,,inferred_chain,composite of 11 other L2 tags
+Furnace_9_Status_PIAF,"if([Furnace_J_COT]<500,0,if(([TQE_Outlet_Pressure_Furnace_J]>0.4 && [Mixed_Feed_MOV_Opening_Furnace_J]>5),1,if(([TQE_Outlet_Pressure_Furnace_J]<0.4 && [Decoke_Air_Pressure_Furnace_J]>[min_Convection_Inlet_Pressure_Furnace_J]+0.5 && [Furnace_J_COT]>820 && [Sum_Decoke_Flow_Furnace_J]>=0.5),2,if(([Furnace_J_COT]>860 && [Decoke_Air_Pressure_Furnace_J]>[min_Convection_Inlet_Pressure_Furnace_J]+0.5),2,3))))",True,6,Decoke_Air_Pressure_Furnace_J; Furnace_J_COT; Mixed_Feed_MOV_Opening_Furnace_J; Sum_Decoke_Flow_Furnace_J; TQE_Outlet_Pressure_Furnace_J; min_Convection_Inlet_Pressure_Furnace_J,,inferred_chain,composite of 11 other L2 tags
+LAO_Plant_Status,"if(if(missing([LAO_Load]),0,[LAO_Load])<5,0,1)",True,1,LAO_Load,,inferred_chain,composite of 2 other L2 tags
+Spec_En_Cons_BLR_1_Opt,(8E-06*[BLR_1_HPS_Gen]^2-0.0017*[BLR_1_HPS_Gen]+3.0167)*[BLR_1_Status],True,2,BLR_1_HPS_Gen; BLR_1_Status,,inferred_chain,composite of 3 other L2 tags
+Spec_En_Cons_BLR_2_Opt,(8E-06*[BLR_2_HPS_Gen]^2-0.0017*[BLR_2_HPS_Gen]+3.0167)*[BLR_2_Status],True,2,BLR_2_HPS_Gen; BLR_2_Status,,inferred_chain,composite of 3 other L2 tags
+Spec_En_Cons_BLR_3_Opt,(8E-06*[BLR_3_HPS_Gen]^2-0.0017*[BLR_3_HPS_Gen]+3.0167)*[BLR_3_Status],True,2,BLR_3_HPS_Gen; BLR_3_Status,,inferred_chain,composite of 3 other L2 tags
+Spec_En_Cons_BLR_4_Opt,(8E-06*[BLR_4_HPS_Gen]^2-0.0017*[BLR_4_HPS_Gen]+3.0167)*[BLR_4_Status],True,2,BLR_4_HPS_Gen; BLR_4_Status,,inferred_chain,composite of 3 other L2 tags
+Spec_En_Cons_BLR_5_Opt,(8E-06*[BLR_5_HPS_Gen]^2-0.0017*[BLR_5_HPS_Gen]+3.0167)*[BLR_5_Status],True,2,BLR_5_HPS_Gen; BLR_5_Status,,inferred_chain,composite of 3 other L2 tags
+Steam_Generation_from_Boilers,([BLR_1_HPS_Gen]*[BLR_1_Status]+[BLR_2_HPS_Gen]*[BLR_2_Status]+[BLR_3_HPS_Gen]*[BLR_3_Status]+[BLR_4_HPS_Gen]*[BLR_4_Status]+[BLR_5_HPS_Gen]*[BLR_5_Status]),True,10,BLR_1_HPS_Gen; BLR_1_Status; BLR_2_HPS_Gen; BLR_2_Status; BLR_3_HPS_Gen; BLR_3_Status; BLR_4_HPS_Gen; BLR_4_Status; BLR_5_HPS_Gen; BLR_5_Status,,inferred_chain,composite of 10 other L2 tags
+VHP_BFW_B_Turb_Steam_cons,"if([VHP_BFW_B_Turb_Status]==1,[VHP_BFW_B_Turb_Steam],[VHP_BFW_B_Turb_Steam_Regression])",True,3,VHP_BFW_B_Turb_Status; VHP_BFW_B_Turb_Steam; VHP_BFW_B_Turb_Steam_Regression,,inferred_chain,composite of 3 other L2 tags
+VHP_BFW_C_Turb_Steam_cons,"if([VHP_BFW_C_Turb_Status]==1,[VHP_BFW_C_Turb_Steam],[VHP_BFW_C_Turb_Steam_Regression])",True,3,VHP_BFW_C_Turb_Status; VHP_BFW_C_Turb_Steam; VHP_BFW_C_Turb_Steam_Regression,,inferred_chain,composite of 3 other L2 tags
+VHP_Flow_Demand,[VHP_BFW_FROM_U_O]+[VHP_DESPHTR_BFW_FROM_U_O],True,2,VHP_BFW_FROM_U_O; VHP_DESPHTR_BFW_FROM_U_O,,inferred_chain,composite of 2 other L2 tags
+Air_Compressor_Turbine_A_Steam_raw,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+Air_Compressor_Turbine_D_Steam_raw,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+BFW_B_Turb_Steam_raw,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+BFW_C_Turb_Steam_raw,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+BFW_E_Turb_Steam_raw,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+BOILER_A_FLUE_GAS_OXGYGEN,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+BOILER_B_FLUE_GAS_OXGYGEN,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+BOILER_C_FLUE_GAS_OXGYGEN,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+BOILER_D_FLUE_GAS_OXGYGEN,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+BOILER_E_FLUE_GAS_OXGYGEN,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+Boiler_5_O2,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+DMW_Turbine_A_Steam_raw,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+DMW_Turbine_C_Steam_raw,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+DSP_BFW_TO_EG3_raw,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+DSP_BFW_TO_ETH_raw,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+Ethylene_total_flow,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FD_Fan_BLR_1_Steam_raw,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FD_Fan_BLR_2_Steam_raw,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FD_Fan_BLR_3_Steam_raw,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FD_Fan_BLR_4_Steam_raw,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FD_Fan_BLR_5_Steam_raw,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FUR_1_FLUE_GAS_O2,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FUR_1_PASS_1_ETHANE_FEED,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FUR_1_PASS_2_ETHANE_FEED,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FUR_1_PASS_3_ETHANE_FEED,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FUR_1_PASS_4_ETHANE_FEED,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FUR_1_PASS_5_ETHANE_FEED,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FUR_1_PASS_6_ETHANE_FEED,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FUR_1_PASS_7_ETHANE_FEED,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FUR_1_PASS_8_ETHANE_FEED,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FUR_1_STACK_TEMPERATURE,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FUR_2_FLUE_GAS_O2,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FUR_2_PASS_1_ETHANE_FEED,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FUR_2_PASS_2_ETHANE_FEED,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FUR_2_PASS_3_ETHANE_FEED,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FUR_2_PASS_4_ETHANE_FEED,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FUR_2_PASS_5_ETHANE_FEED,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FUR_2_PASS_6_ETHANE_FEED,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FUR_2_PASS_7_ETHANE_FEED,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FUR_2_PASS_8_ETHANE_FEED,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FUR_2_STACK_TEMPERATURE,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FUR_3_FLUE_GAS_O2,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FUR_3_PASS_1_ETHANE_FEED,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FUR_3_PASS_2_ETHANE_FEED,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FUR_3_PASS_3_ETHANE_FEED,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FUR_3_PASS_4_ETHANE_FEED,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FUR_3_PASS_5_ETHANE_FEED,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FUR_3_PASS_6_ETHANE_FEED,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FUR_3_PASS_7_ETHANE_FEED,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FUR_3_PASS_8_ETHANE_FEED,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FUR_3_STACK_TEMPERATURE,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FUR_4_FLUE_GAS_O2,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FUR_4_PASS_1_ETHANE_FEED,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FUR_4_PASS_2_ETHANE_FEED,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FUR_4_PASS_3_ETHANE_FEED,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FUR_4_PASS_4_ETHANE_FEED,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FUR_4_PASS_5_ETHANE_FEED,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FUR_4_PASS_6_ETHANE_FEED,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FUR_4_PASS_7_ETHANE_FEED,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FUR_4_PASS_8_ETHANE_FEED,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FUR_4_STACK_TEMPERATURE,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FUR_5_FLUE_GAS_O2,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FUR_5_PASS_1_ETHANE_FEED,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FUR_5_PASS_2_ETHANE_FEED,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FUR_5_PASS_3_ETHANE_FEED,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FUR_5_PASS_4_ETHANE_FEED,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FUR_5_PASS_5_ETHANE_FEED,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FUR_5_PASS_6_ETHANE_FEED,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FUR_5_PASS_7_ETHANE_FEED,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FUR_5_PASS_8_ETHANE_FEED,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FUR_5_STACK_TEMPERATURE,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FUR_6_FLUE_GAS_O2,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FUR_6_PASS_1_ETHANE_FEED,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FUR_6_PASS_2_ETHANE_FEED,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FUR_6_PASS_3_ETHANE_FEED,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FUR_6_PASS_4_ETHANE_FEED,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FUR_6_PASS_5_ETHANE_FEED,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FUR_6_PASS_6_ETHANE_FEED,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FUR_6_PASS_7_ETHANE_FEED,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FUR_6_PASS_8_ETHANE_FEED,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FUR_6_STACK_TEMPERATURE,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FUR_7_FLUE_GAS_O2,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FUR_7_PASS_1_ETHANE_FEED,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FUR_7_PASS_2_ETHANE_FEED,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FUR_7_PASS_3_ETHANE_FEED,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FUR_7_PASS_4_ETHANE_FEED,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FUR_7_PASS_5_ETHANE_FEED,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FUR_7_PASS_6_ETHANE_FEED,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FUR_7_PASS_7_ETHANE_FEED,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FUR_7_PASS_8_ETHANE_FEED,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FUR_7_STACK_TEMPERATURE,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FUR_8_FLUE_GAS_O2,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FUR_8_PASS_1_ETHANE_FEED,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FUR_8_PASS_2_ETHANE_FEED,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FUR_8_PASS_3_ETHANE_FEED,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FUR_8_PASS_4_ETHANE_FEED,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FUR_8_PASS_5ETHANE_FEED,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FUR_8_PASS_6_ETHANE_FEED,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FUR_8_PASS_7_ETHANE_FEED,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FUR_8_PASS_8_ETHANE_FEED,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FUR_8_STACK_TEMPERATURE,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FUR_9_FLUE_GAS_O2,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FUR_9_PASS_1_ETHANE_FEED,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FUR_9_PASS_2_ETHANE_FEED,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FUR_9_PASS_3_ETHANE_FEED,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FUR_9_PASS_4_ETHANE_FEED,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FUR_9_PASS_5ETHANE_FEED,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FUR_9_PASS_6_ETHANE_FEED,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FUR_9_PASS_7_ETHANE_FEED,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FUR_9_PASS_8_ETHANE_FEED,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+FUR_9_STACK_TEMPERATURE,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+Furnace_A_COT,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+Furnace_A_Fuel_gas_flow,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+Furnace_B_COT,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+Furnace_B_Fuel_gas_flow,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+Furnace_C_COT,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+Furnace_C_Fuel_gas_flow,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+Furnace_D_COT,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+Furnace_D_Fuel_gas_flow,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+Furnace_E_COT,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+Furnace_E_Fuel_gas_flow,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+Furnace_F_COT,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+Furnace_F_Fuel_gas_flow,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+Furnace_G_COT,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+Furnace_G_Fuel_gas_flow,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+Furnace_H_COT,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+Furnace_H_Fuel_gas_flow,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+Furnace_J_COT,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+Furnace_J_Fuel_gas_flow,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+HP_to_MP_Letdown_Valve_Opening_PV0007A_UO,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+HP_to_MP_Letdown_Valve_Opening_PV0007B_UO,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+LHV,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+MP_to_LP_Letdown_Valve_Opening_PV013A_UO,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+MP_to_LP_Letdown_Valve_Opening_PV013B_UO,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+MP_to_LP_Letdown_Valve_Opening_PV31_UO,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+MP_to_LP_Letdown_Valve_Opening_PV32_UO,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+Overall_SHC_Ratio,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+Specific_energy_consumption_in_C2R,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+Suction_Press_1Stage,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+VHP_BFW_B_Turb_Steam_raw,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+VHP_BFW_C_Turb_Steam_raw,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+VHP_BFW_FROM_U_O,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+VHP_DESPHTR_BFW_FROM_U_O,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+VHP_Steam_Pressure,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+VHP_to_HP_Let_Down_Valve_Opening_PX7024A_ETH,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+VHP_to_HP_Let_Down_Valve_Opening_PX7024B_ETH,,True,0,,,needs_pi_in_hierarchy,no inferred formula; appears in master_pi_data -> raw PI snapshot input
+ETH_Plant_Status,"if(if(missing([Total_Ethylene_Production_ETH_Plant]),0,[Total_Ethylene_Production_ETH_Plant])>100,1,0)",True,1,Total_Ethylene_Production_ETH_Plant,,regression,"references regression-style tags: ['Total_Ethylene_Production_ETH_Plant', 'Total_Ethylene_Production_ETH_Plant']"

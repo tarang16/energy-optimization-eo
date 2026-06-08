@@ -1,0 +1,26 @@
+﻿effect_id,effect_name,effect_description,effect_expression,category,monitoring_tag_id,active
+1,Energy_Bill,Energy Bill,"If((Energy_Bill_Actual-Energy_Bill_Optimum) > 10,1,0)",Fuel,334,0
+2,Specific_Energy_Consumption,ENERGY SPECIFIC CONSUMPTION HIGH,"if([Specific_Energy_Consumption_actual]>[Specific_Energy_Consumption_optimum],1,0)","Fuel,Energy,Environment",350,0
+3,Specific_Energy_Consumption_1,"LOW ENERGY SPECIFIC CONSUMPTION ","if([Specific_Energy_Consumption_actual]<[Specific_Energy_Consumption_optimum],1,0)","Fuel,Energy,Environment",350,0
+4,Total_Power_Demand,TOTAL POWER DEMAND HIGH,"if([Total_Power_Demand_actual]>[Total_Power_Demand_optimum],1,0)","Fuel,Energy,Environment",336,0
+5,Total_Energy_Bill,TOTAL ENERGY BILL HIGH,"if([Total_Energy_Bill_actual]>[Total_Energy_Bill_optimum],1,0)","Fuel,Energy,Environment",424,0
+6,LP_Steam_Dumping,LP STEAM DUMPING HIGH,"if(([LP_Steam_to_Condensing_actual]-[LP_Steam_to_Condensing_optimum])>0 &&([LP_Steam_to_Condensing_actual]> [LP_Steam_to_venting_actual]),1,0)","Fuel,Energy,Environment",339,0
+7,LP_Steam_Venting,LP STEAM VENTING HIGH,"if(([LP_Steam_to_venting_actual]-[LP_Steam_to_venting_optimum])>0 &&([LP_Steam_to_Condensing_actual]< [LP_Steam_to_venting_actual]),1,0)","Fuel,Energy,Environment",340,0
+9,HP_Steam_to_MP_Steam_Letdown_flow,HP STEAM TO MP STEAM LETDOWN FLOW HIGH,"if([HP_Steam_to_MP_Steam_Letdown_flow_optimum]-[HP_Steam_to_MP_Steam_Letdown_flow_actual]>0,1,0)","Fuel,Energy,Environment",337,0
+10,MP_Steam_to_LP_Steam_Letdown_flow,MP STEAM TO LP STEAM LETDOWN FLOW HIGH,"if([MP_Steam_to_LP_Steam_Letdown_flow_optimum]-[MP_Steam_to_LP_Steam_Letdown_flow_actual]>0,1,0)","Fuel,Energy,Environment",338,0
+11,Specific_Energy_Cost,SPECIFIC ENERGY COST HIGH,"if([Specific_Energy_Cost_actual]>[Specific_Energy_Cost_optimum],1,0)","Fuel,Energy,Environment",349,0
+12,Total_Energy_Consumption,TOTAL ENERGY CONSUMPTION HIGH,"if([Total_Energy_Consumption_actual]>[Total_Energy_Consumption_optimum],1,0)","Fuel,Energy,Environment",348,0
+13,Total_Fuel_Demand,TOTAL FUEL IMPORT HIGH,"if([NATURAL_GAS_Import_CTM_actual]>[NATURAL_GAS_Import_CTM_optimum],1,0)","Fuel,Energy,Environment",416,0
+14,Imbalance_Deviations,Imbalance Deviations,"if([Imbalance_Deviation_actual]==1,1,0)","Fuel,Energy,Environment",1870,1
+15,Compressor_Efficiency,Compressor Efficiency Low,"if(([EG1_Comp_eff_actual]>57 && [EG1_Comp_eff_actual]<75.8) || ([EG2_Comp_eff_actual]>64 && [EG2_Comp_eff_actual]<73) || ([EG3_Comp_eff_actual]>65 && [EG3_Comp_eff_actual]<80.5),1,0)","Fuel,Energy,Environment",2160,1
+16,EG1_MP_to_E_2610_high,EG1 MEG column steam Flow High,"if([EG1_MP_to_E_2610_actual]!=[EG1_MP_to_E_2610_optimum],1,0)","Fuel,Energy,Environment",542,0
+17,EG1_MP_to_E_2620_high,EG1 Drying column steam Flow High,"if([EG1_MP_to_E_2620_actual]!=[EG1_MP_to_E_2620_optimum],1,0)","Fuel,Energy,Environment",543,0
+18,EG2_MP_to_E_4610_high,EG2 MEG column steam Flow High,"if([EG2_MP_to_E_4610_actual]!=[EG2_MP_to_E_4610_optimum],1,0)","Fuel,Energy,Environment",576,0
+19,EG2_MP_to_E_4620_high,EG2 Drying column steam Flow High,"if([EG2_MP_to_E_4620_actual]!=[EG2_MP_to_E_4620_optimum],1,0)","Fuel,Energy,Environment",577,0
+20,EG3_MP_to_E_6620_high,EG3 MEG column steam Flow High,"if([EG3_MP_to_E_6620_actual]!=[EG3_MP_to_E_6620_optimum],1,0)","Fuel,Energy,Environment",613,0
+21,CW_Chem_Bill_Low,CW Chemical Bill is higher,"if([CW_Chem_bill_actual]>[CW_Chem_bill_optimum],1,0)","Fuel,Energy,Environment",2898,0
+22,Power_Bill,Power Bill,"if([Power_Bill_actual]+[Fuel_Bill_actual]>[Power_Bill_optimum]+[Fuel_Bill_optimum],1,0)","Fuel,Energy,Environment",421,1
+23,DMW_Bill,DM Water Bill,"if([DMW_Bill_actual]>[DMW_Bill_optimum],1,0)","Fuel,Energy,Environment",423,1
+24,total_fuel_consumption,Fuel Bill,"if([Power_Bill_actual]+[Fuel_Bill_actual]>[Power_Bill_optimum]+[Fuel_Bill_optimum],1,0)","Fuel,Energy,Environment",422,1
+25,CW_Chem_Bill,CW Chemical bill,"if([CW_Chem_bill_actual]>[CW_Chem_bill_optimum],1,0)","Fuel,Energy,Environment",2898,1
+26,Process_plant_SEUs,Process_plant_SEUs,1,"Fuel,Energy,Environment",3090,1

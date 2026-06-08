@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?><process version="10.4.003">
+  <context>
+    <input/>
+    <output/>
+    <macros/>
+  </context>
+  <operator activated="true" class="process" compatibility="10.4.003" expanded="true" name="Process">
+    <parameter key="logverbosity" value="init"/>
+    <parameter key="random_seed" value="2001"/>
+    <parameter key="send_mail" value="never"/>
+    <parameter key="notification_email" value=""/>
+    <parameter key="process_duration_for_mail" value="30"/>
+    <parameter key="encoding" value="SYSTEM"/>
+    <process expanded="true">
+      <operator activated="true" class="retrieve" compatibility="10.4.003" expanded="true" height="68" name="Retrieve MSSQL_EO_2024_QA" width="90" x="45" y="697">
+        <parameter key="repository_entry" value="//Local Repository/Connections/MSSQL_EO_2024_QA"/>
+      </operator>
+      <operator activated="true" class="multiply" compatibility="10.4.003" expanded="true" height="355" name="Multiply" width="90" x="246" y="697"/>
+      <operator activated="true" class="jdbc_connectors:read_database" compatibility="10.4.003" expanded="true" height="82" name="model_output" width="90" x="380" y="1462">
+        <parameter key="define_connection" value="repository"/>
+        <parameter key="database_system" value="MySQL"/>
+        <parameter key="define_query" value="query"/>
+        <parameter key="query" value="select top 1000 * FROM model_output order by 1 desc&#10;"/>
+        <parameter key="use_default_schema" value="true"/>
+        <parameter key="prepare_statement" value="false"/>
+        <enumeration key="parameters"/>
+        <parameter key="data_management" value="auto"/>
+      </operator>
+      <operator activated="true" class="jdbc_connectors:read_database" compatibility="10.4.003" expanded="true" height="82" name="pi_output" width="90" x="380" y="1360">
+        <parameter key="define_connection" value="repository"/>
+        <parameter key="database_system" value="MySQL"/>
+        <parameter key="define_query" value="query"/>
+        <parameter key="query" value="select top 1000 * FROM pi_output order by 1 desc&#10;"/>
+        <parameter key="use_default_schema" value="true"/>
+        <parameter key="prepare_statement" value="false"/>
+        <enumeration key="parameters"/>
+        <parameter key="data_management" value="auto"/>
+      </operator>
+      <operator activated="true" class="jdbc_connectors:read_database" compatibility="10.4.003" expanded="true" height="82" name="sub_model_validation" width="90" x="380" y="1258">
+        <parameter key="define_connection" value="repository"/>
+        <parameter key="database_system" value="MySQL"/>
+        <parameter key="define_query" value="query"/>
+        <parameter key="query" value="select top 100 * FROM sub_model_validation order by 1 desc&#10;"/>
+        <parameter key="use_default_schema" value="true"/>
+        <parameter key="prepare_statement" value="false"/>
+        <enumeration key="parameters"/>
+        <parameter key="data_management" value="auto"/>
+      </operator>
+      <operator activated="true" class="jdbc_connectors:read_database" compatibility="10.4.003" expanded="true" height="82" name="sub_model_retraining_history" width="90" x="380" y="1156">
+        <parameter key="define_connection" value="repository"/>
+        <parameter key="database_system" value="MySQL"/>
+        <parameter key="define_query" value="query"/>
+        <parameter key="query" value="select top 100 * FROM sub_model_retraining_history order by 1 desc&#10;"/>
+        <parameter key="use_default_schema" value="true"/>
+        <parameter key="prepare_statement" value="false"/>
+        <enumeration key="parameters"/>
+        <parameter key="data_management" value="auto"/>
+      </operator>
+      <operator activated="true" class="jdbc_connectors:read_database" compatibility="10.4.003" expanded="true" height="82" name="tag_good_data" width="90" x="380" y="1054">
+        <parameter key="define_connection" value="repository"/>
+        <parameter key="database_system" value="MySQL"/>
+        <parameter key="define_query" value="query"/>
+        <parameter key="query" value="select top 100 * FROM tag_good_data order by 1 desc&#10;"/>
+        <parameter key="use_default_schema" value="true"/>
+        <parameter key="prepare_statement" value="false"/>
+        <enumeration key="parameters"/>
+        <parameter key="data_management" value="auto"/>
+      </operator>
+      <operator activated="true" class="jdbc_connectors:read_database" compatibility="10.4.003" expanded="true" height="82" name="equipment_availability_history" width="90" x="380" y="952">
+        <parameter key="define_connection" value="repository"/>
+        <parameter key="database_system" value="MySQL"/>
+        <parameter key="define_query" value="query"/>
+        <parameter key="query" value="select top 1000 * FROM equipment_availability_history order by 1 desc&#10;"/>
+        <parameter key="use_default_schema" value="true"/>
+        <parameter key="prepare_statement" value="false"/>
+        <enumeration key="parameters"/>
+        <parameter key="data_management" value="auto"/>
+      </operator>
+      <operator activated="true" class="jdbc_connectors:read_database" compatibility="10.4.003" expanded="true" height="82" name="seec_kpi_output" width="90" x="380" y="850">
+        <parameter key="define_connection" value="repository"/>
+        <parameter key="database_system" value="MySQL"/>
+        <parameter key="define_query" value="query"/>
+        <parameter key="query" value="select top 1000 * FROM seec_kpi_output order by 1 desc&#10;"/>
+        <parameter key="use_default_schema" value="true"/>
+        <parameter key="prepare_statement" value="false"/>
+        <enumeration key="parameters"/>
+        <parameter key="data_management" value="auto"/>
+      </operator>
+      <operator activated="true" class="jdbc_connectors:read_database" compatibility="10.4.003" expanded="true" height="82" name="seu_output" width="90" x="380" y="748">
+        <parameter key="define_connection" value="repository"/>
+        <parameter key="database_system" value="MySQL"/>
+        <parameter key="define_query" value="query"/>
+        <parameter key="query" value="select top 100 * FROM seu_output order by 1 desc&#10;"/>
+        <parameter key="use_default_schema" value="true"/>
+        <parameter key="prepare_statement" value="false"/>
+        <enumeration key="parameters"/>
+        <parameter key="data_management" value="auto"/>
+      </operator>
+      <operator activated="true" class="jdbc_connectors:read_database" compatibility="10.4.003" expanded="true" height="82" name="peeo_ods_output" width="90" x="380" y="646">
+        <parameter key="define_connection" value="repository"/>
+        <parameter key="database_system" value="MySQL"/>
+        <parameter key="define_query" value="query"/>
+        <parameter key="query" value="select top 100 * FROM peeo_ods_output order by 1 desc&#10;"/>
+        <parameter key="use_default_schema" value="true"/>
+        <parameter key="prepare_statement" value="false"/>
+        <enumeration key="parameters"/>
+        <parameter key="data_management" value="auto"/>
+      </operator>
+      <operator activated="true" class="jdbc_connectors:read_database" compatibility="10.4.003" expanded="true" height="82" name="operation_decision_support_output" width="90" x="380" y="544">
+        <parameter key="define_connection" value="repository"/>
+        <parameter key="database_system" value="MySQL"/>
+        <parameter key="define_query" value="query"/>
+        <parameter key="query" value="select top 100 * FROM operation_decision_support_output order by 1 desc&#10;"/>
+        <parameter key="use_default_schema" value="true"/>
+        <parameter key="prepare_statement" value="false"/>
+        <enumeration key="parameters"/>
+        <parameter key="data_management" value="auto"/>
+      </operator>
+      <operator activated="true" class="jdbc_connectors:read_database" compatibility="10.4.003" expanded="true" height="82" name="model_alert_output" width="90" x="380" y="442">
+        <parameter key="define_connection" value="repository"/>
+        <parameter key="database_system" value="MySQL"/>
+        <parameter key="define_query" value="query"/>
+        <parameter key="query" value="select top 1000 * FROM model_alert_output order by 1 desc&#10;"/>
+        <parameter key="use_default_schema" value="true"/>
+        <parameter key="prepare_statement" value="false"/>
+        <enumeration key="parameters"/>
+        <parameter key="data_management" value="auto"/>
+      </operator>
+      <operator activated="true" class="jdbc_connectors:read_database" compatibility="10.4.003" expanded="true" height="82" name="run_info" width="90" x="380" y="340">
+        <parameter key="define_connection" value="repository"/>
+        <parameter key="database_system" value="MySQL"/>
+        <parameter key="define_query" value="query"/>
+        <parameter key="query" value="select top 100 * FROM run_info order by 1 desc&#10;"/>
+        <parameter key="use_default_schema" value="true"/>
+        <parameter key="prepare_statement" value="false"/>
+        <enumeration key="parameters"/>
+        <parameter key="data_management" value="auto"/>
+      </operator>
+      <operator activated="true" class="jdbc_connectors:read_database" compatibility="10.4.003" expanded="true" height="82" name="aihub_scheduler" width="90" x="380" y="136">
+        <parameter key="define_connection" value="repository"/>
+        <parameter key="database_system" value="MySQL"/>
+        <parameter key="define_query" value="query"/>
+        <parameter key="query" value="select top 100 * FROM aihub_scheduler order by 1 desc&#10;"/>
+        <parameter key="use_default_schema" value="true"/>
+        <parameter key="prepare_statement" value="false"/>
+        <enumeration key="parameters"/>
+        <parameter key="data_management" value="auto"/>
+      </operator>
+      <operator activated="true" class="jdbc_connectors:read_database" compatibility="10.4.003" expanded="true" height="82" name="error_log" width="90" x="380" y="238">
+        <parameter key="define_connection" value="repository"/>
+        <parameter key="database_system" value="MySQL"/>
+        <parameter key="define_query" value="query"/>
+        <parameter key="query" value="select top 100 * FROM error_log order by 1 desc&#10;"/>
+        <parameter key="use_default_schema" value="true"/>
+        <parameter key="prepare_statement" value="false"/>
+        <enumeration key="parameters"/>
+        <parameter key="data_management" value="auto"/>
+      </operator>
+      <connect from_op="Retrieve MSSQL_EO_2024_QA" from_port="output" to_op="Multiply" to_port="input"/>
+      <connect from_op="Multiply" from_port="output 1" to_op="aihub_scheduler" to_port="connection"/>
+      <connect from_op="Multiply" from_port="output 2" to_op="error_log" to_port="connection"/>
+      <connect from_op="Multiply" from_port="output 3" to_op="run_info" to_port="connection"/>
+      <connect from_op="Multiply" from_port="output 4" to_op="model_alert_output" to_port="connection"/>
+      <connect from_op="Multiply" from_port="output 5" to_op="operation_decision_support_output" to_port="connection"/>
+      <connect from_op="Multiply" from_port="output 6" to_op="peeo_ods_output" to_port="connection"/>
+      <connect from_op="Multiply" from_port="output 7" to_op="seu_output" to_port="connection"/>
+      <connect from_op="Multiply" from_port="output 8" to_op="seec_kpi_output" to_port="connection"/>
+      <connect from_op="Multiply" from_port="output 9" to_op="equipment_availability_history" to_port="connection"/>
+      <connect from_op="Multiply" from_port="output 10" to_op="tag_good_data" to_port="connection"/>
+      <connect from_op="Multiply" from_port="output 11" to_op="sub_model_retraining_history" to_port="connection"/>
+      <connect from_op="Multiply" from_port="output 12" to_op="sub_model_validation" to_port="connection"/>
+      <connect from_op="Multiply" from_port="output 13" to_op="pi_output" to_port="connection"/>
+      <connect from_op="Multiply" from_port="output 14" to_op="model_output" to_port="connection"/>
+      <connect from_op="model_output" from_port="output" to_port="result 14"/>
+      <connect from_op="pi_output" from_port="output" to_port="result 13"/>
+      <connect from_op="sub_model_validation" from_port="output" to_port="result 12"/>
+      <connect from_op="sub_model_retraining_history" from_port="output" to_port="result 11"/>
+      <connect from_op="tag_good_data" from_port="output" to_port="result 10"/>
+      <connect from_op="equipment_availability_history" from_port="output" to_port="result 9"/>
+      <connect from_op="seec_kpi_output" from_port="output" to_port="result 8"/>
+      <connect from_op="seu_output" from_port="output" to_port="result 7"/>
+      <connect from_op="peeo_ods_output" from_port="output" to_port="result 6"/>
+      <connect from_op="operation_decision_support_output" from_port="output" to_port="result 5"/>
+      <connect from_op="model_alert_output" from_port="output" to_port="result 4"/>
+      <connect from_op="run_info" from_port="output" to_port="result 3"/>
+      <connect from_op="aihub_scheduler" from_port="output" to_port="result 1"/>
+      <connect from_op="error_log" from_port="output" to_port="result 2"/>
+      <portSpacing port="source_input 1" spacing="0"/>
+      <portSpacing port="sink_result 1" spacing="0"/>
+      <portSpacing port="sink_result 2" spacing="0"/>
+      <portSpacing port="sink_result 3" spacing="0"/>
+      <portSpacing port="sink_result 4" spacing="0"/>
+      <portSpacing port="sink_result 5" spacing="0"/>
+      <portSpacing port="sink_result 6" spacing="0"/>
+      <portSpacing port="sink_result 7" spacing="0"/>
+      <portSpacing port="sink_result 8" spacing="0"/>
+      <portSpacing port="sink_result 9" spacing="0"/>
+      <portSpacing port="sink_result 10" spacing="0"/>
+      <portSpacing port="sink_result 11" spacing="0"/>
+      <portSpacing port="sink_result 12" spacing="0"/>
+      <portSpacing port="sink_result 13" spacing="0"/>
+      <portSpacing port="sink_result 14" spacing="0"/>
+      <portSpacing port="sink_result 15" spacing="0"/>
+    </process>
+  </operator>
+</process>

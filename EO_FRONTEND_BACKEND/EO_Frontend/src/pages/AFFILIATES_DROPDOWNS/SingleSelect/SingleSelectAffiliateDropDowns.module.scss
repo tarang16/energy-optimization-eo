@@ -1,0 +1,48 @@
+@use 'src/config/scss/_variables' as *;
+@use 'src/config/scss/typography' as *;
+
+.parentContainerDropDown {
+  .dropdownMainDiv {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .marginRight {
+      margin-right: 2vmin;
+
+      :global(.blue_dropdownList) {
+        max-height: 20vmin;
+      }
+    }
+
+    .buttonContainer {
+      button {
+        border-radius: 0.3vmin;
+        padding-top: 0.4vmin;
+        color: $primary_white;
+        width: 9vmin;
+        text-transform: uppercase;
+
+        height: 100%;
+
+        &.disabled_button {
+          border: 1px solid $primary_gray_3;
+          opacity: 0.8;
+          background-color: $primary_gray_2;
+          cursor: not-allowed;
+        }
+
+        &.enable_button {
+          border: 1px solid $primary_blue;
+          background-color: $primary_blue;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
+
+.dropdownContainer {
+  min-width: 25vmin !important;
+  width: 25vmin !important;
+}

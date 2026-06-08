@@ -1,0 +1,579 @@
+@use 'src/config/scss/_variables' as *;
+
+.separator {
+  margin: 0 1vmin;
+}
+
+.odsAlertMContainer {
+  &__breadcrum {
+    height: 4vmin;
+
+    .breadcrumFlexContainer {
+      display: flex;
+      align-items: flex-start;
+    }
+
+    .breadcrumItem {
+      display: inline-block;
+      color: $primary_blue;
+    }
+
+    .separatorImg {
+      display: inline-block;
+      position: relative;
+      top: -0.3vmin;
+      width: 2.1vmin;
+      height: 2.1vmin;
+      margin: 0 0.8vmin;
+    }
+  }
+
+  .btnContainer {
+    height: calc(100% - 4vmin);
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 3vmin;
+
+    &__L {
+      width: 70%;
+      display: flex;
+      flex-direction: column;
+
+      .topContainer {
+        height: calc(100% - 20vmin);
+        // padding: 1.5vmin;
+        // @include boxShadow_card;
+        // border-radius: 1vmin;
+        display: flex;
+        flex-direction: column;
+
+        .fixContainer {
+          @include boxShadow_card;
+          padding: 1vmin;
+          border-radius: 1vmin;
+
+          .container_bg_yellow {
+            background-color: $primary_yellow_bg;
+            padding: 1vmin;
+            border-radius: 1vmin;
+            min-height: 11vmin;
+            max-height: 15vmin;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            .separator_vertical {
+              margin: 1vmin 0;
+              border-bottom: 1px solid $primary_gray_3;
+            }
+
+            .suggestionLabel {
+              min-width: fit-content;
+            }
+
+            .valueContainer {
+              min-width: fit-content;
+              max-width: 25vmin;
+              text-align: end;
+
+              img {
+                width: 2vmin;
+                height: 2vmin;
+                cursor: pointer;
+              }
+            }
+          }
+
+          .tableContainer {
+            height: 10vmin;
+            margin-top: 1vmin;
+
+            :global(.ag-theme-alpine .cell-span) {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              height: 100%;
+            }
+
+            :global(.ag-cell[rowspan='0']) {
+              display: none;
+            }
+
+            :global(.cell-style) {
+              white-space: normal;
+              word-break: break-word;
+              max-width: 20vmin;
+              line-height: 1.1;
+              display: flex;
+              align-items: flex-start;
+              padding: 1vmin !important;
+              background-color: inherit;
+            }
+
+            :global(.addBorder) {
+              border-bottom: 0.1vmin solid $primary_gray_4 !important;
+              border-right: 0.1vmin solid $primary_gray_4 !important;
+              border-left: 0.1vmin solid $primary_gray_4 !important;
+            }
+
+            .centerCell {
+              text-align: center;
+              padding-right: 2vmin;
+            }
+
+            .agGridReactContainer {
+              position: relative;
+            }
+
+            :global(.ag-header .ag-pivot-off .ag-header-allow-overflow) {
+              height: 5vmin !important;
+              max-height: 5vmin !important;
+            }
+
+            table {
+              thead {
+                height: 4.5vmin !important;
+              }
+
+              tbody {
+                tr {
+                  td {
+                    height: 3vmin !important;
+                    text-transform: uppercase;
+                    padding-top: 0.8vmin;
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        .stageScrollContainer {
+          @include boxShadow_card;
+          border-radius: 1vmin;
+          height: calc(100%);
+          padding: 1vmin;
+          margin-top: 1.5vmin;
+          overflow-y: auto;
+
+          .stageContainer {
+            .tableContainer {
+              height: 12vmin;
+
+              table {
+                thead {
+                  height: 4.5vmin !important;
+                }
+
+                tbody {
+                  tr {
+                    td:first-child {
+                      text-align: left !important;
+                    }
+
+                    td {
+                      height: 3vmin;
+                      text-transform: uppercase;
+                      padding-top: 0.8vmin;
+                    }
+                  }
+                }
+              }
+            }
+
+            .noactionableText {
+              background-color: $primary_blue_bg;
+              @include boxShadow_card;
+              margin-top: 3vmin;
+              border-radius: 0.5vmin;
+              display: flex;
+              align-items: center;
+              gap: 2vmin;
+              padding: 1.5vmin 1vmin;
+
+              .crossIon {
+                width: 3vmin;
+                height: 3vmin;
+                border-radius: 50%;
+              }
+
+              .noactionText {
+                margin-top: 0.3vmin;
+              }
+            }
+          }
+        }
+      }
+
+      .bottomContainer {
+        display: flex;
+        gap: 2vmin;
+        flex-wrap: nowrap;
+        min-height: 14vmin;
+        max-height: 14vmin;
+        margin-top: 2vmin;
+
+        .cardContainer {
+          padding: 1vmin;
+          height: 100%;
+          @include boxShadow_card;
+          border-radius: 1vmin;
+          width: 50%;
+
+          &.leftContainer {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5vmin;
+
+            .headerText {
+              min-height: 2vmin;
+              max-height: 2vmin;
+            }
+
+            .commentInputBox {
+              flex-grow: 1;
+              border: 1px solid $primary_gray_4;
+              outline: none;
+              box-shadow: none;
+              padding: 1vmin;
+              font-size: 1.4vmin;
+              color: $primary_gray;
+              resize: none;
+              border-radius: 0.3vmin;
+              height: 100%;
+
+              &:focus,
+              &:focus-visible,
+              &:hover {
+                border: 1px solid $primary_gray_4;
+              }
+
+              &:disabled {
+                background-color: $primary_gray_6;
+              }
+            }
+          }
+
+          &.rightContainer {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5vmin;
+
+            .filePreview {
+              min-height: 2vmin;
+              max-height: 7vmin;
+              display: flex;
+              justify-content: space-between;
+              flex-wrap: wrap;
+              overflow-y: auto;
+              padding-right: 0.5vmin;
+              gap: 0.5vmin;
+
+              .fileDetails {
+                // width: calc(50% - 1vmin);
+                border: 1px solid $primary_gray_3;
+                border-radius: 0.3vmin;
+                display: flex;
+                gap: 0.4vmin;
+                align-items: center;
+                justify-content: space-between;
+                row-gap: 1vmin;
+                padding: 0.5vmin 1vmin;
+                height: 3vmin;
+
+                .deleteFile {
+                  cursor: pointer;
+                  width: 2vmin;
+                  height: 2vmin;
+                }
+              }
+            }
+
+            .placeholderName {
+              flex-grow: 1;
+              width: 100%;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              // border: 1px dashed $primary_blue;
+              border-radius: 1vmin;
+              color: $primary_gray;
+              cursor: pointer;
+
+              .dropzone {
+                border: 1px dashed $primary_blue;
+                border-radius: 0.3vmin;
+                width: 100%;
+                height: 100%;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                display: flex;
+                flex: 1;
+
+                &.disablesFileUploader {
+                  cursor: no-drop;
+                  border: 1px dashed $primary_gray_2;
+                  background-color: $primary_gray_6;
+                }
+              }
+
+              .blueText {
+                color: $primary_blue;
+                text-decoration: underline;
+              }
+
+              .uploadInput {
+                position: absolute;
+                opacity: 0;
+                right: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                cursor: pointer;
+                filter: alpha(opacity=0);
+                z-index: 1;
+              }
+            }
+          }
+        }
+      }
+
+      .btnContainerHeight {
+        height: 3vmin;
+        margin-top: 1vmin;
+
+        .btnContainer {
+          height: 100%;
+          gap: 1.5vmin;
+
+          .saveBtn {
+            border: 1px solid $primary_blue;
+            display: inline-block;
+            height: 3.5vmin;
+            color: $primary_white;
+            width: 10vmin;
+            padding-top: 0.3vmin;
+            background-color: $primary_blue;
+            text-transform: uppercase;
+            border-radius: 0.3vmin;
+
+            &.disabled {
+              background-color: $primary_gray_2;
+              border: 1px solid $primary_gray_2;
+              cursor: not-allowed;
+            }
+          }
+
+          .cancelBtn {
+            border: 1px solid $primary_blue;
+            display: inline-block;
+            height: 3.5vmin;
+            color: $primary_blue;
+            width: 10vmin;
+            padding-top: 0.3vmin;
+            background-color: $primary_blue_bg;
+            text-transform: uppercase;
+            border-radius: 0.3vmin;
+
+            &.disabled {
+              background-color: $primary_gray_4;
+              border: 1px solid $primary_gray_3;
+              color: $primary_gray_2;
+            }
+          }
+        }
+      }
+    }
+
+    &__R {
+      width: 30%;
+      @include boxShadow_card;
+      border-radius: 1vmin;
+      padding: 0 1.5vmin;
+      position: relative;
+
+      &::before {
+        content: '';
+        position: absolute;
+        height: 100%;
+        width: 0.1vmin;
+        background-color: $primary_shadow_card;
+        left: -1.5vmin;
+        top: 0;
+      }
+
+      &__top {
+        border-bottom: 1px solid $primary_gray_3;
+        height: 5vmin;
+        display: flex;
+        align-items: center;
+
+        // padding-bottom: 1vmin;
+        h2 {
+          margin-top: 0.4vmin;
+        }
+
+        .adduserSubmitBtn {
+          background-color: $primary_blue;
+          color: $primary_white;
+          border: none;
+          display: inline-block;
+          height: 3vmin;
+          border-radius: 0.5vmin;
+          padding: 0 1vmin;
+          cursor: pointer;
+          @include boxShadow_card;
+
+          img {
+            width: 2vmin;
+          }
+        }
+      }
+
+      &__bottom {
+        height: calc(100% - 4vmin);
+        padding-top: 2vmin;
+        padding-bottom: 1vmin;
+      }
+    }
+  }
+}
+
+.saveBtn {
+  border: 1px solid $primary_blue;
+  display: inline-block;
+  height: 3vmin;
+  color: $primary_white;
+  width: 14vmin;
+  padding-top: 0.3vmin;
+  background-color: $primary_blue;
+  text-transform: uppercase;
+  border-radius: 0.3vmin;
+
+  &:disabled {
+    background-color: $primary_gray_2;
+    border: 1px solid $primary_gray_2;
+    cursor: not-allowed;
+    opacity: 0.8;
+  }
+}
+
+.cancelBtn {
+  border: 1px solid $primary_blue;
+  display: inline-block;
+  height: 3vmin;
+  color: $primary_blue;
+  width: 14vmin;
+  padding-top: 0.3vmin;
+  background-color: $primary_blue_bg;
+  text-transform: uppercase;
+  border-radius: 0.3vmin;
+}
+
+.disabled {
+  background-color: $primary_gray_2;
+  border: 1px solid $primary_gray_2;
+  cursor: not-allowed;
+}
+
+:global(.customNestedBackgroundBlue) {
+  background-color: rgba(77, 77, 77, 0.4) !important;
+}
+
+.removeLastCellBorder {
+  table {
+    tbody {
+      tr {
+        &:last-child {
+          td {
+            border-bottom: none !important;
+          }
+        }
+      }
+    }
+  }
+}
+
+.workflowClosed {
+  border: 1px solid $primary_orange;
+  display: inline-block;
+  height: 3.5vmin;
+  width: 20vmin;
+  padding-top: 1vmin;
+  background-color: $primary_orange;
+  color: $primary_white;
+  border-radius: 0.5vmin;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.workFlowTableModal {
+  :global(.modal-dialog.modal-dialog-centered) {
+    min-width: 115vmin !important;
+    max-width: 115vmin !important;
+  }
+}
+
+.workflowUserConfiramationContainer {
+  .radioBtnContainer {
+    margin: 1vmin 0;
+  }
+
+  input[type='radio'] {
+    width: 2vmin;
+    height: 2vmin;
+  }
+
+  .datePickerContainerUserConfirm {
+    width: 18vmin;
+    height: 3.5vmin;
+
+    :global(
+      .react-datepicker-wrapper .react-datepicker__input-container input
+    ) {
+      background-image: url('../../../../assets/sabic_new_icons/calendar_icon.svg');
+      background-repeat: no-repeat;
+      background-position: calc(100% - 1vmin) center;
+      background-size: 2vmin;
+      width: 100% !important;
+    }
+  }
+
+  .descriptionText {
+    margin: 1.5vmin 0 0 0;
+    color: $primary_orange;
+  }
+
+  .btnContainer {
+    margin-top: 3vmin;
+  }
+}
+
+.IsSnoozeEnabledContainer {
+  &__Item {
+    margin-top: 2vmin;
+
+    .labelText {
+      min-width: 18vmin;
+    }
+
+    .singleSelectContainer {
+      height: 3.5vmin;
+      width: 30vmin;
+    }
+
+    .userInputSection {
+      width: 65vmin;
+      max-width: 65vmin;
+
+      .commentInputBox {
+        padding: 1vmin;
+      }
+    }
+  }
+}
+
+:global(.highlight-color) {
+  color: $primary_blue;
+}

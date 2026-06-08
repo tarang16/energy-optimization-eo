@@ -1,0 +1,8 @@
+[
+  {
+    "_doc": "One entry per ranking criterion. Weights across all criteria must sum to 100. sort_type 'desc' means higher value = better rank; 'asc' means lower value = better rank.",
+    "attribute_name": "your_calculated_attribute",
+    "attribute_weightage": 100,
+    "sort_type": "desc"
+  }
+]

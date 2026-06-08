@@ -1,0 +1,292 @@
+@use 'src/config/scss/_variables' as *;
+
+.StatisticsContainer {
+  width: 100%;
+  height: 100%;
+
+  &__wrapper {
+    margin-bottom: 1.5vmin;
+    height: calc(100% - 8.5vmin);
+    padding: 0 1vmin 0 1vmin;
+    border: 1px solid $primary_gray_4;
+    border-radius: 0.3vmin;
+
+    &__topBlock {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 7vmin;
+      border-bottom: 1px solid $primary_gray_5;
+      // @include boxShadow_card;
+      border-radius: 0.3vmin;
+      padding: 0.5vmin;
+
+      &__item {
+        gap: 2vmin;
+      }
+
+      .imgIcon {
+        width: 4vmin;
+        max-width: 4vmin;
+      }
+    }
+
+    &__middleBlock {
+      // margin-top: 1.5vmin;
+      // gap: 1.5vmin;
+      height: calc(100% - 7vmin);
+      display: flex;
+      flex-direction: column;
+      // border: 1px solid $primary_gray_4;
+      border-radius: 0.3vmin;
+
+      &__item {
+        width: 100%;
+        height: 33.33%;
+        padding: 0.5vmin 1vmin 0.5vmin 1.5vmin;
+        // border: 1px solid $primary_gray_4;
+        // box-shadow: 0px 0px 3px 0px $primary_shadow_card;
+        // border-radius: .3vmin;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 2vmin;
+        // border-bottom: 1px solid $primary_gray_4;
+        // box-shadow:  0px 1px 2px 0px $primary_shadow_card;
+        // box-shadow:  0px 10px 10px -10px $primary_shadow_card;
+        box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
+        // &:last-child{
+        //   box-shadow: none;
+        // }
+
+        .topBlock {
+          width: calc(100% - 2vmin);
+          height: 100%;
+          display: flex;
+          gap: 1.5vmin;
+          align-items: center;
+
+          .iconContainer {
+            width: 2.5vmin;
+
+            .imgIcon {
+              width: 100%;
+            }
+          }
+
+          .valueCOntainer {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            gap: 2vmin;
+            justify-content: space-between;
+          }
+        }
+
+        .modalButtonsContainer {
+          text-align: center;
+          width: 2vmin;
+          height: 2vmin;
+
+          button {
+            height: 100%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+            background-color: transparent;
+            border: none;
+
+            img {
+              width: 100%;
+              height: 100%;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &__bottomBlock {
+    height: 7vmin;
+    width: 100%;
+
+    .cardItem {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2vmin;
+      padding: 0.5vmin 2.2vmin 0.5vmin 2.2vmin;
+      border: 1px solid $primary_gray_4;
+      border-radius: 0.3vmin;
+
+      &__left {
+        display: flex;
+        gap: 1.5vmin;
+        align-items: center;
+        justify-content: space-between;
+        width: calc(100% - 2vmin);
+
+        // padding-left: 1vmin;
+        .imgIcon {
+          width: 2.5vmin;
+        }
+
+        .middleContent {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          flex-grow: 1;
+        }
+      }
+
+      &__right {
+        // padding-right: 1vmin;
+        width: 2vmin;
+
+        .modalButtonsContainer {
+          text-align: center;
+          width: 2vmin;
+          height: 2vmin;
+
+          button {
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+            background-color: transparent;
+            border: none;
+
+            img {
+              width: 100%;
+              height: 100%;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.Alertcard {
+  background-color: $primary_blue_bg;
+  @include boxShadow_card;
+  width: 30%;
+  padding: 2vmin 4vmin;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 0 1.2vmin;
+
+  .imgIcon {
+    width: 30px; // Set width to 30px
+    max-width: 30px;
+  }
+}
+
+.alertStatusContainer {
+  padding: 0 1.5vmin 1.5vmin 1.5vmin;
+
+  .alertStatusTopContainer {
+    height: 3.5vmin;
+    margin-bottom: 1.5vmin;
+    width: 100%;
+  }
+
+  .alertStatusButtomContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5vmin;
+    height: calc(100% - 5vmin);
+
+    &__top {
+      display: flex;
+      gap: 1.5vmin;
+      height: 40%;
+    }
+
+    &__bottom {
+      display: flex;
+      height: 60%;
+      gap: 1.5vmin;
+
+      &__right {
+        display: flex;
+        gap: 1vmin;
+        height: 100%;
+        @include boxShadow_card;
+        padding: 1vmin;
+
+        .divider {
+          width: 1px;
+          background-color: $primary_gray_4;
+        }
+      }
+    }
+  }
+}
+
+.modalTableBtn {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+
+  img {
+    width: 2.5vmin;
+    height: 2.5vmin;
+  }
+}
+
+.actionBtnGrp {
+  display: flex;
+  align-items: center;
+  gap: 0.6vmin;
+  flex-wrap: nowrap;
+
+  button {
+    border: none;
+    width: 2vmin;
+    height: 2vmin;
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    img {
+      width: 100%;
+      height: 100%;
+      filter: unset !important;
+    }
+  }
+}
+
+// trend-icon in table
+.cumulativeContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+
+  .cumulativeText {
+    width: 50%;
+    flex: 1;
+    text-align: end;
+  }
+
+  .iconWrapper {
+    width: 50%;
+    flex: 1;
+    flex-shrink: 0;
+    text-align: start;
+
+    img {
+      margin-left: 0.8vmin;
+      height: 1.8vmin;
+      width: 1.8vmin;
+    }
+  }
+}

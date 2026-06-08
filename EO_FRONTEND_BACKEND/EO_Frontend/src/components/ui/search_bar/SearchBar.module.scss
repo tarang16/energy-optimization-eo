@@ -1,0 +1,92 @@
+@use 'config/scss/variables' as *;
+
+.searchBar {
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+
+  :global(.react-select__menu) {
+    z-index: 25;
+    border-radius: 0.3vmin;
+  }
+
+  :global(.react-select__menu-list) {
+    padding: 1.5vmin 1vmin !important;
+
+    :global(.react-select__menu-notice--no-options) {
+      padding: 0 !important;
+    }
+  }
+
+  :global(.react-select__control) {
+    min-height: 100%;
+    padding: 0;
+    margin: 0;
+    border: 1px solid $primary_gray_3;
+    box-shadow: none;
+    outline: none;
+    border-radius: 0.3vmin;
+
+    &:hover,
+    &:focus {
+      border: 1px solid $primary_gray_3;
+      box-shadow: none;
+      outline: none;
+    }
+
+    :global(.react-select__value-container) {
+      padding: 0;
+      margin: 0;
+      height: 100%;
+      padding-left: 5px;
+
+      :global(.react-select__placeholder) {
+        padding: 0;
+        margin: 0;
+        height: 100%;
+        display: flex;
+        align-items: center;
+      }
+
+      :global(.react-select__input-container) {
+        padding: 0;
+        margin: 0;
+        height: 100%;
+
+        input {
+          width: 100%;
+          border-radius: 4px;
+          outline: none;
+          border: 1px solid $primary_gray_2;
+          height: 100%;
+          padding: 5px;
+          position: relative;
+          font-size: 1.4vmin;
+        }
+      }
+    }
+
+    :global(.react-select__menu) {
+      min-height: 10vmin;
+    }
+  }
+}
+
+:global(.react-select__menu-list .react-select__option) {
+  padding: 1.2vmin 0.8vmin 0.9vmin 0.8vmin !important;
+  font-size: 1.4vmin;
+
+  &:focus-visible {
+    outline: none;
+  }
+
+  &:hover,
+  &:active {
+    background-color: $primary_blue_bg !important;
+  }
+
+  &:global(.react-select__option--is-focused) {
+    background-color: $primary_blue_bg !important;
+  }
+}

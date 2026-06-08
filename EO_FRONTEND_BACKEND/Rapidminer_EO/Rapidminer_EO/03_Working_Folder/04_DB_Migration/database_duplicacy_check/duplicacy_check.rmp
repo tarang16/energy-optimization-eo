@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8"?><process version="10.4.003">
+  <context>
+    <input/>
+    <output/>
+    <macros/>
+  </context>
+  <operator activated="true" class="process" compatibility="10.4.003" expanded="true" name="Process">
+    <parameter key="logverbosity" value="init"/>
+    <parameter key="random_seed" value="2001"/>
+    <parameter key="send_mail" value="never"/>
+    <parameter key="notification_email" value=""/>
+    <parameter key="process_duration_for_mail" value="30"/>
+    <parameter key="encoding" value="SYSTEM"/>
+    <process expanded="true">
+      <operator activated="false" class="retrieve" compatibility="10.4.003" expanded="true" height="68" name="Retrieve MSSQL_EO_2024" width="90" x="45" y="187">
+        <parameter key="repository_entry" value="//ing_manufacturing_eo_2024_qa/Connections/MSSQL_EO_2024"/>
+      </operator>
+      <operator activated="false" class="jdbc_connectors:execute_sql" compatibility="10.4.003" expanded="true" height="82" name="Execute SQL" width="90" x="45" y="289">
+        <parameter key="define_connection" value="repository"/>
+        <parameter key="database_system" value="MySQL"/>
+        <parameter key="query" value="delete from inferred_tag_rm_block_mapping where inferred_tag_rm_block_mapping_id  in (2476,&#10;2749,&#10;2847)&#10;"/>
+        <parameter key="prepare_statement" value="false"/>
+        <enumeration key="parameters"/>
+      </operator>
+      <operator activated="true" class="read_excel" compatibility="10.4.003" expanded="true" height="68" name="Read Excel" width="90" x="179" y="34">
+        <parameter key="excel_file" value="C:\aistudio\ing_manufacturing_eo_2024_dev_ing\04_Working_Folder\02_Miscellaneous\04_DB_Migration\database_duplicacy_check\db_uniqueness.xlsx"/>
+        <parameter key="sheet_selection" value="sheet number"/>
+        <parameter key="sheet_number" value="2"/>
+        <parameter key="imported_cell_range" value="A1"/>
+        <parameter key="encoding" value="SYSTEM"/>
+        <parameter key="use_header_row" value="true"/>
+        <parameter key="header_row" value="1"/>
+        <parameter key="first_row_as_names" value="true"/>
+        <list key="annotations"/>
+        <parameter key="date_format" value=""/>
+        <parameter key="time_zone" value="SYSTEM"/>
+        <parameter key="locale" value="English (United States)"/>
+        <parameter key="read_all_values_as_polynominal" value="false"/>
+        <list key="data_set_meta_data_information">
+          <parameter key="0" value="table_name.true.polynominal.attribute"/>
+          <parameter key="1" value="attribute.true.polynominal.attribute"/>
+        </list>
+        <parameter key="read_not_matching_values_as_missings" value="false"/>
+      </operator>
+      <operator activated="true" class="remove_duplicates" compatibility="10.4.003" expanded="true" height="103" name="Remove Duplicates" width="90" x="313" y="34">
+        <parameter key="attribute_filter_type" value="single"/>
+        <parameter key="attribute" value="table_name"/>
+        <parameter key="attributes" value=""/>
+        <parameter key="use_except_expression" value="false"/>
+        <parameter key="value_type" value="attribute_value"/>
+        <parameter key="use_value_type_exception" value="false"/>
+        <parameter key="except_value_type" value="time"/>
+        <parameter key="block_type" value="attribute_block"/>
+        <parameter key="use_block_type_exception" value="false"/>
+        <parameter key="except_block_type" value="value_matrix_row_start"/>
+        <parameter key="invert_selection" value="false"/>
+        <parameter key="include_special_attributes" value="false"/>
+        <parameter key="treat_missing_values_as_duplicates" value="false"/>
+      </operator>
+      <operator activated="false" class="retrieve" compatibility="10.4.003" expanded="true" height="68" name="Retrieve MSSQL_EO_2024 (2)" width="90" x="112" y="340">
+        <parameter key="repository_entry" value="/Connections/MSSQL_EO_2024"/>
+      </operator>
+      <operator activated="false" class="retrieve" compatibility="10.4.003" expanded="true" height="68" name="Retrieve MSSQL_EO_2024 (3)" width="90" x="313" y="289">
+        <parameter key="repository_entry" value="//ing_manufacturing_eo_2024_qa/Connections/MSSQL_EO_2024"/>
+      </operator>
+      <operator activated="true" class="retrieve" compatibility="10.4.003" expanded="true" height="68" name="Retrieve MSSQL_EO_2024 (4)" width="90" x="246" y="187">
+        <parameter key="repository_entry" value="/Connections/MSSQL_EO_2024"/>
+      </operator>
+      <operator activated="true" class="concurrency:loop_values" compatibility="10.4.003" expanded="true" height="124" name="Loop Values" width="90" x="447" y="34">
+        <parameter key="attribute" value="table_name"/>
+        <parameter key="iteration_macro" value="table_name"/>
+        <parameter key="reuse_results" value="false"/>
+        <parameter key="enable_parallel_execution" value="true"/>
+        <process expanded="true">
+          <operator activated="true" class="filter_examples" compatibility="10.4.003" expanded="true" height="103" name="Filter Examples" width="90" x="45" y="34">
+            <parameter key="parameter_expression" value=""/>
+            <parameter key="condition_class" value="custom_filters"/>
+            <parameter key="invert_filter" value="false"/>
+            <list key="filters_list">
+              <parameter key="filters_entry_key" value="table_name.equals.%{table_name}"/>
+            </list>
+            <parameter key="filters_logic_and" value="true"/>
+            <parameter key="filters_check_metadata" value="true"/>
+          </operator>
+          <operator activated="true" class="blending:pivot" compatibility="10.4.003" expanded="true" height="103" name="Pivot" width="90" x="179" y="34">
+            <parameter key="group_by_attributes" value="table_name"/>
+            <parameter key="column_grouping_attribute" value="table_name"/>
+            <list key="aggregation_attributes">
+              <parameter key="attribute" value="concatenation"/>
+            </list>
+            <parameter key="use_default_aggregation" value="false"/>
+            <parameter key="default_aggregation_function" value="first"/>
+          </operator>
+          <operator activated="true" class="rename_by_replacing" compatibility="10.4.003" expanded="true" height="82" name="Rename by Replacing" width="90" x="313" y="34">
+            <parameter key="attribute_filter_type" value="all"/>
+            <parameter key="attribute" value=""/>
+            <parameter key="attributes" value=""/>
+            <parameter key="use_except_expression" value="false"/>
+            <parameter key="value_type" value="attribute_value"/>
+            <parameter key="use_value_type_exception" value="false"/>
+            <parameter key="except_value_type" value="time"/>
+            <parameter key="block_type" value="attribute_block"/>
+            <parameter key="use_block_type_exception" value="false"/>
+            <parameter key="except_block_type" value="value_matrix_row_start"/>
+            <parameter key="invert_selection" value="false"/>
+            <parameter key="include_special_attributes" value="false"/>
+            <parameter key="replace_what" value="concat\(attribute\)_.*"/>
+            <parameter key="replace_by" value="attribute"/>
+          </operator>
+          <operator activated="true" class="extract_macro" compatibility="10.4.003" expanded="true" height="68" name="Extract Macro (5)" width="90" x="447" y="34">
+            <parameter key="macro" value="columns"/>
+            <parameter key="macro_type" value="data_value"/>
+            <parameter key="statistics" value="average"/>
+            <parameter key="attribute_name" value="attribute"/>
+            <parameter key="example_index" value="1"/>
+            <list key="additional_macros"/>
+          </operator>
+          <operator activated="true" class="generate_macro" compatibility="10.4.003" expanded="true" height="82" name="Generate Macro" width="90" x="581" y="34">
+            <list key="function_descriptions">
+              <parameter key="flag_active" value="if(contains(%{columns},&quot;active&quot;),1,0)"/>
+            </list>
+          </operator>
+          <operator activated="true" class="blending:generate_columns" compatibility="10.4.003" expanded="true" height="82" name="Generate Attributes (2)" width="90" x="715" y="34">
+            <list key="function_descriptions">
+              <parameter key="attribute" value="if(contains([attribute],&quot;active&quot;),replace([attribute],&quot;|active&quot;,&quot;&quot;),[attribute])"/>
+            </list>
+            <parameter key="keep_all_columns" value="true"/>
+            <parameter key="default_time_zone" value="Asia/Calcutta"/>
+          </operator>
+          <operator activated="true" class="extract_macro" compatibility="10.4.003" expanded="true" height="68" name="Extract Macro (6)" width="90" x="849" y="34">
+            <parameter key="macro" value="columns"/>
+            <parameter key="macro_type" value="data_value"/>
+            <parameter key="statistics" value="average"/>
+            <parameter key="attribute_name" value="attribute"/>
+            <parameter key="example_index" value="1"/>
+            <list key="additional_macros"/>
+          </operator>
+          <operator activated="false" class="branch" compatibility="10.4.003" expanded="true" height="82" name="Branch (2)" width="90" x="782" y="442">
+            <parameter key="condition_type" value="expression"/>
+            <parameter key="expression" value="%{flag_active}==1"/>
+            <parameter key="io_object" value="ANOVAMatrix"/>
+            <parameter key="return_inner_output" value="true"/>
+            <process expanded="true">
+              <operator activated="true" class="blending:generate_columns" compatibility="10.4.003" expanded="true" height="82" name="Generate Attributes" width="90" x="112" y="34">
+                <list key="function_descriptions"/>
+                <parameter key="keep_all_columns" value="true"/>
+                <parameter key="default_time_zone" value="Asia/Calcutta"/>
+              </operator>
+              <operator activated="true" class="extract_macro" compatibility="10.4.003" expanded="true" height="68" name="Extract Macro" width="90" x="246" y="34">
+                <parameter key="macro" value="columns"/>
+                <parameter key="macro_type" value="data_value"/>
+                <parameter key="statistics" value="average"/>
+                <parameter key="attribute_name" value="attribute"/>
+                <parameter key="example_index" value="1"/>
+                <list key="additional_macros"/>
+              </operator>
+              <connect from_port="condition" to_op="Generate Attributes" to_port="table input"/>
+              <connect from_op="Generate Attributes" from_port="table output" to_op="Extract Macro" to_port="example set"/>
+              <portSpacing port="source_condition" spacing="0"/>
+              <portSpacing port="source_input 1" spacing="0"/>
+              <portSpacing port="sink_input 1" spacing="0"/>
+              <portSpacing port="sink_input 2" spacing="0"/>
+            </process>
+            <process expanded="true">
+              <operator activated="true" class="extract_macro" compatibility="10.4.003" expanded="true" height="68" name="Extract Macro (2)" width="90" x="246" y="34">
+                <parameter key="macro" value="columns"/>
+                <parameter key="macro_type" value="data_value"/>
+                <parameter key="statistics" value="average"/>
+                <parameter key="attribute_name" value="attribute"/>
+                <parameter key="example_index" value="1"/>
+                <list key="additional_macros"/>
+              </operator>
+              <connect from_port="condition" to_op="Extract Macro (2)" to_port="example set"/>
+              <connect from_op="Extract Macro (2)" from_port="example set" to_port="input 1"/>
+              <portSpacing port="source_condition" spacing="0"/>
+              <portSpacing port="source_input 1" spacing="0"/>
+              <portSpacing port="sink_input 1" spacing="0"/>
+              <portSpacing port="sink_input 2" spacing="0"/>
+            </process>
+          </operator>
+          <operator activated="true" class="branch" compatibility="10.4.003" expanded="true" height="103" name="Branch" width="90" x="782" y="238">
+            <parameter key="condition_type" value="expression"/>
+            <parameter key="expression" value="%{flag_active}==1"/>
+            <parameter key="io_object" value="ANOVAMatrix"/>
+            <parameter key="return_inner_output" value="true"/>
+            <process expanded="true">
+              <operator activated="true" class="jdbc_connectors:read_database" compatibility="10.4.003" expanded="true" height="82" name="Read Database (2)" width="90" x="45" y="34">
+                <parameter key="define_connection" value="repository"/>
+                <parameter key="database_system" value="MySQL"/>
+                <parameter key="define_query" value="query"/>
+                <parameter key="query" value="select * from %{table_name}&#10;&#10;"/>
+                <parameter key="use_default_schema" value="true"/>
+                <parameter key="prepare_statement" value="false"/>
+                <enumeration key="parameters"/>
+                <parameter key="data_management" value="auto"/>
+              </operator>
+              <operator activated="true" class="remove_duplicates" compatibility="10.4.003" expanded="true" height="103" name="Remove Duplicates (3)" width="90" x="179" y="34">
+                <parameter key="attribute_filter_type" value="regular_expression"/>
+                <parameter key="attribute" value=""/>
+                <parameter key="attributes" value=""/>
+                <parameter key="regular_expression" value="%{columns}"/>
+                <parameter key="use_except_expression" value="false"/>
+                <parameter key="value_type" value="attribute_value"/>
+                <parameter key="use_value_type_exception" value="false"/>
+                <parameter key="except_value_type" value="time"/>
+                <parameter key="block_type" value="attribute_block"/>
+                <parameter key="use_block_type_exception" value="false"/>
+                <parameter key="except_block_type" value="value_matrix_row_start"/>
+                <parameter key="invert_selection" value="false"/>
+                <parameter key="include_special_attributes" value="false"/>
+                <parameter key="treat_missing_values_as_duplicates" value="false"/>
+              </operator>
+              <operator activated="true" class="extract_macro" compatibility="10.4.003" expanded="true" height="68" name="Extract Macro (3)" width="90" x="313" y="158">
+                <parameter key="macro" value="noe"/>
+                <parameter key="macro_type" value="number_of_examples"/>
+                <parameter key="statistics" value="average"/>
+                <parameter key="attribute_name" value="attribute"/>
+                <parameter key="example_index" value="1"/>
+                <list key="additional_macros"/>
+              </operator>
+              <operator activated="true" class="utility:create_exampleset" compatibility="10.4.003" expanded="true" height="68" name="Create ExampleSet (2)" width="90" x="313" y="34">
+                <parameter key="generator_type" value="comma separated text"/>
+                <parameter key="number_of_examples" value="100"/>
+                <parameter key="use_stepsize" value="false"/>
+                <list key="function_descriptions"/>
+                <parameter key="add_id_attribute" value="false"/>
+                <list key="numeric_series_configuration"/>
+                <list key="date_series_configuration"/>
+                <list key="date_series_configuration (interval)"/>
+                <parameter key="date_format" value="yyyy-MM-dd HH:mm:ss"/>
+                <parameter key="time_zone" value="SYSTEM"/>
+                <parameter key="input_csv_text" value="table_name,num_duplicates&#10;%{table_name},%{noe}"/>
+                <parameter key="column_separator" value=","/>
+                <parameter key="parse_all_as_nominal" value="false"/>
+                <parameter key="decimal_point_character" value="."/>
+                <parameter key="trim_attribute_names" value="true"/>
+              </operator>
+              <connect from_port="condition" to_op="Read Database (2)" to_port="connection"/>
+              <connect from_op="Read Database (2)" from_port="output" to_op="Remove Duplicates (3)" to_port="example set input"/>
+              <connect from_op="Remove Duplicates (3)" from_port="duplicates" to_op="Extract Macro (3)" to_port="example set"/>
+              <connect from_op="Create ExampleSet (2)" from_port="output" to_port="input 1"/>
+              <portSpacing port="source_condition" spacing="0"/>
+              <portSpacing port="source_input 1" spacing="0"/>
+              <portSpacing port="sink_input 1" spacing="0"/>
+              <portSpacing port="sink_input 2" spacing="0"/>
+              <portSpacing port="sink_input 3" spacing="0"/>
+            </process>
+            <process expanded="true">
+              <operator activated="true" class="jdbc_connectors:read_database" compatibility="10.4.003" expanded="true" height="82" name="Read Database (3)" width="90" x="45" y="34">
+                <parameter key="define_connection" value="repository"/>
+                <parameter key="database_system" value="MySQL"/>
+                <parameter key="define_query" value="query"/>
+                <parameter key="query" value="SELECT *&#10;FROM %{table_name}&#10;&#10;"/>
+                <parameter key="use_default_schema" value="true"/>
+                <parameter key="prepare_statement" value="false"/>
+                <enumeration key="parameters"/>
+                <parameter key="data_management" value="auto"/>
+              </operator>
+              <operator activated="true" class="remove_duplicates" compatibility="10.4.003" expanded="true" height="103" name="Remove Duplicates (4)" width="90" x="179" y="34">
+                <parameter key="attribute_filter_type" value="regular_expression"/>
+                <parameter key="attribute" value=""/>
+                <parameter key="attributes" value="|inferred_detail_id|rm_block_id"/>
+                <parameter key="regular_expression" value="%{columns}"/>
+                <parameter key="use_except_expression" value="false"/>
+                <parameter key="value_type" value="attribute_value"/>
+                <parameter key="use_value_type_exception" value="false"/>
+                <parameter key="except_value_type" value="time"/>
+                <parameter key="block_type" value="attribute_block"/>
+                <parameter key="use_block_type_exception" value="false"/>
+                <parameter key="except_block_type" value="value_matrix_row_start"/>
+                <parameter key="invert_selection" value="false"/>
+                <parameter key="include_special_attributes" value="false"/>
+                <parameter key="treat_missing_values_as_duplicates" value="false"/>
+              </operator>
+              <operator activated="true" class="extract_macro" compatibility="10.4.003" expanded="true" height="68" name="Extract Macro (4)" width="90" x="313" y="158">
+                <parameter key="macro" value="noe"/>
+                <parameter key="macro_type" value="number_of_examples"/>
+                <parameter key="statistics" value="average"/>
+                <parameter key="attribute_name" value="attribute"/>
+                <parameter key="example_index" value="1"/>
+                <list key="additional_macros"/>
+              </operator>
+              <operator activated="true" class="utility:create_exampleset" compatibility="10.4.003" expanded="true" height="68" name="Create ExampleSet (3)" width="90" x="313" y="34">
+                <parameter key="generator_type" value="comma separated text"/>
+                <parameter key="number_of_examples" value="100"/>
+                <parameter key="use_stepsize" value="false"/>
+                <list key="function_descriptions"/>
+                <parameter key="add_id_attribute" value="false"/>
+                <list key="numeric_series_configuration"/>
+                <list key="date_series_configuration"/>
+                <list key="date_series_configuration (interval)"/>
+                <parameter key="date_format" value="yyyy-MM-dd HH:mm:ss"/>
+                <parameter key="time_zone" value="SYSTEM"/>
+                <parameter key="input_csv_text" value="table_name,num_duplicates&#10;%{table_name},%{noe}"/>
+                <parameter key="column_separator" value=","/>
+                <parameter key="parse_all_as_nominal" value="false"/>
+                <parameter key="decimal_point_character" value="."/>
+                <parameter key="trim_attribute_names" value="true"/>
+              </operator>
+              <connect from_port="condition" to_op="Read Database (3)" to_port="connection"/>
+              <connect from_op="Read Database (3)" from_port="output" to_op="Remove Duplicates (4)" to_port="example set input"/>
+              <connect from_op="Remove Duplicates (4)" from_port="duplicates" to_op="Extract Macro (4)" to_port="example set"/>
+              <connect from_op="Create ExampleSet (3)" from_port="output" to_port="input 2"/>
+              <portSpacing port="source_condition" spacing="0"/>
+              <portSpacing port="source_input 1" spacing="0"/>
+              <portSpacing port="sink_input 1" spacing="0"/>
+              <portSpacing port="sink_input 2" spacing="0"/>
+              <portSpacing port="sink_input 3" spacing="0"/>
+            </process>
+          </operator>
+          <connect from_port="input 2" to_op="Filter Examples" to_port="example set input"/>
+          <connect from_port="input 3" to_op="Branch" to_port="condition"/>
+          <connect from_op="Filter Examples" from_port="example set output" to_op="Pivot" to_port="input"/>
+          <connect from_op="Pivot" from_port="output" to_op="Rename by Replacing" to_port="example set input"/>
+          <connect from_op="Rename by Replacing" from_port="example set output" to_op="Extract Macro (5)" to_port="example set"/>
+          <connect from_op="Extract Macro (5)" from_port="example set" to_op="Generate Macro" to_port="through 1"/>
+          <connect from_op="Generate Macro" from_port="through 1" to_op="Generate Attributes (2)" to_port="table input"/>
+          <connect from_op="Generate Attributes (2)" from_port="table output" to_op="Extract Macro (6)" to_port="example set"/>
+          <connect from_op="Branch" from_port="input 1" to_port="output 1"/>
+          <connect from_op="Branch" from_port="input 2" to_port="output 2"/>
+          <portSpacing port="source_input 1" spacing="0"/>
+          <portSpacing port="source_input 2" spacing="0"/>
+          <portSpacing port="source_input 3" spacing="0"/>
+          <portSpacing port="source_input 4" spacing="0"/>
+          <portSpacing port="sink_output 1" spacing="0"/>
+          <portSpacing port="sink_output 2" spacing="0"/>
+          <portSpacing port="sink_output 3" spacing="0"/>
+        </process>
+      </operator>
+      <operator activated="true" class="append" compatibility="10.4.003" expanded="true" height="82" name="withput active" width="90" x="648" y="136">
+        <parameter key="data_management" value="auto"/>
+        <parameter key="merge_type" value="all"/>
+      </operator>
+      <operator activated="true" breakpoints="after" class="append" compatibility="10.4.003" expanded="true" height="82" name="with active" width="90" x="648" y="34">
+        <parameter key="data_management" value="auto"/>
+        <parameter key="merge_type" value="all"/>
+      </operator>
+      <connect from_op="Read Excel" from_port="output" to_op="Remove Duplicates" to_port="example set input"/>
+      <connect from_op="Remove Duplicates" from_port="example set output" to_op="Loop Values" to_port="input 1"/>
+      <connect from_op="Remove Duplicates" from_port="original" to_op="Loop Values" to_port="input 2"/>
+      <connect from_op="Retrieve MSSQL_EO_2024 (4)" from_port="output" to_op="Loop Values" to_port="input 3"/>
+      <connect from_op="Loop Values" from_port="output 1" to_op="with active" to_port="example set 1"/>
+      <connect from_op="Loop Values" from_port="output 2" to_op="withput active" to_port="example set 1"/>
+      <connect from_op="withput active" from_port="merged set" to_port="result 2"/>
+      <connect from_op="with active" from_port="merged set" to_port="result 1"/>
+      <portSpacing port="source_input 1" spacing="0"/>
+      <portSpacing port="sink_result 1" spacing="0"/>
+      <portSpacing port="sink_result 2" spacing="0"/>
+      <portSpacing port="sink_result 3" spacing="0"/>
+    </process>
+  </operator>
+</process>

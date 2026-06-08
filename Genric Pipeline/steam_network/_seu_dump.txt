@@ -1,0 +1,2124 @@
+
+========== GROUP: Furnace (225 rows) ==========
+
+  Element ID: k_bkieqj
+  Element Type: OLF Furnace
+  Element Path: United > Specific Energy Consumers > OLF [OLF]A > Fuel EnergyA > OLF FurnaceA-furnace a
+  --- 49 attributes:
+    [Fuel Flow                               ]  UOM=Nm3/h       PI=UN.ETH.11FI1029AA.PV
+    [Duty                                    ]  UOM=MMkcal/h    PI=
+    [Stack Temperature                       ]  UOM=degC        PI=UN.ETH.11TI1011A.PV
+    [Efficiency                              ]  UOM=percent     PI=
+    [Fuel Gas Hydrogen                       ]  UOM=percent     PI=UN.ETH.12AI2206A.PV
+    [Fuel Gas Methae                         ]  UOM=percent     PI=UN.ETH.12AI2206B.PV
+    [Fuel Gas Ethylene                       ]  UOM=percent     PI=UN.ETH.12AI2206C.PV
+    [Fuel Gas Ethane                         ]  UOM=percent     PI=UN.ETH.12AI2206D.PV
+    [Fuel Gas Propane                        ]  UOM=percent     PI=UN.ETH.12AI2206E.PV
+    [Fuel Gas Hydrogen                       ]  UOM=percent     PI=UN.ETH.12AI2206A.PV
+    [Fuel Gas Methae                         ]  UOM=percent     PI=UN.ETH.12AI2206B.PV
+    [Fuel Gas Ethylene                       ]  UOM=percent     PI=UN.ETH.12AI2206C.PV
+    [Fuel Gas Ethane                         ]  UOM=percent     PI=UN.ETH.12AI2206D.PV
+    [Fuel Gas Propane                        ]  UOM=percent     PI=UN.ETH.12AI2206E.PV
+    [Fuel Gas Hydrogen                       ]  UOM=percent     PI=UN.ETH.12AI2206A.PV
+    [Fuel Gas Methae                         ]  UOM=percent     PI=UN.ETH.12AI2206B.PV
+    [Fuel Gas Ethylene                       ]  UOM=percent     PI=UN.ETH.12AI2206C.PV
+    [Fuel Gas Ethane                         ]  UOM=percent     PI=UN.ETH.12AI2206D.PV
+    [Fuel Gas Propane                        ]  UOM=percent     PI=UN.ETH.12AI2206E.PV
+    [Fuel Gas Hydrogen                       ]  UOM=percent     PI=UN.ETH.12AI2206A.PV
+    [Fuel Gas Methae                         ]  UOM=percent     PI=UN.ETH.12AI2206B.PV
+    [Fuel Gas Ethylene                       ]  UOM=percent     PI=UN.ETH.12AI2206C.PV
+    [Fuel Gas Ethane                         ]  UOM=percent     PI=UN.ETH.12AI2206D.PV
+    [Fuel Gas Propane                        ]  UOM=percent     PI=UN.ETH.12AI2206E.PV
+    [Fuel Gas Hydrogen                       ]  UOM=percent     PI=UN.ETH.12AI2206A.PV
+    [Fuel Gas Methae                         ]  UOM=percent     PI=UN.ETH.12AI2206B.PV
+    [Fuel Gas Ethylene                       ]  UOM=percent     PI=UN.ETH.12AI2206C.PV
+    [Fuel Gas Ethane                         ]  UOM=percent     PI=UN.ETH.12AI2206D.PV
+    [Fuel Gas Propane                        ]  UOM=percent     PI=UN.ETH.12AI2206E.PV
+    [Fuel Gas Hydrogen                       ]  UOM=percent     PI=UN.ETH.12AI2206A.PV
+    [Fuel Gas Methae                         ]  UOM=percent     PI=UN.ETH.12AI2206B.PV
+    [Fuel Gas Ethylene                       ]  UOM=percent     PI=UN.ETH.12AI2206C.PV
+    [Fuel Gas Ethane                         ]  UOM=percent     PI=UN.ETH.12AI2206D.PV
+    [Fuel Gas Propane                        ]  UOM=percent     PI=UN.ETH.12AI2206E.PV
+    [Fuel Gas Hydrogen                       ]  UOM=percent     PI=UN.ETH.12AI2206A.PV
+    [Fuel Gas Methae                         ]  UOM=percent     PI=UN.ETH.12AI2206B.PV
+    [Fuel Gas Ethylene                       ]  UOM=percent     PI=UN.ETH.12AI2206C.PV
+    [Fuel Gas Ethane                         ]  UOM=percent     PI=UN.ETH.12AI2206D.PV
+    [Fuel Gas Propane                        ]  UOM=percent     PI=UN.ETH.12AI2206E.PV
+    [Fuel Gas Hydrogen                       ]  UOM=percent     PI=UN.ETH.12AI2206A.PV
+    [Fuel Gas Methae                         ]  UOM=percent     PI=UN.ETH.12AI2206B.PV
+    [Fuel Gas Ethylene                       ]  UOM=percent     PI=UN.ETH.12AI2206C.PV
+    [Fuel Gas Ethane                         ]  UOM=percent     PI=UN.ETH.12AI2206D.PV
+    [Fuel Gas Propane                        ]  UOM=percent     PI=UN.ETH.12AI2206E.PV
+    [Fuel Gas Hydrogen                       ]  UOM=percent     PI=UN.ETH.12AI2206A.PV
+    [Fuel Gas Methae                         ]  UOM=percent     PI=UN.ETH.12AI2206B.PV
+    [Fuel Gas Ethylene                       ]  UOM=percent     PI=UN.ETH.12AI2206C.PV
+    [Fuel Gas Ethane                         ]  UOM=percent     PI=UN.ETH.12AI2206D.PV
+    [Fuel Gas Propane                        ]  UOM=percent     PI=UN.ETH.12AI2206E.PV
+
+  Element ID: k_12mjdjp
+  Element Type: OLF Furnace Combustion System
+  Element Path: United > Specific Energy Consumers > OLF [OLF]A > Fuel EnergyA > OLF FurnaceA-furnace a > OLF Furnace Combustion SystemA
+  --- 3 attributes:
+    [Burner Header Pressure                  ]  UOM=bar         PI=
+    [Excess O2 Setpoint                      ]  UOM=vol%        PI=
+    [Total Combustion Air Flow               ]  UOM=Nm3/h       PI=
+
+  Element ID: k_11hxmyj
+  Element Type: OLF Furnace Burner
+  Element Path: United > Specific Energy Consumers > OLF [OLF]A > Fuel EnergyA > OLF FurnaceA-furnace a > OLF Furnace Combustion SystemA > OLF Furnace BurnerA
+  --- 4 attributes:
+    [Burner Air Flow                         ]  UOM=Nm3/h       PI=
+    [Burner Fuel Flow                        ]  UOM=Nm3/h       PI=
+    [Flame Status                            ]  UOM=            PI=
+    [Pilot Status                            ]  UOM=            PI=
+
+  Element ID: k_155rs3p
+  Element Type: OLF Furnace Radiant Section
+  Element Path: United > Specific Energy Consumers > OLF [OLF]A > Fuel EnergyA > OLF FurnaceA-furnace a > OLF Furnace Radiant SectionA
+  --- 3 attributes:
+    [Box Draft                               ]  UOM=mmH2O       PI=
+    [Radiant Box Temperature                 ]  UOM=degC        PI=
+    [Tube Skin Temperature (TMT)             ]  UOM=degC        PI=
+
+  Element ID: k_14xkwvi
+  Element Type: OLF Furnace Convection Section
+  Element Path: United > Specific Energy Consumers > OLF [OLF]A > Fuel EnergyA > OLF FurnaceA-furnace a > OLF Furnace Convection SectionA
+  --- 2 attributes:
+    [Flue Inlet Temperature                  ]  UOM=degC        PI=
+    [Flue Outlet Temperature                 ]  UOM=degC        PI=
+
+  Element ID: k_1bbry9z
+  Element Type: OLF Furnace Stack
+  Element Path: United > Specific Energy Consumers > OLF [OLF]A > Fuel EnergyA > OLF FurnaceA-furnace a > OLF Furnace StackA
+  --- 4 attributes:
+    [NOx Emission                            ]  UOM=ppm         PI=
+    [O2 in Flue Gas                          ]  UOM=vol%        PI=UN.ETH.11AI1068A.PV
+    [Stack Draft                             ]  UOM=mmH2O       PI=
+    [Stack Temperature                       ]  UOM=degC        PI=UN.ETH.11TI1011A.PV
+
+  Element ID: k_1u9gm3
+  Element Type: OLF Furnace
+  Element Path: United > Specific Energy Consumers > OLF [OLF]A > Fuel EnergyA > OLF FurnaceB-furnace b
+  --- 4 attributes:
+    [Fuel Flow                               ]  UOM=Nm3/h       PI=UN.ETH.11FI1029BA.PV
+    [Duty                                    ]  UOM=MMkcal/h    PI=
+    [Stack Temperature                       ]  UOM=degC        PI=UN.ETH.11TI1011B.PV
+    [Efficiency                              ]  UOM=percent     PI=
+
+  Element ID: k_8sb9jp
+  Element Type: OLF Furnace Combustion System
+  Element Path: United > Specific Energy Consumers > OLF [OLF]A > Fuel EnergyA > OLF FurnaceB-furnace b > OLF Furnace Combustion SystemA
+  --- 3 attributes:
+    [Burner Header Pressure                  ]  UOM=bar         PI=
+    [Excess O2 Setpoint                      ]  UOM=vol%        PI=
+    [Total Combustion Air Flow               ]  UOM=Nm3/h       PI=
+
+  Element ID: k_7py46z
+  Element Type: OLF Furnace Burner
+  Element Path: United > Specific Energy Consumers > OLF [OLF]A > Fuel EnergyA > OLF FurnaceB-furnace b > OLF Furnace Combustion SystemA > OLF Furnace BurnerA
+  --- 4 attributes:
+    [Burner Air Flow                         ]  UOM=Nm3/h       PI=
+    [Burner Fuel Flow                        ]  UOM=Nm3/h       PI=
+    [Flame Status                            ]  UOM=            PI=
+    [Pilot Status                            ]  UOM=            PI=
+
+  Element ID: k_huaev9
+  Element Type: OLF Furnace Radiant Section
+  Element Path: United > Specific Energy Consumers > OLF [OLF]A > Fuel EnergyA > OLF FurnaceB-furnace b > OLF Furnace Radiant SectionA
+  --- 3 attributes:
+    [Box Draft                               ]  UOM=mmH2O       PI=
+    [Radiant Box Temperature                 ]  UOM=degC        PI=
+    [Tube Skin Temperature (TMT)             ]  UOM=degC        PI=
+
+  Element ID: k_1x5hajy
+  Element Type: OLF Furnace Convection Section
+  Element Path: United > Specific Energy Consumers > OLF [OLF]A > Fuel EnergyA > OLF FurnaceB-furnace b > OLF Furnace Convection SectionA
+  --- 2 attributes:
+    [Flue Inlet Temperature                  ]  UOM=degC        PI=
+    [Flue Outlet Temperature                 ]  UOM=degC        PI=
+
+  Element ID: k_r2gakn
+  Element Type: OLF Furnace Stack
+  Element Path: United > Specific Energy Consumers > OLF [OLF]A > Fuel EnergyA > OLF FurnaceB-furnace b > OLF Furnace StackA
+  --- 4 attributes:
+    [NOx Emission                            ]  UOM=ppm         PI=
+    [O2 in Flue Gas                          ]  UOM=vol%        PI=UN.ETH.11AI1068B.PV
+    [Stack Draft                             ]  UOM=mmH2O       PI=
+    [Stack Temperature                       ]  UOM=degC        PI=UN.ETH.11TI1011B.PV
+
+  Element ID: k_1lmurrv
+  Element Type: OLF Furnace
+  Element Path: United > Specific Energy Consumers > OLF [OLF]A > Fuel EnergyA > OLF FurnaceC-furnace c
+  --- 4 attributes:
+    [Fuel Flow                               ]  UOM=Nm3/h       PI=UN.ETH.11FI1029CA.PV
+    [Duty                                    ]  UOM=MMkcal/h    PI=
+    [Stack Temperature                       ]  UOM=degC        PI=UN.ETH.11TI1011C.PV
+    [Efficiency                              ]  UOM=percent     PI=
+
+  Element ID: k_1fjqcet
+  Element Type: OLF Furnace Combustion System
+  Element Path: United > Specific Energy Consumers > OLF [OLF]A > Fuel EnergyA > OLF FurnaceC-furnace c > OLF Furnace Combustion SystemA
+  --- 3 attributes:
+    [Burner Header Pressure                  ]  UOM=bar         PI=
+    [Excess O2 Setpoint                      ]  UOM=vol%        PI=
+    [Total Combustion Air Flow               ]  UOM=Nm3/h       PI=
+
+  Element ID: k_mrz057
+  Element Type: OLF Furnace Burner
+  Element Path: United > Specific Energy Consumers > OLF [OLF]A > Fuel EnergyA > OLF FurnaceC-furnace c > OLF Furnace Combustion SystemA > OLF Furnace BurnerA
+  --- 4 attributes:
+    [Burner Air Flow                         ]  UOM=Nm3/h       PI=
+    [Burner Fuel Flow                        ]  UOM=Nm3/h       PI=
+    [Flame Status                            ]  UOM=            PI=
+    [Pilot Status                            ]  UOM=            PI=
+
+  Element ID: k_pudzid
+  Element Type: OLF Furnace Radiant Section
+  Element Path: United > Specific Energy Consumers > OLF [OLF]A > Fuel EnergyA > OLF FurnaceC-furnace c > OLF Furnace Radiant SectionA
+  --- 3 attributes:
+    [Box Draft                               ]  UOM=mmH2O       PI=
+    [Radiant Box Temperature                 ]  UOM=degC        PI=
+    [Tube Skin Temperature (TMT)             ]  UOM=degC        PI=
+
+  Element ID: k_156ajji
+  Element Type: OLF Furnace Convection Section
+  Element Path: United > Specific Energy Consumers > OLF [OLF]A > Fuel EnergyA > OLF FurnaceC-furnace c > OLF Furnace Convection SectionA
+  --- 2 attributes:
+    [Flue Inlet Temperature                  ]  UOM=degC        PI=
+    [Flue Outlet Temperature                 ]  UOM=degC        PI=
+
+  Element ID: k_qxlnpj
+  Element Type: OLF Furnace Stack
+  Element Path: United > Specific Energy Consumers > OLF [OLF]A > Fuel EnergyA > OLF FurnaceC-furnace c > OLF Furnace StackA
+  --- 4 attributes:
+    [NOx Emission                            ]  UOM=ppm         PI=
+    [O2 in Flue Gas                          ]  UOM=vol%        PI=UN.ETH.11AI1068C.PV
+    [Stack Draft                             ]  UOM=mmH2O       PI=
+    [Stack Temperature                       ]  UOM=degC        PI=UN.ETH.11TI1011C.PV
+
+  Element ID: k_blbyvv
+  Element Type: OLF Furnace
+  Element Path: United > Specific Energy Consumers > OLF [OLF]A > Fuel EnergyA > OLF FurnaceD-furnace d
+  --- 4 attributes:
+    [Fuel Flow                               ]  UOM=Nm3/h       PI=UN.ETH.11FI1029DA.PV
+    [Duty                                    ]  UOM=MMkcal/h    PI=
+    [Stack Temperature                       ]  UOM=degC        PI=UN.ETH.11TI1011D.PV
+    [Efficiency                              ]  UOM=percent     PI=
+
+  Element ID: k_8rxyqd
+  Element Type: OLF Furnace Combustion System
+  Element Path: United > Specific Energy Consumers > OLF [OLF]A > Fuel EnergyA > OLF FurnaceD-furnace d > OLF Furnace Combustion SystemA
+  --- 3 attributes:
+    [Burner Header Pressure                  ]  UOM=bar         PI=
+    [Excess O2 Setpoint                      ]  UOM=vol%        PI=
+    [Total Combustion Air Flow               ]  UOM=Nm3/h       PI=
+
+  Element ID: k_rx46gr
+  Element Type: OLF Furnace Burner
+  Element Path: United > Specific Energy Consumers > OLF [OLF]A > Fuel EnergyA > OLF FurnaceD-furnace d > OLF Furnace Combustion SystemA > OLF Furnace BurnerA
+  --- 4 attributes:
+    [Burner Air Flow                         ]  UOM=Nm3/h       PI=
+    [Burner Fuel Flow                        ]  UOM=Nm3/h       PI=
+    [Flame Status                            ]  UOM=            PI=
+    [Pilot Status                            ]  UOM=            PI=
+
+  Element ID: k_i1bzyd
+  Element Type: OLF Furnace Radiant Section
+  Element Path: United > Specific Energy Consumers > OLF [OLF]A > Fuel EnergyA > OLF FurnaceD-furnace d > OLF Furnace Radiant SectionA
+  --- 3 attributes:
+    [Box Draft                               ]  UOM=mmH2O       PI=
+    [Radiant Box Temperature                 ]  UOM=degC        PI=
+    [Tube Skin Temperature (TMT)             ]  UOM=degC        PI=
+
+  Element ID: k_1wtadny
+  Element Type: OLF Furnace Convection Section
+  Element Path: United > Specific Energy Consumers > OLF [OLF]A > Fuel EnergyA > OLF FurnaceD-furnace d > OLF Furnace Convection SectionA
+  --- 2 attributes:
+    [Flue Inlet Temperature                  ]  UOM=degC        PI=
+    [Flue Outlet Temperature                 ]  UOM=degC        PI=
+
+  Element ID: k_1eco13b
+  Element Type: OLF Furnace Stack
+  Element Path: United > Specific Energy Consumers > OLF [OLF]A > Fuel EnergyA > OLF FurnaceD-furnace d > OLF Furnace StackA
+  --- 4 attributes:
+    [NOx Emission                            ]  UOM=ppm         PI=
+    [O2 in Flue Gas                          ]  UOM=vol%        PI=UN.ETH.11AI1068D.PV
+    [Stack Draft                             ]  UOM=mmH2O       PI=
+    [Stack Temperature                       ]  UOM=degC        PI=UN.ETH.11TI1011D.PV
+
+  Element ID: k_1q6cjdn
+  Element Type: OLF Furnace
+  Element Path: United > Specific Energy Consumers > OLF [OLF]A > Fuel EnergyA > OLF FurnaceE-furnace e
+  --- 4 attributes:
+    [Fuel Flow                               ]  UOM=Nm3/h       PI=UN.ETH.11FI1029EA.PV
+    [Duty                                    ]  UOM=MMkcal/h    PI=
+    [Stack Temperature                       ]  UOM=degC        PI=UN.ETH.11TI1011E.PV
+    [Efficiency                              ]  UOM=percent     PI=
+
+  Element ID: k_11ykh1x
+  Element Type: OLF Furnace Combustion System
+  Element Path: United > Specific Energy Consumers > OLF [OLF]A > Fuel EnergyA > OLF FurnaceE-furnace e > OLF Furnace Combustion SystemA
+  --- 3 attributes:
+    [Burner Header Pressure                  ]  UOM=bar         PI=
+    [Excess O2 Setpoint                      ]  UOM=vol%        PI=
+    [Total Combustion Air Flow               ]  UOM=Nm3/h       PI=
+
+  Element ID: k_qc6t7
+  Element Type: OLF Furnace Burner
+  Element Path: United > Specific Energy Consumers > OLF [OLF]A > Fuel EnergyA > OLF FurnaceE-furnace e > OLF Furnace Combustion SystemA > OLF Furnace BurnerA
+  --- 4 attributes:
+    [Burner Air Flow                         ]  UOM=Nm3/h       PI=
+    [Burner Fuel Flow                        ]  UOM=Nm3/h       PI=
+    [Flame Status                            ]  UOM=            PI=
+    [Pilot Status                            ]  UOM=            PI=
+
+  Element ID: k_1yyuepx
+  Element Type: OLF Furnace Radiant Section
+  Element Path: United > Specific Energy Consumers > OLF [OLF]A > Fuel EnergyA > OLF FurnaceE-furnace e > OLF Furnace Radiant SectionA
+  --- 3 attributes:
+    [Box Draft                               ]  UOM=mmH2O       PI=
+    [Radiant Box Temperature                 ]  UOM=degC        PI=
+    [Tube Skin Temperature (TMT)             ]  UOM=degC        PI=
+
+  Element ID: k_iyl4ku
+  Element Type: OLF Furnace Convection Section
+  Element Path: United > Specific Energy Consumers > OLF [OLF]A > Fuel EnergyA > OLF FurnaceE-furnace e > OLF Furnace Convection SectionA
+  --- 2 attributes:
+    [Flue Inlet Temperature                  ]  UOM=degC        PI=
+    [Flue Outlet Temperature                 ]  UOM=degC        PI=
+
+  Element ID: k_v44jt3
+  Element Type: OLF Furnace Stack
+  Element Path: United > Specific Energy Consumers > OLF [OLF]A > Fuel EnergyA > OLF FurnaceE-furnace e > OLF Furnace StackA
+  --- 4 attributes:
+    [NOx Emission                            ]  UOM=ppm         PI=
+    [O2 in Flue Gas                          ]  UOM=vol%        PI=UN.ETH.11AI1068E.PV
+    [Stack Draft                             ]  UOM=mmH2O       PI=
+    [Stack Temperature                       ]  UOM=degC        PI=UN.ETH.11TI1011E.PV
+
+  Element ID: k_1gg3l97
+  Element Type: OLF Furnace
+  Element Path: United > Specific Energy Consumers > OLF [OLF]A > Fuel EnergyA > OLF FurnaceF-furnace f
+  --- 4 attributes:
+    [Fuel Flow                               ]  UOM=Nm3/h       PI=UN.ETH.11FI1029FA.PV
+    [Duty                                    ]  UOM=MMkcal/h    PI=
+    [Stack Temperature                       ]  UOM=degC        PI=UN.ETH.11TI1011F.PV
+    [Efficiency                              ]  UOM=percent     PI=
+
+  Element ID: k_84cd1x
+  Element Type: OLF Furnace Combustion System
+  Element Path: United > Specific Energy Consumers > OLF [OLF]A > Fuel EnergyA > OLF FurnaceF-furnace f > OLF Furnace Combustion SystemA
+  --- 3 attributes:
+    [Burner Header Pressure                  ]  UOM=bar         PI=
+    [Excess O2 Setpoint                      ]  UOM=vol%        PI=
+    [Total Combustion Air Flow               ]  UOM=Nm3/h       PI=
+
+  Element ID: k_15zgq0r
+  Element Type: OLF Furnace Burner
+  Element Path: United > Specific Energy Consumers > OLF [OLF]A > Fuel EnergyA > OLF FurnaceF-furnace f > OLF Furnace Combustion SystemA > OLF Furnace BurnerA
+  --- 4 attributes:
+    [Burner Air Flow                         ]  UOM=Nm3/h       PI=
+    [Burner Fuel Flow                        ]  UOM=Nm3/h       PI=
+    [Flame Status                            ]  UOM=            PI=
+    [Pilot Status                            ]  UOM=            PI=
+
+  Element ID: k_1bnd1hh
+  Element Type: OLF Furnace Radiant Section
+  Element Path: United > Specific Energy Consumers > OLF [OLF]A > Fuel EnergyA > OLF FurnaceF-furnace f > OLF Furnace Radiant SectionA
+  --- 3 attributes:
+    [Box Draft                               ]  UOM=mmH2O       PI=
+    [Radiant Box Temperature                 ]  UOM=degC        PI=
+    [Tube Skin Temperature (TMT)             ]  UOM=degC        PI=
+
+  Element ID: k_1b6hi9a
+  Element Type: OLF Furnace Convection Section
+  Element Path: United > Specific Energy Consumers > OLF [OLF]A > Fuel EnergyA > OLF FurnaceF-furnace f > OLF Furnace Convection SectionA
+  --- 2 attributes:
+    [Flue Inlet Temperature                  ]  UOM=degC        PI=
+    [Flue Outlet Temperature                 ]  UOM=degC        PI=
+
+  Element ID: k_ausw3r
+  Element Type: OLF Furnace Stack
+  Element Path: United > Specific Energy Consumers > OLF [OLF]A > Fuel EnergyA > OLF FurnaceF-furnace f > OLF Furnace StackA
+  --- 4 attributes:
+    [NOx Emission                            ]  UOM=ppm         PI=
+    [O2 in Flue Gas                          ]  UOM=vol%        PI=UN.ETH.11AI1068F.PV
+    [Stack Draft                             ]  UOM=mmH2O       PI=
+    [Stack Temperature                       ]  UOM=degC        PI=UN.ETH.11TI1011F.PV
+
+  Element ID: k_117kufv
+  Element Type: OLF Furnace
+  Element Path: United > Specific Energy Consumers > OLF [OLF]A > Fuel EnergyA > OLF FurnaceG-furnace g
+  --- 4 attributes:
+    [Fuel Flow                               ]  UOM=Nm3/h       PI=UN.ETH.11FI1029GA.PV
+    [Duty                                    ]  UOM=MMkcal/h    PI=
+    [Stack Temperature                       ]  UOM=degC        PI=UN.ETH.11TI1011G.PV
+    [Efficiency                              ]  UOM=percent     PI=
+
+  Element ID: k_1evrfx1
+  Element Type: OLF Furnace Combustion System
+  Element Path: United > Specific Energy Consumers > OLF [OLF]A > Fuel EnergyA > OLF FurnaceG-furnace g > OLF Furnace Combustion SystemA
+  --- 3 attributes:
+    [Burner Header Pressure                  ]  UOM=bar         PI=
+    [Excess O2 Setpoint                      ]  UOM=vol%        PI=
+    [Total Combustion Air Flow               ]  UOM=Nm3/h       PI=
+
+  Element ID: k_1l1hlyz
+  Element Type: OLF Furnace Burner
+  Element Path: United > Specific Energy Consumers > OLF [OLF]A > Fuel EnergyA > OLF FurnaceG-furnace g > OLF Furnace Combustion SystemA > OLF Furnace BurnerA
+  --- 4 attributes:
+    [Burner Air Flow                         ]  UOM=Nm3/h       PI=
+    [Burner Fuel Flow                        ]  UOM=Nm3/h       PI=
+    [Flame Status                            ]  UOM=            PI=
+    [Pilot Status                            ]  UOM=            PI=
+
+  Element ID: k_1jngm4l
+  Element Type: OLF Furnace Radiant Section
+  Element Path: United > Specific Energy Consumers > OLF [OLF]A > Fuel EnergyA > OLF FurnaceG-furnace g > OLF Furnace Radiant SectionA
+  --- 3 attributes:
+    [Box Draft                               ]  UOM=mmH2O       PI=
+    [Radiant Box Temperature                 ]  UOM=degC        PI=
+    [Tube Skin Temperature (TMT)             ]  UOM=degC        PI=
+
+  Element ID: k_j7ar8u
+  Element Type: OLF Furnace Convection Section
+  Element Path: United > Specific Energy Consumers > OLF [OLF]A > Fuel EnergyA > OLF FurnaceG-furnace g > OLF Furnace Convection SectionA
+  --- 2 attributes:
+    [Flue Inlet Temperature                  ]  UOM=degC        PI=
+    [Flue Outlet Temperature                 ]  UOM=degC        PI=
+
+  Element ID: k_apy98n
+  Element Type: OLF Furnace Stack
+  Element Path: United > Specific Energy Consumers > OLF [OLF]A > Fuel EnergyA > OLF FurnaceG-furnace g > OLF Furnace StackA
+  --- 4 attributes:
+    [NOx Emission                            ]  UOM=ppm         PI=
+    [O2 in Flue Gas                          ]  UOM=vol%        PI=UN.ETH.11AI1068G.PV
+    [Stack Draft                             ]  UOM=mmH2O       PI=
+    [Stack Temperature                       ]  UOM=degC        PI=UN.ETH.11TI1011G.PV
+
+  Element ID: k_rp6xjv
+  Element Type: OLF Furnace
+  Element Path: United > Specific Energy Consumers > OLF [OLF]A > Fuel EnergyA > OLF FurnaceH-furnace h
+  --- 4 attributes:
+    [Fuel Flow                               ]  UOM=Nm3/h       PI=UN.ETH.11FI1029HA.PV
+    [Duty                                    ]  UOM=MMkcal/h    PI=
+    [Stack Temperature                       ]  UOM=degC        PI=UN.ETH.11TI1011H.PV
+    [Efficiency                              ]  UOM=percent     PI=
+
+  Element ID: k_1g1d0yd
+  Element Type: OLF Furnace Combustion System
+  Element Path: United > Specific Energy Consumers > OLF [OLF]A > Fuel EnergyA > OLF FurnaceH-furnace h > OLF Furnace Combustion SystemA
+  --- 3 attributes:
+    [Burner Header Pressure                  ]  UOM=bar         PI=
+    [Excess O2 Setpoint                      ]  UOM=vol%        PI=
+    [Total Combustion Air Flow               ]  UOM=Nm3/h       PI=
+
+  Element ID: k_evp9rv
+  Element Type: OLF Furnace Burner
+  Element Path: United > Specific Energy Consumers > OLF [OLF]A > Fuel EnergyA > OLF FurnaceH-furnace h > OLF Furnace Combustion SystemA > OLF Furnace BurnerA
+  --- 4 attributes:
+    [Burner Air Flow                         ]  UOM=Nm3/h       PI=
+    [Burner Fuel Flow                        ]  UOM=Nm3/h       PI=
+    [Flame Status                            ]  UOM=            PI=
+    [Pilot Status                            ]  UOM=            PI=
+
+  Element ID: k_t8aked
+  Element Type: OLF Furnace Radiant Section
+  Element Path: United > Specific Energy Consumers > OLF [OLF]A > Fuel EnergyA > OLF FurnaceH-furnace h > OLF Furnace Radiant SectionA
+  --- 3 attributes:
+    [Box Draft                               ]  UOM=mmH2O       PI=
+    [Radiant Box Temperature                 ]  UOM=degC        PI=
+    [Tube Skin Temperature (TMT)             ]  UOM=degC        PI=
+
+  Element ID: k_4sq9im
+  Element Type: OLF Furnace Convection Section
+  Element Path: United > Specific Energy Consumers > OLF [OLF]A > Fuel EnergyA > OLF FurnaceH-furnace h > OLF Furnace Convection SectionA
+  --- 2 attributes:
+    [Flue Inlet Temperature                  ]  UOM=degC        PI=
+    [Flue Outlet Temperature                 ]  UOM=degC        PI=
+
+  Element ID: k_1ubvhjb
+  Element Type: OLF Furnace Stack
+  Element Path: United > Specific Energy Consumers > OLF [OLF]A > Fuel EnergyA > OLF FurnaceH-furnace h > OLF Furnace StackA
+  --- 4 attributes:
+    [NOx Emission                            ]  UOM=ppm         PI=
+    [O2 in Flue Gas                          ]  UOM=vol%        PI=UN.ETH.11AI1068H.PV
+    [Stack Draft                             ]  UOM=mmH2O       PI=
+    [Stack Temperature                       ]  UOM=degC        PI=UN.ETH.11TI1011H.PV
+
+  Element ID: k_793g2j
+  Element Type: OLF Furnace
+  Element Path: United > Specific Energy Consumers > OLF [OLF]A > Fuel EnergyA > OLF FurnaceI-furnace i
+  --- 4 attributes:
+    [Fuel Flow                               ]  UOM=Nm3/h       PI=UN.ETH.11FI1029JA.PV
+    [Duty                                    ]  UOM=MMkcal/h    PI=
+    [Stack Temperature                       ]  UOM=degC        PI=UN.ETH.11TI1011J.PV
+    [Efficiency                              ]  UOM=percent     PI=
+
+  Element ID: k_a6vhat
+  Element Type: OLF Furnace Combustion System
+  Element Path: United > Specific Energy Consumers > OLF [OLF]A > Fuel EnergyA > OLF FurnaceI-furnace i > OLF Furnace Combustion SystemA
+  --- 3 attributes:
+    [Burner Header Pressure                  ]  UOM=bar         PI=
+    [Excess O2 Setpoint                      ]  UOM=vol%        PI=
+    [Total Combustion Air Flow               ]  UOM=Nm3/h       PI=
+
+  Element ID: k_1mq1c3f
+  Element Type: OLF Furnace Burner
+  Element Path: United > Specific Energy Consumers > OLF [OLF]A > Fuel EnergyA > OLF FurnaceI-furnace i > OLF Furnace Combustion SystemA > OLF Furnace BurnerA
+  --- 4 attributes:
+    [Burner Air Flow                         ]  UOM=Nm3/h       PI=
+    [Burner Fuel Flow                        ]  UOM=Nm3/h       PI=
+    [Flame Status                            ]  UOM=            PI=
+    [Pilot Status                            ]  UOM=            PI=
+
+  Element ID: k_b4ox6t
+  Element Type: OLF Furnace Radiant Section
+  Element Path: United > Specific Energy Consumers > OLF [OLF]A > Fuel EnergyA > OLF FurnaceI-furnace i > OLF Furnace Radiant SectionA
+  --- 3 attributes:
+    [Box Draft                               ]  UOM=mmH2O       PI=
+    [Radiant Box Temperature                 ]  UOM=degC        PI=
+    [Tube Skin Temperature (TMT)             ]  UOM=degC        PI=
+
+  Element ID: k_pz52em
+  Element Type: OLF Furnace Convection Section
+  Element Path: United > Specific Energy Consumers > OLF [OLF]A > Fuel EnergyA > OLF FurnaceI-furnace i > OLF Furnace Convection SectionA
+  --- 2 attributes:
+    [Flue Inlet Temperature                  ]  UOM=degC        PI=
+    [Flue Outlet Temperature                 ]  UOM=degC        PI=
+
+  Element ID: k_1b3c093
+  Element Type: OLF Furnace Stack
+  Element Path: United > Specific Energy Consumers > OLF [OLF]A > Fuel EnergyA > OLF FurnaceI-furnace i > OLF Furnace StackA
+  --- 4 attributes:
+    [NOx Emission                            ]  UOM=ppm         PI=
+    [O2 in Flue Gas                          ]  UOM=vol%        PI=UN.ETH.11AI1068J.PV
+    [Stack Draft                             ]  UOM=mmH2O       PI=
+    [Stack Temperature                       ]  UOM=degC        PI=UN.ETH.11TI1011J.PV
+
+========== GROUP: Boiler (530 rows) ==========
+
+  Element ID: k_25ic3d
+  Element Type: EG1 Reboiler
+  Element Path: United > Specific Energy Consumers > EG1 [EG1]A > Steam EnergyA > EG1 ReboilerA-reboiler a
+  --- 5 attributes:
+    [Steam Flow                              ]  UOM=metric_ton/h  PI=UN.EG1.26FC6205.PV
+    [Steam Pressure                          ]  UOM=bar         PI=UN.UO.70PC0007A.PV
+    [Steam Temperature                       ]  UOM=degC        PI=UN.UO.70TC0005.PV
+    [Duty                                    ]  UOM=MMkcal/h    PI=
+    [Column ID                               ]  UOM=            PI=
+
+  Element ID: k_11em0bd
+  Element Type: EG1 Reboiler
+  Element Path: United > Specific Energy Consumers > EG1 [EG1]A > Steam EnergyA > EG1 ReboilerB-reboiler b
+  --- 5 attributes:
+    [Steam Flow                              ]  UOM=metric_ton/h  PI=UN.EG1.26FC6308.PV
+    [Steam Pressure                          ]  UOM=bar         PI=UN.UO.70PC0007A.PV
+    [Steam Temperature                       ]  UOM=degC        PI=UN.UO.70TC0005.PV
+    [Duty                                    ]  UOM=MMkcal/h    PI=
+    [Column ID                               ]  UOM=            PI=
+
+  Element ID: k_13kzx15
+  Element Type: EG1 Reboiler
+  Element Path: United > Specific Energy Consumers > EG1 [EG1]A > Steam EnergyA > EG1 ReboilerC-reboiler c
+  --- 15 attributes:
+    [Steam Flow                              ]  UOM=metric_ton/h  PI=UN.EG1.25FC5514.PV
+    [Steam Pressure                          ]  UOM=bar         PI=UN.UO.70PC0007A.PV
+    [Steam Temperature                       ]  UOM=degC        PI=UN.UO.70TC0005.PV
+    [Duty                                    ]  UOM=MMkcal/h    PI=
+    [Column ID                               ]  UOM=            PI=
+    [Steam Flow                              ]  UOM=metric_ton/h  PI=UN.EG1.23FC3206.PV
+    [Steam Pressure                          ]  UOM=bar         PI=UN.UO.70PI0024A.PV
+    [Steam Temperature                       ]  UOM=degC        PI=UN.UO.70TI0006.PV
+    [Duty                                    ]  UOM=MMkcal/h    PI=
+    [Column ID                               ]  UOM=            PI=
+    [Steam Flow                              ]  UOM=metric_ton/h  PI=UN.EG1.22FC2209.PV
+    [Steam Pressure                          ]  UOM=bar         PI=UN.UO.70PI0024A.PV
+    [Steam Temperature                       ]  UOM=degC        PI=UN.UO.70TI0006.PV
+    [Duty                                    ]  UOM=MMkcal/h    PI=
+    [Column ID                               ]  UOM=            PI=
+
+  Element ID: k_d9hx16
+  Element Type: EG2 Reboiler
+  Element Path: United > Specific Energy Consumers > EG2 [EG2]A > Steam EnergyA > EG2 ReboilerA-reboiler a
+  --- 5 attributes:
+    [Steam Flow                              ]  UOM=metric_ton/h  PI=UN.EG2.42FC2209.PV
+    [Steam Pressure                          ]  UOM=bar         PI=UN.UO.70PI0024A.PV
+    [Steam Temperature                       ]  UOM=degC        PI=UN.UO.70TI0006.PV
+    [Duty                                    ]  UOM=MMkcal/h    PI=
+    [Column ID                               ]  UOM=            PI=
+
+  Element ID: k_1161bbu
+  Element Type: EG2 Reboiler
+  Element Path: United > Specific Energy Consumers > EG2 [EG2]A > Steam EnergyA > EG2 ReboilerB-reboiler b
+  --- 5 attributes:
+    [Steam Flow                              ]  UOM=metric_ton/h  PI=UN.EG2.43FC3206.PV
+    [Steam Pressure                          ]  UOM=bar         PI=UN.UO.70PI0024A.PV
+    [Steam Temperature                       ]  UOM=degC        PI=UN.UO.70TI0006.PV
+    [Duty                                    ]  UOM=MMkcal/h    PI=
+    [Column ID                               ]  UOM=            PI=
+
+  Element ID: k_15uda2i
+  Element Type: EG2 Reboiler
+  Element Path: United > Specific Energy Consumers > EG2 [EG2]A > Steam EnergyA > EG2 ReboilerC-reboiler c
+  --- 15 attributes:
+    [Steam Flow                              ]  UOM=metric_ton/h  PI=UN.EG2.46FC6308.PV
+    [Steam Pressure                          ]  UOM=bar         PI=UN.UO.70PC0007A.PV
+    [Steam Temperature                       ]  UOM=degC        PI=UN.UO.70TC0005.PV
+    [Duty                                    ]  UOM=MMkcal/h    PI=
+    [Column ID                               ]  UOM=            PI=
+    [Steam Flow                              ]  UOM=metric_ton/h  PI=UN.EG2.45FC5514.PV
+    [Steam Pressure                          ]  UOM=bar         PI=UN.UO.70PC0007A.PV
+    [Steam Temperature                       ]  UOM=degC        PI=UN.UO.70TC0005.PV
+    [Duty                                    ]  UOM=MMkcal/h    PI=
+    [Column ID                               ]  UOM=            PI=
+    [Steam Flow                              ]  UOM=metric_ton/h  PI=UN.EG2.46FC6205.PV
+    [Steam Pressure                          ]  UOM=bar         PI=UN.UO.70PC0007A.PV
+    [Steam Temperature                       ]  UOM=degC        PI=UN.UO.70TC0005.PV
+    [Duty                                    ]  UOM=MMkcal/h    PI=
+    [Column ID                               ]  UOM=            PI=
+
+  Element ID: k_1qe0r7f
+  Element Type: EG3 Reboiler
+  Element Path: United > Specific Energy Consumers > EG3 [EG3]A > Steam EnergyA > EG3 ReboilerA-reboiler a
+  --- 5 attributes:
+    [Steam Flow                              ]  UOM=metric_ton/h  PI=UN.EG3.66FC6308.PV
+    [Steam Pressure                          ]  UOM=bar         PI=UN.UO.70PC0007A.PV
+    [Steam Temperature                       ]  UOM=degC        PI=UN.UO.70TC0005.PV
+    [Duty                                    ]  UOM=MMkcal/h    PI=
+    [Column ID                               ]  UOM=            PI=
+
+  Element ID: k_3p8om3
+  Element Type: EG3 Reboiler
+  Element Path: United > Specific Energy Consumers > EG3 [EG3]A > Steam EnergyA > EG3 ReboilerB-reboiler b
+  --- 5 attributes:
+    [Steam Flow                              ]  UOM=metric_ton/h  PI=UN.EG3.62FC2209.PV
+    [Steam Pressure                          ]  UOM=bar         PI=UN.UO.70PI0024A.PV
+    [Steam Temperature                       ]  UOM=degC        PI=UN.UO.70TI0006.PV
+    [Duty                                    ]  UOM=MMkcal/h    PI=
+    [Column ID                               ]  UOM=            PI=
+
+  Element ID: k_1k26pa3
+  Element Type: EG3 Reboiler
+  Element Path: United > Specific Energy Consumers > EG3 [EG3]A > Steam EnergyA > EG3 ReboilerC-reboiler c
+  --- 5 attributes:
+    [Steam Flow                              ]  UOM=metric_ton/h  PI=UN.EG3.65FC5514.PV
+    [Steam Pressure                          ]  UOM=bar         PI=UN.UO.70PC0007A.PV
+    [Steam Temperature                       ]  UOM=degC        PI=UN.UO.70TC0005.PV
+    [Duty                                    ]  UOM=MMkcal/h    PI=
+    [Column ID                               ]  UOM=            PI=
+
+  Element ID: k_64yw6w
+  Element Type: UTI Boiler
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerA-boiler a
+  --- 4 attributes:
+    [Fuel Flow                               ]  UOM=Nm3/h       PI=
+    [Steam Output                            ]  UOM=metric_ton/h  PI=
+    [Boiler Efficiency                       ]  UOM=percent     PI=
+    [Excess O2                               ]  UOM=percent     PI=
+
+  Element ID: k_zb3jnm
+  Element Type: UTI Boiler Air Preheater
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerA-boiler a > UTI Boiler Air PreheaterA
+  --- 6 attributes:
+    [Air Inlet Temperature                   ]  UOM=degC        PI=
+    [Air Outlet Temperature                  ]  UOM=degC        PI=
+    [Air Side Differential Pressure          ]  UOM=bar         PI=
+    [Flue Inlet Temperature                  ]  UOM=degC        PI=
+    [Flue Outlet Temperature                 ]  UOM=degC        PI=
+    [Leakage                                 ]  UOM=percent     PI=
+
+  Element ID: k_17ftwx2
+  Element Type: UTI Boiler BFW System
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerA-boiler a > UTI Boiler BFW SystemA
+  --- 4 attributes:
+    [BFW Header Pressure                     ]  UOM=bar         PI=
+    [BFW Header Temperature                  ]  UOM=degC        PI=
+    [BFW Inlet Flow                          ]  UOM=metric_ton/h  PI=
+    [BFW Quality (Conductivity)              ]  UOM=uS/cm       PI=
+
+  Element ID: k_1rzlkud
+  Element Type: UTI Boiler BFW Pump
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerA-boiler a > UTI Boiler BFW SystemA > UTI Boiler BFW PumpA
+  --- 9 attributes:
+    [Bearing Temperature                     ]  UOM=degC        PI=
+    [Discharge Flow                          ]  UOM=metric_ton/h  PI=
+    [Discharge Pressure                      ]  UOM=bar         PI=
+    [Driver Steam Flow                       ]  UOM=metric_ton/h  PI=
+    [Motor Current                           ]  UOM=A           PI=
+    [Power Output                            ]  UOM=kW          PI=
+    [Speed                                   ]  UOM=rpm         PI=
+    [Suction Pressure                        ]  UOM=bar         PI=
+    [Vibration                               ]  UOM=mm/s        PI=
+
+  Element ID: k_ue7xt
+  Element Type: UTI Boiler Blowdown System
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerA-boiler a > UTI Boiler Blowdown SystemA
+  --- 7 attributes:
+    [Blowdown Conductivity                   ]  UOM=uS/cm       PI=
+    [Blowdown Flow Controller Opening        ]  UOM=percent     PI=
+    [Blowdown TDS                            ]  UOM=ppm         PI=
+    [Continuous Blowdown Flow                ]  UOM=metric_ton/h  PI=
+    [Flash Drum Pressure                     ]  UOM=bar         PI=
+    [Flash Steam Flow                        ]  UOM=metric_ton/h  PI=
+    [Intermittent Blowdown Flow              ]  UOM=metric_ton/h  PI=
+
+  Element ID: k_1rjtz1o
+  Element Type: UTI Boiler Combustion System
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerA-boiler a > UTI Boiler Combustion SystemA
+  --- 5 attributes:
+    [Atomizing Steam Flow                    ]  UOM=metric_ton/h  PI=
+    [Burner Header Pressure                  ]  UOM=bar         PI=
+    [Excess O2 Setpoint                      ]  UOM=vol%        PI=
+    [Pilot Gas Flow                          ]  UOM=metric_ton/h  PI=
+    [Total Combustion Air Flow               ]  UOM=Nm3/h       PI=
+
+  Element ID: k_1k8uhbs
+  Element Type: UTI Boiler Burner
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerA-boiler a > UTI Boiler Combustion SystemA > UTI Boiler BurnerA
+  --- 5 attributes:
+    [Burner Air Flow                         ]  UOM=Nm3/h       PI=
+    [Burner Backpressure                     ]  UOM=bar         PI=
+    [Burner Fuel Flow                        ]  UOM=Nm3/h       PI=
+    [Flame Status                            ]  UOM=            PI=
+    [Pilot Status                            ]  UOM=            PI=
+
+  Element ID: k_1aklyyf
+  Element Type: UTI Boiler Convection Section
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerA-boiler a > UTI Boiler Convection SectionA
+  --- 3 attributes:
+    [Draft at Arch                           ]  UOM=mmH2O       PI=
+    [Flue Inlet Temperature                  ]  UOM=degC        PI=
+    [Flue Outlet Temperature                 ]  UOM=degC        PI=
+
+  Element ID: k_zf4eov
+  Element Type: UTI Boiler Desuperheater
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerA-boiler a > UTI Boiler DesuperheaterA
+  --- 5 attributes:
+    [Inlet Steam Temperature                 ]  UOM=degC        PI=
+    [Outlet Steam Setpoint                   ]  UOM=degC        PI=
+    [Outlet Steam Temperature                ]  UOM=degC        PI=
+    [Spray Valve Opening                     ]  UOM=percent     PI=
+    [Spray Water Flow                        ]  UOM=metric_ton/h  PI=
+
+  Element ID: k_1t4xw1
+  Element Type: UTI Boiler Economizer
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerA-boiler a > UTI Boiler EconomizerA
+  --- 4 attributes:
+    [BFW Inlet Temperature                   ]  UOM=degC        PI=
+    [BFW Outlet Temperature                  ]  UOM=degC        PI=
+    [Flue Inlet Temperature                  ]  UOM=degC        PI=
+    [Flue Outlet Temperature                 ]  UOM=degC        PI=
+
+  Element ID: k_1wbcidq
+  Element Type: UTI Boiler Evaporator Section
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerA-boiler a > UTI Boiler Evaporator SectionA
+  --- 4 attributes:
+    [Inlet Gas Temperature                   ]  UOM=degC        PI=
+    [Outlet Gas Temperature                  ]  UOM=degC        PI=
+    [Steam Generation                        ]  UOM=metric_ton/h  PI=
+    [Tube Differential Pressure              ]  UOM=bar         PI=
+
+  Element ID: k_1nihduj
+  Element Type: UTI Boiler FD Fan
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerA-boiler a > UTI Boiler FD FanA
+  --- 6 attributes:
+    [Bearing Temperature                     ]  UOM=degC        PI=
+    [Discharge Pressure                      ]  UOM=bar         PI=
+    [Inlet Damper Opening                    ]  UOM=percent     PI=
+    [Motor Current                           ]  UOM=A           PI=
+    [Speed                                   ]  UOM=rpm         PI=
+    [Vibration                               ]  UOM=mm/s        PI=
+
+  Element ID: k_f0lfis
+  Element Type: UTI Boiler ID Fan
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerA-boiler a > UTI Boiler ID FanA
+  --- 6 attributes:
+    [Bearing Temperature                     ]  UOM=degC        PI=
+    [Discharge Pressure                      ]  UOM=bar         PI=
+    [Inlet Damper Opening                    ]  UOM=percent     PI=
+    [Motor Current                           ]  UOM=A           PI=
+    [Speed                                   ]  UOM=rpm         PI=
+    [Vibration                               ]  UOM=mm/s        PI=
+
+  Element ID: k_r2303g
+  Element Type: UTI Boiler Radiant Section
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerA-boiler a > UTI Boiler Radiant SectionA
+  --- 3 attributes:
+    [Box Draft                               ]  UOM=mmH2O       PI=
+    [Radiant Box Temperature                 ]  UOM=degC        PI=
+    [Tube Skin Temperature (TMT)             ]  UOM=degC        PI=
+
+  Element ID: k_2ystyr
+  Element Type: UTI Boiler Soot Blower System
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerA-boiler a > UTI Boiler Soot Blower SystemA
+  --- 4 attributes:
+    [Cycle Status                            ]  UOM=            PI=
+    [Last Run Time                           ]  UOM=h           PI=
+    [Soot Blower Steam Flow                  ]  UOM=metric_ton/h  PI=
+    [Soot Blower Steam Pressure              ]  UOM=bar         PI=
+
+  Element ID: k_dj294u
+  Element Type: UTI Boiler Stack
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerA-boiler a > UTI Boiler StackA
+  --- 7 attributes:
+    [CO in Flue Gas                          ]  UOM=ppm         PI=
+    [Flue Gas Flow                           ]  UOM=Nm3/h       PI=
+    [NOx Emission                            ]  UOM=ppm         PI=
+    [O2 in Flue Gas                          ]  UOM=vol%        PI=
+    [SOx Emission                            ]  UOM=ppm         PI=
+    [Stack Draft                             ]  UOM=mmH2O       PI=
+    [Stack Temperature                       ]  UOM=degC        PI=
+
+  Element ID: k_1vocagg
+  Element Type: UTI Boiler Steam Drum
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerA-boiler a > UTI Boiler Steam DrumA
+  --- 4 attributes:
+    [Drum Level                              ]  UOM=percent     PI=
+    [Drum Pressure                           ]  UOM=bar         PI=
+    [Drum Temperature                        ]  UOM=degC        PI=
+    [Drum Vent Flow                          ]  UOM=metric_ton/h  PI=
+
+  Element ID: k_tbhtr2
+  Element Type: UTI Boiler Superheater
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerA-boiler a > UTI Boiler SuperheaterA
+  --- 7 attributes:
+    [Attemperator Flow Opening               ]  UOM=percent     PI=
+    [Attemperator Spray Flow                 ]  UOM=metric_ton/h  PI=
+    [Steam Inlet Pressure                    ]  UOM=bar         PI=
+    [Steam Inlet Temperature                 ]  UOM=degC        PI=
+    [Steam Outlet Pressure                   ]  UOM=bar         PI=
+    [Steam Outlet Temperature                ]  UOM=degC        PI=
+    [Tube Skin Temperature                   ]  UOM=degC        PI=
+
+  Element ID: k_qu7ck8
+  Element Type: UTI Boiler
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerB-boiler b
+  --- 4 attributes:
+    [Fuel Flow                               ]  UOM=Nm3/h       PI=
+    [Steam Output                            ]  UOM=metric_ton/h  PI=
+    [Boiler Efficiency                       ]  UOM=percent     PI=
+    [Excess O2                               ]  UOM=percent     PI=
+
+  Element ID: k_10w1k2
+  Element Type: UTI Boiler Air Preheater
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerB-boiler b > UTI Boiler Air PreheaterA
+  --- 6 attributes:
+    [Air Inlet Temperature                   ]  UOM=degC        PI=
+    [Air Outlet Temperature                  ]  UOM=degC        PI=
+    [Air Side Differential Pressure          ]  UOM=bar         PI=
+    [Flue Inlet Temperature                  ]  UOM=degC        PI=
+    [Flue Outlet Temperature                 ]  UOM=degC        PI=
+    [Leakage                                 ]  UOM=percent     PI=
+
+  Element ID: k_1n43ux2
+  Element Type: UTI Boiler BFW System
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerB-boiler b > UTI Boiler BFW SystemA
+  --- 4 attributes:
+    [BFW Header Pressure                     ]  UOM=bar         PI=
+    [BFW Header Temperature                  ]  UOM=degC        PI=
+    [BFW Inlet Flow                          ]  UOM=metric_ton/h  PI=
+    [BFW Quality (Conductivity)              ]  UOM=uS/cm       PI=
+
+  Element ID: k_5fj7dx
+  Element Type: UTI Boiler BFW Pump
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerB-boiler b > UTI Boiler BFW SystemA > UTI Boiler BFW PumpA
+  --- 9 attributes:
+    [Bearing Temperature                     ]  UOM=degC        PI=
+    [Discharge Flow                          ]  UOM=metric_ton/h  PI=
+    [Discharge Pressure                      ]  UOM=bar         PI=
+    [Driver Steam Flow                       ]  UOM=metric_ton/h  PI=
+    [Motor Current                           ]  UOM=A           PI=
+    [Power Output                            ]  UOM=kW          PI=
+    [Speed                                   ]  UOM=rpm         PI=
+    [Suction Pressure                        ]  UOM=bar         PI=
+    [Vibration                               ]  UOM=mm/s        PI=
+
+  Element ID: k_93euoh
+  Element Type: UTI Boiler Blowdown System
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerB-boiler b > UTI Boiler Blowdown SystemA
+  --- 7 attributes:
+    [Blowdown Conductivity                   ]  UOM=uS/cm       PI=
+    [Blowdown Flow Controller Opening        ]  UOM=percent     PI=
+    [Blowdown TDS                            ]  UOM=ppm         PI=
+    [Continuous Blowdown Flow                ]  UOM=metric_ton/h  PI=
+    [Flash Drum Pressure                     ]  UOM=bar         PI=
+    [Flash Steam Flow                        ]  UOM=metric_ton/h  PI=
+    [Intermittent Blowdown Flow              ]  UOM=metric_ton/h  PI=
+
+  Element ID: k_1xfpk5o
+  Element Type: UTI Boiler Combustion System
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerB-boiler b > UTI Boiler Combustion SystemA
+  --- 5 attributes:
+    [Atomizing Steam Flow                    ]  UOM=metric_ton/h  PI=
+    [Burner Header Pressure                  ]  UOM=bar         PI=
+    [Excess O2 Setpoint                      ]  UOM=vol%        PI=
+    [Pilot Gas Flow                          ]  UOM=metric_ton/h  PI=
+    [Total Combustion Air Flow               ]  UOM=Nm3/h       PI=
+
+  Element ID: k_1sddr4o
+  Element Type: UTI Boiler Burner
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerB-boiler b > UTI Boiler Combustion SystemA > UTI Boiler BurnerA
+  --- 5 attributes:
+    [Burner Air Flow                         ]  UOM=Nm3/h       PI=
+    [Burner Backpressure                     ]  UOM=bar         PI=
+    [Burner Fuel Flow                        ]  UOM=Nm3/h       PI=
+    [Flame Status                            ]  UOM=            PI=
+    [Pilot Status                            ]  UOM=            PI=
+
+  Element ID: k_25wzh3
+  Element Type: UTI Boiler Convection Section
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerB-boiler b > UTI Boiler Convection SectionA
+  --- 3 attributes:
+    [Draft at Arch                           ]  UOM=mmH2O       PI=
+    [Flue Inlet Temperature                  ]  UOM=degC        PI=
+    [Flue Outlet Temperature                 ]  UOM=degC        PI=
+
+  Element ID: k_12ues3j
+  Element Type: UTI Boiler Desuperheater
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerB-boiler b > UTI Boiler DesuperheaterA
+  --- 5 attributes:
+    [Inlet Steam Temperature                 ]  UOM=degC        PI=
+    [Outlet Steam Setpoint                   ]  UOM=degC        PI=
+    [Outlet Steam Temperature                ]  UOM=degC        PI=
+    [Spray Valve Opening                     ]  UOM=percent     PI=
+    [Spray Water Flow                        ]  UOM=metric_ton/h  PI=
+
+  Element ID: k_1hwdghd
+  Element Type: UTI Boiler Economizer
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerB-boiler b > UTI Boiler EconomizerA
+  --- 4 attributes:
+    [BFW Inlet Temperature                   ]  UOM=degC        PI=
+    [BFW Outlet Temperature                  ]  UOM=degC        PI=
+    [Flue Inlet Temperature                  ]  UOM=degC        PI=
+    [Flue Outlet Temperature                 ]  UOM=degC        PI=
+
+  Element ID: k_9ns3fy
+  Element Type: UTI Boiler Evaporator Section
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerB-boiler b > UTI Boiler Evaporator SectionA
+  --- 4 attributes:
+    [Inlet Gas Temperature                   ]  UOM=degC        PI=
+    [Outlet Gas Temperature                  ]  UOM=degC        PI=
+    [Steam Generation                        ]  UOM=metric_ton/h  PI=
+    [Tube Differential Pressure              ]  UOM=bar         PI=
+
+  Element ID: k_w1m4cb
+  Element Type: UTI Boiler FD Fan
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerB-boiler b > UTI Boiler FD FanA
+  --- 6 attributes:
+    [Bearing Temperature                     ]  UOM=degC        PI=
+    [Discharge Pressure                      ]  UOM=bar         PI=
+    [Inlet Damper Opening                    ]  UOM=percent     PI=
+    [Motor Current                           ]  UOM=A           PI=
+    [Speed                                   ]  UOM=rpm         PI=
+    [Vibration                               ]  UOM=mm/s        PI=
+
+  Element ID: k_1ybeq5w
+  Element Type: UTI Boiler ID Fan
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerB-boiler b > UTI Boiler ID FanA
+  --- 6 attributes:
+    [Bearing Temperature                     ]  UOM=degC        PI=
+    [Discharge Pressure                      ]  UOM=bar         PI=
+    [Inlet Damper Opening                    ]  UOM=percent     PI=
+    [Motor Current                           ]  UOM=A           PI=
+    [Speed                                   ]  UOM=rpm         PI=
+    [Vibration                               ]  UOM=mm/s        PI=
+
+  Element ID: k_1te3jdo
+  Element Type: UTI Boiler Radiant Section
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerB-boiler b > UTI Boiler Radiant SectionA
+  --- 3 attributes:
+    [Box Draft                               ]  UOM=mmH2O       PI=
+    [Radiant Box Temperature                 ]  UOM=degC        PI=
+    [Tube Skin Temperature (TMT)             ]  UOM=degC        PI=
+
+  Element ID: k_16gtolv
+  Element Type: UTI Boiler Soot Blower System
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerB-boiler b > UTI Boiler Soot Blower SystemA
+  --- 4 attributes:
+    [Cycle Status                            ]  UOM=            PI=
+    [Last Run Time                           ]  UOM=h           PI=
+    [Soot Blower Steam Flow                  ]  UOM=metric_ton/h  PI=
+    [Soot Blower Steam Pressure              ]  UOM=bar         PI=
+
+  Element ID: k_1tvy7xa
+  Element Type: UTI Boiler Stack
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerB-boiler b > UTI Boiler StackA
+  --- 7 attributes:
+    [CO in Flue Gas                          ]  UOM=ppm         PI=
+    [Flue Gas Flow                           ]  UOM=Nm3/h       PI=
+    [NOx Emission                            ]  UOM=ppm         PI=
+    [O2 in Flue Gas                          ]  UOM=vol%        PI=
+    [SOx Emission                            ]  UOM=ppm         PI=
+    [Stack Draft                             ]  UOM=mmH2O       PI=
+    [Stack Temperature                       ]  UOM=degC        PI=
+
+  Element ID: k_zr76ts
+  Element Type: UTI Boiler Steam Drum
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerB-boiler b > UTI Boiler Steam DrumA
+  --- 4 attributes:
+    [Drum Level                              ]  UOM=percent     PI=
+    [Drum Pressure                           ]  UOM=bar         PI=
+    [Drum Temperature                        ]  UOM=degC        PI=
+    [Drum Vent Flow                          ]  UOM=metric_ton/h  PI=
+
+  Element ID: k_s7ko5a
+  Element Type: UTI Boiler Superheater
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerB-boiler b > UTI Boiler SuperheaterA
+  --- 7 attributes:
+    [Attemperator Flow Opening               ]  UOM=percent     PI=
+    [Attemperator Spray Flow                 ]  UOM=metric_ton/h  PI=
+    [Steam Inlet Pressure                    ]  UOM=bar         PI=
+    [Steam Inlet Temperature                 ]  UOM=degC        PI=
+    [Steam Outlet Pressure                   ]  UOM=bar         PI=
+    [Steam Outlet Temperature                ]  UOM=degC        PI=
+    [Tube Skin Temperature                   ]  UOM=degC        PI=
+
+  Element ID: k_1ytht4o
+  Element Type: UTI Boiler
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerC-boiler c
+  --- 4 attributes:
+    [Fuel Flow                               ]  UOM=Nm3/h       PI=
+    [Steam Output                            ]  UOM=metric_ton/h  PI=
+    [Boiler Efficiency                       ]  UOM=percent     PI=
+    [Excess O2                               ]  UOM=percent     PI=
+
+  Element ID: k_2hlyte
+  Element Type: UTI Boiler Air Preheater
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerC-boiler c > UTI Boiler Air PreheaterA
+  --- 6 attributes:
+    [Air Inlet Temperature                   ]  UOM=degC        PI=
+    [Air Outlet Temperature                  ]  UOM=degC        PI=
+    [Air Side Differential Pressure          ]  UOM=bar         PI=
+    [Flue Inlet Temperature                  ]  UOM=degC        PI=
+    [Flue Outlet Temperature                 ]  UOM=degC        PI=
+    [Leakage                                 ]  UOM=percent     PI=
+
+  Element ID: k_2j0km
+  Element Type: UTI Boiler BFW System
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerC-boiler c > UTI Boiler BFW SystemA
+  --- 4 attributes:
+    [BFW Header Pressure                     ]  UOM=bar         PI=
+    [BFW Header Temperature                  ]  UOM=degC        PI=
+    [BFW Inlet Flow                          ]  UOM=metric_ton/h  PI=
+    [BFW Quality (Conductivity)              ]  UOM=uS/cm       PI=
+
+  Element ID: k_wohtdx
+  Element Type: UTI Boiler BFW Pump
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerC-boiler c > UTI Boiler BFW SystemA > UTI Boiler BFW PumpA
+  --- 9 attributes:
+    [Bearing Temperature                     ]  UOM=degC        PI=
+    [Discharge Flow                          ]  UOM=metric_ton/h  PI=
+    [Discharge Pressure                      ]  UOM=bar         PI=
+    [Driver Steam Flow                       ]  UOM=metric_ton/h  PI=
+    [Motor Current                           ]  UOM=A           PI=
+    [Power Output                            ]  UOM=kW          PI=
+    [Speed                                   ]  UOM=rpm         PI=
+    [Suction Pressure                        ]  UOM=bar         PI=
+    [Vibration                               ]  UOM=mm/s        PI=
+
+  Element ID: k_1uhcwz5
+  Element Type: UTI Boiler Blowdown System
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerC-boiler c > UTI Boiler Blowdown SystemA
+  --- 7 attributes:
+    [Blowdown Conductivity                   ]  UOM=uS/cm       PI=
+    [Blowdown Flow Controller Opening        ]  UOM=percent     PI=
+    [Blowdown TDS                            ]  UOM=ppm         PI=
+    [Continuous Blowdown Flow                ]  UOM=metric_ton/h  PI=
+    [Flash Drum Pressure                     ]  UOM=bar         PI=
+    [Flash Steam Flow                        ]  UOM=metric_ton/h  PI=
+    [Intermittent Blowdown Flow              ]  UOM=metric_ton/h  PI=
+
+  Element ID: k_15fyyng
+  Element Type: UTI Boiler Combustion System
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerC-boiler c > UTI Boiler Combustion SystemA
+  --- 5 attributes:
+    [Atomizing Steam Flow                    ]  UOM=metric_ton/h  PI=
+    [Burner Header Pressure                  ]  UOM=bar         PI=
+    [Excess O2 Setpoint                      ]  UOM=vol%        PI=
+    [Pilot Gas Flow                          ]  UOM=metric_ton/h  PI=
+    [Total Combustion Air Flow               ]  UOM=Nm3/h       PI=
+
+  Element ID: k_5dagzc
+  Element Type: UTI Boiler Burner
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerC-boiler c > UTI Boiler Combustion SystemA > UTI Boiler BurnerA
+  --- 5 attributes:
+    [Burner Air Flow                         ]  UOM=Nm3/h       PI=
+    [Burner Backpressure                     ]  UOM=bar         PI=
+    [Burner Fuel Flow                        ]  UOM=Nm3/h       PI=
+    [Flame Status                            ]  UOM=            PI=
+    [Pilot Status                            ]  UOM=            PI=
+
+  Element ID: k_1fjn7jr
+  Element Type: UTI Boiler Convection Section
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerC-boiler c > UTI Boiler Convection SectionA
+  --- 3 attributes:
+    [Draft at Arch                           ]  UOM=mmH2O       PI=
+    [Flue Inlet Temperature                  ]  UOM=degC        PI=
+    [Flue Outlet Temperature                 ]  UOM=degC        PI=
+
+  Element ID: k_1cahtsv
+  Element Type: UTI Boiler Desuperheater
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerC-boiler c > UTI Boiler DesuperheaterA
+  --- 5 attributes:
+    [Inlet Steam Temperature                 ]  UOM=degC        PI=
+    [Outlet Steam Setpoint                   ]  UOM=degC        PI=
+    [Outlet Steam Temperature                ]  UOM=degC        PI=
+    [Spray Valve Opening                     ]  UOM=percent     PI=
+    [Spray Water Flow                        ]  UOM=metric_ton/h  PI=
+
+  Element ID: k_1iwef2p
+  Element Type: UTI Boiler Economizer
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerC-boiler c > UTI Boiler EconomizerA
+  --- 4 attributes:
+    [BFW Inlet Temperature                   ]  UOM=degC        PI=
+    [BFW Outlet Temperature                  ]  UOM=degC        PI=
+    [Flue Inlet Temperature                  ]  UOM=degC        PI=
+    [Flue Outlet Temperature                 ]  UOM=degC        PI=
+
+  Element ID: k_1dx5wb2
+  Element Type: UTI Boiler Evaporator Section
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerC-boiler c > UTI Boiler Evaporator SectionA
+  --- 4 attributes:
+    [Inlet Gas Temperature                   ]  UOM=degC        PI=
+    [Outlet Gas Temperature                  ]  UOM=degC        PI=
+    [Steam Generation                        ]  UOM=metric_ton/h  PI=
+    [Tube Differential Pressure              ]  UOM=bar         PI=
+
+  Element ID: k_1v38zdn
+  Element Type: UTI Boiler FD Fan
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerC-boiler c > UTI Boiler FD FanA
+  --- 6 attributes:
+    [Bearing Temperature                     ]  UOM=degC        PI=
+    [Discharge Pressure                      ]  UOM=bar         PI=
+    [Inlet Damper Opening                    ]  UOM=percent     PI=
+    [Motor Current                           ]  UOM=A           PI=
+    [Speed                                   ]  UOM=rpm         PI=
+    [Vibration                               ]  UOM=mm/s        PI=
+
+  Element ID: k_mld11w
+  Element Type: UTI Boiler ID Fan
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerC-boiler c > UTI Boiler ID FanA
+  --- 6 attributes:
+    [Bearing Temperature                     ]  UOM=degC        PI=
+    [Discharge Pressure                      ]  UOM=bar         PI=
+    [Inlet Damper Opening                    ]  UOM=percent     PI=
+    [Motor Current                           ]  UOM=A           PI=
+    [Speed                                   ]  UOM=rpm         PI=
+    [Vibration                               ]  UOM=mm/s        PI=
+
+  Element ID: k_1ijq6ws
+  Element Type: UTI Boiler Radiant Section
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerC-boiler c > UTI Boiler Radiant SectionA
+  --- 3 attributes:
+    [Box Draft                               ]  UOM=mmH2O       PI=
+    [Radiant Box Temperature                 ]  UOM=degC        PI=
+    [Tube Skin Temperature (TMT)             ]  UOM=degC        PI=
+
+  Element ID: k_105fmr7
+  Element Type: UTI Boiler Soot Blower System
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerC-boiler c > UTI Boiler Soot Blower SystemA
+  --- 4 attributes:
+    [Cycle Status                            ]  UOM=            PI=
+    [Last Run Time                           ]  UOM=h           PI=
+    [Soot Blower Steam Flow                  ]  UOM=metric_ton/h  PI=
+    [Soot Blower Steam Pressure              ]  UOM=bar         PI=
+
+  Element ID: k_1f4z7ni
+  Element Type: UTI Boiler Stack
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerC-boiler c > UTI Boiler StackA
+  --- 7 attributes:
+    [CO in Flue Gas                          ]  UOM=ppm         PI=
+    [Flue Gas Flow                           ]  UOM=Nm3/h       PI=
+    [NOx Emission                            ]  UOM=ppm         PI=
+    [O2 in Flue Gas                          ]  UOM=vol%        PI=
+    [SOx Emission                            ]  UOM=ppm         PI=
+    [Stack Draft                             ]  UOM=mmH2O       PI=
+    [Stack Temperature                       ]  UOM=degC        PI=
+
+  Element ID: k_b5rp9s
+  Element Type: UTI Boiler Steam Drum
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerC-boiler c > UTI Boiler Steam DrumA
+  --- 4 attributes:
+    [Drum Level                              ]  UOM=percent     PI=
+    [Drum Pressure                           ]  UOM=bar         PI=
+    [Drum Temperature                        ]  UOM=degC        PI=
+    [Drum Vent Flow                          ]  UOM=metric_ton/h  PI=
+
+  Element ID: k_y7480u
+  Element Type: UTI Boiler Superheater
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerC-boiler c > UTI Boiler SuperheaterA
+  --- 7 attributes:
+    [Attemperator Flow Opening               ]  UOM=percent     PI=
+    [Attemperator Spray Flow                 ]  UOM=metric_ton/h  PI=
+    [Steam Inlet Pressure                    ]  UOM=bar         PI=
+    [Steam Inlet Temperature                 ]  UOM=degC        PI=
+    [Steam Outlet Pressure                   ]  UOM=bar         PI=
+    [Steam Outlet Temperature                ]  UOM=degC        PI=
+    [Tube Skin Temperature                   ]  UOM=degC        PI=
+
+  Element ID: k_e8memw
+  Element Type: UTI Boiler
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerD-boiler d
+  --- 4 attributes:
+    [Fuel Flow                               ]  UOM=Nm3/h       PI=
+    [Steam Output                            ]  UOM=metric_ton/h  PI=
+    [Boiler Efficiency                       ]  UOM=percent     PI=
+    [Excess O2                               ]  UOM=percent     PI=
+
+  Element ID: k_t25fz6
+  Element Type: UTI Boiler Air Preheater
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerD-boiler d > UTI Boiler Air PreheaterA
+  --- 6 attributes:
+    [Air Inlet Temperature                   ]  UOM=degC        PI=
+    [Air Outlet Temperature                  ]  UOM=degC        PI=
+    [Air Side Differential Pressure          ]  UOM=bar         PI=
+    [Flue Inlet Temperature                  ]  UOM=degC        PI=
+    [Flue Outlet Temperature                 ]  UOM=degC        PI=
+    [Leakage                                 ]  UOM=percent     PI=
+
+  Element ID: k_yc0kjq
+  Element Type: UTI Boiler BFW System
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerD-boiler d > UTI Boiler BFW SystemA
+  --- 4 attributes:
+    [BFW Header Pressure                     ]  UOM=bar         PI=
+    [BFW Header Temperature                  ]  UOM=degC        PI=
+    [BFW Inlet Flow                          ]  UOM=metric_ton/h  PI=
+    [BFW Quality (Conductivity)              ]  UOM=uS/cm       PI=
+
+  Element ID: k_xwyfdx
+  Element Type: UTI Boiler BFW Pump
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerD-boiler d > UTI Boiler BFW SystemA > UTI Boiler BFW PumpA
+  --- 9 attributes:
+    [Bearing Temperature                     ]  UOM=degC        PI=
+    [Discharge Flow                          ]  UOM=metric_ton/h  PI=
+    [Discharge Pressure                      ]  UOM=bar         PI=
+    [Driver Steam Flow                       ]  UOM=metric_ton/h  PI=
+    [Motor Current                           ]  UOM=A           PI=
+    [Power Output                            ]  UOM=kW          PI=
+    [Speed                                   ]  UOM=rpm         PI=
+    [Suction Pressure                        ]  UOM=bar         PI=
+    [Vibration                               ]  UOM=mm/s        PI=
+
+  Element ID: k_12zunf5
+  Element Type: UTI Boiler Blowdown System
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerD-boiler d > UTI Boiler Blowdown SystemA
+  --- 7 attributes:
+    [Blowdown Conductivity                   ]  UOM=uS/cm       PI=
+    [Blowdown Flow Controller Opening        ]  UOM=percent     PI=
+    [Blowdown TDS                            ]  UOM=ppm         PI=
+    [Continuous Blowdown Flow                ]  UOM=metric_ton/h  PI=
+    [Flash Drum Pressure                     ]  UOM=bar         PI=
+    [Flash Steam Flow                        ]  UOM=metric_ton/h  PI=
+    [Intermittent Blowdown Flow              ]  UOM=metric_ton/h  PI=
+
+  Element ID: k_jjsi30
+  Element Type: UTI Boiler Combustion System
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerD-boiler d > UTI Boiler Combustion SystemA
+  --- 5 attributes:
+    [Atomizing Steam Flow                    ]  UOM=metric_ton/h  PI=
+    [Burner Header Pressure                  ]  UOM=bar         PI=
+    [Excess O2 Setpoint                      ]  UOM=vol%        PI=
+    [Pilot Gas Flow                          ]  UOM=metric_ton/h  PI=
+    [Total Combustion Air Flow               ]  UOM=Nm3/h       PI=
+
+  Element ID: k_f5o63c
+  Element Type: UTI Boiler Burner
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerD-boiler d > UTI Boiler Combustion SystemA > UTI Boiler BurnerA
+  --- 5 attributes:
+    [Burner Air Flow                         ]  UOM=Nm3/h       PI=
+    [Burner Backpressure                     ]  UOM=bar         PI=
+    [Burner Fuel Flow                        ]  UOM=Nm3/h       PI=
+    [Flame Status                            ]  UOM=            PI=
+    [Pilot Status                            ]  UOM=            PI=
+
+  Element ID: k_l09f13
+  Element Type: UTI Boiler Convection Section
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerD-boiler d > UTI Boiler Convection SectionA
+  --- 3 attributes:
+    [Draft at Arch                           ]  UOM=mmH2O       PI=
+    [Flue Inlet Temperature                  ]  UOM=degC        PI=
+    [Flue Outlet Temperature                 ]  UOM=degC        PI=
+
+  Element ID: k_ek39mn
+  Element Type: UTI Boiler Desuperheater
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerD-boiler d > UTI Boiler DesuperheaterA
+  --- 5 attributes:
+    [Inlet Steam Temperature                 ]  UOM=degC        PI=
+    [Outlet Steam Setpoint                   ]  UOM=degC        PI=
+    [Outlet Steam Temperature                ]  UOM=degC        PI=
+    [Spray Valve Opening                     ]  UOM=percent     PI=
+    [Spray Water Flow                        ]  UOM=metric_ton/h  PI=
+
+  Element ID: k_gwapyp
+  Element Type: UTI Boiler Economizer
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerD-boiler d > UTI Boiler EconomizerA
+  --- 4 attributes:
+    [BFW Inlet Temperature                   ]  UOM=degC        PI=
+    [BFW Outlet Temperature                  ]  UOM=degC        PI=
+    [Flue Inlet Temperature                  ]  UOM=degC        PI=
+    [Flue Outlet Temperature                 ]  UOM=degC        PI=
+
+  Element ID: k_18uryni
+  Element Type: UTI Boiler Evaporator Section
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerD-boiler d > UTI Boiler Evaporator SectionA
+  --- 4 attributes:
+    [Inlet Gas Temperature                   ]  UOM=degC        PI=
+    [Outlet Gas Temperature                  ]  UOM=degC        PI=
+    [Steam Generation                        ]  UOM=metric_ton/h  PI=
+    [Tube Differential Pressure              ]  UOM=bar         PI=
+
+  Element ID: k_1s17ozf
+  Element Type: UTI Boiler FD Fan
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerD-boiler d > UTI Boiler FD FanA
+  --- 6 attributes:
+    [Bearing Temperature                     ]  UOM=degC        PI=
+    [Discharge Pressure                      ]  UOM=bar         PI=
+    [Inlet Damper Opening                    ]  UOM=percent     PI=
+    [Motor Current                           ]  UOM=A           PI=
+    [Speed                                   ]  UOM=rpm         PI=
+    [Vibration                               ]  UOM=mm/s        PI=
+
+  Element ID: k_7sr1ys
+  Element Type: UTI Boiler ID Fan
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerD-boiler d > UTI Boiler ID FanA
+  --- 6 attributes:
+    [Bearing Temperature                     ]  UOM=degC        PI=
+    [Discharge Pressure                      ]  UOM=bar         PI=
+    [Inlet Damper Opening                    ]  UOM=percent     PI=
+    [Motor Current                           ]  UOM=A           PI=
+    [Speed                                   ]  UOM=rpm         PI=
+    [Vibration                               ]  UOM=mm/s        PI=
+
+  Element ID: k_1y5xcm4
+  Element Type: UTI Boiler Radiant Section
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerD-boiler d > UTI Boiler Radiant SectionA
+  --- 3 attributes:
+    [Box Draft                               ]  UOM=mmH2O       PI=
+    [Radiant Box Temperature                 ]  UOM=degC        PI=
+    [Tube Skin Temperature (TMT)             ]  UOM=degC        PI=
+
+  Element ID: k_1k0zhn7
+  Element Type: UTI Boiler Soot Blower System
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerD-boiler d > UTI Boiler Soot Blower SystemA
+  --- 4 attributes:
+    [Cycle Status                            ]  UOM=            PI=
+    [Last Run Time                           ]  UOM=h           PI=
+    [Soot Blower Steam Flow                  ]  UOM=metric_ton/h  PI=
+    [Soot Blower Steam Pressure              ]  UOM=bar         PI=
+
+  Element ID: k_fa11lq
+  Element Type: UTI Boiler Stack
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerD-boiler d > UTI Boiler StackA
+  --- 7 attributes:
+    [CO in Flue Gas                          ]  UOM=ppm         PI=
+    [Flue Gas Flow                           ]  UOM=Nm3/h       PI=
+    [NOx Emission                            ]  UOM=ppm         PI=
+    [O2 in Flue Gas                          ]  UOM=vol%        PI=
+    [SOx Emission                            ]  UOM=ppm         PI=
+    [Stack Draft                             ]  UOM=mmH2O       PI=
+    [Stack Temperature                       ]  UOM=degC        PI=
+
+  Element ID: k_p5esk0
+  Element Type: UTI Boiler Steam Drum
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerD-boiler d > UTI Boiler Steam DrumA
+  --- 4 attributes:
+    [Drum Level                              ]  UOM=percent     PI=
+    [Drum Pressure                           ]  UOM=bar         PI=
+    [Drum Temperature                        ]  UOM=degC        PI=
+    [Drum Vent Flow                          ]  UOM=metric_ton/h  PI=
+
+  Element ID: k_jdew3i
+  Element Type: UTI Boiler Superheater
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerD-boiler d > UTI Boiler SuperheaterA
+  --- 7 attributes:
+    [Attemperator Flow Opening               ]  UOM=percent     PI=
+    [Attemperator Spray Flow                 ]  UOM=metric_ton/h  PI=
+    [Steam Inlet Pressure                    ]  UOM=bar         PI=
+    [Steam Inlet Temperature                 ]  UOM=degC        PI=
+    [Steam Outlet Pressure                   ]  UOM=bar         PI=
+    [Steam Outlet Temperature                ]  UOM=degC        PI=
+    [Tube Skin Temperature                   ]  UOM=degC        PI=
+
+  Element ID: k_1su28e0
+  Element Type: UTI Boiler
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerE-boiler e
+  --- 4 attributes:
+    [Fuel Flow                               ]  UOM=Nm3/h       PI=
+    [Steam Output                            ]  UOM=metric_ton/h  PI=
+    [Boiler Efficiency                       ]  UOM=percent     PI=
+    [Excess O2                               ]  UOM=percent     PI=
+
+  Element ID: k_1hpdm82
+  Element Type: UTI Boiler Air Preheater
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerE-boiler e > UTI Boiler Air PreheaterA
+  --- 6 attributes:
+    [Air Inlet Temperature                   ]  UOM=degC        PI=
+    [Air Outlet Temperature                  ]  UOM=degC        PI=
+    [Air Side Differential Pressure          ]  UOM=bar         PI=
+    [Flue Inlet Temperature                  ]  UOM=degC        PI=
+    [Flue Outlet Temperature                 ]  UOM=degC        PI=
+    [Leakage                                 ]  UOM=percent     PI=
+
+  Element ID: k_any7ae
+  Element Type: UTI Boiler BFW System
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerE-boiler e > UTI Boiler BFW SystemA
+  --- 4 attributes:
+    [BFW Header Pressure                     ]  UOM=bar         PI=
+    [BFW Header Temperature                  ]  UOM=degC        PI=
+    [BFW Inlet Flow                          ]  UOM=metric_ton/h  PI=
+    [BFW Quality (Conductivity)              ]  UOM=uS/cm       PI=
+
+  Element ID: k_14jr9s5
+  Element Type: UTI Boiler BFW Pump
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerE-boiler e > UTI Boiler BFW SystemA > UTI Boiler BFW PumpA
+  --- 9 attributes:
+    [Bearing Temperature                     ]  UOM=degC        PI=
+    [Discharge Flow                          ]  UOM=metric_ton/h  PI=
+    [Discharge Pressure                      ]  UOM=bar         PI=
+    [Driver Steam Flow                       ]  UOM=metric_ton/h  PI=
+    [Motor Current                           ]  UOM=A           PI=
+    [Power Output                            ]  UOM=kW          PI=
+    [Speed                                   ]  UOM=rpm         PI=
+    [Suction Pressure                        ]  UOM=bar         PI=
+    [Vibration                               ]  UOM=mm/s        PI=
+
+  Element ID: k_43afch
+  Element Type: UTI Boiler Blowdown System
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerE-boiler e > UTI Boiler Blowdown SystemA
+  --- 7 attributes:
+    [Blowdown Conductivity                   ]  UOM=uS/cm       PI=
+    [Blowdown Flow Controller Opening        ]  UOM=percent     PI=
+    [Blowdown TDS                            ]  UOM=ppm         PI=
+    [Continuous Blowdown Flow                ]  UOM=metric_ton/h  PI=
+    [Flash Drum Pressure                     ]  UOM=bar         PI=
+    [Flash Steam Flow                        ]  UOM=metric_ton/h  PI=
+    [Intermittent Blowdown Flow              ]  UOM=metric_ton/h  PI=
+
+  Element ID: k_1c2fay4
+  Element Type: UTI Boiler Combustion System
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerE-boiler e > UTI Boiler Combustion SystemA
+  --- 5 attributes:
+    [Atomizing Steam Flow                    ]  UOM=metric_ton/h  PI=
+    [Burner Header Pressure                  ]  UOM=bar         PI=
+    [Excess O2 Setpoint                      ]  UOM=vol%        PI=
+    [Pilot Gas Flow                          ]  UOM=metric_ton/h  PI=
+    [Total Combustion Air Flow               ]  UOM=Nm3/h       PI=
+
+  Element ID: k_gfv2d4
+  Element Type: UTI Boiler Burner
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerE-boiler e > UTI Boiler Combustion SystemA > UTI Boiler BurnerA
+  --- 5 attributes:
+    [Burner Air Flow                         ]  UOM=Nm3/h       PI=
+    [Burner Backpressure                     ]  UOM=bar         PI=
+    [Burner Fuel Flow                        ]  UOM=Nm3/h       PI=
+    [Flame Status                            ]  UOM=            PI=
+    [Pilot Status                            ]  UOM=            PI=
+
+  Element ID: k_wty9iv
+  Element Type: UTI Boiler Convection Section
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerE-boiler e > UTI Boiler Convection SectionA
+  --- 3 attributes:
+    [Draft at Arch                           ]  UOM=mmH2O       PI=
+    [Flue Inlet Temperature                  ]  UOM=degC        PI=
+    [Flue Outlet Temperature                 ]  UOM=degC        PI=
+
+  Element ID: k_1hteh9b
+  Element Type: UTI Boiler Desuperheater
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerE-boiler e > UTI Boiler DesuperheaterA
+  --- 5 attributes:
+    [Inlet Steam Temperature                 ]  UOM=degC        PI=
+    [Outlet Steam Setpoint                   ]  UOM=degC        PI=
+    [Outlet Steam Temperature                ]  UOM=degC        PI=
+    [Spray Valve Opening                     ]  UOM=percent     PI=
+    [Spray Water Flow                        ]  UOM=metric_ton/h  PI=
+
+  Element ID: k_142da8h
+  Element Type: UTI Boiler Economizer
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerE-boiler e > UTI Boiler EconomizerA
+  --- 4 attributes:
+    [BFW Inlet Temperature                   ]  UOM=degC        PI=
+    [BFW Outlet Temperature                  ]  UOM=degC        PI=
+    [Flue Inlet Temperature                  ]  UOM=degC        PI=
+    [Flue Outlet Temperature                 ]  UOM=degC        PI=
+
+  Element ID: k_1ikosy6
+  Element Type: UTI Boiler Evaporator Section
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerE-boiler e > UTI Boiler Evaporator SectionA
+  --- 4 attributes:
+    [Inlet Gas Temperature                   ]  UOM=degC        PI=
+    [Outlet Gas Temperature                  ]  UOM=degC        PI=
+    [Steam Generation                        ]  UOM=metric_ton/h  PI=
+    [Tube Differential Pressure              ]  UOM=bar         PI=
+
+  Element ID: k_up2g9n
+  Element Type: UTI Boiler FD Fan
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerE-boiler e > UTI Boiler FD FanA
+  --- 6 attributes:
+    [Bearing Temperature                     ]  UOM=degC        PI=
+    [Discharge Pressure                      ]  UOM=bar         PI=
+    [Inlet Damper Opening                    ]  UOM=percent     PI=
+    [Motor Current                           ]  UOM=A           PI=
+    [Speed                                   ]  UOM=rpm         PI=
+    [Vibration                               ]  UOM=mm/s        PI=
+
+  Element ID: k_1l8ajx0
+  Element Type: UTI Boiler ID Fan
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerE-boiler e > UTI Boiler ID FanA
+  --- 6 attributes:
+    [Bearing Temperature                     ]  UOM=degC        PI=
+    [Discharge Pressure                      ]  UOM=bar         PI=
+    [Inlet Damper Opening                    ]  UOM=percent     PI=
+    [Motor Current                           ]  UOM=A           PI=
+    [Speed                                   ]  UOM=rpm         PI=
+    [Vibration                               ]  UOM=mm/s        PI=
+
+  Element ID: k_uaz7i4
+  Element Type: UTI Boiler Radiant Section
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerE-boiler e > UTI Boiler Radiant SectionA
+  --- 3 attributes:
+    [Box Draft                               ]  UOM=mmH2O       PI=
+    [Radiant Box Temperature                 ]  UOM=degC        PI=
+    [Tube Skin Temperature (TMT)             ]  UOM=degC        PI=
+
+  Element ID: k_1o996ib
+  Element Type: UTI Boiler Soot Blower System
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerE-boiler e > UTI Boiler Soot Blower SystemA
+  --- 4 attributes:
+    [Cycle Status                            ]  UOM=            PI=
+    [Last Run Time                           ]  UOM=h           PI=
+    [Soot Blower Steam Flow                  ]  UOM=metric_ton/h  PI=
+    [Soot Blower Steam Pressure              ]  UOM=bar         PI=
+
+  Element ID: k_nf2eym
+  Element Type: UTI Boiler Stack
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerE-boiler e > UTI Boiler StackA
+  --- 7 attributes:
+    [CO in Flue Gas                          ]  UOM=ppm         PI=
+    [Flue Gas Flow                           ]  UOM=Nm3/h       PI=
+    [NOx Emission                            ]  UOM=ppm         PI=
+    [O2 in Flue Gas                          ]  UOM=vol%        PI=
+    [SOx Emission                            ]  UOM=ppm         PI=
+    [Stack Draft                             ]  UOM=mmH2O       PI=
+    [Stack Temperature                       ]  UOM=degC        PI=
+
+  Element ID: k_ywgkts
+  Element Type: UTI Boiler Steam Drum
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerE-boiler e > UTI Boiler Steam DrumA
+  --- 4 attributes:
+    [Drum Level                              ]  UOM=percent     PI=
+    [Drum Pressure                           ]  UOM=bar         PI=
+    [Drum Temperature                        ]  UOM=degC        PI=
+    [Drum Vent Flow                          ]  UOM=metric_ton/h  PI=
+
+  Element ID: k_d845lq
+  Element Type: UTI Boiler Superheater
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerE-boiler e > UTI Boiler SuperheaterA
+  --- 7 attributes:
+    [Attemperator Flow Opening               ]  UOM=percent     PI=
+    [Attemperator Spray Flow                 ]  UOM=metric_ton/h  PI=
+    [Steam Inlet Pressure                    ]  UOM=bar         PI=
+    [Steam Inlet Temperature                 ]  UOM=degC        PI=
+    [Steam Outlet Pressure                   ]  UOM=bar         PI=
+    [Steam Outlet Temperature                ]  UOM=degC        PI=
+    [Tube Skin Temperature                   ]  UOM=degC        PI=
+
+========== GROUP: Compressor (39 rows) ==========
+
+  Element ID: k_1owtsvo
+  Element Type: EG1 Compressor
+  Element Path: United > Specific Energy Consumers > EG1 [EG1]A > Electric EnergyA > EG1 CompressorA-compressor a
+  --- 5 attributes:
+    [Current                                 ]  UOM=A           PI=UN.EG1.21II1815A.PV
+    [Suction Flow                            ]  UOM=Nm3/h       PI=UN.EG1.21FI1610.PV
+    [Suction Pressure                        ]  UOM=bar         PI=UN.EG1.21PI1864B.PV
+    [Discharge Pressure                      ]  UOM=bar         PI=UN.EG1.21PI1863B.PV
+    [Polytropic Efficiency                   ]  UOM=percent     PI=
+
+  Element ID: k_1s2j7sn
+  Element Type: EG2 Compressor
+  Element Path: United > Specific Energy Consumers > EG2 [EG2]A > Electric EnergyA > EG2 CompressorA-compressor a
+  --- 5 attributes:
+    [Current                                 ]  UOM=A           PI=UN.EG2.41II1815AB.PV
+    [Suction Flow                            ]  UOM=Nm3/h       PI=UN.EG2.41FI1610.PV
+    [Suction Pressure                        ]  UOM=bar         PI=UN.EG2.41PI1864B.PV
+    [Discharge Pressure                      ]  UOM=bar         PI=UN.EG2.41PI1608.PV
+    [Polytropic Efficiency                   ]  UOM=percent     PI=
+
+  Element ID: k_1btdiie
+  Element Type: EG3 Compressor
+  Element Path: United > Specific Energy Consumers > EG3 [EG3]A > Electric EnergyA > EG3 CompressorA-compressor a
+  --- 5 attributes:
+    [Current                                 ]  UOM=A           PI=UN.EG3.61XII1871.PV
+    [Suction Flow                            ]  UOM=Nm3/h       PI=UN.EG3.61FI1780.PV
+    [Suction Pressure                        ]  UOM=bar         PI=UN.EG3.61PI1830.PV
+    [Discharge Pressure                      ]  UOM=bar         PI=UN.EG3.61PI1608.PV
+    [Polytropic Efficiency                   ]  UOM=percent     PI=
+
+  Element ID: k_1g5rz0h
+  Element Type: UTI Compressor
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Electric EnergyA > UTI CompressorA-compressor a
+  --- 5 attributes:
+    [Current                                 ]  UOM=A           PI=UN.UO.72II2001A.PV
+    [Suction Flow                            ]  UOM=Nm3/h       PI=UN.UO.72FI2117.PV
+    [Suction Pressure                        ]  UOM=bar         PI=
+    [Discharge Pressure                      ]  UOM=bar         PI=UN.UO.72PC2009.PV
+    [Polytropic Efficiency                   ]  UOM=percent     PI=
+
+  Element ID: k_ffmsyp
+  Element Type: UTI Compressor
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Electric EnergyA > UTI CompressorB-compressor b
+  --- 5 attributes:
+    [Current                                 ]  UOM=A           PI=UN.UO.72II2002A.PV
+    [Suction Flow                            ]  UOM=Nm3/h       PI=UN.UO.72FI2140.PV
+    [Suction Pressure                        ]  UOM=bar         PI=
+    [Discharge Pressure                      ]  UOM=bar         PI=UN.UO.72PC2015.PV
+    [Polytropic Efficiency                   ]  UOM=percent     PI=
+
+  Element ID: k_165t8ah
+  Element Type: CO2 Compressor
+  Element Path: United > Specific Energy Consumers > CO2 [CO2]A > Electric EnergyA > CO2 CompressorA-compressor a
+  --- 7 attributes:
+    [Driver Power                            ]  UOM=kW          PI=
+    [Suction Flow                            ]  UOM=Nm3/h       PI=UN.UO.50FI0115.PV
+    [Suction Pressure                        ]  UOM=bar         PI=UN.UO.50PI0259B FAST
+    [Discharge Pressure                      ]  UOM=bar         PI=UN.UO.50PI0256.PV
+    [Suction Temperature                     ]  UOM=degC        PI=UN.UO.50TI0252.PV
+    [Discharge Temperature                   ]  UOM=degC        PI=UN.UO.50TI0260A.PV
+    [Polytropic Efficiency                   ]  UOM=percent     PI=
+
+  Element ID: k_idkgd5
+  Element Type: CO2 Compressor
+  Element Path: United > Specific Energy Consumers > CO2 [CO2]A > Electric EnergyA > CO2 CompressorB-compressor b
+  --- 7 attributes:
+    [Driver Power                            ]  UOM=kW          PI=
+    [Suction Flow                            ]  UOM=Nm3/h       PI=UN.UO.50FI0253_HS
+    [Suction Pressure                        ]  UOM=bar         PI=UN.UO.50PI0259B FAST
+    [Discharge Pressure                      ]  UOM=bar         PI=UN.UO.50PI0256.PV
+    [Suction Temperature                     ]  UOM=degC        PI=UN.UO.50TI0252.PV
+    [Discharge Temperature                   ]  UOM=degC        PI=UN.UO.50TI0260A.PV
+    [Polytropic Efficiency                   ]  UOM=percent     PI=
+
+========== GROUP: Feed Saturator — NO ROWS ==========
+
+========== GROUP: Deaerator — NO ROWS ==========
+
+========== GROUP: Pump (61 rows) ==========
+
+  Element ID: k_1rzlkud
+  Element Type: UTI Boiler BFW Pump
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerA-boiler a > UTI Boiler BFW SystemA > UTI Boiler BFW PumpA
+  --- 9 attributes:
+    [Bearing Temperature                     ]  UOM=degC        PI=
+    [Discharge Flow                          ]  UOM=metric_ton/h  PI=
+    [Discharge Pressure                      ]  UOM=bar         PI=
+    [Driver Steam Flow                       ]  UOM=metric_ton/h  PI=
+    [Motor Current                           ]  UOM=A           PI=
+    [Power Output                            ]  UOM=kW          PI=
+    [Speed                                   ]  UOM=rpm         PI=
+    [Suction Pressure                        ]  UOM=bar         PI=
+    [Vibration                               ]  UOM=mm/s        PI=
+
+  Element ID: k_5fj7dx
+  Element Type: UTI Boiler BFW Pump
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerB-boiler b > UTI Boiler BFW SystemA > UTI Boiler BFW PumpA
+  --- 9 attributes:
+    [Bearing Temperature                     ]  UOM=degC        PI=
+    [Discharge Flow                          ]  UOM=metric_ton/h  PI=
+    [Discharge Pressure                      ]  UOM=bar         PI=
+    [Driver Steam Flow                       ]  UOM=metric_ton/h  PI=
+    [Motor Current                           ]  UOM=A           PI=
+    [Power Output                            ]  UOM=kW          PI=
+    [Speed                                   ]  UOM=rpm         PI=
+    [Suction Pressure                        ]  UOM=bar         PI=
+    [Vibration                               ]  UOM=mm/s        PI=
+
+  Element ID: k_wohtdx
+  Element Type: UTI Boiler BFW Pump
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerC-boiler c > UTI Boiler BFW SystemA > UTI Boiler BFW PumpA
+  --- 9 attributes:
+    [Bearing Temperature                     ]  UOM=degC        PI=
+    [Discharge Flow                          ]  UOM=metric_ton/h  PI=
+    [Discharge Pressure                      ]  UOM=bar         PI=
+    [Driver Steam Flow                       ]  UOM=metric_ton/h  PI=
+    [Motor Current                           ]  UOM=A           PI=
+    [Power Output                            ]  UOM=kW          PI=
+    [Speed                                   ]  UOM=rpm         PI=
+    [Suction Pressure                        ]  UOM=bar         PI=
+    [Vibration                               ]  UOM=mm/s        PI=
+
+  Element ID: k_xwyfdx
+  Element Type: UTI Boiler BFW Pump
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerD-boiler d > UTI Boiler BFW SystemA > UTI Boiler BFW PumpA
+  --- 9 attributes:
+    [Bearing Temperature                     ]  UOM=degC        PI=
+    [Discharge Flow                          ]  UOM=metric_ton/h  PI=
+    [Discharge Pressure                      ]  UOM=bar         PI=
+    [Driver Steam Flow                       ]  UOM=metric_ton/h  PI=
+    [Motor Current                           ]  UOM=A           PI=
+    [Power Output                            ]  UOM=kW          PI=
+    [Speed                                   ]  UOM=rpm         PI=
+    [Suction Pressure                        ]  UOM=bar         PI=
+    [Vibration                               ]  UOM=mm/s        PI=
+
+  Element ID: k_14jr9s5
+  Element Type: UTI Boiler BFW Pump
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Fuel EnergyA > UTI BoilerE-boiler e > UTI Boiler BFW SystemA > UTI Boiler BFW PumpA
+  --- 9 attributes:
+    [Bearing Temperature                     ]  UOM=degC        PI=
+    [Discharge Flow                          ]  UOM=metric_ton/h  PI=
+    [Discharge Pressure                      ]  UOM=bar         PI=
+    [Driver Steam Flow                       ]  UOM=metric_ton/h  PI=
+    [Motor Current                           ]  UOM=A           PI=
+    [Power Output                            ]  UOM=kW          PI=
+    [Speed                                   ]  UOM=rpm         PI=
+    [Suction Pressure                        ]  UOM=bar         PI=
+    [Vibration                               ]  UOM=mm/s        PI=
+
+  Element ID: k_1w1jm9t
+  Element Type: UTI Pump
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Electric EnergyA > UTI PumpA-pump a
+  --- 4 attributes:
+    [Current                                 ]  UOM=A           PI=UN.UO.71II1001.PV
+    [Flow                                    ]  UOM=m3/h        PI=
+    [Differential Head                       ]  UOM=m           PI=
+    [Efficiency                              ]  UOM=percent     PI=
+
+  Element ID: k_3sbme9
+  Element Type: UTI Pump
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Electric EnergyA > UTI PumpB-pump b
+  --- 4 attributes:
+    [Current                                 ]  UOM=A           PI=UN.UO.71II1002.PV
+    [Flow                                    ]  UOM=m3/h        PI=
+    [Differential Head                       ]  UOM=m           PI=
+    [Efficiency                              ]  UOM=percent     PI=
+
+  Element ID: k_1nlfdfl
+  Element Type: UTI Pump
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Electric EnergyA > UTI PumpC-pump c
+  --- 4 attributes:
+    [Current                                 ]  UOM=A           PI=UN.UO.71II1003.PV
+    [Flow                                    ]  UOM=m3/h        PI=
+    [Differential Head                       ]  UOM=m           PI=
+    [Efficiency                              ]  UOM=percent     PI=
+
+  Element ID: k_1vtegyp
+  Element Type: UTI Pump
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Electric EnergyA > UTI PumpD-pump d
+  --- 4 attributes:
+    [Driver Power                            ]  UOM=kW          PI=
+    [Flow                                    ]  UOM=m3/h        PI=
+    [Differential Head                       ]  UOM=m           PI=
+    [Efficiency                              ]  UOM=percent     PI=
+
+========== GROUP: Hot Oil Heater/LAO (31 rows) ==========
+
+  Element ID: k_1oyhrx8
+  Element Type: LAO Feed Preheater
+  Element Path: United > Specific Energy Consumers > LAO [LAO]A > Fuel EnergyA > LAO Feed PreheaterA-feed preheater a
+  --- 6 attributes:
+    [Fuel Flow A                             ]  UOM=Nm3/h       PI=UN.LAO.38FI8108.PV
+    [Fuel Flow B                             ]  UOM=Nm3/h       PI=UN.LAO.38FIC8109.PV
+    [Duty                                    ]  UOM=MMkcal/h    PI=
+    [Outlet Temperature                      ]  UOM=degC        PI=
+    [Efficiency                              ]  UOM=percent     PI=
+    [Fuel Gas C1                             ]  UOM=mol%        PI=AR.AR5.DCS.Process.AI51211.PV
+
+  Element ID: k_5gzr3
+  Element Type: LAO Feed Preheater
+  Element Path: United > Specific Energy Consumers > LAO [LAO]A > Fuel EnergyA > LAO Feed PreheaterA-feed preheater a
+  --- 9 attributes:
+    [Fuel Gas C2                             ]  UOM=mol%        PI=AR.AR5.DCS.Process.AI51212.PV
+    [Fuel Gas C3                             ]  UOM=mol%        PI=AR.AR5.DCS.Process.AI51213.PV
+    [Fuel Gas CO2                            ]  UOM=mol%        PI=AR.AR5.DCS.Process.AI51217.PV
+    [Fuel Gas Flow                           ]  UOM=metric_ton/h  PI=UN.UO.71FC1104.PV
+    [Fuel Gas iC4                            ]  UOM=mol%        PI=AR.AR5.DCS.Process.AI51215.PV
+    [Fuel Gas iC5                            ]  UOM=mol%        PI=AR.AR5.DCS.Process.AI512111.PV
+    [Fuel Gas N2                             ]  UOM=mol%        PI=AR.AR5.DCS.Process.AI51219.PV
+    [Fuel Gas nC4                            ]  UOM=mol%        PI=AR.AR5.DCS.Process.AI51214.PV
+    [Fuel Gas nC5                            ]  UOM=mol%        PI=AR.AR5.DCS.Process.AI512110.PV
+
+  Element ID: k_1sir2c7
+  Element Type: LAO Feed Preheater Combustion System
+  Element Path: United > Specific Energy Consumers > LAO [LAO]A > Fuel EnergyA > LAO Feed PreheaterA-feed preheater a > LAO Feed Preheater Combustion SystemA
+  --- 3 attributes:
+    [Burner Header Pressure                  ]  UOM=bar         PI=
+    [Excess O2 Setpoint                      ]  UOM=vol%        PI=
+    [Total Combustion Air Flow               ]  UOM=Nm3/h       PI=
+
+  Element ID: k_v4w36k
+  Element Type: LAO Feed Preheater Burner
+  Element Path: United > Specific Energy Consumers > LAO [LAO]A > Fuel EnergyA > LAO Feed PreheaterA-feed preheater a > LAO Feed Preheater Combustion SystemA > LAO Feed Preheater BurnerA
+  --- 4 attributes:
+    [Burner Air Flow                         ]  UOM=Nm3/h       PI=
+    [Burner Fuel Flow                        ]  UOM=Nm3/h       PI=
+    [Flame Status                            ]  UOM=            PI=
+    [Pilot Status                            ]  UOM=            PI=
+
+  Element ID: k_yztxaf
+  Element Type: LAO Feed Preheater Radiant Section
+  Element Path: United > Specific Energy Consumers > LAO [LAO]A > Fuel EnergyA > LAO Feed PreheaterA-feed preheater a > LAO Feed Preheater Radiant SectionA
+  --- 3 attributes:
+    [Box Draft                               ]  UOM=mmH2O       PI=
+    [Radiant Box Temperature                 ]  UOM=degC        PI=
+    [Tube Skin Temperature (TMT)             ]  UOM=degC        PI=
+
+  Element ID: k_avt370
+  Element Type: LAO Feed Preheater Convection Section
+  Element Path: United > Specific Energy Consumers > LAO [LAO]A > Fuel EnergyA > LAO Feed PreheaterA-feed preheater a > LAO Feed Preheater Convection SectionA
+  --- 2 attributes:
+    [Flue Inlet Temperature                  ]  UOM=degC        PI=
+    [Flue Outlet Temperature                 ]  UOM=degC        PI=
+
+  Element ID: k_kysxol
+  Element Type: LAO Feed Preheater Stack
+  Element Path: United > Specific Energy Consumers > LAO [LAO]A > Fuel EnergyA > LAO Feed PreheaterA-feed preheater a > LAO Feed Preheater StackA
+  --- 4 attributes:
+    [NOx Emission                            ]  UOM=ppm         PI=
+    [O2 in Flue Gas                          ]  UOM=vol%        PI=UN.LAO.38AI8460.PV
+    [Stack Draft                             ]  UOM=mmH2O       PI=
+    [Stack Temperature                       ]  UOM=degC        PI=UN.LAO.X38TI8469A.PV
+
+========== GROUP: Stripping System — NO ROWS ==========
+
+========== GROUP: Regeneration — NO ROWS ==========
+
+========== GROUP: Reboiler (65 rows) ==========
+
+  Element ID: k_25ic3d
+  Element Type: EG1 Reboiler
+  Element Path: United > Specific Energy Consumers > EG1 [EG1]A > Steam EnergyA > EG1 ReboilerA-reboiler a
+  --- 5 attributes:
+    [Steam Flow                              ]  UOM=metric_ton/h  PI=UN.EG1.26FC6205.PV
+    [Steam Pressure                          ]  UOM=bar         PI=UN.UO.70PC0007A.PV
+    [Steam Temperature                       ]  UOM=degC        PI=UN.UO.70TC0005.PV
+    [Duty                                    ]  UOM=MMkcal/h    PI=
+    [Column ID                               ]  UOM=            PI=
+
+  Element ID: k_11em0bd
+  Element Type: EG1 Reboiler
+  Element Path: United > Specific Energy Consumers > EG1 [EG1]A > Steam EnergyA > EG1 ReboilerB-reboiler b
+  --- 5 attributes:
+    [Steam Flow                              ]  UOM=metric_ton/h  PI=UN.EG1.26FC6308.PV
+    [Steam Pressure                          ]  UOM=bar         PI=UN.UO.70PC0007A.PV
+    [Steam Temperature                       ]  UOM=degC        PI=UN.UO.70TC0005.PV
+    [Duty                                    ]  UOM=MMkcal/h    PI=
+    [Column ID                               ]  UOM=            PI=
+
+  Element ID: k_13kzx15
+  Element Type: EG1 Reboiler
+  Element Path: United > Specific Energy Consumers > EG1 [EG1]A > Steam EnergyA > EG1 ReboilerC-reboiler c
+  --- 15 attributes:
+    [Steam Flow                              ]  UOM=metric_ton/h  PI=UN.EG1.25FC5514.PV
+    [Steam Pressure                          ]  UOM=bar         PI=UN.UO.70PC0007A.PV
+    [Steam Temperature                       ]  UOM=degC        PI=UN.UO.70TC0005.PV
+    [Duty                                    ]  UOM=MMkcal/h    PI=
+    [Column ID                               ]  UOM=            PI=
+    [Steam Flow                              ]  UOM=metric_ton/h  PI=UN.EG1.23FC3206.PV
+    [Steam Pressure                          ]  UOM=bar         PI=UN.UO.70PI0024A.PV
+    [Steam Temperature                       ]  UOM=degC        PI=UN.UO.70TI0006.PV
+    [Duty                                    ]  UOM=MMkcal/h    PI=
+    [Column ID                               ]  UOM=            PI=
+    [Steam Flow                              ]  UOM=metric_ton/h  PI=UN.EG1.22FC2209.PV
+    [Steam Pressure                          ]  UOM=bar         PI=UN.UO.70PI0024A.PV
+    [Steam Temperature                       ]  UOM=degC        PI=UN.UO.70TI0006.PV
+    [Duty                                    ]  UOM=MMkcal/h    PI=
+    [Column ID                               ]  UOM=            PI=
+
+  Element ID: k_d9hx16
+  Element Type: EG2 Reboiler
+  Element Path: United > Specific Energy Consumers > EG2 [EG2]A > Steam EnergyA > EG2 ReboilerA-reboiler a
+  --- 5 attributes:
+    [Steam Flow                              ]  UOM=metric_ton/h  PI=UN.EG2.42FC2209.PV
+    [Steam Pressure                          ]  UOM=bar         PI=UN.UO.70PI0024A.PV
+    [Steam Temperature                       ]  UOM=degC        PI=UN.UO.70TI0006.PV
+    [Duty                                    ]  UOM=MMkcal/h    PI=
+    [Column ID                               ]  UOM=            PI=
+
+  Element ID: k_1161bbu
+  Element Type: EG2 Reboiler
+  Element Path: United > Specific Energy Consumers > EG2 [EG2]A > Steam EnergyA > EG2 ReboilerB-reboiler b
+  --- 5 attributes:
+    [Steam Flow                              ]  UOM=metric_ton/h  PI=UN.EG2.43FC3206.PV
+    [Steam Pressure                          ]  UOM=bar         PI=UN.UO.70PI0024A.PV
+    [Steam Temperature                       ]  UOM=degC        PI=UN.UO.70TI0006.PV
+    [Duty                                    ]  UOM=MMkcal/h    PI=
+    [Column ID                               ]  UOM=            PI=
+
+  Element ID: k_15uda2i
+  Element Type: EG2 Reboiler
+  Element Path: United > Specific Energy Consumers > EG2 [EG2]A > Steam EnergyA > EG2 ReboilerC-reboiler c
+  --- 15 attributes:
+    [Steam Flow                              ]  UOM=metric_ton/h  PI=UN.EG2.46FC6308.PV
+    [Steam Pressure                          ]  UOM=bar         PI=UN.UO.70PC0007A.PV
+    [Steam Temperature                       ]  UOM=degC        PI=UN.UO.70TC0005.PV
+    [Duty                                    ]  UOM=MMkcal/h    PI=
+    [Column ID                               ]  UOM=            PI=
+    [Steam Flow                              ]  UOM=metric_ton/h  PI=UN.EG2.45FC5514.PV
+    [Steam Pressure                          ]  UOM=bar         PI=UN.UO.70PC0007A.PV
+    [Steam Temperature                       ]  UOM=degC        PI=UN.UO.70TC0005.PV
+    [Duty                                    ]  UOM=MMkcal/h    PI=
+    [Column ID                               ]  UOM=            PI=
+    [Steam Flow                              ]  UOM=metric_ton/h  PI=UN.EG2.46FC6205.PV
+    [Steam Pressure                          ]  UOM=bar         PI=UN.UO.70PC0007A.PV
+    [Steam Temperature                       ]  UOM=degC        PI=UN.UO.70TC0005.PV
+    [Duty                                    ]  UOM=MMkcal/h    PI=
+    [Column ID                               ]  UOM=            PI=
+
+  Element ID: k_1qe0r7f
+  Element Type: EG3 Reboiler
+  Element Path: United > Specific Energy Consumers > EG3 [EG3]A > Steam EnergyA > EG3 ReboilerA-reboiler a
+  --- 5 attributes:
+    [Steam Flow                              ]  UOM=metric_ton/h  PI=UN.EG3.66FC6308.PV
+    [Steam Pressure                          ]  UOM=bar         PI=UN.UO.70PC0007A.PV
+    [Steam Temperature                       ]  UOM=degC        PI=UN.UO.70TC0005.PV
+    [Duty                                    ]  UOM=MMkcal/h    PI=
+    [Column ID                               ]  UOM=            PI=
+
+  Element ID: k_3p8om3
+  Element Type: EG3 Reboiler
+  Element Path: United > Specific Energy Consumers > EG3 [EG3]A > Steam EnergyA > EG3 ReboilerB-reboiler b
+  --- 5 attributes:
+    [Steam Flow                              ]  UOM=metric_ton/h  PI=UN.EG3.62FC2209.PV
+    [Steam Pressure                          ]  UOM=bar         PI=UN.UO.70PI0024A.PV
+    [Steam Temperature                       ]  UOM=degC        PI=UN.UO.70TI0006.PV
+    [Duty                                    ]  UOM=MMkcal/h    PI=
+    [Column ID                               ]  UOM=            PI=
+
+  Element ID: k_1k26pa3
+  Element Type: EG3 Reboiler
+  Element Path: United > Specific Energy Consumers > EG3 [EG3]A > Steam EnergyA > EG3 ReboilerC-reboiler c
+  --- 5 attributes:
+    [Steam Flow                              ]  UOM=metric_ton/h  PI=UN.EG3.65FC5514.PV
+    [Steam Pressure                          ]  UOM=bar         PI=UN.UO.70PC0007A.PV
+    [Steam Temperature                       ]  UOM=degC        PI=UN.UO.70TC0005.PV
+    [Duty                                    ]  UOM=MMkcal/h    PI=
+    [Column ID                               ]  UOM=            PI=
+
+========== GROUP: Steam Exchanger (15 rows) ==========
+
+  Element ID: k_1ww33fz
+  Element Type: OLF Steam Exchanger
+  Element Path: United > Specific Energy Consumers > OLF [OLF]A > Steam EnergyA > OLF Steam ExchangerA-steam exchanger a
+  --- 5 attributes:
+    [Steam Flow                              ]  UOM=metric_ton/h  PI=UN.ETH.11FC1021.PV
+    [Steam Pressure                          ]  UOM=bar         PI=UN.UO.70PI0024A.PV
+    [Steam Temperature                       ]  UOM=degC        PI=UN.UO.70TI0006.PV
+    [Duty                                    ]  UOM=MMkcal/h    PI=
+    [LMTD                                    ]  UOM=degC        PI=
+
+  Element ID: k_9elxbt
+  Element Type: EG1 Steam Exchanger
+  Element Path: United > Specific Energy Consumers > EG1 [EG1]A > Steam EnergyA > EG1 Steam ExchangerA-steam exchanger a
+  --- 5 attributes:
+    [Steam Flow                              ]  UOM=metric_ton/h  PI=UN.EG1.25FC5304.PV
+    [Steam Pressure                          ]  UOM=bar         PI=UN.UO.70PI0024A.PV
+    [Steam Temperature                       ]  UOM=degC        PI=UN.UO.70TI0006.PV
+    [Duty                                    ]  UOM=MMkcal/h    PI=
+    [LMTD                                    ]  UOM=degC        PI=
+
+  Element ID: k_16xfpx6
+  Element Type: EG2 Steam Exchanger
+  Element Path: United > Specific Energy Consumers > EG2 [EG2]A > Steam EnergyA > EG2 Steam ExchangerA-steam exchanger a
+  --- 5 attributes:
+    [Steam Flow                              ]  UOM=metric_ton/h  PI=UN.EG2.45FC5304.PV
+    [Steam Pressure                          ]  UOM=bar         PI=UN.UO.70PI0024A.PV
+    [Steam Temperature                       ]  UOM=degC        PI=UN.UO.70TI0006.PV
+    [Duty                                    ]  UOM=MMkcal/h    PI=
+    [LMTD                                    ]  UOM=degC        PI=
+
+========== GROUP: Turbine (73 rows) ==========
+
+  Element ID: k_174npzj
+  Element Type: OLF Turbine
+  Element Path: United > Specific Energy Consumers > OLF [OLF]A > Steam EnergyA > OLF TurbineA-turbine a
+  --- 8 attributes:
+    [Inlet Steam Flow                        ]  UOM=metric_ton/h  PI=UN.ETH.12FI2157.PV
+    [Inlet Pressure                          ]  UOM=bar         PI=UN.ETH.12PI2125.PV
+    [Outlet Pressure                         ]  UOM=bar         PI=UN.ETH.12PI2130.PV
+    [Inlet Temperature                       ]  UOM=degC        PI=UN.ETH.12TI2107.PV
+    [Outlet Temperature                      ]  UOM=degC        PI=UN.ETH.12TI2103.PV
+    [Extraction Flow                         ]  UOM=metric_ton/h  PI=UN.ETH.12FI2158.PV
+    [Shaft Power                             ]  UOM=kW          PI=
+    [Isentropic Efficiency                   ]  UOM=percent     PI=
+
+  Element ID: k_1vw6tlb
+  Element Type: OLF Turbine
+  Element Path: United > Specific Energy Consumers > OLF [OLF]A > Steam EnergyA > OLF TurbineB-turbine b
+  --- 7 attributes:
+    [Inlet Steam Flow                        ]  UOM=metric_ton/h  PI=UN.ETH.15FI5165.PV
+    [Inlet Pressure                          ]  UOM=bar         PI=UN.ETH.15PI5029.PV
+    [Outlet Pressure                         ]  UOM=bar         PI=UN.ETH.16PI6028.PV
+    [Inlet Temperature                       ]  UOM=bar         PI=UN.ETH.15TI5105.PV
+    [Outlet Temperature                      ]  UOM=bar         PI=UN.UO.70TI0006.PV
+    [Shaft Power                             ]  UOM=kW          PI=
+    [Isentropic Efficiency                   ]  UOM=percent     PI=
+
+  Element ID: k_111naz3
+  Element Type: OLF Turbine
+  Element Path: United > Specific Energy Consumers > OLF [OLF]A > Steam EnergyA > OLF TurbineC-turbine c
+  --- 8 attributes:
+    [Inlet Steam Flow                        ]  UOM=metric_ton/h  PI=UN.ETH.16FI6065.PV
+    [Inlet Pressure                          ]  UOM=bar         PI=UN.ETH.16PI6029.PV
+    [Outlet Pressure                         ]  UOM=bar         PI=UN.ETH.16PI6120C.PV
+    [Inlet Temperature                       ]  UOM=degC        PI=UN.ETH.16TI6006.PV
+    [Outlet Temperature                      ]  UOM=degC        PI=UN.ETH.16TI6007.PV
+    [Extraction Flow                         ]  UOM=metric_ton/h  PI=UN.ETH.16FI6066.PV
+    [Shaft Power                             ]  UOM=kW          PI=
+    [Isentropic Efficiency                   ]  UOM=percent     PI=
+
+  Element ID: k_782ugc
+  Element Type: UTI Turbine
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Steam EnergyA > UTI TurbineA-turbine a
+  --- 5 attributes:
+    [Inlet Steam Flow                        ]  UOM=metric_ton/h  PI=
+    [Inlet Pressure                          ]  UOM=bar         PI=
+    [Outlet Pressure                         ]  UOM=bar         PI=
+    [Shaft Power                             ]  UOM=kW          PI=
+    [Isentropic Efficiency                   ]  UOM=percent     PI=
+
+  Element ID: k_xwsd64
+  Element Type: UTI Turbine
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Steam EnergyA > UTI TurbineB-turbine b
+  --- 5 attributes:
+    [Inlet Steam Flow                        ]  UOM=metric_ton/h  PI=
+    [Inlet Pressure                          ]  UOM=bar         PI=
+    [Outlet Pressure                         ]  UOM=bar         PI=
+    [Shaft Power                             ]  UOM=kW          PI=
+    [Isentropic Efficiency                   ]  UOM=percent     PI=
+
+  Element ID: k_dgkg4s
+  Element Type: UTI Turbine
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Steam EnergyA > UTI TurbineC-turbine c
+  --- 5 attributes:
+    [Inlet Steam Flow                        ]  UOM=metric_ton/h  PI=
+    [Inlet Pressure                          ]  UOM=bar         PI=
+    [Outlet Pressure                         ]  UOM=bar         PI=
+    [Shaft Power                             ]  UOM=kW          PI=
+    [Isentropic Efficiency                   ]  UOM=percent     PI=
+
+  Element ID: k_11prnho
+  Element Type: UTI Turbine
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Steam EnergyA > UTI TurbineD-turbine d
+  --- 5 attributes:
+    [Inlet Steam Flow                        ]  UOM=metric_ton/h  PI=
+    [Inlet Pressure                          ]  UOM=bar         PI=
+    [Outlet Pressure                         ]  UOM=bar         PI=
+    [Shaft Power                             ]  UOM=kW          PI=
+    [Isentropic Efficiency                   ]  UOM=percent     PI=
+
+  Element ID: k_mh4h4c
+  Element Type: UTI Turbine
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Steam EnergyA > UTI TurbineE-turbine e
+  --- 5 attributes:
+    [Inlet Steam Flow                        ]  UOM=metric_ton/h  PI=
+    [Inlet Pressure                          ]  UOM=bar         PI=
+    [Outlet Pressure                         ]  UOM=bar         PI=
+    [Shaft Power                             ]  UOM=kW          PI=
+    [Isentropic Efficiency                   ]  UOM=percent     PI=
+
+  Element ID: k_1d5tzu4
+  Element Type: UTI Turbine
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Steam EnergyA > UTI TurbineF-turbine f
+  --- 5 attributes:
+    [Inlet Steam Flow                        ]  UOM=metric_ton/h  PI=
+    [Inlet Pressure                          ]  UOM=bar         PI=
+    [Outlet Pressure                         ]  UOM=bar         PI=
+    [Shaft Power                             ]  UOM=kW          PI=
+    [Isentropic Efficiency                   ]  UOM=percent     PI=
+
+  Element ID: k_spm2ss
+  Element Type: UTI Turbine
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Steam EnergyA > UTI TurbineG-turbine g
+  --- 5 attributes:
+    [Inlet Steam Flow                        ]  UOM=metric_ton/h  PI=
+    [Inlet Pressure                          ]  UOM=bar         PI=
+    [Outlet Pressure                         ]  UOM=bar         PI=
+    [Shaft Power                             ]  UOM=kW          PI=
+    [Isentropic Efficiency                   ]  UOM=percent     PI=
+
+  Element ID: k_gqafu4
+  Element Type: UTI Turbine
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Steam EnergyA > UTI TurbineH-turbine h
+  --- 5 attributes:
+    [Inlet Steam Flow                        ]  UOM=metric_ton/h  PI=
+    [Inlet Pressure                          ]  UOM=bar         PI=
+    [Outlet Pressure                         ]  UOM=bar         PI=
+    [Shaft Power                             ]  UOM=kW          PI=
+    [Isentropic Efficiency                   ]  UOM=percent     PI=
+
+  Element ID: k_1hn9gs
+  Element Type: UTI Turbine
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Steam EnergyA > UTI TurbineI-turbine i
+  --- 5 attributes:
+    [Inlet Steam Flow                        ]  UOM=metric_ton/h  PI=
+    [Inlet Pressure                          ]  UOM=bar         PI=
+    [Outlet Pressure                         ]  UOM=bar         PI=
+    [Shaft Power                             ]  UOM=kW          PI=
+    [Isentropic Efficiency                   ]  UOM=percent     PI=
+
+  Element ID: k_s6cs6k
+  Element Type: UTI Turbine
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Steam EnergyA > UTI TurbineJ-turbine j
+  --- 5 attributes:
+    [Inlet Steam Flow                        ]  UOM=metric_ton/h  PI=
+    [Inlet Pressure                          ]  UOM=bar         PI=
+    [Outlet Pressure                         ]  UOM=bar         PI=
+    [Shaft Power                             ]  UOM=kW          PI=
+    [Isentropic Efficiency                   ]  UOM=percent     PI=
+
+========== GROUP: Live Steam Injection (24 rows) ==========
+
+  Element ID: k_1exo4l5
+  Element Type: EG1 Live Steam Injection
+  Element Path: United > Specific Energy Consumers > EG1 [EG1]A > Steam EnergyA > EG1 Live Steam InjectionA-live steam injection a
+  --- 4 attributes:
+    [Steam Flow                              ]  UOM=metric_ton/h  PI=UN.EG1.23FI3215.PV
+    [Steam Pressure                          ]  UOM=bar         PI=UN.UO.70PI0024A.PV
+    [Steam Temperature                       ]  UOM=degC        PI=UN.UO.70TI0006.PV
+    [Column ID                               ]  UOM=            PI=
+
+  Element ID: k_121pqc9
+  Element Type: EG1 Live Steam Injection
+  Element Path: United > Specific Energy Consumers > EG1 [EG1]A > Steam EnergyA > EG1 Live Steam InjectionB-live steam injection b
+  --- 4 attributes:
+    [Steam Flow                              ]  UOM=metric_ton/h  PI=UN.EG1.22FC2208.PV
+    [Steam Pressure                          ]  UOM=bar         PI=UN.UO.70PI0024A.PV
+    [Steam Temperature                       ]  UOM=degC        PI=UN.UO.70TI0006.PV
+    [Column ID                               ]  UOM=            PI=
+
+  Element ID: k_qzdhtm
+  Element Type: EG2 Live Steam Injection
+  Element Path: United > Specific Energy Consumers > EG2 [EG2]A > Steam EnergyA > EG2 Live Steam InjectionA-live steam injection a
+  --- 4 attributes:
+    [Steam Flow                              ]  UOM=metric_ton/h  PI=UN.EG2.42FC2208.PV
+    [Steam Pressure                          ]  UOM=bar         PI=UN.UO.70PI0024A.PV
+    [Steam Temperature                       ]  UOM=degC        PI=UN.UO.70TI0006.PV
+    [Column ID                               ]  UOM=            PI=
+
+  Element ID: k_2odzfe
+  Element Type: EG2 Live Steam Injection
+  Element Path: United > Specific Energy Consumers > EG2 [EG2]A > Steam EnergyA > EG2 Live Steam InjectionB-live steam injection b
+  --- 4 attributes:
+    [Steam Flow                              ]  UOM=metric_ton/h  PI=UN.EG2.43FI3215.PV
+    [Steam Pressure                          ]  UOM=bar         PI=UN.UO.70PI0024A.PV
+    [Steam Temperature                       ]  UOM=degC        PI=UN.UO.70TI0006.PV
+    [Column ID                               ]  UOM=            PI=
+
+  Element ID: k_1ajlkng
+  Element Type: UTI Live Steam Injection
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Steam EnergyA > UTI Live Steam InjectionA-live steam injection a
+  --- 4 attributes:
+    [Steam Flow                              ]  UOM=metric_ton/h  PI=UN.UO.71FI1002.PV
+    [Steam Pressure                          ]  UOM=bar         PI=UN.UO.70PI0024A.PV
+    [Steam Temperature                       ]  UOM=degC        PI=UN.UO.70TI0006.PV
+    [Column ID                               ]  UOM=            PI=
+
+  Element ID: k_kb9omk
+  Element Type: UTI Live Steam Injection
+  Element Path: United > Specific Energy Consumers > Utility Unit [UTI]A > Steam EnergyA > UTI Live Steam InjectionB-live steam injection b
+  --- 4 attributes:
+    [Steam Flow                              ]  UOM=metric_ton/h  PI=UN.UO.71FI1004.PV
+    [Steam Pressure                          ]  UOM=bar         PI=UN.UO.70PI0024A.PV
+    [Steam Temperature                       ]  UOM=degC        PI=UN.UO.70TI0006.PV
+    [Column ID                               ]  UOM=            PI=

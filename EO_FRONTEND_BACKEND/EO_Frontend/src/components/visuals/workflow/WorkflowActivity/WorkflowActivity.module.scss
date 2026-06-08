@@ -1,0 +1,212 @@
+@use 'src/config/scss/_variables' as *;
+
+.workFlowStepperContainer {
+  height: 100%;
+  overflow-y: auto;
+  padding-right: 0.5vmin;
+
+  .userCard {
+    gap: 1vmin;
+    margin-bottom: 3vmin;
+
+    &__left {
+      display: flex;
+      justify-content: space-between;
+      min-width: 11vmin;
+      max-width: 11vmin;
+
+      .dateTimeContainer {
+        margin-top: 1.8vmin;
+
+        .dateText {
+          color: $primary_gray_2;
+          margin-bottom: 0.2vmin;
+        }
+      }
+    }
+
+    &__right {
+      position: relative;
+
+      &::before {
+        content: '';
+        position: absolute;
+        width: 0.1vmin;
+        height: calc(100%);
+        top: 3.9vmin;
+        left: calc(0.7vmin - 1px);
+        border-left: 1px dotted $primary_gray_2;
+      }
+
+      .circle {
+        margin-top: 1.8vmin;
+        width: 1.4vmin;
+        height: 1.4vmin;
+        margin-right: 1vmin;
+        background-color: $primary_gray_2;
+        border-radius: 50%;
+        box-shadow: 0 0 0.5vmin 0 $primary_gray_2;
+        border: 1px solid $primary_white;
+      }
+
+      .imgContainer {
+        width: 5vmin;
+        height: 5vmin;
+        border-radius: 50%;
+        border: 0.1px solid $primary_gray_4;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        img {
+          width: 100%;
+          height: 100%;
+          border-radius: 50%;
+        }
+      }
+
+      .detailsContainer {
+        .employeeName {
+          margin: 0.5vmin 0;
+        }
+
+        .employeeRole {
+          margin-bottom: 0.5vmin;
+        }
+
+        .attachmentContainer {
+          margin-bottom: 0.8vmin;
+
+          .attachment {
+            margin-bottom: 1vmin;
+            width: 85%;
+            padding: 0.5vmin 1vmin;
+            border-radius: 0.3vmin;
+            gap: 1vmin;
+
+            .downloadIcon {
+              cursor: pointer;
+              width: 2.2vmin;
+              height: 2.2vmin;
+            }
+          }
+        }
+
+        .accept {
+          color: $primary_blue;
+          letter-spacing: 0.1vmin;
+        }
+
+        .reject {
+          color: $primary_orange;
+          letter-spacing: 0.1vmin;
+        }
+
+        .delegate {
+          color: $primary_yellow;
+          letter-spacing: 0.1vmin;
+        }
+
+        .assign {
+          color: $primary_gray_2;
+          letter-spacing: 0.1vmin;
+        }
+      }
+    }
+  }
+
+  .userCardlast {
+    border: 1px solid $primary_gray_3;
+    gap: 1vmin;
+    margin-top: 4vmin;
+    background-color: $primary_gray_5;
+    padding: 1.5vmin 0;
+    border-radius: 0.3vmin;
+    margin-bottom: 3vmin;
+
+    &__left {
+      display: flex;
+      justify-content: space-between;
+      min-width: 11vmin;
+      max-width: 11vmin;
+
+      .dateTimeContainer {
+        .dateText {
+          color: $primary_gray_2;
+          margin-bottom: 0.5vmin;
+        }
+      }
+    }
+
+    &__right {
+      .circle {
+        margin-top: 1.8vmin;
+        width: 1.4vmin;
+        height: 1.4vmin;
+        margin-right: 1vmin;
+        border-radius: 50%;
+      }
+
+      .imgContainer {
+        width: 5vmin;
+        height: 5vmin;
+        border-radius: 50%;
+        border: 0.1px solid $primary_gray_2;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        img {
+          width: 100%;
+          height: 100%;
+          border-radius: 50%;
+        }
+      }
+
+      .detailsContainer {
+        .employeeName {
+          margin-bottom: 0.8vmin;
+        }
+
+        .employeeRole {
+          margin-bottom: 0.8vmin;
+        }
+
+        .accept {
+          color: $primary_blue;
+          letter-spacing: 0.1vmin;
+        }
+
+        .reject {
+          color: $primary_orange;
+          letter-spacing: 0.1vmin;
+        }
+
+        .delegate {
+          color: $primary_yellow;
+          letter-spacing: 0.1vmin;
+        }
+
+        .assign {
+          color: $primary_gray_2;
+          letter-spacing: 0.1vmin;
+        }
+
+        .pending {
+          color: $primary_yellow;
+          letter-spacing: 0.1vmin;
+        }
+
+        .overdue {
+          color: $primary_orange;
+          letter-spacing: 0.1vmin;
+        }
+
+        .in_progress {
+          color: $primary_yellow;
+          letter-spacing: 0.1vmin;
+        }
+      }
+    }
+  }
+}

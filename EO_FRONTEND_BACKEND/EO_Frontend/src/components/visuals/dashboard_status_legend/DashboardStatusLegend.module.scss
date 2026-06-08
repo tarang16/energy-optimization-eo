@@ -1,0 +1,258 @@
+@use '../../../config/scss/variables' as *;
+
+.timeInfo_icon {
+  height: 2.5vmin;
+  width: 2.5vmin;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.separator {
+  margin: 0 1vmin;
+  font-size: 1.4vmin;
+  line-height: 1;
+}
+
+.btnContainer {
+  margin-bottom: 0.4vmin;
+  margin-right: 0.8vmin;
+
+  .bellIconBtn {
+    border: none;
+    background-color: transparent;
+    padding: 0;
+    // display: inline-block;
+    outline: none;
+    width: 2.5vmin;
+    height: 2.5vmin;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+
+    img {
+      width: 100%;
+      height: 100%;
+      vertical-align: unset !important;
+      cursor: pointer;
+    }
+  }
+}
+
+.card_container {
+  background-color: $primary_white;
+  padding: 0 1vmin 1vmin 1vmin;
+  margin: 10px;
+  box-shadow: 0px 0px 5px 1px $primary_gray_4;
+  height: calc(100% - 20px);
+  border-radius: 4px;
+
+  .renderHealthStatus {
+    border-bottom: 1px solid $primary_gray_3;
+
+    &:last-child {
+      border-bottom: none;
+      padding-bottom: 0 !important;
+    }
+  }
+
+  &.shadow_none {
+    box-shadow: none;
+  }
+}
+
+.tooltip {
+  background-color: $primary_white !important;
+  padding: 0px !important;
+  margin: 0px !important;
+  border: 1px solid $primary_gray_3;
+  left: unset !important;
+  position: absolute;
+  right: -9vmin !important;
+  transform: translateY(63%);
+  width: 400px !important;
+
+  :global(.react-tooltip-arrow) {
+    border-top: 1px solid $primary_gray_3;
+    border-left: transparent;
+    border-right: 1px solid $primary_gray_3;
+    position: absolute;
+    top: -0.5vmin;
+    right: 9.5vmin;
+  }
+}
+
+#optimum_time_tooltip {
+  left: unset;
+  background-color: $primary_white !important;
+  padding: 0px !important;
+  margin: 0px !important;
+  border: 1px solid $primary_gray_3;
+  position: absolute;
+  right: -2vmin;
+
+  .react-tooltip {
+    background-color: $primary_white !important;
+  }
+
+  :global(.react-tooltip-arrow) {
+    border-left: 1px solid $primary_gray_3;
+    border-top: 1px solid $primary_gray_3;
+  }
+}
+
+.optimumContainer {
+  position: relative;
+
+  :global(.react-tooltip-arrow) {
+    border-top: 1px solid $primary_gray_3;
+    border-left: transparent;
+    border-right: 1px solid $primary_gray_3;
+    position: absolute;
+    top: -0.5vmin !important;
+    right: 9.5vmin !important;
+  }
+}
+
+.healthStatusContainer {
+  position: relative;
+
+  :global(.tooltip_container) {
+    max-width: 33vmin;
+  }
+
+  :global(.react-tooltip) {
+    left: unset !important;
+    right: -2vmin !important;
+    top: 4vmin !important;
+  }
+
+  :global(.react-tooltip-arrow) {
+    top: -4px !important;
+    // left: unset !important;
+    right: 2vmin !important;
+    transform: rotate(45deg) !important;
+  }
+
+  .reset_button_icon {
+    // background-image: url("../../../assets/sabic_new_icons/reset_icon.svg");
+    // width: 45px;
+    // height: 35px;
+    // background-repeat: no-repeat;
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    display: inline-block;
+
+    img {
+      width: 2.5vmin;
+      height: 2.5vmin;
+      cursor: pointer;
+    }
+  }
+
+  .healthStatusTooltip {
+    .card_container {
+      div {
+        padding: 1vmin;
+
+        span:first-child {
+          color: $primary_gray;
+          width: 9vmin;
+        }
+
+        img {
+          height: 2vmin;
+          width: 2vmin;
+          margin: 0 1vmin;
+        }
+
+        span:last-child {
+          color: $primary_gray;
+          width: calc(100% - 4vmin - 25%);
+        }
+      }
+    }
+  }
+
+  @keyframes blink {
+    from,
+    to {
+      opacity: 0;
+    }
+
+    50% {
+      opacity: 1;
+    }
+  }
+
+  @-moz-keyframes blink {
+    from,
+    to {
+      opacity: 0;
+    }
+
+    50% {
+      opacity: 1;
+    }
+  }
+
+  @-webkit-keyframes blink {
+    from,
+    to {
+      opacity: 0;
+    }
+
+    50% {
+      opacity: 1;
+    }
+  }
+
+  @-ms-keyframes blink {
+    from,
+    to {
+      opacity: 0;
+    }
+
+    50% {
+      opacity: 1;
+    }
+  }
+
+  @-o-keyframes blink {
+    from,
+    to {
+      opacity: 0;
+    }
+
+    50% {
+      opacity: 1;
+    }
+  }
+}
+
+.blinkContainer {
+  .alertContainer {
+    padding: 0.2vmin;
+    border-radius: 0.3vmin;
+    border: 1px solid $primary_yellow;
+
+    &:global(.bg_primary_orange) {
+      border: none;
+    }
+
+    i {
+      height: 1vmin !important;
+      width: 1vmin !important;
+      border-radius: 50%;
+    }
+  }
+}
+
+:global(.dashboardLegendTooltip .tooltip-inner) {
+  background-color: $primary_gray_4 !important;
+}
+
+:global(.tooltip-arrow::before) {
+  border-bottom-color: $primary_gray_4 !important;
+}

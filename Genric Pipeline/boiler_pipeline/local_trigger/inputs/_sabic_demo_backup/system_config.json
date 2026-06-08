@@ -1,0 +1,37 @@
+{
+  "name": "SABIC",
+  "id": "09296cd9-0970-5623-bb92-e0140a2ea5cb",
+  "level": "Plant",
+  "children": [
+    {
+      "name": "BLR_1",
+      "id": "57db313d-bba0-598e-8f03-0af6d096a157",
+      "level": "Boiler",
+      "children": []
+    },
+    {
+      "name": "BLR_2",
+      "id": "99015c6b-97d3-5b59-92d5-11c1ea6eb68f",
+      "level": "Boiler",
+      "children": []
+    },
+    {
+      "name": "BLR_3",
+      "id": "0b91d938-03f0-5600-b325-f831fd539948",
+      "level": "Boiler",
+      "children": []
+    },
+    {
+      "name": "BLR_4",
+      "id": "8d011aee-b730-5ce7-8790-7ee7b0ad8dad",
+      "level": "Boiler",
+      "children": []
+    },
+    {
+      "name": "BLR_5",
+      "id": "da0df97a-124a-5aaf-be0f-bb8619424292",
+      "level": "Boiler",
+      "children": []
+    }
+  ]
+}

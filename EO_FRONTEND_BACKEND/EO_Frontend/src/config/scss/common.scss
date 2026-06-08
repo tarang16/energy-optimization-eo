@@ -1,0 +1,23 @@
+.flexCenterContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (min-width: 576px) {
+  .modal-dialog.modal-sm {
+    max-width: 35vmin;
+  }
+
+  .modal-dialog.modal-md {
+    max-width: 70vmin;
+  }
+
+  .modal-dialog.modal-lg {
+    max-width: 93vmin;
+  }
+
+  .modal-dialog.modal-xl {
+    max-width: 80vw;
+  }
+}

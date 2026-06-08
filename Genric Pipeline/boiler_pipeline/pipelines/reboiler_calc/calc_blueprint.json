@@ -1,0 +1,97 @@
+{
+  "version": "2.0",
+  "description": "Generic steam-heated reboiler calc chain \u2014 applied to every Reboiler in system_config.json.",
+  "attributes": [
+    {
+      "attribute_name": "STEAM_FLOW_T_H",
+      "hierarchy_level": "Reboiler",
+      "formula": "STEAM_FLOW_RAW / STEAM_FLOW_DIV",
+      "data_type": "real",
+      "uom": "T/HR"
+    },
+    {
+      "attribute_name": "DUTY_FROM_PI_GJ_H",
+      "hierarchy_level": "Reboiler",
+      "formula": "DUTY_RAW",
+      "data_type": "real",
+      "uom": "GJ/H"
+    },
+    {
+      "attribute_name": "STATUS",
+      "hierarchy_level": "Reboiler",
+      "formula": "if(DUTY_FROM_PI_GJ_H > MIN_DUTY_THRESH, 1, 0)",
+      "data_type": "real",
+      "uom": ""
+    },
+    {
+      "attribute_name": "STEAM_ENTHALPY_KJKG",
+      "hierarchy_level": "Reboiler",
+      "formula": "(H_STEAM_A - H_STEAM_B * STEAM_PRESSURE + H_STEAM_C * STEAM_TEMP) * 0.239 + 2",
+      "data_type": "real",
+      "uom": "KJ/KG"
+    },
+    {
+      "attribute_name": "CONDENSATE_ENTHALPY_KJKG",
+      "hierarchy_level": "Reboiler",
+      "formula": "H_COND_A + H_COND_B * STEAM_PRESSURE + H_COND_C * CONDENSATE_TEMP",
+      "data_type": "real",
+      "uom": "KJ/KG"
+    },
+    {
+      "attribute_name": "DUTY_STEAM_CALC_GJ_H",
+      "hierarchy_level": "Reboiler",
+      "formula": "STEAM_FLOW_T_H * 1000 * (STEAM_ENTHALPY_KJKG - CONDENSATE_ENTHALPY_KJKG) / 1000000",
+      "data_type": "real",
+      "uom": "GJ/H"
+    },
+    {
+      "attribute_name": "DUTY_PROCESS_GJ_H",
+      "hierarchy_level": "Reboiler",
+      "formula": "PROCESS_FLOW * 1000 / 3600 * PROCESS_CP * (PROCESS_OUTLET_TEMP - PROCESS_INLET_TEMP) * 3.6 / 1000",
+      "data_type": "real",
+      "uom": "GJ/H"
+    },
+    {
+      "attribute_name": "DUTY_DEVIATION_PCT",
+      "hierarchy_level": "Reboiler",
+      "formula": "if(DUTY_STEAM_CALC_GJ_H == 0, 0, (DUTY_STEAM_CALC_GJ_H - DUTY_PROCESS_GJ_H) / DUTY_STEAM_CALC_GJ_H * 100)",
+      "data_type": "real",
+      "uom": "%"
+    },
+    {
+      "attribute_name": "APPROACH_DT_C",
+      "hierarchy_level": "Reboiler",
+      "formula": "SATURATION_TEMP_DEFAULT - PROCESS_OUTLET_TEMP",
+      "data_type": "real",
+      "uom": "C"
+    },
+    {
+      "attribute_name": "SUBCOOL_C",
+      "hierarchy_level": "Reboiler",
+      "formula": "SATURATION_TEMP_DEFAULT - CONDENSATE_TEMP",
+      "data_type": "real",
+      "uom": "C"
+    },
+    {
+      "attribute_name": "SEC_GJ_PER_T",
+      "hierarchy_level": "Reboiler",
+      "formula": "if(PROCESS_FLOW > 0, DUTY_FROM_PI_GJ_H / PROCESS_FLOW, 0)",
+      "data_type": "real",
+      "uom": "GJ/T"
+    },
+    {
+      "attribute_name": "SPECIFIC_STEAM_T_PER_T",
+      "hierarchy_level": "Reboiler",
+      "formula": "if(PROCESS_FLOW > 0, STEAM_FLOW_T_H / PROCESS_FLOW, 0)",
+      "data_type": "real",
+      "uom": "T/T"
+    },
+    {
+      "attribute_name": "DUTY_LOAD_PCT",
+      "hierarchy_level": "Reboiler",
+      "formula": "if(DESIGN_DUTY > 0, DUTY_FROM_PI_GJ_H / DESIGN_DUTY * 100, 0)",
+      "data_type": "real",
+      "uom": "%"
+    }
+  ]
+}

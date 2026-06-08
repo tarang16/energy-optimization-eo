@@ -1,0 +1,102 @@
+@use 'config/scss/variables' as *;
+
+.tableContainer {
+  border-radius: 0.3vmin;
+
+  table {
+    .overflowHidden {
+      overflow: hidden;
+    }
+
+    width: 100%;
+    height: 100%;
+    border-collapse: separate;
+    border-spacing: 0px;
+    table-layout: auto;
+    /* Change table layout to auto for dynamic width adjustment */
+
+    thead {
+      height: 5vmin;
+      width: 100%;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+
+      tr {
+        th {
+          position: relative;
+          background-color: $primary_blue_bg;
+          border-bottom: 1px solid $primary_gray_4;
+          color: $primary_gray;
+          font-size: 1.2vmin;
+          font-family: 'sabic_text_bold', serif;
+          text-transform: uppercase;
+
+          &:first-child {
+            padding: 1vmin 1vmin 1vmin 4vmin;
+          }
+
+          &:not(:first-child) {
+            padding: 0 0.5vmin;
+            text-align: center;
+          }
+        }
+      }
+
+      tr th:nth-child(1) {
+        width: 60%;
+      }
+
+      tr th:nth-child(3),
+      tr th:nth-child(4) {
+        width: 20%;
+      }
+    }
+
+    tbody {
+      overflow-y: auto;
+      height: calc(100% - 7vmin);
+
+      tr {
+        td {
+          font-size: 1.3vmin;
+          line-height: 1.4;
+          background-color: $primary_blue_bg;
+          /* Ensures background is applied to the full width of the td */
+          color: $primary_gray;
+          font-family: 'sabic_text_regular', serif;
+          position: relative;
+          vertical-align: middle;
+          border-bottom: 1px solid #e6e7e8;
+          height: 4.5vmin;
+          text-transform: uppercase;
+
+          &:not(:first-child) {
+            padding: 0 0.5vmin;
+          }
+
+          .fileTypeImgIcon {
+            width: 3vmin;
+          }
+
+          button {
+            border: none;
+            background: none;
+          }
+
+          &.ExpandableTableContainerTbody {
+            height: 4.1vmin;
+          }
+        }
+      }
+    }
+  }
+}
+
+.disabledBorder.WidthAdjust {
+  width: 4vmin;
+}
+
+.expandTableUomText {
+  padding-left: 7px;
+}

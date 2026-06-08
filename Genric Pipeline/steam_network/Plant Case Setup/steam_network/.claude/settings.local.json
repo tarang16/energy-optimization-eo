@@ -1,0 +1,27 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python -c ' *)",
+      "Bash(node -e \"const fs=require\\('fs'\\);const s=fs.readFileSync\\('C:/Users/tnigam/Desktop/Python EO/Genric Pipeline/steam_network/plant_network_studio_v1.html','utf8'\\);const m=s.match\\(/<script[^>]*>\\([\\\\s\\\\S]*?\\)<\\\\/script>/g\\);const js=m[m.length-1].replace\\(/<\\\\/?script[^>]*>/g,''\\);try{new Function\\(js\\);console.log\\('JS parses OK \\('+js.length+' chars\\)'\\);}catch\\(e\\){console.log\\('PARSE ERROR:',e.message\\);}\")",
+      "Bash(node -e ' *)",
+      "PowerShell(\\(Get-Content \"D:\\\\EO AI\\\\Plant Case Setup\\\\steam_network\\\\plant_network_studio_v2.html\" | Measure-Object -Line\\).Lines)",
+      "Bash(python3 -c \"import sys,json; lines=sys.stdin.readlines\\(\\); [print\\(json.loads\\(l\\).get\\('type',''\\),json.loads\\(l\\).get\\('content',''\\)[:300] if isinstance\\(json.loads\\(l\\).get\\('content',''\\),str\\) else ''\\) for l in lines[-10:]]\")",
+      "Bash(python3 -c ' *)",
+      "Bash(which python *)",
+      "PowerShell(python -c \"import urllib.request; r = urllib.request.urlopen\\('http://127.0.0.1:5001/'\\); print\\(r.status\\)\")",
+      "mcp__Claude_in_Chrome__tabs_context_mcp",
+      "Bash(python patch_kpi.py)",
+      "Bash(python patch_kpi2.py)",
+      "Bash(python patch_kpi3.py)",
+      "Bash(python patch_kpi5.py)",
+      "Bash(python patch_kpi6.py)",
+      "Bash(python patch_kpi7.py)",
+      "Bash(python patch_remove_tabs.py)",
+      "Bash(python patch_ct_fan.py)",
+      "Bash(python patch_power_network.py)",
+      "Bash(python patch_power_custom_ui.py)",
+      "Bash(python patch_multi_sheet_export.py)",
+      "Bash(python patch_three_fixes.py)"
+    ]
+  }
+}

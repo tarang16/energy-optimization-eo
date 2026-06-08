@@ -1,0 +1,331 @@
+@use 'config/scss/variables' as *;
+
+.box {
+  position: relative;
+  padding: 1vmin 1vmin 1vmin 3.5vmin;
+  background-color: $primary_blue_bg;
+  border-radius: 5px;
+  transition: 0.05s ease-in-out;
+  margin-left: 3vmin;
+
+  .middleFlexContainer {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    gap: 2vmin;
+    padding-left: 3vmin;
+  }
+
+  .leftContent {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8vmin;
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      z-index: 22;
+      width: 1px;
+      height: 88%;
+      background-color: $primary_gray_3;
+      right: -1vmin;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .topLeftContent {
+      display: flex;
+      justify-content: end;
+      align-items: end;
+    }
+
+    .bottomLeftContent {
+      display: flex;
+      justify-content: end;
+      align-items: baseline;
+      // padding-left: 2vmin;
+    }
+  }
+
+  .rightContent {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8vmin;
+    padding-right: 2vmin;
+
+    .topRightContent {
+      display: flex;
+      justify-content: end;
+      align-items: end;
+    }
+
+    .bottomRightContent {
+      display: flex;
+      // justify-content: end;
+      align-items: baseline;
+    }
+  }
+
+  .positionImg {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 6vmin;
+    height: 6vmin;
+    left: -3vmin;
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 50%;
+    background-color: $primary_white;
+    padding: 0.5vmin;
+    border: 1px solid $primary_white;
+    box-shadow: 0px 4px 18px $primary_gray_4;
+
+    img {
+      width: 85%;
+      height: 85%;
+    }
+  }
+
+  &:hover {
+    cursor: default;
+  }
+
+  &.active {
+    background-color: $primary_blue;
+
+    // @include boxShadow_kpi;
+    .white_text_hover {
+      color: $primary_white;
+    }
+
+    sub {
+      color: $primary_white;
+    }
+
+    :global(.sub-text) {
+      color: $primary_white;
+    }
+
+    .positionImg {
+      background-color: $primary_blue_bg;
+      box-shadow: none;
+      border-color: $primary_blue;
+    }
+
+    .leftContent {
+      &::after {
+        background-color: $primary_white;
+      }
+    }
+  }
+
+  :global(.fadeInElement) {
+    border-radius: 0 5px 5px 0 !important;
+    background-color: transparent !important;
+
+    :global(.remove_action_btn) {
+      display: none !important;
+    }
+  }
+
+  :global(.fadeInElement img) {
+    width: 2vmin;
+    height: 2vmin;
+    cursor: pointer !important;
+    filter: brightness(0) saturate(100%) invert(42%) sepia(79%) saturate(732%)
+      hue-rotate(157deg) brightness(99%) contrast(109%) !important;
+  }
+
+  :global(.fadeInElement img.filter-unset-img) {
+    filter: unset !important;
+  }
+}
+
+.boxInactive {
+  position: relative;
+  padding: 1vmin 1vmin 1vmin 3.5vmin;
+  background-color: $primary_blue_bg;
+  border-radius: 0.3vmin;
+  transition: 0.03s ease-in-out;
+  margin-left: 3vmin;
+
+  display: flex;
+  gap: 2vmin;
+
+  .leftContent {
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    gap: 1vmin;
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      z-index: 22;
+      width: 1px;
+      height: 88%;
+      background-color: $primary_gray_3;
+      right: -1vmin;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .topLeftContent {
+      display: flex;
+      justify-content: end;
+      align-items: end;
+    }
+
+    .bottomLeftContent {
+      display: flex;
+      justify-content: end;
+      align-items: baseline;
+      padding-left: 2vmin;
+    }
+  }
+
+  .rightContent {
+    width: 55%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8vmin;
+
+    .topRightContent {
+      display: flex;
+      justify-content: end;
+      align-items: end;
+    }
+
+    .bottomRightContent {
+      display: flex;
+      justify-content: end;
+      align-items: baseline;
+    }
+  }
+
+  .positionImg {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 6vmin;
+    height: 6vmin;
+    left: -3vmin;
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 50%;
+    background-color: $primary_white;
+    padding: 3%;
+    border: 1px solid $primary_white;
+    box-shadow: 0px 4px 18px $primary_gray_4;
+
+    img {
+      width: 85%;
+      height: 85%;
+    }
+  }
+
+  &:hover {
+    :global(.fadeInElement) {
+      display: none !important;
+    }
+  }
+}
+
+.lastTopTilesCard {
+  .leftContent,
+  .rightContent {
+    width: 50%;
+  }
+
+  :global(.fadeInElement) {
+    display: none;
+  }
+}
+
+.disableEvents {
+  pointer-events: none;
+}
+
+.enableEvents {
+  pointer-events: all;
+}
+
+.contentFitWidth {
+  :global(.modal-dialog.modal-xl) {
+    width: fit-content !important;
+    margin: 0 auto !important;
+  }
+
+  :global(.gap_btn_header) {
+    gap: 3vmin !important;
+  }
+}
+
+.customPaddingModalCardToptiles {
+  padding-top: 1.5vmin;
+}
+
+.positionWarningIcon {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 0.5vmin;
+
+  img {
+    width: 2.4vmin;
+    height: 2.4vmin;
+  }
+}
+
+.box.seecCardActionContainer,
+.lastTopTilesCard {
+  cursor: pointer !important;
+
+  &:hover {
+    background-color: $primary_blue;
+
+    :global(.fadeInElement img) {
+      cursor: pointer;
+      filter: brightness(0) invert(1) !important;
+    }
+
+    .positionImg {
+      box-shadow: none;
+      border: 1px solid $primary_blue;
+    }
+
+    .white_text_hover {
+      color: $primary_white;
+    }
+  }
+}
+
+.showSeuTableModalCustomModal:global(.customResponsiveWidth) {
+  :global(.modal-dialog.modal-xl) {
+    width: 110vmin;
+    max-width: 90vw;
+  }
+}
+
+.showAlertStatisticsCustomModal:global(.customResponsiveWidth) {
+  :global(.modal-dialog.modal-xl) {
+    width: 170vmin;
+    max-width: 100vw;
+  }
+}
+
+.h_45 {
+  height: 45%;
+}
+
+.h_55 {
+  height: 55%;
+}

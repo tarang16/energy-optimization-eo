@@ -1,0 +1,616 @@
+@use 'config/scss/variables' as *;
+
+.energyManagementContainer {
+  .filterContainer {
+    position: absolute;
+    top: 0;
+    right: 2vmin;
+    padding: 0.75vmin 0;
+    height: 5vmin;
+
+    .selectBoxWrapper {
+      .labelText {
+        min-width: fit-content;
+      }
+
+      :global(.customSelectBoxField) {
+        height: inherit;
+        min-width: 18vmin;
+        max-width: 18vmin;
+      }
+
+      :global(.react-select-modifyDetails__control) {
+        min-height: unset;
+        height: inherit;
+        font-size: 1.2vmin;
+        padding: 0 0 0 1vmin;
+      }
+
+      :global(
+        .react-select-modifyDetails__control.react-select-modifyDetails__control--is-focused
+      ) {
+        border: 1px solid $primary_blue !important;
+      }
+
+      :global(.react-select-modifyDetails__indicators) {
+        height: 100%;
+      }
+
+      :global(
+        .react-select-modifyDetails__value-container.react-select-modifyDetails__value-container--has-value
+      ) {
+        height: 100%;
+        padding: 0 1vmin 0 0;
+      }
+
+      :global(.react-select-modifyDetails__menu) {
+        z-index: 999;
+        margin: 0;
+      }
+
+      :global(.react-select-modifyDetails__menu-list) {
+        max-height: 19vmin;
+        font-size: 1.2vmin;
+      }
+
+      :global(.react-select-modifyDetails__input-container) {
+        height: 100%;
+        max-height: 4vmin;
+        margin: 0;
+        padding: 0;
+      }
+
+      :global(.react-select-modifyDetails__single-value) {
+        margin-top: 0.3vmin;
+      }
+
+      :global(
+        .react-select-modifyDetails__indicator.react-select-modifyDetails__dropdown-indicator
+      ),
+      :global(
+        .react-select-modifyDetails__indicator.react-select-modifyDetails__clear-indicator
+      ) {
+        padding: 1vmin;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        svg {
+          width: 2vmin;
+          filter: brightness(0) saturate(100%) invert(64%) sepia(4%)
+            saturate(240%) hue-rotate(177deg) brightness(92%) contrast(92%);
+        }
+      }
+    }
+
+    .datePickerOuterContainer {
+      color: $primary_gray;
+      font-size: 1.4vmin;
+      font-style: normal;
+      line-height: 1.2;
+      font-family: 'sabic_text_regular', serif;
+      font-weight: 400;
+
+      :global(
+        .react-datepicker-wrapper .react-datepicker__input-container input
+      ) {
+        width: 18vmin !important;
+        background-image: url('../../../../assets/sabic_new_icons/calendar_icon.svg');
+        background-repeat: no-repeat;
+        background-position: calc(100% - 1vmin) center;
+        background-size: 2vmin;
+      }
+
+      :global(.react-datepicker__year .react-datepicker__year-wrapper) {
+        height: 100%;
+      }
+
+      :global(
+        .react-datepicker__year
+          .react-datepicker__year-wrapper
+          .react-datepicker__year-text
+      ) {
+        height: calc(100% - 2.5vmin);
+        box-sizing: border-box;
+        padding: 0.7vmin;
+        color: $primary_gray;
+      }
+
+      :global(.react-datepicker__year-wrapper) {
+        display: flex;
+        flex-wrap: wrap;
+        width: 148px;
+        max-width: 200px;
+        justify-content: center;
+        gap: 0.4vmin;
+      }
+
+      :global(
+        .react-datepicker.custom-calendar
+          .react-datepicker__month-container
+          .react-datepicker__month.react-datepicker__monthPicker
+      ) {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      :global(
+        .react-datepicker__month.react-datepicker__monthPicker
+          .react-datepicker__month-wrapper
+      ) {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 1vmin;
+        height: 100%;
+      }
+
+      :global(
+        .react-datepicker__month.react-datepicker__monthPicker
+          .react-datepicker__month-wrapper:first-of-type
+          .react-datepicker__month-text:last-child
+      ) {
+        margin-bottom: 1.2vmin;
+      }
+
+      :global(
+        .react-datepicker__month.react-datepicker__monthPicker
+          .react-datepicker__month-text
+      ) {
+        display: flex;
+        justify-content: center;
+      }
+
+      :global(.react-datepicker__month.react-datepicker__monthPicker) {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      :global(
+        .react-datepicker__month.react-datepicker__monthPicker.react-datepicker__month-wrapper
+      ) {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      :global(
+        .react-datepicker__month-text.react-datepicker__month-text--selected.react-datepicker__month-text--keyboard-selected
+      ) {
+        color: $primary_white !important;
+        background-color: $primary_blue;
+        padding: 0.5vmin;
+      }
+
+      :global(
+        .react-datepicker__month.react-datepicker__monthPicker
+          .react-datepicker__month-wrapper
+          .react-datepicker__month-text.react-datepicker__month-text--disabled
+      ) {
+        color: $primary_gray_3;
+      }
+
+      :global(
+        .react-datepicker__month.react-datepicker__monthPicker
+          .react-datepicker__month-wrapper
+          .react-datepicker__month-text
+      ) {
+        color: $primary_gray;
+      }
+
+      :global(.react-datepicker__day.react-datepicker__day) {
+        color: $primary_gray;
+      }
+
+      :global(.react-datepicker__day.react-datepicker__day--keyboard-selected) {
+        background-color: $primary_blue;
+        color: $primary_white;
+      }
+
+      :global(.react-datepicker__day.react-datepicker__day--disabled) {
+        color: $primary_gray_3;
+      }
+
+      :global(
+        .react-datepicker__year-text.react-datepicker__year-text--disabled
+      ) {
+        color: $primary_gray_3;
+      }
+
+      :global(
+        .react-datepicker__year
+          .react-datepicker__year-wrapper
+          .react-datepicker__year-text--selected
+      ) {
+        color: $primary_white;
+        background-color: $primary_blue;
+        box-sizing: border-box;
+      }
+
+      :global(
+        .react-datepicker__year
+          .react-datepicker__year-wrapper
+          .react-datepicker__year-text--disabled
+      ) {
+        color: $primary_gray_3;
+      }
+
+      :global(.react-datepicker__day.react-datepicker__day--selected) {
+        color: $primary_white;
+        background-color: $primary_blue;
+      }
+
+      :global(
+        .react-datepicker__week
+          .react-datepicker__day.react-datepicker__day--selected.react-datepicker__day--weekend
+      ) {
+        background-color: $primary_blue;
+      }
+    }
+  }
+
+  &__content {
+    height: 100%;
+    width: 100%;
+    padding: 0 2vmin;
+    overflow: hidden;
+
+    .energyManagementTopKPI {
+      height: 11vmin;
+      width: 100%;
+    }
+
+    .energyManagementBottomContainer {
+      margin-top: 3vmin;
+      height: calc(100% - 15.5vmin);
+      padding: 0;
+    }
+  }
+}
+
+.popupClass {
+  z-index: 999;
+}
+
+.cursorDefault {
+  input {
+    cursor: default !important;
+  }
+}
+
+.cursorPointer {
+  input {
+    cursor: pointer !important;
+  }
+}
+
+// Energy Management All tabs Style
+.EMTabsContainer {
+  @include boxShadow_kpi;
+  padding: 1vmin;
+  border-radius: 0.8vmin;
+
+  &__tabButton {
+    height: 3.5vmin;
+    display: flex;
+    gap: 1.5vmin;
+
+    button {
+      padding: 0.3vmin 1.5vmin 0 1.5vmin;
+      width: fit-content;
+      height: 100%;
+      border: none;
+      border-radius: 1vmin;
+      background-color: $primary_blue_bg;
+
+      &.btnActive {
+        background-color: $primary_blue;
+        color: $primary_white;
+      }
+    }
+
+    :global(.customSelectBoxField) {
+      height: inherit;
+      min-width: 19vmin;
+      max-width: 19vmin;
+    }
+
+    :global(.react-select-modifyDetails__control) {
+      min-height: unset;
+      height: inherit;
+      font-size: 1.2vmin;
+      padding: 0 0 0 1vmin;
+    }
+
+    :global(
+      .react-select-modifyDetails__control.react-select-modifyDetails__control--is-focused
+    ) {
+      border: 1px solid $primary_blue !important;
+    }
+
+    :global(.react-select-modifyDetails__indicators) {
+      height: 100%;
+    }
+
+    :global(
+      .react-select-modifyDetails__value-container.react-select-modifyDetails__value-container--has-value
+    ) {
+      height: 100%;
+      padding: 0 1vmin;
+    }
+
+    :global(.react-select-modifyDetails__menu) {
+      z-index: 45;
+
+      :global(.react-select-modifyDetails__menu-list) {
+        max-height: 19vmin;
+        font-size: 1.2vmin;
+      }
+    }
+
+    :global(.react-select-modifyDetails__input-container) {
+      height: 100%;
+      max-height: 4vmin;
+      margin: 0;
+      padding: 0;
+    }
+
+    :global(.react-select-modifyDetails__single-value) {
+      margin-top: 0.3vmin;
+    }
+
+    :global(
+      .react-select-modifyDetails__indicator.react-select-modifyDetails__dropdown-indicator
+    ),
+    :global(
+      .react-select-modifyDetails__indicator.react-select-modifyDetails__clear-indicator
+    ) {
+      padding: 1vmin;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      svg {
+        width: 2vmin;
+        filter: brightness(0) saturate(100%) invert(64%) sepia(4%)
+          saturate(240%) hue-rotate(177deg) brightness(92%) contrast(92%);
+      }
+    }
+  }
+
+  &__tabContent {
+    height: calc(100% - 3.5vmin);
+  }
+}
+
+.seuEnpinetContainer {
+  padding-top: 4.5vmin;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  .seuEnpinetTabsContainer {
+    @include boxShadow_kpi;
+    position: relative;
+    height: calc(100%);
+
+    &__tabButton {
+      position: absolute;
+      top: -4.5vmin;
+      height: 4.5vmin;
+      display: flex;
+      border-bottom: 1px solid $primary_gray_4;
+
+      .navItem {
+        // filter: drop-shadow(0px -0.13vmin 0.25vmin rgba(0, 0, 0, 0.15));
+        position: relative;
+
+        &:first-child {
+          left: -0.4vmin;
+        }
+
+        &:nth-child(2) {
+          left: -3.4vmin;
+        }
+
+        button {
+          border: none;
+          height: 100%;
+          color: $primary_gray;
+          // padding: 0.25vmin 3vmin 0 3vmin;
+          // clip-path: polygon(2.5vmin 0%, calc(100% - 2.5vmin) 0%, 100% 100%, 0% 100%);
+          // border-top-left-radius: 3.5vmin;
+          // border-top-right-radius: 3.5vmin;
+          overflow: hidden;
+          // background-color: $primary_blue_bg;
+          min-width: 35vmin;
+          max-width: 35vmin;
+          position: relative;
+          // filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.15));
+          // margin-right: -1vmin;
+          padding: 0 !important;
+          padding-top: 0.3vmin !important;
+          background-image: url('../../../../assets/sabic_icons/common/tabsImg.svg');
+          background-size: 100%;
+          background-repeat: no-repeat;
+          background-position: center center;
+          background-color: transparent !important;
+
+          &.btnActive {
+            color: $primary_white;
+            background-color: transparent !important;
+            background-image: url('../../../../assets/sabic_icons/common/tabsImgActive.svg');
+          }
+        }
+      }
+
+      @for $i from 1 through 30 {
+        .navItem:nth-child(#{$i}) {
+          z-index: #{31 - $i};
+        }
+      }
+
+      .navItem:has(button.btnActive) {
+        z-index: 50;
+      }
+    }
+
+    &__tabContent {
+      height: 100%;
+    }
+  }
+}
+
+.coolingWaterPerformanceContainer {
+  padding-top: 4.5vmin;
+  position: relative;
+
+  .CWPTopTabButton {
+    position: absolute;
+    top: 0vmin;
+    height: 4.5vmin;
+    display: flex;
+    border-bottom: 1px solid $primary_gray_4;
+
+    .navItem {
+      height: 100%;
+      // filter: drop-shadow(0px -0.13vmin 0.25vmin rgba(0, 0, 0, 0.15));
+      position: relative;
+
+      &:first-child {
+        left: -0.4vmin;
+      }
+
+      &:nth-child(2) {
+        left: -3.4vmin;
+      }
+
+      &:nth-child(3) {
+        left: -6.4vmin;
+      }
+
+      &:nth-child(4) {
+        left: -9.4vmin;
+      }
+
+      button {
+        border: none;
+        height: 100%;
+        color: $primary_gray;
+        overflow: hidden;
+        min-width: 35vmin;
+        max-width: 35vmin;
+        position: relative;
+        padding: 0 !important;
+        padding-top: 0.3vmin !important;
+        background-image: url('../../../../assets/sabic_icons/common/tabsImg.svg');
+        background-size: 100%;
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-color: transparent !important;
+
+        &.btnActive {
+          color: $primary_white;
+          background-color: transparent !important;
+          background-image: url('../../../../assets/sabic_icons/common/tabsImgActive.svg');
+        }
+      }
+
+      // button {
+      //     border: none;
+      //     height: 100%;
+      //     color: $primary_gray;
+      //     padding: 0.25vmin 3vmin 0 3vmin;
+      //     clip-path: polygon(2.5vmin 0%, calc(100% - 2.5vmin) 0%, 100% 100%, 0% 100%);
+      //     border-top-left-radius: 3.5vmin;
+      //     border-top-right-radius: 3.5vmin;
+      //     overflow: hidden;
+      //     background-color: $primary_blue_bg;
+      //     min-width: 30vmin;
+      //     position: relative;
+      //     filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.15));
+      //     margin-right: -1vmin;
+
+      //     &.btnActive {
+      //         color: $primary_white;
+      //         background-color: $primary_blue;
+      //     }
+      // }
+    }
+
+    @for $i from 1 through 30 {
+      .navItem:nth-child(#{$i}) {
+        z-index: #{31 - $i};
+      }
+    }
+
+    .navItem:has(button.btnActive) {
+      z-index: 50;
+    }
+  }
+
+  .CWPTopTabContent {
+    padding: 1vmin;
+    height: calc(100%);
+    @include boxShadow_kpi;
+  }
+}
+
+.EMTabsContainer.Select {
+  .select {
+    :global(.customSelectBoxField .react-select-modifyDetails__menu) {
+      margin: 0;
+    }
+  }
+}
+
+.btnContainer {
+  button {
+    padding: 0;
+    border: none;
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 2vmin;
+
+    img {
+      width: 2.5vmin;
+
+      &:hover {
+        filter: brightness(0) saturate(100%) invert(49%) sepia(19%)
+          saturate(3675%) hue-rotate(163deg) brightness(93%) contrast(102%);
+      }
+    }
+  }
+}
+
+.boundFieldBtnContainer {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  gap: 2vmin;
+  margin-top: 3vmin;
+  height: 3.5vmin;
+
+  a {
+    border: none;
+    height: 100%;
+    width: 14vmin;
+    border-radius: 0.3vmin;
+    text-decoration: none;
+    align-content: center;
+    padding-left: 2rem;
+
+    &.saveBtn {
+      background-color: $primary_blue;
+      color: $primary_white;
+    }
+
+    &:disabled {
+      pointer-events: inherit;
+      cursor: not-allowed;
+      opacity: 0.65;
+    }
+  }
+}

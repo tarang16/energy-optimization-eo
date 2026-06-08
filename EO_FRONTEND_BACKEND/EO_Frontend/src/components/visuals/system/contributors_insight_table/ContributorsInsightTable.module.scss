@@ -1,0 +1,229 @@
+@use 'src/config/scss/_variables' as *;
+@use 'src/config/scss/typography' as *;
+
+.contributor_card {
+  background-color: $primary_white;
+  height: 100%;
+}
+
+.leftContainer {
+  width: calc(50% - 0.5vmin);
+  @include boxShadow_card;
+}
+
+.rightContainer {
+  width: calc(50% - 0.5vmin);
+  position: relative;
+  @include boxShadow_card;
+  padding: 1vmin 1vmin 0 1vmin;
+
+  :global(.nav-tabs .nav-link) {
+    text-transform: none !important;
+  }
+
+  :global(.nav.nav-tabs .nav-item .nav-link:hover) {
+    color: unset !important;
+  }
+
+  :global(.nav.nav-tabs) {
+    display: flex;
+    justify-content: flex-start;
+    border-top-left-radius: 4px;
+    width: 100% !important;
+    height: 4vmin !important;
+    overflow: hidden;
+
+    :global(.nav-item) {
+      height: calc(100%) !important;
+      width: 33vmin !important;
+      padding: 0 !important;
+      overflow: hidden;
+      position: relative;
+
+      &:first-child {
+        z-index: 1;
+        left: -0.4vmin;
+      }
+
+      &:nth-child(2) {
+        z-index: 2;
+      }
+
+      &:not(:first-child) {
+        left: -3.5vmin;
+      }
+
+      :global(.nav-link) {
+        height: 100% !important;
+        color: $primary_gray !important;
+        @include text14;
+        line-height: 1.4vmin;
+        font-family: 'sabic_text_bold', serif;
+        padding: 0 !important;
+        padding-top: 0.4vmin !important;
+        background-color: none !important;
+        border: none;
+        background-image: url('../../../../assets/sabic_icons/common/tabsImg.svg');
+        background-size: 100%;
+        background-repeat: no-repeat;
+        background-position: center center;
+        position: absolute;
+        bottom: 0;
+        margin-bottom: 0;
+
+        &:hover {
+          background-color: transparent !important;
+        }
+
+        :global(.nav.nav-tabs .nav-item .nav-link:hover) {
+          color: unset !important;
+        }
+      }
+
+      :global(.nav-link.active) {
+        padding: 0 !important;
+        padding-top: 0.4vmin !important;
+        background-color: transparent !important;
+        background-image: url('../../../../assets/sabic_icons/common/tabsImgActive.svg');
+        color: $primary_white !important;
+      }
+    }
+
+    :global(.nav-item:has(.nav-link.active)) {
+      z-index: 10;
+    }
+  }
+
+  :global(.tab-content) {
+    height: calc(100% - 5vmin);
+    padding-top: 0.5vmin;
+    padding-bottom: 0.5vmin;
+    border-top: 1px solid $primary_gray_4 !important;
+    // position: relative;
+
+    :global(.tab-pane.active) {
+      background-color: $primary_white !important;
+    }
+  }
+}
+
+.dropDownContainer {
+  width: 100%;
+  height: calc(4vmin) !important;
+  z-index: 999;
+
+  :global(.blue_dropdownSelect) {
+    border: 0;
+    border-bottom: 1px solid $primary_gray_3;
+    border-radius: 0;
+    background-color: $primary_blue_bg;
+    height: 100%;
+  }
+
+  :global(.blue_dropdownList) {
+    background-color: $primary_white;
+    box-shadow: 0px 0px 4px 0px $primary_gray_3;
+    border-radius: 0.3vmin;
+    max-height: 15vmin;
+    overflow: auto;
+  }
+
+  :global(.blue_dropdownOption) {
+    padding: 0.8vmin 1vmin !important;
+  }
+
+  :global(.checkIconImg) {
+    filter: brightness(1) invert(0);
+  }
+}
+
+.expandButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.6vmin 0.9vmin;
+  width: 4vmin;
+  border-radius: 0.3vmin;
+  outline: none;
+  border: 1px solid $primary_gray_3;
+  background-color: $primary_white;
+
+  img {
+    width: 100%;
+    height: 100%;
+    filter: none !important;
+  }
+
+  &:hover {
+    background-color: $primary_blue_hover;
+    border-color: $primary_blue;
+
+    img {
+      filter: brightness(0) invert(1) !important;
+    }
+  }
+}
+
+.expandButtonConfigurationDownload {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.6vmin 0.9vmin;
+  width: 4vmin;
+  border-radius: 0.3vmin;
+  outline: none;
+  border: 1px solid $primary_gray_3;
+  background-color: $primary_white;
+
+  &:hover {
+    background-color: $primary_blue;
+    color: $primary_white;
+  }
+
+  :global(.trendPopupIcon) {
+    position: unset;
+    width: unset;
+    height: 100%;
+    background-color: transparent;
+    color: $primary_black;
+    border-radius: unset;
+    box-shadow: none;
+    padding: 0;
+  }
+}
+
+.expandButtonContainer {
+  position: absolute;
+  right: 0px;
+  top: -4.5vmin;
+  z-index: 10;
+  height: 4vmin;
+  width: 4vmin;
+
+  .expandButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.6vmin 0.9vmin;
+    width: 4vmin;
+    border-radius: 0.3vmin;
+    outline: none;
+    border: 1px solid $primary_gray_3;
+    background-color: $primary_white;
+
+    img {
+      width: 100%;
+      height: 100%;
+      filter: none !important;
+    }
+
+    &:hover {
+      background-color: $primary_blue_hover;
+      border-color: $primary_blue;
+
+      img {
+        filter: brightness(0) invert(1) !important;
+      }
+    }
+  }
+}

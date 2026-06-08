@@ -1,0 +1,303 @@
+@use 'config/scss/variables' as *;
+@use 'src/config/scss/typography' as *;
+
+.alertStatusContainer {
+  padding: 0 1.5vmin 1.5vmin 1.5vmin;
+
+  .alertStatusTopContainer {
+    height: 3.5vmin;
+    margin-top: 0.5vmin;
+    margin-bottom: 1.5vmin;
+  }
+
+  .dropdownContainer {
+    min-width: 25vmin !important;
+    width: 25vmin !important;
+  }
+
+  .alertStatusButtomContainer {
+    display: flex;
+    gap: 1.5vmin;
+    height: calc(100% - 5vmin);
+
+    &__left {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5vmin;
+
+      &__top {
+        height: 20%;
+      }
+
+      &__middle {
+        height: calc(100% - 20%);
+
+        .cardContainer {
+          display: flex;
+          gap: 1.5vmin;
+
+          &__left,
+          &__right {
+            // border: 1px solid $primary_gray_4;
+            width: 50%;
+            // padding: 1.5vmin;
+            // border-radius: .3vmin;
+          }
+        }
+      }
+    }
+
+    &__right {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5vmin;
+
+      &__top {
+        height: 45%;
+      }
+
+      &__bottom {
+        height: 55%;
+      }
+    }
+
+    .divider {
+      width: 1px;
+      background-color: $primary_gray_4;
+    }
+  }
+}
+
+.muteAlertContainer {
+  .submitButton {
+    height: 100%;
+    background-color: $primary_blue;
+    border: 1px solid $primary_blue;
+    border-radius: 0.3vmin;
+  }
+
+  .downloadYellowBtn {
+    background-color: $primary_yellow_fade;
+    border: 1px solid $primary_orange_60;
+    margin-right: 1vmin;
+    color: $primary_black;
+  }
+}
+
+.mutedAlertModalContainer {
+  .infoIcon {
+    filter: unset;
+    width: 1.8vmin;
+    height: 1.8vmin;
+  }
+
+  .tableContainer {
+    .customBlueSwitch {
+      input:checked + label {
+        background: $primary_blue;
+      }
+    }
+  }
+
+  .topTabContainer {
+    height: calc(100% - 3.5vmin - 1.5vmin);
+
+    &.topTabContainerFullHeight {
+      height: 100%;
+    }
+
+    :global(.active) {
+      background-color: $primary_blue !important;
+    }
+
+    :global(.nav.nav-tabs) {
+      width: 100%;
+      height: calc(4.5vmin) !important;
+      display: flex;
+      justify-content: flex-start;
+      border-top-left-radius: 4px;
+
+      :global(.nav-item) {
+        padding: 0 !important;
+        position: relative;
+        height: 100%;
+        min-width: fit-content !important;
+        width: unset !important;
+        filter: drop-shadow(0px -0.13vmin 0.25vmin rgba(0, 0, 0, 0.1));
+        padding-top: 0.3vmin !important;
+        margin-right: -0.7vmin;
+
+        :global(.nav-link) {
+          height: 100%;
+          color: $primary_gray !important;
+          @include text14;
+          font-family: 'sabic_text_bold', serif;
+          padding: 0.25vmin 7vmin 0 7vmin;
+          clip-path: polygon(
+            2.5vmin 0%,
+            calc(100% - 2.5vmin) 0%,
+            100% 100%,
+            0% 100%
+          );
+          border-top-left-radius: 3.2vmin;
+          border-top-right-radius: 3.2vmin;
+          overflow: hidden;
+          background-color: $primary_blue_bg;
+          min-width: fit-content;
+          position: relative;
+        }
+
+        :global(.nav-link.active) {
+          color: $primary_white !important;
+        }
+      }
+
+      :global {
+        @for $i from 1 through 30 {
+          .nav-item:nth-child(#{$i}) {
+            z-index: #{31 - $i};
+          }
+        }
+      }
+
+      :global(.nav-item:has(.nav-link.active)) {
+        z-index: 50;
+      }
+    }
+
+    :global(.tab-content) {
+      height: calc(100% - 4.5vmin);
+      @include boxShadow_card;
+      border-radius: 0.3vmin;
+      border-top: 1px solid $primary_gray_4;
+
+      :global(.tab-pane) {
+        padding: 1vmin;
+        border-radius: 0.3vmin;
+      }
+
+      :global(.tab-pane.active) {
+        background-color: $primary_white !important;
+      }
+    }
+  }
+
+  .mutedAlertBtnContainer {
+    height: 3.5vmin;
+    margin-top: 1.5vmin;
+    display: flex;
+    justify-content: flex-end;
+    gap: 2vmin;
+
+    button {
+      background-color: transparent;
+      height: 100%;
+      border-radius: 0.3vmin;
+      text-transform: uppercase;
+      padding: 0 2vmin;
+
+      &.cancelBtn {
+        border: 1px solid $primary_blue;
+        background-color: $primary_blue_bg;
+      }
+
+      &.submitBtn {
+        border: 1px solid $primary_blue;
+        background-color: $primary_blue;
+      }
+
+      &.disabledBtn {
+        background-color: $primary_gray_2;
+        border: 1px solid $primary_gray_2;
+        opacity: 0.7;
+        cursor: not-allowed;
+      }
+    }
+  }
+}
+
+.confirmModalBtnContainer {
+  height: 3.5vmin;
+  margin-top: 1.5vmin;
+  display: flex;
+  justify-content: flex-end;
+  gap: 2vmin;
+
+  button {
+    background-color: transparent;
+    height: 100%;
+    border-radius: 0.3vmin;
+    text-transform: uppercase;
+    padding: 0 2vmin;
+
+    &.cancelBtn {
+      border: 1px solid $primary_blue;
+      background-color: $primary_blue_bg;
+    }
+
+    &.submitBtn {
+      border: 1px solid $primary_blue;
+      background-color: $primary_blue;
+      color: $primary_white;
+    }
+
+    &.disabledBtn {
+      background-color: $primary_gray_2;
+      border: 1px solid $primary_gray_2;
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+  }
+}
+
+.topContainer {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+
+  .leftDateContainer {
+    gap: 1vmin;
+
+    .formDateWrapper {
+      :global(.react-datepicker__input-container) {
+        display: flex;
+        height: 100%;
+        gap: 0.5vmin;
+      }
+
+      div > div > button {
+        img {
+          margin-left: 2vmin;
+        }
+      }
+    }
+
+    .presentbutton {
+      border: 0.5px solid $primary_gray_3;
+      border-radius: 0.4vmin;
+      background-color: $primary_white;
+      padding-right: 3.5vmin;
+    }
+  }
+}
+
+.datepickerStyle {
+  background-color: $primary_white;
+  border: 0.5px solid $primary_gray_3;
+  padding: 0.5vmin;
+  border-radius: 0.4vmin;
+
+  img {
+    width: 2.5vmin;
+    margin-bottom: 0.2vmin;
+  }
+}
+
+// MutedAlterModal-------------------
+.mutedAlertTabModal {
+  :global(.modal-dialog.modal-dialog-centered) {
+    min-width: 120vmin !important;
+    max-width: 120vmin !important;
+  }
+}

@@ -1,0 +1,69 @@
+@use '../node_modules/bootstrap/scss/bootstrap.scss' as *;
+@use 'config/scss/variables' as *;
+@use 'config/scss/fonts.scss' as *;
+@use 'config/scss/typography.scss' as *;
+@use 'config/scss/common.scss' as *;
+
+html, body {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  font-family: 'sabic_text_regular', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  font-weight: 500;
+  background-color: $primary_white;
+}
+
+body {
+  min-height: 100%;
+  margin: 0 auto;
+  max-height: 100%;
+  overflow-y: hidden;
+
+  #root {
+    height: 100%;
+    width: 100%;
+    color: $primary_gray;
+  }
+}
+
+p, h1, h2, h3, h4, h5, h6 { margin: 0; }
+
+::-webkit-scrollbar { width: 0.6vmin; height: 3px; }
+::-webkit-scrollbar-track { background: $primary_gray_5; }
+::-webkit-scrollbar-thumb { background: $primary_gray_2; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: $primary_gray; }
+
+.active, .active > span {
+  color: $primary_white !important;
+  background-color: $primary_blue !important;
+}
+
+.inactive, .inactive > span {
+  color: $primary_gray !important;
+  background-color: $primary_blue_bg !important;
+
+  &:hover {
+    color: $primary_white !important;
+    background-color: $primary_blue_hover !important;
+  }
+}
+
+button:focus-visible { outline: none; }
+
+// React Flow stroke styling (carried over from EO)
+.edgeStoke-vhp  { stroke: rgba(255, 102, 0, 0.7) !important; }
+.edgeStoke-hp   { stroke: rgba(255, 165, 0, 0.7) !important; }
+.edgeStoke-mp   { stroke: rgba(255, 205, 0, 0.7) !important; }
+.edgeStoke-lp   { stroke: rgba(0, 0, 255, 0.7) !important; }
+.edgeStoke-water { stroke: rgba(154, 194, 246, 0.8) !important; }
+.edgeStoke-default { stroke: rgba(0, 0, 0, 0.7) !important; }
+
+.flowingPipe { stroke-width: 6px !important; fill: none !important; }
+.flowingpipeAnimated {
+  stroke-width: 3px !important;
+  fill: none !important;
+  stroke-dasharray: 10 !important;
+  animation: flow 2s linear infinite !important;
+}
+
+@keyframes flow { to { stroke-dashoffset: -20; } }

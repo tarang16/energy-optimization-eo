@@ -1,0 +1,224 @@
+@use 'config/scss/variables' as *;
+
+.cardCcollapse {
+  overflow: hidden;
+  transition: right 0.7s ease-in-out;
+
+  :global(.globalcheckboxDropdownList) {
+    max-height: 25vmin !important;
+  }
+
+  table {
+    thead {
+      tr {
+        th {
+          &::after {
+            width: 0 !important;
+            display: none;
+          }
+        }
+      }
+    }
+
+    tbody {
+      tr {
+        td {
+          vertical-align: middle;
+          overflow-wrap: anywhere;
+          padding: 1vmin 0.5vmin !important;
+
+          &:first-child {
+            vertical-align: middle;
+          }
+
+          &:global(.sticky_cell) {
+            vertical-align: top !important;
+          }
+        }
+      }
+    }
+  }
+}
+
+.trendIconContainer {
+  min-width: 2.5vmin;
+  max-width: 2.5vmin;
+  min-height: 2.5vmin;
+  max-height: 2.5vmin;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cardCcollapseWidth {
+  overflow: hidden;
+  transition: width 0.7s ease-in-out;
+}
+
+.lineChartContainer {
+  @include boxShadow_card;
+  margin: 10px 0 10px 10px;
+
+  table {
+    thead {
+      tr {
+        th {
+          &::after {
+            width: 0 !important;
+          }
+        }
+      }
+    }
+
+    tbody {
+      tr {
+        td {
+          background-color: $primary_white !important;
+          border-bottom: 0.5px solid $primary_gray_4;
+          vertical-align: middle !important;
+
+          &:first-child {
+            text-align: left !important;
+          }
+
+          &:nth-child(2) {
+            text-align: center !important;
+          }
+        }
+      }
+    }
+  }
+}
+
+.infoIconTooltip {
+  :global(.tooltip-inner) {
+    min-width: 50vmin;
+    max-width: 50vmin;
+  }
+}
+
+.sideExpanded,
+.sideCollapsed {
+  cursor: pointer;
+  text-orientation: upright;
+  writing-mode: vertical-lr;
+}
+
+.sideExpanded {
+  height: 72%;
+  position: relative;
+  right: -5px;
+  background-image: url('../../assets/sabic_icons/monitoring/collpsed_image.svg');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4%;
+
+  img {
+    width: 2.7vmin;
+  }
+}
+
+.sideCollapsed {
+  height: 72%;
+  position: relative;
+  background-image: url('../../assets/sabic_icons/monitoring/Expand_image.svg');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4%;
+
+  img {
+    width: 2.7vmin;
+  }
+}
+
+.customInputMonitoring {
+  border: 1px solid $primary_gray_3;
+  width: 100%;
+  padding: 0 1vmin;
+  outline: none;
+  box-shadow: none;
+  height: 3.5vmin;
+
+  &:focus {
+    border: 1px solid $primary_gray_3;
+  }
+}
+
+.columnWidthMonitoringTable {
+  table {
+    thead {
+      tr {
+        th {
+          &:first-child {
+            min-width: 20vmin;
+          }
+        }
+      }
+    }
+  }
+}
+
+.formCheckContainer {
+  min-width: 3vmin;
+  max-width: 3vmin;
+  min-height: 3vmin;
+  max-height: 3vmin;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// WOrking on pagination changes
+:global(.paginationContainer) {
+  // margin-top: 0.5vmin;
+  :global(.pagination) {
+    margin-bottom: 0 !important;
+    height: 100% !important;
+  }
+
+  :global(.page-item) {
+    :global(.page-link) {
+      border: 1px solid $primary_gray_3 !important;
+      border-radius: 0 !important;
+      padding: 0.3vmin 0.3vmin 0 0.3vmin !important;
+      min-width: 4vmin !important;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: $primary_gray;
+      font-size: 1.2vmin;
+      font-weight: 500;
+
+      &:focus {
+        box-shadow: none;
+      }
+    }
+
+    &:first-child,
+    &:last-child {
+      :global(.page-link) {
+        span {
+          font-size: 2.5vmin;
+        }
+      }
+    }
+  }
+
+  :global(.page-item.disabled) {
+    cursor: not-allowed !important;
+  }
+
+  :global(.page-item.active) {
+    :global(.page-link) {
+      color: $primary_white;
+      background-color: $primary_blue;
+    }
+  }
+}

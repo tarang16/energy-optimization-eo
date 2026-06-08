@@ -1,0 +1,82 @@
+{
+  "model_id": "furnace_ranking_v1",
+  "version": "v1",
+  "system_id": "furnace",
+  "feature_flag": "furnace_ranking",
+  "input_config_sheets": {
+    "instantiated_attrs": "intantiated_attributes",
+    "sensors_mapping":    "Sensors_Mapping"
+  },
+  "output_schemas": {
+    "output_attribute_values": {
+      "mandatory": true,
+      "db_table": "output_attribute_values_table",
+      "natural_key": ["run_id", "timestamp", "element_code", "attribute"],
+      "partition_interval": "month",
+      "fields": [
+        {"name": "model_id",     "type": "string",   "nullable": false},
+        {"name": "run_id",       "type": "string",   "nullable": false},
+        {"name": "timestamp",    "type": "datetime", "nullable": false},
+        {"name": "element_code", "type": "string",   "nullable": false},
+        {"name": "attribute",    "type": "string",   "nullable": false},
+        {"name": "value",        "type": "float",    "nullable": true}
+      ],
+      "allowed_combinations": [
+        {"attribute": "Max_CPR",                     "element_code": "f5b1509b-eaa9-452d-8898-eaf6beb6f376"},
+        {"attribute": "Max_CPR",                     "element_code": "68fadd62-8e82-4037-93de-78c6c0735184"},
+        {"attribute": "HC_Flow_CV_Max_OP",           "element_code": "f5b1509b-eaa9-452d-8898-eaf6beb6f376"},
+        {"attribute": "HC_Flow_CV_Max_OP",           "element_code": "68fadd62-8e82-4037-93de-78c6c0735184"},
+        {"attribute": "DS_Flow_CV_Max_OP",           "element_code": "f5b1509b-eaa9-452d-8898-eaf6beb6f376"},
+        {"attribute": "DS_Flow_CV_Max_OP",           "element_code": "68fadd62-8e82-4037-93de-78c6c0735184"},
+        {"attribute": "fuel_gas_pressure",           "element_code": "f5b1509b-eaa9-452d-8898-eaf6beb6f376"},
+        {"attribute": "fuel_gas_pressure",           "element_code": "68fadd62-8e82-4037-93de-78c6c0735184"},
+        {"attribute": "draft_pressure",              "element_code": "f5b1509b-eaa9-452d-8898-eaf6beb6f376"},
+        {"attribute": "draft_pressure",              "element_code": "68fadd62-8e82-4037-93de-78c6c0735184"},
+        {"attribute": "Damper_Opening",              "element_code": "f5b1509b-eaa9-452d-8898-eaf6beb6f376"},
+        {"attribute": "Damper_Opening",              "element_code": "68fadd62-8e82-4037-93de-78c6c0735184"},
+        {"attribute": "Flow_Control_Valve_OP",       "element_code": "f5b1509b-eaa9-452d-8898-eaf6beb6f376"},
+        {"attribute": "Flow_Control_Valve_OP",       "element_code": "68fadd62-8e82-4037-93de-78c6c0735184"},
+        {"attribute": "max_cpr",                     "element_code": "f5b1509b-eaa9-452d-8898-eaf6beb6f376"},
+        {"attribute": "max_cpr",                     "element_code": "68fadd62-8e82-4037-93de-78c6c0735184"},
+        {"attribute": "Total_Runtime",               "element_code": "f5b1509b-eaa9-452d-8898-eaf6beb6f376"},
+        {"attribute": "Total_Runtime",               "element_code": "68fadd62-8e82-4037-93de-78c6c0735184"},
+        {"attribute": "Feed_Type",                   "element_code": "f5b1509b-eaa9-452d-8898-eaf6beb6f376"},
+        {"attribute": "Feed_Type",                   "element_code": "68fadd62-8e82-4037-93de-78c6c0735184"},
+        {"attribute": "percent_above_threshold",     "element_code": "f5b1509b-eaa9-452d-8898-eaf6beb6f376"},
+        {"attribute": "percent_above_threshold",     "element_code": "68fadd62-8e82-4037-93de-78c6c0735184"},
+        {"attribute": "ethylene_yield",              "element_code": "f5b1509b-eaa9-452d-8898-eaf6beb6f376"},
+        {"attribute": "ethylene_yield",              "element_code": "68fadd62-8e82-4037-93de-78c6c0735184"},
+        {"attribute": "specific_energy_consumption", "element_code": "f5b1509b-eaa9-452d-8898-eaf6beb6f376"},
+        {"attribute": "specific_energy_consumption", "element_code": "68fadd62-8e82-4037-93de-78c6c0735184"}
+      ]
+    },
+    "imputation_history": {
+      "mandatory": false,
+      "db_table": "imputation_history_table",
+      "natural_key": ["run_id", "timestamp", "sensor"],
+      "partition_interval": "none",
+      "fields": [
+        {"name": "model_id",       "type": "string",   "nullable": false},
+        {"name": "run_id",         "type": "string",   "nullable": false},
+        {"name": "timestamp",      "type": "datetime", "nullable": false},
+        {"name": "sensor",         "type": "string",   "nullable": false},
+        {"name": "raw_value",      "type": "float",    "nullable": true},
+        {"name": "modified_value", "type": "float",    "nullable": false},
+        {"name": "sip_policy",     "type": "string",   "nullable": false}
+      ]
+    },
+    "ranking_result": {
+      "mandatory": true,
+      "db_table": "ranking_result_table",
+      "natural_key": ["run_id", "timestamp", "furnace_id"],
+      "partition_interval": "month",
+      "fields": [
+        {"name": "model_id",   "type": "string",   "nullable": false},
+        {"name": "run_id",     "type": "string",   "nullable": false},
+        {"name": "timestamp",  "type": "datetime", "nullable": false},
+        {"name": "furnace_id", "type": "string",   "nullable": false},
+        {"name": "rank",       "type": "int",      "nullable": false}
+      ]
+    }
+  }
+}

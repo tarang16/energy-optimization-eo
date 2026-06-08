@@ -1,0 +1,18 @@
+@use '../../../../../src/config/scss/variables.scss' as *;
+
+.ButtonContainer button {
+  background-color: $primary_white;
+  color: $primary_blue;
+  border: 0.3vmin solid $primary_blue;
+  padding: 1vmin;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  width: 18vmin;
+}
+
+.ButtonContainer .button:hover {
+  background-color: $primary_blue;
+  color: $primary_white;
+}

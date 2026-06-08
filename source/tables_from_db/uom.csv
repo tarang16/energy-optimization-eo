@@ -1,0 +1,52 @@
+﻿uom_id,uom_name,uom_description
+1,BARG,1
+2,°C,2
+3,MT/ HR,3
+4,KG/ HR,4
+5,%,5
+6,GJ/ T,6
+7,KCAL/ KG,7
+8,COUNT,8
+9,AMP,9
+10,UM P-P,10
+11,RPM,11
+12,ON/ OFF,12
+13,NM3/ HR,14
+14,KW/ KVA,15
+15,$/ GJ,16
+16,$/ M3,17
+17,GJ/ HR,18
+18,KW,19
+19,MW,20
+20,$/ HR,21
+21,Number,22
+22,$/ MT,23
+23,GJ/ MT,24
+24,$,25
+25,Volts,26
+26,Uk,27
+27,-,28
+28,GJ/YEAR,GJ per Year
+29,$/ MMBTU,29
+30,µS/ cm," microsiemens per centimeter"
+31,M3/ HR," cubic meter per hour"
+32,PPM," PPM"
+33,KG/ S," kg/ Sec"
+34,KJ/ KG," KJ/ KG"
+35,KJ/ (KG-K)," KJ/ (KG-K)"
+36,PPB,PPB
+37,GJ," GJ"
+38,MT," Ton"
+39,mole/ mole,mole/ mole
+40,mBar," mBar"
+41,Mole%," Mole%"
+42,MWH/ MT," MWH/ MT"
+43,MMBtu/ HR," MMBtu/ HR"
+44,KWH/ MT," KWH/ MT"
+45,MWH," MWH"
+46,GJ/Ton of EOE,46
+47,GJ/Eth product,47
+48,GJ/Ton of furnace feed,48
+49,GJ/Ton of CO2 sale flow,49
+50,RATIO,50
+51,W/ C,W/ C

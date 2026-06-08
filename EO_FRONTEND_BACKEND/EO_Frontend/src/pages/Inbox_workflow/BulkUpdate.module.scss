@@ -1,0 +1,189 @@
+@use 'src/config/scss/_variables' as *;
+
+.bulkUpdateContainer {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+
+  .wrapperContainer {
+    &__breadcrum {
+      height: fit-content;
+      margin-bottom: 2vmin;
+
+      .breadcrumFlexContainer {
+        display: flex;
+        align-items: flex-start;
+      }
+
+      .breadcrumItem {
+        display: inline-block;
+        color: $primary_blue;
+      }
+
+      .separatorImg {
+        display: inline-block;
+        position: relative;
+        top: -0.3vmin;
+        width: 2.1vmin;
+        height: 2.1vmin;
+        margin: 0 0.8vmin;
+      }
+    }
+
+    &__commentSection {
+      .topDropdownContainer {
+        display: flex;
+        align-items: center;
+        height: 4vmin;
+
+        .labelText {
+          min-width: 12vmin;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+
+        .singleSelectDropdownContainer {
+          height: 100%;
+          width: 30vmin;
+        }
+      }
+
+      .commentUploadContainer {
+        height: 20vmin;
+        margin-top: 2vmin;
+
+        .cardContainer {
+          height: 100%;
+          display: flex;
+          align-items: flex-start;
+
+          .labelText {
+            min-width: 12vmin;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 1.5vmin;
+          }
+
+          .commentInputBox {
+            flex-grow: 1;
+            border: 1px solid $primary_gray_3;
+            outline: none;
+            box-shadow: none;
+            padding: 1vmin;
+            font-size: 1.4vmin;
+            color: $primary_gray;
+            resize: none;
+            border-radius: 0.3vmin;
+            height: 100%;
+
+            &:focus,
+            &:focus-visible,
+            &:hover {
+              border: 1px solid $primary_gray_4;
+            }
+
+            &:disabled {
+              background-color: $primary_gray_6;
+            }
+          }
+        }
+      }
+    }
+
+    .BulkStageWrapper {
+      height: 4vmin;
+      display: flex;
+      gap: 3vmin;
+      align-items: center;
+
+      .lebelTextMargin {
+        margin-top: 0.3vmin;
+      }
+
+      .checkBox3Container {
+        input[type='checkbox'] {
+          margin-right: 1vmin;
+          cursor: pointer;
+          width: 2vmin;
+          height: 2vmin;
+          border: 1px solid $primary_blue !important;
+          border-radius: 0.3vmin !important;
+        }
+      }
+
+      .dateTimePickerContainer {
+        :global(
+          .react-datepicker-wrapper .react-datepicker__input-container input
+        ) {
+          width: 100% !important;
+          background-image: url('../../assets/sabic_new_icons/calendar_icon.svg');
+          background-repeat: no-repeat;
+          background-position: calc(100% - 1vmin) center;
+          background-size: 2vmin;
+        }
+
+        label {
+          min-width: 14vmin;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+
+        .input {
+          height: 3.5vmin !important;
+        }
+      }
+    }
+  }
+
+  &__bottom {
+    margin-top: 2vmin;
+    height: 3.5vmin;
+
+    .btnContainer {
+      button {
+        border: none;
+        border-radius: 0.3vmin;
+        min-width: 12vmin;
+        height: 3.5vmin;
+        text-transform: uppercase;
+        color: $primary_white;
+
+        &.cancelBtn {
+          border: 1px solid $primary_blue;
+          background-color: $primary_blue_bg;
+          color: $primary_blue;
+        }
+
+        &.saveBtn {
+          background-color: $primary_blue;
+        }
+      }
+    }
+  }
+}
+
+.comfiramationModalBtnContainer {
+  height: 3.5vmin;
+
+  button {
+    border: none;
+    border-radius: 0.3vmin;
+    min-width: 12vmin;
+    height: 3.5vmin;
+    text-transform: uppercase;
+    color: $primary_white;
+
+    &.cancelBtn {
+      border: 1px solid $primary_blue;
+      background-color: $primary_blue_bg;
+      color: $primary_blue;
+    }
+
+    &.saveBtn {
+      background-color: $primary_blue;
+    }
+  }
+}

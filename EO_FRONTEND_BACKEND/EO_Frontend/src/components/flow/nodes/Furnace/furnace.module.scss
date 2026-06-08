@@ -1,0 +1,112 @@
+.furnaceCompoOff {
+  min-height: 10vmin;
+}
+
+.furnaceCompoOff .s {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.furnaceCompoOff .label {
+  margin-bottom: 0;
+}
+
+.furnaceCompoOff .textWrapper {
+  left: 0;
+  letter-spacing: 0;
+  line-height: normal;
+  text-align: center;
+  top: -1px;
+}
+
+.furnaceCompoOff .furnaceOff {
+  background-color: transparent;
+  border-radius: 10px;
+  height: 100px;
+  overflow: hidden;
+  position: relative;
+  width: 100px;
+}
+
+.furnaceCompoOff .furnace {
+  background-image: url('../../../../assets/sabic_icons/network_icons/turbineComoOff.svg');
+  background-size: 100% 100%;
+  height: 42px;
+  left: 16px;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 42px;
+}
+
+.furnaceCompoOff .div {
+  left: 17px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 11px;
+}
+
+.furnaceCompoOff .key {
+  margin-top: 7px;
+}
+
+.furnaceCompo {
+  min-height: 10vmin;
+}
+
+.furnaceCompo .s {
+  align-items: center;
+  display: inline-flex;
+  flex-direction: column;
+  gap: 2px;
+  justify-content: center;
+  position: relative;
+}
+
+.furnaceCompo .label {
+  margin-bottom: 0;
+}
+
+.furnaceCompo .furnaceOn {
+  background-color: transparent;
+  border-radius: 10px;
+  height: 100px;
+  overflow: hidden;
+  position: relative;
+  width: 100px;
+}
+
+.furnaceCompoOff .furnaceOff img {
+  height: 100% !important;
+}
+
+.furnaceCompo .furnaceOn img {
+  height: 100% !important;
+}
+
+.furnaceCompo .furnace {
+  background-image: url('../../../../assets/sabic_icons/network_icons/turbineCompoOn.svg');
+  background-size: 100% 100%;
+  height: 42px;
+  left: 16px;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 42px;
+}
+
+.furnaceCompo .div {
+  color: #2ba402;
+  left: 17px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 11px;
+}
+
+.furnaceCompo .key {
+  margin-top: 7px;
+}

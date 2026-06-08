@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" width="198" height="198" style="shape-rendering: auto; display: block; background: rgba(255, 255, 255, 0);" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<g>
+		<g transform="rotate(0 50 50)">
+			<rect fill="#009FDF" height="17" width="6" ry="3.74" rx="3" y="1.5" x="47">
+				<animate repeatCount="indefinite" begin="-3.5s" dur="4s" keyTimes="0;1" values="1;0" attributeName="opacity">
+				</animate>
+			</rect>
+		</g>
+		<g transform="rotate(45 50 50)">
+			<rect fill="#009FDF" height="17" width="6" ry="3.74" rx="3" y="1.5" x="47">
+				<animate repeatCount="indefinite" begin="-3s" dur="4s" keyTimes="0;1" values="1;0" attributeName="opacity">
+				</animate>
+			</rect>
+		</g>
+		<g transform="rotate(90 50 50)">
+			<rect fill="#009FDF" height="17" width="6" ry="3.74" rx="3" y="1.5" x="47">
+				<animate repeatCount="indefinite" begin="-2.5s" dur="4s" keyTimes="0;1" values="1;0" attributeName="opacity">
+				</animate>
+			</rect>
+		</g>
+		<g transform="rotate(135 50 50)">
+			<rect fill="#009FDF" height="17" width="6" ry="3.74" rx="3" y="1.5" x="47">
+				<animate repeatCount="indefinite" begin="-2s" dur="4s" keyTimes="0;1" values="1;0" attributeName="opacity">
+				</animate>
+			</rect>
+		</g>
+		<g transform="rotate(180 50 50)">
+			<rect fill="#009FDF" height="17" width="6" ry="3.74" rx="3" y="1.5" x="47">
+				<animate repeatCount="indefinite" begin="-1.5s" dur="4s" keyTimes="0;1" values="1;0" attributeName="opacity">
+				</animate>
+			</rect>
+		</g>
+		<g transform="rotate(225 50 50)">
+			<rect fill="#009FDF" height="17" width="6" ry="3.74" rx="3" y="1.5" x="47">
+				<animate repeatCount="indefinite" begin="-1s" dur="4s" keyTimes="0;1" values="1;0" attributeName="opacity">
+				</animate>
+			</rect>
+		</g>
+		<g transform="rotate(270 50 50)">
+			<rect fill="#009FDF" height="17" width="6" ry="3.74" rx="3" y="1.5" x="47">
+				<animate repeatCount="indefinite" begin="-0.5s" dur="4s" keyTimes="0;1" values="1;0" attributeName="opacity">
+				</animate>
+			</rect>
+		</g>
+		<g transform="rotate(315 50 50)">
+			<rect fill="#009FDF" height="17" width="6" ry="3.74" rx="3" y="1.5" x="47">
+				<animate repeatCount="indefinite" begin="0s" dur="4s" keyTimes="0;1" values="1;0" attributeName="opacity">
+				</animate>
+			</rect>
+		</g>
+	</g>
+	<text x="50" y="52" fill="#009FDF" font-size="30px" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-weight="bold">
+		EO
+	</text>
+</svg>

@@ -1,0 +1,25 @@
+{
+  "name": "SABIC",
+  "id": "7b31e484-95b1-5787-90db-bce28c9457da",
+  "level": "Plant",
+  "children": [
+    {
+      "name": "C2R",
+      "id": "ebdbf979-edfa-5383-b891-5f305f6ab4c5",
+      "level": "Turbine",
+      "children": []
+    },
+    {
+      "name": "C3R",
+      "id": "6ec63780-83d1-53ba-b436-1226e203aa57",
+      "level": "Turbine",
+      "children": []
+    },
+    {
+      "name": "CGC",
+      "id": "3414cbfa-c8ff-51eb-b702-b53f845f5c5b",
+      "level": "Turbine",
+      "children": []
+    }
+  ]
+}

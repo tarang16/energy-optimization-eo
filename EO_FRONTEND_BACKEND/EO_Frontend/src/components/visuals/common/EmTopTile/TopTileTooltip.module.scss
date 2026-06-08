@@ -1,0 +1,141 @@
+@use 'config/scss/variables' as *;
+
+.monitoringhTooltipContainer {
+  max-height: 40vmin;
+
+  :global(.customFontsBold) {
+    span {
+      font-size: 1.2vmin !important;
+    }
+
+    sub,
+    sup {
+      color: $primary_gray !important;
+    }
+  }
+}
+
+.ToolTipContainer_First {
+  width: fit-content;
+}
+
+.PrimaryBlueBg {
+  background-color: $primary_blue_bg;
+  padding: 1vmin 0.5vmin;
+
+  div {
+    text-align: left;
+  }
+
+  .BorderRight {
+    border-right: 0.6vmin solid $primary_gray_4;
+  }
+}
+
+.tooltip-inner {
+  width: 320px;
+  max-width: 500px;
+}
+
+.AirSystemTooltip {
+  width: fit-content;
+}
+
+.CoolingWaterContainer {
+  width: 32vmin;
+  max-width: 37vmin;
+}
+
+.SteamLossContainer {
+  width: 40vmin;
+
+  .LeftContainerSteam {
+    width: 18vmin;
+  }
+
+  .RightContainerSteam {
+    width: calc(40vmin - 18vmin);
+  }
+}
+
+.SmallBorderRight {
+  border-right: 0.3vmin solid $primary_gray_2;
+  height: 1.8vmin;
+}
+
+.ToolTipContainerMain {
+  width: 20vmin;
+}
+
+.LeftContainer {
+  width: 15vmin;
+}
+
+.RightContainer {
+  width: calc(20vmin - 5vmin);
+}
+
+.w15 {
+  width: 15%;
+}
+
+.w20 {
+  width: 20%;
+}
+
+.w25 {
+  width: 25%;
+}
+
+.w30 {
+  width: 30%;
+}
+
+.textLeft {
+  text-align: left;
+}
+
+.textRight {
+  text-align: right !important;
+}
+
+.contentWrapper {
+  width: 100%;
+  padding-left: 1vmin;
+  padding-top: 0.5vmin;
+
+  .contentLeft {
+    width: 12vmin;
+  }
+
+  .contentRight {
+    width: calc(100% - 13vmin);
+  }
+
+  .contentLeftCooling {
+    width: 8vmin;
+  }
+
+  .contentRightCooling {
+    width: calc(100% - 9vmin);
+  }
+
+  .contentValueCooling {
+    width: 7vmin;
+    padding-top: 0.5vmin;
+  }
+
+  .energyConsumption {
+    width: 12vmin;
+    padding-top: 0.5vmin;
+  }
+
+  .contentValue {
+    width: 10vmin;
+    padding-top: 0.5vmin;
+  }
+
+  .textLeft {
+    text-align: left;
+  }
+}

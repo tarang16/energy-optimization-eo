@@ -1,0 +1,180 @@
+@use '../../../../config/scss//variables' as *;
+
+.stageTwoContainer {
+  .stage2btnContainer {
+    height: 3.5vmin;
+  }
+
+  .Stage2Wrapper1 {
+    display: flex;
+    gap: 3vmin;
+    align-items: center;
+    padding-top: 1vmin;
+
+    .lebelTextMargin {
+      margin-top: 0.3vmin;
+    }
+
+    .checkBox3Container {
+      input[type='checkbox'] {
+        margin-right: 1vmin;
+        cursor: pointer;
+        width: 2vmin;
+        height: 2vmin;
+        border: 1px solid $primary_blue !important;
+        border-radius: 0.3vmin !important;
+      }
+    }
+
+    .dateTimePickerContainer {
+      height: unset;
+
+      :global(.react-datepicker-wrapper) {
+        height: 3.5vmin;
+      }
+
+      label {
+        width: 13vmin;
+      }
+    }
+  }
+
+  .stage2formContainer {
+    margin-top: 2vmin;
+
+    .stage2dropdowncontainer {
+      display: flex;
+      flex-direction: column;
+      width: 40%;
+
+      .dropdownHeight {
+        height: 3.5vmin;
+      }
+    }
+
+    .checkBoxContainer {
+      margin-top: 1vmin;
+      width: 40%;
+
+      .labelText {
+        margin-top: 0.4vmin;
+      }
+    }
+
+    .dynamic_container {
+      width: 100%;
+
+      .dynamic_row {
+        margin-top: 1vmin;
+
+        .input_container {
+          margin-right: 1vmin;
+
+          input {
+            height: 3.5vmin;
+            outline: none;
+            padding: 0 0.6vmin;
+            border: 1px solid $primary_gray_3;
+
+            &:focus,
+            &:focus-visible {
+              border: 1px solid $primary_gray_3;
+            }
+          }
+
+          .labelText {
+            margin-bottom: 0.7vmin;
+          }
+        }
+
+        .stage2btnContainer {
+          display: flex;
+          margin-right: 0.5vmin;
+          gap: 0.4vmin;
+
+          button {
+            background-color: $primary_gray_4;
+            width: 3.5vmin;
+            height: 3.5vmin;
+            border-radius: 0.3vmin;
+            border: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.4vmin;
+
+            img {
+              width: 90%;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  :global(.blue_dropdownList) {
+    border-width: 0.1vmin;
+    border-color: $primary_gray_4;
+    border-style: solid;
+    box-shadow: none;
+  }
+
+  .dropdownBottom {
+    :global(.blue_dropdownList) {
+      max-height: 10vmin !important;
+    }
+  }
+
+  .dropdownTop {
+    :global(.blue_dropdownList) {
+      max-height: 10vmin !important;
+      top: unset !important;
+      bottom: 110% !important;
+    }
+  }
+
+  // .historyTableCustomClass{
+  //   border:2px solid red
+  // }
+
+  .historicButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2vmin;
+    color: $primary_blue;
+    background-color: transparent;
+    border: 1px solid $primary_blue;
+    cursor: pointer;
+    height: 100%;
+    padding: 1.4vmin 2vmin !important;
+    border-radius: 0.3vmin;
+    letter-spacing: 0.05vmin;
+  }
+}
+
+.historicSuggestionModal {
+  :global(.modal-dialog.modal-dialog-centered) {
+    min-width: 115vmin !important;
+    max-width: 115vmin !important;
+  }
+
+  table {
+    thead {
+      tr {
+        th {
+          text-align: left !important;
+          padding-left: 1.5vmin !important;
+        }
+      }
+    }
+
+    tbody {
+      tr {
+        td {
+          padding-left: 1.5vmin !important;
+        }
+      }
+    }
+  }
+}

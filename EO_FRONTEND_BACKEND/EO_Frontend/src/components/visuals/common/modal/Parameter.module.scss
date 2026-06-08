@@ -1,0 +1,146 @@
+@use 'config/scss/variables' as *;
+
+.parameterModalContainer {
+  .header {
+    cursor: pointer !important;
+  }
+
+  .parameterBody {
+    .buttonContainer {
+      .saveBtn {
+        background-color: $primary_blue;
+        border: none;
+        width: 14vmin;
+        border-radius: 0.3vmin;
+        color: $primary_white;
+        padding: 0.8vmin;
+      }
+    }
+
+    .tableContainer {
+      margin-top: 0.5vmin;
+      overflow-y: auto;
+      max-height: 39vmin;
+
+      table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0px;
+        table-layout: fixed;
+
+        thead {
+          height: 7vmin;
+          width: 100%;
+          position: sticky;
+          top: 0;
+          z-index: 10;
+
+          tr {
+            th {
+              position: relative;
+              background-color: $primary_blue_bg;
+              border-bottom: 1px solid $primary_gray_3;
+              color: $primary_gray;
+              font-size: 1.2vmin;
+              font-family: 'sabic_text_bold', serif;
+              text-transform: uppercase;
+              padding: 1vmin 0.5vmin 1vmin 2vmin;
+            }
+
+            tr th:nth-child(1),
+            tr th:nth-child(2) {
+              width: 30%;
+            }
+
+            tr th:nth-child(3),
+            tr th:nth-child(4) {
+              width: 20%;
+            }
+          }
+        }
+
+        tbody {
+          overflow-y: auto;
+          height: calc(100% - 7vmin);
+
+          tr {
+            td {
+              padding: 1vmin 0.5vmin 1vmin 2vmin;
+              font-size: 1.3vmin;
+              line-height: 1.2;
+              background-color: $primary_blue_bg;
+              color: $primary_gray;
+              font-family: 'sabic_text_regular', serif;
+              position: relative;
+              vertical-align: middle;
+              border-bottom: 1px solid #e6e7e8;
+              height: 7vmin;
+              text-transform: uppercase;
+
+              .fileTypeImgIcon {
+                width: 3vmin;
+              }
+
+              button {
+                border: none;
+                background: none;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.cancelBtnContainer {
+  width: 2.8vmin;
+  height: 2.8vmin;
+
+  button {
+    width: 100%;
+    height: 100%;
+
+    .img {
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+    }
+  }
+}
+
+:global(.modal > .modal-dialog) {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+:global(.modal > .modal-dialog > .modal-content) {
+  background-color: transparent !important;
+}
+
+:global(.modal > .modal-dialog > .modal-content > .react-draggable) {
+  position: relative !important;
+}
+
+.mainHeader {
+  height: 5vmin;
+}
+
+.subTitleHeader {
+  margin-bottom: 1vmin;
+}
+
+.dots {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  display: inline-block;
+
+  &.green {
+    background-color: $primary_green;
+  }
+
+  &.grey {
+    background-color: $primary_gray_2;
+  }
+}

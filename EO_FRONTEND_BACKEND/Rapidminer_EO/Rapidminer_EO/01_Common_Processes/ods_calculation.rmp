@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="UTF-8"?><process version="10.4.003">
+  <context>
+    <input/>
+    <output/>
+    <macros/>
+  </context>
+  <operator activated="true" class="process" compatibility="10.4.003" expanded="true" name="Process">
+    <parameter key="logverbosity" value="init"/>
+    <parameter key="random_seed" value="2001"/>
+    <parameter key="send_mail" value="never"/>
+    <parameter key="notification_email" value=""/>
+    <parameter key="process_duration_for_mail" value="30"/>
+    <parameter key="encoding" value="SYSTEM"/>
+    <process expanded="true">
+      <operator activated="true" class="subprocess" compatibility="10.4.003" expanded="true" height="145" name="initialization (9)" width="90" x="514" y="85">
+        <process expanded="true">
+          <operator activated="true" class="remove_duplicates" compatibility="10.4.003" expanded="true" height="103" name="Remove Duplicates" width="90" x="179" y="136">
+            <parameter key="attribute_filter_type" value="all"/>
+            <parameter key="attribute" value=""/>
+            <parameter key="attributes" value=""/>
+            <parameter key="use_except_expression" value="false"/>
+            <parameter key="value_type" value="attribute_value"/>
+            <parameter key="use_value_type_exception" value="false"/>
+            <parameter key="except_value_type" value="time"/>
+            <parameter key="block_type" value="attribute_block"/>
+            <parameter key="use_block_type_exception" value="false"/>
+            <parameter key="except_block_type" value="value_matrix_row_start"/>
+            <parameter key="invert_selection" value="false"/>
+            <parameter key="include_special_attributes" value="false"/>
+            <parameter key="treat_missing_values_as_duplicates" value="false"/>
+            <description align="center" color="transparent" colored="false" width="126">REMOVE ANY DUPLICATE RECORDS</description>
+          </operator>
+          <operator activated="true" class="remove_duplicates" compatibility="10.4.003" expanded="true" height="103" name="Remove Duplicates (57)" width="90" x="179" y="289">
+            <parameter key="attribute_filter_type" value="all"/>
+            <parameter key="attribute" value=""/>
+            <parameter key="attributes" value=""/>
+            <parameter key="use_except_expression" value="false"/>
+            <parameter key="value_type" value="attribute_value"/>
+            <parameter key="use_value_type_exception" value="false"/>
+            <parameter key="except_value_type" value="time"/>
+            <parameter key="block_type" value="attribute_block"/>
+            <parameter key="use_block_type_exception" value="false"/>
+            <parameter key="except_block_type" value="value_matrix_row_start"/>
+            <parameter key="invert_selection" value="false"/>
+            <parameter key="include_special_attributes" value="false"/>
+            <parameter key="treat_missing_values_as_duplicates" value="false"/>
+            <description align="center" color="transparent" colored="false" width="126">REMOVE ANY DUPLICATE RECORDS</description>
+          </operator>
+          <operator activated="true" class="subprocess" compatibility="10.4.003" expanded="true" height="103" name="prepare_input (9)" width="90" x="380" y="85">
+            <process expanded="true">
+              <operator activated="true" class="multiply" compatibility="10.4.003" expanded="true" height="82" name="effect" width="90" x="45" y="34"/>
+              <operator activated="true" class="select_attributes" compatibility="10.4.003" expanded="true" height="82" name="Select Attributes (123)" width="90" x="179" y="34">
+                <parameter key="attribute_filter_type" value="subset"/>
+                <parameter key="attribute" value=""/>
+                <parameter key="attributes" value="effect_expression|effect_name"/>
+                <parameter key="use_except_expression" value="false"/>
+                <parameter key="value_type" value="attribute_value"/>
+                <parameter key="use_value_type_exception" value="false"/>
+                <parameter key="except_value_type" value="time"/>
+                <parameter key="block_type" value="attribute_block"/>
+                <parameter key="use_block_type_exception" value="false"/>
+                <parameter key="except_block_type" value="value_matrix_row_start"/>
+                <parameter key="invert_selection" value="false"/>
+                <parameter key="include_special_attributes" value="false"/>
+                <description align="center" color="transparent" colored="false" width="126">expression&lt;br&gt;name</description>
+              </operator>
+              <operator activated="true" class="blending:rename" compatibility="10.4.003" expanded="true" height="82" name="Rename (89)" width="90" x="313" y="34">
+                <list key="rename attributes">
+                  <parameter key="effect_name" value="name"/>
+                  <parameter key="effect_expression" value="formula"/>
+                </list>
+                <parameter key="from_attribute" value=""/>
+                <parameter key="to_attribute" value=""/>
+                <description align="center" color="transparent" colored="false" width="126">rename to&lt;br&gt;name&lt;br&gt;formula</description>
+              </operator>
+              <operator activated="true" class="multiply" compatibility="10.4.003" expanded="true" height="82" name="cause (2)" width="90" x="45" y="238"/>
+              <operator activated="true" class="select_attributes" compatibility="10.4.003" expanded="true" height="82" name="Select Attributes (138)" width="90" x="179" y="238">
+                <parameter key="attribute_filter_type" value="subset"/>
+                <parameter key="attribute" value=""/>
+                <parameter key="attributes" value="cause_expression|cause_name"/>
+                <parameter key="use_except_expression" value="false"/>
+                <parameter key="value_type" value="attribute_value"/>
+                <parameter key="use_value_type_exception" value="false"/>
+                <parameter key="except_value_type" value="time"/>
+                <parameter key="block_type" value="attribute_block"/>
+                <parameter key="use_block_type_exception" value="false"/>
+                <parameter key="except_block_type" value="value_matrix_row_start"/>
+                <parameter key="invert_selection" value="false"/>
+                <parameter key="include_special_attributes" value="false"/>
+                <description align="center" color="transparent" colored="false" width="126">expression&lt;br&gt;name</description>
+              </operator>
+              <operator activated="true" class="blending:rename" compatibility="10.4.003" expanded="true" height="82" name="Rename (90)" width="90" x="313" y="238">
+                <list key="rename attributes">
+                  <parameter key="cause_expression" value="formula"/>
+                  <parameter key="cause_name" value="name"/>
+                </list>
+                <parameter key="from_attribute" value=""/>
+                <parameter key="to_attribute" value=""/>
+                <description align="center" color="transparent" colored="false" width="126">rename to&lt;br&gt;name&lt;br&gt;formula</description>
+              </operator>
+              <operator activated="true" class="append" compatibility="9.9.002" expanded="true" height="103" name="Append (6)" width="90" x="447" y="85">
+                <parameter key="data_management" value="auto"/>
+                <parameter key="merge_type" value="all"/>
+              </operator>
+              <connect from_port="in 1" to_op="effect" to_port="input"/>
+              <connect from_port="in 2" to_op="cause (2)" to_port="input"/>
+              <connect from_op="effect" from_port="output 1" to_op="Select Attributes (123)" to_port="example set input"/>
+              <connect from_op="Select Attributes (123)" from_port="example set output" to_op="Rename (89)" to_port="example set input"/>
+              <connect from_op="Rename (89)" from_port="example set output" to_op="Append (6)" to_port="example set 1"/>
+              <connect from_op="cause (2)" from_port="output 1" to_op="Select Attributes (138)" to_port="example set input"/>
+              <connect from_op="Select Attributes (138)" from_port="example set output" to_op="Rename (90)" to_port="example set input"/>
+              <connect from_op="Rename (90)" from_port="example set output" to_op="Append (6)" to_port="example set 2"/>
+              <connect from_op="Append (6)" from_port="merged set" to_port="out 1"/>
+              <portSpacing port="source_in 1" spacing="0"/>
+              <portSpacing port="source_in 2" spacing="0"/>
+              <portSpacing port="source_in 3" spacing="0"/>
+              <portSpacing port="sink_out 1" spacing="0"/>
+              <portSpacing port="sink_out 2" spacing="0"/>
+            </process>
+            <description align="center" color="transparent" colored="false" width="126">prepare dataframe merging cause and effect for further calculation</description>
+          </operator>
+          <operator activated="true" class="remove_duplicates" compatibility="10.4.003" expanded="true" height="103" name="Remove Duplicates (58)" width="90" x="179" y="442">
+            <parameter key="attribute_filter_type" value="all"/>
+            <parameter key="attribute" value=""/>
+            <parameter key="attributes" value=""/>
+            <parameter key="use_except_expression" value="false"/>
+            <parameter key="value_type" value="attribute_value"/>
+            <parameter key="use_value_type_exception" value="false"/>
+            <parameter key="except_value_type" value="time"/>
+            <parameter key="block_type" value="attribute_block"/>
+            <parameter key="use_block_type_exception" value="false"/>
+            <parameter key="except_block_type" value="value_matrix_row_start"/>
+            <parameter key="invert_selection" value="false"/>
+            <parameter key="include_special_attributes" value="false"/>
+            <parameter key="treat_missing_values_as_duplicates" value="false"/>
+            <description align="center" color="transparent" colored="false" width="126">REMOVE ANY DUPLICATE RECORDS</description>
+          </operator>
+          <connect from_port="in 1" to_port="out 1"/>
+          <connect from_port="in 2" to_op="Remove Duplicates" to_port="example set input"/>
+          <connect from_port="in 3" to_op="Remove Duplicates (57)" to_port="example set input"/>
+          <connect from_port="in 4" to_op="Remove Duplicates (58)" to_port="example set input"/>
+          <connect from_op="Remove Duplicates" from_port="example set output" to_op="prepare_input (9)" to_port="in 1"/>
+          <connect from_op="Remove Duplicates (57)" from_port="example set output" to_op="prepare_input (9)" to_port="in 2"/>
+          <connect from_op="prepare_input (9)" from_port="out 1" to_port="out 2"/>
+          <connect from_op="Remove Duplicates (58)" from_port="example set output" to_port="out 3"/>
+          <portSpacing port="source_in 1" spacing="0"/>
+          <portSpacing port="source_in 2" spacing="0"/>
+          <portSpacing port="source_in 3" spacing="0"/>
+          <portSpacing port="source_in 4" spacing="0"/>
+          <portSpacing port="source_in 5" spacing="0"/>
+          <portSpacing port="sink_out 1" spacing="0"/>
+          <portSpacing port="sink_out 2" spacing="0"/>
+          <portSpacing port="sink_out 3" spacing="0"/>
+          <portSpacing port="sink_out 4" spacing="0"/>
+        </process>
+        <description align="center" color="transparent" colored="false" width="126">INITIALIZE&lt;br&gt;Process Parameters and all other process parameters&lt;br&gt;1. tag_Data&lt;br&gt;2. effect&lt;br&gt;3. cause&lt;br&gt;4. mapping_&lt;br/&gt;effect_cause</description>
+      </operator>
+      <operator activated="true" class="subprocess" compatibility="10.4.003" expanded="true" height="124" name="main (10)" width="90" x="849" y="85">
+        <process expanded="true">
+          <operator activated="true" class="multiply" compatibility="10.4.003" expanded="true" height="82" name="data_main" width="90" x="45" y="34"/>
+          <operator activated="true" class="multiply" compatibility="10.4.003" expanded="true" height="82" name="mapping_effect_cause" width="90" x="45" y="238"/>
+          <operator activated="true" class="multiply" compatibility="10.4.003" expanded="true" height="82" name="inferred_effect_cause (2)" width="90" x="45" y="136"/>
+          <operator activated="true" class="subprocess" compatibility="10.4.003" expanded="true" height="103" name="compute_inferred_tag (2)" width="90" x="246" y="340">
+            <process expanded="true">
+              <operator activated="true" class="extract_macro" compatibility="10.4.003" expanded="true" height="68" name="inferred_tag_total (2)" width="90" x="313" y="85">
+                <parameter key="macro" value="Inferred_Tags_Total"/>
+                <parameter key="macro_type" value="number_of_examples"/>
+                <parameter key="statistics" value="average"/>
+                <parameter key="attribute_name" value=""/>
+                <list key="additional_macros"/>
+                <description align="center" color="transparent" colored="false" width="126">Inferred_Tags_Total</description>
+              </operator>
+              <operator activated="true" class="concurrency:loop" compatibility="10.4.003" expanded="true" height="103" name="loop_inferred_tag (2)" width="90" x="581" y="289">
+                <parameter key="number_of_iterations" value="%{Inferred_Tags_Total}"/>
+                <parameter key="iteration_macro" value="Inferred_Tags_Loop_Index"/>
+                <parameter key="reuse_results" value="true"/>
+                <parameter key="enable_parallel_execution" value="true"/>
+                <process expanded="true">
+                  <operator activated="true" class="extract_macro" compatibility="10.4.003" expanded="true" height="68" name="Extract Macro (8)" width="90" x="447" y="34">
+                    <parameter key="macro" value="Current_Inferred_Tags"/>
+                    <parameter key="macro_type" value="data_value"/>
+                    <parameter key="statistics" value="average"/>
+                    <parameter key="attribute_name" value="name"/>
+                    <parameter key="example_index" value="%{Inferred_Tags_Loop_Index}"/>
+                    <list key="additional_macros">
+                      <parameter key="Current_Inferred_Tags_Formula" value="formula"/>
+                    </list>
+                    <description align="center" color="transparent" colored="false" width="126">current&lt;br&gt;Inferred_Tags&lt;br&gt;Inferred_Tags&lt;br&gt;_Formula</description>
+                  </operator>
+                  <operator activated="true" class="generate_attributes" compatibility="10.4.003" expanded="true" height="82" name="Generate Attributes" width="90" x="447" y="238">
+                    <list key="function_descriptions">
+                      <parameter key="%{Current_Inferred_Tags}_ods" value="eval(%{Current_Inferred_Tags_Formula})"/>
+                    </list>
+                    <parameter key="keep_all" value="true"/>
+                    <description align="center" color="transparent" colored="false" width="126">Compute&lt;br/&gt;Inferred Tag</description>
+                  </operator>
+                  <connect from_port="input 1" to_op="Extract Macro (8)" to_port="example set"/>
+                  <connect from_port="input 2" to_op="Generate Attributes" to_port="example set input"/>
+                  <connect from_op="Extract Macro (8)" from_port="example set" to_port="output 1"/>
+                  <connect from_op="Generate Attributes" from_port="example set output" to_port="output 2"/>
+                  <portSpacing port="source_input 1" spacing="0"/>
+                  <portSpacing port="source_input 2" spacing="0"/>
+                  <portSpacing port="source_input 3" spacing="0"/>
+                  <portSpacing port="sink_output 1" spacing="0"/>
+                  <portSpacing port="sink_output 2" spacing="0"/>
+                  <portSpacing port="sink_output 3" spacing="0"/>
+                </process>
+                <description align="center" color="transparent" colored="false" width="126">This block computes inferred tags and handles exceptions</description>
+              </operator>
+              <operator activated="true" class="select_attributes" compatibility="10.4.003" expanded="true" height="82" name="Select Attributes (160)" width="90" x="715" y="289">
+                <parameter key="attribute_filter_type" value="regular_expression"/>
+                <parameter key="attribute" value=""/>
+                <parameter key="attributes" value=""/>
+                <parameter key="regular_expression" value="Timestamp|.+ods.*"/>
+                <parameter key="use_except_expression" value="false"/>
+                <parameter key="value_type" value="attribute_value"/>
+                <parameter key="use_value_type_exception" value="false"/>
+                <parameter key="except_value_type" value="time"/>
+                <parameter key="block_type" value="attribute_block"/>
+                <parameter key="use_block_type_exception" value="false"/>
+                <parameter key="except_block_type" value="value_matrix_row_start"/>
+                <parameter key="invert_selection" value="false"/>
+                <parameter key="include_special_attributes" value="false"/>
+              </operator>
+              <connect from_port="in 1" to_op="loop_inferred_tag (2)" to_port="input 2"/>
+              <connect from_port="in 2" to_op="inferred_tag_total (2)" to_port="example set"/>
+              <connect from_op="inferred_tag_total (2)" from_port="example set" to_op="loop_inferred_tag (2)" to_port="input 1"/>
+              <connect from_op="loop_inferred_tag (2)" from_port="output 2" to_op="Select Attributes (160)" to_port="example set input"/>
+              <connect from_op="Select Attributes (160)" from_port="example set output" to_port="out 1"/>
+              <portSpacing port="source_in 1" spacing="0"/>
+              <portSpacing port="source_in 2" spacing="0"/>
+              <portSpacing port="source_in 3" spacing="0"/>
+              <portSpacing port="sink_out 1" spacing="0"/>
+              <portSpacing port="sink_out 2" spacing="0"/>
+            </process>
+            <description align="center" color="transparent" colored="false" width="126">Computaion of Inferred tags&lt;br/&gt; or&lt;br/&gt;compute effect cause expressions</description>
+          </operator>
+          <operator activated="true" class="subprocess" compatibility="10.4.003" expanded="true" height="103" name="transfrom" width="90" x="380" y="340">
+            <process expanded="true">
+              <operator activated="true" class="rename_by_replacing" compatibility="10.4.003" expanded="true" height="82" name="Rename by Replacing (5)" width="90" x="112" y="34">
+                <parameter key="attribute_filter_type" value="all"/>
+                <parameter key="attribute" value=""/>
+                <parameter key="attributes" value=""/>
+                <parameter key="use_except_expression" value="false"/>
+                <parameter key="value_type" value="attribute_value"/>
+                <parameter key="use_value_type_exception" value="false"/>
+                <parameter key="except_value_type" value="time"/>
+                <parameter key="block_type" value="attribute_block"/>
+                <parameter key="use_block_type_exception" value="false"/>
+                <parameter key="except_block_type" value="value_matrix_row_start"/>
+                <parameter key="invert_selection" value="false"/>
+                <parameter key="include_special_attributes" value="false"/>
+                <parameter key="replace_what" value="(.+)_ods"/>
+                <parameter key="replace_by" value="$1"/>
+                <description align="center" color="transparent" colored="false" width="126">Remove _ods from tag name</description>
+              </operator>
+              <operator activated="true" class="de_pivot" compatibility="10.4.003" expanded="true" height="82" name="De-Pivot (18)" width="90" x="246" y="34">
+                <list key="attribute_name">
+                  <parameter key="value" value="^(?!Timestamp$).+"/>
+                </list>
+                <parameter key="index_attribute" value="tag"/>
+                <parameter key="create_nominal_index" value="true"/>
+                <parameter key="keep_missings" value="false"/>
+                <description align="center" color="transparent" colored="false" width="126">value</description>
+              </operator>
+              <operator activated="true" class="multiply" compatibility="10.4.003" expanded="true" height="103" name="Multiply (29)" width="90" x="380" y="34"/>
+              <connect from_port="in 1" to_op="Rename by Replacing (5)" to_port="example set input"/>
+              <connect from_op="Rename by Replacing (5)" from_port="example set output" to_op="De-Pivot (18)" to_port="example set input"/>
+              <connect from_op="De-Pivot (18)" from_port="example set output" to_op="Multiply (29)" to_port="input"/>
+              <connect from_op="Multiply (29)" from_port="output 1" to_port="out 1"/>
+              <connect from_op="Multiply (29)" from_port="output 2" to_port="out 2"/>
+              <portSpacing port="source_in 1" spacing="0"/>
+              <portSpacing port="source_in 2" spacing="0"/>
+              <portSpacing port="sink_out 1" spacing="0"/>
+              <portSpacing port="sink_out 2" spacing="0"/>
+              <portSpacing port="sink_out 3" spacing="0"/>
+            </process>
+            <description align="center" color="transparent" colored="false" width="126">separate ods effect and cause tags according to the data format&lt;br/&gt;</description>
+          </operator>
+          <operator activated="true" class="concurrency:join" compatibility="10.4.003" expanded="true" height="82" name="Join (101)" width="90" x="514" y="136">
+            <parameter key="remove_double_attributes" value="true"/>
+            <parameter key="join_type" value="left"/>
+            <parameter key="use_id_attribute_as_key" value="false"/>
+            <list key="key_attributes">
+              <parameter key="effect_name" value="tag"/>
+            </list>
+            <parameter key="keep_both_join_attributes" value="false"/>
+            <description align="center" color="transparent" colored="false" width="126">LEFT JOIN&lt;br&gt;effect_tag_name = tag</description>
+          </operator>
+          <operator activated="true" class="blending:rename" compatibility="10.4.003" expanded="true" height="82" name="Rename (91)" width="90" x="648" y="136">
+            <list key="rename attributes">
+              <parameter key="value" value="effect_value"/>
+            </list>
+            <parameter key="from_attribute" value=""/>
+            <parameter key="to_attribute" value=""/>
+            <description align="center" color="transparent" colored="false" width="126">value to effect_value</description>
+          </operator>
+          <operator activated="true" class="concurrency:join" compatibility="10.4.003" expanded="true" height="82" name="Join (102)" width="90" x="782" y="340">
+            <parameter key="remove_double_attributes" value="true"/>
+            <parameter key="join_type" value="left"/>
+            <parameter key="use_id_attribute_as_key" value="false"/>
+            <list key="key_attributes">
+              <parameter key="cause_name" value="tag"/>
+              <parameter key="Timestamp" value="Timestamp"/>
+            </list>
+            <parameter key="keep_both_join_attributes" value="false"/>
+            <description align="center" color="transparent" colored="false" width="126">LEFT&lt;br&gt;cause_tag_name = tag</description>
+          </operator>
+          <operator activated="true" class="blending:rename" compatibility="10.4.003" expanded="true" height="82" name="Rename (92)" width="90" x="916" y="340">
+            <list key="rename attributes">
+              <parameter key="value" value="cause_value"/>
+            </list>
+            <parameter key="from_attribute" value=""/>
+            <parameter key="to_attribute" value=""/>
+            <description align="center" color="transparent" colored="false" width="126">value to cause_value</description>
+          </operator>
+          <operator activated="true" class="filter_examples" compatibility="10.4.003" expanded="true" height="103" name="Filter Examples" width="90" x="1050" y="340">
+            <parameter key="parameter_expression" value=""/>
+            <parameter key="condition_class" value="custom_filters"/>
+            <parameter key="invert_filter" value="false"/>
+            <list key="filters_list">
+              <parameter key="filters_entry_key" value="effect_value.gt.0"/>
+              <parameter key="filters_entry_key" value="cause_value.gt.0"/>
+            </list>
+            <parameter key="filters_logic_and" value="true"/>
+            <parameter key="filters_check_metadata" value="true"/>
+            <description align="center" color="transparent" colored="false" width="126">effect_value GREATER THAN 0&lt;br&gt;cause_value NOT GREATER THAN 0&lt;br&gt;This filter is applied to select only the effects and causes that are coming for the particular time</description>
+          </operator>
+          <connect from_port="in 1" to_op="data_main" to_port="input"/>
+          <connect from_port="in 2" to_op="inferred_effect_cause (2)" to_port="input"/>
+          <connect from_port="in 3" to_op="mapping_effect_cause" to_port="input"/>
+          <connect from_op="data_main" from_port="output 1" to_op="compute_inferred_tag (2)" to_port="in 1"/>
+          <connect from_op="mapping_effect_cause" from_port="output 1" to_op="Join (101)" to_port="left"/>
+          <connect from_op="inferred_effect_cause (2)" from_port="output 1" to_op="compute_inferred_tag (2)" to_port="in 2"/>
+          <connect from_op="compute_inferred_tag (2)" from_port="out 1" to_op="transfrom" to_port="in 1"/>
+          <connect from_op="transfrom" from_port="out 1" to_op="Join (101)" to_port="right"/>
+          <connect from_op="transfrom" from_port="out 2" to_op="Join (102)" to_port="right"/>
+          <connect from_op="Join (101)" from_port="join" to_op="Rename (91)" to_port="example set input"/>
+          <connect from_op="Rename (91)" from_port="example set output" to_op="Join (102)" to_port="left"/>
+          <connect from_op="Join (102)" from_port="join" to_op="Rename (92)" to_port="example set input"/>
+          <connect from_op="Rename (92)" from_port="example set output" to_op="Filter Examples" to_port="example set input"/>
+          <connect from_op="Filter Examples" from_port="example set output" to_port="out 1"/>
+          <portSpacing port="source_in 1" spacing="0"/>
+          <portSpacing port="source_in 2" spacing="0"/>
+          <portSpacing port="source_in 3" spacing="0"/>
+          <portSpacing port="source_in 4" spacing="0"/>
+          <portSpacing port="sink_out 1" spacing="0"/>
+          <portSpacing port="sink_out 2" spacing="0"/>
+        </process>
+        <description align="center" color="transparent" colored="false" width="126">I/P 1: tag_data&lt;br&gt;I/P 2: cause_effect_&lt;br&gt;inferred_Details&lt;br&gt;I/P 3: mapping_&lt;br/&gt;effect_cause&lt;br/&gt;&lt;br&gt;o/p: ods_output</description>
+      </operator>
+      <connect from_port="input 1" to_op="initialization (9)" to_port="in 1"/>
+      <connect from_port="input 2" to_op="initialization (9)" to_port="in 2"/>
+      <connect from_port="input 3" to_op="initialization (9)" to_port="in 3"/>
+      <connect from_port="input 4" to_op="initialization (9)" to_port="in 4"/>
+      <connect from_op="initialization (9)" from_port="out 1" to_op="main (10)" to_port="in 1"/>
+      <connect from_op="initialization (9)" from_port="out 2" to_op="main (10)" to_port="in 2"/>
+      <connect from_op="initialization (9)" from_port="out 3" to_op="main (10)" to_port="in 3"/>
+      <connect from_op="main (10)" from_port="out 1" to_port="result 1"/>
+      <portSpacing port="source_input 1" spacing="0"/>
+      <portSpacing port="source_input 2" spacing="0"/>
+      <portSpacing port="source_input 3" spacing="0"/>
+      <portSpacing port="source_input 4" spacing="0"/>
+      <portSpacing port="source_input 5" spacing="0"/>
+      <portSpacing port="sink_result 1" spacing="0"/>
+      <portSpacing port="sink_result 2" spacing="0"/>
+      <description align="center" color="red" colored="true" height="568" resized="true" width="330" x="394" y="16">FE initialization</description>
+      <description align="center" color="green" colored="true" height="568" resized="true" width="326" x="732" y="16">Main</description>
+      <description align="center" color="transparent" colored="true" height="104" resized="false" width="180" x="798" y="278"/>
+      <description align="center" color="purple" colored="true" height="570" resized="true" width="382" x="10" y="16">ODS&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;Author:&lt;br&gt;Akshay Hasabe&lt;br&gt;Naveen Kumar&lt;br&gt;Karthik Sanagapalli&lt;br&gt;&lt;br&gt;&lt;br&gt;Overview:&lt;br&gt;The suggestion block analyzes cause-effect relationships using health checks and logic from multiple tables to generate insights. It maps causes to effects and presents tailored messages from the `message_info` table as actionable recommendations for issue resolution.&lt;br&gt;&lt;br&gt;Inputs:&lt;br&gt;1. tag_Data&lt;br&gt;2. effect&lt;br&gt;3. cause&lt;br&gt;4. mapping_effect_cause&lt;br&gt;&lt;br&gt;Output:1.&lt;br&gt;1. ods_output&lt;br&gt;&lt;br&gt;</description>
+    </process>
+  </operator>
+</process>

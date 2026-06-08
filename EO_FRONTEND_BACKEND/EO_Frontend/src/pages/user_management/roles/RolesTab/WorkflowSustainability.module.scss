@@ -1,0 +1,117 @@
+@use 'config/scss/variables' as *;
+
+.searchBarHeight {
+  height: 3.5vmin;
+}
+
+.addUserSection {
+  background-color: $primary_gray_5;
+  border-radius: 4px;
+  margin-bottom: 7px;
+  padding: 1vmin;
+}
+
+.User {
+  background-color: $primary_blue_bg;
+  padding: 1vmin;
+  margin: 1vmin 0;
+  border-radius: 4px;
+
+  span {
+    flex: 1;
+  }
+
+  button {
+    border: none;
+    outline: none;
+    background: transparent;
+    flex: 0.1;
+  }
+
+  img {
+    filter: none;
+    width: 2vmin;
+    height: 2vmin;
+  }
+}
+
+.addManager {
+  span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1vmin;
+
+    img {
+      height: 1.5vmin;
+      width: 1.5vmin;
+      margin-bottom: 0.5vmin;
+    }
+  }
+
+  button {
+    border: 1px solid $primary_blue;
+    border-radius: 0.3vmin;
+    padding: 0 1vmin;
+    cursor: pointer;
+    padding-top: 0.2vmin;
+
+    height: 3vmin;
+
+    &:hover {
+      border: 1px solid $primary_blue;
+    }
+  }
+}
+
+.addUserBtnContainer {
+  text-align: end;
+  height: 3.5vmin;
+  display: flex;
+  justify-content: flex-end;
+  align-content: center;
+
+  .adduserSubmitBtn {
+    background-color: $primary_blue;
+    color: $primary_white;
+    border: none;
+    display: inline-block;
+    height: 100%;
+    border-radius: 0.3vmin;
+    padding-top: 0.3vmin;
+    width: 12vmin;
+    cursor: pointer;
+
+    &:disabled {
+      background-color: $primary_gray_2;
+      color: $primary_white;
+      cursor: not-allowed;
+    }
+  }
+
+  .adduserCancelBtn {
+    background-color: $primary_blue_bg;
+    color: $primary_blue;
+    border: 1px solid $primary_blue;
+    display: inline-block;
+    height: 100%;
+    border-radius: 0.3vmin;
+    padding-top: 0.3vmin;
+    width: 12vmin;
+    cursor: pointer;
+  }
+}
+
+.blinkingImg {
+  border: none;
+  outline: none;
+  background: transparent;
+  cursor: not-allowed;
+  padding: 0;
+
+  img {
+    width: 3vmin;
+    height: 3vmin;
+    mix-blend-mode: multiply;
+  }
+}

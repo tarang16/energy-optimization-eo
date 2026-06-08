@@ -1,0 +1,373 @@
+﻿message_info_id,message,category
+1,"Reduce Load in Boiler 1 In Steps of 5T/HR, Specific Energy Consumption High.",ods_cause_suggestion
+2,"Reduce Load in Boiler 2 In Steps of 5T/HR, Specific Energy Consumption High.",ods_cause_suggestion
+3,"Reduce Load in Boiler 3 In Steps of 5T/HR, Specific Energy Consumption High.",ods_cause_suggestion
+4,"Reduce Load in Boiler 4 In Steps of 5T/HR, Specific Energy Consumption High.",ods_cause_suggestion
+5,"Reduce Load in Boiler 5 In Steps of 5T/HR, Specific Energy Consumption High.",ods_cause_suggestion
+6,"Increase Load in Boiler 1 In Steps of 5T/HR, Specific Energy Consumption Low.",ods_cause_suggestion
+7,"Increase Load in Boiler 2 In Steps of 5T/HR, Specific Energy Consumption Low.",ods_cause_suggestion
+8,"Increase Load in Boiler 3 In Steps of 5T/HR, Specific Energy Consumption Low.",ods_cause_suggestion
+9,"Increase Load in Boiler 4 In Steps of 5T/HR, Specific Energy Consumption Low.",ods_cause_suggestion
+10,"Increase Load in Boiler 5 In Steps of 5T/HR, Specific Energy Consumption Low.",ods_cause_suggestion
+11,Stop BFW A Motor,ods_cause_suggestion
+12,Stop BFW B Turbine,ods_cause_suggestion
+13,Stop BFW C Turbine,ods_cause_suggestion
+14,Stop BFW D Motor,ods_cause_suggestion
+15,Stop BFW E Turbine,ods_cause_suggestion
+16,Stop BFW F Motor,ods_cause_suggestion
+17,Run BFW A Motor,ods_cause_suggestion
+18,Run BFW B Turbine,ods_cause_suggestion
+19,Run BFW C Turbine,ods_cause_suggestion
+20,Run BFW D Motor,ods_cause_suggestion
+21,Run BFW E Turbine,ods_cause_suggestion
+22,Run BFW F Motor,ods_cause_suggestion
+23,Stop VHP BFW A Motor,ods_cause_suggestion
+24,Stop VHP BFW B Turbine,ods_cause_suggestion
+25,Stop VHP BFW C Turbine,ods_cause_suggestion
+26,Run VHP BFW A Motor,ods_cause_suggestion
+27,Run VHP BFW B Turbine,ods_cause_suggestion
+28,Run VHP BFW C Turbine,ods_cause_suggestion
+29,Stop CW A Turbine,ods_cause_suggestion
+30,Stop CW B Turbine,ods_cause_suggestion
+31,Stop CW C Motor,ods_cause_suggestion
+32,Stop CW D Motor,ods_cause_suggestion
+33,Stop CW E Motor,ods_cause_suggestion
+34,Stop CW F Motor,ods_cause_suggestion
+35,Stop CW G Turbine,ods_cause_suggestion
+36,Run CW A Turbine,ods_cause_suggestion
+37,Run CW B Turbine,ods_cause_suggestion
+38,Run CW C Motor,ods_cause_suggestion
+39,Run CW D Motor,ods_cause_suggestion
+40,Run CW E Motor,ods_cause_suggestion
+41,Run CW F Motor,ods_cause_suggestion
+42,Run CW G Turbine,ods_cause_suggestion
+43,Stop Air Compressor A Turbine,ods_cause_suggestion
+44,Stop Air Compressor B Motor,ods_cause_suggestion
+45,Stop Air Compressor C Motor,ods_cause_suggestion
+46,Stop Air Compressor D Turbine,ods_cause_suggestion
+47,Run Air Compressor A Turbine,ods_cause_suggestion
+48,Run Air Compressor B Motor,ods_cause_suggestion
+49,Run Air Compressor C Motor,ods_cause_suggestion
+50,Run Air Compressor D Turbine,ods_cause_suggestion
+51,Stop DMW A Turbine,ods_cause_suggestion
+52,Stop DMW B Motor,ods_cause_suggestion
+53,Stop DMW C Turbine,ods_cause_suggestion
+54,Run DMW A Turbine,ods_cause_suggestion
+55,Run DMW B Motor,ods_cause_suggestion
+56,Run DMW C Turbine,ods_cause_suggestion
+57,"BFW Drives Running is Higher, Stop Extra Drives.",ods_cause_suggestion
+58,"BFW Drives Running is Lower, Start Extra Drives To meet BFW Demand.",ods_cause_suggestion
+59,"VHP BFW Drives Running is Higher, Stop Extra Drives.",ods_cause_suggestion
+60,"Total No. of Drives Running is Lower, Start Extra Drives To meet VHP Demand.",ods_cause_suggestion
+61,"CW Drives Running is Higher, Stop Extra Drives.",ods_cause_suggestion
+62,"Total No. of Drives Running is Lower, Start Extra Drives To meet CW Demand.",ods_cause_suggestion
+63,"Air Compressor Drives Running is Higher, Stop Extra Drives.",ods_cause_suggestion
+64,"Total No. of Drives Running is Lower, Start Extra Drives To meet Air Demand.",ods_cause_suggestion
+65,"DMW Drives Running is Higher, Stop Extra Drives.",ods_cause_suggestion
+66,"Total No. of Drives Running is Lower, Start Extra Drives To meet DMW Demand.",ods_cause_suggestion
+67,"Considering Buffer Margin in Boilers HP Steam Generation, Boiler 1 to Be Kept on Hot Standby.",ods_cause_suggestion
+68,"Considering Buffer Margin in Boilers HP Steam Generation, Boiler 2 to Be Kept on Hot Standby.",ods_cause_suggestion
+69,"Considering Buffer Margin in Boilers HP Steam Generation, Boiler 3 to Be Kept on Hot Standby.",ods_cause_suggestion
+70,"Considering Buffer Margin in Boilers HP Steam Generation, Boiler 4 to Be Kept on Hot Standby.",ods_cause_suggestion
+71,"Considering Buffer Margin in Boilers HP Steam Generation, Boiler 5 to Be Kept on Hot Standby.",ods_cause_suggestion
+72,"HP to MP Steam LetDown Flow & MP to LP Steam Letdown Flow is Higher, Switchover BFW Motor to Turbine to Reduce HP to MP Steam LetDown Flow & MP to LP Steam Letdown Flow.",ods_cause_suggestion
+73,"LP Steam Venting & Dumping is Higher, Switchover BFW Turbine to Motor to LP Dumping & Venting.",ods_cause_suggestion
+74,"HP to MP Steam LetDown Flow & MP to LP Steam Letdown Flow is Higher, Switchover VHP BFW Motor to Turbine to Reduce HP to MP Steam LetDown Flow & MP to LP Steam Letdown Flow.",ods_cause_suggestion
+75,"LP Steam Venting & Dumping is Higher, Switchover VHP BFW Turbine to Motor to LP Dumping & Venting.",ods_cause_suggestion
+76,"HP to MP Steam LetDown Flow & MP to LP Steam Letdown Flow is Higher, Switchover CW Motor to Turbine to Reduce HP to MP Steam LetDown Flow & MP to LP Steam Letdown Flow.",ods_cause_suggestion
+77,"LP Steam Venting & Dumping is Higher, Switchover CW Turbine to Motor to LP Dumping & Venting.",ods_cause_suggestion
+78,"HP to MP Steam LetDown Flow & MP to LP Steam Letdown Flow is Higher, Switchover Air Compressor Motor to Turbine to Reduce HP to MP Steam LetDown Flow & MP to LP Steam Letdown Flow.",ods_cause_suggestion
+79,"LP Steam Venting & Dumping is Higher, Switchover Air Compressor Turbine to Motor to LP Dumping & Venting.",ods_cause_suggestion
+80,"HP to MP Steam LetDown Flow & MP to LP Steam Letdown Flow is Higher, Switchover DMW Motor to Turbine to Reduce HP to MP Steam LetDown Flow & MP to LP Steam Letdown Flow.",ods_cause_suggestion
+81,"LP Steam Venting & Dumping is Higher, Switchover DMW Turbine to Motor to LP Dumping & Venting.",ods_cause_suggestion
+82,"Considering Buffer Margin in Boilers HP Steam Generation, Shutdown Boiler 1 & Keep on Hot Standby.",ods_cause_suggestion
+83,"Considering Buffer Margin in Boilers HP Steam Generation, Shutdown Boiler 2 & Keep on Hot Standby.",ods_cause_suggestion
+84,"Considering Buffer Margin in Boilers HP Steam Generation, Shutdown Boiler 3 & Keep on Hot Standby.",ods_cause_suggestion
+85,"Considering Buffer Margin in Boilers HP Steam Generation, Shutdown Boiler 4 & Keep on Hot Standby.",ods_cause_suggestion
+86,"Considering Buffer Margin in Boilers HP Steam Generation, Shutdown Boiler 5 & Keep on Hot Standby.",ods_cause_suggestion
+87,"Reduce Load in Boiler 1 In Steps of 5T/HR, Specific Energy Consumption High & Increase Load in Other Boilers. Kindly refer to Load biasing in Optimization Results.",ods_cause_suggestion
+88,"Reduce Load in Boiler 2 In Steps of 5T/HR, Specific Energy Consumption High & Increase Load in Other Boilers. Kindly refer to Load biasing in Optimization Results.",ods_cause_suggestion
+89,"Reduce Load in Boiler 3 In Steps of 5T/HR, Specific Energy Consumption High & Increase Load in Other Boilers. Kindly refer to Load biasing in Optimization Results.",ods_cause_suggestion
+90,"Reduce Load in Boiler 4 In Steps of 5T/HR, Specific Energy Consumption High & Increase Load in Other Boilers. Kindly refer to Load biasing in Optimization Results.",ods_cause_suggestion
+91,"Reduce Load in Boiler 5 In Steps of 5T/HR, Specific Energy Consumption High & Increase Load in Other Boilers. Kindly refer to Load biasing in Optimization Results.",ods_cause_suggestion
+92,"HP to MP Steam LetDown Flow/MP to LP Steam Letdown Flow is Higher, Switchover BFW Motor to Turbine to Reduce HP to MP Steam LetDown Flow/MP to LP Steam Letdown Flow, Refer Optimization Results For Specific Equipment Switchover.",ods_cause_suggestion
+93,"LP Steam Venting/Dumping is Higher, Switchover BFW Turbine to Motor to Reduce LP Dumping/Venting, Refer Optimization Results For Specific Equipment Switchover.",ods_cause_suggestion
+94,"HP to MP Steam LetDown Flow/MP to LP Steam Letdown Flow is Higher, Switchover VHP BFW Motor to Turbine to Reduce HP to MP Steam LetDown Flow/MP to LP Steam Letdown Flow, Refer Optimization Results For Specific Equipment Switchover.",ods_cause_suggestion
+95,"LP Steam Venting/Dumping is Higher, Switchover VHP BFW Turbine to Motor to Reduce LP Dumping/Venting, Refer Optimization Results For Specific Equipment Switchover.",ods_cause_suggestion
+96,"HP to MP Steam LetDown Flow/MP to LP Steam Letdown Flow is Higher, Switchover CW Motor to Turbine to Reduce HP to MP Steam LetDown Flow/MP to LP Steam Letdown Flow, Refer Optimization Results For Specific Equipment Switchover.",ods_cause_suggestion
+97,"LP Steam Venting/Dumping is Higher, Switchover CW Turbine to Motor to Reduce LP Dumping/Venting, Refer Optimization Results For Specific Equipment Switchover.",ods_cause_suggestion
+98,"HP to MP Steam LetDown Flow/MP to LP Steam Letdown Flow is Higher, Switchover Air Compressor Motor to Turbine to Reduce HP to MP Steam LetDown Flow/MP to LP Steam Letdown Flow, Refer Optimization Results For Specific Equipment Switchover.",ods_cause_suggestion
+99,"LP Steam Venting/Dumping is Higher, Switchover Air Compressor Turbine to Motor to Reduce LP Dumping/Venting, Refer Optimization Results For Specific Equipment Switchover.",ods_cause_suggestion
+100,"HP to MP Steam LetDown Flow/MP to LP Steam Letdown Flow is Higher, Switchover DMW Motor to Turbine to Reduce HP to MP Steam LetDown Flow/MP to LP Steam Letdown Flow, Refer Optimization Results For Specific Equipment Switchover.",ods_cause_suggestion
+101,"LP Steam Venting/Dumping is Higher, Switchover DMW Turbine to Motor to LP Dumping/Venting, Refer Optimization Results For Specific Equipment Switchover.",ods_cause_suggestion
+102,"BFW Drives Running is Higher, Stop Extra Drives. Refer Optimization Results For Specific Equipment Shutdown.",ods_cause_suggestion
+103,"BFW Drives Running is Lower, Start Extra Drives To meet BFW Demand. Refer Optimization Results For Specific Equipment Startup.",ods_cause_suggestion
+104,"VHP BFW Drives Running is Higher, Stop Extra Drives. Refer Optimization Results For Specific Equipment Shutdown.",ods_cause_suggestion
+105,"VHP BFW Drives Running is Lower, Start Extra Drives To meet VHP BFW Demand. Refer Optimization Results For Specific Equipment Startup.",ods_cause_suggestion
+106,"CW Drives Running is Higher, Stop Extra Drives. Refer Optimization Results For Specific Equipment Shutdown.",ods_cause_suggestion
+107,"CW Drives Running is Lower, Start Extra Drives To meet CW Demand. Refer Optimization Results For Specific Equipment Startup.",ods_cause_suggestion
+108,"Air Compressor Drives Running is Higher, Stop Extra Drives. Refer Optimization Results For Specific Equipment Shutdown.",ods_cause_suggestion
+109,"Air Compressor Drives Running is Lower, Start Extra Drives To meet AIr Demand. Refer Optimization Results For Specific Equipment Startup.",ods_cause_suggestion
+110,"DMW Drives Running is Higher, Stop Extra Drives. Refer Optimization Results For Specific Equipment Shutdown.",ods_cause_suggestion
+111,"DMW Drives Running is Lower, Start Extra Drives To meet DMW Demand. Refer Optimization Results For Specific Equipment Startup.",ods_cause_suggestion
+112,"Considering Buffer Margin in Boilers HP Steam Generation, Shutdown Boiler 1 & Keep on Hot Standby & Increase Load in Other Boilers. Kindly refer to Load biasing in Optimization Results.",ods_cause_suggestion
+113,"Considering Buffer Margin in Boilers HP Steam Generation, Shutdown Boiler 2 & Keep on Hot Standby & Increase Load in Other Boilers. Kindly refer to Load biasing in Optimization Results.",ods_cause_suggestion
+114,"Considering Buffer Margin in Boilers HP Steam Generation, Shutdown Boiler 3 & Keep on Hot Standby & Increase Load in Other Boilers. Kindly refer to Load biasing in Optimization Results.",ods_cause_suggestion
+115,"Considering Buffer Margin in Boilers HP Steam Generation, Shutdown Boiler 4 & Keep on Hot Standby & Increase Load in Other Boilers. Kindly refer to Load biasing in Optimization Results.",ods_cause_suggestion
+116,"Considering Buffer Margin in Boilers HP Steam Generation, Shutdown Boiler 5 & Keep on Hot Standby & Increase Load in Other Boilers. Kindly refer to Load biasing in Optimization Results.",ods_cause_suggestion
+117,Shutdown Boiler 1 & Keep on Hot Standby & Increase Load in Other Boilers to Increase Overall Boiler Load to 70-75%. Kindly refer to Load biasing in Optimization Results.,ods_cause_suggestion
+118,Shutdown Boiler 2 & Keep on Hot Standby & Increase Load in Other Boilers to Increase Overall Boiler Load to 70-75%. Kindly refer to Load biasing in Optimization Results.,ods_cause_suggestion
+119,Shutdown Boiler 3 & Keep on Hot Standby & Increase Load in Other Boilers to Increase Overall Boiler Load to 70-75%. Kindly refer to Load biasing in Optimization Results.,ods_cause_suggestion
+120,Shutdown Boiler 4 & Keep on Hot Standby & Increase Load in Other Boilers to Increase Overall Boiler Load to 70-75%. Kindly refer to Load biasing in Optimization Results.,ods_cause_suggestion
+121,Shutdown Boiler 5 & Keep on Hot Standby & Increase Load in Other Boilers to Increase Overall Boiler Load to 70-75%. Kindly refer to Load biasing in Optimization Results.,ods_cause_suggestion
+122,"Reduce Load in Boiler 1 In Steps of 5T/HR, Specific Energy Consumption High & Increase Load in Other Boilers to Increase Overall Boiler Load to 70-75%. Kindly refer to Load biasing in Optimization Results.",ods_cause_suggestion
+123,"Reduce Load in Boiler 2 In Steps of 5T/HR, Specific Energy Consumption High & Increase Load in Other Boilers to Increase Overall Boiler Load to 70-75%. Kindly refer to Load biasing in Optimization Results.",ods_cause_suggestion
+124,"Reduce Load in Boiler 3 In Steps of 5T/HR, Specific Energy Consumption High & Increase Load in Other Boilers to Increase Overall Boiler Load to 70-75%. Kindly refer to Load biasing in Optimization Results.",ods_cause_suggestion
+125,"Reduce Load in Boiler 4 In Steps of 5T/HR, Specific Energy Consumption High & Increase Load in Other Boilers to Increase Overall Boiler Load to 70-75%. Kindly refer to Load biasing in Optimization Results.",ods_cause_suggestion
+126,"Reduce Load in Boiler 5 In Steps of 5T/HR, Specific Energy Consumption High & Increase Load in Other Boilers to Increase Overall Boiler Load to 70-75%. Kindly refer to Load biasing in Optimization Results.",ods_cause_suggestion
+127,"Switchover BFW Motor to Turbine to Reduce HP to MP Steam LetDown Flow/MP to LP Steam Letdown Flow, Refer Optimization Results For Specific Motor to Turbine Switchover.",ods_cause_suggestion
+128,"Switchover BFW Turbine to Motor to Reduce LP Dumping/Venting, Refer Optimization Results For Specific Turbine to Motor Switchover.",ods_cause_suggestion
+129,"Switchover VHP BFW Motor to Turbine to Reduce HP to MP Steam LetDown Flow/MP to LP Steam Letdown Flow, Refer Optimization Results For Specific Motor to Turbine Switchover.",ods_cause_suggestion
+130,"Switchover VHP BFW Turbine to Motor to Reduce LP Dumping/Venting, Refer Optimization Results For Specific Turbine to Motor Switchover.",ods_cause_suggestion
+131,"Switchover CW Motor to Turbine to Reduce HP to MP Steam LetDown Flow/MP to LP Steam Letdown Flow, Refer Optimization Results For Specific Motor to Turbine Switchover.",ods_cause_suggestion
+132,"Switchover CW Turbine to Motor to Reduce LP Dumping/Venting, Refer Optimization Results For Specific Turbine to Motor Switchover.",ods_cause_suggestion
+133,"Switchover Air Compressor Motor to Turbine to Reduce HP to MP Steam LetDown Flow/MP to LP Steam Letdown Flow, Refer Optimization Results For Specific Motor to Turbine Switchover.",ods_cause_suggestion
+134,"Switchover Air Compressor Turbine to Motor to Reduce LP Dumping/Venting, Refer Optimization Results For Specific Turbine to Motor Switchover.",ods_cause_suggestion
+135,"Switchover DMW Motor to Turbine to Reduce HP to MP Steam LetDown Flow/MP to LP Steam Letdown Flow, Refer Optimization Results For Specific Motor to Turbine Switchover.",ods_cause_suggestion
+136,"Switchover DMW Turbine to Motor to LP Dumping/Venting, Refer Optimization Results For Specific Turbine to Motor Switchover.",ods_cause_suggestion
+137,"Total Fuel Utilization in Boilers is High, Refer to Boiler Load Biasing for Optimising Boiler Fuel Consumption.",ods_cause_suggestion
+138,"Total Fuel Utilization in Ethylene Plant is High, Refer to Furnace Load Biasing for Optimising Ehylene Fuel Consumption.",ods_cause_suggestion
+139,"Total Fuel Utilization in LAO Plant is High, Optimise LAO Fuel Consumption in order to reduce Total Fuel Demand",ods_cause_suggestion
+140,"Total Power Consumption is Higher, Refer Optimization Results For Specific Motor to Turbine Switchover.",ods_cause_suggestion
+141,"DMW Makeup is High, Reduce Venting & refer to Boiler Load Optimisation to reduce DMW Makeup.",ods_cause_suggestion
+142,"Total Air demand is Low, To Reduce Air Venting Adujst IGV & Reduce Air Supply. This would also reduce Power Consumption.",ods_cause_suggestion
+144,"Since the conductivity of Boiler 1 is below the design value of 150 µS/cm, decrease Boiler blowdown by 50 kg/hr.",ods_cause_suggestion
+145,"Since the conductivity of Boiler 2 is below the design value of 150 µS/cm, decrease Boiler blowdown by 50 kg/hr.",ods_cause_suggestion
+146,"Since the conductivity of Boiler 3 is below the design value of 150 µS/cm, decrease Boiler blowdown by 50 kg/hr.",ods_cause_suggestion
+147,"Since the conductivity of Boiler 4 is below the design value of 150 µS/cm, decrease Boiler blowdown by 50 kg/hr.",ods_cause_suggestion
+148,"Since the conductivity of Boiler 5 is below the design value of 150 µS/cm, decrease Boiler blowdown by 50 kg/hr.",ods_cause_suggestion
+149,"Since the conductivity of Boiler 1 is below the design value of 130 µS/cm, decrease Boiler blowdown by 50 kg/hr.",ods_cause_suggestion
+150,"Since the conductivity of Boiler 2 is below the design value of 130 µS/cm, decrease Boiler blowdown by 50 kg/hr.",ods_cause_suggestion
+151,"Since the conductivity of Boiler 3 is below the design value of 130 µS/cm, decrease Boiler blowdown by 50 kg/hr.",ods_cause_suggestion
+152,"Since the conductivity of Boiler 4 is below the design value of 130 µS/cm, decrease Boiler blowdown by 50 kg/hr.",ods_cause_suggestion
+153,"Since the conductivity of Boiler 5 is below the design value of 130 µS/cm, decrease Boiler blowdown by 50 kg/hr.",ods_cause_suggestion
+154,Shutdown Boiler A & Keep on Hot Standby & Increase Load in Other Boilers to Increase Overall Boiler Load to 70-75%. Kindly refer to Load biasing in Optimization Results.,ods_cause_suggestion
+155,Shutdown Boiler B & Keep on Hot Standby & Increase Load in Other Boilers to Increase Overall Boiler Load to 70-75%. Kindly refer to Load biasing in Optimization Results.,ods_cause_suggestion
+156,Shutdown Boiler C & Keep on Hot Standby & Increase Load in Other Boilers to Increase Overall Boiler Load to 70-75%. Kindly refer to Load biasing in Optimization Results.,ods_cause_suggestion
+157,Shutdown Boiler D & Keep on Hot Standby & Increase Load in Other Boilers to Increase Overall Boiler Load to 70-75%. Kindly refer to Load biasing in Optimization Results.,ods_cause_suggestion
+158,Shutdown Boiler E & Keep on Hot Standby & Increase Load in Other Boilers to Increase Overall Boiler Load to 70-75%. Kindly refer to Load biasing in Optimization Results.,ods_cause_suggestion
+159,"Reduce Load in Boiler A In Steps of 5T/HR, Specific Energy Consumption High & Increase Load in Other Boilers to Increase Overall Boiler Load to 70-75%. Kindly refer to Load biasing in Optimization Results.",ods_cause_suggestion
+160,"Reduce Load in Boiler B In Steps of 5T/HR, Specific Energy Consumption High & Increase Load in Other Boilers to Increase Overall Boiler Load to 70-75%. Kindly refer to Load biasing in Optimization Results.",ods_cause_suggestion
+161,"Reduce Load in Boiler C In Steps of 5T/HR, Specific Energy Consumption High & Increase Load in Other Boilers to Increase Overall Boiler Load to 70-75%. Kindly refer to Load biasing in Optimization Results.",ods_cause_suggestion
+162,"Reduce Load in Boiler D In Steps of 5T/HR, Specific Energy Consumption High & Increase Load in Other Boilers to Increase Overall Boiler Load to 70-75%. Kindly refer to Load biasing in Optimization Results.",ods_cause_suggestion
+163,"Reduce Load in Boiler E In Steps of 5T/HR, Specific Energy Consumption High & Increase Load in Other Boilers to Increase Overall Boiler Load to 70-75%. Kindly refer to Load biasing in Optimization Results.",ods_cause_suggestion
+164,"Since the conductivity of Boiler A is below the design value of 130 µS/cm, decrease Boiler blowdown by 50 kg/hr.",ods_cause_suggestion
+165,"Since the conductivity of Boiler B is below the design value of 130 µS/cm, decrease Boiler blowdown by 50 kg/hr.",ods_cause_suggestion
+166,"Since the conductivity of Boiler C is below the design value of 130 µS/cm, decrease Boiler blowdown by 50 kg/hr.",ods_cause_suggestion
+167,"Since the conductivity of Boiler D is below the design value of 130 µS/cm, decrease Boiler blowdown by 50 kg/hr.",ods_cause_suggestion
+168,"Since the conductivity of Boiler E is below the design value of 130 µS/cm, decrease Boiler blowdown by 50 kg/hr.",ods_cause_suggestion
+169,"Since the conductivity of Boiler A is below the target value of 130 µS/cm, decrease Boiler blowdown by 50 kg/hr.",ods_cause_suggestion
+170,"Since the conductivity of Boiler B is below the target value of 130 µS/cm, decrease Boiler blowdown by 50 kg/hr.",ods_cause_suggestion
+171,"Since the conductivity of Boiler C is below the target value of 130 µS/cm, decrease Boiler blowdown by 50 kg/hr.",ods_cause_suggestion
+172,"Since the conductivity of Boiler D is below the target value of 130 µS/cm, decrease Boiler blowdown by 50 kg/hr.",ods_cause_suggestion
+173,"Since the conductivity of Boiler E is below the target value of 130 µS/cm, decrease Boiler blowdown by 50 kg/hr.",ods_cause_suggestion
+174,Actual Steam generation is Higher than the Optimum generation. Kindly refer to Load biasing in Optimization Results.,ods_cause_suggestion
+175,Increase Pressure Ratio to 1.122 & Decrease temperature ratio to 1.035,ods_cause_suggestion
+176,Increase Pressure Ratio to 1.125 & Decrease temperature ratio to 1.036,ods_cause_suggestion
+177,Increase Pressure Ratio to 1.143 & Decrease temperature ratio to 1.038,ods_cause_suggestion
+178,Total fuel utilization in the Ethylene Plant is high. Refer to the monitoring section to optimize excess air levels for individual furnaces and reduce overall fuel consumption.,ods_cause_suggestion
+179,Total fuel utilization in the LAO plant is high. Refer to the monitoring section to optimize excess air levels for individual furnaces and reduce overall fuel consumption.,ods_cause_suggestion
+180,Fuel consumption is high in the heater. Optimize excess air levels to reduce fuel consumption,ods_cause_suggestion
+181,"Boiler Load is higher, It can be reduced with optimization of dumping/ venting and SEUs energy managment",ods_cause_suggestion
+182,The critical tray temperature is higher than the optimum value. Steam flow to the reboiler can be reduced in steps of 0.5 T/HR to bring the critical tray temperature down,ods_cause_suggestion
+183,Since the conductivity of seawater is below 8 mS/cm & the seawater blowdown rate is high. Reduce the seawater blowdown by 500 m3/hr,ods_cause_suggestion
+184,"EG 1 LP Steam imbalance is coming higher, possible reasons could be sensor issues. This is corrected based on average historic data.",ods_cause_suggestion
+185,"Boiler Load is higher, It can be reduced with reduction of dumping and venting.",ods_cause_suggestion
+186,"Reduce the boiler load to reduce dumping, refer optimization output",ods_cause_suggestion
+187,"Air demand is low. To minimize venting, shut off the specified compressor as per the optimization table.",ods_cause_suggestion
+188,Air demand is low. Adjust the IGV and reduce air supply to minimize venting.,ods_cause_suggestion
+189,"The conductivity of Boiler A is below The target value of 130 µS/cm, decrease Boiler blowdown by 50 kg/hr.",ods_cause_suggestion
+190,"The conductivity of Boiler B is below The target value of 130 µS/cm, decrease Boiler blowdown by 50 kg/hr.",ods_cause_suggestion
+191,"The conductivity of Boiler C is below The target value of 130 µS/cm, decrease Boiler blowdown by 50 kg/hr.",ods_cause_suggestion
+192,"The conductivity of Boiler D is below The target value of 130 µS/cm, decrease Boiler blowdown by 50 kg/hr.",ods_cause_suggestion
+193,"The conductivity of Boiler E is below The target value of 130 µS/cm, decrease Boiler blowdown by 50 kg/hr.",ods_cause_suggestion
+194,Switch off BFW B Turbine to reduce dump/vent of steam,ods_cause_suggestion
+195,Switch off BFW C Turbine to reduce dump/vent of steam,ods_cause_suggestion
+196,Switch off BFW E Turbine to reduce dump/vent of steam,ods_cause_suggestion
+197,Switch off VHP BFW B Turbine to reduce dump/vent of steam,ods_cause_suggestion
+198,Switch off VHP BFW C Turbine to reduce dump/vent of steam,ods_cause_suggestion
+199,Switch off CW Turbine A to reduce dump/vent of steam,ods_cause_suggestion
+200,Switch off CW Turbine B to reduce dump/vent of steam,ods_cause_suggestion
+201,Switch off CW Turbine G to reduce dump/vent of steam,ods_cause_suggestion
+202,Switch off DMW Turbine A to reduce dump/vent of steam,ods_cause_suggestion
+203,Switch off DMW Turbine C to reduce dump/vent of steam,ods_cause_suggestion
+204,Switch off BFW A Motor to reduce dump/vent of steam,ods_cause_suggestion
+205,Switch off BFW D Motor to reduce dump/vent of steam,ods_cause_suggestion
+206,Switch off BFW F Motor to reduce dump/vent of steam,ods_cause_suggestion
+207,Switch off VHP BFW A Motor to reduce dump/vent of steam,ods_cause_suggestion
+208,Switch off CW Motor C to reduce dump/vent of steam,ods_cause_suggestion
+209,Switch off CW Motor D to reduce dump/vent of steam,ods_cause_suggestion
+210,Switch off CW Motor E to reduce dump/vent of steam,ods_cause_suggestion
+211,Switch off CW Motor F to reduce dump/vent of steam,ods_cause_suggestion
+212,?,ods_cause_suggestion
+213,Adjust the IGV and reduce air supply to minimize venting.,ods_cause_suggestion
+214,Switch off BFW A Motor to reduce Power consmption,ods_cause_suggestion
+215,Switch off BFW D Motor to reduce Power consmption,ods_cause_suggestion
+216,Switch off BFW F Motor to reduce Power consmption,ods_cause_suggestion
+217,Switch off VHP BFW A Motor to reduce Power consmption,ods_cause_suggestion
+218,Switch off CW Motor C to reduce Power consmption,ods_cause_suggestion
+219,Switch off CW Motor D to reduce Power consmption,ods_cause_suggestion
+220,Switch off CW Motor E to reduce Power consmption,ods_cause_suggestion
+221,Switch off CW Motor F to reduce Power consmption,ods_cause_suggestion
+222,Switch off Air Compressor turbine A to reduce venting of air & dump/vent of steam,ods_cause_suggestion
+223,Switch off Air Compressor turbine D to reduce venting of air & dump/vent of steam,ods_cause_suggestion
+224,Switch off Air Compressor turbine B to reduce venting of air & dump/vent of steam,ods_cause_suggestion
+225,Switch off Air Compressor turbine C to reduce venting of air & dump/vent of steam,ods_cause_suggestion
+226,Switch on BFW B Turbine to reduce dump/vent of steam,ods_cause_suggestion
+227,Switch on BFW C Turbine to reduce dump/vent of steam,ods_cause_suggestion
+228,Switch on BFW E Turbine to reduce dump/vent of steam,ods_cause_suggestion
+229,Switch on VHP BFW B Turbine to reduce dump/vent of steam,ods_cause_suggestion
+230,Switch on VHP BFW C Turbine to reduce dump/vent of steam,ods_cause_suggestion
+231,Switch on CW Turbine A to reduce dump/vent of steam,ods_cause_suggestion
+232,Switch on CW Turbine B to reduce dump/vent of steam,ods_cause_suggestion
+233,Switch on CW Turbine G to reduce dump/vent of steam,ods_cause_suggestion
+234,Switch on DMW Turbine A to reduce dump/vent of steam,ods_cause_suggestion
+235,Switch on DMW Turbine C to reduce dump/vent of steam,ods_cause_suggestion
+236,Switch on BFW A Motor to reduce dump/vent of steam,ods_cause_suggestion
+237,Switch on BFW D Motor to reduce dump/vent of steam,ods_cause_suggestion
+238,Switch on BFW F Motor to reduce dump/vent of steam,ods_cause_suggestion
+239,Switch on VHP BFW A Motor to reduce dump/vent of steam,ods_cause_suggestion
+240,Switch on CW Motor C to reduce dump/vent of steam,ods_cause_suggestion
+241,Switch on CW Motor D to reduce dump/vent of steam,ods_cause_suggestion
+242,Switch on CW Motor E to reduce dump/vent of steam,ods_cause_suggestion
+243,Switch on CW Motor F to reduce dump/vent of steam,ods_cause_suggestion
+244,Excess O2 is high; reducing it will help optimize fuel consumption in the Boiler A,ods_cause_suggestion
+245,Excess O2 is high; reducing it will help optimize fuel consumption in the Boiler B,ods_cause_suggestion
+246,Excess O2 is high; reducing it will help optimize fuel consumption in the Boiler C,ods_cause_suggestion
+247,Excess O2 is high; reducing it will help optimize fuel consumption in the Boiler D,ods_cause_suggestion
+248,Excess O2 is high; reducing it will help optimize fuel consumption in the Boiler E,ods_cause_suggestion
+249,Excess O2 is high; reducing it will help optimize fuel consumption in the Boiler G,ods_cause_suggestion
+250,Excess O2 is high; reducing it will help optimize fuel consumption in the Boiler H,ods_cause_suggestion
+251,Excess O2 is high; reducing it will help optimize fuel consumption in the Boiler I,ods_cause_suggestion
+252,Excess O2 is high; reducing it will help optimize fuel consumption in the Boiler J,ods_cause_suggestion
+253,Excess O2 is high; reducing it will help optimize fuel consumption in the Furnace A,ods_cause_suggestion
+254,Excess O2 is high; reducing it will help optimize fuel consumption in the Furnace B,ods_cause_suggestion
+255,Excess O2 is high; reducing it will help optimize fuel consumption in the Furnace C,ods_cause_suggestion
+256,Excess O2 is high; reducing it will help optimize fuel consumption in the Furnace D,ods_cause_suggestion
+257,Excess O2 is high; reducing it will help optimize fuel consumption in the Furnace E,ods_cause_suggestion
+258,Excess O2 is high; reducing it will help optimize fuel consumption in the Furnace G,ods_cause_suggestion
+259,Excess O2 is high; reducing it will help optimize fuel consumption in the Furnace H,ods_cause_suggestion
+260,Excess O2 is high; reducing it will help optimize fuel consumption in the Furnace I,ods_cause_suggestion
+261,Excess O2 is high; reducing it will help optimize fuel consumption in the Furnace J,ods_cause_suggestion
+262,"Shutdown Boiler A, to achieve HP steam production as per optimized HP steam demand",ods_cause_suggestion
+263,"Shutdown Boiler B, to achieve HP steam production as per optimized HP steam demand",ods_cause_suggestion
+264,"Shutdown Boiler C, to achieve HP steam production as per optimized HP steam demand",ods_cause_suggestion
+265,"Shutdown Boiler D, to achieve HP steam production as per optimized HP steam demand",ods_cause_suggestion
+266,"Shutdown Boiler E, to achieve HP steam production as per optimized HP steam demand",ods_cause_suggestion
+267,Boiler load to be reduced with optimization of steam dumping/ steam venting. Refer optimization results for load biasing to individual boilers,ods_cause_suggestion
+268,"Optimize excess % O2 to reduce fuel consumption, Boiler A",ods_cause_suggestion
+269,"Optimize excess % O2 to reduce fuel consumption, Boiler B",ods_cause_suggestion
+270,"Optimize excess % O2 to reduce fuel consumption, Boiler C",ods_cause_suggestion
+271,"Optimize excess % O2 to reduce fuel consumption, Boiler D",ods_cause_suggestion
+272,"Optimize excess % O2 to reduce fuel consumption, Boiler E",ods_cause_suggestion
+273,"Optimize excess % O2 to reduce fuel consumption, Furnace A",ods_cause_suggestion
+274,"Optimize excess % O2 to reduce fuel consumption, Furnace B",ods_cause_suggestion
+275,"Optimize excess % O2 to reduce fuel consumption, Furnace C",ods_cause_suggestion
+276,"Optimize excess % O2 to reduce fuel consumption, Furnace D",ods_cause_suggestion
+277,"Optimize excess % O2 to reduce fuel consumption, Furnace E",ods_cause_suggestion
+278,"Optimize excess % O2 to reduce fuel consumption, Furnace G",ods_cause_suggestion
+279,"Optimize excess % O2 to reduce fuel consumption, Furnace H",ods_cause_suggestion
+280,"Optimize excess % O2 to reduce fuel consumption, Furnace I",ods_cause_suggestion
+281,"Optimize excess % O2 to reduce fuel consumption, Furnace J",ods_cause_suggestion
+282,Expected fouling in the first interstage coolers. Cleaning the interstage coolers will help improve the compressor's efficiency & will reduce the Power demand,ods_cause_suggestion
+283,Expected fouling in the second interstage coolers. Cleaning the interstage coolers will help improve the compressor's efficiency & will reduce the Power demand,ods_cause_suggestion
+284,Expected fouling in the third interstage coolers. Cleaning the interstage coolers will help improve the compressor's efficiency & will reduce the Power demand,ods_cause_suggestion
+285,The recycle valve opening of compressor K-5071 is higher than the historical optimum. Reducing the valve opening can lower the power consumption,ods_cause_suggestion
+286,"Optmized HP steam demand will reduce the BFW consumption, eventually this will reduce LP steam demand in de-aerator. Refer optimization results for details",ods_cause_suggestion
+287,"EG1: The reduced compressor efficiency is likely due to deviations from the optimal temperature and pressure ratios of 1.0348 and 1.1215, respectively. Kindly check for any signs of fouling",ods_cause_suggestion
+288,"EG2: The reduced compressor efficiency is likely due to deviations from the optimal temperature and pressure ratios of 1.0361 and 1.1249, respectively. Kindly check for any signs of fouling",ods_cause_suggestion
+289,EG3: The reduced compressor efficiency is likely due to deviations from the optimal temperature and pressure ratios of 1.0379 and 1.1431 respectively. Kindly check for any signs of fouling,ods_cause_suggestion
+290,Switch off Air Compressor motor B to reduce venting of air.,ods_cause_suggestion
+291,Switch off Air Compressor mont C to reduce venting of air.,ods_cause_suggestion
+292,The conductivity of seawater is below 8 mS/cm & the seawater blowdown rate is high. Reduce the seawater blowdown by 500 m3/hr,ods_cause_suggestion
+293,"DMW Makeup is High, Reduce Steam venting & refer to Boiler Load Optimisation to reduce DMW Makeup.",ods_cause_suggestion
+294,"The conductivity of Boiler A is below the target value of 130 µS/cm, decrease Boiler blowdown by 50 kg/hr.(FC1100).",ods_cause_suggestion
+295,"The conductivity of Boiler B is below the target value of 130 µS/cm, decrease Boiler blowdown by 50 kg/hr.(FC1200).",ods_cause_suggestion
+296,"The conductivity of Boiler C is below the target value of 130 µS/cm, decrease Boiler blowdown by 50 kg/hr.(FC1300).",ods_cause_suggestion
+297,"The conductivity of Boiler D is below the target value of 130 µS/cm, decrease Boiler blowdown by 50 kg/hr.(FC1400).",ods_cause_suggestion
+298,"The conductivity of Boiler E is below the target value of 130 µS/cm, decrease Boiler blowdown by 50 kg/hr.(FC1500).",ods_cause_suggestion
+299,"EG1: The reduced compressor efficiency is likely due to deviations from the optimal temperature and pressure ratios of 1.0348 (Kelvin) and 1.1215 (KPa Abs), respectively. Kindly check for any signs of fouling",ods_cause_suggestion
+300,"EG2: The reduced compressor efficiency is likely due to deviations from the optimal temperature and pressure ratios of 1.0361 (Kelvin) and 1.1249 (KPa Abs), respectively. Kindly check for any signs of fouling",ods_cause_suggestion
+301,EG3: The reduced compressor efficiency is likely due to deviations from the optimal temperature and pressure ratios of 1.0379 (Kelvin) and 1.1431 (KPa Abs) respectively. Kindly check for any signs of fouling,ods_cause_suggestion
+302,The critical tray temperature is higher than the optimum value. Steam flow to the reboiler can be reduced in steps of 0.5 T/HR to bring the critical tray temperature down. (FC6308),ods_cause_suggestion
+303,The critical tray temperature is higher than the optimum value. Steam flow to the reboiler can be reduced in steps of 0.5 T/HR to bring the critical tray temperature down. (FC6205),ods_cause_suggestion
+304,The conductivity of seawater is below 8 mS/cm & the seawater blowdown rate is high. Reduce the seawater blowdown by 500 m3/hr. (FC8010),ods_cause_suggestion
+305,"Optimize excess % O2 to reduce fuel consumption, Boiler A .(FC1107)",ods_cause_suggestion
+306,"Optimize excess % O2 to reduce fuel consumption, Boiler B .(FC1207)",ods_cause_suggestion
+307,"Optimize excess % O2 to reduce fuel consumption, Boiler C .(FC1307)",ods_cause_suggestion
+308,"Optimize excess % O2 to reduce fuel consumption, Boiler D .(FC1407)",ods_cause_suggestion
+309,"Optimize excess % O2 to reduce fuel consumption, Boiler E .(FC1507A)",ods_cause_suggestion
+310,"Optimize excess % O2 to reduce fuel consumption, Furnace A .(Optimize Stack Damper PZI1590A)",ods_cause_suggestion
+311,"Optimize excess % O2 to reduce fuel consumption, Furnace B .(Optimize Stack Damper PZI1590B)",ods_cause_suggestion
+312,"Optimize excess % O2 to reduce fuel consumption, Furnace C .(Optimize Stack Damper PZI1590C)",ods_cause_suggestion
+313,"Optimize excess % O2 to reduce fuel consumption, Furnace D .(Optimize Stack Damper PZI1590D)",ods_cause_suggestion
+314,"Optimize excess % O2 to reduce fuel consumption, Furnace E .(Optimize Stack Damper PZI1590E)",ods_cause_suggestion
+315,"Optimize excess % O2 to reduce fuel consumption, Furnace G .(Optimize Stack Damper PZI1590F)",ods_cause_suggestion
+316,"Optimize excess % O2 to reduce fuel consumption, Furnace H .(Optimize Stack Damper PZI1590G)",ods_cause_suggestion
+317,"Optimize excess % O2 to reduce fuel consumption, Furnace I .(Optimize Stack Damper PZI1590H)",ods_cause_suggestion
+318,"Optimize excess % O2 to reduce fuel consumption, Furnace J .(Optimize Stack Damper PZI1590J)",ods_cause_suggestion
+319,Switch off FD Fan-A as Boiler-A can be shut down,ods_cause_suggestion
+320,Switch off FD Fan-B as Boiler-B can be shut down,ods_cause_suggestion
+321,Switch off FD Fan-C as Boiler-C can be shut down,ods_cause_suggestion
+322,Switch off FD Fan-D as Boiler-D can be shut down,ods_cause_suggestion
+323,Switch off FD Fan-E as Boiler-E can be shut down,ods_cause_suggestion
+324,Switch off DMW Motor to reduce dump/vent of steam,ods_cause_suggestion
+325,Switch on DMW Motor to reduce dump/vent of steam,ods_cause_suggestion
+326,"MP to LP letdown is high, reduce the letdown flow",ods_cause_suggestion
+327,Switch off Air Compressor motor C to reduce venting of air.,ods_cause_suggestion
+328,"Decrease the IGV opening of Air Compressor  A to decrease air supply, which will help reduce air venting",ods_cause_suggestion
+329,"Increase the IGV opening of Air Compressor  A to increase air supply, which will help reduce air venting",ods_cause_suggestion
+330,"Decrease the IGV opening of Air Compressor  D to decrease air supply, which will help reduce air venting",ods_cause_suggestion
+331,"Increase the IGV opening of Air Compressor  D to increase air supply, which will help reduce air venting",ods_cause_suggestion
+332,"Decrease the IGV opening of Air Compressor  B to decrease air supply, which will help reduce air venting",ods_cause_suggestion
+333,"Decrease the IGV opening of Air Compressor  C to decrease air supply, which will help reduce air venting",ods_cause_suggestion
+334,"Increase the IGV opening of Air Compressor  B to increase air supply, which will help reduce air venting",ods_cause_suggestion
+335,"increase the IGV opening of Air Compressor  C to increase air supply, which will help reduce air venting",ods_cause_suggestion
+336,"Optimize excess % O2 to reduce fuel consumption, Furnace F .(Optimize Stack Damper PZI1590F)",ods_cause_suggestion
+337,"Optimize excess % O2 to reduce fuel consumption, Furnace G .(Optimize Stack Damper PZI1590G)",ods_cause_suggestion
+338,"Optimize excess % O2 to reduce fuel consumption, Furnace H .(Optimize Stack Damper PZI1590H)",ods_cause_suggestion
+339,"water to EOE ratio is high in EG1, reducig this ratio will result in MP steam flow to first effect reboiler",ods_cause_suggestion
+340,"water to EOE ratio is high in EG2, reducig this ratio will result in MP steam flow to first effect reboiler",ods_cause_suggestion
+341,"water to EOE ratio is high in EG3, reducig this ratio will result in MP steam flow to first effect reboiler",ods_cause_suggestion
+342,"Letdown through PV-7026 can be reduced by increasing extraction through the C3R turbine, enabling energy recovery and reducing shaft losses",ods_cause_suggestion
+343,"Margin available in C3R RPM, Reduce the letdown opening PV-7026, this will reduce the shaft loss and reduce the C3R suction pressure",ods_cause_suggestion
+344,"currently with furnace decoking mode , air venting is observed hence advised to SWITCH OFF AIR COMPRESSOR MOTOR B TO REDUCE VENTING OF AIR",ods_cause_suggestion
+345,"currently with furnace decoking mode , air venting is observed hence advised to SWITCH OFF AIR COMPRESSOR MOTOR C TO REDUCE VENTING OF AIR",ods_cause_suggestion
+346,CW Motor 7814A may be shut down as there is no current cooling water demand,ods_cause_suggestion
+347,CW Motor 7814B may be shut down as there is no current cooling water demand,ods_cause_suggestion
+348,CW Motor 7814C may be shut down as there is no current cooling water demand,ods_cause_suggestion
+349,Boiler load can be reduced by optimizing steam consumption in air compressor turbines,ods_cause_suggestion
+350,"The conductivity of Boiler A is below the target value of 130 µS/cm, and blowdown is higher than required. Reduce Boiler A blowdown to 1% of steam generation. (FC1100)",ods_cause_suggestion
+351,"The conductivity of Boiler B is below the target value of 130 µS/cm, and blowdown is higher than required. Reduce Boiler B blowdown to 1% of steam generation. (FC1200)",ods_cause_suggestion
+352,"The conductivity of Boiler C is below the target value of 130 µS/cm, and blowdown is higher than required. Reduce Boiler C blowdown to 1% of steam generation. (FC1300)",ods_cause_suggestion
+353,"The conductivity of Boiler D is below the target value of 130 µS/cm, and blowdown is higher than required. Reduce Boiler D blowdown to 1% of steam generation. (FC1400)",ods_cause_suggestion
+354,"The conductivity of Boiler E is below the target value of 130 µS/cm, and blowdown is higher than required. Reduce Boiler E blowdown to 1% of steam generation. (FC1500)",ods_cause_suggestion
+355,"The conductivity of seawater is below 85,000 uS/cm & Cooling water supply temp (to plants) is <38 degC and the seawater blowdown rate is high. Reduce the seawater blowdown by 500 m3/hr. (FC8010)",ods_cause_suggestion
+356,"Decrease the IGV opening of Air Compressor  A or Increase the setpoint of Vent off valve by 0.05 barg, which will help reduce air venting",ods_cause_suggestion
+357,"Increase the IGV opening of Air Compressor  A to increase air supply, which will help reduce total air venting",ods_cause_suggestion
+358,"Decrease the IGV opening of Air Compressor  D or Increase the setpoint of Vent off valve by 0.05 barg, which will help reduce air venting",ods_cause_suggestion
+359,"Increase the IGV opening of Air Compressor  D to increase air supply, which will help reduce total air venting",ods_cause_suggestion
+360,"Decrease the IGV opening of Air Compressor  B or Increase the setpoint of Vent off valve by 0.05 barg, which will help reduce air venting",ods_cause_suggestion
+361,"Decrease the IGV opening of Air Compressor  C or Increase the setpoint of Vent off valve by 0.05 barg, which will help reduce air venting",ods_cause_suggestion
+362,"Increase the IGV opening of Air Compressor  B to increase air supply, which will help reduce total air venting",ods_cause_suggestion
+363,"increase the IGV opening of Air Compressor  C to increase air supply, which will help reduce total air venting",ods_cause_suggestion
+364,"Utilize the available IGV margin on this compressor to meet the air demand, enabling reduction or shutdown of other compressors and reducing overall vent losses as per the listed suggestion on other air compressors",ods_cause_suggestion
+365,"More CW drives are running than required, CW motor C can be stopped to optimize power consumption",ods_cause_suggestion
+366,"More CW drives are running than required, CW motor D can be stopped to optimize power consumption",ods_cause_suggestion
+367,"More CW drives are running than required, CW motor E can be stopped to optimize power consumption",ods_cause_suggestion
+368,"More CW drives are running than required, CW motor F can be stopped to optimize power consumption",ods_cause_suggestion
+369,"More CW drives are running than required, CW turbine A can be stopped to optimize steam consumption",ods_cause_suggestion
+370,"More CW drives are running than required, CW turbine B can be stopped to optimize steam consumption",ods_cause_suggestion
+371,"More CW drives are running than required, CW turbine G can be stopped to optimize steam consumption",ods_cause_suggestion
+372,"Switch off fans sequentially, two at a time because current CT fan operation exceeds calculated optimum. Also cooling water supply temperature is below 38 °C & sea water blowdown temperature is below 35 °C",ods_cause_suggestion
+373,"Switch off fans sequentially, two at a time Since there is no Dumping",ods_cause_suggestion

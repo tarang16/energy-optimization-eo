@@ -1,0 +1,86 @@
+@use '../../../config/scss/variables' as *;
+
+.legendContainer {
+  background-color: $primary_white;
+  padding: 0 1.5vmin;
+  @include boxShadow_card;
+
+  .flexContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+
+    .customMargin {
+      margin-right: 1vmin;
+    }
+
+    .legendsName {
+      margin-right: 2vmin;
+      margin-top: 3px;
+    }
+
+    .SOPlegendsName {
+      margin-right: 2vmin;
+      background-color: $primary_blue;
+      color: $primary_white;
+      display: flex;
+      align-items: center;
+      padding: 0.45vmin 0.8vmin 0.1vmin 0.8vmin;
+      height: 75%;
+      line-height: 1;
+    }
+
+    .SEU_energy_btn {
+      background-color: $primary_blue;
+      border: none;
+      border-radius: 0.3vmin;
+      color: $primary_white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.8vmin;
+      height: 3vmin;
+    }
+  }
+
+  .square {
+    width: 1.2vmin;
+    height: 1.2vmin;
+    border-radius: 0.2vmin;
+    display: inline-block;
+  }
+}
+
+.parameterButtonContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 8vmin;
+
+  .saveBtn {
+    background-color: $primary_blue;
+    border: none;
+    border-radius: 0.3vmin;
+    color: $primary_white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.8vmin;
+    height: 3vmin;
+    min-width: 12vmin;
+
+    &.disabledBtn {
+      background-color: $primary_gray_2;
+      cursor: not-allowed;
+      opacity: 0.7;
+    }
+  }
+}
+
+.userParameterModal:global(.customResponsiveWidth) {
+  :global(.modal-dialog.modal-xl) {
+    width: 120vmin;
+    max-width: 90vw;
+  }
+}

@@ -1,0 +1,143 @@
+{
+  "boiler_minlp_tags_total": 83,
+  "boiler_minlp_tags_with_pi_leaves": 48,
+  "boiler_minlp_tags_pure_decision_no_pi_leaves": 35,
+  "leaf_pi_pairs_total": 533,
+  "leaf_pi_pairs_covered_in_hierarchy": 0,
+  "leaf_pi_pairs_in_master_pi_only": 533,
+  "leaf_pi_pairs_missing_everywhere": 0,
+  "leaf_pi_pairs_missing_in_hierarchy": 0,
+  "distinct_leaf_pi_tags": 179,
+  "distinct_leaf_pi_in_hierarchy": 0,
+  "distinct_leaf_pi_missing_in_hierarchy": 179,
+  "by_role": {
+    "decision_variable": {
+      "in_feature_file_only": 384
+    },
+    "post_optimizer": {
+      "in_feature_file_only": 149
+    }
+  },
+  "top_30_missing_pi_by_minlp_tag_count": [
+    {
+      "pi_tag": "LHV",
+      "minlp_tags_blocked": 38
+    },
+    {
+      "pi_tag": "Spec_En_Cons_BLR_1_Opt",
+      "minlp_tags_blocked": 22
+    },
+    {
+      "pi_tag": "Spec_En_Cons_BLR_4_Opt",
+      "minlp_tags_blocked": 22
+    },
+    {
+      "pi_tag": "Spec_En_Cons_BLR_5_Opt",
+      "minlp_tags_blocked": 22
+    },
+    {
+      "pi_tag": "Spec_En_Cons_BLR_3_Opt",
+      "minlp_tags_blocked": 22
+    },
+    {
+      "pi_tag": "Spec_En_Cons_BLR_2_Opt",
+      "minlp_tags_blocked": 22
+    },
+    {
+      "pi_tag": "ETH_Plant_Status",
+      "minlp_tags_blocked": 18
+    },
+    {
+      "pi_tag": "BFW_to_EOEG_3",
+      "minlp_tags_blocked": 16
+    },
+    {
+      "pi_tag": "DSP_BFW_TO_EG2",
+      "minlp_tags_blocked": 16
+    },
+    {
+      "pi_tag": "DSP_BFW_TO_EG1",
+      "minlp_tags_blocked": 16
+    },
+    {
+      "pi_tag": "BFW_to_EOEG_1",
+      "minlp_tags_blocked": 16
+    },
+    {
+      "pi_tag": "VHP_BFW_FROM_U_O",
+      "minlp_tags_blocked": 16
+    },
+    {
+      "pi_tag": "VHP_DESPHTR_BFW_FROM_U_O",
+      "minlp_tags_blocked": 16
+    },
+    {
+      "pi_tag": "EOEG3_Plant_Status",
+      "minlp_tags_blocked": 16
+    },
+    {
+      "pi_tag": "DSP_BFW_TO_ETH_raw",
+      "minlp_tags_blocked": 16
+    },
+    {
+      "pi_tag": "DSP_BFW_TO_CAUSTIC_DILUTION",
+      "minlp_tags_blocked": 16
+    },
+    {
+      "pi_tag": "DSP_BFW_TO_EG3_raw",
+      "minlp_tags_blocked": 16
+    },
+    {
+      "pi_tag": "BFW_to_EOEG_2",
+      "minlp_tags_blocked": 16
+    },
+    {
+      "pi_tag": "BFW_TO_LAO",
+      "minlp_tags_blocked": 16
+    },
+    {
+      "pi_tag": "FD_Fan_BLR_2_Steam_raw",
+      "minlp_tags_blocked": 2
+    },
+    {
+      "pi_tag": "FD_Fan_BLR_4_Steam_raw",
+      "minlp_tags_blocked": 2
+    },
+    {
+      "pi_tag": "FD_Fan_BLR_3_Steam_raw",
+      "minlp_tags_blocked": 2
+    },
+    {
+      "pi_tag": "BFW_C_Turb_Steam_raw",
+      "minlp_tags_blocked": 2
+    },
+    {
+      "pi_tag": "VHP_BFW_C_Turb_Steam_cons",
+      "minlp_tags_blocked": 2
+    },
+    {
+      "pi_tag": "VHP_BFW_C_Turb_Steam_raw",
+      "minlp_tags_blocked": 2
+    },
+    {
+      "pi_tag": "VHP_BFW_B_Turb_Steam_cons",
+      "minlp_tags_blocked": 2
+    },
+    {
+      "pi_tag": "VHP_BFW_B_Turb_Steam_raw",
+      "minlp_tags_blocked": 2
+    },
+    {
+      "pi_tag": "FD_Fan_BLR_1_Steam_raw",
+      "minlp_tags_blocked": 2
+    },
+    {
+      "pi_tag": "BFW_E_Turb_Steam_raw",
+      "minlp_tags_blocked": 2
+    },
+    {
+      "pi_tag": "BFW_B_Turb_Steam_cons",
+      "minlp_tags_blocked": 2
+    }
+  ]
+}

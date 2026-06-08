@@ -1,0 +1,118 @@
+{
+  "version": "2.0",
+  "description": "Calculated attributes for furnace ranking pipeline. Formulas are IP - same for every plant.",
+  "attributes": [
+    {
+      "attribute_name": "CPR",
+      "hierarchy_level": "Coil",
+      "formula": "(Inlet_Press + 1.033) / (pass.Cross_Over_Pressure + 1.033)",
+      "data_type": "real",
+      "uom": "ratio"
+    },
+    {
+      "attribute_name": "Max_CPR",
+      "hierarchy_level": "Pass",
+      "formula": "max(coil.CPR)",
+      "data_type": "real",
+      "uom": "ratio"
+    },
+    {
+      "attribute_name": "Max_CPR",
+      "hierarchy_level": "Cell",
+      "formula": "max(pass.Max_CPR)",
+      "data_type": "real",
+      "uom": "ratio"
+    },
+    {
+      "attribute_name": "Max_CPR",
+      "hierarchy_level": "Furnace",
+      "formula": "max(cell.Max_CPR)",
+      "data_type": "real",
+      "uom": "ratio"
+    },
+    {
+      "attribute_name": "HC_Flow_CV_Max_OP",
+      "hierarchy_level": "Furnace",
+      "formula": "max(pass.HC_Flow_Valve_OP)",
+      "data_type": "real",
+      "uom": "%"
+    },
+    {
+      "attribute_name": "DS_Flow_CV_Max_OP",
+      "hierarchy_level": "Furnace",
+      "formula": "max(pass.DS_Flow_Valve_OP)",
+      "data_type": "real",
+      "uom": "%"
+    },
+    {
+      "attribute_name": "fuel_gas_pressure",
+      "hierarchy_level": "Furnace",
+      "formula": "(Fuel_Gas_CV_OP_Max - max(cell.FG_CV_OP)) * (Fuel_Gas_Pressure_Max - max(cell.FG_Pressure))",
+      "data_type": "real",
+      "uom": ""
+    },
+    {
+      "attribute_name": "draft_pressure",
+      "hierarchy_level": "Furnace",
+      "formula": "Draft_Pressure - Draft_Pressure_Max",
+      "data_type": "real",
+      "uom": "mmH2O"
+    },
+    {
+      "attribute_name": "Damper_Opening",
+      "hierarchy_level": "Furnace",
+      "formula": "Damper_Opening_Max - ID_Fan_Suction_OP",
+      "data_type": "real",
+      "uom": "%"
+    },
+    {
+      "attribute_name": "Flow_Control_Valve_OP",
+      "hierarchy_level": "Furnace",
+      "formula": "max(Flow_CV_Max_OP - max(HC_Flow_CV_Max_OP, DS_Flow_CV_Max_OP), 0)",
+      "data_type": "real",
+      "uom": "%"
+    },
+    {
+      "attribute_name": "max_cpr",
+      "hierarchy_level": "Furnace",
+      "formula": "max(Max_CPR_Limit - Max_CPR, 0)",
+      "data_type": "real",
+      "uom": "ratio"
+    },
+    {
+      "attribute_name": "Total_Runtime",
+      "hierarchy_level": "Furnace",
+      "formula": "Furnace_DOL + Furnace_Runlength_Forecast",
+      "data_type": "real",
+      "uom": "days"
+    },
+    {
+      "attribute_name": "Feed_Type",
+      "hierarchy_level": "Furnace",
+      "formula": "if(Feed_Status == 1801 || Feed_Status == 5, 5, if(Feed_Status == 1802 || Feed_Status == 7, 7, 0))",
+      "data_type": "real",
+      "uom": ""
+    },
+    {
+      "attribute_name": "percent_above_threshold",
+      "hierarchy_level": "Furnace",
+      "formula": "if(Feed_Type == 7, (((Total_Runtime - system.Decoke_Days) - system.Propane_Threshold) / system.Propane_Threshold) * 100, if(Feed_Type == 5, (((Total_Runtime - system.Decoke_Days) - system.Ethane_Threshold) / system.Ethane_Threshold) * 100, 0))",
+      "data_type": "real",
+      "uom": "%"
+    },
+    {
+      "attribute_name": "ethylene_yield",
+      "hierarchy_level": "Furnace",
+      "formula": "Ethylene_Production / Total_HC_Flow * 100",
+      "data_type": "real",
+      "uom": "%"
+    },
+    {
+      "attribute_name": "specific_energy_consumption",
+      "hierarchy_level": "Furnace",
+      "formula": "Total_Fired_Duty / Ethylene_Production",
+      "data_type": "real",
+      "uom": "MW/MT"
+    }
+  ]
+}

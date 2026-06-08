@@ -1,0 +1,194 @@
+@use './variables' as *;
+
+.text_primary_white {
+  color: $primary_white !important;
+}
+
+.text_primary_gray {
+  color: $primary_gray;
+}
+
+.text_primary_gray_2 {
+  color: $primary_gray_2 !important;
+}
+
+.text_primary_gray_3 {
+  color: $primary_gray_3 !important;
+}
+
+.text_primary_gray_4 {
+  color: $primary_gray_4 !important;
+}
+
+.text_primary_gray_5 {
+  color: $primary_gray_5;
+}
+
+.text_primary_gray_6 {
+  color: $primary_gray_6;
+}
+
+.text_primary_dark_blue {
+  color: $primary_dark_blue;
+}
+
+.text_primary_orange {
+  color: $primary_orange;
+}
+
+.text_primary_yellow {
+  color: $primary_yellow;
+}
+
+.text_primary_blue {
+  color: $primary_blue;
+}
+
+.text_primary_blue_bg {
+  color: $primary_blue_bg;
+}
+
+.text_primary_green {
+  color: $primary_green;
+}
+
+.text_primary_black {
+  color: $primary_black !important;
+}
+
+.text_primary_bg {
+  color: $primary_bg;
+}
+
+.text_primary_shadow_card {
+  color: $primary_shadow_card;
+}
+
+.text_primary_shadow_box {
+  color: $primary_shadow_box;
+}
+
+.text_secondary_green {
+  color: $secondary_green;
+}
+
+.text_secondary_green_Light {
+  color: $secondary_green_Light;
+}
+
+.text_secondary_orange_10 {
+  color: $secondary_orange_10;
+}
+
+.text_secondary_orange_60 {
+  color: $secondary_orange_60;
+}
+
+// Background colors
+.bg_primary_white {
+  background-color: $primary_white !important;
+}
+
+.bg_primary_blue_60 {
+  background-color: $primary_blue_60;
+}
+
+.bg_primary_gray {
+  background-color: $primary_gray;
+}
+
+.bg_primary_gray_2 {
+  background-color: $primary_gray_2;
+}
+
+.bg_primary_gray_3 {
+  background-color: $primary_gray_3;
+}
+
+.bg_primary_gray_4 {
+  background-color: $primary_gray_4;
+}
+
+.bg_primary_gray_5 {
+  background-color: $primary_gray_5;
+}
+
+.bg_primary_gray_6 {
+  background-color: $primary_gray_6;
+}
+
+.bg_primary_gray_7 {
+  background-color: $primary_gray_7;
+}
+
+.bg_primary_dark_blue {
+  background-color: $primary_dark_blue;
+}
+
+.bg_primary_orange {
+  background-color: $primary_orange;
+}
+
+.bg_primary_yellow {
+  background-color: $primary_yellow;
+}
+
+.bg_primary_blue {
+  background-color: $primary_blue;
+}
+
+.bg_primary_blue_bg {
+  background-color: $primary_blue_bg;
+}
+
+.bg_primary_green {
+  background-color: $primary_green;
+}
+
+.bg_primary_black {
+  background-color: $primary_black;
+}
+
+.bg_primary_bg {
+  background-color: $primary_bg;
+}
+
+.bg_primary_shadow_card {
+  background-color: $primary_shadow_card;
+}
+
+.bg_primary_shadow_box {
+  background-color: $primary_shadow_box;
+}
+
+.bg_secondary_green {
+  color: $secondary_green;
+}
+
+.bg_secondary_green_Light {
+  color: $secondary_green_Light;
+}
+
+.bg_secondary_orange_10 {
+  color: $secondary_orange_10;
+}
+
+.bg_secondary_orange_60 {
+  color: $secondary_orange_60;
+}
+
+.boxShadow_card {
+  @include boxShadow_card;
+}
+
+.border_primary_orange {
+  border: 1px solid $primary_orange;
+}
+
+.border_primary_blue {
+  border: 2px solid $primary_blue;
+}
+
+.border_primary_gray_2 {
+  border: 1px solid $primary_gray_2;
+}

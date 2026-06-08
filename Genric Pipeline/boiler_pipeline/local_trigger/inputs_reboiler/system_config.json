@@ -1,0 +1,25 @@
+{
+  "name": "SABIC",
+  "id": "4dcd86fe-8cd9-510c-aa1a-f50d9d3212d7",
+  "level": "Plant",
+  "children": [
+    {
+      "name": "Deethaniser_reboiler",
+      "id": "29709031-d18b-5a9d-9a71-8beb6f688155",
+      "level": "Reboiler",
+      "children": []
+    },
+    {
+      "name": "EG3_first_effect_reboiler",
+      "id": "c584ec10-9109-5b98-ac69-1805a9000fb7",
+      "level": "Reboiler",
+      "children": []
+    },
+    {
+      "name": "EG3_MEG_column_reboiler",
+      "id": "d0a57487-5621-5409-8e04-77608b1077d4",
+      "level": "Reboiler",
+      "children": []
+    }
+  ]
+}
