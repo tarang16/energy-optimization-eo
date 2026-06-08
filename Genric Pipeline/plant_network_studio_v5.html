@@ -1190,9 +1190,9 @@ function steamAreaTotal(a){
   return t;
 }
 
-function getElementCountInArea(a, ek) {
-  const n = curNet(), d = curDef();
-  const isSteam = d.customUI === 'steam';
+function getElementCountInArea(a, ek, def) {
+  const d = def || curDef();
+  const isSteam = d && d.customUI === 'steam';
   if (!isSteam) {
     if (ek === 'electric_drivers') {
       let c = 0;
@@ -1237,6 +1237,21 @@ function getElementCountInArea(a, ek) {
     return c;
   }
   return 0;
+}
+
+function getAreaTotalPlaced(a, def) {
+  if (!a) return 0;
+  if (!def) return 0;
+  if (def.customUI === 'steam') return steamAreaTotal(a);
+  if (def.customUI === 'power') return (a.powerConsumers||[]).reduce((x,c)=>x+(+c.count||0),0);
+  if (def.elementTree) {
+    let tot = 0;
+    def.elementTree.forEach(e => {
+      tot += getElementCountInArea(a, e.key, def);
+    });
+    return tot;
+  }
+  return Object.values(a.counts || {}).reduce((x,c)=>x+(+c||0),0);
 }
 
 function buildCountsSource(a, d, isSteam) {
@@ -1867,6 +1882,7 @@ function _invWalkSteamArea(rows, netMeta, areaMeta, area, def){
     const grpInfo = def.groups?.[ed.group] || {};
     let cum = 0;
     STEAM_HEADERS.forEach(h=>{
+      if (area.activeHeaders && !area.activeHeaders.includes(h.key)) return;
       const c = s.gen[h.key]?.[tg.key] || 0;
       for(let i=0; i<c; i++){
         const overallIdx = cum + i;
@@ -1896,6 +1912,7 @@ function _invWalkSteamArea(rows, netMeta, areaMeta, area, def){
     const grpInfo = def.groups?.[ed.group] || {};
     let cum = 0;
     STEAM_HEADERS.forEach(h=>{
+      if (area.activeHeaders && !area.activeHeaders.includes(h.key)) return;
       const c = s.con[h.key]?.[tc.key] || 0;
       for(let i=0; i<c; i++){
         const overallIdx = cum + i;
@@ -1925,6 +1942,7 @@ function _invWalkSteamArea(rows, netMeta, areaMeta, area, def){
     const grpInfo = def.groups?.[ed.group] || {};
     let exchIdx = 0;
     STEAM_HEADERS.forEach(h=>{
+      if (area.activeHeaders && !area.activeHeaders.includes(h.key)) return;
       const cnt = s.con[h.key]?.['steam_exchanger'] || 0;
       for(let i=0; i<cnt; i++){
         const piTagBase = makePITagBase(areaMeta.plantName, areaMeta.areaTag, ed, exchIdx);
@@ -1946,6 +1964,7 @@ function _invWalkSteamArea(rows, netMeta, areaMeta, area, def){
       }
     });
     STEAM_HEADERS.forEach(h=>{
+      if (area.activeHeaders && !area.activeHeaders.includes(h.key)) return;
       const routes = Object.entries(s.exch[h.key]||{});
       routes.forEach(([dstKey, cnt])=>{
         const dstShort = steamHdrByKey(dstKey)?.short || dstKey;
@@ -1978,6 +1997,7 @@ function _invWalkSteamArea(rows, netMeta, areaMeta, area, def){
     const grpInfo = def.groups?.[ed.group] || {};
     let cum = 0;
     STEAM_HEADERS.forEach(h=>{
+      if (area.activeHeaders && !area.activeHeaders.includes(h.key)) return;
       const routes = Object.entries(s.tbn[h.key]||{}).filter(([rk])=>trbParse(rk).typeKey === tt.key);
       routes.forEach(([rk, cnt])=>{
         const parsed = trbParse(rk);
@@ -2015,6 +2035,7 @@ function _invWalkSteamArea(rows, netMeta, areaMeta, area, def){
     const grpInfo = def.groups?.[ed.group] || {};
     let letIdx = 0;
     STEAM_HEADERS.forEach(h=>{
+      if (area.activeHeaders && !area.activeHeaders.includes(h.key)) return;
       const routes = Object.entries(s.let[h.key]||{});
       routes.forEach(([dstKey, cnt])=>{
         const dstShort = steamHdrByKey(dstKey)?.short || dstKey;
@@ -2696,6 +2717,24 @@ function renderCustomAttributeElement(ca, ci, catColor, saveCallback, deleteCall
 /* ---------- STATE ---------- */
 const STORAGE_KEY = 'pns_v2';   /* bumped: schema added affiliate/plants */
 const STATE = loadState() || buildInitialState();
+
+// Clean up legacy electric_drivers count keys (which shouldn't exist without a suffix/pipe)
+if (STATE && STATE.nets) {
+  Object.values(STATE.nets).forEach(net => {
+    if (net && net.areas) {
+      net.areas.forEach(a => {
+        if (a && a.counts) {
+          delete a.counts['electric_drivers'];
+          Object.keys(a.counts).forEach(k => {
+            if (k === 'electric_drivers') {
+              delete a.counts[k];
+            }
+          });
+        }
+      });
+    }
+  });
+}
 function buildInitialState(){
   const s = {
     affiliate:'United',
@@ -2824,13 +2863,30 @@ function syncAreaNames(){
     }
   });
 }
-function elemDef(key){ return curDef().elementTree.find(e=>e.key===key); }
-function totalCount(net,elKey){ return net.areas.reduce((s,a)=>s+(+a.counts[elKey]||0),0); }
+function elemDef(key){
+  let baseKey = key;
+  if (key && key.startsWith('electric_drivers|')) baseKey = 'electric_drivers';
+  return curDef().elementTree.find(e=>e.key===baseKey);
+}
+function getElementLabel(key, ed) {
+  if (key && key.startsWith('electric_drivers|')) {
+     const parts = key.split('|');
+     const scId = parts[1];
+     const scName = parts[2] || '';
+     const sc = ELECTRIC_DRIVER_SUBCATS.find(x=>x.id===scId);
+     let customSubLabel = sc ? sc.label : (scId==='other' ? (scName || 'Other') : scId);
+     if(customSubLabel === '(Generic)' || !customSubLabel) return ed ? ed.name : 'Electric Driver';
+     return customSubLabel;
+  }
+  return ed ? ed.name : key;
+}
+function totalCount(net,elKey){
+  const def = NETWORKS[Object.keys(NETWORKS).find(k=>STATE.nets[k]===net)] || {};
+  return net.areas.reduce((s,a)=>s+getElementCountInArea(a, elKey, def),0);
+}
 function netTotalElements(net){
   const def = NETWORKS[Object.keys(NETWORKS).find(k=>STATE.nets[k]===net)] || {};
-  if (def.customUI==='steam') return net.areas.reduce((s,a)=>s+steamAreaTotal(a),0);
-  if (def.customUI==='power') return net.areas.reduce((s,a)=>s+(a.powerConsumers||[]).reduce((x,c)=>x+(+c.count||0),0),0);
-  return net.areas.reduce((s,a)=>s+Object.values(a.counts).reduce((x,c)=>x+(+c||0),0),0);
+  return net.areas.reduce((s,a)=>s+getAreaTotalPlaced(a, def),0);
 }
 
 function toast(msg,kind='success'){
@@ -4708,7 +4764,7 @@ function panePlace(){
   /* Area pill row */
   const pills = el('div','pill-row');
   n.areas.forEach(a=>{
-    const cnt = Object.values(a.counts).reduce((s,v)=>s+(+v||0),0);
+    const cnt = getAreaTotalPlaced(a, d);
     const p = el('button','pill'+(a.id===n.activeArea?' active':'')+(cnt>0?' done':''));
     p.innerHTML = `<span class="pill-dot"></span><span class="pill-name">${esc(a.name)}</span><span class="pill-count">${cnt}</span>`;
     p.onclick=()=>{ n.activeArea=a.id; render(); };
@@ -4728,7 +4784,7 @@ function panePlace(){
     subs.appendChild(subAll);
     groups.forEach(([gk,gd])=>{
       const els = d.elementTree.filter(e=>e.group===gk);
-      const placed = els.reduce((s,e)=>s+(+a.counts[e.key]||0),0);
+      const placed = els.reduce((s,e)=>s+getElementCountInArea(a, e.key, d),0);
       const st = el('button','subtab'+(n.activeSub===gk?' active':''));
       st.innerHTML = `${gd.icon} ${gd.name} <span class="scount">${placed}</span>`;
       st.style.borderBottomColor = n.activeSub===gk ? gd.color : '';
@@ -5080,7 +5136,7 @@ function panePlace(){
       tree.appendChild(grpNode);
       const ch = el('div','eh-children');
       d.elementTree.filter(e=>e.group===gk).forEach(ed=>{
-        const c    = +a.counts[ed.key]    || 0;
+        const c    = getElementCountInArea(a, ed.key, d);
         const drv  = ed.electricDriver ? (+((a.elDrivers||{})[ed.key]||0)) : 0;
         const drvTxt = (ed.electricDriver && drv > 0) ? ` <span style="font-size:10px;color:#f0c040;margin-left:4px">⚡${drv} drv/unit</span>` : '';
         const node = el('div','eh-node');
@@ -5990,7 +6046,7 @@ function paneAttrs(){
   /* Area pill */
   const pills = el('div','pill-row');
   n.areas.forEach(a=>{
-    const cnt = isSteam ? steamAreaTotal(a) : Object.values(a.counts).reduce((s,v)=>s+(+v||0),0);
+    const cnt = getAreaTotalPlaced(a, d);
     const p = el('button','pill'+(a.id===n.activeArea?' active':'')+(cnt>0?' done':''));
     p.innerHTML = `<span class="pill-dot"></span><span class="pill-name">${esc(a.name)}</span><span class="pill-count">${cnt}</span>`;
     p.onclick=()=>{ n.activeArea=a.id; render(); };
@@ -5999,7 +6055,7 @@ function paneAttrs(){
   w.appendChild(pills);
 
   const a = curArea(); if(!a) return w;
-  const placed = d.elementTree.filter(e=>getElementCountInArea(a, e.key)>0);
+  const placed = d.elementTree.filter(e=>getElementCountInArea(a, e.key, d)>0);
   if (!placed.length){
     w.appendChild(emptyState('','No elements placed for this plant','Go to the Place Elements step and add some.'));
     return w;
@@ -6008,7 +6064,7 @@ function paneAttrs(){
   /* Per-instance picker  like v12 Tab 5 */
   const instanceList = [];
   placed.forEach(ed=>{
-    const count = getElementCountInArea(a, ed.key);
+    const count = getElementCountInArea(a, ed.key, d);
     for (let i=0; i<count; i++){
       const hasHdr = isSteam ? getSteamElementHeader(a, ed.key, i) : '';
       const prefix = hasHdr ? `(${hasHdr}) ` : '';
@@ -6260,7 +6316,7 @@ function paneAttrs(){
     saveState(); render(); toast('SIP enabled on '+setAttrs.length+' attribute(s)','success');
   };
   bulk.querySelector('#bulkCopyArea').onclick=()=>{
-    const count = getElementCountInArea(a, cur.ed.key);
+    const count = getElementCountInArea(a, cur.ed.key, d);
     for (let j=0; j<count; j++){
       if (j===cur.i) continue;
       a.attrs[cur.ed.key][j] = JSON.parse(JSON.stringify(setAttrs));
@@ -6513,11 +6569,10 @@ function drawFuelDiagram(box, net, def, plantSummary) {
 
 function paneNonSec() {
   const allItems = buildEquipmentInventory();
-  const secItems = allItems.filter(it => it.netKey === 'sec');
   const items = allItems.filter(it => {
-    if (it.netKey === 'sec') return false;
-    if (KPI_EXCLUDE_FROM_SEU.has(it.elemKey)) return false;
-    return !getEquipMatchingSecItem(it, secItems);
+    if (it.netKey !== 'steam') return false;
+    if ((it.plantName || '').trim().toLowerCase() !== 'utility unit') return false;
+    return true;
   });
 
   if(!STATE._nonSecFilter) STATE._nonSecFilter = { search: '', plantIds: [] };
@@ -6570,8 +6625,9 @@ function paneNonSec() {
     const plantCounts = {};
     items.forEach(it => { plantCounts[it.plantId] = (plantCounts[it.plantId]||0) + 1; });
     (STATE.plants||[]).forEach(p=>{
-      const on = plantSel.has(p.id);
       const cnt = plantCounts[p.id] || 0;
+      if (cnt === 0) return;
+      const on = plantSel.has(p.id);
       const chip = el('label');
       chip.style.cssText = 'display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:99px;border:1.5px solid '+(on?'#F0C040':'var(--border)')+';background:'+(on?'rgba(240,192,64,.12)':'var(--bg3)')+';cursor:pointer;font-size:11.5px;color:'+(on?'var(--text)':'var(--text2)')+';user-select:none;transition:all .15s;font-weight:'+(on?'700':'500');
       chip.innerHTML = '<input type="checkbox" '+(on?'checked':'')+' style="accent-color:#F0C040;width:13px;height:13px;cursor:pointer">'
@@ -6835,12 +6891,13 @@ function paneReview(){
   const tree = el('div','tree');
   let html = `<div class="tlevel"> ${d.icon} ${d.name}</div>`;
   n.areas.forEach(a=>{
-    const cnt = Object.values(a.counts).reduce((s,v)=>s+(+v||0),0);
+    const cnt = getAreaTotalPlaced(a, d);
     html += `\n  <div class="tarea">  ${esc(a.name)} ${a.tag?'<span class="tcount">['+esc(a.tag)+']</span>':''} <span class="tcount">${cnt} element(s)</span></div>`;
     Object.entries(a.counts).forEach(([k,v])=>{
       if(+v<=0) return;
       const ed = elemDef(k); if(!ed) return;
-      html += `\n    <div class="tnode"> ${eqIcon(ed,14)} ${esc(ed.name)} <span class="tcount"> ${v}</span></div>`;
+      const label = getElementLabel(k, ed);
+      html += `\n    <div class="tnode"> ${eqIcon(ed,14)} ${esc(label)} <span class="tcount"> ${v}</span></div>`;
     });
   });
   if (n.routing.length){
@@ -6960,7 +7017,7 @@ function drawDiagram(box){
     const x = ev.clientX - r.left + 12, y = ev.clientY - r.top + 12;
     let html;
     if(n2.type==='area'){
-      const a=n2._area, total=Object.values(a.counts).reduce((s,v)=>s+(+v||0),0);
+      const a=n2._area, total=getAreaTotalPlaced(a, d);
       html = `<div class="ttl"> ${esc(a.name)}</div>
         <div class="row"><span>Tag</span><b>${esc(a.tag||'')}</b></div>
         <div class="row"><span>Elements</span><b>${total}</b></div>`;
@@ -11209,16 +11266,11 @@ function paneSeu() {
 function paneNonSeu() {
   const allItems = buildEquipmentInventory();
 
-  /* SEU list shows only equipment from the SEC (Significant Energy Consumers)
-     network — that's the canonical source for SEU designation. Equipment in
-     other networks (Fuel, Steam, Air, Water, Power) are utility distribution
-     and should not duplicate entries here. */
-  const secItems = allItems.filter(it => it.netKey === 'sec');
   const items = allItems.filter(it => {
-    if (it.netKey === 'sec') return false;
-    if (KPI_EXCLUDE_FROM_SEU.has(it.elemKey)) return false;
+    if (it.netKey !== 'steam') return false;
+    if ((it.plantName || '').trim().toLowerCase() !== 'utility unit') return false;
     if (STATE._nonSecExcluded && STATE._nonSecExcluded[it.instanceId]) return false;
-    return !getEquipMatchingSecItem(it, secItems);
+    return true;
   });
 
   const syncKpisAcrossEquipType = (srcElemKey, srcSeu, srcInstanceId) => {
@@ -11361,7 +11413,6 @@ function paneNonSeu() {
      Equipment defined in networks is automatically designated as SEU —
      user does not need to manually select each one again. */
   items.forEach(item => {
-    if(KPI_EXCLUDE_FROM_SEU.has(item.elemKey)) return;
     const itemParts = (item.instanceId || '').split('::');
     const itemPlantId = itemParts[1] || '';
     if(!STATE._nonSeuConfig[item.instanceId]) {
@@ -11485,8 +11536,9 @@ function paneNonSeu() {
     const plantCounts = {};
     items.forEach(it => { plantCounts[it.plantId] = (plantCounts[it.plantId]||0) + 1; });
     (STATE.plants||[]).forEach(p=>{
-      const on = plantSel.has(p.id);
       const cnt = plantCounts[p.id] || 0;
+      if (cnt === 0) return;
+      const on = plantSel.has(p.id);
       const chip = el('label');
       chip.style.cssText = 'display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:99px;border:1.5px solid '+(on?'#F0C040':'var(--border)')+';background:'+(on?'rgba(240,192,64,.12)':'var(--bg3)')+';cursor:pointer;font-size:11.5px;color:'+(on?'var(--text)':'var(--text2)')+';user-select:none;transition:all .15s;font-weight:'+(on?'700':'500');
       chip.innerHTML = '<input type="checkbox" '+(on?'checked':'')+' style="accent-color:#F0C040;width:13px;height:13px;cursor:pointer">'
@@ -13109,13 +13161,10 @@ function exportTabXlsx(tabId){
     /* ── Sheet 5: Non-SEU KPIs ── */
     {
       rows = hdr().concat([['Plant','Network','Element','Instance','KPI Name','Data Source','PI Tag','Formula','UOM','Design','Min','Max','Default','Attribute Name']]);
-      var secItems = buildEquipmentInventory().filter(function(it){ return it.netKey === 'sec'; });
       buildEquipmentInventory().forEach(function(it){
-        if (it.netKey === 'sec') return;
-        if (KPI_EXCLUDE_FROM_SEU.has(it.elemKey)) return;
+        if (it.netKey !== 'steam') return;
+        if ((it.plantName || '').trim().toLowerCase() !== 'utility unit') return;
         if (STATE._nonSecExcluded && STATE._nonSecExcluded[it.instanceId]) return;
-        var match = getEquipMatchingSecItem(it, secItems);
-        if (match) return;
 
         var nonseu = STATE._nonSeuConfig && STATE._nonSeuConfig[it.instanceId];
         if(!nonseu||!nonseu.selected) return;
@@ -13755,7 +13804,7 @@ function _doExportXlsx(){
         totEl = net.areas.reduce((s, a) => s + (a.powerConsumers||[]).reduce((x,c) => x+(+c.count||0), 0), 0);
       } else {
         net.areas.forEach(a => {
-          totEl += Object.values(a.counts||{}).reduce((s, c) => s + (+c||0), 0);
+          totEl += getAreaTotalPlaced(a, d);
           if (d.key === 'fuel_network' || d.plantConsumer) {
             const fp = a.fuelPlants || {};
             const fe = a.fuelEquip  || {};
