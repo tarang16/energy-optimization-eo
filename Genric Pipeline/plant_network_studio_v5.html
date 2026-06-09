@@ -13341,7 +13341,39 @@ function exportTabXlsx(tabId){
     function ao(r){ return XLSX.utils.aoa_to_sheet(r); }
     function addS(ws,name,c){ if(c) ws['!cols']=c; XLSX.utils.book_append_sheet(wb,ws,name); }
 
-    /* ── Sheet 1: Master KPI List ── */
+    /* ── Sheet 1: System Config ── */
+    {
+      var sysLabel = STATE.affiliate || 'Energy Network';
+      var hours    = 8000;
+      if (typeof getSystemCostRate === 'function') {
+        hours = +getSystemCostRate('Annual Operating Hours') || 8000;
+      }
+      var sysRows = [];
+      sysRows.push(['PLANT NETWORK STUDIO  SYSTEM CONFIGURATION']);
+      sysRows.push(['Exported: ' + now]);
+      sysRows.push([]);
+      sysRows.push(['Affiliate:', sysLabel, '', 'Region:', STATE.region || '']);
+      sysRows.push([]);
+
+      sysRows.push(['PLANTS', 'Total: ' + ((STATE.plants||[]).length)]);
+      sysRows.push(['#', 'Plant Name', 'Plant ID']);
+      (STATE.plants||[]).forEach((p, i) => sysRows.push([i + 1, p.name, p.id]));
+      sysRows.push([]);
+
+      sysRows.push(['SYSTEM COST RATES & PARAMETERS', '', 'Annual Op. Hours: ' + hours]);
+      sysRows.push(['Parameter', 'Value', 'UOM']);
+      (SYSTEM_ATTRS||[]).forEach(attr => {
+        var userVal = (STATE.costRates||{})[attr.name];
+        if (userVal === undefined || userVal === null || userVal === '') return;
+        sysRows.push([attr.name, userVal, attr.uom || '']);
+      });
+
+      var sysWs = ao(sysRows);
+      sysWs['!merges'] = [{s:{r:0,c:0}, e:{r:0,c:4}}, {s:{r:1,c:0}, e:{r:1,c:4}}];
+      addS(sysWs, 'System Config', [{wch:38}, {wch:30}, {wch:14}, {wch:20}, {wch:28}]);
+    }
+
+    /* ── Sheet 2: Master KPI List ── */
     {
       rows = hdr().concat([['Element Type','KPI Name','Selected','Network(s)']]);
       var inv = buildEquipmentInventory();
@@ -13389,7 +13421,7 @@ function exportTabXlsx(tabId){
       addS(ao(rows),'Master KPI List',cols);
     }
 
-    /* ── Sheet 2: Equipment Status ── */
+    /* ── Sheet 3: Equipment Status ── */
     {
       rows = hdr().concat([['Plant','Network','Group','Element','Instance','PI Tag Base','Status Source','PI Tag / Formula','Attr Tags Mapped']]);
       buildEquipmentInventory().forEach(function(it){
@@ -13404,7 +13436,7 @@ function exportTabXlsx(tabId){
       addS(ao(rows),'Equipment Status',cols);
     }
 
-    /* ── Sheet 3: Plant Production ── */
+    /* ── Sheet 4: Plant Production ── */
     {
       rows = hdr().concat([['Plant','Formula','KPI ID','PI Tag','UOM','Design','Min','Max','Default','Attribute Name']]);
       (STATE.plants||[]).forEach(function(p){
@@ -13430,7 +13462,7 @@ function exportTabXlsx(tabId){
       addS(ao(rows),'Plant Production',cols);
     }
 
-    /* ── Sheet 4: SEU KPIs ── */
+    /* ── Sheet 5: SEU KPIs ── */
     {
       rows = hdr().concat([['Plant','Network','Element','Instance','KPI Name','Data Source','PI Tag','Formula','UOM','Design','Min','Max','Default','Attribute Name']]);
       buildEquipmentInventory().forEach(function(it){
@@ -13462,7 +13494,7 @@ function exportTabXlsx(tabId){
       addS(ao(rows),'SEU KPIs',cols);
     }
 
-    /* ── Sheet 5: Non-SEU KPIs ── */
+    /* ── Sheet 6: Non-SEU KPIs ── */
     {
       rows = hdr().concat([['Plant','Network','Element','Instance','KPI Name','Data Source','PI Tag','Formula','UOM','Design','Min','Max','Default','Attribute Name']]);
       buildEquipmentInventory().forEach(function(it){
@@ -13498,7 +13530,7 @@ function exportTabXlsx(tabId){
       addS(ao(rows),'Non-SEU KPIs',cols);
     }
 
-    /* ── Sheet 6: System KPIs ── */
+    /* ── Sheet 7: System KPIs ── */
     {
       rows = hdr().concat([['Category','KPI ID','KPI Name','Data Source','PI Tag','UOM','Design','Min','Max','Default','Formula/Model','Attribute Name']]);
       KPI_MASTER.forEach(function(kpi){
