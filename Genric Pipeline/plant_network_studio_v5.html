@@ -2245,6 +2245,7 @@ function _invWalkPlantConsumerArea(rows, netMeta, areaMeta, area, def){
 const WORKFLOW = [
   { id:'sysconfig',  name:'Plant Config', icon:'⚙️' },  /* sub-tabs: System Config  Model Selection  Network Config  Review  Export */
   { id:'kpiconfig',  name:"System KPI's",   icon:'⚙️' },
+  { id:'optconfig',  name:"Optimizer Config", icon:'⚙️' },
 ];
 /* All config steps live inside Plant Config as sub-tabs.
    setup, model, network, assign, headers, place are no longer separate top-level tabs. */
@@ -3169,6 +3170,19 @@ function paneSetup(){
     saveState(); render();
   });
 
+  return w;
+}
+
+function paneBilling(){
+  const w = el('div');
+  w.innerHTML = `
+    <div class="section-title"><span class="accent"></span> Billing Info</div>
+    <div class="section-hint">Optional enter values to include in the export. Leave blank to exclude. Rates drive annual cost calculations.</div>
+  `;
+  
+  const form = el('div');
+  form.style.cssText = 'max-width: 600px; margin-top: 10px; display: flex; flex-direction: column; gap: 14px;';
+
   /*  System Cost Rates & Parameters  */
   if (!STATE.costRates) STATE.costRates = {};
   const ratesGrp = el('div','form-group');
@@ -3208,6 +3222,7 @@ function paneSetup(){
     saveState();
   });
 
+  w.appendChild(form);
   return w;
 }
 function applyNetColor(){
@@ -3258,7 +3273,8 @@ function paneSysConfig(){
 
   const unlocked = {
     setup:   true,
-    network: !!STATE._setupSubDone,
+    billing: !!STATE._setupSubDone,
+    network: !!STATE._billingSubDone,
     nonsec:  networkDone,
     review:  networkDone,
     export:  networkDone,
@@ -3268,9 +3284,11 @@ function paneSysConfig(){
   const SUB_TABS = [
     { id:'setup',   label:'System Config',  icon:'⚙️',
       done: () => !!STATE._setupSubDone },
+    { id:'billing', label:'Billing Info',   icon:'💰',
+      done: () => !!STATE._billingSubDone },
     { id:'network', label:'Network Config', icon:'⚙️',
       done: () => networkDone },
-    { id:'nonsec',  label:'Non-SEC Inventory', icon:'⚙️',
+    { id:'nonsec',  label:'Non Significant Energy Users', icon:'⚙️',
       done: () => true },
     { id:'review',  label:'Review',         icon:'⚙️',
       done: () => STATE.activeTab === 'review' || STATE._plantSubTab === 'export' },
@@ -3342,12 +3360,25 @@ function paneSysConfig(){
     panel.appendChild(stripHeaders(paneSetup()));
     const nav = el('div','pc-nav-bar');
     const nxt = el('button','btn btn-primary');
-    nxt.innerHTML = 'Next: Network Config &nbsp;';
+    nxt.innerHTML = 'Next: Billing Info &nbsp;';
     nxt.onclick = () => {
       if (!STATE.affiliate && !(STATE.plants||[]).length){
         toast('Add at least one plant before continuing','warn'); return;
       }
       STATE._setupSubDone = true; STATE.setupComplete = true;
+      STATE._plantSubTab = 'billing';
+      saveState(); render();
+    };
+    nav.appendChild(nxt);
+    panel.appendChild(nav);
+  }
+  else if (active === 'billing') {
+    panel.appendChild(stripHeaders(paneBilling()));
+    const nav = el('div','pc-nav-bar');
+    const nxt = el('button','btn btn-primary');
+    nxt.innerHTML = 'Next: Network Config &nbsp;';
+    nxt.onclick = () => {
+      STATE._billingSubDone = true;
       STATE._plantSubTab = 'network';
       saveState(); render();
     };
@@ -3443,7 +3474,7 @@ function paneSysConfig(){
       render();
     };
     const nxt = el('button','btn btn-primary');
-    nxt.innerHTML = 'Next: Non-SEC Inventory &nbsp;';
+    nxt.innerHTML = 'Next: Non Significant Energy Users &nbsp;';
     nxt.onclick = () => {
       STATE.networkComplete = true;
       STATE._plantSubTab = 'nonsec';
@@ -4609,6 +4640,7 @@ function renderBody(){
     case 'review':     pane.appendChild(paneReviewHub()); break;
     case 'export':     pane.appendChild(paneExport()); break;
     case 'kpiconfig':  pane.appendChild(paneKpiConfig()); break;
+    case 'optconfig':  pane.appendChild(paneOptConfig()); break;
   }
   body.appendChild(pane);
   $('#ftStatus').textContent = `${curDef().name}  ${STATE.activeTab}  ${curNet().areas.length} area(s)  ${netTotalElements(curNet())} element(s)`;
@@ -6648,16 +6680,16 @@ function paneNonSec() {
 
   const w = el('div');
   w.innerHTML = `
-    <div class="section-title"><span class="accent"></span> Non-Significant Energy Consumers</div>
+    <div class="section-title"><span class="accent"></span> Non Significant Energy Users</div>
     <div class="section-hint" style="font-size:12.5px;color:var(--text3);margin-bottom:20px">
-      This inventory lists all equipment instances configured in utility networks that have NOT been designated as Significant Energy Consumers.
+      This inventory lists all equipment instances configured in utility networks that have NOT been designated as Significant Energy Users.
     </div>
   `;
 
   if(items.length === 0){
     const empty = el('div');
     empty.style.cssText = 'margin-top:24px';
-    empty.appendChild(emptyState('','No Non-Significant Energy Consumers','All equipment has been designated as Significant Energy Consumers, or no equipment is configured.'));
+    empty.appendChild(emptyState('','No Non Significant Energy Users','All equipment has been designated as Significant Energy Users, or no equipment is configured.'));
     w.appendChild(empty);
     return w;
   }
@@ -7403,6 +7435,510 @@ const KPI_MASTER=[{id:"Total_Products",label:"Total Products",formula:"[EG1_EOE]
 /* ============================================================================
  *  KPI CONFIG PANE
  * ============================================================================ */
+function paneOptConfig(){
+  if (!STATE._optSubTab) STATE._optSubTab = 'objfunc';
+
+  const SUB_TABS = [
+    { id:'objfunc',   label:'Objective function',  icon:'🎯', done: () => false },
+    { id:'vars',      label:'Variables',           icon:'✖️', done: () => false },
+    { id:'derived',   label:'Derived equations',   icon:'🧮', done: () => false },
+    { id:'constraints',label:'Constraints',        icon:'⚖️', done: () => false },
+  ];
+
+  const w = el('div');
+  const hdr = el('div');
+  hdr.style.cssText = 'display:flex;align-items:flex-start;justify-content:space-between;gap:20px;margin-bottom:4px';
+  hdr.innerHTML = `
+    <div>
+      <div class="section-title"><span class="accent"></span> Optimizer Config</div>
+      <div class="section-hint">Configure optimizer objectives, variables, derived equations, and constraints.</div>
+    </div>
+  `;
+  w.appendChild(hdr);
+
+  const subBar = el('div','pc-subtab-bar');
+  SUB_TABS.forEach(st => {
+    const isActive = STATE._optSubTab === st.id;
+    const cls = ['pc-subtab', isActive?'pc-active':''].filter(Boolean).join(' ');
+    const btn = el('button', cls);
+    btn.innerHTML = `
+      <span>${st.icon}</span>
+      <span>${st.label}</span>
+    `;
+    btn.onclick = () => { STATE._optSubTab = st.id; render(); };
+    subBar.appendChild(btn);
+  });
+  w.appendChild(subBar);
+
+  const panel = el('div','pc-panel');
+  if (STATE._optSubTab === 'objfunc') {
+    panel.innerHTML = '<div class="empty"><div class="e-ic">🎯</div><div class="e-tt">Objective Function</div><div class="e-st">Configure your optimization objective function here.</div></div>';
+  } else if (STATE._optSubTab === 'vars') {
+    if (!STATE.optVars)           STATE.optVars = [];
+    if (!STATE._optVarsFilter)    STATE._optVarsFilter = 'all';
+    if (!STATE._optVarsExpanded)  STATE._optVarsExpanded = [];
+    if (!STATE._optVarAttrs)      STATE._optVarAttrs = {};
+
+    /* ── Pre-build data ──────────────────────────────────────────────── */
+    const _globalKpis = [];
+    KPI_MASTER.forEach(kpi => _globalKpis.push({
+      id: kpi.id, label: kpi.label, category: 'Global',
+      details: kpi.formula || (kpi.tags ? kpi.tags.map(t=>t.p).join(', ') : '')
+    }));
+    if (STATE._masterKpis) {
+      Object.keys(STATE._masterKpis).forEach(gk => {
+        const kpis = STATE._masterKpis[gk];
+        if (Array.isArray(kpis)) kpis.forEach(kpi => _globalKpis.push({
+          id: kpi.id, label: kpi.name, category: gk,
+          details: kpi.formula || kpi.customAttrs || ''
+        }));
+      });
+    }
+
+    const _allNetItems = buildEquipmentInventory().filter(it => it.netKey==='steam' || it.netKey==='power');
+    const _netGroups   = {};
+    _allNetItems.forEach(it => {
+      if (!_netGroups[it.netKey]) _netGroups[it.netKey] = { label:it.netName, icon:it.netIcon, color:it.netColor, plants:{} };
+      const pk = it.plantName || 'Unassigned';
+      if (!_netGroups[it.netKey].plants[pk]) _netGroups[it.netKey].plants[pk] = [];
+      _netGroups[it.netKey].plants[pk].push(it);
+    });
+    const _steamCount  = _netGroups['steam']  ? Object.values(_netGroups['steam'].plants).flat().length  : 0;
+    const _powerCount  = _netGroups['power']  ? Object.values(_netGroups['power'].plants).flat().length  : 0;
+    const _totalCount  = _globalKpis.length + _steamCount + _powerCount;
+    const _selCount    = STATE.optVars.length;
+
+    /* helper: IDs visible in current filter (used by bulk buttons) */
+    const _getVisibleIds = (fKey) => {
+      const ids = [];
+      if (fKey==='all'||fKey==='global') _globalKpis.forEach(k => ids.push(k.id));
+      if (fKey==='all'||fKey==='steam')  (_netGroups['steam'] ? Object.values(_netGroups['steam'].plants).flat() : []).forEach(it => ids.push(it.instanceId));
+      if (fKey==='all'||fKey==='power')  (_netGroups['power'] ? Object.values(_netGroups['power'].plants).flat() : []).forEach(it => ids.push(it.instanceId));
+      if (fKey==='selected')             ids.push(...STATE.optVars);
+      return ids;
+    };
+
+    /* ── Filter tab definitions ──────────────────────────────────────── */
+    const FILTER_TABS = [
+      { id:'all',      label:'All',               icon:'☰',  color:'var(--text2)',   count:_totalCount  },
+      { id:'global',   label:'Global KPIs',       icon:'🌐', color:'var(--blue)',    count:_globalKpis.length },
+      { id:'steam',    label:'Steam Network',     icon:'♨️', color:'var(--orange)', count:_steamCount  },
+      { id:'power',    label:'Power Distribution',icon:'⚡', color:'var(--yellow)', count:_powerCount  },
+      { id:'selected', label:'Selected',          icon:'✓',  color:'var(--green)',   count:_selCount    },
+    ];
+
+    /* ── Outer wrapper ───────────────────────────────────────────────── */
+    const tableWrap = el('div');
+
+    /* hint */
+    const hintTxt = document.createElement('div');
+    hintTxt.style.cssText = 'font-size:12px;color:var(--text3);margin-bottom:12px';
+    hintTxt.textContent   = 'Select variables from Global KPIs and Steam / Power Distribution network elements to include in the Optimizer.';
+    tableWrap.appendChild(hintTxt);
+
+    /* ── Top row: filter tabs + bulk action buttons ──────────────────── */
+    const topRow = document.createElement('div');
+    topRow.style.cssText = 'display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:14px';
+
+    /* filter pills */
+    const filterBar = document.createElement('div');
+    filterBar.style.cssText = 'display:flex;gap:6px;flex-wrap:wrap;align-items:center';
+
+    FILTER_TABS.forEach(ft => {
+      const isActive = STATE._optVarsFilter === ft.id;
+      const btn = document.createElement('button');
+      btn.style.cssText = [
+        'display:inline-flex;align-items:center;gap:5px',
+        'padding:5px 13px;border-radius:20px;cursor:pointer',
+        'font-size:12px;font-weight:600;font-family:var(--font)',
+        'transition:var(--transition)',
+        'border:1.5px solid '+(isActive ? ft.color : 'var(--border2)'),
+        'background:'+(isActive ? 'rgba(255,255,255,.06)' : 'transparent'),
+        'color:'+(isActive ? ft.color : 'var(--text2)'),
+        isActive ? ('box-shadow:0 0 0 3px '+ft.color+';') : '',
+      ].filter(Boolean).join(';');
+      const badge = `<span style="padding:1px 7px;border-radius:10px;font-size:11px;`
+        +`background:${isActive ? ft.color : 'var(--bg4)'};`
+        +`color:${isActive ? '#fff' : 'var(--text3)'}">${ft.count}</span>`;
+      btn.innerHTML = `<span>${ft.icon}</span><span>${ft.label}</span>${badge}`;
+      btn.addEventListener('click', () => { STATE._optVarsFilter = ft.id; saveState(); render(); });
+      filterBar.appendChild(btn);
+    });
+
+    /* bulk action buttons */
+    const actionBar = document.createElement('div');
+    actionBar.style.cssText = 'display:flex;gap:6px;align-items:center;flex-shrink:0';
+
+    const mkBulkBtn = (label, bg, border, color) => {
+      const b = document.createElement('button');
+      b.style.cssText = `padding:5px 13px;border-radius:6px;border:1.5px solid ${border};`
+        +`background:${bg};color:${color};font-size:11px;font-weight:600;cursor:pointer;font-family:var(--font)`;
+      b.textContent = label;
+      return b;
+    };
+
+    const inclAllBtn = mkBulkBtn('✓ Include All Visible','rgba(63,185,80,.1)','var(--green)','var(--green)');
+    inclAllBtn.title = 'Check all rows visible in the current tab';
+    inclAllBtn.addEventListener('click', () => {
+      const ids = _getVisibleIds(STATE._optVarsFilter);
+      ids.forEach(id => { if (!STATE.optVars.includes(id)) STATE.optVars.push(id); });
+      saveState(); render();
+    });
+
+    const exclAllBtn = mkBulkBtn('✕ Exclude All Visible','rgba(248,81,73,.1)','var(--red)','var(--red)');
+    exclAllBtn.title = 'Uncheck all rows visible in the current tab';
+    exclAllBtn.addEventListener('click', () => {
+      const idSet = new Set(_getVisibleIds(STATE._optVarsFilter));
+      STATE.optVars = STATE.optVars.filter(id => !idSet.has(id));
+      saveState(); render();
+    });
+
+    actionBar.appendChild(inclAllBtn);
+    actionBar.appendChild(exclAllBtn);
+    topRow.appendChild(filterBar);
+    topRow.appendChild(actionBar);
+    tableWrap.appendChild(topRow);
+
+    /* ── Table HTML helpers ──────────────────────────────────────────── */
+    /* section row with per-section Include/Exclude All */
+    const sectionHdr = (icon, label, color, sectionIds) => {
+      const allSel = sectionIds.length > 0 && sectionIds.every(id => STATE.optVars.includes(id));
+      const idsAttr = escAttr(JSON.stringify(sectionIds));
+      return `<tr><td colspan="4" style="background:var(--bg3);padding:5px 14px;`
+        +`border-top:2px solid ${color};border-bottom:1px solid var(--border2)">`
+        +`<span style="display:flex;align-items:center;justify-content:space-between">`
+        +`<span style="font-size:11px;font-weight:700;letter-spacing:.06em;color:var(--text2)">`
+        +`<span style="color:${color}">${icon}</span>&nbsp;${label.toUpperCase()}`
+        +`&nbsp;<span style="font-size:10px;font-weight:400;color:var(--text3)">${sectionIds.length} items</span></span>`
+        +`<span style="display:flex;gap:6px">`
+        +`<button class="opt-sec-incl" data-ids='${idsAttr}' `
+        +`style="padding:2px 10px;border-radius:10px;font-size:10px;cursor:pointer;`
+        +`border:1px solid var(--green);background:rgba(63,185,80,.12);color:var(--green);font-weight:600">`
+        +`${allSel ? '✓ All Included' : '+ Include All'}</button>`
+        +`<button class="opt-sec-excl" data-ids='${idsAttr}' `
+        +`style="padding:2px 10px;border-radius:10px;font-size:10px;cursor:pointer;`
+        +`border:1px solid var(--red);background:rgba(248,81,73,.12);color:var(--red);font-weight:600">`
+        +`− Exclude All</button>`
+        +`</span></span></td></tr>`;
+    };
+
+    const plantHdr = name =>
+      `<tr><td colspan="4" style="background:var(--bg4);padding:4px 12px 4px 28px;`
+      +`font-size:11px;color:var(--text2);border-bottom:1px solid var(--border)">`
+      +`&#127981;&nbsp;${esc(name)}</td></tr>`;
+
+    const netRow = (id, category, kpiLabel, details, attrs) => {
+      const chk    = STATE.optVars.includes(id) ? 'checked' : '';
+      const elemBg = STATE.optVars.includes(id) ? 'background:rgba(63,185,80,.06)' : '';
+      const isExp  = STATE._optVarsExpanded.includes(id);
+      const hasA   = Array.isArray(attrs) && attrs.length > 0;
+      const selCnt = hasA ? attrs.filter(a => STATE.optVars.includes(`${id}::${a.name}`)).length : 0;
+
+      /* Element row */
+      let html = `<tr class="var-elem-row" style="${elemBg}">
+        <td style="text-align:center">
+          <input type="checkbox" class="opt-var-cb" data-id="${escAttr(id)}" ${chk}>
+        </td>
+        <td>${esc(category)}</td>
+        <td>
+          ${hasA ? `<button class="var-expand-btn" data-instid="${escAttr(id)}"
+            style="display:inline-flex;align-items:center;justify-content:center;width:15px;height:15px;
+            background:var(--bg4);border:1px solid var(--border2);border-radius:3px;cursor:pointer;
+            color:var(--text2);font-size:9px;margin-right:6px;vertical-align:middle;flex-shrink:0">
+            ${isExp ? '▾' : '▸'}</button>` : ''}
+          ${esc(kpiLabel)}
+          ${hasA ? `<span style="font-size:10px;margin-left:8px;padding:1px 6px;border-radius:8px;
+            background:var(--bg4);color:${selCnt>0?'var(--green)':'var(--text3)'}">${selCnt}/${attrs.length} attrs</span>` : ''}
+        </td>
+        <td style="font-family:var(--mono);font-size:10px;color:var(--text3);max-width:300px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${escAttr(details)}">${esc(details)}</td>
+      </tr>`;
+
+      /* Attribute sub-rows */
+      if (hasA) {
+        attrs.forEach(attr => {
+          const attrId    = `${id}::${attr.name}`;
+          const isAttrSel = STATE.optVars.includes(attrId);
+          const attrBg    = isAttrSel ? 'background:rgba(63,185,80,.04)' : '';
+          const showStyle = isExp ? '' : 'display:none';
+          const savedVt   = (STATE._optVarAttrs[attrId] && STATE._optVarAttrs[attrId].varType)
+                            || inferVarType(attr.name, null);
+          const vtInfo    = VAR_TYPE_INFO[savedVt] || VAR_TYPE_INFO['CV'];
+          html += `<tr class="var-attr-row" data-instid="${escAttr(id)}" style="${showStyle};${attrBg}">
+            <td style="text-align:center;border-left:3px solid var(--border2)">
+              <input type="checkbox" class="opt-var-cb" data-id="${escAttr(attrId)}" ${isAttrSel?'checked':''}>
+            </td>
+            <td style="padding-left:26px">
+              <span style="font-size:10px;font-weight:700;padding:1px 7px;border-radius:4px;
+                background:${vtInfo.color}22;color:${vtInfo.color};border:1px solid ${vtInfo.color}44">
+                ${savedVt}
+              </span>
+            </td>
+            <td style="padding-left:6px">
+              <span style="font-size:12px;color:var(--text)">${esc(attr.name)}</span>
+              ${attr.uom ? `<span style="font-size:10px;color:var(--text3);margin-left:4px">(${esc(attr.uom)})</span>` : ''}
+            </td>
+            <td>
+              <select class="opt-attr-vtype" data-attrid="${escAttr(attrId)}"
+                style="background:var(--bg3);border:1px solid var(--border2);color:var(--text);
+                font-size:10px;padding:2px 6px;border-radius:4px;font-family:var(--font);cursor:pointer">
+                ${VAR_TYPES.map(v=>`<option value="${v}" ${v===savedVt?'selected':''}>${v} — ${VAR_TYPE_INFO[v].name}</option>`).join('')}
+              </select>
+            </td>
+          </tr>`;
+        });
+      }
+      return html;
+    };
+
+    /* ── Build table HTML ────────────────────────────────────────────── */
+    let varsHtml = '<table class="attr-table"><thead><tr>'
+      +'<th style="width:40px;text-align:center">Select</th>'
+      +'<th>Category</th><th>KPI Label</th><th>Formula / Details</th>'
+      +'</tr></thead><tbody>';
+
+    const f = STATE._optVarsFilter;
+
+    /* ── Global KPIs ────── */
+    if (f==='all' || f==='global') {
+      varsHtml += sectionHdr('🌐','Global KPIs','var(--blue)', _globalKpis.map(k=>k.id));
+      if (_globalKpis.length===0) {
+        varsHtml += `<tr><td colspan="4" style="padding:12px;text-align:center;color:var(--text3);font-size:12px">No Global KPIs found.</td></tr>`;
+      } else {
+        _globalKpis.forEach(kpi => {
+          varsHtml += netRow(kpi.id, kpi.category, kpi.label, kpi.details, null);
+        });
+      }
+    }
+
+    /* ── Steam Network ──── */
+    if (f==='all' || f==='steam') {
+      const grp = _netGroups['steam'];
+      if (grp) {
+        const steamIds = Object.values(grp.plants).flat().map(it=>it.instanceId);
+        varsHtml += sectionHdr(grp.icon, grp.label, grp.color||'var(--orange)', steamIds);
+
+        /* Element-type category lookup (mirrors plant config steam UI grouping) */
+        const _steamCatOf = (elemKey) => {
+          const gen = STEAM_GEN.find(x=>x.key===elemKey);
+          if (gen) return { label: gen.cat || 'Generator', color:'var(--orange)', icon:'⚙️', order:0 };
+          /* Turbines stored under STEAM_TURBINE */
+          const tbn = STEAM_TURBINE.find(x=>x.key===elemKey);
+          if (tbn) return { label:'Turbine', color:'var(--purple)', icon:'&#127000;', order:1 };
+          const con = STEAM_CON.find(x=>x.key===elemKey);
+          if (con) {
+            const catColors = { Process:'var(--cyan)', Export:'var(--blue)', Vent:'var(--red)', Deaerator:'var(--green)' };
+            const catIcons  = { Process:'&#128260;', Export:'&#128682;', Vent:'&#128168;', Deaerator:'&#128167;' };
+            const catOrder  = { Process:3, Export:4, Vent:5, Deaerator:6 };
+            return { label: con.cat||'Consumer', color: catColors[con.cat]||'var(--green)',
+                     icon: catIcons[con.cat]||'&#127981;', order: catOrder[con.cat]||3 };
+          }
+          if (elemKey==='letdown_station') return { label:'Letdown (PRDS)', color:'var(--cyan)', icon:'⏬', order:2 };
+          return { label:'Other', color:'var(--text3)', icon:'⚙️', order:99 };
+        };
+
+        const elemTypeSubHdr = (label, color, icon, typeIds) => {
+          const allSel = typeIds.length>0 && typeIds.every(id=>STATE.optVars.includes(id));
+          const idsAttr = escAttr(JSON.stringify(typeIds));
+          return `<tr><td colspan="4" style="background:var(--bg4);padding:3px 12px 3px 42px;`
+            +`font-size:10px;font-weight:700;letter-spacing:.05em;`
+            +`color:${color};border-bottom:1px solid var(--border)">`
+            +`<span style="display:flex;align-items:center;justify-content:space-between">`
+            +`<span>${icon}&nbsp;${esc(label).toUpperCase()}`
+            +`&nbsp;<span style="font-weight:400;color:var(--text3)">${typeIds.length}</span></span>`
+            +`<span style="display:flex;gap:5px">`
+            +`<button class="opt-sec-incl" data-ids='${idsAttr}' `
+            +`style="padding:1px 8px;border-radius:8px;font-size:10px;cursor:pointer;`
+            +`border:1px solid var(--green);background:rgba(63,185,80,.1);color:var(--green);font-weight:600">`
+            +`${allSel?'✓ All':'+ All'}</button>`
+            +`<button class="opt-sec-excl" data-ids='${idsAttr}' `
+            +`style="padding:1px 8px;border-radius:8px;font-size:10px;cursor:pointer;`
+            +`border:1px solid var(--red);background:rgba(248,81,73,.1);color:var(--red);font-weight:600">`
+            +`− All</button>`
+            +`</span></span></td></tr>`;
+        };
+
+        Object.entries(grp.plants).forEach(([plantName, items]) => {
+          varsHtml += plantHdr(plantName);
+
+          /* Group items by elemKey category, sorted by display order */
+          const byElemKey = {};
+          items.forEach(it => {
+            if (!byElemKey[it.elemKey]) byElemKey[it.elemKey] = [];
+            byElemKey[it.elemKey].push(it);
+          });
+
+          /* Sort elem-key groups by display order (Boiler → Turbine → Letdown → Consumer types → Vent last in consumers) */
+          const sortedKeys = Object.keys(byElemKey).sort((a,b) => {
+            const oa = _steamCatOf(a).order;
+            const ob = _steamCatOf(b).order;
+            if (oa !== ob) return oa - ob;
+            return a.localeCompare(b);
+          });
+
+          sortedKeys.forEach(elemKey => {
+            const catInfo = _steamCatOf(elemKey);
+            const typeItems = byElemKey[elemKey];
+            const typeIds   = typeItems.map(it=>it.instanceId);
+
+            /* Find the human-readable name for this element key */
+            const elemDef = STEAM_GEN.find(x=>x.key===elemKey)
+              || STEAM_CON.find(x=>x.key===elemKey)
+              || STEAM_TURBINE.find(x=>x.key===elemKey)
+              || { key:elemKey, name: elemKey==='letdown_station' ? 'Letdown Station (PRDS)' : elemKey };
+            const typeLabel = elemDef.name;
+
+            varsHtml += elemTypeSubHdr(typeLabel, catInfo.color, catInfo.icon, typeIds);
+
+            typeItems.forEach(it => {
+              const details = [it.role, it.header, it.routeLabel].filter(Boolean).join(' | ');
+              varsHtml += netRow(it.instanceId, catInfo.label,
+                it.instLabel+(it.header?' ['+it.header+']':''), details, it.attrs);
+            });
+          });
+        });
+
+      } else if (f==='steam') {
+        varsHtml += `<tr><td colspan="4" style="padding:28px;text-align:center;color:var(--text3);font-size:12px">
+          <div style="font-size:28px;margin-bottom:8px">♨️</div>No Steam Network elements configured yet.<br>
+          Add them in <strong style="color:var(--text2)">Plant Config → Network Setup</strong>.</td></tr>`;
+      }
+    }
+
+    /* ── Power Distribution ─ */
+    if (f==='all' || f==='power') {
+      const grp = _netGroups['power'];
+      if (grp) {
+        const powerIds = Object.values(grp.plants).flat().map(it=>it.instanceId);
+        varsHtml += sectionHdr(grp.icon, grp.label, grp.color||'var(--yellow)', powerIds);
+        Object.entries(grp.plants).forEach(([plantName, items]) => {
+          varsHtml += plantHdr(plantName);
+          items.forEach(it => {
+            const details = [it.role, it.header, it.routeLabel].filter(Boolean).join(' | ');
+            varsHtml += netRow(it.instanceId, it.netName,
+              it.instLabel+(it.header?' ['+it.header+']':''), details, it.attrs);
+          });
+        });
+      } else if (f==='power') {
+        varsHtml += `<tr><td colspan="4" style="padding:28px;text-align:center;color:var(--text3);font-size:12px">
+          <div style="font-size:28px;margin-bottom:8px">⚡</div>No Power Distribution elements configured yet.<br>
+          Add them in <strong style="color:var(--text2)">Plant Config → Network Setup</strong>.</td></tr>`;
+      }
+    }
+
+    /* ── Selected only ───── */
+    if (f==='selected') {
+      const selGlobal = _globalKpis.filter(k => STATE.optVars.includes(k.id));
+      const selNet    = _allNetItems.filter(it => STATE.optVars.includes(it.instanceId));
+      const selIds    = [...selGlobal.map(k=>k.id), ...selNet.map(it=>it.instanceId)];
+      varsHtml += sectionHdr('✓','Selected Variables','var(--green)', selIds);
+      if (selIds.length===0) {
+        varsHtml += `<tr><td colspan="4" style="padding:28px;text-align:center;color:var(--text3);font-size:12px">
+          <div style="font-size:24px;margin-bottom:8px">✓</div>No variables selected yet.<br>
+          Use the other tabs to include variables.</td></tr>`;
+      } else {
+        selGlobal.forEach(kpi => {
+          varsHtml += netRow(kpi.id, kpi.category, kpi.label, kpi.details, null);
+        });
+        selNet.forEach(it => {
+          const details = [it.role, it.header, it.routeLabel].filter(Boolean).join(' | ');
+          varsHtml += netRow(it.instanceId, it.netName,
+            it.instLabel+(it.header?' ['+it.header+']':''), details, it.attrs);
+        });
+      }
+    }
+
+    varsHtml += '</tbody></table>';
+
+    /* ── Mount table in a separate DOM node to preserve filterBar handlers ── */
+    const tableDom = document.createElement('div');
+    tableDom.innerHTML = varsHtml;
+    tableWrap.appendChild(tableDom);
+
+    /* ── change: checkbox toggle + varType dropdown ─────────────────── */
+    tableDom.addEventListener('change', e => {
+      /* Checkbox: element-level or attribute-level */
+      if (e.target.classList.contains('opt-var-cb')) {
+        const id = e.target.dataset.id;
+        if (e.target.checked) { if (!STATE.optVars.includes(id)) STATE.optVars.push(id); }
+        else                  { STATE.optVars = STATE.optVars.filter(v => v !== id); }
+        const row = e.target.closest('tr');
+        const bg  = e.target.checked ? (row && row.classList.contains('var-attr-row') ? 'rgba(63,185,80,.04)' : 'rgba(63,185,80,.06)') : '';
+        if (row) row.style.background = bg;
+        saveState();
+        return;
+      }
+
+      /* varType dropdown: save new type and update badge colour */
+      if (e.target.classList.contains('opt-attr-vtype')) {
+        const attrId = e.target.dataset.attrid;
+        const newVt  = e.target.value;
+        if (!STATE._optVarAttrs[attrId]) STATE._optVarAttrs[attrId] = {};
+        STATE._optVarAttrs[attrId].varType = newVt;
+        saveState();
+        /* Update the colour badge in the same row without re-render */
+        const row   = e.target.closest('tr');
+        const badge = row && row.querySelector('td:nth-child(2) span');
+        const vtI   = VAR_TYPE_INFO[newVt] || VAR_TYPE_INFO['CV'];
+        if (badge) {
+          badge.textContent = newVt;
+          badge.style.background = vtI.color + '22';
+          badge.style.color      = vtI.color;
+          badge.style.border     = '1px solid ' + vtI.color + '44';
+        }
+      }
+    });
+
+    /* ── click: expand toggle + section Include/Exclude All ─────────── */
+    tableDom.addEventListener('click', e => {
+      /* Expand / collapse element row */
+      const expandBtn = e.target.closest('.var-expand-btn');
+      if (expandBtn) {
+        const id  = expandBtn.dataset.instid;
+        const idx = STATE._optVarsExpanded.indexOf(id);
+        const open = idx < 0;
+        if (open) STATE._optVarsExpanded.push(id);
+        else      STATE._optVarsExpanded.splice(idx, 1);
+        /* Toggle attr sub-rows without full re-render */
+        tableDom.querySelectorAll('.var-attr-row').forEach(r => {
+          if (r.dataset.instid === id) r.style.display = open ? '' : 'none';
+        });
+        expandBtn.textContent = open ? '▾' : '▸';
+        /* Update attrs-selected badge count on parent row */
+        const parentRow = expandBtn.closest('tr');
+        const badge = parentRow && parentRow.querySelector('td:nth-child(3) span:last-child');
+        if (badge) {
+          const total = tableDom.querySelectorAll(`.var-attr-row[data-instid="${CSS.escape(id)}"]`).length;
+          const sel   = [...tableDom.querySelectorAll(`.var-attr-row[data-instid="${CSS.escape(id)}"] .opt-var-cb`)]
+                          .filter(cb => cb.checked).length;
+          badge.textContent = `${sel}/${total} attrs`;
+          badge.style.color = sel > 0 ? 'var(--green)' : 'var(--text3)';
+        }
+        saveState();
+        return;
+      }
+
+      /* Per-section Include All / Exclude All */
+      const inclBtn = e.target.closest('.opt-sec-incl');
+      const exclBtn = e.target.closest('.opt-sec-excl');
+      if (!inclBtn && !exclBtn) return;
+      const ids = JSON.parse((inclBtn||exclBtn).dataset.ids || '[]');
+      if (inclBtn) ids.forEach(id => { if (!STATE.optVars.includes(id)) STATE.optVars.push(id); });
+      else         STATE.optVars = STATE.optVars.filter(v => !ids.includes(v));
+      saveState(); render();
+    });
+
+    panel.appendChild(tableWrap);
+
+  } else if (STATE._optSubTab === 'derived') {
+    panel.innerHTML = '<div class="empty"><div class="e-ic">🧮</div><div class="e-tt">Derived Equations</div><div class="e-st">Define derived equations here.</div></div>';
+  } else if (STATE._optSubTab === 'constraints') {
+    panel.innerHTML = '<div class="empty"><div class="e-ic">⚖️</div><div class="e-tt">Constraints</div><div class="e-st">Define optimization constraints here.</div></div>';
+  }
+  
+  w.appendChild(panel);
+  return w;
+}
+
 function paneKpiConfig(){
   if(!STATE._kpiConfig)  STATE._kpiConfig={};
   if(!STATE._kpiSubTab)  STATE._kpiSubTab='inventory';
